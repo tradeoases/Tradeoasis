@@ -15,7 +15,7 @@ import uuid
 # utility functions
 def get_file_path(instance, filename):
     ext = filename.split(".")[-1]
-    filename = "%s-%s.%s" % (instance.slug, uuid.uuid4(), ext)
+    filename = "%s-%s.%s" % (instance.get_username(), uuid.uuid4(), ext)
     return os.path.join(f"{instance.__class__.__name__}/images/", filename)
 
 
@@ -49,7 +49,7 @@ class User(AbstractUser):
 
     def __str__(self):
         if self.get_username:
-            return f"{self.get_username}"
+            return f"{self.get_username()}"
         return f"{self.first_name} {self.last_name}"
 
 
@@ -66,10 +66,14 @@ class ClientProfile(models.Model):
     website = models.URLField(_("Website"), blank=True, null=True)
 
 
+    def __str__(self):
+        return f"{self.user.get_username()}"
+
+
 class SupplierManager(BaseUserManager):
     def get_queryset(self, *args, **kwargs):
         results = super().get_queryset(*args, **kwargs)
-        return results.filter(role=User.Role.SUPPLIER)
+        return results.filter(account_type=User.Role.SUPPLIER)
 
 
 class Supplier(User):
@@ -90,7 +94,7 @@ class Supplier(User):
 class BuyerManager(BaseUserManager):
     def get_queryset(self, *args, **kwargs):
         results = super().get_queryset(*args, **kwargs)
-        return results.filter(role=User.Role.BUYER)
+        return results.filter(account_type=User.Role.BUYER)
 
 
 class Buyer(User):
@@ -108,14 +112,13 @@ class Buyer(User):
 
 class SupportProfile(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
-    responses = models.IntegerField(
-        _('Responses to clients')
-    )
+    responses = models.IntegerField(_("Responses to clients"))
+
 
 class SupportManager(BaseUserManager):
     def get_queryset(self, *args, **kwargs):
         results = super().get_queryset(*args, **kwargs)
-        return results.filter(role=User.Role.SUPPORT)
+        return results.filter(account_type=User.Role.SUPPORT)
 
 
 class Support(User):

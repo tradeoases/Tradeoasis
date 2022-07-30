@@ -31,12 +31,25 @@ class Store(models.Model):
     #     related_name='store_locations',
     #     default=None
     # )
+    slug = models.SlugField(
+        _("Safe Url"),
+        unique=True,
+        blank=True,
+        null=True,
+    )
+    
     image = models.ImageField(
         verbose_name=_("Service Image"),
         upload_to=get_file_path,
     )
     created_on = models.DateField(_("Created on"), default=timezone.now)
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
 
+        self.name = self.name.title()
+
+        super().save(*args, **kwargs)
     def __str__(self) -> str:
         return f"{self.name}"
 
@@ -55,7 +68,13 @@ class ProductCategory(models.Model):
         null=True,
     )
     created_on = models.DateField(_("Created on"), default=timezone.now)
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
 
+        self.name = self.name.title()
+
+        super().save(*args, **kwargs)
     def __str__(self) -> str:
         return f"{self.name}"
 

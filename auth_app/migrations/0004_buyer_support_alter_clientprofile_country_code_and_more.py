@@ -10,51 +10,63 @@ import django.db.models.manager
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('auth_app', '0003_alter_user_account_type_clientprofile'),
+        ("auth_app", "0003_alter_user_account_type_clientprofile"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Buyer',
-            fields=[
-            ],
+            name="Buyer",
+            fields=[],
             options={
-                'proxy': True,
-                'indexes': [],
-                'constraints': [],
+                "proxy": True,
+                "indexes": [],
+                "constraints": [],
             },
-            bases=('auth_app.user',),
+            bases=("auth_app.user",),
             managers=[
-                ('buyer', django.db.models.manager.Manager()),
-                ('objects', django.contrib.auth.models.UserManager()),
+                ("buyer", django.db.models.manager.Manager()),
+                ("objects", django.contrib.auth.models.UserManager()),
             ],
         ),
         migrations.CreateModel(
-            name='Support',
-            fields=[
-            ],
+            name="Support",
+            fields=[],
             options={
-                'proxy': True,
-                'indexes': [],
-                'constraints': [],
+                "proxy": True,
+                "indexes": [],
+                "constraints": [],
             },
-            bases=('auth_app.user',),
+            bases=("auth_app.user",),
             managers=[
-                ('support', django.db.models.manager.Manager()),
-                ('objects', django.contrib.auth.models.UserManager()),
+                ("support", django.db.models.manager.Manager()),
+                ("objects", django.contrib.auth.models.UserManager()),
             ],
         ),
         migrations.AlterField(
-            model_name='clientprofile',
-            name='country_code',
-            field=models.IntegerField(verbose_name='Country Code'),
+            model_name="clientprofile",
+            name="country_code",
+            field=models.IntegerField(verbose_name="Country Code"),
         ),
         migrations.CreateModel(
-            name='SupportProfile',
+            name="SupportProfile",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('responses', models.IntegerField(verbose_name='Responses to clients')),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("responses", models.IntegerField(verbose_name="Responses to clients")),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

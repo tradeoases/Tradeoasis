@@ -34,9 +34,7 @@ class AuthAppTest(TestCase):
             vat_number=114325,
             legal_etity_identifier="vnvio32o",
         )
-        self.assertAlmostEquals(
-            test_supplier_user.profile, test_supplier_user_profile
-        )
+        self.assertAlmostEquals(test_supplier_user.profile, test_supplier_user_profile)
 
         # test Buyer
         test_buyer_user = models.Buyer.objects.create_user(
@@ -53,9 +51,7 @@ class AuthAppTest(TestCase):
             vat_number=114325,
             legal_etity_identifier="vnvio32o",
         )
-        self.assertAlmostEquals(
-            test_buyer_user.profile, test_buyer_user_profile
-        )
+        self.assertAlmostEquals(test_buyer_user.profile, test_buyer_user_profile)
 
         # user has to activate his activate via his email
         self.assertFalse(test_buyer_user.is_active)
@@ -65,4 +61,4 @@ class AuthAppTest(TestCase):
         test_support_user = models.Support.objects.create_user(
             username="mark", password="MAke390"
         )
-        self.assertAlmostEquals(test_support_user.account_type, 'SUPPORT')
+        self.assertAlmostEquals(test_support_user.account_type, "SUPPORT")

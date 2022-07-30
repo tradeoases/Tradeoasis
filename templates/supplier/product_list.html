@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden - {{ view_name }}</title>
+</head>
+<body>
+
+
+    <div class="flex">
+        <a href="{% url 'manager:home' %}" data-link="products">Home</a>
+        <a href="{% url 'manager:products' %}" data-link="products">Products</a>
+        <a href="{% url 'manager:showrooms' %}" data-link="products">Showrooms</a>
+        <a href="{% url 'manager:services' %}" data-link="products">Services</a>
+        <a href="{% url 'manager:support' %}" data-link="products">Support</a>
+        <a href="{% url 'manager:about-us' %}" data-link="products">About Us</a>
+    </div>
+
+    <h3>Categories</h3>
+    <ul data-context='{{ product_categories.context_name }}'>
+        {% for category in product_categories.results %}
+        <li class="flex">
+            <img style="width: 10px; aspect-ratio: 1;" src="/media/{{category.image}}" alt="">
+            <span>{{ category.name }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+
+
+    <h3>Products</h3>
+    <ul data-context='{{ products.context_name }}'>
+        {% for product in product_list %}
+            <a href="{% url 'manager:product-detail' product.slug %}">
+                <li class="flex">
+                    <img style="width: 10px; aspect-ratio: 1;" src="/media/{{product.image}}" alt="">
+                    <span>{{ product.name }}</span>
+                </li>
+            </a>
+        {% endfor %}
+    </ul>
+    
+</body>
+</html>
