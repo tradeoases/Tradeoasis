@@ -1,0 +1,10 @@
+[{"model":"supplier.store","pk":1,"fields": {"name":"Armstrong-Mayer","supplier": 2}},
+{"model":"supplier.store","pk":2,"fields": {"name":"Huel-Gorczany","supplier": 2}},
+{"model":"supplier.store","pk":3,"fields": {"name":"Balistreri LLC","supplier": 3}},
+{"model":"supplier.store","pk":4,"fields": {"name":"Carroll, Ferry and Herman","supplier": 4}},
+{"model":"supplier.store","pk":5,"fields": {"name":"Schmpkt LLC","supplier": 5}},
+{"model":"supplier.store","pk":6,"fields": {"name":"Johnson, Welch and Johnston","supplier": 5}},
+{"model":"supplier.store","pk":7,"fields": {"name":"Runolfsson, Hauck and Koch","supplier": 6}},
+{"model":"supplier.store","pk":8,"fields": {"name":"Runolfsdottir-Bernhard","supplier": 7}},
+{"model":"supplier.store","pk":9,"fields": {"name":"Harber and Sons","supplier": 2}},
+{"model":"supplier.store","pk":10,"fields": {"name":"Conn LLC","supplier": 3}}]

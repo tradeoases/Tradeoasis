@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden - {{ view_name }}</title>
+</head>
+<body>
+
+    <div class="flex">
+        <a href="{% url 'manager:home' %}" data-link="products">Home</a>
+        <a href="{% url 'manager:products' %}" data-link="products">Products</a>
+        <a href="{% url 'manager:showrooms' %}" data-link="products">Showrooms</a>
+        <a href="{% url 'manager:services' %}" data-link="products">Services</a>
+        <a href="{% url 'manager:support' %}" data-link="products">Support</a>
+        <a href="{% url 'manager:about-us' %}" data-link="products">About Us</a>
+    </div>
+
+    <h3>Categories</h3>
+    <ul >
+        {% for category in object_list %}
+        <li class="flex" data-category-index="{{ forloop.counter }}">
+            <a href='{% url "manager:category-detail" category.slug %}'>
+                <img style="width: 30px; aspect-ratio: 1;" src="/media/{{category.image}}" alt="">
+                <span data-category-name="{{category.name}}">{{ category.name }}</span>
+            </a>
+        </li>
+        {% endfor %}
+
+    </ul>
+
+</body>
+</html>

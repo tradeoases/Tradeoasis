@@ -65,7 +65,6 @@ class ClientProfile(models.Model):
     )
     website = models.URLField(_("Website"), blank=True, null=True)
 
-
     def __str__(self):
         return f"{self.user.get_username()}"
 
@@ -90,6 +89,12 @@ class Supplier(User):
         # we can access clientprofile
         return self.clientprofile
 
+    def save(self, *args, **kwargs):
+        # check if instance is already existing
+        if not self.pk:
+            self.account_type = self.base_type
+            super().save(*args, **kwargs)
+
 
 class BuyerManager(BaseUserManager):
     def get_queryset(self, *args, **kwargs):
@@ -108,6 +113,12 @@ class Buyer(User):
     @property
     def profile(self):
         return self.clientprofile
+
+    def save(self, *args, **kwargs):
+        # check if instance is already existing
+        if not self.pk:
+            self.account_type = self.base_type
+            super().save(*args, **kwargs)
 
 
 class SupportProfile(models.Model):
@@ -132,3 +143,9 @@ class Support(User):
     @property
     def profile(self):
         return self.supportprofile
+
+    def save(self, *args, **kwargs):
+        # check if instance is already existing
+        if not self.pk:
+            self.account_type = self.base_type
+            super().save(*args, **kwargs)

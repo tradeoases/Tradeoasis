@@ -22,22 +22,39 @@
     <ul data-context='{{ product_categories.context_name }}'>
         {% for category in product_categories.results %}
         <li class="flex">
-            <img style="width: 10px; aspect-ratio: 1;" src="/media/{{category.image}}" alt="">
-            <span>{{ category.name }}</span>
+
+            <a href='{% url "manager:category-detail" category.slug %}'>
+                <img style="width: 10px; aspect-ratio: 1;" src="/media/{{category.image}}" alt="">
+                <span>{{ category.name }}</span>
+            </a>
         </li>
         {% endfor %}
+        <br>
+
+        <li class="flex" data-category-index="{{ forloop.counter }}">
+            <a href="{% url 'manager:category-list' %}">View All
+            </a>
+        </li>
     </ul>
 
 
     <h3>Products</h3>
     <ul data-context='{{ products.context_name }}'>
-        {% for product in product_list %}
-            <a href="{% url 'manager:product-detail' product.slug %}">
-                <li class="flex">
-                    <img style="width: 10px; aspect-ratio: 1;" src="/media/{{product.image}}" alt="">
-                    <span>{{ product.name }}</span>
-                </li>
-            </a>
+        {% for category_group in object_list %}
+            <div style="border: 2px solid lightgray;margin-block: 1rem">
+                <h4>{{ category_group.category }}</h4>
+
+                <div style="display: flex; gap: 1rem">
+                    {% for product in category_group.results.products %}
+                        <a href="{% url 'manager:product-detail' product.product.slug %}">
+                            <li style="display: grid;">
+                                <img style="width: 10vw; aspect-ratio: 1;" src="/media/{{product.image.image}}" alt="">
+                                <span>{{ product.product.name }}</span>
+                            </li>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
         {% endfor %}
     </ul>
     

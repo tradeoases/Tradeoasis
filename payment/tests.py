@@ -29,7 +29,7 @@ class PaymentTest(TestCase):
             supplier=test_supplier, plan=test_membership_plan, duration="Monthly"
         )
 
-        self.assertEquals(
+        self.assertEqual(
             test_membership.expiry_date,
             (datetime.date.today() + relativedelta(months=1)).strftime("%Y-%m-%d"),
         )

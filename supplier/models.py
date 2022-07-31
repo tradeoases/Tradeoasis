@@ -1,10 +1,12 @@
 # django
+from email.policy import default
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.utils.text import slugify
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
+from django.conf import settings
 
 # python
 import os
@@ -37,12 +39,14 @@ class Store(models.Model):
         blank=True,
         null=True,
     )
-    
+
     image = models.ImageField(
         verbose_name=_("Service Image"),
         upload_to=get_file_path,
+        default="test/django.png",
     )
     created_on = models.DateField(_("Created on"), default=timezone.now)
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
@@ -50,6 +54,7 @@ class Store(models.Model):
         self.name = self.name.title()
 
         super().save(*args, **kwargs)
+
     def __str__(self) -> str:
         return f"{self.name}"
 
@@ -60,6 +65,7 @@ class ProductCategory(models.Model):
     image = models.ImageField(
         verbose_name=_("Image"),
         upload_to=get_file_path,
+        default="test/django.png",
     )
     slug = models.SlugField(
         _("Safe Url"),
@@ -68,6 +74,7 @@ class ProductCategory(models.Model):
         null=True,
     )
     created_on = models.DateField(_("Created on"), default=timezone.now)
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
@@ -75,11 +82,16 @@ class ProductCategory(models.Model):
         self.name = self.name.title()
 
         super().save(*args, **kwargs)
+
     def __str__(self) -> str:
         return f"{self.name}"
 
 
 class Product(models.Model):
+
+    class Meta:
+        ordering = ['-id']
+
     name = models.CharField(_("Name"), max_length=256)
     description = models.TextField(
         _("Description"),
@@ -128,7 +140,7 @@ class ProductImage(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(f"{self.product.name}-image")
+            self.slug = slugify(f"{self.product.name[:10]}-{uuid.uuid4()}")[:50]
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
@@ -178,7 +190,8 @@ class Service(models.Model):
 
 @receiver(post_delete, sender=Store)
 def delete_store_image(sender, instance, *args, **kwargs):
-    instance.photo.delete(save=True)
+    if instance.image and instance.image.filename != "test/django.png":
+        instance.image.delete()
 
 
 @receiver(post_delete, sender=Product)
