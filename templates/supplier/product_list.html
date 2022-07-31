@@ -11,7 +11,7 @@
 
     <div class="flex">
         <a href="{% url 'manager:home' %}" data-link="products">Home</a>
-        <a href="{% url 'manager:products' %}" data-link="products">Products</a>
+        <a href="{% url 'supplier:products' %}" data-link="products">Products</a>
         <a href="{% url 'manager:showrooms' %}" data-link="products">Showrooms</a>
         <a href="{% url 'manager:services' %}" data-link="products">Services</a>
         <a href="{% url 'manager:support' %}" data-link="products">Support</a>
@@ -23,7 +23,7 @@
         {% for category in product_categories.results %}
         <li class="flex">
 
-            <a href='{% url "manager:category-detail" category.slug %}'>
+            <a href='{% url "supplier:category-detail" category.slug %}'>
                 <img style="width: 10px; aspect-ratio: 1;" src="/media/{{category.image}}" alt="">
                 <span>{{ category.name }}</span>
             </a>
@@ -32,7 +32,7 @@
         <br>
 
         <li class="flex" data-category-index="{{ forloop.counter }}">
-            <a href="{% url 'manager:category-list' %}">View All
+            <a href="{% url 'supplier:category-list' %}">View All
             </a>
         </li>
     </ul>
@@ -46,7 +46,7 @@
 
                 <div style="display: flex; gap: 1rem">
                     {% for product in category_group.results.products %}
-                        <a href="{% url 'manager:product-detail' product.product.slug %}">
+                        <a href="{% url 'supplier:product-detail' product.product.slug %}">
                             <li style="display: grid;">
                                 <img style="width: 10vw; aspect-ratio: 1;" src="/media/{{product.image.image}}" alt="">
                                 <span>{{ product.product.name }}</span>

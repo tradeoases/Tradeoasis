@@ -1,6 +1,3 @@
-from ast import arg
-from itertools import product
-from unicodedata import category
 from django.test import TestCase, Client
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.conf import settings
@@ -8,10 +5,10 @@ from django.urls import resolve, reverse_lazy
 
 # apps
 from manager import models
-from supplier.models import Store, Product, ProductCategory
+from supplier.models import Store
 from auth_app.models import User
 
-from manager import views
+from manager import views as ManagerViews
 
 
 class ModelTest(TestCase):
@@ -77,33 +74,32 @@ class ModelTest(TestCase):
 
 
 class RequestTest(TestCase):
-    fixtures = ['supplier.json','profile.json','store.json','category.json', 'products.json']
+    fixtures = [
+        "supplier.json",
+        "profile.json",
+        "supplier_fixtures.json",
+        "manager_fixtures.json",
+    ]
 
     def setUp(self):
         self.client = Client()
+        self.test_showroom = models.Showroom.objects.all().first()
         return super().setUp()
 
     def test_app_urls(self):
         response = self.client.get("")
         # home
         home_found = resolve("/")
-        self.assertEqual(home_found.func.__name__, views.HomeView.as_view().__name__)
-
-        # Products
-        products_found = resolve("/products/")
         self.assertEqual(
-            products_found.func.__name__, views.ProductListView.as_view().__name__
+            home_found.func.__name__, ManagerViews.HomeView.as_view().__name__
         )
 
-        # Product detail
-        products_found = resolve(f"/products/test_slug")
+        # showrooms
+        showroow_found = resolve(reverse_lazy("manager:showrooms"))
         self.assertEqual(
-            products_found.func.__name__, views.ProductDetailView.as_view().__name__
+            showroow_found.func.__name__,
+            ManagerViews.ShowRoomListView.as_view().__name__,
         )
-
-        # # showrooms
-        # products_found = resolve("/showrooms/")
-        # self.assertEqual(products_found.func.__name__, views.ProductListView.as_view().__name__)
 
         # # services
         # products_found = resolve("/services/")
@@ -125,86 +121,55 @@ class RequestTest(TestCase):
         self.assertTemplateUsed(response, "manager/home.html")
 
         # view context
-        home_view_context = [
+        view_context = [
             "view_name",
             "product_categories",
             "showrooms",
-            "stores",
+            "weekly_deals",
             "catogory_product_group",
             "new_arrivals",
         ]
-        
-        for context_name in home_view_context:
+
+        for context_name in view_context:
             self.assertIn(context_name, response.context)
 
-    # def test_product_list_page(self):
+    def test_showroom_view(self):
+        response = self.client.get(reverse_lazy("manager:showrooms"))
 
-    #     product = Product.objects.all().first()
-    #     # a request is made to that base app
-    #     response = self.client.get("/products/")
+        self.assertEqual(response.status_code, 200)
 
-    #     # template used
-    #     self.assertTemplateUsed(response, "supplier/product_list.html")
+        # template used
+        self.assertTemplateUsed(response, "manager/showroom_list.html")
 
-    #     # view context
-    #     home_view_context = ["view_name", "product_categories", "product_list"]
+        # view context
+        view_context = ["view_name", "locations"]
 
-    #     for context_name in home_view_context:
-    #         self.assertIn(context_name, response.context)
+        for context_name in view_context:
+            self.assertIn(context_name, response.context)
 
-    #     self.assertIn(product, response.context.get('object_list'))
+        self.assertIn(self.test_showroom, response.context.get("object_list"))
 
-    # def test_product_detail_page(self):
+    def test_showroom_detail_view(self):
 
-    #     product = Product.objects.all().first()
+        response = self.client.get(
+            reverse_lazy("manager:showroom-detail", args=[self.test_showroom.slug])
+        )
 
-    #     # a request is made to that base app
-    #     response = self.client.get(reverse_lazy('manager:product-detail', args=[product.slug]))
-    #     self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
-    #     # # template used
-    #     self.assertTemplateUsed(response, "supplier/product_detail.html")
+        # template used
+        self.assertTemplateUsed(response, "manager/showroom_detail.html")
 
-    #     # # view context
-    #     home_view_context = ['view_name', 'product_categories', 'product', 'related_products', 'product_images']
+        view_context = ["view_name", "stores", "other_showroom"]
 
-    #     for context_name in home_view_context:
-    #         self.assertIn(context_name, response.context)
+        for context_name in view_context:
+            self.assertIn(context_name, response.context)
 
-    #     self.assertAlmostEquals(response.context.get('product').name, product.name)
+        self.assertEqual(self.test_showroom, response.context.get("object"))
 
+        # view_context = ["view_name", "stores", "other_store"]
 
-    # def test_category_list_view(self):
+        # for context_name in view_context:
+        #     self.assertIn(context_name, response.context)
 
-    #     category = ProductCategory.objects.all().first()
-    #     # a request is made to that base app
-    #     response = self.client.get("/categories/")
-
-    #     # template used
-    #     self.assertTemplateUsed(response, "supplier/productcategory_list.html")
-
-    #     # view context
-    #     # home_view_context = ["view_name", "product_categories", "product_list"]
-
-    #     # for context_name in home_view_context:
-    #     #     self.assertIn(context_name, response.context)
-
-    #     # self.assertIn(product, response.context.get('object_list'))
-        
-    # def test_category_detail_view(self):
-    #     category = ProductCategory.objects.all().first()
-
-    #     # a request is made to that base app
-    #     response = self.client.get(reverse_lazy('manager:category-detail', args=[category.slug]))
-    #     self.assertEqual(response.status_code, 200)
-
-    #     # # template used
-    #     self.assertTemplateUsed(response, "supplier/productcategory_detail.html")
-
-    #     # # view context
-    #     home_view_context = ['view_name', 'products', 'product_count', 'other_categories']
-
-    #     for context_name in home_view_context:
-    #         self.assertIn(context_name, response.context)
-
-    #     self.assertAlmostEquals(response.context.get('productcategory').name, category.name)
+        # self.assertEqual(self.test_store, response.context.get('object'))

@@ -10,7 +10,7 @@
 
     <div class="flex">
         <a href="{% url 'manager:home' %}" data-link="products">Home</a>
-        <a href="{% url 'manager:products' %}" data-link="products">Products</a>
+        <a href="{% url 'supplier:products' %}" data-link="products">Products</a>
         <a href="{% url 'manager:showrooms' %}" data-link="products">Showrooms</a>
         <a href="{% url 'manager:services' %}" data-link="products">Services</a>
         <a href="{% url 'manager:support' %}" data-link="products">Support</a>
@@ -18,10 +18,10 @@
     </div>
 
     <h3>Categories</h3>
-    <ul data-context='{{ product_categories.context_name }}'>
+    <ul data-context='{{ product_categories.context_name }}' style="display: gird; grid-template-columns: repeat(4, 1fr);">
         {% for category in product_categories.results %}
         <li class="flex" data-category-index="{{ forloop.counter }}">
-            <a href='{% url "manager:category-detail" category.slug %}'>
+            <a href='{% url "supplier:category-detail" category.slug %}'>
                 <img style="width: 30px; aspect-ratio: 1;" src="/media/{{category.image}}" alt="">
                 <span data-category-name="{{category.name}}">{{ category.name }}</span>
             </a>
@@ -30,8 +30,8 @@
 
         <br>
 
-        <li class="flex" data-category-index="{{ forloop.counter }}">
-            <a href="{% url 'manager:category-list' %}">View All
+        <li>
+            <a id="categories-view-all" href="{% url 'supplier:category-list' %}">View All
             </a>
         </li>
     </ul>
@@ -40,12 +40,12 @@
     <h3>Products</h3>
     <ul data-context='{{ catogory_product_group.context_name }}' style="display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem">
         {% for category_group in catogory_product_group.results %}
-            <div style="border: 1px solid lightgray;margin-block: 1rem">
+            <div style="border: 1px solid lightgray;margin-block: 1rem" data-category-group-index="{{ forloop.counter }}">
                 <h4>{{ category_group.category }}</h4>
 
                 <div style="display: flex; gap: 1rem">
                     {% for product in category_group.results.products %}
-                        <a href="{% url 'manager:product-detail' product.product.slug %}">
+                        <a href="{% url 'supplier:product-detail' product.product.slug %}" data-product-index="{{forloop.counter}}">
                             <li style="display: grid;">
                                 <img style="width: 5vw; aspect-ratio: 1;" src="/media/{{product.image.image}}" alt="">
                                 <span>{{ product.product.name }}</span>
@@ -58,25 +58,24 @@
     </ul>
 
     <h3>showrooms</h3>
-    <ul data-context='{{ showrooms.context_name }}'>
+    <ul data-context='{{ product_categories.context_name }}' style="display: grid;grid-template-columns: repeat(10, 1fr); gap: 2rem;">
         {% for showroom in showrooms.results %}
-            <li class="flex">
-                <a href="">
-                    <img style="width: 30px; aspect-ratio: 1;" src="/media/{{showroom.image}}" alt="">
-                    <span>{{ showroom.location }}</span>
+            <li>
+                <a href="{% url 'manager:showroom-detail' showroom.slug %}" data-showroom-index="{{forloop.counter}}">
+                    <img style="width: 100%" src="/media/{{ showroom.image }}" alt="">
+                    <p>{{ showroom.name }}</p>
                 </a>
             </li>
         {% endfor %}
     </ul>
 
-
-    <h3>stores</h3>
-    <ul data-context='{{ stores.context_name }}'>
-        {% for store in stores.results %}
-            <li class="flex">
-                <a href="">
-                    <img style="width: 30px; aspect-ratio: 1;" src="media/{{store.image}}" alt="">
-                    <span>{{ store.name }}</span>
+    <h3>Weekly Deals</h3>
+    <ul data-context='{{ weekly_deals.context_name }}' style="display: flex;gap: 2rem">
+        {% for weekly_deal in weekly_deals.results %} 
+            <li>
+                <a href="{% url 'supplier:product-detail' weekly_deal.slug %}" data-new-arrival-index="{{forloop.counter}}" style="display: grid;">
+                    <img style="width: 5vw; aspect-ratio: 1;" src="/media/{{weekly_deal.image}}" alt="">
+                    <p>{{ weekly_deal.name }}</p>
                 </a>
             </li>
         {% endfor %}
@@ -84,12 +83,12 @@
 
 
     <h3>new arrivals</h3>
-    <ul data-context='{{ new_arrivals.context_name }}'>
-        {% for new_arrival in new_arrivals.results %}
-            <li class="flex">
-                <a href="">
-                    <img style="width: 30px; aspect-ratio: 1;" src="/media/{{new_arrival.image}}" alt="">
-                    <span>{{ new_arrival.name }}</span>
+    <ul data-context='{{ new_arrivals.context_name }}' style="display: flex;gap: 2rem">
+        {% for new_arrival in new_arrivals.results %} 
+            <li>
+                <a href="{% url 'supplier:product-detail' new_arrival.slug %}" data-new-arrival-index="{{forloop.counter}}" style="display: grid;">
+                    <img style="width: 5vw; aspect-ratio: 1;" src="/media/{{new_arrival.image}}" alt="">
+                    <p>{{ new_arrival.name }}</p>
                 </a>
             </li>
         {% endfor %}

@@ -27,7 +27,7 @@ class Location(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.name)
+            self.slug = f"{slugify(self.name)}-{uuid.uuid4()}"[:50]
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
@@ -49,7 +49,7 @@ class Service(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.name)
+            self.slug = f"{slugify(self.name)}-{uuid.uuid4()}"[:50]
 
         self.name = self.name.title()
 
@@ -75,7 +75,7 @@ class ServiceImage(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(f"{self.service.name}-image")
+            self.slug = f"{slugify(self.service.name)}-{uuid.uuid4()}"
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
@@ -89,6 +89,7 @@ class Showroom(models.Model):
     image = models.ImageField(
         verbose_name=_("Image"),
         upload_to=get_file_path,
+        default="test/django.png",
     )
     visits = models.IntegerField(_("Number of visits"), default=0)
     slug = models.SlugField(
@@ -101,7 +102,7 @@ class Showroom(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.name)
+            self.slug = f"{slugify(self.name)}-{uuid.uuid4()}"[:50]
 
         self.name = self.name.title()
 

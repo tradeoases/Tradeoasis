@@ -10,7 +10,7 @@
 
     <div class="flex">
         <a href="{% url 'manager:home' %}" data-link="products">Home</a>
-        <a href="{% url 'manager:products' %}" data-link="products">Products</a>
+        <a href="{% url 'supplier:products' %}" data-link="products">Products</a>
         <a href="{% url 'manager:showrooms' %}" data-link="products">Showrooms</a>
         <a href="{% url 'manager:services' %}" data-link="products">Services</a>
         <a href="{% url 'manager:support' %}" data-link="products">Support</a>
@@ -25,17 +25,21 @@
 
     <h3>Products</h3>
     <ul data-context='{{ products.context_name }}'>
-        {% for product in products.results %}
-            <li class="flex" data-product-index="{{ forloop.counter }}">
-                <a href="{% url 'manager:product-detail' product.slug %}">
-                    {% for image in product_images.results %}
-                        {% if image.product == product %}
-                            <img style="width: 30px; aspect-ratio: 1;" src="/media/{{image.image}}" alt="">
-                        {% endif %}
+        {% for sub_category_group in products.results %}
+            <div style="border: 2px solid lightgray;margin-block: 1rem">
+                <h4>{{ sub_category_group.sub_category }}</h4>
+
+                <div style="display: flex; gap: 1rem">
+                    {% for product in sub_category_group.results.products %}
+                        <a href="{% url 'supplier:product-detail' product.product.slug %}">
+                            <li style="display: grid;">
+                                <img style="width: 10vw; aspect-ratio: 1;" src="/media/{{product.image.image}}" alt="">
+                                <span>{{ product.product.name }}</span>
+                            </li>
+                        </a>
                     {% endfor %}
-                    <span data-product-name="{{product.name}}">{{ product.name }}</span>
-                </a>
-            </li>
+                </div>
+            </div>
         {% endfor %}
     </ul>
 
@@ -43,7 +47,7 @@
     <ul data-context='{{ other_categories.context_name }}'>
         {% for category in other_categories.results %}
         <li class="flex" data-category-index="{{ forloop.counter }}">
-            <a href='{% url "manager:category-detail" category.slug %}'>
+            <a href='{% url "supplier:category-detail" category.slug %}'>
                 <img style="width: 30px; aspect-ratio: 1;" src="/media/{{category.image}}" alt="">
                 <span data-category-name="{{category.name}}">{{ category.name }}</span>
             </a>
@@ -52,7 +56,7 @@
         <br>
 
         <li class="flex" data-category-index="{{ forloop.counter }}">
-            <a href="{% url 'manager:category-list' %}">View All
+            <a href="{% url 'supplier:category-list' %}">View All
             </a>
         </li>
     </ul>

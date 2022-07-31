@@ -1,5 +1,6 @@
 # django
 from email.policy import default
+from unicodedata import category
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -87,10 +88,37 @@ class ProductCategory(models.Model):
         return f"{self.name}"
 
 
-class Product(models.Model):
+class ProductSubCategory(models.Model):
+    name = models.CharField(_("Name"), max_length=256)
+    category = models.ForeignKey(to=ProductCategory, on_delete=models.CASCADE)
+    image = models.ImageField(
+        verbose_name=_("Image"),
+        upload_to=get_file_path,
+        default="test/django.png",
+    )
+    slug = models.SlugField(
+        _("Safe Url"),
+        unique=True,
+        blank=True,
+        null=True,
+    )
+    created_on = models.DateField(_("Created on"), default=timezone.now)
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+
+        self.name = self.name.title()
+
+        super().save(*args, **kwargs)
+
+    def __str__(self) -> str:
+        return f"{self.name}"
+
+
+class Product(models.Model):
     class Meta:
-        ordering = ['-id']
+        ordering = ["-id"]
 
     name = models.CharField(_("Name"), max_length=256)
     description = models.TextField(
@@ -99,7 +127,10 @@ class Product(models.Model):
     # can be in many stores
     store = models.ManyToManyField(to=Store, related_name="store_product")
     category = models.ForeignKey(
-        to=ProductCategory,
+        to=ProductCategory, on_delete=models.CASCADE, blank=True, null=True
+    )
+    sub_category = models.ForeignKey(
+        to=ProductSubCategory,
         on_delete=models.CASCADE,
     )
     price = models.DecimalField(_("Price"), decimal_places=3, max_digits=6)
@@ -115,6 +146,9 @@ class Product(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
+
+        if not self.pk:
+            self.category = self.sub_category.category
 
         self.name = self.name.title()
 
@@ -145,15 +179,6 @@ class ProductImage(models.Model):
 
     def __str__(self) -> str:
         return f"{self.product.name}"
-
-
-# SIGNALS
-@receiver(post_save, sender=Product)
-def on_product_save(sender, instance, **kwargs):
-    product_category = instance.category
-    # category product count increases
-    product_category.product_count = int(product_category.product_count) + 1
-    product_category.save()
 
 
 class Service(models.Model):
@@ -188,14 +213,30 @@ class Service(models.Model):
         return f"{self.name}"
 
 
-@receiver(post_delete, sender=Store)
-def delete_store_image(sender, instance, *args, **kwargs):
-    if instance.image and instance.image.filename != "test/django.png":
-        instance.image.delete()
+# SIGNALS
+@receiver(post_save, sender=Product)
+def on_product_save(sender, instance, **kwargs):
+    product_sub_category = instance.sub_category
+    # category product count increases
+    product_sub_category.category.product_count += 1
+    product_sub_category.category.save()
+    product_sub_category.save()
 
 
 @receiver(post_delete, sender=Product)
-def delete_product_image(sender, instance, *args, **kwargs):
+def delete_product(sender, instance, *args, **kwargs):
     images = ProductImage.objects.filter(product=instance)
     for image in images:
         image.delete()
+
+    product_sub_category = instance.sub_category
+    # category product count decreases
+    product_sub_category.category.product_count -= 1
+    product_sub_category.category.save()
+    product_sub_category.save()
+
+
+@receiver(post_delete, sender=Store)
+def delete_store(sender, instance, *args, **kwargs):
+    if instance.image and instance.image != "test/django.png":
+        instance.image.delete()
