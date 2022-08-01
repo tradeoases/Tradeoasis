@@ -1,3 +1,4 @@
+from unicodedata import category
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView, DetailView
@@ -57,8 +58,12 @@ class ProductDetailView(DetailView):
         product = self.get_object()
 
         context["view_name"] = product.name
+        context["product_supplier"] = {
+            "context_name": "product-supplier",
+            "results": product.store.all().first().supplier,
+        }
         context["product_stores"] = {
-            "context_name": "product-categories",
+            "context_name": "product-stores",
             "results": product.store.all(),
         }
         context["product_categories"] = {
@@ -71,12 +76,18 @@ class ProductDetailView(DetailView):
             "context_name": "product-images",
             "results": SupplierModels.ProductImage.objects.filter(product=product),
         }
-        context["related_products"] = {
-            "context_name": "related-product",
-            "results": SupplierModels.Product.objects.filter(
-                Q(sub_category=product.sub_category), ~Q(id=product.id)
-            ),
-        }
+        context["related_stores"] = {
+            "context_name": "related-stores",
+            "results": [
+                {
+                    'product' : product,
+                    'images' : SupplierModels.ProductImage.objects.filter(product=product).first()
+                }
+                for product in SupplierModels.Product.objects.filter(~Q(id=product.id),
+                    Q(sub_category=product.sub_category) | Q(category=product.category)
+                )
+            ]
+        },
         return context
 
 
@@ -137,7 +148,16 @@ class CategoryDetailView(DetailView):
                 }
                 products.append(sub_category_group)
 
-        context["products"] = {"context_name": "products", "results": products}
+        context["products"] = {"context_name": "products", "results": [
+                    {
+                        'product' : product,
+                        'supplier' : product.store.all().first().supplier,
+                        'images' : SupplierModels.ProductImage.objects.filter(product=product).first()
+                    }
+                    for product in SupplierModels.Product.objects.filter(sub_category__in=SupplierModels.ProductSubCategory.objects.filter(category=category))
+                ]}
+
+        context["sub_categories"] = {"context_name": "sub-catogeries", "results": SupplierModels.ProductSubCategory.objects.filter(category=category)}
 
         context["product_count"] = {
             "context_name": "product-count",
@@ -186,7 +206,7 @@ class SubCategoryDetailView(View):
         context_data["products"] = {
             "context-name": "products",
             "results": [
-                {"product": product, "image": product.productimage_set.all().first()}
+                {"product": product,'supplier' : product.store.all().first().supplier, "images": product.productimage_set.all().first()}
                 for product in SupplierModels.Product.objects.filter(
                     sub_category=subcategory
                 )

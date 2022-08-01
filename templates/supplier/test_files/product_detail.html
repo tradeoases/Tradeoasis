@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden - {{ view_name }}</title>
+</head>
+<body>
+
+
+    <div class="flex">
+        <a href="{% url 'manager:home' %}" data-link="products">Home</a>
+        <a href="{% url 'supplier:products' %}" data-link="products">Products</a>
+        <a href="{% url 'manager:showrooms' %}" data-link="products">Showrooms</a>
+        <a href="{% url 'manager:services' %}" data-link="products">Services</a>
+        <a href="{% url 'manager:support' %}" data-link="products">Support</a>
+        <a href="{% url 'manager:about-us' %}" data-link="products">About Us</a>
+    </div>
+
+    <h3>Products</h3>
+    <div data-context='{{ products.context_name }}'>
+        <p>Name: <span id='product-name'>{{ product.name }}</span></p>
+        <p>Description: {{ product.description }}</p>
+        <p>Price: {{product.currency}} {{ product.price }}</p>
+        <p>Category: {{ product.sub_category.category.name }}</p>
+        <p>Sub Category: {{ product.sub_category.name }}</p>
+        <p>Store: 
+            {% for store in product_stores.results%}
+                <span>{{ store.name }}</span>
+            {% endfor %}
+        </p>
+    </div>
+
+    <div data-context="{{product_images.context_name}}" style="display: flex; flex-wrap: wrap; gap: 2rem">
+        {% for image in product_images.results %}
+            <img src="/media/{{image.image}}" style="width: 15vw; aspect-ratio: 1;" alt="">
+        {% endfor %}
+    </div>
+
+    <h3>Related products</h3>
+    <ul data-context='{{ related_products.context_name }}'>
+        {% for product in related_products.results %}
+            <a href="{% url 'supplier:product-detail' product.slug %}">
+                <li class="flex">
+                    <img style="width: 10px; aspect-ratio: 1;" src="/media/{{product.image}}" alt="">
+                    <span>{{ product.name }}</span>
+                </li>
+            </a>
+        {% endfor %}
+    </ul>
+
+    
+</body>
+</html>

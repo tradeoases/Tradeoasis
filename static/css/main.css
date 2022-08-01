@@ -333,5 +333,17 @@ body {
 }
 
 .single-image-product-card img {
-    max-height: 35vh;
+    height: 35vh;
+    aspect-ratio: 1;
 }
+
+/* product page */
+
+.product-detail * {
+    /* border: 1px solid #000; */
+    justify-content: flex-start;
+    width: 100%;
+}
+
+
+/* product page */

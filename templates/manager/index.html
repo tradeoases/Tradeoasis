@@ -1,0 +1,156 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% block content %}
+
+        <section class="main w-12/12 py-6">
+            <div class="page-starter grid w-full mx-auto cf-1 gap-4">
+                <div class="grid side-bar gap-3 content-start product-categories w-12/12 ">
+                    <div class="grid p-0 side-menu card rounded-md overflow-hidden">
+                        <h2 class="text-xl font-bold px-5 py-3" style="background-color: hsla(213, 28%, 90%, .8);">Product Categories</h2>
+                        <ul class="grid gap-0.5 px-5 py-2" data-context='{{ product_categories.context_name }}' >
+                            {% for category in product_categories.results %}                            
+                                <li class="side-menu-item text-slate-800 hover:text-black transition-colors transition-200 ease-in" data-category-index="{{ forloop.counter }}">
+                                    <a class="flex items-center justify-start gap-2 py-2" href='{% url "supplier:category-detail" category.category.slug %}'>
+                                        <i class="ti-folder"></i>
+                                        <span>{{ category.category.name }}</span>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <a  class="side-menu-footer bg-yellowColor flex gap-1 py-3 text-white" href="{% url 'supplier:category-list' %}">
+                        <i class="ti-menu"></i>
+                        <span>All Categories</span>
+                    </a>
+                </div>
+                <div class="carousel-sliders w-12/12">
+                    <div class="sliders">
+                        <div class="slider overflow-hidden rounded-md">
+                            <img src="{% static 'assets/imgs/resources/1.webp' %}" alt="Slider-1">
+                        </div>
+                    </div>
+                </div>
+                <div class="grid side-bar gap-3 content-start product-categories w-12/12">
+                    <div class="grid p-0 side-menu card rounded-md overflow-hidden">
+                        <h2 class="text-xl font-bold px-5 py-3" style="background-color: hsla(213, 28%, 90%, .8);">Showrooms</h2>
+                        <ul class="grid gap-0.5 px-5 py-2"  data-context='{{ product_categories.context_name }}'>
+                            {% for showroom in showrooms.results %}
+                                <li class="side-menu-item text-slate-800 hover:text-black transition-colors transition-200 ease-in">
+                                    <a class="flex items-center justify-start gap-2 py-2" href="{% url 'manager:showroom-detail' showroom.slug %}"  data-showroom-index="{{forloop.counter}}">
+                                        <i class="ti-folder"></i>
+                                        <span>{{ showroom.name }}</span>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <a  class="side-menu-footer bg-yellowColor flex gap-1 py-3 text-white" href="{% url 'manager:showrooms' %}">
+                        <i class="ti-menu"></i>
+                        <span>All Showrooms</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="main w-12/12 py-6">
+            <div class="grid w-full mx-auto cf-1 gap-6">
+                <div class="section-heading">
+                    <h2 class="sec-title text-2xl font-bold">Foroden Marketplace</h2>
+                </div>
+                <div class="section-body grid gap-4 grid-cols-3">
+                    
+                    {% for category in product_categories.results %}   
+                        <div class="section-item-group grid gap-4 rounded-md card p-4" >
+                            <a href='{% url "supplier:category-detail" category.category.slug %}' class="section-item-group-title flex justify-between" data-category-group-index="{{ forloop.counter }}">
+                                <span class="text-lg font-bold" >{{ category.category.name }}</span>
+                                <span class="text-sm text-slate-800 hover:text-yellowColor font-normal" >View All</span>
+                            </a>
+                            <div class="section-item-group-content grid gap-4 grid-cols-3">
+                                {% for sub_category in category.sub_categories %}   
+                                    <div class="item">
+                                        <a class="grid gap-0.5" href='{% url "supplier:subcategory-detail" category.category sub_category.slug %}'  data-subcategory-index="{{ forloop.counter }}">
+                                            <img src="/media/{{sub_category.image}}" alt="{{sub_category.name}}" class="item-img rounded-sm">
+                                            <div class="item-details grid gap-0 justify-center text-center">
+                                                <h5 class="text-sm font-semibold leading-5">    
+                                                    <span>{{sub_category.name}}</span>
+                                                </h5>
+                                                <h6 class="text-gray-600 text-xs">120 Products</h6>
+                                            </div>
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section class="main w-12/12 py-6">
+            <div class="grid w-full mx-auto cf-1 gap-4">
+                <div class="section-heading">
+                    <h2 class="sec-title text-2xl font-bold">Weekly Delays</h2>
+                </div>
+                <div class="section-body grid gap-6 grid-cols-4"  data-context="{{weekly_deal.context_name}}">
+                    {% for weekly_deal in weekly_deals.results %}
+                        <div class="multi-image-product-card overflow-hidden p-1 rounded-md card flex gap-0.5">
+                            <div class="grid gap-1" data-weekly-delay-index="{{forloop.counter}}">
+                                <a class="main-image p-2 grid gap-2" href="{% url 'supplier:product-detail' weekly_deal.product.slug %}">
+                                    <img src="/media/{{weekly_deal.main_image.image}}" alt="Product" class="item-img rounded-sm">
+                                    <div class="item-details grid gap-0 justify-center">
+                                        <h5 class="text-sm font-bold leading-5">    
+                                            {{weekly_deal.product.name}}
+                                        </h5>
+                                    </div>
+                                </a>
+                            </div>
+                            {% for sub_image in weekly_deals.sub_images %}
+                                <div class="grid sub-images gap-0.5 grid-rows-3">
+
+                                    <div class="grid gap-0.5" href="#">
+                                        <img src="/media/{{sub_image.image}}" alt="Product" class="item-img rounded-sm">
+                                        <div class="item-details grid gap-0 justify-center">
+                                            <!-- <h5 class="text-sm font-bold leading-5 hidden">    
+                                                ALKIM PETROKIMYA SAN. VE TIC. A.S.
+                                            </h5> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section class="main w-12/12 py-6" style="background-color: #FFFFFF;">
+            <div class="grid w-full mx-auto cf-1 gap-5">
+                <div class="section-heading">
+                    <h2 class="sec-title text-2xl font-bold">Propular Products</h2>
+                </div>
+                <div class="section-body grid gap-6 grid-cols-5" data-context="{{propular_products.context_name}}">
+                    {% for product in propular_products.results %}
+                        <div class="single-image-product-card overflow-hidden rounded-md flex gap-0.5 card-outlined">
+                            <div class="grid gap-1">
+                                <a class="grid gap-2" href="{% url 'supplier:product-detail' product.product.slug %}">
+                                    <img src="/media/{{product.images.image}}" alt="{{product.name}}" class="item-img rounded-sm" style="object-fit: cover;">
+                                    <div class="item-details grid gap-0 py-1 px-4 gap-2" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
+                                        <p class="grid justify-start text-left">            
+                                            <h5 class="text-sm font-bold leading-5">    
+                                                {{product.product.name}}
+                                            </h5>
+                                            <p class="text-xs font-medium">
+                                                <span>{{product.product.currency}}</span>
+                                                <span>{{product.product.price}}</span>
+                                            </p>
+                                        </p>
+                                    </div>
+                                    <span class="py-1 px-4 font-semibold text-sm">By {{ product.supplier }}</span>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+{% endblock %}

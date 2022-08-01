@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden - {{ view_name }}</title>
+</head>
+<body>
+
+    <div class="flex">
+        <a href="{% url 'manager:home' %}" data-link="products">Home</a>
+        <a href="{% url 'supplier:products' %}" data-link="products">Products</a>
+        <a href="{% url 'manager:showrooms' %}" data-link="products">Showrooms</a>
+        <a href="{% url 'manager:services' %}" data-link="products">Services</a>
+        <a href="{% url 'manager:support' %}" data-link="products">Support</a>
+        <a href="{% url 'manager:about-us' %}" data-link="products">About Us</a>
+    </div>
+
+    <h3>Categories</h3>
+    <ul style="display: flex;gap:2rem;flex-wrap: wrap" data-context-name="{{context_name}}">
+        {% for category_group in object_list %}
+        <li data-category-index="{{ forloop.counter }}" style="display: grid;gap:1rem;">
+            <a href='{% url "supplier:category-detail" category_group.category.slug %}'>
+                <img style="width: 30px; aspect-ratio: 1;" src="/media/{{category_group.category.image}}" alt="">
+                <span data-category-name="{{category_group.category.name}}">{{ category_group.category.name }}</span>
+            </a>
+            <ul>
+                {% for sub_category in category_group.sub_categories %}
+                    <li>
+                        <a href='{% url "supplier:subcategory-detail" category_group.category sub_category.slug %}' data-subcategory-index="{{ forloop.counter }}">
+                            {{sub_category.name}}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+
+    </ul>
+
+</body>
+</html>

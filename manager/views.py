@@ -1,3 +1,4 @@
+from unicodedata import category
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView, DetailView
@@ -15,7 +16,7 @@ from manager import models as ManagerModels
 
 
 class HomeView(View):
-    template_name = "manager/home.html"
+    template_name = "manager/index.html"
 
     def get(self, request):
         # generating products context
@@ -45,7 +46,14 @@ class HomeView(View):
             "view_name": "Home",
             "product_categories": {
                 "context_name": "product-categories",
-                "results": ProductCategory.objects.all().order_by("-created_on"),
+                "results": [
+                    {
+                        'category' : category,
+                        'sub_categories' : ProductSubCategory.objects.filter(category=category)
+                    }
+                    for category in ProductCategory.objects.all().order_by("-created_on")[:7]
+                ]
+                
             },
             "showrooms": {
                 "context_name": "showrooms",
@@ -61,7 +69,26 @@ class HomeView(View):
             },
             "weekly_deals": {
                 "context_name": "weekly-deals",
-                "results": Product.objects.all().order_by("-id")[:6],
+                "results": [
+                    {
+                        'product' : product,
+                        'main_image' : ProductImage.objects.filter(product=product).first(),
+                        'sub_images' : ProductImage.objects.filter(product=product)[1:4]
+                    }
+                    for product in Product.objects.all().order_by("-id")[:6]
+                ]
+            },
+
+            "propular_products": {
+                "context_name": "propular-products",
+                "results": [
+                    {
+                        'product' : product,
+                        'supplier' : product.store.all().first().supplier,
+                        'images' : ProductImage.objects.filter(product=product).first()
+                    }
+                    for product in Product.objects.all().order_by("-id")[:12]
+                ]
             },
         }
         return render(request, self.template_name, context=context_data)
