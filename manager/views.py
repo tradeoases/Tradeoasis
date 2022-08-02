@@ -48,12 +48,15 @@ class HomeView(View):
                 "context_name": "product-categories",
                 "results": [
                     {
-                        'category' : category,
-                        'sub_categories' : ProductSubCategory.objects.filter(category=category)
+                        "category": category,
+                        "sub_categories": ProductSubCategory.objects.filter(
+                            category=category
+                        ),
                     }
-                    for category in ProductCategory.objects.all().order_by("-created_on")[:7]
-                ]
-                
+                    for category in ProductCategory.objects.all().order_by(
+                        "-created_on"
+                    )[:7]
+                ],
             },
             "showrooms": {
                 "context_name": "showrooms",
@@ -71,24 +74,25 @@ class HomeView(View):
                 "context_name": "weekly-deals",
                 "results": [
                     {
-                        'product' : product,
-                        'main_image' : ProductImage.objects.filter(product=product).first(),
-                        'sub_images' : ProductImage.objects.filter(product=product)[1:4]
+                        "product": product,
+                        "main_image": ProductImage.objects.filter(
+                            product=product
+                        ).first(),
+                        "sub_images": ProductImage.objects.filter(product=product)[1:4],
                     }
                     for product in Product.objects.all().order_by("-id")[:6]
-                ]
+                ],
             },
-
             "propular_products": {
                 "context_name": "propular-products",
                 "results": [
                     {
-                        'product' : product,
-                        'supplier' : product.store.all().first().supplier,
-                        'images' : ProductImage.objects.filter(product=product).first()
+                        "product": product,
+                        "supplier": product.store.all().first().supplier,
+                        "images": ProductImage.objects.filter(product=product).first(),
                     }
                     for product in Product.objects.all().order_by("-id")[:12]
-                ]
+                ],
             },
         }
         return render(request, self.template_name, context=context_data)
