@@ -56,24 +56,24 @@
 
 <body>
     <header class="top-nav">
-        <div class="container-fluid cf-1">
+        <div class="w-12/12 bg-backgroundColor">
             <div class="w-full mx-auto">
                 <!-- The temporary navbar -->
                 <div class="temp-nav py-3 grid content-center w-12/12 gap-1">
                     <div class="header-left grid items-center">
                         <div class="logo-wrapper">
-                            <img src="../static/assets/imgs/resources/logo.png" alt="Logo" class="logo">
+                            <img src="../static/assets/imgs/resources/logo_trans.png" alt="Logo" class="logo" style="object-fit: cover;">
                         </div>
-                        <form action="" class="search-form grid w-full gap-0 justify-items-stretch">
-                            <input type="search" name="search-bar" id="search-bar" class="py-3 px-6 rounded-tl-md rounded-bl-md focus:outline-none text-lghterBackgroundColor"
-                                placeholder="Search">
-
-                                <button type="submit" class="grid place-items-center bg-yellowColor rounded-tr-md rounded-br-md">
-                                <i class="ti-search"></i>
-                            </button>
-                        </form>
                     </div>
-                    <ul class="header-right list-none list-outside flex justify-end">
+                    <form action="" class="search-form grid w-full gap-0 justify-items-stretch">
+                        <input type="search" name="search-bar" id="search-bar" class="py-3 px-6 rounded-tl-md rounded-bl-md focus:outline-none text-lghterBackgroundColor"
+                            placeholder="Search">
+
+                            <button type="submit" class="grid place-items-center bg-yellowColor rounded-tr-md rounded-br-md">
+                            <i class="ti-search"></i>
+                        </button>
+                    </form>
+                    <ul class="header-right list-none list-outside flex justify-end text-white">
                         <li class="grid place-items-center h-full positive-relative">
                             <a href="" onClick="(function(){
                             })();return false;" class="flex gap-1 px-4 gap-2 text-sm items-center">
@@ -84,22 +84,22 @@
                                     EN
                                 </span>
                             </a>
-                            <ul class="dropdown-list grid  list-none list-outside bg-lghterBackgroundColor overflow-hidden rounded-md">
+                            <ul class="dropdown-list grid  list-none list-outside bg-lghterBackgroundColor overflow-hidden rounded-md text-base">
                                 <li>
-                                    <a class="grid items-center py-2 px-6" href="">English</a>
+                                    <a class="grid items-center py-3 px-8" href="">English</a>
                                 </li>
                                 <li>
-                                    <a class="grid items-center py-2 px-6" href="">Arabic</a>
+                                    <a class="grid items-center py-3 px-8" href="">Arabic</a>
                                 </li>
                                 <li>
-                                    <a class="grid items-center py-2 px-6" href="">French</a>
+                                    <a class="grid items-center py-3 px-8" href="">French</a>
                                 </li>
                                 <li>
-                                    <a class="grid items-center py-2 px-6" href="">Nederlands</a>
+                                    <a class="grid items-center py-3 px-8" href="">Nederlands</a>
                                 </li>
                             </ul>
                         </li>
-                        <li class="grid place-items-center h-full">
+                        <li class="grid place-items-center h-full positive-relative">
                             <a href="" onClick="(function(){
                             })();return false;" class="flex gap-1 px-4 gap-2 text-sm items-center">
                                 <span class="item-name grid place-items-center py-2">
@@ -109,6 +109,23 @@
                                     <i class="ti-angle-down font-bold"></i>
                                 </span>
                             </a>
+                            <ul class="dropdown-list grid  list-none list-outside bg-lghterBackgroundColor overflow-hidden rounded-md text-base">
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">Profile</a>
+                                </li>
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">Dashboard</a>
+                                </li>
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">Wishlists</a>
+                                </li>
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">Settings</a>
+                                </li>
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">Logout</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -136,9 +153,9 @@
 
     <main class="grid gap-8" style="background-color: #EAEDED;">
         <section class="main w-12/12 py-6">
-            <div class="page-starter grid w-full mx-auto cf-1 gap-4">
+            <div class="page-starter grid w-full mx-auto cf-1 gap-4 overflow-hidden">
                 <div class="grid side-bar gap-3 content-start product-categories w-12/12 ">
-                    <div class="grid p-0 side-menu card rounded-md overflow-hidden">
+                    <div class="grid p-0 side-menu card rounded-none rounded-t-md overflow-hidden">
                         <h2 class="text-xl font-bold px-5 py-3" style="background-color: hsla(213, 28%, 90%, .8);">Product Categories</h2>
                         <ul class="grid gap-0.5 px-5 py-2">
                             <li class="side-menu-item text-slate-800 hover:text-black transition-colors transition-200 ease-in">
@@ -182,20 +199,26 @@
                             </li>
                         </ul>
                     </div>
-                    <a  class="side-menu-footer bg-yellowColor flex gap-1 py-3 text-white" class="" href="#">
+                    <a  class="side-menu-footer bg-yellowColor flex gap-1 py-3 text-white rounded-b-md" class="" href="#">
                         <i class="ti-menu"></i>
                         <span>All Categories</span>
                     </a>
                 </div>
-                <div class="carousel-sliders w-12/12">
-                    <div class="sliders">
-                        <div class="slider overflow-hidden rounded-md">
-                            <img src="../static/assets/imgs/resources/1.webp" alt="Slider-1">
+                <div class="promotion-area w-12/12 grid gap-3">
+                    <div class="upper grid rounded-md overflow-hidden">
+                        <img style="object-fit: cover;" src="../static/assets/imgs//resources/01.png" alt="">
+                    </div>
+                    <div class="lower grid gap-3 grid-flow-row grid-cols-2">
+                        <div class="grid rounded-md overflow-hidden">
+                            <img style="object-fit: cover;" src="../static/assets/imgs//resources/01.png" alt="">
+                        </div>
+                        <div class="grid rounded-md overflow-hidden">
+                            <img style="object-fit: cover;" src="../static/assets/imgs//resources/01.png" alt="">
                         </div>
                     </div>
                 </div>
                 <div class="grid side-bar gap-3 content-start product-categories w-12/12">
-                    <div class="grid p-0 side-menu card rounded-md overflow-hidden">
+                    <div class="grid p-0 side-menu card rounded-none rounded-t-md overflow-hidden">
                         <h2 class="text-xl font-bold px-5 py-3" style="background-color: hsla(213, 28%, 90%, .8);">Showrooms</h2>
                         <ul class="grid gap-0.5 px-5 py-2">
                             <li class="side-menu-item text-slate-800 hover:text-black transition-colors transition-200 ease-in">
@@ -227,7 +250,7 @@
                             </li>
                         </ul>
                     </div>
-                    <a  class="side-menu-footer bg-yellowColor flex gap-1 py-3 text-white" class="" href="#">
+                    <a  class="side-menu-footer bg-yellowColor flex gap-1 py-3 text-white rounded-b-md" class="" href="#">
                         <i class="ti-menu"></i>
                         <span>All Showrooms</span>
                     </a>
