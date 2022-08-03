@@ -1,5 +1,5 @@
 body {
-    background-color: #f6f6f5;
+    background-color: hsl(0, 0%, 99%);
 }
 
 .lang-flag.flex {
@@ -110,11 +110,11 @@ body {
 
 .promotion-area {
     height: 90vh;
-    border: 1px solid #000;
+    grid-template-rows: 40vh 30vh;
 }
 
-.promotion-area>* {
-    border: 1px solid rgb(131, 25, 25);
+.promotion-area div {
+    border-radius: 5px;
 }
 
 .promotion-area .lower,
@@ -125,21 +125,31 @@ body {
 
 .promotion-area .upper {
     grid-template-columns: 2fr 1fr;
+    grid-row: 1/2;
 }
 
-.promotion-area .lower {}
+.promotion-area .upper .banner,
+.promotion-area .upper .cards {
+    grid-row: 1/-1;
+}
 
-.promotion-area .lower>*,
-.promotion-area .upper>* {
-    border: 1px solid rgb(250, 2, 2);
+.promotion-area .lower > * {
+    grid-row: 1/-1;
+}
+
+.promotion-area .lower .banner-lower {
+    grid-column: 2/-1;
 }
 
 .promotion-area img {
-    /* align-self: 16/9;
-    height: 100%; */
-    display: none;
+    align-self: 16/9;
+    height: 100%;
 }
 
+/* 
+.promotion-area .lower .banner-lower {
+    height: 50vh;
+} */
 
 /* page starter */
 
@@ -331,8 +341,76 @@ body {
     max-height: 35vh;
 }
 
+.promotion-area .small-item {
+    grid-template-columns: 1fr;
+    grid-template-rows: 2fr 0.5fr;
+    overflow: hidden;
+    gap: .25rem;
+    border-radius: 0;
+}
+
+.promotion-area .small-item .card-img-wrapper {
+    grid-column: 1/-1;
+    grid-row: 1/2;
+    border-radius: 0;
+}
+.promotion-area .small-item .body {
+    grid-column: 1/-1;
+    grid-row: 2/-1;
+    gap: .35rem;
+    padding: .25rem;
+}
+.promotion-area .small-item .body * {
+    line-height: 1;
+}
 
 
+/* single product page */
+@media (min-width: 786px) {
+    .product-detail {
+        grid-template-columns: 1fr 2fr;
+    }
+}
+
+.product-images-list img {
+    transform: scale(1);
+}
+.product-images-list img.active {
+    transform: scale(1.1);
+}
+
+.store-card {
+    display: grid;
+    position: relative;
+}
+
+.store-card .img-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.store-card img {
+    width: 100%;
+    aspect-ratio:2/1;
+    object-fit:cover;
+}
+
+.store-card .card-details {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: hsla(213, 28%, 19%, 0.219);
+
+    display: grid;
+    align-content: flex-end;
+    transition: all .2s ease-in;
+}
+
+.store-card:hover .card-details {
+    background-color: hsla(213, 28%, 19%, 0.5);
+}
 
 /* Start Footer */
 .foot {
@@ -373,5 +451,3 @@ footer .cl {
 footer a:hover {
     text-decoration: underline;
 }
-
-/* End Footer */

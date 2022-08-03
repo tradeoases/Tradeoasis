@@ -175,12 +175,12 @@ h4 {
     overflow: auto;
 }
 
-.flex {
+/* .flex {
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
 /* .grid {
     height: 100%;
@@ -215,7 +215,7 @@ h4 {
 .show {
     display: block;
 }
-
+/* 
 .cta {
     color: var(--brand-primary);
     font-weight: 800;
@@ -241,7 +241,7 @@ h4 {
 .cta.lg:hover {
     color: var(--brand-primary);
     background-color: #e5fae4;
-}
+} */
 
 
 #toggle-dropdown {
