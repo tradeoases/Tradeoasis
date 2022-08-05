@@ -320,11 +320,11 @@ body {
 }
 
 
-.multi-image-product-card  {
+.multi-image-product-card {
     grid-template-columns: 2fr 1fr;
 }
 
-.multi-image-product-card .sub-images > div {
+.multi-image-product-card .sub-images>div {
     max-height: 7rem;
     aspect-ratio: 1;
     overflow: hidden;
@@ -410,4 +410,44 @@ body {
 
 .store-card:hover .card-details {
     background-color: hsla(213, 28%, 19%, 0.5);
+}
+
+/* Start Footer */
+.foot {
+    border-top: 1px solid #d5d5d5;
+    border-bottom: 1px solid #f3f3f3;
+}
+
+.fc {
+    padding: 2.4rem 0;
+    height: 400px;
+    overflow: hidden;
+}
+
+.fc .cl {
+    margin: .6rem;
+    width: 33.3%;
+    height: 100%;
+}
+
+.fc .cl1 img {
+    width: 90px;
+    height: 45px;
+}
+
+.fc h1 {
+    text-transform: uppercase;
+    font-weight: 800;
+}
+
+.fc .cl ul li {
+    margin: .4rem 0;
+}
+
+footer .cl {
+    margin: 0 !important;
+}
+
+footer a:hover {
+    text-decoration: underline;
 }
