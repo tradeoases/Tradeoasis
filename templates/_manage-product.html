@@ -41,8 +41,8 @@
                         <li class="link">
                             <a href="#">
                                 <span class="flex">
-                                    <span><i class="icon ti-receipt"></i><span class="text">Inventory</span></span><i
-                                        class="ti-angle-down"></i>
+                                    <span><i class="icon ti-receipt"></i><span class="text">Products</span></span><i
+                                        class="ti-angle-down" style="color:#fff;"></i>
                                 </span>
                             </a>
                             <ul class="sub-menu">
@@ -107,7 +107,8 @@
                     </div>
                 </div>
                 <div class="main-content">
-                    <div class="card data-table">
+                    <h3 style="margin:1.6rem 0 .4rem 0;font-weight:600;">Manage Existing Product</h3>
+                    <div class="card data-table products-table">
                         <table id="table-1" class="display" style="width:100%;margin-top:.5rem;">
                             <thead>
                                 <tr>
@@ -116,6 +117,7 @@
                                     <th>Category</th>
                                     <th>Unit Price</th>
                                     <th>Created At</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -125,6 +127,7 @@
                                     <td>Gadgets</td>
                                     <td>£245</td>
                                     <td>05/16/2022</td>
+                                    <td class="edit">Edit</td>
                                 </tr>
                                 <tr>
                                     <td>FORDN11410</td>
@@ -132,6 +135,7 @@
                                     <td>Electronics</td>
                                     <td>£1000</td>
                                     <td>05/17/2022</td>
+                                    <td class="edit">Edit</td>
                                 </tr>
                                 <tr>
                                     <td>FORDN11500</td>
@@ -139,6 +143,7 @@
                                     <td>Gadgets</td>
                                     <td>£1700</td>
                                     <td>05/15/2022</td>
+                                    <td class="edit">Edit</td>
                                 </tr>
                                 <tr>
                                     <td>FORDN11501</td>
@@ -146,6 +151,7 @@
                                     <td>Computing</td>
                                     <td>£2000</td>
                                     <td>05/16/2022</td>
+                                    <td class="edit">Edit</td>
                                 </tr>
                             </tbody>
                             <tfoot>
@@ -154,7 +160,9 @@
                                     <th>Item</th>
                                     <th>Category</th>
                                     <th>Unit Price</th>
+                                    <th>Edit</th>
                                     <th>Created At</th>
+                                    <th>Edit</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -165,55 +173,49 @@
         </div>
     </div>
 
-
+    <script src="../static/js/dropdown.js"></script>
+    <script src="../static/js/sidebar.js"></script>
+    <script src="../static/js/modal.js"></script>
     <script>
-        const dropdownMenu = document.querySelector('#dropdown-menu');
-        const toggleDropdown = document.querySelector('#toggle-dropdown');
-        let isDropdownToggled = false;
-
-        toggleDropdown.addEventListener('click', (event) => {
-            console.log(1000);
-            if (!isDropdownToggled) {
-                isDropdownToggled = true;
-                dropdownMenu.style.display = "block";
-            } else {
-                isDropdownToggled = false;
-                dropdownMenu.style.display = "none";
-            }
-        });
-
-        if (!dropdownMenu.classList.contains('right') || !dropdownMenu.classList.contains('right')) {
-            dropdownMenu.classList.add('dropdown-menu-default');
-        }
-
-        const sidebarSubMenus = document.querySelectorAll('.sub-menu');
-        const sidebarSubMenuToggleDropdowns = document.querySelectorAll('.ti-angle-down');
-
-
-        for (i = 0; i < sidebarSubMenuToggleDropdowns.length; i++) {
-            sidebarSubMenuToggleDropdowns[i].addEventListener("click", function () {
-                this.classList.toggle("active");
-                const dropdownContent = this.parentElement.parentElement.nextElementSibling;
-
-                if (dropdownContent.style.display === "block") {
-                    sidebarSubMenus.forEach(subMenu => {
-                        subMenu.style.display = "none";
-                    });
-                    dropdownContent.style.display = "none";
-                } else {
-                    sidebarSubMenus.forEach(subMenu => {
-                        subMenu.style.display = "none";
-                    });
-                    dropdownContent.style.display = "block";
-                }
-            });
-        }
-
+        // Table
         $(document).ready(function () {
             $('#table-1').DataTable();
         });
 
+
+        // Open Modal
+        const productEditBtns = document.querySelectorAll('.edit');
+        productEditBtns.forEach(btn => {
+            btn.addEventListener('click', editProduct);
+
+        });
+
+        function editProduct(e) {
+            const name = e.target.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent
+            const category = e.target.previousElementSibling.previousElementSibling.previousElementSibling.textContent
+            const price = e.target.previousElementSibling.previousElementSibling.textContent
+
+            const product = {
+                name,
+                model: "TP-Link Modem 04.4v",
+                serialNumber: "25416",
+                category,
+                price,
+                description: "Some description for this particular product"
+            };
+
+            // Open Modal
+            Modal.show(product);
+
+            // Close Modal
+            document.querySelector('#close-modal').addEventListener('click', (event) => {
+                if (event.target.classList.contains('ti-close'))
+                    Modal.hide(event);
+            });
+        }
+
     </script>
+
 </body>
 
 </html>

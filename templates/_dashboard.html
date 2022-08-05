@@ -41,8 +41,8 @@
                         <li class="link">
                             <a href="#">
                                 <span class="flex">
-                                    <span><i class="icon ti-receipt"></i><span class="text">Inventory</span></span><i
-                                        class="ti-angle-down"></i>
+                                    <span><i class="icon ti-receipt"></i><span class="text">Products</span></span><i
+                                        class="ti-angle-down" style="color:#fff;"></i>
                                 </span>
                             </a>
                             <ul class="sub-menu">
@@ -224,9 +224,9 @@
                             </div>
                         </div>
                         <div class="card">
-                            <h4>Top selling categories [Pie-Chart]</h4>
+                            <h4>Top selling categories</h4>
                             <div>
-                                <canvas id="most-bought"></canvas>
+                                <canvas id="most-bought" style="max-height: 266px;"></canvas>
                             </div>
                         </div>
                     </div>
@@ -237,49 +237,10 @@
     </div>
 
 
+    <script src="../static/js/dropdown.js"></script>
+    <script src="../static/js/sidebar.js"></script>
+
     <script>
-        const dropdownMenu = document.querySelector('#dropdown-menu');
-        const toggleDropdown = document.querySelector('#toggle-dropdown');
-        let isDropdownToggled = false;
-
-        toggleDropdown.addEventListener('click', (event) => {
-            console.log(1000);
-            if (!isDropdownToggled) {
-                isDropdownToggled = true;
-                dropdownMenu.style.display = "block";
-            } else {
-                isDropdownToggled = false;
-                dropdownMenu.style.display = "none";
-            }
-        });
-
-        if (!dropdownMenu.classList.contains('right') || !dropdownMenu.classList.contains('right')) {
-            dropdownMenu.classList.add('dropdown-menu-default');
-        }
-
-        const sidebarSubMenus = document.querySelectorAll('.sub-menu');
-        const sidebarSubMenuToggleDropdowns = document.querySelectorAll('.ti-angle-down');
-
-
-        for (i = 0; i < sidebarSubMenuToggleDropdowns.length; i++) {
-            sidebarSubMenuToggleDropdowns[i].addEventListener("click", function () {
-                this.classList.toggle("active");
-                const dropdownContent = this.parentElement.parentElement.nextElementSibling;
-
-                if (dropdownContent.style.display === "block") {
-                    sidebarSubMenus.forEach(subMenu => {
-                        subMenu.style.display = "none";
-                    });
-                    dropdownContent.style.display = "none";
-                } else {
-                    sidebarSubMenus.forEach(subMenu => {
-                        subMenu.style.display = "none";
-                    });
-                    dropdownContent.style.display = "block";
-                }
-            });
-        }
-
 
         const labels = [
             'January',
@@ -312,39 +273,43 @@
         );
 
 
-
-        const labels2 = [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-        ];
-
         const data2 = {
-            labels: labels2,
+            labels: [
+                'Gadgets',
+                'Computing',
+                'Fashion',
+                'Jewellery'
+            ],
             datasets: [{
-                label: 'Sales',
-                backgroundColor: '#ecab08',
-                borderColor: '#ecab08',
-                data: [0, 1000, 1500, 890, 2500, 3000, 4500],
+                label: 'My First Dataset',
+                data: [300, 50, 100, 78],
+                backgroundColor: [
+                    'rgb(255, 205, 86)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 99, 132)',
+                    'rgb(25, 55, 86)'
+                ],
+                hoverOffset: 4
             }]
         };
 
         const config2 = {
-            type: 'bar',
+            type: 'doughnut',
             data: data2,
-            options: {}
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                    }
+                }
+            },
         };
 
         const mostBought = new Chart(
             document.getElementById('most-bought'),
             config2
         );
-
-
-
 
     </script>
 </body>

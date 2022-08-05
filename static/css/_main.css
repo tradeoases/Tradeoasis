@@ -659,6 +659,7 @@ a {
 .product-name-category {
     justify-content: flex-start;
     gap: .4rem;
+    border: 1px solid red;
 }
 
 .product-save-cancel {
@@ -714,4 +715,96 @@ a {
 .top-selling-product-details h6 {
     font-size: 10px;
     font-weight: 600;
+}
+
+.products-table td:last-child {
+    color: red;
+    cursor: pointer;
+}
+
+
+
+.modal {
+    height: fit-content;
+    width: fit-content;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 999999;
+    transform: translate(-50%, -50%);
+    box-shadow: -5px 5px 10px 4px rgba(0, 0, 0, .1);
+    border-radius: 10px;
+    background-color: #fff;
+    /* display: none; */
+}
+
+.modal .modal-head {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #ecab08;
+    padding: 2%;
+    text-transform: capitalize;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal .modal-body {
+    padding: .8rem;
+}
+
+.modal .modal-foot {
+    background-color: var(--gray-6);
+    padding: 2% 5%;
+    text-transform: capitalize;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal .modal-head h2 {
+    color: #fff;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.modal .modal-head i {
+    cursor: pointer;
+    border-radius: 5px;
+    padding: .6rem;
+    color: #fff;
+    background-color: #c08b06;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.modal .modal-head button {
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid var(--bg-5);
+    outline: none;
+    background: var(--bg-5);
+    border-radius: 5px;
+}
+
+.modal .form-control input,
+.modal .form-control textarea,
+.modal .form-control select {
+    color: rgb(96, 96, 96);
+    background-color: var(--bg-white);
+    width: 100%;
+    font-size: 1.2rem;
+    font-weight: 300;
+    font-family: "Poppins", sans-serif;
+    padding: 0.5rem;
+    border: 1px solid #e1e4e8;
+    border-radius: 3px;
+}
+
+.modal .form-control input:focus {
+    outline: none;
+}
+
+.ti-angle-down {
+    color: #fff;
 }
