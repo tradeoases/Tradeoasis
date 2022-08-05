@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="../static/css/_main.css">
     <link rel="stylesheet" href="../static/icons/themify-icons.css">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
 
     <title>Golden - GOLDEN</title>
 </head>
@@ -101,50 +107,59 @@
                     </div>
                 </div>
                 <div class="main-content">
-                    <div class="card product-form">
-                        <h4>Create new product</h4>
-                        <div class="create-form">
-                            <form action="">
-                                <div class="product-name-category flex">
-                                    <div class="form-control">
-                                        <label for="produt-name">Product name</label>
-                                        <input type="text" name="product-name" id="product-name">
-                                    </div>
-                                    <div class="form-control">
-                                        <label for="product-category">Select category</label>
-                                        <select name="product-category" id="product-category">
-                                            <option value="">Gadgets</option>
-                                            <option value="">Gadgets</option>
-                                            <option value="">Gadgets</option>
-                                            <option value="">Gadgets</option>
-                                            <option value="">Gadgets</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-control">
-                                        <label for="produt-price">Product price</label>
-                                        <input type="text" name="product-price" id="product-price">
-                                    </div>
-                                </div>
-                                <div class="form-control">
-                                    <label for="product-description">Product description</label>
-                                    <textarea name="product-description" id="product-description" cols="30"
-                                        rows="10"></textarea>
-                                </div>
-                                <div class="form-control">
-                                    <label for="product-image"></label>
-                                    <input type="file" name="product-image" id="product-image">
-                                </div>
-                                <div class="product-save-cancel flex mt-5">
-                                    <div class="form-control">
-                                        <input type="submit" value="Create" name="btn-create" class="btn">
-                                    </div>
-                                    <div class="form-control">
-                                        <input type="submit" value="Cancel" name="btn-cancel" class="btn">
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+                    <div class="card data-table">
+                        <table id="table-1" class="display" style="width:100%;margin-top:.5rem;">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Item</th>
+                                    <th>Category</th>
+                                    <th>Unit Price</th>
+                                    <th>Created At</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>FORDN11414</td>
+                                    <td>HP Canon printer</td>
+                                    <td>Gadgets</td>
+                                    <td>£245</td>
+                                    <td>05/16/2022</td>
+                                </tr>
+                                <tr>
+                                    <td>FORDN11410</td>
+                                    <td>DT-X UPS device</td>
+                                    <td>Electronics</td>
+                                    <td>£1000</td>
+                                    <td>05/17/2022</td>
+                                </tr>
+                                <tr>
+                                    <td>FORDN11500</td>
+                                    <td>HP Mini scanner</td>
+                                    <td>Gadgets</td>
+                                    <td>£1700</td>
+                                    <td>05/15/2022</td>
+                                </tr>
+                                <tr>
+                                    <td>FORDN11501</td>
+                                    <td>TP-Link router</td>
+                                    <td>Computing</td>
+                                    <td>£2000</td>
+                                    <td>05/16/2022</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Item</th>
+                                    <th>Category</th>
+                                    <th>Unit Price</th>
+                                    <th>Created At</th>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -193,6 +208,11 @@
                 }
             });
         }
+
+        $(document).ready(function () {
+            $('#table-1').DataTable();
+        });
+
     </script>
 </body>
 

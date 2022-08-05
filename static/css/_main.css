@@ -156,6 +156,10 @@ a {
     border-radius: 0;
 }
 
+.br-10 {
+    border-radius: 10px;
+}
+
 .m-0 {
     margin: 0;
 }
@@ -669,4 +673,45 @@ a {
 .data-visual {
     justify-content: space-between;
     gap: 1.4rem;
+}
+
+.top {
+    gap: 1.4rem;
+}
+
+.top .left {
+    width: 78%;
+    padding: 0;
+}
+
+.top .right {
+    width: 22%;
+    padding-top: .24rem;
+}
+
+.top .right .wrapper {
+    gap: .4rem;
+    justify-content: flex-start;
+    margin-top: .8rem;
+}
+
+.top-selling-product {
+    margin: .4rem 0;
+}
+
+.top-selling-product i {
+    color: var(--bg-white);
+    background-color: var(--brand-primary);
+    border-radius: 50%;
+    padding: .8rem;
+}
+
+.top-selling-product-details h4 {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.top-selling-product-details h6 {
+    font-size: 10px;
+    font-weight: 600;
 }

@@ -12,8 +12,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -49,7 +47,7 @@
                             </a>
                             <ul class="sub-menu">
                                 <li class="link"><a href="_create-product.html"> Create products</a></li>
-                                <li class="link"><a href="#"> Manage products</a></li>
+                                <li class="link"><a href="_manage-product.html"> Manage products</a></li>
                             </ul>
                         </li>
                         <li class="link">
@@ -110,7 +108,7 @@
                 </div>
                 <div class="main-content">
                     <div class="top flex">
-                        <div class="left">
+                        <div class="left content">
                             <div class="top-cards flex">
                                 <div class="top-card card flex">
                                     <div class="card-content card-content-left">
@@ -175,80 +173,58 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="right">
-                            <div class="card br-0 m-0">
+                        <div class="right content">
+                            <div class="card m-0">
                                 <h4>Top 5 selling products</h4>
-                                <div>
-                                    <canvas id=""></canvas>
+                                <div class="wrapper flex">
+                                    <div class="top-selling-product">
+                                        <span><i class="ti ti-wallet"></i></span>
+                                    </div>
+                                    <div class="top-selling-product-details">
+                                        <h4>Headphone & Tablet</h4>
+                                        <h6>£13k</h6>
+                                    </div>
+                                </div>
+                                <div class="wrapper flex">
+                                    <div class="top-selling-product">
+                                        <span><i class="ti ti-wallet"></i></span>
+                                    </div>
+                                    <div class="top-selling-product-details">
+                                        <h4>Cosmetic & Jewellery</h4>
+                                        <h6>£475k</h6>
+                                    </div>
+                                </div>
+                                <div class="wrapper flex">
+                                    <div class="top-selling-product">
+                                        <span><i class="ti ti-wallet"></i></span>
+                                    </div>
+                                    <div class="top-selling-product-details">
+                                        <h4>Fashion</h4>
+                                        <h6>£27k</h6>
+                                    </div>
+                                </div>
+                                <div class="wrapper flex">
+                                    <div class="top-selling-product">
+                                        <span><i class="ti ti-wallet"></i></span>
+                                    </div>
+                                    <div class="top-selling-product-details">
+                                        <h4>Home furniture</h4>
+                                        <h6>£64k</h6>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-
-
-                    <!-- <div class="card data-table">
-                        <table id="table-1" class="display" style="width:100%;margin-top:.5rem;">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Item</th>
-                                    <th>Category</th>
-                                    <th>Unit Price</th>
-                                    <th>Created At</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>FORDN11414</td>
-                                    <td>HP Canon printer</td>
-                                    <td>Gadgets</td>
-                                    <td>£245</td>
-                                    <td>05/16/2022</td>
-                                </tr>
-                                <tr>
-                                    <td>FORDN11410</td>
-                                    <td>DT-X UPS device</td>
-                                    <td>Electronics</td>
-                                    <td>£1000</td>
-                                    <td>05/17/2022</td>
-                                </tr>
-                                <tr>
-                                    <td>FORDN11500</td>
-                                    <td>HP Mini scanner</td>
-                                    <td>Gadgets</td>
-                                    <td>£1700</td>
-                                    <td>05/15/2022</td>
-                                </tr>
-                                <tr>
-                                    <td>FORDN11501</td>
-                                    <td>TP-Link router</td>
-                                    <td>Computing</td>
-                                    <td>£2000</td>
-                                    <td>05/16/2022</td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Item</th>
-                                    <th>Category</th>
-                                    <th>Unit Price</th>
-                                    <th>Created At</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div> -->
-
                     <div class="data-visual flex">
-                        <div class="card br-0">
+                        <div class="card">
                             <h4>Your revenue trend</h4>
                             <div>
                                 <canvas id="revenue"></canvas>
                             </div>
                         </div>
-                        <div class="card br-0">
-                            <h4>Top selling categories</h4>
+                        <div class="card">
+                            <h4>Top selling categories [Pie-Chart]</h4>
                             <div>
                                 <canvas id="most-bought"></canvas>
                             </div>
@@ -304,10 +280,6 @@
             });
         }
 
-        $(document).ready(function () {
-            $('#table-1').DataTable();
-        });
-
 
         const labels = [
             'January',
@@ -322,8 +294,8 @@
             labels: labels,
             datasets: [{
                 label: 'Sales',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: '#ecab08',
+                borderColor: '#ecab08',
                 data: [0, 1000, 1500, 890, 2500, 3000, 4500],
             }]
         };
@@ -354,8 +326,8 @@
             labels: labels2,
             datasets: [{
                 label: 'Sales',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: '#ecab08',
+                borderColor: '#ecab08',
                 data: [0, 1000, 1500, 890, 2500, 3000, 4500],
             }]
         };
