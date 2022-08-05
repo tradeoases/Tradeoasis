@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="../static/css/utils.css"> -->
-    <!-- <link rel="stylesheet" href="../static/css/main.css"> -->
+    <link rel="stylesheet" href="../static/css/_main.css">
     <link rel="stylesheet" href="../static/icons/themify-icons.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
@@ -15,638 +15,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&display=swap');
-
-        :root {
-            --brand-primary: #ecab08;
-            --brand-primary-light: #f9df9c;
-            --brand-secondary: #fafbfc;
-
-            --text-grey: #65735b;
-            --text-light-grey: #d6d8d4;
-            --text-white: #ffffff;
-
-            --bg-white: #ffffff;
-
-            --font-quicksand: "Quicksand", sans-serif;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html,
-        body {
-            height: 100%;
-        }
-
-        body {
-            color: var(--text-grey);
-            background: var(--brand-secondary);
-            font-family: var(--font-quicksand);
-            line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        img {
-            width: 100%;
-        }
-
-        ul {
-            list-style-type: none;
-        }
-
-        a {
-            color: var(--text-1);
-            text-decoration: none;
-        }
-
-
-        .container {
-            max-width: 100%;
-            margin: 0 auto;
-            overflow: auto;
-            padding: 0 10px;
-        }
-
-        .flex {
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .flex-column {
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-        }
-
-        .grid {
-            height: 100%;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .icon {
-            width: 35px;
-            height: 35px;
-        }
-
-        .avatar {
-            margin: 0;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 10px 30px;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            color: var(--text-white);
-            background-color: var(--brand-primary);
-        }
-
-        .btn:hover {
-            background-color: var(--brand-primary-dark);
-        }
-
-        .btn-sm {
-            padding: .5rem 1rem;
-        }
-
-        .btn-lg {
-            padding: .8rem 2rem;
-        }
-
-
-        .card {
-            color: var(--text-1);
-            background-color: var(--bg-7);
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            margin: 10px 0;
-            width: 100%;
-        }
-
-        .card .title h3 {
-            margin-bottom: 0;
-            letter-spacing: normal;
-            color: var(--text-1);
-            font-weight: bold;
-        }
-
-        .card .text p {
-            margin-top: 0;
-            color: var(--text-1);
-            font-weight: bold;
-        }
-
-        .card-info {
-            position: relative;
-        }
-
-        .card-info .exit {
-            font-family: "themify";
-            font-weight: 900;
-            display: inline-block;
-            font-size: .8rem;
-            font-weight: bold;
-            color: var(--brand-primary);
-            margin: 8px 15px;
-            position: absolute;
-            top: 5px;
-            right: 0;
-        }
-
-        .br-0 {
-            border-radius: 0;
-        }
-
-        .m-0 {
-            margin: 0;
-        }
-
-        .p-0 {
-            padding: 0;
-        }
-
-        .pb-5 {
-            padding-bottom: .5rem;
-        }
-
-
-        /* Logout dropdown */
-        .dropdown {
-            display: inline;
-            width: fit-content;
-            height: auto;
-            position: relative;
-            z-index: 99999;
-            overflow: visible;
-        }
-
-        .dropdown-menu::before {
-            content: "";
-            background-color: #fff;
-            box-shadow: -3px -3px 5px 0px rgba(0, 0, 0, .0375);
-            transform: rotate(45deg);
-            position: absolute;
-            top: -6px;
-            left: 45%;
-            width: 20px;
-            height: 20px;
-        }
-
-        .dropdown-menu {
-            border: none;
-            position: absolute;
-            top: 100%;
-            z-index: 9999;
-            display: none;
-
-            box-shadow: 0 0 5px 1px rgba(0, 0, 0, .0975);
-            min-width: 12.5rem;
-            height: auto;
-            padding: 0 !important;
-            margin: 0;
-            background: #fff;
-            border-radius: 10px;
-        }
-
-        .dropdown-menu-default {
-            left: 50%;
-            transform: translateX(-54%);
-        }
-
-        .dropdown-menu.right {
-            position: absolute;
-            right: 100% !important;
-            transform: translateX(50%) !important;
-        }
-
-        .dropdown-menu.left {
-            position: absolute;
-            left: 100% !important;
-            transform: translateX(-50%) !important;
-        }
-
-        .dropdown-menu .dropdown-items {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            line-height: 1.6em;
-            background: transparent;
-            border-radius: 10px;
-        }
-
-        .dropdown-menu .dropdown-items .dropdown-item:nth-child(1):hover,
-        .dropdown-menu .dropdown-items .dropdown-item:nth-child(2):hover {
-            border-bottom: unset;
-        }
-
-        .dropdown-menu .dropdown-item.footer:last-child {
-            border-top: 1px solid #f0efef;
-        }
-
-        .dropdown-menu .dropdown-items .dropdown-item {
-            margin: unset;
-            height: auto;
-            padding: 5px 25px;
-            cursor: pointer;
-        }
-
-        .dropdown-menu .dropdown-items .dropdown-item i {
-            color: #262626;
-        }
-
-        .dropdown-menu .dropdown-items .dropdown-item a {
-            text-decoration: none;
-            color: #262626;
-            font-size: 14px;
-            font-weight: bold;
-            margin: 0 5px;
-            font-family: 'Lato', sans-serif;
-        }
-
-        .dropdown-menu .dropdown-items .dropdown-item:last-child a {
-            color: #000000;
-            font-weight: bolder;
-        }
-
-        .dropdown-menu .dropdown-items .dropdown-item:first-child {
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-        }
-
-        .dropdown-menu .dropdown-items .dropdown-item:last-child {
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
-        }
-
-        .dropdown-menu .dropdown-items .dropdown-item:hover i,
-        .dropdown-menu .dropdown-items .dropdown-item:hover a {
-            color: var(--brand-primary);
-        }
-
-        /* Logout dropdown */
-
-        .form-control input,
-        .form-control button {
-            border: none;
-            border-radius: .2rem;
-        }
-
-        .form-control input:focus,
-        .form-control textarea:focus {
-            outline: none;
-            border: 1px solid var(--brand-primary);
-        }
-
-        .form-control button i {
-            font-weight: bold;
-        }
-
-        .app-container {
-            background-color: var(--brand-secondary);
-            padding: 2.5rem;
-        }
-
-        .app-content.flex {
-            justify-content: flex-start;
-            align-items: flex-start;
-            height: 80vh;
-        }
-
-        .app-logo * {
-            cursor: pointer;
-            color: var(--text-1);
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .app-logo i {
-            font-weight: bolder;
-            margin-right: .5rem;
-        }
-
-        .app-logo span {
-            font-size: 32px;
-        }
-
-        .sidebar {
-            width: 25%;
-            height: 100%;
-            color: var(--text-white);
-            background-color: var(--brand-primary);
-        }
-
-        .sidebar.card {
-            margin: 0;
-            margin-right: .5rem;
-            border-radius: 20px;
-        }
-
-        .sidebar-header {
-            margin-bottom: .5rem;
-        }
-
-        .sidebar-body .link {
-            padding: .5rem;
-        }
-
-        .sidebar-body .link .flex {
-            justify-content: space-between;
-        }
-
-        .sidebar-body .link .icon {
-            font-weight: bold;
-            margin-right: .5rem;
-        }
-
-        .sidebar-body .link .ti-angle-down {
-            font-weight: bold;
-            color: var(--text-light-grey);
-        }
-
-        .sidebar-body .link .ti-angle-down.active {
-            color: var(--text-white);
-        }
-
-        .sidebar-body .link .text {
-            font-weight: normal;
-        }
-
-        .sidebar-body .sub-menu {
-            display: none;
-            padding-left: 2rem;
-        }
-
-        .sidebar-body .sub-menu .link {
-            color: #f3f3f3;
-            padding: .1rem 0;
-        }
-
-        .main {
-            width: 100%;
-            padding: 0 1.2rem;
-        }
-
-        .main-content {
-            width: 100%;
-        }
-
-        /* Navbar */
-        .navbar {
-            width: auto;
-            height: auto;
-        }
-
-        .navbar .flex {
-            justify-content: space-between;
-            overflow: visible;
-        }
-
-        .navbar nav {
-            margin-left: 1.5rem;
-            overflow: hidden;
-            overflow: visible;
-        }
-
-
-
-        .navbar .toggle {
-            font-size: 25px;
-            display: none;
-        }
-
-        .navbar nav .nav-links.flex {
-            justify-content: flex-end;
-        }
-
-        .navbar nav .nav-links>* {}
-
-        .navbar nav .nav-links .link>* {
-            font-weight: bold;
-        }
-
-        .navbar nav .nav-links .link.bell {}
-
-        .navbar nav .nav-links .link.bell,
-        .navbar nav .nav-links .link.settings,
-        .navbar nav .nav-links .link.customer-display,
-        .navbar nav .nav-links .link.pos {
-            padding: .5rem 1rem;
-            margin: 0;
-        }
-
-        .navbar nav .nav-links .link.bell:hover,
-        .navbar nav .nav-links .link.settings:hover,
-        .navbar nav .nav-links .link.customer-display:hover,
-        .navbar nav .nav-links .link.pos:hover {
-            color: var(--brand-primary-dark);
-        }
-
-
-        .navbar nav .nav-links .dropdown img {
-            border: 2px solid var(--brand-primary);
-            margin-left: .5rem;
-            margin-right: .5rem;
-        }
-
-        .navbar nav div {
-            margin-right: 0 !important;
-        }
-
-        /* Navbar */
-
-        .search-form .form-control * {
-            padding: .6rem;
-            margin: 0;
-            font-size: 1.2rem;
-        }
-
-        .search-form .form-control button {
-            margin: 0;
-        }
-
-        .top-card {
-            margin: .2rem;
-            width: 25%;
-            border-radius: 5px;
-        }
-
-        .top-cards.flex {
-            justify-content: flex-start;
-        }
-
-        .top-card.flex {
-            justify-content: flex-start;
-        }
-
-        .top-card:nth-child(1) {
-            margin-left: 0;
-            background-color: var(--brand-primary-light);
-            border: 1px solid var(--brand-primary);
-        }
-
-        .top-card:nth-child(4) {
-            margin-right: 0;
-        }
-
-        .card-content .ti {
-            font-size: large;
-            font-weight: bold;
-        }
-
-        .card-content-left {
-            color: var(--bg-white);
-            background-color: var(--brand-primary);
-            border-radius: .5rem;
-            margin-right: 1rem;
-            padding: .6rem 1rem;
-        }
-
-        .card-content-right {
-            color: var(--brand-primary-dark);
-        }
-
-        .filter-content {
-            width: 100%;
-        }
-
-        .filter-content.flex {
-            justify-content: space-between;
-        }
-
-        .filter-cards {
-            border: 1px solid var(--brand-primary);
-        }
-
-        .filter-cards.duration {
-            width: fit-content;
-            height: 3rem;
-        }
-
-        .filter-cards.transaction.flex {
-            width: 50%;
-            justify-content: space-between;
-        }
-
-        .filter-cards.transaction a {
-            width: 50%;
-            height: 3rem;
-        }
-
-        .filter-cards.date {
-            width: fit-content;
-            height: 3rem;
-        }
-
-        .filter-cards .form-control {
-            color: var(--brand-primary);
-            background: none;
-        }
-
-        .filter-cards .form-control * {
-            height: 100%;
-            border-radius: .5rem;
-        }
-
-        .filter-cards .form-control input {
-            padding-left: .5rem;
-        }
-
-        .filter-cards .form-control button {
-            color: var(--brand-primary);
-            background-color: var(--text-white);
-        }
-
-        .filter-cards .form-control button.active {
-            color: var(--text-white);
-            background-color: var(--brand-primary);
-        }
-
-        .filter-cards .form-control button:hover {
-            background-color: var(--brand-primary-light);
-        }
-
-        .filter-cards .form-control button.active:hover {
-            background-color: var(--brand-primary-dark);
-        }
-
-        .filter-cards .form-control button.day {
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-
-        .filter-cards .form-control button.week,
-        .filter-cards .form-control button.month {
-            border-radius: 0;
-            border-radius: 0;
-        }
-
-        .filter-cards .form-control button.pick-date,
-        .filter-cards .form-control button.year {
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-        }
-
-        .filter-card {
-            box-shadow: unset;
-            cursor: pointer;
-        }
-
-        .filter-card:first-child {
-            border-top-left-radius: .5rem;
-            border-bottom-left-radius: .5rem;
-        }
-
-        .filter-card:last-child {
-            border-top-right-radius: .5rem;
-            border-bottom-right-radius: .5rem;
-        }
-
-        .filter-card.active {
-            color: var(--bg-white);
-            background-color: var(--brand-primary);
-        }
-
-        .date-range-picker .date-range-filter {
-            padding: 0.5em;
-            border: 1px solid #e1e4e8;
-            border-radius: 3px;
-        }
-
-        .date-range-picker .hidden {
-            visibility: hidden;
-        }
-
-        .date-range-picker img {
-            width: 36px;
-            height: 16px;
-            margin: 0 5px;
-        }
-
-        .filter-cards.date {
-            border: none;
-            background-color: transparent;
-            box-shadow: unset;
-            width: fit-content;
-            height: fit-content;
-        }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
     <title>Golden - GOLDEN</title>
@@ -740,69 +109,85 @@
                     </div>
                 </div>
                 <div class="main-content">
-                    <div class="top-cards flex">
-                        <div class="top-card card flex">
-                            <div class="card-content card-content-left">
-                                <span><i class="ti ti-money"></i></span>
-                            </div>
-                            <div class="card-content card-content-right">
-                                <h4>Sales</h4>
-                                <h6>5000</h6>
-                            </div>
-                        </div>
-                        <div class="top-card card flex">
-                            <div class="card-content card-content-left">
-                                <span><i class="ti ti-money"></i></span>
-                            </div>
-                            <div class="card-content card-content-right">
-                                <h4>Returns</h4>
-                                <h6>200</h6>
-                            </div>
-                        </div>
-                        <div class="top-card card flex">
-                            <div class="card-content card-content-left">
-                                <span><i class="ti ti-credit-card"></i></span>
-                            </div>
-                            <div class="card-content card-content-right">
-                                <h4>Income</h4>
-                                <h6>UGX 7,850,000</h6>
-                            </div>
-                        </div>
-                        <div class="top-card card flex">
-                            <div class="card-content card-content-left">
-                                <span><i class="ti ti-credit-card"></i></span>
-                            </div>
-                            <div class="card-content card-content-right">
-                                <h4>Losses</h4>
-                                <h6>UGX 1,000,000</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="filter-content flex">
-                        <div class="filter-cards duration card flex p-0">
-                            <div class="form-control flex action">
-                                <button class="btn act-btn active br-0 m-0 day">Today</button>
-                            </div>
-                            <div class="form-control flex action">
-                                <button class="btn act-btn br-0 m-0 week">Week</button>
-                            </div>
-                            <div class="form-control flex action">
-                                <button class="btn act-btn br-0 m-0 month">Month</button>
-                            </div>
-                            <div class="form-control flex action">
-                                <button class="btn act-btn br-0 m-0 year">Year</button>
-                            </div>
-                        </div>
-                        <div class="filter-cards date card flex p-0" style="border: 1px solid var(--brand-primary);">
-                            <form action="" class="pick-date-form flex">
-                                <div class="form-control flex action">
-                                    <input type="date" name="" id="">
-                                    <button class="btn active pick-date"><i class="ti-link"></i></button>
+                    <div class="top flex">
+                        <div class="left">
+                            <div class="top-cards flex">
+                                <div class="top-card card flex">
+                                    <div class="card-content card-content-left">
+                                        <span><i class="ti ti-money"></i></span>
+                                    </div>
+                                    <div class="card-content card-content-right">
+                                        <h4>Sales</h4>
+                                        <h6>5000</h6>
+                                    </div>
                                 </div>
-                            </form>
+                                <div class="top-card card flex">
+                                    <div class="card-content card-content-left">
+                                        <span><i class="ti ti-money"></i></span>
+                                    </div>
+                                    <div class="card-content card-content-right">
+                                        <h4>Returns</h4>
+                                        <h6>200</h6>
+                                    </div>
+                                </div>
+                                <div class="top-card card flex">
+                                    <div class="card-content card-content-left">
+                                        <span><i class="ti ti-credit-card"></i></span>
+                                    </div>
+                                    <div class="card-content card-content-right">
+                                        <h4>Income</h4>
+                                        <h6>£850,000</h6>
+                                    </div>
+                                </div>
+                                <div class="top-card card flex">
+                                    <div class="card-content card-content-left">
+                                        <span><i class="ti ti-credit-card"></i></span>
+                                    </div>
+                                    <div class="card-content card-content-right">
+                                        <h4>Losses</h4>
+                                        <h6>£20,000</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="filter-content flex">
+                                <div class="filter-cards duration card flex p-0">
+                                    <div class="form-control flex action">
+                                        <button class="btn act-btn active br-0 m-0 day">Today</button>
+                                    </div>
+                                    <div class="form-control flex action">
+                                        <button class="btn act-btn br-0 m-0 week">Week</button>
+                                    </div>
+                                    <div class="form-control flex action">
+                                        <button class="btn act-btn br-0 m-0 month">Month</button>
+                                    </div>
+                                    <div class="form-control flex action">
+                                        <button class="btn act-btn br-0 m-0 year">Year</button>
+                                    </div>
+                                </div>
+                                <div class="filter-cards date card flex p-0"
+                                    style="border: 1px solid var(--brand-primary);">
+                                    <form action="" class="pick-date-form flex">
+                                        <div class="form-control flex action">
+                                            <input type="date" name="" id="">
+                                            <button class="btn active pick-date"><i class="ti-link"></i></button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="card br-0 m-0">
+                                <h4>Top 5 selling products</h4>
+                                <div>
+                                    <canvas id=""></canvas>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card data-table">
+
+
+
+                    <!-- <div class="card data-table">
                         <table id="table-1" class="display" style="width:100%;margin-top:.5rem;">
                             <thead>
                                 <tr>
@@ -818,7 +203,7 @@
                                     <td>FORDN11414</td>
                                     <td>HP Canon printer</td>
                                     <td>Gadgets</td>
-                                    <td>$245</td>
+                                    <td>£245</td>
                                     <td>05/16/2022</td>
                                 </tr>
                                 <tr>
@@ -853,7 +238,23 @@
                                 </tr>
                             </tfoot>
                         </table>
+                    </div> -->
+
+                    <div class="data-visual flex">
+                        <div class="card br-0">
+                            <h4>Your revenue trend</h4>
+                            <div>
+                                <canvas id="revenue"></canvas>
+                            </div>
+                        </div>
+                        <div class="card br-0">
+                            <h4>Top selling categories</h4>
+                            <div>
+                                <canvas id="most-bought"></canvas>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -906,6 +307,73 @@
         $(document).ready(function () {
             $('#table-1').DataTable();
         });
+
+
+        const labels = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+        ];
+
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'Sales',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [0, 1000, 1500, 890, 2500, 3000, 4500],
+            }]
+        };
+
+        const config = {
+            type: 'line',
+            data: data,
+            options: {}
+        };
+
+        const revenue = new Chart(
+            document.getElementById('revenue'),
+            config
+        );
+
+
+
+        const labels2 = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+        ];
+
+        const data2 = {
+            labels: labels2,
+            datasets: [{
+                label: 'Sales',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [0, 1000, 1500, 890, 2500, 3000, 4500],
+            }]
+        };
+
+        const config2 = {
+            type: 'bar',
+            data: data2,
+            options: {}
+        };
+
+        const mostBought = new Chart(
+            document.getElementById('most-bought'),
+            config2
+        );
+
+
+
+
     </script>
 </body>
 
