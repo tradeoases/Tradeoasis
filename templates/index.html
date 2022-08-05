@@ -65,7 +65,7 @@
                             <img src="../static/assets/imgs/resources/logo_trans.png" alt="Logo" class="logo" style="object-fit: cover;">
                         </div>
                     </div>
-                    <form action="" class="search-form grid w-full gap-0 justify-items-stretch">
+                    <form action="" class="search-form grid w-12/12 gap-0 justify-items-stretch">
                         <input type="search" name="search-bar" id="search-bar" class="py-3 px-6 rounded-tl-md rounded-bl-md focus:outline-none text-lghterBackgroundColor"
                             placeholder="Search">
 
@@ -84,7 +84,7 @@
                                     EN
                                 </span>
                             </a>
-                            <ul class="dropdown-list  list-none list-outside bg-lghterBackgroundColor overflow-hidden rounded-md text-base">
+                            <ul class="dropdown-list   list-none list-outside bg-lghterBackgroundColor overflow-hidden rounded-md text-base">
                                 <li>
                                     <a class="grid items-center py-3 px-8" href="">English</a>
                                 </li>
@@ -109,7 +109,7 @@
                                     <i class="ti-angle-down font-bold"></i>
                                 </span>
                             </a>
-                            <ul class="dropdown-list  list-none list-outside bg-lghterBackgroundColor overflow-hidden rounded-md text-base">
+                            <ul class="dropdown-list   list-none list-outside bg-lghterBackgroundColor overflow-hidden rounded-md text-base">
                                 <li>
                                     <a class="grid items-center py-3 px-8" href="">Profile</a>
                                 </li>
@@ -151,7 +151,7 @@
         </div>
     </nav>
 
-    <main class="grid gap-8" style="background-color: #EAEDED;">
+    <main class="grid gap-8">
         <section class="main w-12/12 py-6">
             <div class="page-starter grid w-full mx-auto cf-1 gap-4 overflow-hidden">
                 <div class="grid side-bar gap-3 content-start product-categories w-12/12 ">
@@ -199,24 +199,44 @@
                             </li>
                         </ul>
                     </div>
-                    <a  class="side-menu-footer bg-yellowColor flex gap-1 py-3 text-white rounded-b-md" class="" href="#">
+                    <a  class="side-menu-footer bg-yellowColor flex gap-1 px-6 items-center py-3 text-white rounded-b-md" class="" href="#">
                         <i class="ti-menu"></i>
                         <span>All Categories</span>
                     </a>
                 </div>
                 <div class="promotion-area w-12/12 grid gap-3">
-                    <div class="upper grid rounded-md overflow-hidden">
-                        <div class="grid"></div>
-                        <div class="grid grid-rows-2">
-                            <div class="grid"></div>
-                            <div class="grid"></div>
+                    <div class="upper grid gap-3 rounded-md overflow-hidden">
+                        <div class="grid banner">                           
+                            <img style="object-fit: cover;" src="../static/assets/imgs//resources/01.png" alt="">
+                        </div>
+                        <div class="grid grid-rows-2 cards gap-3">
+                            <div class="grid grid-flow-row grid-cols-2 gap-3 card p-1">
+                                <div class="grid small-item">
+                                    <div class="card-img-wrapper overflow-hidden rounded-none">
+                                        <img src="../static/assets/imgs/resources/prod-1.jpg" style="object-fit: cover;" alt="">
+                                    </div>
+                                    <div class="body grid grid-flow-row">
+                                        <span class="font-bold text-sm">USD 50.00</span>
+                                       <!-- <small class="text-slate-400">Fashion</small> -->
+                                    </div>
+                                </div>
+                                <div class="grid small-item">
+                                    <div class="card-img-wrapper overflow-hidden rounded-none">
+                                        <img src="../static/assets/imgs/resources/prod-1.jpg" style="object-fit: cover;" alt="">
+                                    </div>
+                                    <div class="body grid grid-flow-row">
+                                        <span class="font-bold text-sm">USD 50.00</span>
+                                       <!-- <small class="text-slate-400">Fashion</small> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid card"></div>
                         </div>
                     </div>
                     <div class="lower grid gap-3 grid-flow-row grid-cols-2">
-                        <div class="grid rounded-md overflow-hidden">
-                            <img style="object-fit: cover;" src="../static/assets/imgs//resources/01.png" alt="">
+                        <div class="grid rounded-md overflow-hidden card">
                         </div>
-                        <div class="grid rounded-md overflow-hidden">
+                        <div class="grid rounded-md overflow-hidden banner-lower">
                             <img style="object-fit: cover;" src="../static/assets/imgs//resources/01.png" alt="">
                         </div>
                     </div>
@@ -254,7 +274,7 @@
                             </li>
                         </ul>
                     </div>
-                    <a  class="side-menu-footer bg-yellowColor flex gap-1 py-3 text-white rounded-b-md" class="" href="#">
+                    <a  class="side-menu-footer bg-yellowColor flex gap-1 px-6 items-center py-3 text-white rounded-b-md" class="" href="#">
                         <i class="ti-menu"></i>
                         <span>All Showrooms</span>
                     </a>
@@ -266,7 +286,7 @@
         <section class="main w-12/12 py-6">
             <div class="grid w-full mx-auto cf-1 gap-6">
                 <div class="section-heading">
-                    <h2 class="sec-title text-2xl font-bold">Foroden Marketplace</h2>
+                    <h2 class="sec-title text-xl text-2xl font-bold text-yellowColor">Foroden Marketplace</h2>
                 </div>
                 <div class="section-body grid gap-4 grid-cols-3">
                     
@@ -278,8 +298,8 @@
                         <div class="section-item-group-content grid gap-4 grid-cols-3">
                             <div class="item">
                                 <a class="grid gap-0.5" href="#">
-                                    <img src="../static/assets/imgs/resources/02.jpg" alt="Product" class="item-img rounded-sm">
-                                    <div class="item-details grid gap-0 justify-center text-center">
+                                    <img src="../static/assets/imgs/resources/02.jpg" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;border-radius: 0;">
+                                    <div class="item-details grid gap-0 justify-start text-left">
                                         <h5 class="text-sm font-semibold leading-5">    
                                             <span>Mobile Phones</span>
                                         </h5>
@@ -289,8 +309,8 @@
                             </div>
                             <div class="item">
                                 <a class="grid gap-0.5" href="#">
-                                    <img src="../static/assets/imgs/resources/02.jpg" alt="Product" class="item-img rounded-sm">
-                                    <div class="item-details grid gap-0 justify-center text-center">
+                                    <img src="../static/assets/imgs/resources/02.jpg" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;border-radius: 0;">
+                                    <div class="item-details grid gap-0 justify-start text-left">
                                         <h5 class="text-sm font-semibold leading-5">
                                             <span class="text-xs text-gray-600">USD</span>    
                                             <span>450</span>
@@ -301,52 +321,8 @@
                             </div>
                             <div class="item">
                                 <a class="grid gap-0.5" href="#">
-                                    <img src="../static/assets/imgs/resources/02.jpg" alt="Product" class="item-img rounded-sm">
-                                    <div class="item-details grid gap-0 justify-center text-center">
-                                        <h5 class="text-sm font-semibold leading-5">
-                                            <span class="text-xs text-gray-600">USD</span>    
-                                            <span>450</span>
-                                        </h5>
-                                        <h6 class="text-gray-600 text-xs">Trending</h6>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="section-item-group grid gap-2 rounded-md card p-4">
-                        <a href="#" class="section-item-group-title flex justify-between">
-                            <span class="text-lg font-bold" >Construction & Building</span>
-                            <span class="text-sm text-slate-800 hover:text-yellowColor font-normal" >View All</span>
-                        </a>
-                        <div class="section-item-group-content grid gap-4 grid-cols-3">
-                            <div class="item">
-                                <a class="grid gap-0.5" href="#">
-                                    <img src="../static/assets/imgs/resources/02.jpg" alt="Product" class="item-img rounded-sm">
-                                    <div class="item-details grid gap-0 justify-center text-center">
-                                        <h5 class="text-sm font-semibold leading-5">
-                                            <span class="text-xs text-gray-600">USD</span>    
-                                            <span>450</span>
-                                        </h5>
-                                        <h6 class="text-gray-600 text-xs">Trending</h6>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="item">
-                                <a class="grid gap-0.5" href="#">
-                                    <img src="../static/assets/imgs/resources/02.jpg" alt="Product" class="item-img rounded-sm">
-                                    <div class="item-details grid gap-0 justify-center text-center">
-                                        <h5 class="text-sm font-semibold leading-5">
-                                            <span class="text-xs text-gray-600">USD</span>    
-                                            <span>450</span>
-                                        </h5>
-                                        <h6 class="text-gray-600 text-xs">Trending</h6>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="item">
-                                <a class="grid gap-0.5" href="#">
-                                    <img src="../static/assets/imgs/resources/02.jpg" alt="Product" class="item-img rounded-sm">
-                                    <div class="item-details grid gap-0 justify-center text-center">
+                                    <img src="../static/assets/imgs/resources/02.jpg" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;border-radius: 0;">
+                                    <div class="item-details grid gap-0 justify-start text-left">
                                         <h5 class="text-sm font-semibold leading-5">
                                             <span class="text-xs text-gray-600">USD</span>    
                                             <span>450</span>
@@ -365,8 +341,19 @@
                         <div class="section-item-group-content grid gap-4 grid-cols-3">
                             <div class="item">
                                 <a class="grid gap-0.5" href="#">
-                                    <img src="../static/assets/imgs/resources/02.jpg" alt="Product" class="item-img rounded-sm">
-                                    <div class="item-details grid gap-0 justify-center text-center">
+                                    <img src="../static/assets/imgs/resources/02.jpg" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;border-radius: 0;">
+                                    <div class="item-details grid gap-0 justify-start text-left">
+                                        <h5 class="text-sm font-semibold leading-5">    
+                                            <span>Mobile Phones</span>
+                                        </h5>
+                                        <h6 class="text-gray-600 text-xs">120 Products</h6>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="item">
+                                <a class="grid gap-0.5" href="#">
+                                    <img src="../static/assets/imgs/resources/02.jpg" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;border-radius: 0;">
+                                    <div class="item-details grid gap-0 justify-start text-left">
                                         <h5 class="text-sm font-semibold leading-5">
                                             <span class="text-xs text-gray-600">USD</span>    
                                             <span>450</span>
@@ -377,8 +364,39 @@
                             </div>
                             <div class="item">
                                 <a class="grid gap-0.5" href="#">
-                                    <img src="../static/assets/imgs/resources/02.jpg" alt="Product" class="item-img rounded-sm">
-                                    <div class="item-details grid gap-0 justify-center text-center">
+                                    <img src="../static/assets/imgs/resources/02.jpg" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;border-radius: 0;">
+                                    <div class="item-details grid gap-0 justify-start text-left">
+                                        <h5 class="text-sm font-semibold leading-5">
+                                            <span class="text-xs text-gray-600">USD</span>    
+                                            <span>450</span>
+                                        </h5>
+                                        <h6 class="text-gray-600 text-xs">Trending</h6>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section-item-group grid gap-2 rounded-md card p-4">
+                        <a href="#" class="section-item-group-title flex justify-between">
+                            <span class="text-lg font-bold" >Construction & Building</span>
+                            <span class="text-sm text-slate-800 hover:text-yellowColor font-normal" >View All</span>
+                        </a>
+                        <div class="section-item-group-content grid gap-4 grid-cols-3">
+                            <div class="item">
+                                <a class="grid gap-0.5" href="#">
+                                    <img src="../static/assets/imgs/resources/02.jpg" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;border-radius: 0;">
+                                    <div class="item-details grid gap-0 justify-start text-left">
+                                        <h5 class="text-sm font-semibold leading-5">    
+                                            <span>Mobile Phones</span>
+                                        </h5>
+                                        <h6 class="text-gray-600 text-xs">120 Products</h6>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="item">
+                                <a class="grid gap-0.5" href="#">
+                                    <img src="../static/assets/imgs/resources/02.jpg" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;border-radius: 0;">
+                                    <div class="item-details grid gap-0 justify-start text-left">
                                         <h5 class="text-sm font-semibold leading-5">
                                             <span class="text-xs text-gray-600">USD</span>    
                                             <span>450</span>
@@ -389,8 +407,8 @@
                             </div>
                             <div class="item">
                                 <a class="grid gap-0.5" href="#">
-                                    <img src="../static/assets/imgs/resources/02.jpg" alt="Product" class="item-img rounded-sm">
-                                    <div class="item-details grid gap-0 justify-center text-center">
+                                    <img src="../static/assets/imgs/resources/02.jpg" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;border-radius: 0;">
+                                    <div class="item-details grid gap-0 justify-start text-left">
                                         <h5 class="text-sm font-semibold leading-5">
                                             <span class="text-xs text-gray-600">USD</span>    
                                             <span>450</span>
@@ -407,320 +425,104 @@
 
         <section class="main w-12/12 py-6">
             <div class="grid w-full mx-auto cf-1 gap-4">
-                <div class="section-heading">
-                    <h2 class="sec-title text-2xl font-bold">Weekly Delays</h2>
-                </div>
-                <div class="section-body grid gap-6 grid-cols-4">
-                    <div class="multi-image-product-card overflow-hidden p-1 rounded-md card flex gap-0.5">
-                        <div class="grid gap-1">
-                            <a class="main-image p-2 grid gap-2" href="#">
-                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
-                                    </h5>
-                                </div>
-                            </a>
+                <div class="section-body grid gap-2 card p-3 py-6 rounded-md">
+                    <div class="flex p-2 pt-0 justify-between items-baseline">
+                        <div class="flex gap-5">                            
+                            <h1 class="text-2xl text-yellowColor font-bold">Discounted Products</h1>
+                            <h1 class="text-xl text-slate-400 font-bold"><span class="text-2xl text-slate-500">30%</span> OFF</h1>
                         </div>
-                        <div class="grid sub-images gap-0.5 grid-rows-3">
-
-                            <div class="grid gap-0.5" href="#">
-                                <img src="../static/assets/imgs/resources/prod-1.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5 hidden">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="grid gap-0.5" href="#">
-                                <img src="../static/assets/imgs/resources/prod-2.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5 hidden">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="grid gap-0.5" href="#">
-                                <img src="../static/assets/imgs/resources/prod-3.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5 hidden">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
+                        <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="">View All</a>
                     </div>
-                    <div class="multi-image-product-card overflow-hidden p-1 rounded-md card flex gap-0.5">
-                        <div class="grid gap-1">
-                            <a class="main-image p-2 grid gap-2" href="#">
-                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
+                    <div class="grid gap-2 grid-cols-6">
+                        <div class="promorion-card grid">
+                            <a class="grid gap-1 rounded-md" href="#">
+                                <div class="grid p-2">
+                                    <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;">
+                                </div>
+                                <div class="item-details grid gap-1 px-2">
+                                    <h5 class="text-sm font-normal leading-5">    
+                                        Short Sleeve Dewy Print
                                     </h5>
+                                    <p class="text-base font-bold flex gap-2 items-baseline">
+                                        USD <span>120.30</span><s class="text-slate-400 font-normal text-sm">140</s>
+                                    </p>
                                 </div>
                             </a>
                         </div>
-                        <div class="grid sub-images gap-0.5 grid-rows-3">
-
-                            <div class="grid gap-0.5" href="#">
-                                <img src="../static/assets/imgs/resources/prod-1.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5 hidden">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
-                                    </h5>
+                        <div class="promorion-card grid">
+                            <a class="grid gap-1 rounded-md" href="#">
+                                <div class="grid p-2">
+                                    <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGNsb3RoZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;">
                                 </div>
-                            </div>
-                            <div class="grid gap-0.5" href="#">
-                                <img src="../static/assets/imgs/resources/prod-2.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5 hidden">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
+                                <div class="item-details grid gap-1 px-2">
+                                    <h5 class="text-sm font-normal leading-5">    
+                                        Short Sleeve Dewy Print
                                     </h5>
-                                </div>
-                            </div>
-                            <div class="grid gap-0.5" href="#">
-                                <img src="../static/assets/imgs/resources/prod-3.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5 hidden">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="multi-image-product-card overflow-hidden p-1 rounded-md card flex gap-0.5">
-                        <div class="grid gap-1">
-                            <a class="main-image p-2 grid gap-2" href="#">
-                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
-                                    </h5>
+                                    <p class="text-base font-bold flex gap-2 items-baseline">
+                                        USD <span>120.30</span><s class="text-slate-400 font-normal text-sm">140</s>
+                                    </p>
                                 </div>
                             </a>
                         </div>
-                        <div class="grid sub-images gap-0.5 grid-rows-3">
-
-                            <div class="grid gap-0.5" href="#">
-                                <img src="../static/assets/imgs/resources/prod-1.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5 hidden">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
-                                    </h5>
+                        <div class="promorion-card grid">
+                            <a class="grid gap-1 rounded-md" href="#">
+                                <div class="grid p-2">
+                                    <img src="https://images.unsplash.com/photo-1562157873-818bc0726f68?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8Y2xvdGhlc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;">
                                 </div>
-                            </div>
-                            <div class="grid gap-0.5" href="#">
-                                <img src="../static/assets/imgs/resources/prod-2.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5 hidden">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
+                                <div class="item-details grid gap-1 px-2">
+                                    <h5 class="text-sm font-normal leading-5">    
+                                        Short Sleeve Dewy Print
                                     </h5>
-                                </div>
-                            </div>
-                            <div class="grid gap-0.5" href="#">
-                                <img src="../static/assets/imgs/resources/prod-3.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5 hidden">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="multi-image-product-card overflow-hidden p-1 rounded-md card flex gap-0.5">
-                        <div class="grid gap-1">
-                            <a class="main-image p-2 grid gap-2" href="#">
-                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
-                                    </h5>
+                                    <p class="text-base font-bold flex gap-2 items-baseline">
+                                        USD <span>120.30</span><s class="text-slate-400 font-normal text-sm">140</s>
+                                    </p>
                                 </div>
                             </a>
                         </div>
-                        <div class="grid sub-images gap-0.5 grid-rows-3">
-
-                            <div class="grid gap-0.5" href="#">
-                                <img src="../static/assets/imgs/resources/prod-1.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5 hidden">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
-                                    </h5>
+                        <div class="promorion-card grid">
+                            <a class="grid gap-1 rounded-md" href="#">
+                                <div class="grid p-2">
+                                    <img src="https://images.unsplash.com/photo-1567113379515-6e85e7168eb1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHNwb3J0cyUyMGVxdWlwbWVudHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;">
                                 </div>
-                            </div>
-                            <div class="grid gap-0.5" href="#">
-                                <img src="../static/assets/imgs/resources/prod-2.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5 hidden">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
+                                <div class="item-details grid gap-1 px-2">
+                                    <h5 class="text-sm font-normal leading-5">    
+                                        Short Sleeve Dewy Print
                                     </h5>
-                                </div>
-                            </div>
-                            <div class="grid gap-0.5" href="#">
-                                <img src="../static/assets/imgs/resources/prod-3.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5 hidden">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="multi-image-product-card overflow-hidden p-1 rounded-md card flex gap-0.5">
-                        <div class="grid gap-1">
-                            <a class="main-image p-2 grid gap-2" href="#">
-                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
-                                    </h5>
+                                    <p class="text-base font-bold flex gap-2 items-baseline">
+                                        USD <span>120.30</span><s class="text-slate-400 font-normal text-sm">140</s>
+                                    </p>
                                 </div>
                             </a>
                         </div>
-                        <div class="grid sub-images gap-0.5 grid-rows-3">
-
-                            <div class="grid gap-0.5" href="#">
-                                <img src="../static/assets/imgs/resources/prod-1.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5 hidden">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
-                                    </h5>
+                        <div class="promorion-card grid">
+                            <a class="grid gap-1 rounded-md" href="#">
+                                <div class="grid p-2">
+                                    <img src="https://images.unsplash.com/photo-1595827432953-7161e19e303e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fHNwb3J0cyUyMGVxdWlwbWVudHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;">
                                 </div>
-                            </div>
-                            <div class="grid gap-0.5" href="#">
-                                <img src="../static/assets/imgs/resources/prod-2.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5 hidden">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
+                                <div class="item-details grid gap-1 px-2">
+                                    <h5 class="text-sm font-normal leading-5">    
+                                        Short Sleeve Dewy Print
                                     </h5>
-                                </div>
-                            </div>
-                            <div class="grid gap-0.5" href="#">
-                                <img src="../static/assets/imgs/resources/prod-3.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5 hidden">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="multi-image-product-card overflow-hidden p-1 rounded-md card flex gap-0.5">
-                        <div class="grid gap-1">
-                            <a class="main-image p-2 grid gap-2" href="#">
-                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
-                                    </h5>
+                                    <p class="text-base font-bold flex gap-2 items-baseline">
+                                        USD <span>120.30</span><s class="text-slate-400 font-normal text-sm">140</s>
+                                    </p>
                                 </div>
                             </a>
                         </div>
-                        <div class="grid sub-images gap-0.5 grid-rows-3">
-
-                            <div class="grid gap-0.5" href="#">
-                                <img src="../static/assets/imgs/resources/prod-1.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5 hidden">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
-                                    </h5>
+                        <div class="promorion-card grid">
+                            <a class="grid gap-1 rounded-md" href="#">
+                                <div class="grid p-2">
+                                    <img src="https://images.unsplash.com/photo-1599236755629-17aff66ccda0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fHNwb3J0cyUyMGVxdWlwbWVudHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;">
                                 </div>
-                            </div>
-                            <div class="grid gap-0.5" href="#">
-                                <img src="../static/assets/imgs/resources/prod-2.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5 hidden">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
+                                <div class="item-details grid gap-1 px-2">
+                                    <h5 class="text-sm font-normal leading-5">    
+                                        Short Sleeve Dewy Print
                                     </h5>
-                                </div>
-                            </div>
-                            <div class="grid gap-0.5" href="#">
-                                <img src="../static/assets/imgs/resources/prod-3.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5 hidden">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="multi-image-product-card overflow-hidden p-1 rounded-md card flex gap-0.5">
-                        <div class="grid gap-1">
-                            <a class="main-image p-2 grid gap-2" href="#">
-                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
-                                    </h5>
+                                    <p class="text-base font-bold flex gap-2 items-baseline">
+                                        USD <span>120.30</span><s class="text-slate-400 font-normal text-sm">140</s>
+                                    </p>
                                 </div>
                             </a>
-                        </div>
-                        <div class="grid sub-images gap-0.5 grid-rows-3">
-
-                            <div class="grid gap-0.5" href="#">
-                                <img src="../static/assets/imgs/resources/prod-1.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5 hidden">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="grid gap-0.5" href="#">
-                                <img src="../static/assets/imgs/resources/prod-2.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5 hidden">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="grid gap-0.5" href="#">
-                                <img src="../static/assets/imgs/resources/prod-3.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5 hidden">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="multi-image-product-card overflow-hidden p-1 rounded-md card flex gap-0.5">
-                        <div class="grid gap-1">
-                            <a class="main-image p-2 grid gap-2" href="#">
-                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
-                                    </h5>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="grid sub-images gap-0.5 grid-rows-3">
-
-                            <div class="grid gap-0.5" href="#">
-                                <img src="../static/assets/imgs/resources/prod-1.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5 hidden">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="grid gap-0.5" href="#">
-                                <img src="../static/assets/imgs/resources/prod-2.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5 hidden">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="grid gap-0.5" href="#">
-                                <img src="../static/assets/imgs/resources/prod-3.jpg" alt="Product" class="item-img rounded-sm">
-                                <div class="item-details grid gap-0 justify-center">
-                                    <h5 class="text-sm font-bold leading-5 hidden">    
-                                        ALKIM PETROKIMYA SAN. VE TIC. A.S.
-                                    </h5>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -730,13 +532,13 @@
         <section class="main w-12/12 py-6" style="background-color: #FFFFFF;">
             <div class="grid w-full mx-auto cf-1 gap-5">
                 <div class="section-heading">
-                    <h2 class="sec-title text-2xl font-bold">Propular Products</h2>
+                    <h2 class="sec-title text-xl text-2xl font-bold text-yellowColor">Propular Products</h2>
                 </div>
                 <div class="section-body grid gap-6 grid-cols-5">
                     <div class="single-image-product-card overflow-hidden rounded-md flex gap-0.5 card-outlined">
                         <div class="grid gap-1">
-                            <a class="grid gap-2" href="#">
-                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded-sm" >
+                            <a class="grid gap-2" href="./product.html">
+                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;" >
                                 <div class="item-details grid gap-0 justify-center py-3 px-4 gap-2" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
                                     <h5 class="text-sm font-bold leading-5">    
                                         OEM Basketball Shoes High Quality Outdoor Sports Shoes 
@@ -752,8 +554,8 @@
                     </div>
                     <div class="single-image-product-card overflow-hidden rounded-md flex gap-0.5 card-outlined">
                         <div class="grid gap-1">
-                            <a class="grid gap-2" href="#">
-                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded-sm" >
+                            <a class="grid gap-2" href="./product.html">
+                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;" >
                                 <div class="item-details grid gap-0 justify-center py-3 px-4 gap-2" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
                                     <h5 class="text-sm font-bold leading-5">    
                                         OEM Basketball Shoes High Quality Outdoor Sports Shoes 
@@ -769,8 +571,8 @@
                     </div>
                     <div class="single-image-product-card overflow-hidden rounded-md flex gap-0.5 card-outlined">
                         <div class="grid gap-1">
-                            <a class="grid gap-2" href="#">
-                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded-sm" >
+                            <a class="grid gap-2" href="./product.html">
+                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;" >
                                 <div class="item-details grid gap-0 justify-center py-3 px-4 gap-2" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
                                     <h5 class="text-sm font-bold leading-5">    
                                         OEM Basketball Shoes High Quality Outdoor Sports Shoes 
@@ -786,8 +588,8 @@
                     </div>
                     <div class="single-image-product-card overflow-hidden rounded-md flex gap-0.5 card-outlined">
                         <div class="grid gap-1">
-                            <a class="grid gap-2" href="#">
-                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded-sm" >
+                            <a class="grid gap-2" href="./product.html">
+                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;" >
                                 <div class="item-details grid gap-0 justify-center py-3 px-4 gap-2" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
                                     <h5 class="text-sm font-bold leading-5">    
                                         OEM Basketball Shoes High Quality Outdoor Sports Shoes 
@@ -803,8 +605,8 @@
                     </div>
                     <div class="single-image-product-card overflow-hidden rounded-md flex gap-0.5 card-outlined">
                         <div class="grid gap-1">
-                            <a class="grid gap-2" href="#">
-                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded-sm" >
+                            <a class="grid gap-2" href="./product.html">
+                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;" >
                                 <div class="item-details grid gap-0 justify-center py-3 px-4 gap-2" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
                                     <h5 class="text-sm font-bold leading-5">    
                                         OEM Basketball Shoes High Quality Outdoor Sports Shoes 
@@ -820,8 +622,8 @@
                     </div>
                     <div class="single-image-product-card overflow-hidden rounded-md flex gap-0.5 card-outlined">
                         <div class="grid gap-1">
-                            <a class="grid gap-2" href="#">
-                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded-sm" >
+                            <a class="grid gap-2" href="./product.html">
+                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;" >
                                 <div class="item-details grid gap-0 justify-center py-3 px-4 gap-2" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
                                     <h5 class="text-sm font-bold leading-5">    
                                         OEM Basketball Shoes High Quality Outdoor Sports Shoes 
@@ -837,8 +639,8 @@
                     </div>
                     <div class="single-image-product-card overflow-hidden rounded-md flex gap-0.5 card-outlined">
                         <div class="grid gap-1">
-                            <a class="grid gap-2" href="#">
-                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded-sm" >
+                            <a class="grid gap-2" href="./product.html">
+                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;" >
                                 <div class="item-details grid gap-0 justify-center py-3 px-4 gap-2" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
                                     <h5 class="text-sm font-bold leading-5">    
                                         OEM Basketball Shoes High Quality Outdoor Sports Shoes 
@@ -854,8 +656,8 @@
                     </div>
                     <div class="single-image-product-card overflow-hidden rounded-md flex gap-0.5 card-outlined">
                         <div class="grid gap-1">
-                            <a class="grid gap-2" href="#">
-                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded-sm" >
+                            <a class="grid gap-2" href="./product.html">
+                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;" >
                                 <div class="item-details grid gap-0 justify-center py-3 px-4 gap-2" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
                                     <h5 class="text-sm font-bold leading-5">    
                                         OEM Basketball Shoes High Quality Outdoor Sports Shoes 
@@ -871,8 +673,8 @@
                     </div>
                     <div class="single-image-product-card overflow-hidden rounded-md flex gap-0.5 card-outlined">
                         <div class="grid gap-1">
-                            <a class="grid gap-2" href="#">
-                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded-sm" >
+                            <a class="grid gap-2" href="./product.html">
+                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;" >
                                 <div class="item-details grid gap-0 justify-center py-3 px-4 gap-2" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
                                     <h5 class="text-sm font-bold leading-5">    
                                         OEM Basketball Shoes High Quality Outdoor Sports Shoes 
@@ -888,8 +690,8 @@
                     </div>
                     <div class="single-image-product-card overflow-hidden rounded-md flex gap-0.5 card-outlined">
                         <div class="grid gap-1">
-                            <a class="grid gap-2" href="#">
-                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded-sm" >
+                            <a class="grid gap-2" href="./product.html">
+                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;" >
                                 <div class="item-details grid gap-0 justify-center py-3 px-4 gap-2" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
                                     <h5 class="text-sm font-bold leading-5">    
                                         OEM Basketball Shoes High Quality Outdoor Sports Shoes 
