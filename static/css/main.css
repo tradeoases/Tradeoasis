@@ -521,30 +521,7 @@ footer a:hover {
     object-fit: cover;
 }
 
-.about-us-content .right,
-.about-us-content .left {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-}
 
-.about-us-content .right {
-    grid-template-columns: 1fr 1.1fr;
-}
-.about-us-content .left {
-    grid-template-columns: 1.2fr 1fr;
-}
-
-.about-us-content .img-wrapper,
-.about-us-content .about-description {
-    grid-row: 1/-1;
-}
-
-.about-us-content .img-wrapper {
-    grid-column: 2/-1;
-}
-.about-us-content .about-description {
-    grid-column: 1/2;
-}
 .stats {
     padding: 5rem 2rem;
 }
@@ -565,11 +542,6 @@ footer a:hover {
         padding: 4rem 2rem;
     }
     
-    .about-us-content .right,
-    .about-us-content .left {
-        grid-template-rows: .1fr 1fr;
-        grid-template-columns: 1fr;
-    }
     .about-us-content {
         padding: 0;
     }
@@ -584,16 +556,6 @@ footer a:hover {
         padding: 2rem;
     }
     
-    .about-us-content .img-wrapper,
-    .about-us-content .about-description {
-        grid-column: 1/-1;
-    }
-    .about-us-content .img-wrapper {
-        grid-row: 1/2;
-    }
-    .about-us-content .about-description {
-        grid-row: 2/-1;
-    }
     .about-us-content::after {
         display: none;
     }

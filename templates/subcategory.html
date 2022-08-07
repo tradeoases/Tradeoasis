@@ -154,20 +154,19 @@
         </div>
     </nav>
 
-    <main class="grid gap-2 md:gap-8 px-5">
-
+    <main class="grid gap-2 md:gap-8 w-full mx-auto">
         <div class="grid gap-6 md:gap-3 bg-white">
-            <div class="breadcrumb flex flex-wrap justify-start gap-2 md:w-full mx-auto pt-8 justify-items-stretch">
-                <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">Home</a>
+            <div class="breadcrumb flex flex-wrap justify-start gap-2 md:w-full mx-auto pb-3 pt-8">
+                <a class="text-gray-600 hover:text-gray-900" href="./index.html">Home</a>
                 <a>/</a>
-                <a class="text-gray-600 hover:text-gray-900" href='{% url "supplier:category-detail" object.sub_category.category.slug %}'>Fashion</a>
+                <a class="text-gray-600 hover:text-gray-900" href='./subcategory.html'>Fashion</a>
                 <a>/</a>
-                <a class="text-gray-600 hover:text-gray-900" href='{% url "supplier:subcategory-detail" object.sub_category.category.slug object.sub_category.slug %}'>Man's Clothes</a>
+                <a class="text-gray-600 hover:text-gray-900" href='./subcategory.html'> Clothes</a>
                 <a>/</a>
                 <span class="text-lightBackgroundColor">Short Sleeve Dewy Print</span>
             </div>
-
-            <div class="product-filter grid w-12/12 md:w-full md:grid-flow-col gap-4 mx-auto py-3 px-4" style="background-color: rgb(242, 245, 248);">
+    
+            <div class="product-filter grid md:flex gap-4 justify-between p-5" style="background-color: rgb(242, 245, 248);">
                 <div class="grid gap-2">
                     <h3 class="text-xl text-lightBackgroundColor font-semibold">Electronics</h3>
                 </div>
@@ -201,7 +200,7 @@
         </div>
 
         <section class="main w-12/12 py-6">
-            <div class="grid md:w-full mx-auto p-2 md:p-0 cf-1 gap-4">
+            <div class="grid mx-auto md:p-0 cf-1 gap-4">
                 <div class="section-body grid gap-2 card p-3 py-6 rounded-md">
                     <div class="flex p-2 pt-0 justify-between items-baseline">
                         <div class="flex gap-5">                            
@@ -306,8 +305,8 @@
             </div>
         </section>
         
-        <section class="main w-12/12 py-3 pt-0" style="height: auto">
-            <div class="grid w-full mx-auto cf-1 gap-4" style="grid-template-columns: 1fr;">
+        <section class="main w-12/12 pt-0" style="height: auto">
+            <div class="grid mx-auto cf-1 gap-6 card p-4" style="grid-template-columns: 1fr;">
                 <div class="section-body grid gap-2 md:gap-6 grid-cols-2 md:grid-cols-5" data-context="{{propular_products.context_name}}">
 
                     <div class="single-image-product-card overflow-hidden rounded flex gap-0.5 card-outlined">
@@ -517,7 +516,7 @@
                                     <span>200</span>
                                 </p>
                             </div>
-                            <span class="grid items-center pb-2 px-4 font-semibold text-sm">By CorEats Mixes, Inc.</span>
+                        <span class="grid items-center pb-2 px-4 font-semibold text-sm">By CorEats Mixes, Inc.</span>
                         </a>
                     </div>
 
@@ -548,15 +547,15 @@
             </div>
         </div>
 
-        <section class="main w-12/12 py-3 my-3">
-            <div class="md:w-full mx-auto grid md:grid-cols-2 items-start gap-6 md:gap-0">
+        <section class="main w-12/12 my-3">
+            <div class="mx-auto grid md:grid-cols-2 items-start gap-6">
                 <div class="grid gap-1">                    
                     <div class="flex p-2 px-4 pt-0 justify-between items-baseline">
                         <div class="flex gap-5">                            
                             <h1 class="text-xl md:text-2xl text-lightBackgroundColor font-bold">Related Products</h1>
                         </div>
                     </div>
-                    <div class="grid gap-3 md:grid-cols-2 rounded-md p-3 items-start">
+                    <div class="grid gap-3 md:grid-cols-2 rounded-md items-start">
                         <div class="card-sm grid px-3 py-3 items-start rounded-md card bg-lghterBackgroundColor gap-3">
                             <div class="card-details grid px-2">
                                 <h5 class="text-lg font-semibold leading-5 text-white">    
@@ -638,7 +637,7 @@
                         </div>
                         <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="">View All</a>
                     </div>
-                    <div class="grid gap-3 md:grid-cols-2 rounded-md p-3">
+                    <div class="grid gap-3 md:grid-cols-2 rounded-md">
                         <div class="grid p-4 items-start rounded-md card gap-4">
                             <div class="card-details grid">
                                 <a href="" class="text-lg font-semibold leading-5 text-lightBackgroundColor">    
@@ -646,16 +645,16 @@
                                 </a>
                             </div>
                             <div class="grid grid-cols-2 justify-evenly gap-2">
-                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                <a class="grid gap-1 rounded-md" href="./store.html">
                                     <img loading="lazy" src="https://images.unsplash.com/photo-1555529771-835f59fc5efe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Y2xvdGhlcyUyMHN0b3JlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;">
                                 </a>
-                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                <a class="grid gap-1 rounded-md" href="./store.html">
                                     <img loading="lazy" src="https://images.unsplash.com/photo-1582719188393-bb71ca45dbb9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGNsb3RoZXMlMjBzdG9yZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;">
                                 </a>
-                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                <a class="grid gap-1 rounded-md" href="./store.html">
                                     <img loading="lazy" src="https://images.unsplash.com/photo-1565084888279-aca607ecce0c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGNsb3RoZXMlMjBzdG9yZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;">
                                 </a>
-                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                <a class="grid gap-1 rounded-md" href="./store.html">
                                     <img loading="lazy" src="https://images.unsplash.com/photo-1470309864661-68328b2cd0a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGNsb3RoZXMlMjBzdG9yZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60em-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;">
                                 </a>
                             </div>
@@ -667,16 +666,16 @@
                                 </a>
                             </div>
                             <div class="grid grid-cols-2 justify-evenly gap-2">
-                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                <a class="grid gap-1 rounded-md" href="./store.html">
                                     <img loading="lazy" src="https://images.unsplash.com/photo-1555529771-835f59fc5efe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Y2xvdGhlcyUyMHN0b3JlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;">
                                 </a>
-                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                <a class="grid gap-1 rounded-md" href="./store.html">
                                     <img loading="lazy" src="https://images.unsplash.com/photo-1582719188393-bb71ca45dbb9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGNsb3RoZXMlMjBzdG9yZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;">
                                 </a>
-                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                <a class="grid gap-1 rounded-md" href="./store.html">
                                     <img loading="lazy" src="https://images.unsplash.com/photo-1565084888279-aca607ecce0c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGNsb3RoZXMlMjBzdG9yZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;">
                                 </a>
-                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                <a class="grid gap-1 rounded-md" href="./store.html">
                                     <img loading="lazy" src="https://images.unsplash.com/photo-1470309864661-68328b2cd0a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGNsb3RoZXMlMjBzdG9yZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60em-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;">
                                 </a>
                             </div>
@@ -686,10 +685,9 @@
             </div>
         </section>
 
-
     </main>
 
-    <footer class="mt-10">
+    <footer style="margin-block-start: 3rem;">
         <div class="container-fluid foot mt-50">
             <div class="container">
                 <div class="fc flex" style="height:fit-content;margin:0;height:400px;">

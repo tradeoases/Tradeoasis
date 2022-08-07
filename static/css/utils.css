@@ -320,3 +320,33 @@ form input[type='submit'] {
 form input[type='submit']:hover {
     background-color: hsl(213, 28%, 16%);
 }
+
+
+.horizontal-scroll {
+    padding: .5rem 0;
+    grid-auto-flow: column;
+    grid-auto-columns: 27%;
+    --gap: 0 1rem;
+    overflow-x: scroll;
+    overscroll-behavior-inline: contain;
+
+    scroll-snap-type: inline mandatory;
+    scroll-padding-inline: 1rem;
+    padding-inline-start: 1rem;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.horizontal-scroll > * {
+    scroll-snap-align: start;
+}
+
+@media (max-width: 786px) {
+    .horizontal-scroll {
+        grid-auto-columns: 88%;
+    }
+}
