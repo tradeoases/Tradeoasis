@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
             })
         }
         else {
-            console.log("Lesser")
             navBar.classList.add('bg-lghterBackgroundColor');
             navBar.classList.remove('bg-white');
             navBar.classList.remove("cs-fixed");
