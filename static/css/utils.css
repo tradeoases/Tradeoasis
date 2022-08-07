@@ -296,7 +296,8 @@ h4 {
 
 /* forms */
 
-form input,
+
+form:not(.search-form) input,
 form select {
     padding-inline: 1.5rem;
     padding-block: .75rem;
@@ -306,6 +307,11 @@ form select {
     outline: none;
     border-radius: 5px;
     transition: all .2s ease-in;
+}
+
+form.filter-group input {
+    padding-inline: .5rem;
+    padding-block: .35rem;
 }
 
 form input:focus {
@@ -347,6 +353,6 @@ form input[type='submit']:hover {
 
 @media (max-width: 786px) {
     .horizontal-scroll {
-        grid-auto-columns: 88%;
+        grid-auto-columns: 66%;
     }
 }

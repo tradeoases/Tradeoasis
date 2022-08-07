@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+    // global state
+    let IsMobileMenuOpen = false;
+
     const imgMagnifier = document.querySelector('.img-magnifier');
     const productImagesContainer = document.querySelector('.product-images-list');
 
@@ -58,6 +62,47 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
+    // mobile menu
+    const mobileMenuActivator = document.querySelector('#mobile-menu-activator');
+    const mobileMenu = document.querySelector('#mobile-menu');
+    mobileMenuActivator.addEventListener('click', () => {
+        if (!IsMobileMenuOpen) {
+            IsMobileMenuOpen = true;
+            mobileMenu.classList.add('open');
+            document.body.classList.add('menuOpen');
+        }
+        else {
+            IsMobileMenuOpen = false;
+            mobileMenu.classList.remove('open');
+            document.body.classList.remove('menuOpen');
+        }
+    })
+
+    // mobile search bar
+    const mobileSearchbarActivator = document.querySelector('#mobile-searchbar-activator');
+    const mobileSearchbar = document.querySelector('#mobile-searchbar');
+    
+    mobileSearchbarActivator.addEventListener('click', () => {
+        mobileSearchbar.classList.toggle('open');
+        if (mobileSearchbar.classList.contains('open')) {
+            mobileSearchbarActivator.querySelector('i').classList.remove('fa-search');
+            mobileSearchbarActivator.querySelector('i').classList.add('fa-close');
+        } else {
+            mobileSearchbarActivator.querySelector('i').classList.add('fa-search');
+            mobileSearchbarActivator.querySelector('i').classList.remove('fa-close');
+        }
+    })
+
+    
+
+    // close mobile menu
+    document.body.addEventListener('click', (e) => {
+        if (IsMobileMenuOpen && e.target != mobileMenu && e.target != mobileMenuActivator && e.target != mobileMenuActivator.querySelector('i')) {
+            IsMobileMenuOpen = false;
+            mobileMenu.classList.remove('open');
+            document.body.classList.remove('menuOpen');
+        }
+    })
 
     // set default dates for contract forms
     const setDefaultDate = () => {
@@ -88,5 +133,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
     
-    setDefaultDate();  
+    setDefaultDate();
 })
