@@ -30,4 +30,64 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     }
 
+
+    // make header sticky
+    const navBar = document.querySelector('nav');
+    document.addEventListener('scroll', function(e) {
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+            navBar.classList.remove('bg-lghterBackgroundColor');
+            navBar.classList.add('bg-white');
+            navBar.classList.add("cs-fixed");
+            navBar.classList.add("card");
+
+            navBar.querySelectorAll('.text-white').forEach(tab => {
+                tab.classList.remove('text-white');
+                tab.classList.add('text-lghterBackgroundColor');
+            })
+        }
+        else {
+            console.log("Lesser")
+            navBar.classList.add('bg-lghterBackgroundColor');
+            navBar.classList.remove('bg-white');
+            navBar.classList.remove("cs-fixed");
+            navBar.classList.remove("card");
+
+            navBar.querySelectorAll('ul.text-lghterBackgroundColor').forEach(tab => {
+                tab.classList.add('text-white');
+                tab.classList.remove('text-lghterBackgroundColor');
+            })
+        }
+    })
+
+
+    // set default dates for contract forms
+    const setDefaultDate = () => {
+        
+        const startDate = document.querySelector('#contract-start-date');
+        const endDate = document.querySelector('#contract-end-date');
+
+        if ((startDate && startDate != null) && (endDate && endDate != null)) {
+
+            var date = new Date();
+    
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+    
+            if (month < 10) month = "0" + month;
+            if (day < 10) day = "0" + day;
+    
+            var today = year + "-" + month + "-" + day;
+
+            // after year
+            var afterYear = (year + 1) + "-" + month + "-" + day;
+    
+            startDate.value = today;
+            endDate.value = afterYear;
+
+        }
+
+    }
+    
+    setDefaultDate();  
 })

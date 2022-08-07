@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/utils.css">
+    <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" href="../static/icons/themify-icons.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.css" >
+
+    <title>Golden - GOLDEN</title>
+</head>
+
+<script>
+    tailwind.config = {
+      theme: {
+        screens : {
+            sm: '480px',
+            md: '768px',
+            lg: '976px',
+            xl: '1440px',
+        },
+        extend: {
+            colors: {
+                yellowColor: 'hsl(38, 95%, 47%)',
+                yellowColorHover: 'hsl(38, 95%, 44%)',
+                backgroundColor: 'hsl(0, 0%, 9%)',
+                backgroundColorHover: 'hsl(0, 0%, 5%)',
+                lghterBackgroundColor: 'hsl(213, 28%, 19%)',
+                lghterBackgroundColorhover: 'hsl(213, 28%, 16%)',
+                // headerBg: 'hsla(0, 100%, 97%, .8)',
+                // hoverBackgroundColor: 'hsla(0, 100%, 95%, 1)',
+            },
+            width: {
+                'full': '95%',
+            }
+        },
+        // fontSize: {
+            // 'xs': '.85rem',
+            // 'sm': '.975rem',
+            // 'tiny': '.975rem',
+            // 'base': '1.1rem',
+            // 'lg': '1.325rem',
+            // 'xl': '1.35rem',
+            // '2xl': '1.6rem',
+            // '3xl': '1.975rem',
+            // '4xl': '2.35rem',
+            // '5xl': '3rem',
+            // '6xl': '4rem',
+            // '7xl': '6rem',
+        // }
+      }
+    }
+</script>
+
+<body>
+    <header class="top-nav">
+        <div class="w-12/12 bg-backgroundColor">
+            <div class="w-full mx-auto">
+                <!-- The temporary navbar -->
+                <div class="temp-nav py-3 grid content-center w-12/12 gap-1">
+                    <div class="header-left grid items-center">
+                        <div class="logo-wrapper">
+                            <img src="../static/assets/imgs/resources/logo_trans.png" alt="Logo" class="logo" style="object-fit: cover;">
+                        </div>
+                    </div>
+                    <form action="" class="search-form grid w-12/12 gap-0 justify-items-stretch">
+                        <input type="search" name="search-bar" id="search-bar" class="py-3 px-6 rounded-tl-md rounded-bl-md focus:outline-none text-lghterBackgroundColor"
+                            placeholder="Search">
+
+                            <button type="submit" class="grid place-items-center bg-yellowColor rounded-tr-md rounded-br-md">
+                            <i class="ti-search"></i>
+                        </button>
+                    </form>
+                    <ul class="header-right list-none list-outside flex justify-end text-white">
+                        <li class="grid place-items-center h-full positive-relative">
+                            <a href="" onClick="(function(){
+                            })();return false;" class="flex gap-1 px-4 gap-2 text-sm items-center">
+                                <span class="item-name grid place-items-center py-2">
+                                    <i class="ti-world font-bold"></i>
+                                </span>
+                                <span class="grid place-items-center py-2">
+                                    EN
+                                </span>
+                            </a>
+                            <ul class="dropdown-list   list-none list-outside bg-lghterBackgroundColor overflow-hidden rounded-md text-base">
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">English</a>
+                                </li>
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">Arabic</a>
+                                </li>
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">French</a>
+                                </li>
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">Nederlands</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="grid place-items-center h-full positive-relative">
+                            <a href="" onClick="(function(){
+                            })();return false;" class="flex gap-1 px-4 gap-2 text-sm items-center">
+                                <span class="item-name grid place-items-center py-2">
+                                    My Account
+                                </span>
+                                <span class="grid items-center py-2">
+                                    <i class="ti-angle-down font-bold"></i>
+                                </span>
+                            </a>
+                            <ul class="dropdown-list   list-none list-outside bg-lghterBackgroundColor overflow-hidden rounded-md text-base">
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">Profile</a>
+                                </li>
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">Dashboard</a>
+                                </li>
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">Wishlists</a>
+                                </li>
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">Settings</a>
+                                </li>
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- The permanent/sticky navbar -->
+    <nav class="w-12/12 bg-lghterBackgroundColor">
+        <div class="w-full mx-auto flex justify-between  overflow-hidden">
+            <ul class="flex text-base text-white">
+                <li><a class="grid py-3 px-4 hover:bg-lghterBackgroundColorhover transition-colors transition-200 ease-in" href="./index.html">Home</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lghterBackgroundColorhover transition-colors transition-200 ease-in" href="./about.html">About us</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lghterBackgroundColorhover transition-colors transition-200 ease-in" href="./services.html">Services</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lghterBackgroundColorhover transition-colors transition-200 ease-in" href="#">Products</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lghterBackgroundColorhover transition-colors transition-200 ease-in" href="./showrooms.html">Home</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lghterBackgroundColorhover transition-colors transition-200 ease-in" href="#">Contact</a></li>
+            </ul>
+            
+            <ul class="flex text-base text-white">
+                <li><a class="grid py-3 px-4 bg-yellowColor hover:bg-yellowColorHover font-semibold transition-colors transition-200 ease-in" href="#">Sell On Foroden</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="grid gap-6 md:gap-4">
+        <div class="breadcrumb flex flex-wrap justify-start gap-2 w-full mx-auto px-5 pt-8">
+            <a class="text-gray-600 hover:text-gray-900" href="./index.html">Home</a>
+            <a>/</a>
+            <a class="text-gray-600 hover:text-gray-900" href='./supplier.html'>Supplier</a>
+            <a>/</a>
+            <span class="text-lightBackgroundColor">Customer Representation</span>
+        </div>
+        <section class="main w-12/12 py-6 pt-0 grid gap-10 px-5" style="height: auto;">
+            <div class="grid gap-6 md:gap-10 supplier-detail w-full md:w-full mx-auto">
+                <div class="grid gap-4 justify-start content-start">
+                    <div class="grid md:grid-flow-col justify-between gap-1">                        
+                        <h3 class="text-xl md:text-2xl font-bold text-lghterBackgroundColor">
+                            Customer Representation</h3>
+                    </div>
+                    <div class="client-infor grid gap-4 py-4 justify-items-start" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
+                        <div class="grid gap-2">
+                            <h4 class="text-lg font-semibold text-lightBackgroundColor">About Service</h4>
+                            <p class="text-base font-normal text-slate-800">
+                                A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy,
+                            </p>
+                        </div>
+                        <div class="grid items-start gap-2">
+                            <span class="flex gap-1 items-start">
+                                <h3 class="text-base font-semibold text-lightBackgroundColor">Currents Customers: </h3>
+                                <p class="flex gap-1 items-center font-normal text-slate-700">
+                                    120
+                                </p>
+                            </span>
+                            <span class="flex gap-1 items-start">
+                                <h3 class="text-base font-semibold text-lightBackgroundColor">Price: </h3>
+                                <p class="flex gap-1 items-center font-normal text-slate-700">
+                                    <span>USD 1000</span>
+                                    <span class="font-sm text-slate-500 font-normal">
+                                        (Paid once)
+                                    </span>
+                                </p>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contract-form grid gap-4 w-full md:w-full mx-auto">
+                <form action="" class="grid gap-6 p-5" style="background-color: rgb(242, 245, 248);">
+                    <div class="form-heading text-xl md:text-2xl text-lghterBackgroundColor font-bold text-capitalize">
+                        Fill in form to make contract.
+                    </div>
+                    <div class="form-group grid gap-2">
+                        <!-- when user selects a different service, make ajax call and update the service description above -->
+                        <label for="contract-name" class="text-slate-700 text-base font-normal">Service</label>
+                        <select name="contract-name" id="contract-name">
+                            <option value="" selected>Customer Representation</option>
+                            <option value="">Customer Representation</option>
+                            <option value="">Customer Representation</option>
+                            <option value="">Customer Representation</option>
+                        </select>
+                    </div>
+                    <div class="form-group grid gap-2">
+                        <label for="contract-price" class="text-slate-700 text-base font-normal">Price <span class="text-slate-600">(USD)</span></label>
+                        <input class="text-lghterBackgroundColor" type="number" name="contract-price" id="contract-price" value="1200">
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="form-group grid gap-2">
+                            <label for="contract-start-date" class="text-slate-700 text-base font-normal">Start Date</label>
+                            <input class="text-lghterBackgroundColor" type="date" name="contract-start-date" id="contract-start-date">
+                        </div>
+                        <div class="form-group grid gap-2">
+                            <label for="contract-end-date" class="text-slate-700 text-base font-normal">End Date</label>
+                            <input class="text-lghterBackgroundColor" type="date" name="contract-end-date" id="contract-end-date">
+                        </div>
+                    </div>
+                    <div class="form-group grid gap-2">
+                        <input class="text-white bg-lghterBackgroundColor hover:yellowColor" type="submit" name="contract-start-date" id="contract-start-date"
+                        value="Create Contract">
+                    </div>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="../static/js/scripts.js"></script>
+</body>
+
+</html>

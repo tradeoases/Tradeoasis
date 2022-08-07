@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/utils.css">
+    <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" href="../static/icons/themify-icons.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.css" >
+
+    <title>Golden - GOLDEN</title>
+</head>
+
+<script>
+    tailwind.config = {
+      theme: {
+        screens : {
+            sm: '480px',
+            md: '768px',
+            lg: '976px',
+            xl: '1440px',
+        },
+        extend: {
+            colors: {
+                yellowColor: 'hsl(38, 95%, 47%)',
+                yellowColorHover: 'hsl(38, 95%, 44%)',
+                backgroundColor: 'hsl(0, 0%, 9%)',
+                backgroundColorHover: 'hsl(0, 0%, 5%)',
+                lghterBackgroundColor: 'hsl(213, 28%, 19%)',
+                lghterBackgroundColorhover: 'hsl(213, 28%, 16%)',
+                // headerBg: 'hsla(0, 100%, 97%, .8)',
+                // hoverBackgroundColor: 'hsla(0, 100%, 95%, 1)',
+            },
+            width: {
+                'full': '95%',
+            }
+        },
+        // fontSize: {
+            // 'xs': '.85rem',
+            // 'sm': '.975rem',
+            // 'tiny': '.975rem',
+            // 'base': '1.1rem',
+            // 'lg': '1.325rem',
+            // 'xl': '1.35rem',
+            // '2xl': '1.6rem',
+            // '3xl': '1.975rem',
+            // '4xl': '2.35rem',
+            // '5xl': '3rem',
+            // '6xl': '4rem',
+            // '7xl': '6rem',
+        // }
+      }
+    }
+  </script>
+
+<body>
+    <header class="top-nav">
+        <div class="w-12/12 bg-backgroundColor">
+            <div class="w-full mx-auto">
+                <!-- The temporary navbar -->
+                <div class="temp-nav py-3 grid content-center w-12/12 gap-1">
+                    <div class="header-left grid items-center">
+                        <div class="logo-wrapper">
+                            <img src="../static/assets/imgs/resources/logo_trans.png" alt="Logo" class="logo" style="object-fit: cover;">
+                        </div>
+                    </div>
+                    <form action="" class="search-form grid w-12/12 gap-0 justify-items-stretch">
+                        <input type="search" name="search-bar" id="search-bar" class="py-3 px-6 rounded-tl-md rounded-bl-md focus:outline-none text-lghterBackgroundColor"
+                            placeholder="Search">
+
+                            <button type="submit" class="grid place-items-center bg-yellowColor rounded-tr-md rounded-br-md">
+                            <i class="ti-search"></i>
+                        </button>
+                    </form>
+                    <ul class="header-right list-none list-outside flex justify-end text-white">
+                        <li class="grid place-items-center h-full positive-relative">
+                            <a href="" onClick="(function(){
+                            })();return false;" class="flex gap-1 px-4 gap-2 text-sm items-center">
+                                <span class="item-name grid place-items-center py-2">
+                                    <i class="ti-world font-bold"></i>
+                                </span>
+                                <span class="grid place-items-center py-2">
+                                    EN
+                                </span>
+                            </a>
+                            <ul class="dropdown-list   list-none list-outside bg-lghterBackgroundColor overflow-hidden rounded-md text-base">
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">English</a>
+                                </li>
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">Arabic</a>
+                                </li>
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">French</a>
+                                </li>
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">Nederlands</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="grid place-items-center h-full positive-relative">
+                            <a href="" onClick="(function(){
+                            })();return false;" class="flex gap-1 px-4 gap-2 text-sm items-center">
+                                <span class="item-name grid place-items-center py-2">
+                                    My Account
+                                </span>
+                                <span class="grid items-center py-2">
+                                    <i class="ti-angle-down font-bold"></i>
+                                </span>
+                            </a>
+                            <ul class="dropdown-list   list-none list-outside bg-lghterBackgroundColor overflow-hidden rounded-md text-base">
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">Profile</a>
+                                </li>
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">Dashboard</a>
+                                </li>
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">Wishlists</a>
+                                </li>
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">Settings</a>
+                                </li>
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- The permanent/sticky navbar -->
+    <nav class="w-12/12 bg-lghterBackgroundColor">
+        <div class="w-full mx-auto flex justify-between  overflow-hidden">
+            <ul class="flex text-base text-white">
+                <li><a class="grid py-3 px-4 hover:bg-lghterBackgroundColorhover transition-colors transition-200 ease-in" href="./index.html">Home</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lghterBackgroundColorhover transition-colors transition-200 ease-in" href="./about.html">About us</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lghterBackgroundColorhover transition-colors transition-200 ease-in" href="./services.html">Services</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lghterBackgroundColorhover transition-colors transition-200 ease-in" href="#">Products</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lghterBackgroundColorhover transition-colors transition-200 ease-in" href="./showrooms.html">Home</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lghterBackgroundColorhover transition-colors transition-200 ease-in" href="#">Contact</a></li>
+            </ul>
+            
+            <ul class="flex text-base text-white">
+                <li><a class="grid py-3 px-4 bg-yellowColor hover:bg-yellowColorHover font-semibold transition-colors transition-200 ease-in" href="#">Sell On Foroden</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="grid gap-2 md:gap-8">
+
+        <div class="block bg-white px-5">
+            <div class="breadcrumb flex flex-wrap justify-start gap-2 md:w-full md:mx-auto py-6 justify-self-start">
+                <a class="text-gray-600 hover:text-gray-900" href="./index.html">Home</a>
+                <a>/</a>
+                <span class="text-lightBackgroundColor">Stores</span>
+            </div>
+
+            <div class="product-filter grid w-12/12 md:w-full md:grid-flow-col gap-4 mx-auto px-5 py-3 justify-self-stretch" style="background-color: rgb(242, 245, 248);">
+                <div class="grid gap-2">
+                    <h3 class="text-xl text-lightBackgroundColor font-semibold">Stores</h3>
+                </div>
+                <form class="filter grid md:grid-flow-col gap-4 md:justify-self-end items-center">
+                    <div class="filter-group flex gap-2 items-center">
+                        <p class="font-medium text-slate-800">Supplier: </p>
+                        <div class="filter-form-group flex gap-3 items-center">
+                            <select name="" id="" class="px-2 py-1 rounded text-sm text-slate-700 focus:outline-none">
+                                <option value="">All</option>
+                                <option value="">Supplier 1</option>
+                                <option value="">Supplier 2</option>
+                                <option value="">Supplier 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="filter-group flex gap-2 items-center">
+                        <p class="font-medium text-slate-800">Showroom: </p>
+                        <div class="filter-form-group flex gap-3 items-center">
+                            <select name="" id="" class="px-2 py-1 rounded text-sm text-slate-700 focus:outline-none">
+                                <option value="">All</option>
+                                <option value="">Showroom 1</option>
+                                <option value="">Showroom 2</option>
+                                <option value="">Showroom 3</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <section class="main w-12/12 py-3 md:px-6 my-3">
+            <div class="w-11/12 md:w-full mx-auto grid">
+                <div class="grid gap-3 md:grid-cols-4 rounded-md py-3">
+                    <div class="store-card grid items-start rounded-md card gap-4">
+                        <a class="grid gap-1 rounded-md overflow-hidden" href="./store.html">
+                            <img src="https://images.unsplash.com/photo-1555529771-835f59fc5efe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Y2xvdGhlcyUyMHN0b3JlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="img-wrapper rounded-md">
+                            <div class="card-details grid items-end px-4 py-4">
+                                <h2 class="text-lg leading-5 text-white font-bold">    
+                                    CorEats Mixes Suppliers
+                                </h2>
+                                <p class="text-slate-200 font-medium flex gap-2 flex-wrap">
+                                    <span>CorEats Mixes</span>
+                                    <span>120 Products</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="store-card grid items-start rounded-md card gap-4">
+                        <a class="grid gap-1 rounded-md overflow-hidden" href="./store.html">
+                            <img src="https://images.unsplash.com/photo-1555529771-835f59fc5efe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Y2xvdGhlcyUyMHN0b3JlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="img-wrapper rounded-md">
+                            <div class="card-details grid items-end px-4 py-4">
+                                <h2 class="text-lg leading-5 text-white font-bold">    
+                                    CorEats Mixes Suppliers
+                                </h2>
+                                <p class="text-slate-200 font-medium flex gap-2 flex-wrap">
+                                    <span>CorEats Mixes</span>
+                                    <span>120 Products</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="store-card grid items-start rounded-md card gap-4">
+                        <a class="grid gap-1 rounded-md overflow-hidden" href="./store.html">
+                            <img src="https://images.unsplash.com/photo-1555529771-835f59fc5efe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Y2xvdGhlcyUyMHN0b3JlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="img-wrapper rounded-md">
+                            <div class="card-details grid items-end px-4 py-4">
+                                <h2 class="text-lg leading-5 text-white font-bold">    
+                                    CorEats Mixes Suppliers
+                                </h2>
+                                <p class="text-slate-200 font-medium flex gap-2 flex-wrap">
+                                    <span>CorEats Mixes</span>
+                                    <span>120 Products</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="store-card grid items-start rounded-md card gap-4">
+                        <a class="grid gap-1 rounded-md overflow-hidden" href="./store.html">
+                            <img src="https://images.unsplash.com/photo-1555529771-835f59fc5efe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Y2xvdGhlcyUyMHN0b3JlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="img-wrapper rounded-md">
+                            <div class="card-details grid items-end px-4 py-4">
+                                <h2 class="text-lg leading-5 text-white font-bold">    
+                                    CorEats Mixes Suppliers
+                                </h2>
+                                <p class="text-slate-200 font-medium flex gap-2 flex-wrap">
+                                    <span>CorEats Mixes</span>
+                                    <span>120 Products</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="store-card grid items-start rounded-md card gap-4">
+                        <a class="grid gap-1 rounded-md overflow-hidden" href="./store.html">
+                            <img src="https://images.unsplash.com/photo-1555529771-835f59fc5efe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Y2xvdGhlcyUyMHN0b3JlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="img-wrapper rounded-md">
+                            <div class="card-details grid items-end px-4 py-4">
+                                <h2 class="text-lg leading-5 text-white font-bold">    
+                                    CorEats Mixes Suppliers
+                                </h2>
+                                <p class="text-slate-200 font-medium flex gap-2 flex-wrap">
+                                    <span>CorEats Mixes</span>
+                                    <span>120 Products</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="store-card grid items-start rounded-md card gap-4">
+                        <a class="grid gap-1 rounded-md overflow-hidden" href="./store.html">
+                            <img src="https://images.unsplash.com/photo-1555529771-835f59fc5efe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Y2xvdGhlcyUyMHN0b3JlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="img-wrapper rounded-md">
+                            <div class="card-details grid items-end px-4 py-4">
+                                <h2 class="text-lg leading-5 text-white font-bold">    
+                                    CorEats Mixes Suppliers
+                                </h2>
+                                <p class="text-slate-200 font-medium flex gap-2 flex-wrap">
+                                    <span>CorEats Mixes</span>
+                                    <span>120 Products</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="store-card grid items-start rounded-md card gap-4">
+                        <a class="grid gap-1 rounded-md overflow-hidden" href="./store.html">
+                            <img src="https://images.unsplash.com/photo-1555529771-835f59fc5efe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Y2xvdGhlcyUyMHN0b3JlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="img-wrapper rounded-md">
+                            <div class="card-details grid items-end px-4 py-4">
+                                <h2 class="text-lg leading-5 text-white font-bold">    
+                                    CorEats Mixes Suppliers
+                                </h2>
+                                <p class="text-slate-200 font-medium flex gap-2 flex-wrap">
+                                    <span>CorEats Mixes</span>
+                                    <span>120 Products</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="store-card grid items-start rounded-md card gap-4">
+                        <a class="grid gap-1 rounded-md overflow-hidden" href="./store.html">
+                            <img src="https://images.unsplash.com/photo-1555529771-835f59fc5efe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Y2xvdGhlcyUyMHN0b3JlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="img-wrapper rounded-md">
+                            <div class="card-details grid items-end px-4 py-4">
+                                <h2 class="text-lg leading-5 text-white font-bold">    
+                                    CorEats Mixes Suppliers
+                                </h2>
+                                <p class="text-slate-200 font-medium flex gap-2 flex-wrap">
+                                    <span>CorEats Mixes</span>
+                                    <span>120 Products</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="hidden pagination md:grid grid-flow-col gap-2 justify-center py-3 my-2 md:w-full mx-auto border-b border-t border-solid border-slate-200">
+            <a href="" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">Previous</a>
+            <a href="" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">1</a>
+            <a href="" class="grid place-items-center px-4 py-2 outline-none rounded bg-lghterBackgroundColorhover text-white">2</a>
+            <a href="" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">3</a>
+            <a href="" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">4</a>
+            <a href="" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">Next</a>
+        </div>
+
+        <div class="grid pagination md:hidden gap-2 justify-center py-3 my-2 w-11/12 md:w-full mx-auto border-b border-t border-solid border-slate-200">
+            <div class="grid grid-flow-col gap-2">
+                <a href="" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">1</a>
+                <a href="" class="grid place-items-center px-4 py-2 outline-none rounded bg-lghterBackgroundColorhover text-white">2</a>
+                <a href="" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">3</a>
+                <a href="" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">4</a>
+            </div>
+
+            <div class="grid grid-flow-col gap-2">
+                <a href="" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">Previous</a>
+                <a href="" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">Next</a>
+            </div>
+        </div>
+
+        <section class="main w-12/12 py-3 my-3">
+            <div class="md:w-full mx-auto grid md:grid-cols-2 items-start gap-6 md:gap-0">
+                <div class="grid gap-1">                    
+                    <div class="flex p-2 px-4 pt-0 justify-between items-baseline">
+                        <div class="flex gap-5">                            
+                            <h1 class="text-xl md:text-2xl text-lightBackgroundColor font-bold">Popular Products</h1>
+                        </div>
+                    </div>
+                    <div class="grid gap-3 md:grid-cols-2 rounded-md p-3 items-start">
+                        <div class="card-sm grid px-3 py-3 items-start rounded-md card bg-lghterBackgroundColor gap-3">
+                            <div class="card-details grid px-2">
+                                <h5 class="text-lg font-semibold leading-5 text-white">    
+                                    Women's Clothes
+                                </h5>
+                            </div>
+                            <div class="grid grid-cols-3 justify-evenly gap-2">
+                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                    <img src="https://images.unsplash.com/photo-1479064555552-3ef4979f8908?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fHdvbWVuJ3MlMjBjbG90aGVzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;">
+                                </a>
+                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                    <img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;">
+                                </a>
+                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                    <img src="https://images.unsplash.com/photo-1467043237213-65f2da53396f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzN8fHdvbWVuJ3MlMjBjbG90aGVzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-sm grid px-3 py-3 items-start rounded-md card bg-yellowColor gap-3">
+                            <div class="card-details grid px-2">
+                                <h5 class="text-lg font-semibold leading-5 text-white">    
+                                    Women's Clothes
+                                </h5>
+                            </div>
+                            <div class="grid grid-cols-3 justify-evenly gap-2">
+                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                    <img src="https://images.unsplash.com/photo-1479064555552-3ef4979f8908?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fHdvbWVuJ3MlMjBjbG90aGVzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;">
+                                </a>
+                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                    <img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;">
+                                </a>
+                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                    <img src="https://images.unsplash.com/photo-1467043237213-65f2da53396f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzN8fHdvbWVuJ3MlMjBjbG90aGVzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-sm grid px-3 py-3 items-start rounded-md card gap-3">
+                            <div class="card-details grid px-2">
+                                <h5 class="text-lg font-semibold leading-5 text-lightBackgroundColor">    
+                                    Women's Clothes
+                                </h5>
+                            </div>
+                            <div class="grid grid-cols-3 justify-evenly gap-2">
+                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                    <img src="https://images.unsplash.com/photo-1479064555552-3ef4979f8908?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fHdvbWVuJ3MlMjBjbG90aGVzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;">
+                                </a>
+                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                    <img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;">
+                                </a>
+                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                    <img src="https://images.unsplash.com/photo-1467043237213-65f2da53396f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzN8fHdvbWVuJ3MlMjBjbG90aGVzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-sm grid px-3 py-3 items-start rounded-md card bg-backgroundColor gap-3">
+                            <div class="card-details grid px-2">
+                                <h5 class="text-lg font-semibold leading-5 text-white">    
+                                    Women's Clothes
+                                </h5>
+                            </div>
+                            <div class="grid grid-cols-3 justify-evenly gap-2">
+                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                    <img src="https://images.unsplash.com/photo-1479064555552-3ef4979f8908?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fHdvbWVuJ3MlMjBjbG90aGVzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;">
+                                </a>
+                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                    <img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;">
+                                </a>
+                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                    <img src="https://images.unsplash.com/photo-1467043237213-65f2da53396f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzN8fHdvbWVuJ3MlMjBjbG90aGVzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid gap-1">                    
+                    <div class="flex p-2 px-4 pt-0 justify-between items-baseline">
+                        <div class="flex gap-5">                            
+                            <h1 class="text-xl md:text-2xl text-lightBackgroundColor font-bold">Popular Stores</h1>
+                        </div>
+                        <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="">View All</a>
+                    </div>
+                    <div class="grid gap-3 md:grid-cols-2 rounded-md p-3">
+                        <div class="grid p-4 items-start rounded-md card gap-4">
+                            <div class="card-details grid">
+                                <a href="" class="text-lg font-semibold leading-5 text-lightBackgroundColor">    
+                                    CorEats Mixes Suppliers
+                                </a>
+                            </div>
+                            <div class="grid grid-cols-2 justify-evenly gap-2">
+                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                    <img src="https://images.unsplash.com/photo-1555529771-835f59fc5efe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Y2xvdGhlcyUyMHN0b3JlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;">
+                                </a>
+                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                    <img src="https://images.unsplash.com/photo-1582719188393-bb71ca45dbb9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGNsb3RoZXMlMjBzdG9yZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;">
+                                </a>
+                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                    <img src="https://images.unsplash.com/photo-1565084888279-aca607ecce0c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGNsb3RoZXMlMjBzdG9yZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;">
+                                </a>
+                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                    <img src="https://images.unsplash.com/photo-1470309864661-68328b2cd0a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGNsb3RoZXMlMjBzdG9yZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60em-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="grid p-4 items-start rounded-md card gap-4">
+                            <div class="card-details grid">
+                                <a href="" class="text-lg font-semibold leading-5 text-lightBackgroundColor">    
+                                    CorEats Mixes Suppliers
+                                </a>
+                            </div>
+                            <div class="grid grid-cols-2 justify-evenly gap-2">
+                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                    <img src="https://images.unsplash.com/photo-1555529771-835f59fc5efe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Y2xvdGhlcyUyMHN0b3JlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;">
+                                </a>
+                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                    <img src="https://images.unsplash.com/photo-1582719188393-bb71ca45dbb9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGNsb3RoZXMlMjBzdG9yZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;">
+                                </a>
+                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                    <img src="https://images.unsplash.com/photo-1565084888279-aca607ecce0c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGNsb3RoZXMlMjBzdG9yZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;">
+                                </a>
+                                <a class="grid gap-1 rounded-md" href="./product.html">
+                                    <img src="https://images.unsplash.com/photo-1470309864661-68328b2cd0a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGNsb3RoZXMlMjBzdG9yZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60em-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <script src="../static/js/scripts.js"></script>
+</body>
+
+</html>

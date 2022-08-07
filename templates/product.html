@@ -137,14 +137,14 @@
     </header>
 
     <!-- The permanent/sticky navbar -->
-    <nav class="w-12/12 bg-lghterBackgroundColor sticky top-0 z-50">
+    <nav class="w-12/12 bg-lghterBackgroundColor">
         <div class="w-full mx-auto flex justify-between  overflow-hidden">
             <ul class="flex text-base text-white">
-                <li><a class="grid py-3 px-4 hover:bg-lghterBackgroundColorhover transition-colors transition-200 ease-in" href="#">Home</a></li>
-                <li><a class="grid py-3 px-4 hover:bg-lghterBackgroundColorhover transition-colors transition-200 ease-in" href="#">About us</a></li>
-                <li><a class="grid py-3 px-4 hover:bg-lghterBackgroundColorhover transition-colors transition-200 ease-in" href="#">Services</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lghterBackgroundColorhover transition-colors transition-200 ease-in" href="./index.html">Home</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lghterBackgroundColorhover transition-colors transition-200 ease-in" href="./about.html">About us</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lghterBackgroundColorhover transition-colors transition-200 ease-in" href="./services.html">Services</a></li>
                 <li><a class="grid py-3 px-4 hover:bg-lghterBackgroundColorhover transition-colors transition-200 ease-in" href="#">Products</a></li>
-                <li><a class="grid py-3 px-4 hover:bg-lghterBackgroundColorhover transition-colors transition-200 ease-in" href="#">Showrooms</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lghterBackgroundColorhover transition-colors transition-200 ease-in" href="./showrooms.html">Home</a></li>
                 <li><a class="grid py-3 px-4 hover:bg-lghterBackgroundColorhover transition-colors transition-200 ease-in" href="#">Contact</a></li>
             </ul>
             
@@ -154,8 +154,8 @@
         </div>
     </nav>
 
-    <main class="grid gap-2 md:gap-8">
-        <div class="breadcrumb flex flex-wrap justify-start gap-2 md:w-10/12 mx-auto px-5 pt-8">
+    <main class="grid gap-2 md:gap-4">
+        <div class="breadcrumb flex flex-wrap justify-start gap-2 md:w-full mx-auto px-5 pt-8">
             <a class="text-gray-600 hover:text-gray-900" href="./index.html">Home</a>
             <a>/</a>
             <a class="text-gray-600 hover:text-gray-900" href='./index.html'>Fashion</a>
@@ -165,7 +165,7 @@
             <span class="text-lightBackgroundColor">Short Sleeve Dewy Print</span>
         </div>
         <section class="main w-12/12 py-6 pt-0" style="height: auto;">
-            <div class="grid gap-6 md:gap-10 p-5 product-detail w-full md:w-10/12 mx-auto">
+            <div class="grid gap-6 md:gap-10 p-5 product-detail w-full md:w-full mx-auto">
                 <div class="product-images grid gap-2" data-context="{{product_images.context_name}}">
                     <div class="img-magnifier img-wrapper overflow-hidden" >
                         <img  style="object-fit: cover;" src="" alt="">
@@ -193,34 +193,34 @@
                     <div class="grid gap-4">
                         <p class="text-slate-700 flex gap-2" data-context="{{product_supplier.context_name}}">
                             <span>Supplier: </span>
-                            <a href="" class="font-semibold">Alexander Fashions</a>
+                            <a href="./supplier.html" class="font-semibold">Alexander Fashions</a>
                         </p>
                         <p class="text-slate-700 flex flex-wrap gap-3 justify-start items-center" data-context="{{product_stores.context_name}}">
                             <span>Stores: </span>
-                            <a href="" class="grid px-4 py-1 bg-slate-200 rounded-full text-backgroundColor">Kampala Styles</a>
-                            <a href="" class="grid px-4 py-1 bg-slate-200 rounded-full text-backgroundColor">Nairobi Fashion</a>
+                            <a href="./store.html" class="grid px-4 py-1 bg-slate-200 rounded-full text-backgroundColor">Kampala Styles</a>
+                            <a href="./store.html" class="grid px-4 py-1 bg-slate-200 rounded-full text-backgroundColor">Nairobi Fashion</a>
                         </p>
                     </div>
                     <div class="cta flex flex-wrap gap-3 my-3">
-                        <button class="flex place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-yellowColor hover:bg-yellowColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
+                        <a href="" class="flex place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-yellowColor hover:bg-yellowColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
                             <span class="text-white"><i class="fa fa-address-book"></i></span>
                             <span>Contact Supplier</span>
-                        </button>
-                        <button class="flex place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-lghterBackgroundColor hover:bg-lghterBackgroundColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
+                        </a>
+                        <a href="./contract.html" class="flex place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-lghterBackgroundColor hover:bg-lghterBackgroundColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
                             <span class="text-white"><i class="fa fa-file"></i></span>
                             <span>Make Contract</span>
-                        </button>
-                        <button class="flex place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-backgroundColor hover:bg-backgroundColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
+                        </a>
+                        <a href="" class="flex place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-backgroundColor hover:bg-backgroundColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
                             <span class="text-white"><i class="fa fa-shopping-cart"></i></span>
                             <span>Add To Wishlist</span>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
 
         <section class="main w-12/12 py-6 md:py-10" style="background-color: #FFFFFF;">
-            <div class="grid w-full mx-auto cf-1 gap-4 md:gap-6 w-full md:w-10/12 mx-auto">
+            <div class="grid w-full mx-auto cf-1 gap-4 md:gap-6 w-full md:w-full mx-auto">
                 <div class="section-heading">
                     <h2 class="sec-title text-xl md:text-2xl font-bold text-lghterBackgroundColor">Products Just For you</h2>
                 </div>

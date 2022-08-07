@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/utils.css">
+    <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" href="../static/icons/themify-icons.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.css" >
+
+    <title>Golden - GOLDEN</title>
+</head>
+
+<script>
+    tailwind.config = {
+      theme: {
+        screens : {
+            sm: '480px',
+            md: '768px',
+            lg: '976px',
+            xl: '1440px',
+        },
+        extend: {
+            colors: {
+                yellowColor: 'hsl(38, 95%, 47%)',
+                yellowColorHover: 'hsl(38, 95%, 44%)',
+                backgroundColor: 'hsl(0, 0%, 9%)',
+                backgroundColorHover: 'hsl(0, 0%, 5%)',
+                lghterBackgroundColor: 'hsl(213, 28%, 19%)',
+                lghterBackgroundColorhover: 'hsl(213, 28%, 16%)'
+                // headerBg: 'hsla(0, 100%, 97%, .8)',
+                // hoverBackgroundColor: 'hsla(0, 100%, 95%, 1)',
+            },
+            width: {
+                'full': '95%',
+            }
+        },
+        // fontSize: {
+            // 'xs': '.85rem',
+            // 'sm': '.975rem',
+            // 'tiny': '.975rem',
+            // 'base': '1.1rem',
+            // 'lg': '1.325rem',
+            // 'xl': '1.35rem',
+            // '2xl': '1.6rem',
+            // '3xl': '1.975rem',
+            // '4xl': '2.35rem',
+            // '5xl': '3rem',
+            // '6xl': '4rem',
+            // '7xl': '6rem',
+        // }
+      }
+    }
+  </script>
+
+<body>
+    <header class="top-nav">
+        <div class="w-12/12 bg-backgroundColor">
+            <div class="w-full mx-auto">
+                <!-- The temporary navbar -->
+                <div class="temp-nav py-3 grid content-center w-12/12 gap-1">
+                    <div class="header-left grid items-center">
+                        <div class="logo-wrapper">
+                            <img src="../static/assets/imgs/resources/logo_trans.png" alt="Logo" class="logo" style="object-fit: cover;">
+                        </div>
+                    </div>
+                    <form action="" class="search-form grid w-12/12 gap-0 justify-items-stretch">
+                        <input type="search" name="search-bar" id="search-bar" class="py-3 px-6 rounded-tl-md rounded-bl-md focus:outline-none text-lghterBackgroundColor"
+                            placeholder="Search">
+
+                            <button type="submit" class="grid place-items-center bg-yellowColor rounded-tr-md rounded-br-md">
+                            <i class="ti-search"></i>
+                        </button>
+                    </form>
+                    <ul class="header-right list-none list-outside flex justify-end text-white">
+                        <li class="grid place-items-center h-full positive-relative">
+                            <a href="" onClick="(function(){
+                            })();return false;" class="flex gap-1 px-4 gap-2 text-sm items-center">
+                                <span class="item-name grid place-items-center py-2">
+                                    <i class="ti-world font-bold"></i>
+                                </span>
+                                <span class="grid place-items-center py-2">
+                                    EN
+                                </span>
+                            </a>
+                            <ul class="dropdown-list   list-none list-outside bg-lghterBackgroundColor overflow-hidden rounded-md text-base">
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">English</a>
+                                </li>
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">Arabic</a>
+                                </li>
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">French</a>
+                                </li>
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">Nederlands</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="grid place-items-center h-full positive-relative">
+                            <a href="" onClick="(function(){
+                            })();return false;" class="flex gap-1 px-4 gap-2 text-sm items-center">
+                                <span class="item-name grid place-items-center py-2">
+                                    My Account
+                                </span>
+                                <span class="grid items-center py-2">
+                                    <i class="ti-angle-down font-bold"></i>
+                                </span>
+                            </a>
+                            <ul class="dropdown-list   list-none list-outside bg-lghterBackgroundColor overflow-hidden rounded-md text-base">
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">Profile</a>
+                                </li>
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">Dashboard</a>
+                                </li>
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">Wishlists</a>
+                                </li>
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">Settings</a>
+                                </li>
+                                <li>
+                                    <a class="grid items-center py-3 px-8" href="">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- The permanent/sticky navbar -->
+    <nav class="w-12/12 bg-lghterBackgroundColor">
+        <div class="w-full mx-auto flex justify-between  overflow-hidden">
+            <ul class="flex text-base text-white">
+                <li><a class="grid py-3 px-4 hover:bg-lghterBackgroundColorhover transition-colors transition-200 ease-in" href="./index.html">Home</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lghterBackgroundColorhover transition-colors transition-200 ease-in" href="./about.html">About us</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lghterBackgroundColorhover transition-colors transition-200 ease-in" href="./services.html">Services</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lghterBackgroundColorhover transition-colors transition-200 ease-in" href="#">Products</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lghterBackgroundColorhover transition-colors transition-200 ease-in" href="#">Contact</a></li>
+            </ul>
+            
+            <ul class="flex text-base text-white">
+                <li><a class="grid py-3 px-4 bg-yellowColor hover:bg-yellowColorHover font-semibold transition-colors transition-200 ease-in" href="#">Sell On Foroden</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="grid gap-2 md:gap-4">
+        <!-- <div class="block bg-white px-5">
+            <div class="breadcrumb flex flex-wrap justify-start gap-2 md:w-full md:mx-auto py-6 justify-self-start">
+                <a class="text-gray-600 hover:text-gray-900" href="./index.html">Home</a>
+                <a>/</a>
+                <span class="text-lightBackgroundColor">About Us</span>
+            </div>
+        </div> -->
+
+        <section class="main w-12/12 py-6 pt-0" style="background-color: #FFFFFF;">
+            <div class="grid gap-2 w-12/12" style="padding: 8rem;background-color: rgb(242, 245, 248);">
+                <div class="grid gap-2 justify-center">
+                    <h4 class="text-2xl text-gray-600 font-bold">
+                        About Us
+                    </h4>
+                </div>
+                <div class="grid gap-2">
+                    <p class="text-lightBackgroundColor text-4xl text-semi-bold w-8/12 mx-auto text-center" style="font-family: serif;">
+                        We are empowering entrepreneurs around the world to chase their dreams.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section class="grid gap-10 about-us-content">
+            <div class="grid right gap-20 w-10/12 mx-auto overflow-hidden">
+                <div class="grid gap-4 content-center">
+                    <h2 class="text-2xl font-semibold text-lightBackgroundColor" style="font-family: serif">Vision Statement</h2>
+                    <p class="text-lg text-slate-700">
+                        Now more than ever, consumers are choosing to support local shops over big-box chains. There are millions of thriving small businesses in North America and Europe alone, who collectively represent a $2T market. With our global community and the power of technology, Faire is helping fuel the growth of entrepreneurs everywhere.
+                    </p>
+                </div>
+                <div class="grid gap-2 img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1542744174-a35e40ade835?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fHNhbGVzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="" style="object-fit: cover;aspect-ratio: 1/2;">
+                </div>
+            </div>
+            <div class="grid left gap-20 w-10/12 mx-auto overflow-hidden">
+                <div class="grid gap-2 img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1467318339494-a32c2ada54d4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fG9mZmljZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60" alt="" style="object-fit: cover;aspect-ratio: 1/2;">
+                </div>
+                <div class="grid gap-4 content-center">
+                    <h2 class="text-2xl font-semibold text-lightBackgroundColor" style="font-family: serif">Vision Statement</h2>
+                    <p class="text-lg text-slate-700">
+                        Now more than ever, consumers are choosing to support local shops over big-box chains. There are millions of thriving small businesses in North America and Europe alone, who collectively represent a $2T market. With our global community and the power of technology, Faire is helping fuel the growth of entrepreneurs everywhere.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid bg-lghterBackgroundColor my-4">
+            <div class="stats grid gap-2 grid-cols-4 w-10/12 mx-auto justify-start">
+                <div class="grid gap-1 stats-card">
+                    <span class="num font-semibold text-white">50,000</span>
+                    <span class="text-2xl text-white font-semibold">Suppliers</span>
+                    <span class="text-slate-300">All over the world.</span>
+                </div>
+                <div class="grid gap-1 stats-card">
+                    <span class="num font-semibold text-white">50</span>
+                    <span class="text-2xl text-white font-semibold">Showrooms</span>
+                    <span class="text-slate-300">All over the world.</span>
+                </div>
+                <div class="grid gap-1 stats-card">
+                    <span class="num font-semibold text-white">100</span>
+                    <span class="text-2xl text-white font-semibold">Countries</span>
+                    <span class="text-slate-300">All over the world.</span>
+                </div>
+                <div class="grid gap-1 stats-card">
+                    <span class="num font-semibold text-white">50,000</span>
+                    <span class="text-2xl text-white font-semibold">Suppliers</span>
+                    <span class="text-slate-300">All over the world.</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../static/js/scripts.js"></script>
+</body>
+
+</html>
