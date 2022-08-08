@@ -195,8 +195,14 @@ nav.cs-fixed li:hover * {
 
 
 .promotion-area {
-    height: 90vh;
-    grid-template-rows: 40vh 30vh;
+    height: auto;
+    grid-template-rows: 40vh 25vh;
+}
+
+.mobile.promotion-area {
+    height: auto;
+    grid-template-rows: 35vh 20vh;
+    padding: .5rem;
 }
 
 .promotion-area div {
@@ -207,6 +213,13 @@ nav.cs-fixed li:hover * {
 .promotion-area .upper {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
+}
+
+.mobile.promotion-area .upper {
+    grid-template-columns: 1fr;
+}
+.mobile.promotion-area .lower {
+    grid-template-columns: 1fr 1fr;
 }
 
 .promotion-area .upper {

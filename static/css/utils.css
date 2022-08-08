@@ -331,14 +331,13 @@ form input[type='submit']:hover {
 .horizontal-scroll {
     padding: .5rem 0;
     grid-auto-flow: column;
-    grid-auto-columns: 27%;
+    grid-auto-columns: 17%;
     --gap: 0 1rem;
     overflow-x: scroll;
     overscroll-behavior-inline: contain;
 
     scroll-snap-type: inline mandatory;
     scroll-padding-inline: 1rem;
-    padding-inline-start: 1rem;
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
@@ -354,5 +353,6 @@ form input[type='submit']:hover {
 @media (max-width: 786px) {
     .horizontal-scroll {
         grid-auto-columns: 66%;
+        padding-inline-start: 1rem;
     }
 }
