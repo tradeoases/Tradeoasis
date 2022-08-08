@@ -11,9 +11,9 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 /* Remove default margin */
@@ -27,45 +27,45 @@ figure,
 blockquote,
 dl,
 dd {
-  margin: 0;
+    margin: 0;
 }
 
 a {
-  text-decoration: none;
-  color: inherit;
+    text-decoration: none;
+    color: inherit;
 }
 
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
 ul[role='list'],
 ol[role='list'] {
-  list-style: none;
+    list-style: none;
 }
 
 /* Set core root defaults */
 html:focus-within {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 /* Set core body defaults */
 body {
-  min-block-size: 100vh;
-  text-rendering: optimizeSpeed;
-  line-height: 1.5;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    min-block-size: 100vh;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 /* A elements that don't have a class get default styles */
 a:not([class]) {
-  text-decoration-skip-ink: auto;
+    text-decoration-skip-ink: auto;
 }
 
 /* Make images easier to work with */
 img,
 picture {
-  max-inline-size: 100%;
-  display: block;
-  object-fit: contain;
-  aspect-ratio: 1/1;
+    max-inline-size: 100%;
+    display: block;
+    object-fit: contain;
+    aspect-ratio: 1/1;
 }
 
 /* Inherit fonts for inputs and buttons */
@@ -73,23 +73,23 @@ input,
 button,
 textarea,
 select {
-  font: inherit;
+    font: inherit;
 }
 
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
-  html:focus-within {
-    scroll-behavior: auto;
-  }
-  
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+    html:focus-within {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
 
 /* css reset */
@@ -175,12 +175,12 @@ h4 {
     overflow: auto;
 }
 
-.flex {
+/* .flex {
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
 /* .grid {
     height: 100%;
@@ -207,6 +207,7 @@ h4 {
     border-radius: 2.5px;
 }
 
+
 .hide {
     display: none;
 }
@@ -214,7 +215,7 @@ h4 {
 .show {
     display: block;
 }
-
+/* 
 .cta {
     color: var(--brand-primary);
     font-weight: 800;
@@ -240,7 +241,7 @@ h4 {
 .cta.lg:hover {
     color: var(--brand-primary);
     background-color: #e5fae4;
-}
+} */
 
 
 #toggle-dropdown {
@@ -289,4 +290,69 @@ h4 {
 .dropdown-item ul li a {
     margin: 0;
     color: #656565;
+}
+
+
+
+/* forms */
+
+
+form:not(.search-form) input,
+form select {
+    padding-inline: 1.5rem;
+    padding-block: .75rem;
+    font-size: 1rem;
+    background-color: transparent;
+    border: 1px solid hsl(213, 28%, 60%);
+    outline: none;
+    border-radius: 5px;
+    transition: all .2s ease-in;
+}
+
+form.filter-group input {
+    padding-inline: .5rem;
+    padding-block: .35rem;
+}
+
+form input:focus {
+    outline: 1px solid hsl(213, 28%, 30%);
+}
+
+
+form input[type='submit'] {
+    cursor: pointer;
+}
+
+form input[type='submit']:hover {
+    background-color: hsl(213, 28%, 16%);
+}
+
+
+.horizontal-scroll {
+    padding: .5rem 0;
+    grid-auto-flow: column;
+    grid-auto-columns: 17%;
+    --gap: 0 1rem;
+    overflow-x: scroll;
+    overscroll-behavior-inline: contain;
+
+    scroll-snap-type: inline mandatory;
+    scroll-padding-inline: 1rem;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.horizontal-scroll > * {
+    scroll-snap-align: start;
+}
+
+@media (max-width: 786px) {
+    .horizontal-scroll {
+        grid-auto-columns: 66%;
+        padding-inline-start: 1rem;
+    }
 }
