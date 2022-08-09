@@ -31,8 +31,7 @@ class MembershipPlan(models.Model):
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
+        self.slug = slugify(self.name)
 
         self.name = self.name.title()
 
@@ -91,8 +90,7 @@ class ModeOfPayment(models.Model):
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
+        self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:

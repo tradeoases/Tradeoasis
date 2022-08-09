@@ -1,4 +1,3 @@
-from unicodedata import category
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView, DetailView
@@ -55,7 +54,7 @@ class HomeView(View):
                     }
                     for category in ProductCategory.objects.all().order_by(
                         "-created_on"
-                    )[:7]
+                    )[:6] if category.product_count > 0 and category.productsubcategory_set.count()
                 ],
             },
             "showrooms": {
@@ -70,8 +69,8 @@ class HomeView(View):
                 "context_name": "new-arrivals",
                 "results": Product.objects.all().order_by("-id")[:6],
             },
-            "weekly_deals": {
-                "context_name": "weekly-deals",
+            "discounts": {
+                "context_name": "discounts",
                 "results": [
                     {
                         "product": product,

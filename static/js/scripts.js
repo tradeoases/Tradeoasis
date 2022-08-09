@@ -134,4 +134,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     setDefaultDate();
+
+
+    // // responsive store cards
+    // const storeListSm = document.querySelector('.store-list-sm');
+    // if (storeListSm && storeListSm != undefined) {
+    //     const storeCardProducts = document.querySelectorAll('.store-card-sm .products');
+    //     storeCardProducts.forEach(card => {
+    //         let productCount = card.querySelectorAll('a.product').length;
+    //         card.classList.add(`grid-cols-${productCount}`);
+    //     })
+    // }
+
 })

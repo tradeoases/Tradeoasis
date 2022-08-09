@@ -26,8 +26,7 @@ class Location(models.Model):
     )
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = f"{slugify(self.name)}-{uuid.uuid4()}"[:50]
+        self.slug = f"{slugify(self.name)}-{uuid.uuid4()}"[:50]
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
@@ -48,8 +47,7 @@ class Service(models.Model):
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = f"{slugify(self.name)}-{uuid.uuid4()}"[:50]
+        self.slug = f"{slugify(self.name)}-{uuid.uuid4()}"[:50]
 
         self.name = self.name.title()
 
@@ -74,8 +72,7 @@ class ServiceImage(models.Model):
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = f"{slugify(self.service.name)}-{uuid.uuid4()}"
+        self.slug = f"{slugify(self.service.name)}-{uuid.uuid4()}"
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
@@ -101,8 +98,7 @@ class Showroom(models.Model):
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = f"{slugify(self.name)}-{uuid.uuid4()}"[:50]
+        self.slug = f"{slugify(self.name)}-{uuid.uuid4()}"[:50]
 
         self.name = self.name.title()
 

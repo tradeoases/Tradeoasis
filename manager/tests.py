@@ -125,7 +125,7 @@ class RequestTest(TestCase):
             "view_name",
             "product_categories",
             "showrooms",
-            "weekly_deals",
+            "discounts",
             "catogory_product_group",
             "new_arrivals",
         ]

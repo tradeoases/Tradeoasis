@@ -2,88 +2,101 @@
 {% load static %}
 {% block content %}
 
-        <section class="main w-12/12 py-6" style="height: auto;background-color: white;">
+    <div class="breadcrumb flex flex-wrap justify-start gap-2 md:w-full mx-auto px-5 ">
+        <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">Home</a>
+        <span>/</span>
+        <a class="text-gray-600 hover:text-gray-900" href='{% url "supplier:category-detail" object.sub_category.category.slug %}'>{{object.sub_category.category}}</a>
+        <span>/</span>
+        <a class="text-gray-600 hover:text-gray-900" href='{% url "supplier:subcategory-detail" object.sub_category.category.slug object.sub_category.slug %}'>{{object.sub_category}}</a>
+        <span>/</span>
+        <span>{{object.name}}</span>
+    </div>
 
-            <div class="breadcrumb grid grid-flow-col justify-start gap-2 w-10/12 mx-auto py-2 px-5">
-                <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">Home</a>
-                <a>/</a>
-                <a class="text-gray-600 hover:text-gray-900" href='{% url "supplier:category-detail" object.sub_category.category.slug %}'>{{object.sub_category.category}}</a>
-                <a>/</a>
-                <a class="text-gray-600 hover:text-gray-900" href='{% url "supplier:subcategory-detail" object.sub_category.category.slug object.sub_category.slug %}'>{{object.sub_category}}</a>
-                <a>/</a>
-                <span>{{object.name}}</span>
+    <section class="main w-12/12 py-6 pt-0" style="height: auto;">
+        <div class="grid gap-6 md:gap-10 p-5 product-detail w-full md:w-full mx-auto">
+            <div class="product-images grid gap-2" data-context="{{product_images.context_name}}">
+                <div class="img-magnifier img-wrapper overflow-hidden" >
+                    <img  style="object-fit: cover;" src="" alt="{{object.name}}">
+                </div>
+                <hr>
+                <div class="product-images-list grid gap-2" style="grid-template-columns: repeat(5, 1fr);">
+                    {% for image in product_images.results %}
+                        <img style="aspect-ratio: 1;object-fit: cover;cursor: pointer;" src="/media/{{image.image}}" alt="">
+                    {% endfor %}
+                </div>
             </div>
+            <div class="grid gap-4 justify-start content-start">
+                <div class="grid md:grid-flow-col justify-between gap-1">                        
+                    <h3 class="text-xl md:text-2xl font-bold text-lghterBackgroundColor">{{ object.name }}</h3>
+                    <p class="text-bold justify-start text-lghterBackgroundColor" style="display:grid;grid-auto-flow: column; align-items: baseline;gap: .25rem;">
+                        <span class="text-base md:text-lg">{{ object.currency }}</span>
+                        <span class="text-xl md:text-2xl font-bold">{{ object.price }}</span>
+                    </p>
+                </div>
+                <div class="grid md:gap-1 py-2 justify-items-start" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
+                    <p class="text-base font-normal text-slate-800">{{object.description}}</p>
+                </div>
+                <div class="grid gap-2 justify-start">
+                    <p class="flex items-center justify-items-start text-slate-700 gap-2" data-context="{{product_supplier.context_name}}">
+                        <span class="justify-self-start" style="inline-size: min-content;">Supplier: </span>
+                        <a href="{% url 'supplier:supplier-detail' product_supplier.results.profile.slug %}" class="grid px-4 py-1 bg-slate-200 place-items-center rounded-full text-backgroundColor" style="inline-size: min-content;">{{product_supplier.results.profile.business_name}}</a>
+                    </p>
+                    <p class="text-slate-700 grid grid-flow-col flex-wrap gap-3 justify-start items-center" data-context="{{product_stores.context_name}}">
+                        <span>Stores: </span>
 
-            <div class="grid gap-10 p-5 product-detail w-10/12 mx-auto" style="grid-template-columns: 1fr 2fr;">
-                <div class="product-images grid gap-2" data-context="{{product_images.context_name}}">
-                    <div class="img-wrapper" >
-                        <img  style="object-fit: cover;" src="/media/{{product_images.results.0.image}}" alt="">
-                    </div>
-                    <hr>
-                    <div class="extra-images grid gap-2" style="grid-template-columns: repeat(4, 1fr);">
-                        {% for image in product_images.results %}
-                            <img src="/media/{{image.image}}" alt="">
+                        {% for store in product_stores.results %}
+                            <a href="{% url 'supplier:store-detail' store.slug %}" class="grid px-4 py-1 bg-slate-200 rounded-full text-backgroundColor">{{ store }}</a>
                         {% endfor %}
-                    </div>
+
+                    </p>
                 </div>
-                <div class="product-detail grid gap-4 justify-start content-start">
-                    <div class="grid grid-flow-col justify-between">                        
-                        <h3 class="text-2xl font-semibold">{{ object.name }}</h3>
-                        <p class="text-bold" style="display:grid;grid-auto-flow: column; align-items: baseline;gap: .25rem;">
-                            <span class="text-lg">{{ object.currency }}</span>
-                            <span class="text-2xl font-bold">{{ object.price }}</span>
-                        </p>
-                    </div>
-                    <div class="grid gap-1 px-4 py-2 justify-items-start" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
-                        <p class="text-base font-normal text-slate-800">{{object.description}}</p>
-                    </div>
-                    <div class="grid gap-2">
-                        <p class="text-slate-700 flex gap-1" data-context="{{product_supplier.context_name}}">
-                            <span>Supplier: </span>
-                            <span class="font-semibold">{{product_supplier.results}}</span>
-                        </p>
-                        <p class="text-slate-700 grid grid-flow-col gap-3" data-context="{{product_stores.context_name}}">
-                            <span>Stores: </span>
-                            <span class="flex flex-wrap gap-1">
-                                {% for store in product_stores.results %}
-                                    <span>{{ store }}</span>
-                                {% endfor %}
-                            </span>
-                        </p>
-                    </div>
+                <div class="cta grid grid-flow-col gap-3">
+                    <a href="" class="grid grid-flow-col place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-yellowColor hover:bg-yellowColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
+                        <span class="text-white"><i class="fa fa-address-book"></i></span>
+                        <span>Contact Supplier</span>
+                    </a>
+                    <a href="./contract.html" class="grid grid-flow-col place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-lghterBackgroundColor hover:bg-lighterBackgroundColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
+                        <span class="text-white"><i class="fa fa-file"></i></span>
+                        <span>Make Contract</span>
+                    </a>
+                    <a href="" class="grid grid-flow-col place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-backgroundColor hover:bg-backgroundColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
+                        <span class="text-white"><i class="fa fa-shopping-cart"></i></span>
+                        <span>Show Interest</span>
+                    </a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="main w-12/12 py-6" style="background-color: #FFFFFF;">
-            <div class="grid w-full mx-auto cf-1 gap-5 w-10/12 mx-auto">
+    {% if related_products.results %}
+        <section class="main w-12/12 py-6 md:py-10" style="background-color: #FFFFFF;">
+            <div class="grid w-full mx-auto cf-1 gap-4 md:gap-6 w-full md:w-full mx-auto">
                 <div class="section-heading">
-                    <h2 class="sec-title text-2xl font-bold">Related Products</h2>
+                    <h2 class="sec-title text-xl capitalize md:text-2xl font-bold text-lghterBackgroundColor">Products Just For you</h2>
                 </div>
-                <div class="section-body grid gap-6 grid-cols-5" data-context="{{propular_products.context_name}}">
-                    {% for product in propular_products.results %}
-                        <div class="single-image-product-card overflow-hidden rounded-md flex gap-0.5 card-outlined">
-                            <div class="grid gap-1">
-                                <a class="grid gap-2" href="{% url 'supplier:product-detail' product.product.slug %}">
-                                    <img src="/media/{{product.images.image}}" alt="{{product.name}}" class="item-img rounded-sm" >
-                                    <div class="item-details grid gap-0 py-1 px-4 gap-2" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
-                                        <p class="grid justify-start text-left">            
-                                            <h5 class="text-sm font-bold leading-5">    
-                                                {{product.product.name}}
-                                            </h5>
-                                            <p class="text-xs font-medium">
-                                                <span>{{product.product.currency}}</span>
-                                                <span>{{product.product.price}}</span>
-                                            </p>
-                                        </p>
-                                    </div>
-                                    <span class="py-1 px-4 font-semibold text-sm">By {{ product.supplier }}</span>
-                                </a>
-                            </div>
+                <div class="section-body grid md:gap-3 grid-cols-2 md:grid-cols-5" data-context="{{propular_products.context_name}}">
+                    {% for product in related_products.results %}
+                        <div class="single-image-product-card overflow-hidden rounded grid gap-0.5 card-outlined">
+                            <a class="grid gap-2 p-1 rounded overflow-hidden" href="{% url 'supplier:product-detail' product.product.slug %}">
+                                <img loading="lazy" src="/media/{{product.images.image}}" alt="{{product.name}}"
+                                    class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;">
+                                <div class="item-details grid gap-0 py-2 md:py-3 px-4 gap-2"
+                                    style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
+                                    <h5 class="text-sm font-bold leading-5 text-lightBackgroundColor">
+                                        {{product.product.name}}
+                                    </h5>
+                                    <p class="text-xs font-medium">
+                                        <span>{{product.product.currency}}</span>
+                                        <span>{{product.product.price}}</span>
+                                    </p>
+                                </div>
+                                <span class="grid items-center pb-2 px-4 font-semibold text-sm">By {{ product.supplier }}</span>
+                            </a>
                         </div>
                     {% endfor %}
                 </div>
             </div>
         </section>
+    {% endif %}
 
 {% endblock %}

@@ -70,12 +70,12 @@
     </ul>
 
     <h3>Weekly Deals</h3>
-    <ul data-context='{{ weekly_deals.context_name }}' style="display: flex;gap: 2rem">
-        {% for weekly_deal in weekly_deals.results %} 
+    <ul data-context='{{ discounts.context_name }}' style="display: flex;gap: 2rem">
+        {% for discount in discounts.results %} 
             <li>
-                <a href="{% url 'supplier:product-detail' weekly_deal.slug %}" data-new-arrival-index="{{forloop.counter}}" style="display: grid;">
-                    <img style="width: 5vw; aspect-ratio: 1;" src="/media/{{weekly_deal.image}}" alt="">
-                    <p>{{ weekly_deal.name }}</p>
+                <a href="{% url 'supplier:product-detail' discount.slug %}" data-new-arrival-index="{{forloop.counter}}" style="display: grid;">
+                    <img style="width: 5vw; aspect-ratio: 1;" src="/media/{{discount.image}}" alt="">
+                    <p>{{ discount.name }}</p>
                 </a>
             </li>
         {% endfor %}

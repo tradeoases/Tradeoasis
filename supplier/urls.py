@@ -6,6 +6,11 @@ from supplier import views
 app_name = "supplier"
 
 urlpatterns = [
+    # supplier
+    path(
+        "supplier/<str:slug>", views.SupplierDetailView.as_view(), name="supplier-detail"
+    ),
+
     # products
     path("products/", views.ProductListView.as_view(), name="products"),
     path(

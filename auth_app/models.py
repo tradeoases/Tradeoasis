@@ -3,8 +3,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils.translation import gettext_lazy as _
 from django.utils.text import slugify
-from django.db.models.signals import pre_save
-from django.dispatch import receiver
 
 
 # python
@@ -55,6 +53,14 @@ class User(AbstractUser):
 
 class ClientProfile(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
+    business_name = models.CharField(_("Business Name"), max_length=256, blank=True, null=True)
+    slug = models.SlugField(
+        _("Safe Url"),
+        unique=True,
+        blank=True,
+        null=True,
+    )
+    business_description = models.TextField(_('Business Description'))
     country = models.CharField(_("Country"), max_length=256)
     country_code = models.IntegerField(_("Country Code"))
     city = models.CharField(_("City"), max_length=256)
@@ -64,6 +70,13 @@ class ClientProfile(models.Model):
         _("Legal Entity Identifier"), max_length=256, blank=True, null=True
     )
     website = models.URLField(_("Website"), blank=True, null=True)
+    
+    def save(self, *args, **kwargs):
+        if not self.business_name:
+            self.business_name = self.user.username.title() 
+
+        self.slug = slugify(self.business_name)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.user.get_username()}"

@@ -1,13 +1,10 @@
 # django
-from email.policy import default
-from unicodedata import category
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.utils.text import slugify
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
-from django.conf import settings
 
 # python
 import os
@@ -49,8 +46,7 @@ class Store(models.Model):
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
+        self.slug = slugify(self.name)
 
         self.name = self.name.title()
 
@@ -72,13 +68,12 @@ class ProductCategory(models.Model):
         _("Safe Url"),
         unique=True,
         blank=True,
-        null=True,
+        null=True
     )
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
+        self.slug = slugify(self.name)
 
         self.name = self.name.title()
 
@@ -105,8 +100,7 @@ class ProductSubCategory(models.Model):
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
+        self.slug = slugify(self.name)
 
         self.name = self.name.title()
 
@@ -144,8 +138,7 @@ class Product(models.Model):
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
+        self.slug = slugify(self.name)
 
         if not self.pk:
             self.category = self.sub_category.category
@@ -173,8 +166,7 @@ class ProductImage(models.Model):
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(f"{self.product.name[:10]}-{uuid.uuid4()}")[:50]
+        self.slug = slugify(f"{self.product.name[:10]}-{uuid.uuid4()}")[:50]
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
@@ -202,8 +194,7 @@ class Service(models.Model):
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
+        self.slug = slugify(self.name)
 
         self.name = self.name.title()
 
