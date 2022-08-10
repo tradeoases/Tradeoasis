@@ -4,6 +4,8 @@ from django.views.generic import ListView, DetailView
 from django.db.models import Q
 from django.core.paginator import Paginator
 
+import random
+
 from supplier import models as SupplierModels
 from auth_app import models as AuthModels
 from manager import models as ManagerModels
@@ -44,46 +46,114 @@ class SupplierDetailView(DetailView):
 
         return context
 
-class ProductListView(ListView):
-    model = SupplierModels.Product
+class ProductListView(View):
+    model = SupplierModels.ProductSubCategory
+    template_name = "supplier/product_list.html"
+    PER_PAGE_COUNT = 20
+
+    def get(self, request):
+
+        return render(
+            request,
+            template_name=self.template_name,
+            context=self.get_context_data()
+        )
+
+    def get_queryset(self):
+
+        # get query parameters
+        min_price = self.request.GET.get('min-price', 0)
+        max_price = self.request.GET.get('max-price', None)
+        supplier = self.request.GET.get('supplier', 'All')
+
+        if max_price and supplier != "All":
+            return SupplierModels.Product.objects.filter(
+                Q(price__gte=float(min_price) if min_price else float(0)),
+                Q(price__lte=float(max_price)),
+                Q(store__supplier=AuthModels.Supplier.supplier.filter(clientprofile__business_name=supplier).first())
+            )
+
+        elif max_price:
+            return SupplierModels.Product.objects.filter(
+                Q(price__gte=float(min_price) if min_price else float(0)),
+                Q(price__lte=float(max_price))
+            )
+
+        elif supplier != "All":
+            return SupplierModels.Product.objects.filter(
+                Q(price__gte=float(min_price) if min_price else float(0)),
+                Q(store__supplier=AuthModels.Supplier.supplier.filter(clientprofile__business_name=supplier).first())
+            )
+
+        return SupplierModels.Product.objects.filter(
+            price__gte = float(min_price) if min_price else float(0)
+        )
+
+    def get_products_paginator(self):
+
+        queryset = self.get_queryset()
+
+        self.products = random.sample(list(queryset.order_by('-id')), self.PER_PAGE_COUNT if queryset.count() >= 20 else queryset.count())
+
+        paginator = Paginator(self.products, self.PER_PAGE_COUNT)
+
+        page_num = self.request.GET.get('page', 1)
+        return paginator.page(page_num)
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context_data = dict()
 
-        sub_categories = SupplierModels.ProductSubCategory.objects.all()[:10]
+        products_paginator = self.get_products_paginator()
 
-        object_list = []
-        for sub_category in sub_categories:
-            if not sub_category.product_set.count() < 1:
-                sub_category_group = {
-                    "sub_category": sub_category.name,
-                    "category": sub_category.category.name,
-                    "count": sub_category.category.product_count,
-                    "results": {
-                        "products": [
-                            {
-                                "product": product,
-                                "image": SupplierModels.ProductImage.objects.filter(
-                                    product=product
-                                ).first(),
-                            }
-                            for product in sub_category.product_set.all()
-                        ]
-                    },
+        context_data["view_name"] = "Products"
+        context_data['page_obj'] = products_paginator
+        context_data['product_count'] = len(self.products)
+        context_data['current_page_number'] = self.request.GET.get('page', 1)
+
+        context_data["products"] = {
+            "context-name": "products",
+            "results": [
+                {
+                    "product": product,
+                    "supplier": product.store.all().first().supplier,
+                    "images": product.productimage_set.all().first(),
                 }
-                object_list.append(sub_category_group)
-
-        context["object_list"] = object_list
-
-        context["view_name"] = "Products"
-        context["product_categories"] = {
-            "context_name": "product-categories",
-            "results": SupplierModels.ProductCategory.objects.all().order_by("-id"),
+                for product in products_paginator.object_list
+            ],
         }
 
-        # deals, suggestion, new arrivals are to be added in context
+        context_data["new_arrivals"] = {
+            "context_name": "new_arrivals",
+            "results": [
+                {
+                    "product": product,
+                    "main_image": SupplierModels.ProductImage.objects.filter(
+                        product=product
+                    ).first(),
+                }
+                for product in (lambda products: random.sample(products, len(products)))(list(SupplierModels.Product.objects.all().order_by("-id")[:10]))
+            ]
+        }
 
-        return context
+        context_data['suppliers'] = {
+            "context_name": 'suppliers',
+            'results': AuthModels.Supplier.supplier.all()
+        }
+
+        context_data['price_limits'] = {
+            "context_name": 'price-limits',
+            'results': {
+                'min_price': self.request.GET.get('min-price', 0),
+            'max_price': self.request.GET.get('max-price', None)
+            }
+        }
+
+        context_data['supplier_filter'] = {
+            "context_name": 'supplier-filter',
+            'results': self.request.GET.get('supplier', 0)
+        }
+
+        return context_data
 
 
 class ProductDetailView(DetailView):
@@ -122,11 +192,11 @@ class ProductDetailView(DetailView):
                             product=product
                         ).first(),
                     }
-                    for product in SupplierModels.Product.objects.filter(
+                    for product in (lambda products: random.sample(products, len(products)))(list(SupplierModels.Product.objects.filter(
                         ~Q(id=product.id),
                         Q(sub_category=product.sub_category)
                         | Q(category=product.category),
-                    )
+                    )[:10]))
                 ],
             }
         return context
@@ -399,8 +469,6 @@ class StoreDetailView(DetailView):
 
         self.store_products = self.get_object().store_product.all()
 
-        print(self.store_products)
-
         paginator = Paginator(self.store_products.order_by('-id'), PER_PAGE_COUNT)
 
         page_num = self.request.GET.get('page', 1)
@@ -442,4 +510,30 @@ class StoreDetailView(DetailView):
                 Q(supplier=store.supplier), ~Q(id=store.id)
             ).order_by("-id")[:5]
         }
+        return context
+
+class StoreListView(ListView):
+    model = SupplierModels.Store
+    paginate_by = 20
+
+    def get_queryset(self):
+        supplier_filter_param = self.request.GET.get('supplier', None)
+        if supplier_filter_param:
+            supplier = AuthModels.ClientProfile.objects.filter(business_name=supplier_filter_param).first().user
+            return self.model.objects.filter(supplier= supplier).order_by('-id')
+
+        return super().get_queryset().order_by('-id')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["view_name"] = "Stores"
+
+
+        context['suppliers'] = {
+            "context_name": 'suppliers',
+            'results': AuthModels.Supplier.supplier.all()
+        }
+
+
         return context

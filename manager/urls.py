@@ -15,7 +15,7 @@ urlpatterns = [
         name="showroom-detail",
     ),
     # services
-    path("services/", views.HomeView.as_view(), name="services"),
+    path("services/", views.ServiceListView.as_view(), name="services"),
     path("support/", views.HomeView.as_view(), name="support"),
-    path("about-us/", views.HomeView.as_view(), name="about-us"),
+    path("about/", views.AboutUsView.as_view(), name="about-us"),
 ]

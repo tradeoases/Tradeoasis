@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# projects files
+test_files/*
+media/*
+./functional_tests.py
+.test.py

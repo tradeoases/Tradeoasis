@@ -695,3 +695,8 @@ footer a:hover {
     grid-auto-flow: column;
     justify-content: center;
 } */
+
+
+.sec-title {
+    color: hsl(38, 95%, 47%) !important;
+}

@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.views import View
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 from django.db.models import Q
+import random
 
 # apps
 from supplier.models import (
@@ -54,7 +55,9 @@ class HomeView(View):
                     }
                     for category in ProductCategory.objects.all().order_by(
                         "-created_on"
-                    )[:6] if category.product_count > 0 and category.productsubcategory_set.count()
+                    )[:6]
+                    if category.product_count > 0
+                    and category.productsubcategory_set.count()
                 ],
             },
             "showrooms": {
@@ -67,7 +70,15 @@ class HomeView(View):
             },
             "new_arrivals": {
                 "context_name": "new-arrivals",
-                "results": Product.objects.all().order_by("-id")[:6],
+                "results": [
+                    {
+                        "product": product,
+                        "main_image": ProductImage.objects.filter(
+                            product=product
+                        ).first(),
+                    }
+                    for product in (lambda products: random.sample(products, len(products)))(list(Product.objects.all().order_by("-id")[:10]))
+                ]
             },
             "discounts": {
                 "context_name": "discounts",
@@ -105,9 +116,19 @@ class ShowRoomListView(ListView):
         context = super().get_context_data(**kwargs)
 
         context["view_name"] = "Showrooms"
-        context["locations"] = {
-            "context_name": "locations",
-            "results": ManagerModels.Location.objects.all(),
+        context["object_list"] = {
+            "context_name": "showrooms",
+            "results": [
+                {
+                    "showroom" : showroom,
+                    "store_count" : showroom.store.count()
+                }
+                for showroom in (lambda showrooms: random.sample(showrooms, len(showrooms)))(list(ManagerModels.Showroom.objects.all()[:20]))
+            ]
+        }
+        context["stores"] = {
+            "context_name": "stores",
+            "results": (lambda stores: random.sample(stores, len(stores)))(list(Store.objects.all()[:10]))
         }
         return context
 
@@ -124,6 +145,42 @@ class ShowRoomDetailView(DetailView):
         context["stores"] = {"context_name": "stores", "results": showroom.store.all()}
         context["other_showroom"] = {
             "context_name": "other-showroom",
-            "results": ManagerModels.Showroom.objects.all().order_by("-id")[:6],
+            "results": [
+                {
+                    "showroom" : showroom,
+                    "store_count" : showroom.store.count()
+                }
+                for showroom in (lambda showrooms: random.sample(showrooms, len(showrooms)))(list(ManagerModels.Showroom.objects.all()[:10]))
+            ]
         }
+        context["products"] = {
+            "context_name": "products",
+            "results": [
+                {
+                    "product": product,
+                    "supplier": product.store.all().first().supplier,
+                    "images": product.productimage_set.all().first(),
+                }
+                for product in (lambda products: random.sample(products, len(products)))([product for product in Product.objects.filter(store__in = showroom.store.all())][:20])
+            ],
+        }
+
+        return context
+
+
+class ServiceListView(ListView):
+    model = ManagerModels.Service
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["view_name"] = "Services"
+        return context
+
+class AboutUsView(TemplateView):
+    template_name = 'manager/about.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["view_name"] = "About Us"
         return context

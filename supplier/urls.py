@@ -8,9 +8,10 @@ app_name = "supplier"
 urlpatterns = [
     # supplier
     path(
-        "supplier/<str:slug>", views.SupplierDetailView.as_view(), name="supplier-detail"
+        "supplier/<str:slug>",
+        views.SupplierDetailView.as_view(),
+        name="supplier-detail",
     ),
-
     # products
     path("products/", views.ProductListView.as_view(), name="products"),
     path(
@@ -34,6 +35,11 @@ urlpatterns = [
         "store/<str:slug>",
         views.StoreDetailView.as_view(),
         name="store-detail",
+    ),
+    path(
+        "stores",
+        views.StoreListView.as_view(),
+        name="store-list",
     )
     # path("stores/", views.CategoryListView.as_view(), name="store-list"),
     # path(

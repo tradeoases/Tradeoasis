@@ -64,12 +64,7 @@ class ProductCategory(models.Model):
         upload_to=get_file_path,
         default="test/django.png",
     )
-    slug = models.SlugField(
-        _("Safe Url"),
-        unique=True,
-        blank=True,
-        null=True
-    )
+    slug = models.SlugField(_("Safe Url"), unique=True, blank=True, null=True)
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
