@@ -1,3 +1,30 @@
+:root {
+    --danger-color: hsl(0, 100%, 35%);
+    --success-color: green;
+}
+
+body.modal-open {
+    overflow: hidden;
+    inline-size: 100vw;
+    block-size: 100vh;
+}
+
+body::after {
+    display: none;
+    content: "";
+    position: absolute;
+    inset: 0;
+    inline-size: 100vw;
+    block-size: 100vh;
+    background-color: hsla(213, 28%, 19%, 0.5);
+    z-index: 50;
+}
+
+body.modal-open::after {
+    display: block;
+}
+
+
 /* utility classes */
 
 .cs-overflow-hidden {
@@ -36,6 +63,12 @@
 }
 .cs-bg-transparent {
     background-color: transparent;
+}
+.cs-bg-danger {
+    background-color: var(--danger-color);
+}
+.cs-bg-success {
+    background-color: var(--success-color);
 }
 
 .cs-text-white {
@@ -86,7 +119,8 @@
 .cs-align-between {align-items: space-between;}
 .cs-align-center {align-items: center;}
 .cs-align-start {align-items: flex-start;}
-.cs-content-start {align-items: flex-start;}
+.cs-content-start {align-content: flex-start;}
+.cs-align-baseline {align-items: baseline;}
 
 @media (max-width: 786px) {
     .cs-md-hidden {display: none;}
@@ -144,7 +178,16 @@
 .btn {
     cursor: pointer;
     padding: .5rem 1rem;
-    border: 1px sold var(--primary-color)
+    border: none;
+    transition: all .02s ease-out;
+}
+.btn.cs-bg-secondary:hover,
+.btn.cs-bg-secondary:focus-within {
+    background-color: var(--secondary-color-hover);
+}
+.btn.cs-bg-primary:hover,
+.btn.cs-bg-primary:focus-within {
+    background-color: var(--primary-color-hover);
 }
 .outlined {
     border: 1px solid hsla(213, 28%, 80%, 70%);
@@ -204,7 +247,7 @@ form input {
     color: var(--secondary-color);
     padding: 1rem 1rem;
     outline: none;
-    background: #000;
+    width: 100%;
 }
 form .outline-input {
     border: 1px solid lightgray;
@@ -214,6 +257,14 @@ form .outline-input {
 form .outline-input input {
     border: none !important;
     padding: .5rem 1rem;
+}
+
+form input:focus,
+form input:focus-within,
+form textarea:focus,
+form textarea:focus-within {
+    border: 1px solid hsla(213, 28%, 30%, 90%);
+    outline: none;
 }
 
 /* sidebar */
@@ -256,10 +307,10 @@ body.admin-body {
 .admin-content-area {
     padding: .25rem .5rem;
     align-content: flex-start;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 .content-area-header {
-    grid-template-columns: 1fr 1fr .8fr;
+    grid-template-columns: .6fr 1fr .6fr;
     padding: .5rem 1rem;
     border: 1px solid hsla(213, 28%, 20%, 10%);
 }
@@ -273,7 +324,7 @@ body.admin-body {
     top: 0;
 }
 .section-nav {
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 2fr 1.5fr;
     
 }
 .section-nav li {
@@ -302,6 +353,80 @@ body.admin-body {
     inline-size: 100%;
     max-inline-size: 50vw;
 }
+
+/* lists */
+table {
+    border-collapse: collapse;
+}
+table tr {
+    border-block-end: 1px solid hsla(213, 28%, 80%, 70%);
+    border-inline: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+}
+table tbody tr:hover {
+    background-color: hsla(213, 28%, 70%, 10%);
+    border-inline: 3px solid var(--secondary-color);
+}
+tr th,
+tr td {
+    padding: .5rem 1rem;
+    text-align: left;
+}
+
+tr th {
+    text-transform: capitalize;
+}
+
+tbody tr:nth-child(even) {
+    background-color: hsla(213, 28%, 85%, 20%);
+}
+tbody tr td:nth-child(even) {
+    background-color: hsla(213, 28%, 95%, 20%);
+}
+
+tbody tr td {
+    color: hsla(213, 28%, 35%, 100%);
+}
+
+tbody tr td.delete {
+    display: grid;
+    place-items: center;
+}
+/* lists */
+
+.modal {
+    position: fixed;
+    inset-block-start: 10%;
+    inset-inline-start: 50%;
+    transform: translateX(-50%);
+    inline-size: 60vw;
+    max-block-size: 80vh;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: var(--white-color);
+    padding: 1.5rem 2rem;
+    animation: modalEnter .5s ease-in;
+    z-index: 1000;
+}
+.modal.sm {
+    inset-block-start: 15%;
+    inline-size: 25vw;
+    z-index: 1200;
+}
+@keyframes modalEnter {
+    from {inset-block-start: -20%;opacity: 0;}
+    to {inset-block-start: 10%;opacity: 1;}
+}
+@media (max-width: 1000px) {
+    .modal {
+        inline-size: 80vw;
+    }
+    .modal.sm {
+        inline-size: 40vw;
+    }
+}
+
 /* body */
 
 /* components */

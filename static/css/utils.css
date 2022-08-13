@@ -294,15 +294,19 @@ h4 {
 
 
 form:not(.search-form) input,
-form select {
+form select, form textarea {
     padding-inline: 1.5rem;
     padding-block: .75rem;
     font-size: 1rem;
-    background-color: transparent;
     border: 1px solid hsl(213, 28%, 60%);
     outline: none;
     border-radius: 5px;
     transition: all .2s ease-in;
+}
+
+form:not(.search-form) input:not([type='submit']),
+form select {
+    background-color: transparent;
 }
 
 form.filter-group input {
