@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden - Admin Dashboard</title>
+    <link href="../../static/icons/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet"  type='text/css'>
+    <link rel="stylesheet" href="../../static/css/utils.css">
+    <link rel="stylesheet" href="../../static/css/dashboards.css">
+</head>
+<body
+    class="admin-body cs-bg-white cs-grid"
+    style="
+            --white-color: #fff;
+            --accent-color: hsl(38, 95%, 47%);
+            --primary-color: hsl(0, 0%, 9%);
+            --primary-color-hover: hsla(0, 100%, 95%, 1);
+            --secondary-color: hsl(213, 28%, 19%);
+            --secondary-color-hover: hsl(213, 28%, 14%);
+            --gap: 0rem;
+        "
+>
+    
+    <!-- sidenav -->
+    <aside class="admin-side-nav cs-grid cs-align-start" style="--gap: .5rem;align-content: flex-start;">
+        <div class="header cs-grid">
+            <div class="cs-flex cs-align-center cs-justify-between" style="--gap: 2rem">
+                <div class="logo-wrapper cs-overflow-hidden">
+                    <img src="../../static/assets/imgs/resources/logo_website-e1652772171833-1.png" alt="Logo" class="logo" style="object-fit: cover;">
+                </div>
+                <button class="btn cs-bg-transparent cs-text-primary"><i class="fa fa-bars"></i></button>
+            </div>
+            <hr style="border: 1px solid hsl(0, 0%, 95%);">
+        </div>
+        <div class="body cs-grid" style="--gap: 2rem;">
+            <div class="item-group cs-grid" style="--gap: 0rem;">
+                <h3 class="item-group-title cs-font-500 cs-text-md" style="color: hsl(0, 0%, 60%)">Navigation</h3>
+                <div class="items cs-grid" style="--gap: .1rem">
+                    <ul class="item list-none list-outside">
+                        <li>
+                            <a href="" class="active side-tab br-sm cs-flex justify-start cs-align-center" style="--gap: .5rem;">
+                                <i class="fa fa-home cs-text-normal-md cs-text-primary"></i>
+                                <h5 class="item-label cs-font-500 cs-text-md cs-text-cs-bg-secondary">Home</h5>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./clients.html" class="side-tab br-sm cs-flex justify-start cs-align-center" style="--gap: .5rem;">
+                                <i class="fa fa-user cs-text-normal-md cs-text-primary"></i>
+                                <h5 class="item-label cs-font-500 cs-text-md cs-text-cs-bg-secondary">Clients</h5>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" class="side-tab br-sm cs-flex justify-start cs-align-center" style="--gap: .5rem;">
+                                <i class="fa fa-home cs-text-normal-md cs-text-primary"></i>
+                                <h5 class="item-label cs-font-500 cs-text-md cs-text-cs-bg-secondary">Showrooms</h5>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" class="side-tab br-sm cs-flex justify-start cs-align-center" style="--gap: .5rem;">
+                                <i class="fa fa-home cs-text-normal-md cs-text-primary"></i>
+                                <h5 class="item-label cs-font-500 cs-text-md cs-text-cs-bg-secondary">Services</h5>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" class="side-tab br-sm cs-flex justify-start cs-align-center" style="--gap: .5rem;">
+                                <i class="fa fa-home cs-text-normal-md cs-text-primary"></i>
+                                <h5 class="item-label cs-font-500 cs-text-md cs-text-cs-bg-secondary">Products</h5>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" class="side-tab br-sm cs-flex justify-start cs-align-center" style="--gap: .5rem;">
+                                <i class="fa fa-home cs-text-normal-md cs-text-primary"></i>
+                                <h5 class="item-label cs-font-500 cs-text-md cs-text-cs-bg-secondary">Support</h5>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer cs-grid" style="align-self: flex-end;--gap: 1rem;">
+            <hr style="border: 1px solid hsl(0, 0%, 95%);">
+            <div class="cs-flex justify-center" style="--gap:1rem;">
+                <button class="btn icon-btn cs-bg-white cs-grid cs-justify-center cs-align-center br-sm">
+                    <i class="fa fa-cog"></i>
+                </button>
+                <button class="btn icon-btn cs-bg-white cs-grid cs-justify-center cs-align-center br-sm">
+                    <i class="fa fa-user"></i>
+                </button>
+                <button class="btn icon-btn cs-bg-white cs-grid cs-justify-center cs-align-center br-sm">
+                    <i class="fa fa-user"></i>
+                </button>
+            </div>
+            <button class="btn outlined cs-text-md cs-font-500 br-sm cs-bg-hover-color" sty>Log out</button>
+        </div>
+    </aside>
+    <!-- sidenav -->
+
+    <!-- main -->
+    <main class="cs-grid admin-content-area" style="--gap: 1rem;">
+        <!-- header area -->
+            <header class="content-area-header cs-grid br-sm" style="--gap: 2rem;">
+                <div class="cs-grid cs-align-center" style="align-content: center;--gap: .35rem">
+                    <h1 class="section-title cs-font-700 cs-font-500 cs-text-secondary" style="line-height: 20px;margin: 0;font-size: 1.4rem;">Admin Dashboard</h1>
+                    <p class="cs-flex cs-text-md" style="color: hsla(213, 28%, 60%, 100%)"><span>Home</span></p>
+                </div>
+                <div class="cs-grid">
+                    <form action="" class="cs-grid" style="align-self: center;">
+                        <div class="cs-flex form-group outline-input" style="align-items: center;--gap: 0">
+                            <i class="fa fa-search cs-text-body" style="color: hsl(0, 0%, 85%);"></i>
+                            <input type="text" name="" id="">
+                        </div>
+                    </form>
+                </div>
+                <div class="cs-flex justify-end cs-grid-flow-col align-center" style="justify-content: flex-end;--gap: 1rem">
+                    <button class="badge btn cs-bg-transparent">
+                        <span class="count">4</span>
+                        <i class="fa fa-bell"></i>
+                    </button>
+                    <div class="cs-flex br-md" style="--gap: 1rem;padding: .5rem 1rem;background-color: hsla(213, 28%, 70%, 10%);align-content: center;align-items: center;">
+                        <div class="cs-grid" style="--gap: 0;justify-items: flex-end;align-content: center;">
+                            <h4 class="cs-text-md cs-font-500" style="line-height: 14px;margin: 0;">Nola Riska</h4>
+                            <p class="cs-text-sm cs-font-500" style="color: hsl(0, 0%, 60%);">Support</p>
+                        </div>
+                        <div class="avator br-full cs-overflow-hidden">
+                            <img src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
+                        </div>
+                    </div>
+                </div>
+            </header>
+        <!-- header area -->
+        <!-- section area -->
+            <!-- section selectors -->
+            <nav class="section-nav-area br-sm cs-bg-white outlined">
+                <ul class="cs-grid section-nav list-none list-outside" style="--gap: .25rem;">
+                    <div class="cs-flex">
+                        <li class="cs-text-md cs-font-500 active">Overview</li>
+                        <li class="cs-text-md cs-font-500">Requests</li>
+                        <li class="cs-text-md cs-font-500">Requests</li>
+                    </div>
+                    <div class="cs-flex" style="justify-self: flex-end;">
+                        <li class="cs-flex cs-text-md cs-bg-secondary cs-font-500 br-sm emph" style="--text-color: #fff;--gap: .5rem;align-items: center;">
+                            <i class="fa fa-plus"></i>
+                            <span>Create</span>
+                        </li>
+                    </div>
+                </ul>
+            </nav>
+            <!-- section selectors -->
+
+            <section class="content cs-grid br-sm" style="--gap: 1rem;">
+                <div class="cs-grid horizontal-scroll" style="padding: .1rem 0;--gap: 1rem;--row-size: 21%;">
+                    <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
+                        <h4 class="cs-text-md cs-font-500" style="margin: 0;color: var(--text-color);">
+                            Total Suppliers
+                        </h4>
+                        <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
+                            <div class="cs-grid">
+                                <p class="cs-text-body cs-font-bold cs-text-secondary" style="margin: 0;">
+                                    10000
+                                </p>
+                                <span class="cs-text-sm" style="color: var(--text-color);">Supplier Count</span>
+                            </div>
+                            <a href="" class="cs-text-sm cs-text-accent cs-font-500" style="align-self: flex-end">View All</a>
+                        </div>
+                    </div>
+                    <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
+                        <h4 class="cs-text-md cs-font-500" style="margin: 0;color: var(--text-color);">
+                            Total Buyers
+                        </h4>
+                        <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
+                            <div class="cs-grid">
+                                <p class="cs-text-body cs-font-bold cs-text-secondary" style="margin: 0;">
+                                    10000
+                                </p>
+                                <span class="cs-text-sm" style="color: var(--text-color);">Supplier Count</span>
+                            </div>
+                            <a href="" class="cs-text-sm cs-text-accent cs-font-500" style="align-self: flex-end">View All</a>
+                        </div>
+                    </div>
+                    <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
+                        <h4 class="cs-text-md cs-font-500" style="margin: 0;color: var(--text-color);">
+                            Total Requests
+                        </h4>
+                        <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
+                            <div class="cs-grid">
+                                <p class="cs-text-body cs-font-bold cs-text-secondary" style="margin: 0;">
+                                    10000
+                                </p>
+                                <span class="cs-text-sm" style="color: var(--text-color);">As Per Today</span>
+                            </div>
+                            <a href="" class="cs-text-sm cs-text-accent cs-font-500" style="align-self: flex-end">View All</a>
+                        </div>
+                    </div>
+                    <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
+                        <h4 class="cs-text-md cs-font-500" style="margin: 0;color: var(--text-color);">
+                            Total Suppliers
+                        </h4>
+                        <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
+                            <div class="cs-grid">
+                                <p class="cs-text-body cs-font-bold cs-text-secondary" style="margin: 0;">
+                                    10000
+                                </p>
+                                <span class="cs-text-sm" style="color: var(--text-color);">Supplier Count</span>
+                            </div>
+                            <a href="" class="cs-text-sm cs-text-accent cs-font-500" style="align-self: flex-end">View All</a>
+                        </div>
+                    </div>
+                    <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
+                        <h4 class="cs-text-md cs-font-500" style="margin: 0;color: var(--text-color);">
+                            Total Buyers
+                        </h4>
+                        <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
+                            <div class="cs-grid">
+                                <p class="cs-text-body cs-font-bold cs-text-secondary" style="margin: 0;">
+                                    10000
+                                </p>
+                                <span class="cs-text-sm" style="color: var(--text-color);">Supplier Count</span>
+                            </div>
+                            <a href="" class="cs-text-sm cs-text-accent cs-font-500" style="align-self: flex-end">View All</a>
+                        </div>
+                    </div>
+                    <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
+                        <h4 class="cs-text-md cs-font-500" style="margin: 0;color: var(--text-color);">
+                            Total Requests
+                        </h4>
+                        <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
+                            <div class="cs-grid">
+                                <p class="cs-text-body cs-font-bold cs-text-secondary" style="margin: 0;">
+                                    10000
+                                </p>
+                                <span class="cs-text-sm" style="color: var(--text-color);">As Per Today</span>
+                            </div>
+                            <a href="" class="cs-text-sm cs-text-accent cs-font-500" style="align-self: flex-end">View All</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="cs-grid" style="padding: .1rem 0;--gap: 1rem;--row-size: 21%;grid-template-columns: repeat(2, 1fr);">
+                    <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
+                        <div class="cs-grid">
+                            <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
+                                Requests By Location
+                            </p>
+                            <span class="cs-text-sm" style="color: var(--text-color);">Requests Stats By Location</span>
+                        </div>
+                        <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
+                            <img class="stats-card-img" src="../../static/assets/imgs/resources/20220812_083902.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
+                        <div class="cs-grid">
+                            <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
+                                Requests By Location
+                            </p>
+                            <span class="cs-text-sm" style="color: var(--text-color);">Requests Stats By Location</span>
+                        </div>
+                        <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
+                            <img class="stats-card-img" src="../../static/assets/imgs/resources/20220812_083930.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
+                        <div class="cs-grid">
+                            <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
+                                Requests By Location
+                            </p>
+                            <span class="cs-text-sm" style="color: var(--text-color);">Requests Stats By Location</span>
+                        </div>
+                        <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
+                            <img class="stats-card-img" src="../../static/assets/imgs/resources/20220812_083930.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="cs-grid" style="--gap: .1rem;align-content: flex-start;padding: .25rem;grid-template-columns: repeat(2, 1fr);">
+                        <div class="cs-grid br-md cs-justify-center" style="--gap: 1rem;padding: 0 0;align-content: flex-start;">
+                            <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
+                                Top Suppliers
+                            </p>
+                            <div class="cs-grid cs-justify-start" style="--gap: 1rem;">
+                                <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
+                                    <div class="avator br-full cs-overflow-hidden">
+                                        <img src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
+                                    </div>
+                                    <div class="cs-grid">
+                                        <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
+                                        <span class="cs-text-accent cs-text-sm">View Profile</span>
+                                    </div>
+                                </a>
+                                <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
+                                    <div class="avator br-full cs-overflow-hidden">
+                                        <img src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
+                                    </div>
+                                    <div class="cs-grid">
+                                        <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
+                                        <span class="cs-text-accent cs-text-sm">View Profile</span>
+                                    </div>
+                                </a>
+                                <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
+                                    <div class="avator br-full cs-overflow-hidden">
+                                        <img src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
+                                    </div>
+                                    <div class="cs-grid">
+                                        <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
+                                        <span class="cs-text-accent cs-text-sm">View Profile</span>
+                                    </div>
+                                </a>
+                                <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
+                                    <div class="avator br-full cs-overflow-hidden">
+                                        <img src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
+                                    </div>
+                                    <div class="cs-grid">
+                                        <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
+                                        <span class="cs-text-accent cs-text-sm">View Profile</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="cs-grid br-md cs-justify-center" style="--gap: .8rem;padding: 1rem 0;background-color: hsla(213, 28%, 19%, 85%);">
+                            <p class="cs-text-normal cs-font-bold cs-text-white" style="margin: 0;">
+                                Recent Payments
+                            </p>
+                            <div class="cs-grid cs-justify-start" style="--gap: 1rem;">
+                                <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
+                                    <div class="avator br-full cs-overflow-hidden">
+                                        <img src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
+                                    </div>
+                                    <div class="cs-grid">
+                                        <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
+                                        <span class="cs-text-accent cs-text-sm">View Details</span>
+                                    </div>
+                                </a>
+                                <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
+                                    <div class="avator br-full cs-overflow-hidden">
+                                        <img src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
+                                    </div>
+                                    <div class="cs-grid">
+                                        <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
+                                        <span class="cs-text-accent cs-text-sm">View Details</span>
+                                    </div>
+                                </a>
+                                <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
+                                    <div class="avator br-full cs-overflow-hidden">
+                                        <img src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
+                                    </div>
+                                    <div class="cs-grid">
+                                        <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
+                                        <span class="cs-text-accent cs-text-sm">View Details</span>
+                                    </div>
+                                </a>
+                                <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
+                                    <div class="avator br-full cs-overflow-hidden">
+                                        <img src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
+                                    </div>
+                                    <div class="cs-grid">
+                                        <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
+                                        <span class="cs-text-accent cs-text-sm">View Details</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        <!-- section area -->
+    </main>
+    <!-- main -->
+
+</body>
+</html>
