@@ -296,7 +296,7 @@ h4 {
 form:not(.search-form) input,
 form select, form textarea {
     padding-inline: 1.5rem;
-    padding-block: .75rem;
+    padding-block: .5rem;
     font-size: 1rem;
     border: 1px solid hsl(213, 28%, 60%);
     outline: none;

@@ -51,13 +51,13 @@
                             </a>
                         </li>
                         <li>
-                            <a href="./manager.html" class="active side-tab br-sm cs-flex justify-start cs-align-center" style="--gap: .5rem;">
+                            <a href="./manager.html" class="manager active side-tab br-sm cs-flex justify-start cs-align-center" style="--gap: .5rem;">
                                 <i class="fa fa-home cs-text-normal-md cs-text-primary"></i>
                                 <h5 class="item-label cs-font-500 cs-text-md cs-text-cs-bg-secondary">Manager</h5>
                             </a>
                         </li>
                         <li>
-                            <a href="" class="side-tab br-sm cs-flex justify-start cs-align-center" style="--gap: .5rem;">
+                            <a href="./support/index.html" class="side-tab br-sm cs-flex justify-start cs-align-center" style="--gap: .5rem;">
                                 <i class="fa fa-home cs-text-normal-md cs-text-primary"></i>
                                 <h5 class="item-label cs-font-500 cs-text-md cs-text-cs-bg-secondary">Support</h5>
                             </a>
@@ -72,12 +72,12 @@
                 <button class="btn icon-btn cs-bg-white cs-grid cs-justify-center cs-align-center br-sm">
                     <i class="fa fa-cog"></i>
                 </button>
-                <button class="btn icon-btn cs-bg-white cs-grid cs-justify-center cs-align-center br-sm">
+                <a href="./createProfile.html" class="btn icon-btn cs-bg-white cs-grid cs-justify-center cs-align-center br-sm">
                     <i class="fa fa-user"></i>
-                </button>
-                <button class="btn icon-btn cs-bg-white cs-grid cs-justify-center cs-align-center br-sm">
+                </a>
+                <a class="btn icon-btn cs-bg-white cs-grid cs-justify-center cs-align-center br-sm">
                     <i class="fa fa-user"></i>
-                </button>
+                </a>
             </div>
             <button class="btn outlined cs-text-md cs-font-500 br-sm cs-bg-hover-color" sty>Log out</button>
         </div>
@@ -97,27 +97,70 @@
                     </p>
                 </div>
                 <div class="cs-grid">
-                    <form action="" class="cs-grid" style="align-self: center;">
+                    <form action="./search.html" class="cs-grid" style="align-self: center;">
                         <div class="cs-flex form-group outline-input" style="align-items: center;--gap: 0">
                             <i class="fa fa-search cs-text-body" style="color: hsl(0, 0%, 85%);"></i>
-                            <input type="text" name="" id="">
+                            <input type="text" name="search" id="search-bar" placeholder="Search...">
                         </div>
                     </form>
                 </div>
-                <div class="cs-flex justify-end cs-grid-flow-col align-center" style="justify-content: flex-end;--gap: 1rem">
-                    <button class="badge btn cs-bg-transparent">
+                <div class="cs-grid justify-end cs-grid-flow-col align-center" style="justify-content: flex-end;--gap: 1rem">
+                    <button class="notification-cta badge btn cs-bg-transparent">
                         <span class="count">4</span>
                         <i class="fa fa-bell"></i>
+                        <div class="notification-list cs-hidden outlined cs-bg-white br-sm" style="--gap: 1rem;text-align: left;">
+                            <h4 class="cs-text-normal cs-font-600 cs-text-secondary" style="margin: 0;">Nofications</h4>
+                            <hr style="border: 1px solid hsl(0, 0%, 95%);">
+                            <ul class="cs-grid" style="--gap: .25rem">
+                                <li>
+                                    <a href="./support/chat.html" class="cs-grid" style="--gap:.25rem;">
+                                        <p class="cs-flex cs-align-baseline cs-justify-between">
+                                            <span class="cs-grid cs-text-secondary cs-text-md">Nowela Mary</span>
+                                            <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">1 minute ago</span>
+                                        </p>
+                                        <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">contract transaction failed ...</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./support/chat.html" class="cs-grid" style="--gap:.25rem;">
+                                        <p class="cs-flex cs-align-baseline cs-justify-between">
+                                            <span class="cs-grid cs-text-secondary cs-text-md">Nowela Mary</span>
+                                            <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">1 minute ago</span>
+                                        </p>
+                                        <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">contract transaction failed ...</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./support/chat.html" class="cs-grid" style="--gap:.25rem;">
+                                        <p class="cs-flex cs-align-baseline cs-justify-between">
+                                            <span class="cs-grid cs-text-secondary cs-text-md">Nowela Mary</span>
+                                            <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">1 minute ago</span>
+                                        </p>
+                                        <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">contract transaction failed ...</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./support/chat.html" class="cs-grid" style="--gap:.25rem;">
+                                        <p class="cs-flex cs-align-baseline cs-justify-between">
+                                            <span class="cs-grid cs-text-secondary cs-text-md">Nowela Mary</span>
+                                            <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">1 minute ago</span>
+                                        </p>
+                                        <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">contract transaction failed ...</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </button>
-                    <div class="cs-flex br-md" style="--gap: 1rem;padding: .5rem 1rem;background-color: hsla(213, 28%, 70%, 10%);align-content: center;align-items: center;">
+                    
+                    <a href="./profile.html" class="cs-flex br-md" style="--gap: 1rem;padding: .5rem 1rem;background-color: hsla(213, 28%, 70%, 10%);align-content: center;align-items: center;">
                         <div class="cs-grid" style="--gap: 0;justify-items: flex-end;align-content: center;">
-                            <h4 class="cs-text-md cs-font-500 manager-item" style="line-height: 14px;margin: 0;">Nola Riska</h4>
+                            <h4 class="cs-text-md cs-font-500" style="line-height: 14px;margin: 0;">Nola Riska</h4>
                             <p class="cs-text-sm cs-font-500" style="color: hsl(0, 0%, 60%);">Support</p>
                         </div>
                         <div class="avator br-full cs-overflow-hidden">
-                            <img loading="lazy" src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
+                            <img src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
                         </div>
-                    </div>
+                    </a>
                 </div>
             </header>
         <!-- header area -->
@@ -127,7 +170,7 @@
                 <!-- when not in display -> cs-hidden -->
             
             <section class="content br-sm outlined" style="--gap: 1rem;">
-                <form action="" class="cs-grid br-sm" enctype="multipart/form-data" style="padding: 2rem;--gap:1rem;">
+                <form action="" id="category-form" class="cs-grid br-sm" enctype="multipart/form-data" style="padding: 2rem;--gap:1rem;">
                     <h2 style="margin: 0;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
                         Fill in form to create product category.
                     </h2>
@@ -141,14 +184,19 @@
                     </div>
                     <div class="form-group cs-grid cs-align-center" style="--gap: .5rem;">
                         <label for="showroom-name" class="cs-text-normal" style="color: var(--text-color);">Sub Categories</label>
-                        <div class="cs-grid" style="--gap: 1rem;">
-                            <div class="cs-grid cs-align-center" style="--gap: 1rem; grid-template-columns: 1fr 1fr;">
+                        <div class="cs-grid" id="subCategory-group" style="--gap: 1rem;">
+                            <div class="subcategory-inputs cs-grid cs-align-center" style="grid-template-columns: 1fr 1fr .1fr;" data-subcategorycount="1">
                                 <input type="text" name="subcategory-1" id="subcategory-1" placeholder="Sub Category Name">
                                 <input type="file" name="sub-category-image-1" id="sub-category-image-1">
-                            </div>
-                            <div class="cs-grid cs-align-center" style="--gap: 1rem; grid-template-columns: 1fr 1fr;">
-                                <input type="text" name="subcategory-1" id="subcategory-1" placeholder="Sub Category Name">
-                                <input type="file" name="sub-category-image-1" id="sub-category-image-1">
+                                <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-hover-color cs-text-secondary br-full" id="add-input" style="padding: 1rem .5rem;" onclick="(function(){
+                                })();return false;">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+
+                                <button class="btn cs-justify-center cs-align-center cs-bg-hover-color cs-text-secondary br-full cs-hidden delete-input" data-subcategoryDeleteCount="1" style="padding: 1rem .5rem;" onclick="(function(){
+                                })();return false;">
+                                    <i class="fa fa-trash"></i>
+                                </button>
                             </div>
                         </div>
                     </div>

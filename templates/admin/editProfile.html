@@ -166,28 +166,43 @@
         <!-- header area -->
         <!-- section area -->
 
-                <!-- when in display -> cs-grid -->
-                <!-- when not in display -> cs-hidden -->
-            
-            <section class="content br-sm outlined" style="--gap: 1rem;">
-                <form action="" class="cs-grid br-sm" style="padding: 2rem;--gap:1rem;">
-                    <h2 style="margin: 0;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
-                        Fill in form to create showroom.
-                    </h2>
+        <section class="content br-sm outlined" style="--gap: 1rem;">
+            <form action="" id="profile-form" class="cs-grid br-sm" enctype="multipart/form-data" style="padding: 2rem;--gap:1rem;">
+                <h2 style="margin: 0;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
+                    Edit Account Details.
+                </h2>
+                <div class="cs-grid" style="grid-template-columns: repeat(2, 1fr);--gap: 1rem;">
                     <div class="form-group cs-grid" style="--gap: .5rem;">
-                        <label for="showroom-name" class="cs-text-normal" style="color: var(--text-color);">Name</label>
-                        <input type="text" name="showroom-name" id="showroom-name">
+                        <label for="firstname" class="cs-text-normal" style="color: var(--text-color);">Firstname</label>
+                        <input type="text" name="firstname" id="firstname">
                     </div>
                     <div class="form-group cs-grid" style="--gap: .5rem;">
-                        <label for="showroom-name" class="cs-text-normal" style="color: var(--text-color);">Location</label>
-                        <input type="text" name="showroom-name" id="showroom-name">
+                        <label for="lastname" class="cs-text-normal" style="color: var(--text-color);">Lastname</label>
+                        <input type="text" name="lastname" id="lastname">
                     </div>
-                    <div class="form-group cs-grid" style="--gap: .5rem;">
-                        <input class="cs-text-white cs-bg-secondary" type="submit" name="contract-start-date" id="contract-start-date"
-                        value="Create Showroom">
-                    </div>
-                </form>
-            </section>
+                </div>
+                <div class="form-group cs-grid" style="--gap: .5rem;">
+                    <label for="username" class="cs-text-normal" style="color: var(--text-color);">Username</label>
+                    <input type="text" name="username" id="username">
+                </div>
+                <div class="form-group cs-grid" style="--gap: .5rem;">
+                    <label for="email" class="cs-text-normal" style="color: var(--text-color);">Email</label>
+                    <input type="email" name="email" id="email">
+                </div>
+                <div class="form-group cs-grid" style="--gap: .5rem;">
+                    <label for="password" class="cs-text-normal" style="color: var(--text-color);">Password</label>
+                    <input type="password" name="password" id="password">
+                </div>
+                <div class="form-group cs-grid" style="--gap: .5rem;">
+                    <label for="confirm-password" class="cs-text-normal" style="color: var(--text-color);">Confirm Password</label>
+                    <input type="password" name="confirm-password" id="confirm-password">
+                </div>
+                <div class="form-group cs-grid" style="--gap: .5rem;">
+                    <input class="cs-text-white cs-bg-secondary" type="submit" name="contract-start-date" id="contract-start-date"
+                    value="Save Account">
+                </div>
+            </form>
+        </section>
 
         <!-- section area -->
     </main>

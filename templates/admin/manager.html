@@ -57,7 +57,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="" class="side-tab br-sm cs-flex justify-start cs-align-center" style="--gap: .5rem;">
+                            <a href="./support/index.html" class="side-tab br-sm cs-flex justify-start cs-align-center" style="--gap: .5rem;">
                                 <i class="fa fa-home cs-text-normal-md cs-text-primary"></i>
                                 <h5 class="item-label cs-font-500 cs-text-md cs-text-cs-bg-secondary">Support</h5>
                             </a>
@@ -72,12 +72,12 @@
                 <button class="btn icon-btn cs-bg-white cs-grid cs-justify-center cs-align-center br-sm">
                     <i class="fa fa-cog"></i>
                 </button>
-                <button class="btn icon-btn cs-bg-white cs-grid cs-justify-center cs-align-center br-sm">
+                <a href="./createProfile.html" class="btn icon-btn cs-bg-white cs-grid cs-justify-center cs-align-center br-sm">
                     <i class="fa fa-user"></i>
-                </button>
-                <button class="btn icon-btn cs-bg-white cs-grid cs-justify-center cs-align-center br-sm">
+                </a>
+                <a class="btn icon-btn cs-bg-white cs-grid cs-justify-center cs-align-center br-sm">
                     <i class="fa fa-user"></i>
-                </button>
+                </a>
             </div>
             <button class="btn outlined cs-text-md cs-font-500 br-sm cs-bg-hover-color" sty>Log out</button>
         </div>
@@ -97,27 +97,70 @@
                     </p>
                 </div>
                 <div class="cs-grid">
-                    <form action="" class="cs-grid" style="align-self: center;">
+                    <form action="./search.html" class="cs-grid" style="align-self: center;">
                         <div class="cs-flex form-group outline-input" style="align-items: center;--gap: 0">
                             <i class="fa fa-search cs-text-body" style="color: hsl(0, 0%, 85%);"></i>
-                            <input type="text" name="" id="">
+                            <input type="text" name="search" id="search-bar" placeholder="Search...">
                         </div>
                     </form>
                 </div>
-                <div class="cs-flex justify-end cs-grid-flow-col align-center" style="justify-content: flex-end;--gap: 1rem">
-                    <button class="badge btn cs-bg-transparent">
+                <div class="cs-grid justify-end cs-grid-flow-col align-center" style="justify-content: flex-end;--gap: 1rem">
+                    <button class="notification-cta badge btn cs-bg-transparent">
                         <span class="count">4</span>
                         <i class="fa fa-bell"></i>
+                        <div class="notification-list cs-hidden outlined cs-bg-white br-sm" style="--gap: 1rem;text-align: left;">
+                            <h4 class="cs-text-normal cs-font-600 cs-text-secondary" style="margin: 0;">Nofications</h4>
+                            <hr style="border: 1px solid hsl(0, 0%, 95%);">
+                            <ul class="cs-grid" style="--gap: .25rem">
+                                <li>
+                                    <a href="./support/chat.html" class="cs-grid" style="--gap:.25rem;">
+                                        <p class="cs-flex cs-align-baseline cs-justify-between">
+                                            <span class="cs-grid cs-text-secondary cs-text-md">Nowela Mary</span>
+                                            <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">1 minute ago</span>
+                                        </p>
+                                        <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">contract transaction failed ...</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./support/chat.html" class="cs-grid" style="--gap:.25rem;">
+                                        <p class="cs-flex cs-align-baseline cs-justify-between">
+                                            <span class="cs-grid cs-text-secondary cs-text-md">Nowela Mary</span>
+                                            <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">1 minute ago</span>
+                                        </p>
+                                        <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">contract transaction failed ...</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./support/chat.html" class="cs-grid" style="--gap:.25rem;">
+                                        <p class="cs-flex cs-align-baseline cs-justify-between">
+                                            <span class="cs-grid cs-text-secondary cs-text-md">Nowela Mary</span>
+                                            <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">1 minute ago</span>
+                                        </p>
+                                        <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">contract transaction failed ...</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./support/chat.html" class="cs-grid" style="--gap:.25rem;">
+                                        <p class="cs-flex cs-align-baseline cs-justify-between">
+                                            <span class="cs-grid cs-text-secondary cs-text-md">Nowela Mary</span>
+                                            <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">1 minute ago</span>
+                                        </p>
+                                        <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">contract transaction failed ...</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </button>
-                    <div class="cs-flex br-md" style="--gap: 1rem;padding: .5rem 1rem;background-color: hsla(213, 28%, 70%, 10%);align-content: center;align-items: center;">
+                    
+                    <a href="./profile.html" class="cs-flex br-md" style="--gap: 1rem;padding: .5rem 1rem;background-color: hsla(213, 28%, 70%, 10%);align-content: center;align-items: center;">
                         <div class="cs-grid" style="--gap: 0;justify-items: flex-end;align-content: center;">
-                            <h4 class="cs-text-md cs-font-500 manager-item" style="line-height: 14px;margin: 0;">Nola Riska</h4>
+                            <h4 class="cs-text-md cs-font-500" style="line-height: 14px;margin: 0;">Nola Riska</h4>
                             <p class="cs-text-sm cs-font-500" style="color: hsl(0, 0%, 60%);">Support</p>
                         </div>
                         <div class="avator br-full cs-overflow-hidden">
-                            <img loading="lazy" src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
+                            <img src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
                         </div>
-                    </div>
+                    </a>
                 </div>
             </header>
         <!-- header area -->
@@ -125,34 +168,41 @@
             <!-- section selectors -->
             <nav data-page="manager" class="section-nav-area br-sm cs-bg-white outlined">
                 <ul class="cs-grid section-nav list-none list-outside overflow-hidden" style="--gap: .5rem;">
-                    <div class="cs-flex">
+                    <ul class="cs-flex">
                         <li id="manager-overview-activator" class="cs-text-md cs-font-500">Overview</li>
                         <li id="manager-showroom-activator" class="cs-text-md cs-font-500">Showrooms</li>
                         <li id="manager-services-activator"class="cs-text-md cs-font-500">Services</li>
                         <li id="manager-products-activator"class="cs-text-md cs-font-500">Products</li>
-                    </div>
-                    <div class="cs-flex" style="justify-self: flex-end;--gap: .15rem;">
-                        <li class="btn cs-flex cs-text-md cs-bg-secondary cs-font-500 emph">
-                            <a style="--gap: .5rem;align-items: center;" class="cs-text-white" href="./productcategorycreate.html">
-
+                        <li id="manager-memberships-activator"class="cs-text-md cs-font-500">Membership</li>
+                    </ul>
+                    <ul class="nav-emph-cta" style="justify-self: flex-end;align-self: center;margin-inline-end: .5rem;">
+                        <li id="nav-emph-cta" class="cs-flex cs-text-md cs-bg-secondary cs-font-500 br-sm emph" style="--text-color: #fff;--gap: .5rem;align-items: center;">
                             <i class="fa fa-plus"></i>
-                            <span>Product Category</span>
-                            </a>
+                            <span>Create</span>
                         </li>
-                        <li class="btn cs-flex cs-text-md cs-bg-secondary cs-font-500 emph">
-                            <a style="--gap: .5rem;align-items: center;" class="cs-text-white" href="./showroom_create.html">
-
-                            <i class="fa fa-plus"></i>
-                            <span>Showroom</span>
-                            </a>
-                        </li>
-                        <li class="btn cs-flex cs-text-md cs-bg-primary cs-font-500 emph">
-                            <a style="--gap: .5rem;align-items: center;" class="cs-text-white" href="./service_create.html">
+                        <ul class="cs-hidden cs-bg-white outlined br-sm cta-emph" style="--gap: .15rem;">
+                            <li class="cs-flex cs-text-md cs-bg-secondary cs-font-500 emph">
+                                <a style="--gap: .5rem;align-items: center;" class="cs-flex cs-text-white cs-text-md" href="./productcategorycreate.html">
+    
                                 <i class="fa fa-plus"></i>
-                                <span>Service</span>
-                            </a>
-                        </li>
-                    </div>
+                                <span>Product Category</span>
+                                </a>
+                            </li>
+                            <li class="cs-flex cs-text-md cs-bg-secondary cs-font-500 emph">
+                                <a style="--gap: .5rem;align-items: center;" class="cs-flex cs-text-white cs-text-md" href="./showroom_create.html">
+    
+                                <i class="fa fa-plus"></i>
+                                <span>Showroom</span>
+                                </a>
+                            </li>
+                            <li class="cs-flex cs-text-md cs-bg-secondary cs-font-500 emph">
+                                <a style="--gap: .5rem;align-items: center;" class="cs-flex cs-text-white cs-text-md" href="./service_create.html">
+                                    <i class="fa fa-plus"></i>
+                                    <span>Service</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </ul>
                 </ul>
             </nav>
             <!-- section selectors -->
@@ -206,16 +256,16 @@
                     </div>
                     <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
                         <h4 class="cs-text-md cs-font-500 manager-item" style="margin: 0;color: var(--text-color);">
-                            Total Contracts
+                            Total Memberships
                         </h4>
                         <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
                             <div class="cs-grid">
                                 <p class="cs-text-body cs-font-bold cs-text-secondary" style="margin: 0;">
-                                    10
+                                    100
                                 </p>
-                                <span class="cs-text-sm" style="color: var(--text-color);">Contracts Count</span>
+                                <span class="cs-text-sm" style="color: var(--text-color);">Membership Count</span>
                             </div>
-                            <span id="manager-contracts-overview-activator" class="cs-text-sm cs-text-accent cs-font-500" style="align-self: flex-end">View All</span>
+                            <span id="manager-memberships-overview-activator" class="cs-text-sm cs-text-accent cs-font-500" style="align-self: flex-end">View All</span>
                         </div>
                     </div>
                 </div>
@@ -247,67 +297,6 @@
                     <div class="cs-grid br-md cs-justify-start" style="--gap: 1rem;padding: 0 0;align-content: flex-start;">
                         <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
                             Top showroom
-                        </p>
-                        <div class="cs-grid cs-justify-start horizontal-scroll" style="--gap: 1rem;--row-size: 21%;">
-                            <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
-                                <div class="avator br-full cs-overflow-hidden">
-                                    <img loading="lazy" src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
-                                </div>
-                                <div class="cs-grid">
-                                    <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
-                                    <span class="cs-text-accent cs-text-sm">View Profile</span>
-                                </div>
-                            </a>
-                            <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
-                                <div class="avator br-full cs-overflow-hidden">
-                                    <img loading="lazy" src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
-                                </div>
-                                <div class="cs-grid">
-                                    <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
-                                    <span class="cs-text-accent cs-text-sm">View Profile</span>
-                                </div>
-                            </a>
-                            <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
-                                <div class="avator br-full cs-overflow-hidden">
-                                    <img loading="lazy" src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
-                                </div>
-                                <div class="cs-grid">
-                                    <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
-                                    <span class="cs-text-accent cs-text-sm">View Profile</span>
-                                </div>
-                            </a>
-                            <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
-                                <div class="avator br-full cs-overflow-hidden">
-                                    <img loading="lazy" src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
-                                </div>
-                                <div class="cs-grid">
-                                    <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
-                                    <span class="cs-text-accent cs-text-sm">View Profile</span>
-                                </div>
-                            </a>
-                            <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
-                                <div class="avator br-full cs-overflow-hidden">
-                                    <img loading="lazy" src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
-                                </div>
-                                <div class="cs-grid">
-                                    <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
-                                    <span class="cs-text-accent cs-text-sm">View Profile</span>
-                                </div>
-                            </a>
-                            <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
-                                <div class="avator br-full cs-overflow-hidden">
-                                    <img loading="lazy" src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
-                                </div>
-                                <div class="cs-grid">
-                                    <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
-                                    <span class="cs-text-accent cs-text-sm">View Profile</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="cs-grid br-md cs-justify-start" style="--gap: 1rem;padding: 0 0;align-content: flex-start;">
-                        <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
-                            Top services
                         </p>
                         <div class="cs-grid cs-justify-start horizontal-scroll" style="--gap: 1rem;--row-size: 21%;">
                             <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
@@ -586,6 +575,83 @@
                             <th>Category</th>
                             <th>Sub Categories</th>
                             <th>Products</th>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
+                    <div class="cs-grid cs-align-center">
+                        <p class="cs-text-md" style="color: var(--text-color);">Showing Page 1 of 10. (1000 Entries)</p>
+                    </div>
+                    <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
+                        <button class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
+                        <span class="cs-text-md">1</span>
+                        <button class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
+                    </div>
+                </div> 
+            </section>
+
+            <section id="manager-memberships-section" class="cs-hidden content br-sm" style="--gap: 1rem;">
+                <table>
+                    <thead>
+                        <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                            <th>No.</th>
+                            <th>Supplier</th>
+                            <th>Client</th>
+                            <th>Membership</th>
+                            <th>Paid On</th>
+                            <th>Expires On</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="cs-text-md cs-font-500 manager-service-item" data-itemId="1">
+                            <td>1</td>
+                            <td>Alex Fashions</td>
+                            <td>Kampala Men's Fashion</td>
+                            <td>Premium</td>
+                            <td>30/12/2020</td>
+                            <td>30/12/2020</td>
+                        </tr>
+                        <tr class="cs-text-md cs-font-500 manager-service-item" data-itemId="1">
+                            <td>1</td>
+                            <td>Alex Fashions</td>
+                            <td>Kampala Men's Fashion</td>
+                            <td>Premium</td>
+                            <td>30/12/2020</td>
+                            <td>30/12/2020</td>
+                        </tr>
+                        <tr class="cs-text-md cs-font-500 manager-service-item" data-itemId="1">
+                            <td>1</td>
+                            <td>Alex Fashions</td>
+                            <td>Kampala Men's Fashion</td>
+                            <td>Premium</td>
+                            <td>30/12/2020</td>
+                            <td>30/12/2020</td>
+                        </tr>
+                        <tr class="cs-text-md cs-font-500 manager-service-item" data-itemId="1">
+                            <td>1</td>
+                            <td>Alex Fashions</td>
+                            <td>Kampala Men's Fashion</td>
+                            <td>Premium</td>
+                            <td>30/12/2020</td>
+                            <td>30/12/2020</td>
+                        </tr>
+                        <tr class="cs-text-md cs-font-500 manager-service-item" data-itemId="1">
+                            <td>1</td>
+                            <td>Alex Fashions</td>
+                            <td>Kampala Men's Fashion</td>
+                            <td>Premium</td>
+                            <td>30/12/2020</td>
+                            <td>30/12/2020</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                            <th>No.</th>
+                            <th>Supplier</th>
+                            <th>Client</th>
+                            <th>Membership</th>
+                            <th>Paid On</th>
+                            <th>Expires On</th>
                         </tr>
                     </tfoot>
                 </table>

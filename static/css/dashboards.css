@@ -8,6 +8,9 @@ body.modal-open {
     inline-size: 100vw;
     block-size: 100vh;
 }
+aside, main {
+    block-size: 100vh;
+}
 
 body::after {
     display: none;
@@ -89,7 +92,12 @@ body.modal-open::after {
 .cs-text-secondary-hover {
     color: var(--secondary-color-hover);
 }
-
+.cs-text-danger {
+    color: var(--danger-color);
+}
+.cs-text-success {
+    color: var(--success-color);
+}
 /* colors */
 
 /* display */
@@ -102,6 +110,7 @@ body.modal-open::after {
 .cs-flex {
     gap: var(--gap);
     display: flex;
+    inline-size: 100%;
 }
 .cs-flex-flow-col {flex-direction: column;}
 .cs-flex-flow-row {flex-direction: row;}
@@ -203,8 +212,8 @@ body.modal-open::after {
 }
 .badge .count {
     position: absolute;
-    inset-inline-end: 2px;
-    inset-block-start: 2px;
+    inset-inline-end: 7px;
+    inset-block-start: 7px;
     /* inline-size: 25px;
     block-size: 25px; */
     padding: 0 6px;
@@ -213,6 +222,7 @@ body.modal-open::after {
     place-items: center;
     border-radius: 100%;
     background-color: var(--accent-color);
+    color: white;
 }
 /* buttons and links */
 
@@ -245,10 +255,11 @@ form .outline-input input:focus {
 }
 form input {
     color: var(--secondary-color);
-    padding: 1rem 1rem;
+    padding: .5rem 1rem;
     outline: none;
     width: 100%;
 }
+
 form .outline-input {
     border: 1px solid lightgray;
     padding: 0 1rem;
@@ -257,6 +268,10 @@ form .outline-input {
 form .outline-input input {
     border: none !important;
     padding: .5rem 1rem;
+}
+
+form input.error {
+    border: 2px solid var(--danger-color);
 }
 
 form input:focus,
@@ -309,6 +324,7 @@ body.admin-body {
     align-content: flex-start;
     overflow-y: scroll;
 }
+
 .content-area-header {
     grid-template-columns: .6fr 1fr .6fr;
     padding: .5rem 1rem;
@@ -319,12 +335,12 @@ body.admin-body {
     block-size: 3rem;
 }
 .section-nav-area {
-    position: sticky;
+    /* position: sticky;
     position: -webkit-sticky;
-    top: 0;
+    top: 0; */
 }
 .section-nav {
-    grid-template-columns: 2fr 1.5fr;
+    grid-template-columns: 2fr .25fr;
     
 }
 .section-nav li {
@@ -332,7 +348,25 @@ body.admin-body {
     color: var(--text-color);
     transition: all 0.2s ease-out;
     cursor: pointer;
-    border-block-end: 2px solid transparent
+    border-block-end: 2px solid transparent;
+}
+
+.nav-emph-cta {
+    position: relative;
+}
+
+.section-nav .cta-emph {
+    /* display: flex; */
+    padding: 1rem 1rem;
+    margin: .1rem 0;
+    position: absolute;
+    inset-inline-end: 0;
+    inset-block-start: -1;
+    inline-size: 15vw;
+}
+
+.section-nav li.emph {
+    padding: .5rem 1rem;
 }
 
 .section-nav li.active,
@@ -426,6 +460,91 @@ tbody tr td.delete {
         inline-size: 40vw;
     }
 }
+
+/* forms */
+#subCategory-group > div {
+    --gap: 1rem;
+    grid-template-columns: 1fr 1fr .1fr;
+}
+
+/* notification */
+.notification-cta {
+    position: relative;
+}
+.notification-list {
+    position: absolute;
+    inset-inline-end: 0;
+    inset-block-start: -1;
+    padding: 1rem 1.5rem;
+    z-index: 9000;
+    inline-size: 25vw;
+    max-block-size: 62.5vh;
+    overflow: hidden;
+    padding-block-end: 2rem;
+}
+.notification-list ul {
+    overflow: scroll;
+    scrollbar-width: none;
+    border-radius: 5px;
+    max-block-size: inherit;
+}
+.notification-list ul::-webkit-scrollbar {
+    display: none;
+}
+
+.notification-list ul li a,
+.inbox ul li a  {
+    padding: .25rem .5rem;
+    border: 1px solid hsl(0, 4%, 93%);
+    border-radius: 5px;
+}
+
+.inbox-area {
+    grid-template-columns: 1fr;
+}
+
+.inbox-area.split {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.inbox, .chat {
+    block-size: 70vh;
+    overflow: hidden;
+}
+.inbox-area .list {
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+.inbox .list {
+    block-size: 55vh;
+    padding: .5rem .5rem .5rem 0;
+}
+
+.chat .list {
+    block-size: 47.5vh;
+    padding: 0 .5rem .5rem 0;
+}
+.chat ul li {
+    padding: .25rem .5rem;
+    border: 1px solid hsl(0, 4%, 93%);
+    border-radius: 5px;
+    max-inline-size: 60%;
+    color: var(--text-color);
+    align-self: flex-start;
+    align-content: flex-start;
+}
+.chat ul li.received {
+    justify-self: flex-end;
+    text-align: right;
+    background-color: var(--secondary-color);
+}
+.chat ul li.received p {
+    color: white;
+}
+.chat form input {
+    align-self: flex-end;
+}
+
 
 /* body */
 

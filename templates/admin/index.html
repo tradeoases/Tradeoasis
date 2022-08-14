@@ -57,7 +57,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="" class="side-tab br-sm cs-flex justify-start cs-align-center" style="--gap: .5rem;">
+                            <a href="./support/index.html" class="side-tab br-sm cs-flex justify-start cs-align-center" style="--gap: .5rem;">
                                 <i class="fa fa-home cs-text-normal-md cs-text-primary"></i>
                                 <h5 class="item-label cs-font-500 cs-text-md cs-text-cs-bg-secondary">Support</h5>
                             </a>
@@ -72,12 +72,12 @@
                 <button class="btn icon-btn cs-bg-white cs-grid cs-justify-center cs-align-center br-sm">
                     <i class="fa fa-cog"></i>
                 </button>
-                <button class="btn icon-btn cs-bg-white cs-grid cs-justify-center cs-align-center br-sm">
+                <a href="./createProfile.html" class="btn icon-btn cs-bg-white cs-grid cs-justify-center cs-align-center br-sm">
                     <i class="fa fa-user"></i>
-                </button>
-                <button class="btn icon-btn cs-bg-white cs-grid cs-justify-center cs-align-center br-sm">
+                </a>
+                <a class="btn icon-btn cs-bg-white cs-grid cs-justify-center cs-align-center br-sm">
                     <i class="fa fa-user"></i>
-                </button>
+                </a>
             </div>
             <button class="btn outlined cs-text-md cs-font-500 br-sm cs-bg-hover-color" sty>Log out</button>
         </div>
@@ -93,19 +93,61 @@
                     <p class="cs-flex cs-text-md" style="color: hsla(213, 28%, 60%, 100%)"><span>Home</span></p>
                 </div>
                 <div class="cs-grid">
-                    <form action="" class="cs-grid" style="align-self: center;">
+                    <form action="./search.html" class="cs-grid" style="align-self: center;">
                         <div class="cs-flex form-group outline-input" style="align-items: center;--gap: 0">
                             <i class="fa fa-search cs-text-body" style="color: hsl(0, 0%, 85%);"></i>
-                            <input type="text" name="" id="">
+                            <input type="text" name="search" id="search-bar" placeholder="Search...">
                         </div>
                     </form>
                 </div>
-                <div class="cs-flex justify-end cs-grid-flow-col align-center" style="justify-content: flex-end;--gap: 1rem">
-                    <button class="badge btn cs-bg-transparent">
+                <div class="cs-grid justify-end cs-grid-flow-col align-center" style="justify-content: flex-end;--gap: 1rem">
+                    <button class="notification-cta badge btn cs-bg-transparent">
                         <span class="count">4</span>
                         <i class="fa fa-bell"></i>
+                        <div class="notification-list cs-hidden outlined cs-bg-white br-sm" style="--gap: 1rem;text-align: left;">
+                            <h4 class="cs-text-normal cs-font-600 cs-text-secondary" style="margin: 0;">Nofications</h4>
+                            <hr style="border: 1px solid hsl(0, 0%, 95%);">
+                            <ul class="cs-grid" style="--gap: .25rem">
+                                <li>
+                                    <a href="./support/chat.html" class="cs-grid" style="--gap:.25rem;">
+                                        <p class="cs-flex cs-align-baseline cs-justify-between">
+                                            <span class="cs-grid cs-text-secondary cs-text-md">Nowela Mary</span>
+                                            <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">1 minute ago</span>
+                                        </p>
+                                        <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">contract transaction failed ...</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./support/chat.html" class="cs-grid" style="--gap:.25rem;">
+                                        <p class="cs-flex cs-align-baseline cs-justify-between">
+                                            <span class="cs-grid cs-text-secondary cs-text-md">Nowela Mary</span>
+                                            <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">1 minute ago</span>
+                                        </p>
+                                        <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">contract transaction failed ...</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./support/chat.html" class="cs-grid" style="--gap:.25rem;">
+                                        <p class="cs-flex cs-align-baseline cs-justify-between">
+                                            <span class="cs-grid cs-text-secondary cs-text-md">Nowela Mary</span>
+                                            <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">1 minute ago</span>
+                                        </p>
+                                        <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">contract transaction failed ...</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./support/chat.html" class="cs-grid" style="--gap:.25rem;">
+                                        <p class="cs-flex cs-align-baseline cs-justify-between">
+                                            <span class="cs-grid cs-text-secondary cs-text-md">Nowela Mary</span>
+                                            <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">1 minute ago</span>
+                                        </p>
+                                        <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">contract transaction failed ...</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </button>
-                    <div class="cs-flex br-md" style="--gap: 1rem;padding: .5rem 1rem;background-color: hsla(213, 28%, 70%, 10%);align-content: center;align-items: center;">
+                    <a href="./profile.html" class="cs-flex br-md" style="--gap: 1rem;padding: .5rem 1rem;background-color: hsla(213, 28%, 70%, 10%);align-content: center;align-items: center;">
                         <div class="cs-grid" style="--gap: 0;justify-items: flex-end;align-content: center;">
                             <h4 class="cs-text-md cs-font-500" style="line-height: 14px;margin: 0;">Nola Riska</h4>
                             <p class="cs-text-sm cs-font-500" style="color: hsl(0, 0%, 60%);">Support</p>
@@ -113,7 +155,7 @@
                         <div class="avator br-full cs-overflow-hidden">
                             <img src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
                         </div>
-                    </div>
+                    </a>
                 </div>
             </header>
         <!-- header area -->
@@ -123,15 +165,13 @@
                 <ul class="cs-grid section-nav list-none list-outside" style="--gap: .25rem;">
                     <div class="cs-flex">
                         <li class="cs-text-md cs-font-500 active">Overview</li>
-                        <li class="cs-text-md cs-font-500">Requests</li>
-                        <li class="cs-text-md cs-font-500">Requests</li>
                     </div>
-                    <div class="cs-flex" style="justify-self: flex-end;">
+                    <!-- <div class="cs-flex" style="justify-self: flex-end;">
                         <li class="cs-flex cs-text-md cs-bg-secondary cs-font-500 br-sm emph" style="--text-color: #fff;--gap: .5rem;align-items: center;">
                             <i class="fa fa-plus"></i>
                             <span>Create</span>
                         </li>
-                    </div>
+                    </div> -->
                 </ul>
             </nav>
             <!-- section selectors -->

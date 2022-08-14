@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const nav = document.querySelector('nav[data-page]');
     
     // client page
-    if (nav.dataset['page'] === 'client') {
+    // if (nav && nav.dataset['page'] === 'client') {
         const clientRoutes = ["client-overview", "client-suppliers","client-buyers", "client-contracts","client-products","client-suppliers-overview","client-buyers-overview", "client-contracts-overview","client-products-overview"];
         
         // SWITCHING TABS
@@ -48,9 +48,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const section = document.querySelector(`#${route.split('-').slice(0,2).join('-')}-section`);
 
             if (route === activeTab) {
-                activator.classList.add('active');
-                section.classList.remove('cs-hidden');
-                section.classList.add('cs-grid');
+                try {
+                    activator.classList.add('active');
+                    section.classList.remove('cs-hidden');
+                    section.classList.add('cs-grid');
+                } catch (e)  {
+
+                }
             }
 
             if(activator) {
@@ -96,9 +100,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        clientModalCloseActivator.addEventListener('click', () => {
-            closeClientModel()
-        })
+        if (clientModalCloseActivator) {
+            clientModalCloseActivator.addEventListener('click', () => {
+                closeClientModel()
+            })
+        }
 
         document.body.addEventListener('click', (e) => {
             // if (!isClientModalOpen && e.target != clientModal && !(e.target.localName == 'td' || e.target.classList.contains('client-item')) && !(e.target == clientModal)) {
@@ -149,11 +155,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-
-        productModalCloseActivator.addEventListener('click', () => {
-            closeProductModel()
-        })
-
+        if (productModalCloseActivator) {
+            productModalCloseActivator.addEventListener('click', () => {
+                closeProductModel()
+            })
+        }
 
         if (productItems && productItems != undefined) {
             productItems.forEach(item => {
@@ -190,9 +196,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        contractModalCloseActivator.addEventListener('click', () => {
-            closecontractModel()
-        })
+        if (contractModalCloseActivator) {
+            contractModalCloseActivator.addEventListener('click', () => {
+                closecontractModel()
+            })
+        }
 
         if (contractItems && contractItems != undefined) {
             contractItems.forEach(item => {
@@ -208,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         // CONTRACT MODAL
 
-    }
+    // }
     
     // client page
 
@@ -216,8 +224,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // manager page
 
         // client page
-        if (nav.dataset['page'] === 'manager') {
-            const clientRoutes = ["manager-overview", "manager-showroom","manager-services","manager-products","manager-showroom-overview","manager-services-overview",];
+        if (nav && nav.dataset['page'] === 'manager') {
+            const clientRoutes = ["manager-overview", "manager-showroom","manager-services", "manager-memberships","manager-products","manager-showroom-overview","manager-services-overview","manager-memberships-overview"];
             
             // SWITCHING TABS
             activeTab = clientRoutes[0];
@@ -322,4 +330,86 @@ document.addEventListener('DOMContentLoaded', () => {
             cell.textContent = `${cell.textContent.split(" ").slice(0, MAXWORDCOUNT).join(" ")} ....`
         }
     })
+
+    const handleAddInput = (target, subCategoryCount, subCategoryGroup, lastAddElem) => {
+        // remove add btn
+        lastAddElem.removeChild(target)
+        const deleteInputBtn = lastAddElem.querySelector('.delete-input');
+
+        // add delete btn
+        deleteInputBtn.classList.remove('cs-hidden');
+        deleteInputBtn.classList.add('cs-grid');
+
+        // handle delete inputs
+        deleteInputBtn.addEventListener('click', (e) => {
+            console.log(subCategoryCount)
+            subCategoryGroup.removeChild(subCategoryGroup.querySelector(`.subcategory-inputs[data-subcategorycount="${subCategoryCount}"]`));
+        })
+
+        // create form element
+        const subCategoryElem = document.createElement('div');
+        subCategoryElem.classList.add(...['cs-grid', 'cs-align-center', 'subcategory-inputs']);
+
+        subCategoryElem.innerHTML = `
+            <input type="text" name='subcategory-${subCategoryCount + 1}' id="subcategory-${subCategoryCount + 1}" placeholder="Sub Category Name">
+            <input type="file" name="sub-category-image-${subCategoryCount + 1}" id="sub-category-image-${subCategoryCount + 1}">
+            <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-hover-color cs-text-secondary br-full" id="add-input" style="padding: 1rem .5rem;" onclick="(function(){
+            })();return false;">
+                <i class="fa fa-plus"></i>
+            </button>
+
+            <button class="btn cs-justify-center cs-align-center cs-bg-hover-color cs-text-secondary br-full cs-hidden delete-input" data-subcategoryDeleteCcount="${subCategoryCount + 1}" style="padding: 1rem .5rem;" onclick="(function(){
+            })();return false;">
+                <i class="fa fa-trash"></i>
+            </button>
+        `
+        let _subCategoryCount = subCategoryCount + 1;
+        
+        subCategoryElem.dataset['subcategorycount'] = _subCategoryCount;
+        subCategoryGroup.appendChild(subCategoryElem);
+
+        lastAddElem = subCategoryElem;
+
+        const addInputBtn = lastAddElem.querySelector('#add-input');
+        addInputBtn.addEventListener('click', () => handleAddInput(addInputBtn, _subCategoryCount, subCategoryGroup, lastAddElem));
+    }
+
+    // add form inputs
+    const categoryForm = document.querySelector('#category-form');
+    if (categoryForm && categoryForm != undefined) {
+        let subCategoryCount = 1;
+        const subCategoryGroup = document.querySelector('#subCategory-group');
+        let lastAddElem = document.querySelector(`.subcategory-inputs[data-subcategorycount="1"]`)
+
+
+        const addInputBtn = lastAddElem.querySelector('#add-input');
+        addInputBtn.addEventListener('click', () => handleAddInput(addInputBtn, subCategoryCount, subCategoryGroup, lastAddElem));
+    }
+
+    // active tba should not reload page
+    document.querySelectorAll('a').forEach(tab => {
+        tab.addEventListener('click', (e) => {
+            console.log(e.target.classList)
+            if ((e.target.classList.contains('active') && !e.target.classList.contains('manager')) || (e.target.parentNode.classList.contains('active') && !e.target.parentNode.classList.contains('manager'))) {
+                e.preventDefault();
+            }
+        })
+    })
+
+    // notification popup
+    const notificationCta = document.querySelector('.notification-cta');
+    const notificationPopup =  document.querySelector('.notification-list')
+    notificationCta.addEventListener('click', () => {
+        notificationPopup.classList.toggle('cs-hidden');
+        notificationPopup.classList.toggle('cs-grid');
+    });
+
+    const navEmphCta = document.querySelector('#nav-emph-cta');
+    if (navEmphCta) {
+        navEmphCta.addEventListener('click', () => {
+            const ctaEmph = document.querySelector('.cta-emph');
+            ctaEmph.classList.toggle('cs-hidden');
+            ctaEmph.classList.toggle('cs-grid');
+        });
+    }
 });

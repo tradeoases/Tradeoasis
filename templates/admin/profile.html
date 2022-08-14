@@ -170,23 +170,33 @@
                 <!-- when not in display -> cs-hidden -->
             
             <section class="content br-sm outlined" style="--gap: 1rem;">
-                <form action="" class="cs-grid br-sm" style="padding: 2rem;--gap:1rem;">
-                    <h2 style="margin: 0;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
-                        Fill in form to create showroom.
-                    </h2>
-                    <div class="form-group cs-grid" style="--gap: .5rem;">
-                        <label for="showroom-name" class="cs-text-normal" style="color: var(--text-color);">Name</label>
-                        <input type="text" name="showroom-name" id="showroom-name">
+                <div class="cs-grid" style="grid-template-columns: .8fr 3fr;padding: 1rem 2rem;--gap:2rem;">
+                    <div class="img-wrapper br-full cs-overflow-hidden">
+                        <img src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;" alt="">
                     </div>
-                    <div class="form-group cs-grid" style="--gap: .5rem;">
-                        <label for="showroom-name" class="cs-text-normal" style="color: var(--text-color);">Location</label>
-                        <input type="text" name="showroom-name" id="showroom-name">
+                    <div class="cs-grid cs-content-start" style="--gap: .5rem;padding: 1rem 0;">
+                        <div class="group cs-flex" style="--gap: 1rem;">
+                            <span class="cs-text-normal" style="color: var(--text-color);">Name:</span>
+                            <span class="cs-text-normal cs-text-secondary">Nola Riska</span>
+                        </div>
+                        <div class="group cs-flex" style="--gap: .5rem;">
+                            <span class="cs-text-normal" style="color: var(--text-color);">UserName:</span>
+                            <span class="cs-text-normal cs-text-secondary">nolariska</span>
+                        </div>
+                        <div class="group cs-flex" style="--gap: .5rem;">
+                            <span class="cs-text-normal" style="color: var(--text-color);">Email:</span>
+                            <span class="cs-text-normal cs-text-secondary">nolariska@fodran.org</span>
+                        </div>
+                        <div class="group cs-flex" style="--gap: .5rem;">
+                            <span class="cs-text-normal" style="color: var(--text-color);">Acount Type:</span>
+                            <span class="cs-text-normal cs-text-secondary">Support</span>
+                        </div>
+                        <div class="group cs-flex" style="--gap: .5rem;">
+                            <a class="btn outlined cs-bg-hover-color br-sm" href="./editProfile.html">Edit Profile</a>
+                            <a class="btn outlined cs-bg-secondary cs-text-white br-sm" href="./editProfile.html">Send Invite</a>
+                        </div>
                     </div>
-                    <div class="form-group cs-grid" style="--gap: .5rem;">
-                        <input class="cs-text-white cs-bg-secondary" type="submit" name="contract-start-date" id="contract-start-date"
-                        value="Create Showroom">
-                    </div>
-                </form>
+                </div>
             </section>
 
         <!-- section area -->

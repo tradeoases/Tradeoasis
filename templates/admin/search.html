@@ -85,7 +85,7 @@
     <!-- sidenav -->
 
     <!-- main -->
-    <main class="cs-grid admin-content-area" style="--gap: 1rem;">
+    <main class="cs-grid admin-content-area" style="--gap: .5rem;">
         <!-- header area -->
             <header class="content-area-header cs-grid br-sm" style="--gap: .5rem;">
                 <div class="cs-grid cs-align-center" style="align-content: center;--gap: .35rem">
@@ -100,7 +100,7 @@
                     <form action="./search.html" class="cs-grid" style="align-self: center;">
                         <div class="cs-flex form-group outline-input" style="align-items: center;--gap: 0">
                             <i class="fa fa-search cs-text-body" style="color: hsl(0, 0%, 85%);"></i>
-                            <input type="text" name="search" id="search-bar">
+                            <input type="text" name="search" id="search-bar" placeholder="Search...">
                         </div>
                     </form>
                 </div>
@@ -161,237 +161,25 @@
                             <img src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
                         </div>
                     </a>
-                </div>
+                </div>  
             </header>
-        <!-- header area -->
-        <!-- section area -->
-            <!-- section selectors -->
-            <nav data-page="client" class="section-nav-area br-sm cs-bg-white outlined">
+
+            <!-- <nav data-page="client" class="section-nav-area br-sm cs-bg-white outlined">
                 <ul class="cs-grid section-nav list-none list-outside" style="--gap: .5rem;">
                     <div class="cs-flex">
-                        <li id="client-overview-activator" class="cs-text-md cs-font-500">Overview</li>
+                        <li id="client-overview-activator" class="cs-text-md cs-font-500">All</li>
                         <li id="client-suppliers-activator" class="cs-text-md cs-font-500">Suppliers</li>
                         <li id="client-buyers-activator"class="cs-text-md cs-font-500">Buyers</li>
                         <li id="client-products-activator"class="cs-text-md cs-font-500">Products</li>
                         <li id="client-contracts-activator"class="cs-text-md cs-font-500">Contracts</li>
                     </div>
                 </ul>
-            </nav>
-            <!-- section selectors -->
+            </nav> -->
 
-                <!-- when in display -> cs-grid -->
-                <!-- when not in display -> cs-hidden -->
-
-            <section id="client-overview-section" class="cs-hidden content br-sm" style="--gap: 1rem;">
-                <div class="cs-grid horizontal-scroll cs-justify-between" style="padding: .1rem 0;--gap: 1rem;--row-size: 23%;">
-                    <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
-                        <h4 class="cs-text-md cs-font-500 client-item" style="margin: 0;color: var(--text-color);">
-                            Total Suppliers
-                        </h4>
-                        <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
-                            <div class="cs-grid">
-                                <p class="cs-text-body cs-font-bold cs-text-secondary" style="margin: 0;">
-                                    10000
-                                </p>
-                                <span class="cs-text-sm" style="color: var(--text-color);">Supplier Count</span>
-                            </div>
-                            <span id="client-suppliers-overview-activator" class="cs-text-sm cs-text-accent cs-font-500" style="align-self: flex-end">View All</span>
-                        </div>
-                    </div>
-                    <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
-                        <h4 class="cs-text-md cs-font-500 client-item" style="margin: 0;color: var(--text-color);">
-                            Total Buyers
-                        </h4>
-                        <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
-                            <div class="cs-grid">
-                                <p class="cs-text-body cs-font-bold cs-text-secondary" style="margin: 0;">
-                                    10000
-                                </p>
-                                <span class="cs-text-sm" style="color: var(--text-color);">Supplier Count</span>
-                            </div>
-                            <span id="client-buyers-overview-activator" class="cs-text-sm cs-text-accent cs-font-500" style="align-self: flex-end">View All</span>
-                        </div>
-                    </div>
-                    <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
-                        <h4 class="cs-text-md cs-font-500 client-item" style="margin: 0;color: var(--text-color);">
-                            Total Products
-                        </h4>
-                        <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
-                            <div class="cs-grid">
-                                <p class="cs-text-body cs-font-bold cs-text-secondary" style="margin: 0;">
-                                    10000
-                                </p>
-                                <span class="cs-text-sm" style="color: var(--text-color);">As Per Today</span>
-                            </div>
-                            <span id="client-products-overview-activator" class="cs-text-sm cs-text-accent cs-font-500" style="align-self: flex-end">View All</span>
-                        </div>
-                    </div>
-                    <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
-                        <h4 class="cs-text-md cs-font-500 client-item" style="margin: 0;color: var(--text-color);">
-                            Total Contracts
-                        </h4>
-                        <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
-                            <div class="cs-grid">
-                                <p class="cs-text-body cs-font-bold cs-text-secondary" style="margin: 0;">
-                                    10
-                                </p>
-                                <span class="cs-text-sm" style="color: var(--text-color);">Contracts Count</span>
-                            </div>
-                            <span id="client-contracts-overview-activator" class="cs-text-sm cs-text-accent cs-font-500" style="align-self: flex-end">View All</span>
-                        </div>
-                    </div>
+            <section id="client-suppliers-section" class="content cs-grid br-sm" style="--gap: 1rem;padding: .5rem 0;">
+                <div class="cs-grid" style="margin: .15rem .5rem">
+                    <h4 class="cs-text-normal cs-text-accent" style="margin: 0;">Suppliers</h4>
                 </div>
-                <div class="cs-grid" style="padding: .1rem 0;--gap: 1rem;--row-size: 21%;grid-template-columns: repeat(2, 1fr);">
-                    <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
-                        <div class="cs-grid">
-                            <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
-                                Suppliers By Location
-                            </p>
-                            <span class="cs-text-sm" style="color: var(--text-color);">Suppliers Stats By Location</span>
-                        </div>
-                        <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
-                            <img loading="lazy" class="stats-card-img" src="../../static/assets/imgs/resources/20220812_083902.jpg" alt="">
-                        </div>
-                    </div>
-                    <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
-                        <div class="cs-grid">
-                            <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
-                                Buyers By Location
-                            </p>
-                            <span class="cs-text-sm" style="color: var(--text-color);">Buyers Stats By Location</span>
-                        </div>
-                        <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
-                            <img loading="lazy" class="stats-card-img" src="../../static/assets/imgs/resources/20220812_083930.jpg" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="cs-grid" style="--gap: 1rem;align-content: flex-start;padding: .5rem;grid-template-columns: 1fr;">
-                    <div class="cs-grid br-md cs-justify-start" style="--gap: 1rem;padding: 0 0;align-content: flex-start;">
-                        <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
-                            Top Suppliers
-                        </p>
-                        <div class="cs-grid cs-justify-start horizontal-scroll" style="--gap: 1rem;--row-size: 21%;">
-                            <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
-                                <div class="avator br-full cs-overflow-hidden">
-                                    <img loading="lazy" src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
-                                </div>
-                                <div class="cs-grid">
-                                    <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
-                                    <span class="cs-text-accent cs-text-sm">View Profile</span>
-                                </div>
-                            </a>
-                            <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
-                                <div class="avator br-full cs-overflow-hidden">
-                                    <img loading="lazy" src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
-                                </div>
-                                <div class="cs-grid">
-                                    <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
-                                    <span class="cs-text-accent cs-text-sm">View Profile</span>
-                                </div>
-                            </a>
-                            <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
-                                <div class="avator br-full cs-overflow-hidden">
-                                    <img loading="lazy" src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
-                                </div>
-                                <div class="cs-grid">
-                                    <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
-                                    <span class="cs-text-accent cs-text-sm">View Profile</span>
-                                </div>
-                            </a>
-                            <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
-                                <div class="avator br-full cs-overflow-hidden">
-                                    <img loading="lazy" src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
-                                </div>
-                                <div class="cs-grid">
-                                    <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
-                                    <span class="cs-text-accent cs-text-sm">View Profile</span>
-                                </div>
-                            </a>
-                            <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
-                                <div class="avator br-full cs-overflow-hidden">
-                                    <img loading="lazy" src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
-                                </div>
-                                <div class="cs-grid">
-                                    <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
-                                    <span class="cs-text-accent cs-text-sm">View Profile</span>
-                                </div>
-                            </a>
-                            <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
-                                <div class="avator br-full cs-overflow-hidden">
-                                    <img loading="lazy" src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
-                                </div>
-                                <div class="cs-grid">
-                                    <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
-                                    <span class="cs-text-accent cs-text-sm">View Profile</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="cs-grid br-md cs-justify-start" style="--gap: 1rem;padding: 0 0;align-content: flex-start;">
-                        <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
-                            Top Buyers
-                        </p>
-                        <div class="cs-grid cs-justify-start horizontal-scroll" style="--gap: 1rem;--row-size: 21%;">
-                            <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
-                                <div class="avator br-full cs-overflow-hidden">
-                                    <img loading="lazy" src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
-                                </div>
-                                <div class="cs-grid">
-                                    <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
-                                    <span class="cs-text-accent cs-text-sm">View Profile</span>
-                                </div>
-                            </a>
-                            <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
-                                <div class="avator br-full cs-overflow-hidden">
-                                    <img loading="lazy" src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
-                                </div>
-                                <div class="cs-grid">
-                                    <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
-                                    <span class="cs-text-accent cs-text-sm">View Profile</span>
-                                </div>
-                            </a>
-                            <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
-                                <div class="avator br-full cs-overflow-hidden">
-                                    <img loading="lazy" src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
-                                </div>
-                                <div class="cs-grid">
-                                    <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
-                                    <span class="cs-text-accent cs-text-sm">View Profile</span>
-                                </div>
-                            </a>
-                            <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
-                                <div class="avator br-full cs-overflow-hidden">
-                                    <img loading="lazy" src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
-                                </div>
-                                <div class="cs-grid">
-                                    <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
-                                    <span class="cs-text-accent cs-text-sm">View Profile</span>
-                                </div>
-                            </a>
-                            <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
-                                <div class="avator br-full cs-overflow-hidden">
-                                    <img loading="lazy" src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
-                                </div>
-                                <div class="cs-grid">
-                                    <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
-                                    <span class="cs-text-accent cs-text-sm">View Profile</span>
-                                </div>
-                            </a>
-                            <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
-                                <div class="avator br-full cs-overflow-hidden">
-                                    <img loading="lazy" src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
-                                </div>
-                                <div class="cs-grid">
-                                    <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
-                                    <span class="cs-text-accent cs-text-sm">View Profile</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="client-suppliers-section" class="content cs-hidden br-sm" style="--gap: 1rem;padding: .5rem 0;">
                 <table>
                     <thead>
                         <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
@@ -446,66 +234,6 @@
                             <td>4</td>
                             <td>12/03/2020</td>
                         </tr>
-                        <tr class="cs-text-md cs-font-500 client-item">
-                            <td>5</td>
-                            <td>Alex Fashions</td>
-                            <td>France</td>
-                            <td>192047239</td>
-                            <td>39N23J23MF</td>
-                            <td>Premium</td>
-                            <td>4</td>
-                            <td>12/03/2020</td>
-                        </tr>
-                        <tr class="cs-text-md cs-font-500 client-item">
-                            <td>6</td>
-                            <td>Alex Fashions</td>
-                            <td>France</td>
-                            <td>192047239</td>
-                            <td>39N23J23MF</td>
-                            <td>Premium</td>
-                            <td>4</td>
-                            <td>12/03/2020</td>
-                        </tr>
-                        <tr class="cs-text-md cs-font-500 client-item">
-                            <td>7</td>
-                            <td>Alex Fashions</td>
-                            <td>France</td>
-                            <td>192047239</td>
-                            <td>39N23J23MF</td>
-                            <td>Premium</td>
-                            <td>4</td>
-                            <td>12/03/2020</td>
-                        </tr>
-                        <tr class="cs-text-md cs-font-500 client-item">
-                            <td>8</td>
-                            <td>Alex Fashions</td>
-                            <td>France</td>
-                            <td>192047239</td>
-                            <td>39N23J23MF</td>
-                            <td>Premium</td>
-                            <td>4</td>
-                            <td>12/03/2020</td>
-                        </tr>
-                        <tr class="cs-text-md cs-font-500 client-item">
-                            <td>9</td>
-                            <td>Alex Fashions</td>
-                            <td>France</td>
-                            <td>192047239</td>
-                            <td>39N23J23MF</td>
-                            <td>Premium</td>
-                            <td>4</td>
-                            <td>12/03/2020</td>
-                        </tr>
-                        <tr class="cs-text-md cs-font-500 client-item">
-                            <td>10</td>
-                            <td>Alex Fashions</td>
-                            <td>France</td>
-                            <td>192047239</td>
-                            <td>39N23J23MF</td>
-                            <td>Premium</td>
-                            <td>4</td>
-                            <td>12/03/2020</td>
-                        </tr>
                     </tbody>
                     <tfoot>
                         <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
@@ -520,19 +248,12 @@
                         </tr>
                     </tfoot>
                 </table>
-                <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
-                    <div class="cs-grid cs-align-center">
-                        <p class="cs-text-md" style="color: var(--text-color);">Showing Page 1 of 10. (1000 Entries)</p>
-                    </div>
-                    <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
-                        <button class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
-                        <span class="cs-text-md">1</span>
-                        <button class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
-                    </div>
-                </div>
             </section>
 
-            <section id="client-buyers-section" class="content cs-hidden br-sm" style="--gap: 1rem;padding: .5rem 0;">
+            <section id="client-buyers-section" class="content cs-grid br-sm" style="--gap: 1rem;padding: .5rem 0;">
+                <div class="cs-grid" style="margin: .15rem .5rem">
+                    <h4 class="cs-text-normal cs-text-accent" style="margin: 0;">Buyers</h4>
+                </div>
                 <table>
                     <thead>
                         <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
@@ -577,76 +298,6 @@
                             <td>4</td>
                             <td>12/03/2020</td>
                         </tr>
-                        <tr class="cs-text-md cs-font-500 client-item">
-                            <td>4</td>
-                            <td>Alex Fashions</td>
-                            <td>France</td>
-                            <td>192047239</td>
-                            <td>39N23J23MF</td>
-                            <td>Premium</td>
-                            <td>4</td>
-                            <td>12/03/2020</td>
-                        </tr>
-                        <tr class="cs-text-md cs-font-500 client-item">
-                            <td>5</td>
-                            <td>Alex Fashions</td>
-                            <td>France</td>
-                            <td>192047239</td>
-                            <td>39N23J23MF</td>
-                            <td>Premium</td>
-                            <td>4</td>
-                            <td>12/03/2020</td>
-                        </tr>
-                        <tr class="cs-text-md cs-font-500 client-item">
-                            <td>6</td>
-                            <td>Alex Fashions</td>
-                            <td>France</td>
-                            <td>192047239</td>
-                            <td>39N23J23MF</td>
-                            <td>Premium</td>
-                            <td>4</td>
-                            <td>12/03/2020</td>
-                        </tr>
-                        <tr class="cs-text-md cs-font-500 client-item">
-                            <td>7</td>
-                            <td>Alex Fashions</td>
-                            <td>France</td>
-                            <td>192047239</td>
-                            <td>39N23J23MF</td>
-                            <td>Premium</td>
-                            <td>4</td>
-                            <td>12/03/2020</td>
-                        </tr>
-                        <tr class="cs-text-md cs-font-500 client-item">
-                            <td>8</td>
-                            <td>Alex Fashions</td>
-                            <td>France</td>
-                            <td>192047239</td>
-                            <td>39N23J23MF</td>
-                            <td>Premium</td>
-                            <td>4</td>
-                            <td>12/03/2020</td>
-                        </tr>
-                        <tr class="cs-text-md cs-font-500 client-item">
-                            <td>9</td>
-                            <td>Alex Fashions</td>
-                            <td>France</td>
-                            <td>192047239</td>
-                            <td>39N23J23MF</td>
-                            <td>Premium</td>
-                            <td>4</td>
-                            <td>12/03/2020</td>
-                        </tr>
-                        <tr class="cs-text-md cs-font-500 client-item">
-                            <td>10</td>
-                            <td>Alex Fashions</td>
-                            <td>France</td>
-                            <td>192047239</td>
-                            <td>39N23J23MF</td>
-                            <td>Premium</td>
-                            <td>4</td>
-                            <td>12/03/2020</td>
-                        </tr>
                     </tbody>
                     <tfoot>
                         <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
@@ -661,103 +312,12 @@
                         </tr>
                     </tfoot>
                 </table>
-                <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
-                    <div class="cs-grid cs-align-center">
-                        <p class="cs-text-md" style="color: var(--text-color);">Showing Page 1 of 10. (1000 Entries)</p>
-                    </div>
-                    <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
-                        <button class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
-                        <span class="cs-text-md">1</span>
-                        <button class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
-                    </div>
-                </div>
             </section>
 
-            <section id="client-contracts-section" class="content cs-hidden br-sm" style="--gap: 1rem;padding: .5rem 0;">
-                <table>
-                    <thead>
-                        <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
-                            <th>No.</th>
-                            <th>Supplier</th>
-                            <th>Buyer</th>
-                            <th>Service</th>
-                            <th>Complete</th>
-                            <th>Amount</th>
-                            <th>Created On</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="cs-text-md cs-font-500 contract-item">
-                            <td>1</td>
-                            <td>Alex Fashions</td>
-                            <td>Mark Shops</td>
-                            <td>Representation</td>
-                            <td>False</td>
-                            <td>USD 10000</td>
-                            <td>12/03/2020</td>
-                        </tr>
-                        <tr class="cs-text-md cs-font-500 contract-item">
-                            <td>2</td>
-                            <td>Alex Fashions</td>
-                            <td>Mark Shops</td>
-                            <td>Representation</td>
-                            <td>False</td>
-                            <td>USD 10000</td>
-                            <td>12/03/2020</td>
-                        </tr>
-                        <tr class="cs-text-md cs-font-500 contract-item">
-                            <td>3</td>
-                            <td>Alex Fashions</td>
-                            <td>Mark Shops</td>
-                            <td>Representation</td>
-                            <td>False</td>
-                            <td>USD 10000</td>
-                            <td>12/03/2020</td>
-                        </tr>
-                        <tr class="cs-text-md cs-font-500 contract-item">
-                            <td>4</td>
-                            <td>Alex Fashions</td>
-                            <td>Mark Shops</td>
-                            <td>Representation</td>
-                            <td>False</td>
-                            <td>USD 10000</td>
-                            <td>12/03/2020</td>
-                        </tr>
-                        <tr class="cs-text-md cs-font-500 contract-item">
-                            <td>5</td>
-                            <td>Alex Fashions</td>
-                            <td>Mark Shops</td>
-                            <td>Representation</td>
-                            <td>False</td>
-                            <td>USD 10000</td>
-                            <td>12/03/2020</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
-                            <th>No.</th>
-                            <th>Supplier</th>
-                            <th>Buyer</th>
-                            <th>Service</th>
-                            <th>Complete</th>
-                            <th>Amount</th>
-                            <th>Created On</th>
-                        </tr>
-                    </tfoot>
-                </table>
-                <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
-                    <div class="cs-grid cs-align-center">
-                        <p class="cs-text-md" style="color: var(--text-color);">Showing Page 1 of 2. (10 Entries)</p>
-                    </div>
-                    <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
-                        <button class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
-                        <span class="cs-text-md">1</span>
-                        <button class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
-                    </div>
+            <section id="client-products-section" class="content cs-grid br-sm" style="--gap: 1rem;padding: .5rem 0;">
+                <div class="cs-grid" style="margin: .15rem .5rem">
+                    <h4 class="cs-text-normal cs-text-accent" style="margin: 0;">Products</h4>
                 </div>
-            </section>
-
-            <section id="client-products-section" class="content cs-hidden br-sm" style="--gap: 1rem;padding: .5rem 0;">
                 <table>
                     <thead>
                         <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
@@ -802,22 +362,6 @@
                             <td>Shoes</td>
                             <td>10</td>
                         </tr>
-                        <tr class="cs-text-md cs-font-500 product-item">
-                            <td>5</td>
-                            <td>Air Jordans</td>
-                            <td>Al Shoes Store </td>
-                            <td>Fashion</td>
-                            <td>Shoes</td>
-                            <td>10</td>
-                        </tr>
-                        <tr class="cs-text-md cs-font-500 product-item">
-                            <td>6</td>
-                            <td>Air Jordans</td>
-                            <td>Al Shoes Store </td>
-                            <td>Fashion</td>
-                            <td>Shoes</td>
-                            <td>10</td>
-                        </tr>
                     </tbody>
                     <tfoot>
                         <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
@@ -830,16 +374,6 @@
                         </tr>
                     </tfoot>
                 </table>
-                <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
-                    <div class="cs-grid cs-align-center">
-                        <p class="cs-text-md" style="color: var(--text-color);">Showing Page 1 of 10. (1000 Entries)</p>
-                    </div>
-                    <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
-                        <button class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
-                        <span class="cs-text-md">1</span>
-                        <button class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
-                    </div>
-                </div>
             </section>
 
 
