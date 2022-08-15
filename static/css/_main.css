@@ -28,6 +28,7 @@ body {
 body {
     color: var(--text-grey);
     background: var(--brand-secondary);
+    font-size: 16px;
     font-family: var(--font-quicksand);
     line-height: 1.6;
     overflow-x: hidden;
@@ -45,6 +46,14 @@ ul {
 a {
     color: var(--text-1);
     text-decoration: none;
+}
+
+h2 {
+    font-size: 18px;
+}
+
+h3 {
+    font-size: 16px;
 }
 
 
@@ -396,6 +405,60 @@ a {
 .main-content .top {
     justify-content: space-between;
     align-items: flex-start;
+    gap: 1.4rem;
+    height: 30vh;
+    margin-top: .4rem;
+}
+
+.top .card {
+    margin: 0;
+}
+
+.top .left {
+    width: 78%;
+    padding: 0;
+}
+
+.top .left .top-cards.flex {
+    gap: .8rem;
+    margin-bottom: .8rem;
+}
+
+.top .right {
+    width: 22%;
+    height: 100%;
+    padding: 0;
+}
+
+.top .right .card {
+    padding-bottom: 2.0rem;
+}
+
+.top .right .wrapper {
+    gap: .4rem;
+    justify-content: flex-start;
+    margin-top: .8rem;
+}
+
+.top-selling-product {
+    margin: .4rem 0;
+}
+
+.top-selling-product i {
+    color: var(--bg-white);
+    background-color: var(--brand-primary);
+    border-radius: 50%;
+    padding: .8rem;
+}
+
+.top-selling-product-details h4 {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.top-selling-product-details h6 {
+    font-size: 10px;
+    font-weight: 600;
 }
 
 /* Navbar */
@@ -486,12 +549,6 @@ a {
     justify-content: flex-start;
 }
 
-.top-card:nth-child(1) {
-    margin-left: 0;
-    background-color: var(--brand-primary-light);
-    border: 1px solid var(--brand-primary);
-}
-
 .top-card:nth-child(4) {
     margin-right: 0;
 }
@@ -525,9 +582,9 @@ a {
     border: 1px solid var(--brand-primary);
 }
 
-.filter-cards.duration {
+.filter-cards.duration.card {
     width: fit-content;
-    height: 3rem;
+    height: fit-content;
 }
 
 .filter-cards.transaction.flex {
@@ -676,46 +733,6 @@ a {
     gap: 1.4rem;
 }
 
-.top {
-    gap: 1.4rem;
-}
-
-.top .left {
-    width: 78%;
-    padding: 0;
-}
-
-.top .right {
-    width: 22%;
-    padding-top: .24rem;
-}
-
-.top .right .wrapper {
-    gap: .4rem;
-    justify-content: flex-start;
-    margin-top: .8rem;
-}
-
-.top-selling-product {
-    margin: .4rem 0;
-}
-
-.top-selling-product i {
-    color: var(--bg-white);
-    background-color: var(--brand-primary);
-    border-radius: 50%;
-    padding: .8rem;
-}
-
-.top-selling-product-details h4 {
-    font-size: 14px;
-    font-weight: 700;
-}
-
-.top-selling-product-details h6 {
-    font-size: 10px;
-    font-weight: 600;
-}
 
 .products-table td:last-child {
     color: red;

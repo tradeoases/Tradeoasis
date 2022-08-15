@@ -111,28 +111,27 @@
                     </div>
                 </div>
                 <div class="main-content">
-                    <h3 style="margin:1.6rem 0 .4rem 0;font-weight:600;">My Contracts</h3>
+                    <h3 style="margin:1.6rem 0 .4rem 0;font-weight:600;">My Stores</h3>
                     <div class="card data-table products-table">
                         <table id="table-1" class="display" style="width:100%;margin-top:.5rem;">
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Service</th>
-                                    <th>Price</th>
-                                    <th>Start date</th>
-                                    <th>End date</th>
-                                    <th>Action</th>
+                                    <th>Name</th>
+                                    <th>Products</th>
+                                    <th>Services</th>
+                                    <th>Created At</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr class="select">
-                                    <td>CNTR11414</td>
-                                    <td>Customer representation</td>
-                                    <td>1200</td>
-                                    <td>08/16/2022</td>
-                                    <td>09/16/2022</td>
-                                    <td>View Details</td>
+                                    <td>STRE11414</td>
+                                    <td>Lancaster Fashions</td>
+                                    <td>1000</td>
+                                    <td>10</td>
+                                    <td style="color: unset;">08/16/2022</td>
                                 </tr>
+
                             </tbody>
                         </table>
                     </div>
@@ -152,14 +151,16 @@
         });
 
 
+        // Open Modal
         const rows = document.querySelectorAll('.select');
         rows.forEach(row => {
-            row.addEventListener('click', navigateToContract);
+            row.style.cursor = "pointer";
+            row.addEventListener('click', navigateToStore);
 
         });
 
-        function navigateToContract() {
-            location.href = "_contract-detail.html";
+        function navigateToStore() {
+            location.href = "_create-product.html";
         }
 
     </script>

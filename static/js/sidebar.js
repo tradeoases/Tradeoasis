@@ -7,7 +7,7 @@ const path = window.location.pathname;
 const page = path.split("/").pop();
 
 
-if (page === "_create-product.html" || page === "_manage-product.html") {
+if (page === "_create-store.html" || page === "_manage-store.html" || page === "_manage-product.html") {
     sidebarSubMenus[0].style.display = "block";
     for (i = 0; i < sidebarSubMenuToggleDropdowns.length; i++) {
         sidebarSubMenuToggleDropdowns[i].addEventListener("click", function () {
