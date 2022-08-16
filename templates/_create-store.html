@@ -106,8 +106,17 @@
                 </div>
                 <div class="main-content">
                     <h3 style="margin:1.6rem 0 .4rem 0;font-weight:600;">Create New Store</h3>
+                    <div class="card card-info" id="orders-help">
+                        <i class="ti-close exit"></i>
+                        <div class="title">
+                            <small>Choose a good name</small>
+                        </div>
+                        <div class="text">
+                            <small>To create your store.</small>
+                        </div>
+                    </div>
                     <div class="card product-form">
-                        <div class="create-form">
+                        <div class="create-form" style="padding-top:1.2rem;padding-bottom:1.2rem;">
                             <form action="">
                                 <div class="" style="position:relative;z-index:5;height:auto;width:100%;">
                                     <div
@@ -148,6 +157,15 @@
 
     <script src="../static/js/dropdown.js"></script>
     <script src="../static/js/sidebar.js"></script>
+
+    <script>
+        const closeCard = document.querySelector('.ti-close.exit');
+        if (closeCard) {
+            closeCard.addEventListener('click', function (e) {
+                e.target.parentElement.remove();
+            });
+        }
+    </script>
 </body>
 
 </html>

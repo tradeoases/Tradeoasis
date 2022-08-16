@@ -112,6 +112,15 @@
                 </div>
                 <div class="main-content">
                     <h3 style="margin:1.6rem 0 .4rem 0;font-weight:600;">Manage Existing Product</h3>
+                    <div class="card card-info" id="orders-help">
+                        <i class="ti-close exit"></i>
+                        <div class="title">
+                            <small>Click the "Edit" label</small>
+                        </div>
+                        <div class="text">
+                            <small>To make changes to your product.</small>
+                        </div>
+                    </div>
                     <div class="card data-table products-table">
                         <table id="table-1" class="display" style="width:100%;margin-top:.5rem;">
                             <thead>
@@ -215,6 +224,13 @@
             document.querySelector('#close-modal').addEventListener('click', (event) => {
                 if (event.target.classList.contains('ti-close'))
                     Modal.hide(event);
+            });
+        }
+
+        const closeCard = document.querySelector('.ti-close.exit');
+        if (closeCard) {
+            closeCard.addEventListener('click', function (e) {
+                e.target.parentElement.remove();
             });
         }
 

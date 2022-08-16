@@ -112,6 +112,15 @@
                 </div>
                 <div class="main-content">
                     <h3 style="margin:1.6rem 0 .4rem 0;font-weight:600;">My Contracts</h3>
+                    <div class="card card-info" id="orders-help">
+                        <i class="ti-close exit"></i>
+                        <div class="title">
+                            <small>To view the contract details</small>
+                        </div>
+                        <div class="text">
+                            <small>Click the "View Details" label.</small>
+                        </div>
+                    </div>
                     <div class="card data-table products-table">
                         <table id="table-1" class="display" style="width:100%;margin-top:.5rem;">
                             <thead>
@@ -162,6 +171,12 @@
             location.href = "_contract-detail.html";
         }
 
+        const closeCard = document.querySelector('.ti-close.exit');
+        if (closeCard) {
+            closeCard.addEventListener('click', function (e) {
+                e.target.parentElement.remove();
+            });
+        }
     </script>
 
 </body>

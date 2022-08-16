@@ -109,7 +109,7 @@ h3 {
 }
 
 .btn:hover {
-    background-color: var(--brand-primary-dark);
+    /* background-color: var(--brand-primary-dark); */
 }
 
 .btn-sm {
@@ -824,4 +824,59 @@ h3 {
 
 .ti-angle-down {
     color: #fff;
+}
+
+.contract-body .title {
+    justify-content: space-between;
+}
+
+.contract.card {
+    padding: 0;
+    box-shadow: unset;
+}
+
+.contract.card .profile .avatar {
+    margin-right: .4rem;
+}
+
+.contract.card .top-content.flex {
+    padding: .4rem .8rem;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    justify-content: space-between;
+}
+
+.contract.card .bottom-content.flex {
+    padding: .4rem .8rem;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    justify-content: space-between;
+}
+
+tr {
+    cursor: pointer;
+}
+
+.contract-table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.contract-table td,
+.contract-table th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.ti-angle-down.toggle {
+    transform: rotate(180deg);
 }

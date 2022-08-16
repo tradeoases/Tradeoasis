@@ -112,6 +112,15 @@
                 </div>
                 <div class="main-content">
                     <h3 style="margin:1.6rem 0 .4rem 0;font-weight:600;">My Stores</h3>
+                    <div class="card card-info" id="orders-help">
+                        <i class="ti-close exit"></i>
+                        <div class="title">
+                            <small>Please, select a store from the table</small>
+                        </div>
+                        <div class="text">
+                            <small>To add products to it.</small>
+                        </div>
+                    </div>
                     <div class="card data-table products-table">
                         <table id="table-1" class="display" style="width:100%;margin-top:.5rem;">
                             <thead>
@@ -130,6 +139,27 @@
                                     <td>1000</td>
                                     <td>10</td>
                                     <td style="color: unset;">08/16/2022</td>
+                                </tr>
+                                <tr class="select">
+                                    <td>STRE11200</td>
+                                    <td>Go Green Solutions</td>
+                                    <td>500</td>
+                                    <td>47</td>
+                                    <td style="color: unset;">08/04/2022</td>
+                                </tr>
+                                <tr class="select">
+                                    <td>STRE11210</td>
+                                    <td>Modern Electronics</td>
+                                    <td>1560</td>
+                                    <td>1</td>
+                                    <td style="color: unset;">08/04/2022</td>
+                                </tr>
+                                <tr class="select">
+                                    <td>STRE11240</td>
+                                    <td>LMK Shells</td>
+                                    <td>40</td>
+                                    <td>3</td>
+                                    <td style="color: unset;">08/11/2022</td>
                                 </tr>
 
                             </tbody>
@@ -161,6 +191,13 @@
 
         function navigateToStore() {
             location.href = "_create-product.html";
+        }
+
+        const closeCard = document.querySelector('.ti-close.exit');
+        if (closeCard) {
+            closeCard.addEventListener('click', function (e) {
+                e.target.parentElement.remove();
+            });
         }
 
     </script>
