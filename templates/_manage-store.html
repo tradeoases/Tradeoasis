@@ -111,14 +111,14 @@
                     </div>
                 </div>
                 <div class="main-content">
-                    <h3 style="margin:1.6rem 0 .4rem 0;font-weight:600;">Manage Existing Product</h3>
+                    <h3 style="margin:1.6rem 0 .4rem 0;font-weight:600;">My Stores</h3>
                     <div class="card card-info" id="orders-help">
                         <i class="ti-close exit"></i>
                         <div class="title">
-                            <small>Click the "Edit" label</small>
+                            <small>Please, select a store from the table</small>
                         </div>
                         <div class="text">
-                            <small>To make changes to your product.</small>
+                            <small>To add products to it.</small>
                         </div>
                     </div>
                     <div class="card data-table products-table">
@@ -126,58 +126,43 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Item</th>
-                                    <th>Category</th>
-                                    <th>Unit Price</th>
+                                    <th>Name</th>
+                                    <th>Products</th>
+                                    <th>Services</th>
                                     <th>Created At</th>
-                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>FORDN11414</td>
-                                    <td>HP Canon printer</td>
-                                    <td>Gadgets</td>
-                                    <td>£245</td>
-                                    <td>05/16/2022</td>
-                                    <td class="edit">Edit</td>
+                                <tr class="select">
+                                    <td>STRE11414</td>
+                                    <td>Lancaster Fashions</td>
+                                    <td>1000</td>
+                                    <td>10</td>
+                                    <td style="color: unset;">08/16/2022</td>
                                 </tr>
-                                <tr>
-                                    <td>FORDN11410</td>
-                                    <td>DT-X UPS device</td>
-                                    <td>Electronics</td>
-                                    <td>£1000</td>
-                                    <td>05/17/2022</td>
-                                    <td class="edit">Edit</td>
+                                <tr class="select">
+                                    <td>STRE11200</td>
+                                    <td>Go Green Solutions</td>
+                                    <td>500</td>
+                                    <td>47</td>
+                                    <td style="color: unset;">08/04/2022</td>
                                 </tr>
-                                <tr>
-                                    <td>FORDN11500</td>
-                                    <td>HP Mini scanner</td>
-                                    <td>Gadgets</td>
-                                    <td>£1700</td>
-                                    <td>05/15/2022</td>
-                                    <td class="edit">Edit</td>
+                                <tr class="select">
+                                    <td>STRE11210</td>
+                                    <td>Modern Electronics</td>
+                                    <td>1560</td>
+                                    <td>1</td>
+                                    <td style="color: unset;">08/04/2022</td>
                                 </tr>
-                                <tr>
-                                    <td>FORDN11501</td>
-                                    <td>TP-Link router</td>
-                                    <td>Computing</td>
-                                    <td>£2000</td>
-                                    <td>05/16/2022</td>
-                                    <td class="edit">Edit</td>
+                                <tr class="select">
+                                    <td>STRE11240</td>
+                                    <td>LMK Shells</td>
+                                    <td>40</td>
+                                    <td>3</td>
+                                    <td style="color: unset;">08/11/2022</td>
                                 </tr>
+
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Item</th>
-                                    <th>Category</th>
-                                    <th>Unit Price</th>
-                                    <th>Edit</th>
-                                    <th>Created At</th>
-                                    <th>Edit</th>
-                                </tr>
-                            </tfoot>
                         </table>
                     </div>
 
@@ -197,34 +182,15 @@
 
 
         // Open Modal
-        const productEditBtns = document.querySelectorAll('.edit');
-        productEditBtns.forEach(btn => {
-            btn.addEventListener('click', editProduct);
+        const rows = document.querySelectorAll('.select');
+        rows.forEach(row => {
+            row.style.cursor = "pointer";
+            row.addEventListener('click', navigateToStore);
 
         });
 
-        function editProduct(e) {
-            const name = e.target.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent
-            const category = e.target.previousElementSibling.previousElementSibling.previousElementSibling.textContent
-            const price = e.target.previousElementSibling.previousElementSibling.textContent
-
-            const product = {
-                name,
-                model: "TP-Link Modem 04.4v",
-                serialNumber: "25416",
-                category,
-                price,
-                description: "Some description for this particular product"
-            };
-
-            // Open Modal
-            Modal.show(product);
-
-            // Close Modal
-            document.querySelector('#close-modal').addEventListener('click', (event) => {
-                if (event.target.classList.contains('ti-close'))
-                    Modal.hide(event);
-            });
+        function navigateToStore() {
+            location.href = "_create-product.html";
         }
 
         const closeCard = document.querySelector('.ti-close.exit');
