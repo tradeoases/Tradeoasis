@@ -1,11 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600;700;800&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap');
 
-
-
 /* css reset */
-
-
 
 /* Box sizing rules */
 *,
@@ -298,15 +294,19 @@ h4 {
 
 
 form:not(.search-form) input,
-form select {
+form select, form textarea {
     padding-inline: 1.5rem;
-    padding-block: .75rem;
+    padding-block: .5rem;
     font-size: 1rem;
-    background-color: transparent;
     border: 1px solid hsl(213, 28%, 60%);
     outline: none;
     border-radius: 5px;
     transition: all .2s ease-in;
+}
+
+form:not(.search-form) input:not([type='submit']),
+form select {
+    background-color: transparent;
 }
 
 form.filter-group input {
@@ -329,9 +329,10 @@ form input[type='submit']:hover {
 
 
 .horizontal-scroll {
+    --row-size: 17%;
     padding: .5rem 0;
     grid-auto-flow: column;
-    grid-auto-columns: 17%;
+    grid-auto-columns: var(--row-size);
     --gap: 0 1rem;
     overflow-x: scroll;
     overscroll-behavior-inline: contain;

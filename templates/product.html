@@ -393,86 +393,170 @@
     </div>
     <!-- mobile -->
 
-    <main class="grid gap-6 md:gap-4">
-        <div class="breadcrumb flex flex-wrap justify-start gap-2 w-full mx-auto px-5 pt-8">
+    <main class="grid gap-2 md:gap-4">
+        <div class="breadcrumb flex flex-wrap justify-start gap-2 md:w-full mx-auto px-5 pt-8">
             <a class="text-gray-600 hover:text-gray-900" href="./index.html">Home</a>
             <a>/</a>
-            <a class="text-gray-600 hover:text-gray-900" href='./supplier.html'>Supplier</a>
+            <a class="text-gray-600 hover:text-gray-900" href='./index.html'>Fashion</a>
             <a>/</a>
-            <span class="text-lightBackgroundColor">Customer Representation</span>
+            <a class="text-gray-600 hover:text-gray-900" href='./subcategory.html'>Man's Clothes</a>
+            <a>/</a>
+            <span class="text-lightBackgroundColor">Short Sleeve Dewy Print</span>
         </div>
-        <section class="main w-12/12 py-6 pt-0 grid gap-10 px-5" style="height: auto;">
-            <div class="grid gap-6 md:gap-10 supplier-detail w-full md:w-full mx-auto">
+        <section class="main w-12/12 py-6 pt-0" style="height: auto;">
+            <div class="grid gap-6 md:gap-10 p-5 product-detail w-full md:w-full mx-auto">
+                <div class="product-images grid gap-2" data-context="{{product_images.context_name}}">
+                    <div class="img-magnifier img-wrapper overflow-hidden" >
+                        <img  style="object-fit: cover;" src="" alt="">
+                    </div>
+                    <hr>
+                    <div class="product-images-list grid gap-2" style="grid-template-columns: repeat(5, 1fr);">
+                        <img style="aspect-ratio: 1;object-fit: cover;cursor: pointer;" src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGNsb3RoZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60" alt="">
+                        <img style="aspect-ratio: 1;object-fit: cover;cursor: pointer;" src="https://images.unsplash.com/photo-1562157873-818bc0726f68?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8Y2xvdGhlc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="">
+                        <img style="aspect-ratio: 1;object-fit: cover;cursor: pointer;" src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGNsb3RoZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60" alt="">
+                        <img style="aspect-ratio: 1;object-fit: cover;cursor: pointer;" src="https://images.unsplash.com/photo-1537274942065-eda9d00a6293?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGNsb3RoZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60" alt="">
+                    </div>
+                </div>
                 <div class="grid gap-4 justify-start content-start">
                     <div class="grid md:grid-flow-col justify-between gap-1">                        
                         <h3 class="text-xl md:text-2xl font-bold text-lghterBackgroundColor">
-                            Customer Representation</h3>
+                            Short Sleeve Dewy Print</h3>
+                        <p class="text-bold justify-start text-lghterBackgroundColor" style="display:grid;grid-auto-flow: column; align-items: baseline;gap: .25rem;">
+                            <span class="text-base md:text-lg">USD</span>
+                            <span class="text-xl md:text-2xl font-bold">120.40</span>
+                        </p>
                     </div>
-                    <div class="client-infor grid gap-4 py-4 justify-items-start" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
-                        <div class="grid gap-2">
-                            <h4 class="text-lg font-semibold text-lightBackgroundColor">About Service</h4>
-                            <p class="text-base font-normal text-slate-800">
-                                A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy,
-                            </p>
-                        </div>
-                        <div class="grid items-start gap-2">
-                            <span class="flex gap-1 items-start">
-                                <h3 class="text-base font-semibold text-lightBackgroundColor">Currents Customers: </h3>
-                                <p class="flex gap-1 items-center font-normal text-slate-700">
-                                    120
-                                </p>
-                            </span>
-                            <span class="flex gap-1 items-start">
-                                <h3 class="text-base font-semibold text-lightBackgroundColor">Price: </h3>
-                                <p class="flex gap-1 items-center font-normal text-slate-700">
-                                    <span>USD 1000</span>
-                                    <span class="font-sm text-slate-500 font-normal">
-                                        (Paid once)
-                                    </span>
-                                </p>
-                            </span>
-                        </div>
+                    <div class="grid md:gap-1 py-2 justify-items-start" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
+                        <p class="text-base font-normal text-slate-800">But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth</p>
+                    </div>
+                    <div class="grid gap-4">
+                        <p class="text-slate-700 flex gap-2" data-context="{{product_supplier.context_name}}">
+                            <span>Supplier: </span>
+                            <a href="./supplier.html" class="font-semibold">Alexander Fashions</a>
+                        </p>
+                        <p class="text-slate-700 flex flex-wrap gap-3 justify-start items-center" data-context="{{product_stores.context_name}}">
+                            <span>Stores: </span>
+                            <a href="./store.html" class="grid px-4 py-1 bg-slate-200 rounded-full text-backgroundColor">Kampala Styles</a>
+                            <a href="./store.html" class="grid px-4 py-1 bg-slate-200 rounded-full text-backgroundColor">Nairobi Fashion</a>
+                        </p>
+                    </div>
+                    <div class="cta flex flex-wrap gap-3 my-3">
+                        <a href="" class="flex place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-yellowColor hover:bg-yellowColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
+                            <span class="text-white"><i class="fa fa-address-book"></i></span>
+                            <span>Contact Supplier</span>
+                        </a>
+                        <a href="./contract.html" class="flex place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-lghterBackgroundColor hover:bg-lighterBackgroundColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
+                            <span class="text-white"><i class="fa fa-file"></i></span>
+                            <span>Make Contract</span>
+                        </a>
+                        <a href="" class="flex place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-backgroundColor hover:bg-backgroundColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
+                            <span class="text-white"><i class="fa fa-shopping-cart"></i></span>
+                            <span>Show Interest</span>
+                        </a>
                     </div>
                 </div>
             </div>
-
-            <div class="contract-form grid gap-4 w-full md:w-full mx-auto">
-                <form action="" class="grid gap-6 p-5" style="background-color: rgb(242, 245, 248);">
-                    <div class="form-heading text-xl md:text-2xl text-lghterBackgroundColor font-bold text-capitalize">
-                        Fill in form to create contract.
-                    </div>
-                    <div class="form-group grid gap-2">
-                        <!-- when user selects a different service, make ajax call and update the service description above -->
-                        <label for="contract-name" class="text-slate-700 text-base font-normal">Service</label>
-                        <select name="contract-name" id="contract-name">
-                            <option value="" selected>Customer Representation</option>
-                            <option value="">Customer Representation</option>
-                            <option value="">Customer Representation</option>
-                            <option value="">Customer Representation</option>
-                        </select>
-                    </div>
-                    <div class="form-group grid gap-2">
-                        <label for="contract-price" class="text-slate-700 text-base font-normal">Price <span class="text-slate-600">(USD)</span></label>
-                        <input class="text-lghterBackgroundColor" type="number" name="contract-price" id="contract-price" value="1200">
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 justify-items-stretch">
-                        <div class="form-group grid gap-2">
-                            <label for="contract-start-date" class="text-slate-700 text-base font-normal">Start Date</label>
-                            <input class="w-12/12 text-lghterBackgroundColor" type="date" name="contract-start-date" id="contract-start-date">
-                        </div>
-                        <div class="form-group grid gap-2">
-                            <label for="contract-end-date" class="text-slate-700 text-base font-normal">End Date</label>
-                            <input class="w-12/12 text-lghterBackgroundColor" type="date" name="contract-end-date" id="contract-end-date">
-                        </div>
-                    </div>
-                    <div class="form-group grid gap-2">
-                        <input class="text-white bg-lghterBackgroundColor hover:yellowColor" type="submit" name="contract-start-date" id="contract-start-date"
-                        value="Create Contract">
-                    </div>
-                </form>
-            </div>
         </section>
 
+        <section class="main w-12/12 py-6 md:py-10" style="background-color: #FFFFFF;">
+            <div class="grid w-full mx-auto cf-1 gap-4 md:gap-6 w-full md:w-full mx-auto">
+                <div class="section-heading">
+                    <h2 class="sec-title text-xl md:text-2xl font-bold text-lghterBackgroundColor">Products Just For you</h2>
+                </div>
+                <div class="section-body grid md:gap-3 grid-cols-2 md:grid-cols-5">
+                    <div class="single-image-product-card overflow-hidden rounded flex gap-0.5 card-outlined">
+                            <a class="grid gap-2" href="./product.html">
+                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;" >
+                                <div class="item-details grid gap-0 justify-center py-2 md:py-3 px-4 gap-2" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
+                                    <h5 class="text-sm font-bold leading-5 text-lightBackgroundColor">    
+                                        OEM Basketball Shoes High Quality Outdoor Sports Shoes
+                                    </h5>
+                                    <p class="text-xs font-medium">
+                                        <span>USD</span>
+                                        <span>200</span>
+                                    </p>
+                                </div>
+                                <span class="grid items-center pb-2 px-4 font-semibold text-sm">By CorEats Mixes, Inc.</span>
+                            </a>
+                    </div>
+                    <div class="single-image-product-card overflow-hidden rounded flex gap-0.5 card-outlined">
+                            <a class="grid gap-2" href="./product.html">
+                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;" >
+                                <div class="item-details grid gap-0 justify-center py-2 md:py-3 px-4 gap-2" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
+                                    <h5 class="text-sm font-bold leading-5 text-lightBackgroundColor">    
+                                        OEM Basketball Shoes High Quality Outdoor Sports Shoes
+                                    </h5>
+                                    <p class="text-xs font-medium">
+                                        <span>USD</span>
+                                        <span>200</span>
+                                    </p>
+                                </div>
+                                <span class="grid items-center pb-2 px-4 font-semibold text-sm">By CorEats Mixes, Inc.</span>
+                            </a>
+                    </div>
+                    <div class="single-image-product-card overflow-hidden rounded flex gap-0.5 card-outlined">
+                            <a class="grid gap-2" href="./product.html">
+                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;" >
+                                <div class="item-details grid gap-0 justify-center py-2 md:py-3 px-4 gap-2" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
+                                    <h5 class="text-sm font-bold leading-5 text-lightBackgroundColor">    
+                                        OEM Basketball Shoes High Quality Outdoor Sports Shoes
+                                    </h5>
+                                    <p class="text-xs font-medium">
+                                        <span>USD</span>
+                                        <span>200</span>
+                                    </p>
+                                </div>
+                                <span class="grid items-center pb-2 px-4 font-semibold text-sm">By CorEats Mixes, Inc.</span>
+                            </a>
+                    </div>
+                    <div class="single-image-product-card overflow-hidden rounded flex gap-0.5 card-outlined">
+                            <a class="grid gap-2" href="./product.html">
+                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;" >
+                                <div class="item-details grid gap-0 justify-center py-2 md:py-3 px-4 gap-2" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
+                                    <h5 class="text-sm font-bold leading-5 text-lightBackgroundColor">    
+                                        OEM Basketball Shoes High Quality Outdoor Sports Shoes
+                                    </h5>
+                                    <p class="text-xs font-medium">
+                                        <span>USD</span>
+                                        <span>200</span>
+                                    </p>
+                                </div>
+                                <span class="grid items-center pb-2 px-4 font-semibold text-sm">By CorEats Mixes, Inc.</span>
+                            </a>
+                    </div>
+                    <div class="single-image-product-card overflow-hidden rounded flex gap-0.5 card-outlined">
+                            <a class="grid gap-2" href="./product.html">
+                                <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;" >
+                                <div class="item-details grid gap-0 justify-center py-2 md:py-3 px-4 gap-2" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
+                                    <h5 class="text-sm font-bold leading-5 text-lightBackgroundColor">    
+                                        OEM Basketball Shoes High Quality Outdoor Sports Shoes
+                                    </h5>
+                                    <p class="text-xs font-medium">
+                                        <span>USD</span>
+                                        <span>200</span>
+                                    </p>
+                                </div>
+                                <span class="grid items-center pb-2 px-4 font-semibold text-sm">By CorEats Mixes, Inc.</span>
+                            </a>
+                    </div>
+                    <div class="single-image-product-card overflow-hidden rounded flex gap-0.5 card-outlined">
+                        <a class="grid gap-2" href="./product.html">
+                            <img src="../static/assets/imgs/resources/prod.jpg" alt="Product" class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;" >
+                            <div class="item-details grid gap-0 justify-center py-2 md:py-3 px-4 gap-2" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
+                                <h5 class="text-sm font-bold leading-5 text-lightBackgroundColor">    
+                                    OEM Basketball Shoes High Quality Outdoor Sports Shoes
+                                </h5>
+                                <p class="text-xs font-medium">
+                                    <span>USD</span>
+                                    <span>200</span>
+                                </p>
+                            </div>
+                            <span class="grid items-center pb-2 px-4 font-semibold text-sm">By CorEats Mixes, Inc.</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
     <footer class="mt-10">
         <div class="container-fluid foot mt-50">
