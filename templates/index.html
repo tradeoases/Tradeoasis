@@ -21,14 +21,13 @@
 
     <style>
         #banner .item {
-            margin: 3px;
+            margin: 0;
         }
 
         #banner .item img {
-            border: 1px solid red;
             display: block;
             width: 100%;
-            height: 280px;
+            height: 420px;
             object-fit: cover;
         }
     </style>
@@ -479,9 +478,9 @@
                     </a>
                 </div>
                 <div class="hidden promotion-area w-12/12 md:grid gap-3">
-                    <div class="upper gap-3 rounded-md overflow-hidden" style="border:1px solid red;">
+                    <div class="upper gap-3 rounded-md overflow-hidden" style="height:450px;">
                         <!-- Owl carousel -->
-                        <div id="banner">
+                        <div id="banner" style="height:100%;">
                             <div class="item"><img src="../static/assets/imgs/resources/01.jpg" alt="Owl Image"></div>
                             <div class="item"><img src="../static/assets/imgs/resources/011.jpg" alt="Owl Image"></div>
                             <div class="item"><img src="../static/assets/imgs/resources/01.jpg" alt="Owl Image"></div>
@@ -490,7 +489,14 @@
                             <div class="item"><img src="../static/assets/imgs/resources/011.jpg" alt="Owl Image"></div>
                             <div class="item"><img src="../static/assets/imgs/resources/01.jpg" alt="Owl Image"></div>
                             <div class="item"><img src="../static/assets/imgs/resources/011.jpg" alt="Owl Image"></div>
-
+                            <div class="item"><img src="../static/assets/imgs/resources/01.jpg" alt="Owl Image"></div>
+                            <div class="item"><img src="../static/assets/imgs/resources/011.jpg" alt="Owl Image"></div>
+                            <div class="item"><img src="../static/assets/imgs/resources/01.jpg" alt="Owl Image"></div>
+                            <div class="item"><img src="../static/assets/imgs/resources/011.jpg" alt="Owl Image"></div>
+                            <div class="item"><img src="../static/assets/imgs/resources/01.jpg" alt="Owl Image"></div>
+                            <div class="item"><img src="../static/assets/imgs/resources/011.jpg" alt="Owl Image"></div>
+                            <div class="item"><img src="../static/assets/imgs/resources/01.jpg" alt="Owl Image"></div>
+                            <div class="item"><img src="../static/assets/imgs/resources/011.jpg" alt="Owl Image"></div>
                         </div>
                         <!-- Owl carousel -->
                     </div>
@@ -1332,7 +1338,7 @@
         $(document).ready(function () {
             $("#banner").owlCarousel({
                 autoPlay: 1000, //Set AutoPlay to 3 seconds
-                items: 3,
+                items: 1,
                 itemsDesktop: [1199, 3],
                 itemsDesktopSmall: [979, 3]
             });
