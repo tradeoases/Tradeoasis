@@ -1,0 +1,122 @@
+{% extends './utils/layout.html' %}
+{% load static %}
+{% block content %}
+    <!-- section area -->
+        <!-- section selectors -->
+        <nav class="section-nav-area br-sm cs-bg-white outlined">
+            <ul class="cs-grid section-nav list-none list-outside" style="--gap: .25rem;">
+                <div class="cs-flex">
+                    <li class="cs-text-md cs-font-500 active">Overview</li>
+                </div>
+                <!-- <div class="cs-flex" style="justify-self: flex-end;">
+                    <li class="cs-flex cs-text-md cs-bg-secondary cs-font-500 br-sm emph" style="--text-color: #fff;--gap: .5rem;align-items: center;">
+                        <i class="fa fa-plus"></i>
+                        <span>Create</span>
+                    </li>
+                </div> -->
+            </ul>
+        </nav>
+        <!-- section selectors -->
+
+        <section class="content cs-grid br-sm" style="--gap: 1rem;">
+            <div class="cs-grid horizontal-scroll" style="padding: .1rem 0;--gap: 1rem;--row-size: 21%;" data-context="{{statistics.name}}">
+                {% for statistic in statistics.results %}
+                    <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
+                        <h4 class="cs-text-md cs-font-500" style="margin: 0;color: var(--text-color);">
+                            {{statistic.name}}
+                        </h4>
+                        <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
+                            <div class="cs-grid">
+                                <p class="cs-text-body cs-font-bold cs-text-secondary" style="margin: 0;">
+                                    {{statistic.count}}
+                                </p>
+                                <span class="cs-text-sm" style="color: var(--text-color);">
+                                    {{statistic.description}}</span>
+                            </div>
+                            <a href="" class="cs-text-sm cs-text-accent cs-font-500" style="align-self: flex-end">View All</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="cs-grid" style="padding: .1rem 0;--gap: 1rem;--row-size: 21%;grid-template-columns: repeat(2, 1fr);">
+                <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
+                    <div class="cs-grid">
+                        <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
+                            Requests By Location
+                        </p>
+                        <span class="cs-text-sm" style="color: var(--text-color);">Requests Stats By Location</span>
+                    </div>
+                    <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
+                        <img class="stats-card-img" src="../../static/assets/imgs/resources/20220812_083902.jpg" alt="">
+                    </div>
+                </div>
+                <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
+                    <div class="cs-grid">
+                        <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
+                            Requests By Location
+                        </p>
+                        <span class="cs-text-sm" style="color: var(--text-color);">Requests Stats By Location</span>
+                    </div>
+                    <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
+                        <img class="stats-card-img" src="../../static/assets/imgs/resources/20220812_083930.jpg" alt="">
+                    </div>
+                </div>
+                <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
+                    <div class="cs-grid">
+                        <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
+                            Requests By Location
+                        </p>
+                        <span class="cs-text-sm" style="color: var(--text-color);">Requests Stats By Location</span>
+                    </div>
+                    <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
+                        <img class="stats-card-img" src="../../static/assets/imgs/resources/20220812_083930.jpg" alt="">
+                    </div>
+                </div>
+                <div class="cs-grid" style="--gap: .1rem;align-content: flex-start;padding: .25rem;grid-template-columns: repeat(2, 1fr);">
+                    {% if top_suppliers.results %}
+                        <div class="cs-grid br-md cs-justify-center" style="--gap: 1rem;padding: 0 0;align-content: flex-start;" data-context="{{top_suppliers.context_name}}">
+                            <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
+                                Top Suppliers
+                            </p>
+                            <div class="cs-grid" style="--gap: 1rem;">
+                                {% for supplier in top_suppliers.results %}
+                                    <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;justify-self: stretch;">
+                                        <div class="avator br-full cs-overflow-hidden">
+                                            <img src="/media/{{supplier.image}}" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
+                                        </div>
+                                        <div class="cs-grid">
+                                            <h5 class="cs-text-secondary" style="margin: 0;">{{supplier.profile.business_name}}</h5>
+                                            <span class="cs-text-accent cs-text-sm">View Profile</span>
+                                        </div>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if recent_payments.results %}
+                        <div class="cs-grid br-md cs-justify-center" style="--gap: .8rem;padding: 1rem 0;background-color: hsla(213, 28%, 19%, 85%);" data-context="{{recent_payments.context_name}}">
+                            <p class="cs-text-normal cs-font-bold cs-text-white" style="margin: 0;">
+                                Recent Payments
+                            </p>
+                            <div class="cs-grid cs-justify-start" style="--gap: 1rem;">
+                                {% for payment in recent_payments.results %}
+                                    <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
+                                        <div class="avator br-full cs-overflow-hidden">
+                                            <img src="/media/{{payment.supplier.image}}" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
+                                        </div>
+                                        <div class="cs-grid">
+                                            <h5 class="cs-text-secondary" style="margin: 0;">{{payment.supplier.profile.business_name}}</h5>
+                                            <span class="cs-text-accent cs-text-sm">View Details</span>
+                                        </div>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+
+    <!-- section area -->
+{% endblock %}

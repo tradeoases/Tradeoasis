@@ -7,7 +7,7 @@
                 <div class="cl cl1 w-3/12">
                     <img loading="lazy" src="{% static 'assets/imgs/resources/logo_website-e1652772171833-1.png' %}" alt="footer-logo" style="inline-size: 5rem;">
                 </div>
-                <div class="fc gap-6 w-9/12 grid gap-4" style="height:fit-content;margin:0">
+                <div class="fc gap-6 w-9/12 grid gap-4" style="height:70vh;margin:0">
                     <div class="flex hoverables" style="width:100%;">
                         <div class="cl cl2">
                             <h1>Let us help you</h1>
@@ -16,9 +16,6 @@
                                 <li><a href="#">Contact us</a></li>
                                 <li><a href="#">How to buy on Foroden</a></li>
                                 <li><a href="#">Payment Methods</a></li>
-                                <li><a href="#">Delivery</a></li>
-                                <li><a href="#">Delivery Timelines</a></li>
-                                <li><a href="#">Return Policy</a></li>
                                 <li><a href="#">Report a Product</a></li>
                             </ul>
                         </div>
@@ -32,8 +29,6 @@
                                 <li><a href="#">Dispute Resolution Policy</a></li>
                                 <li><a href="#">Privacy Policy</a></li>
                                 <li><a href="#">Cookie Notice</a></li>
-                                <li><a href="#">Free Delivery</a></li>
-                                <li><a href="#">Flash Sales</a></li>
                             </ul>
                         </div>
                         <div class="cl cl4">
@@ -42,9 +37,6 @@
                                 <li><a href="#">Sell on Foroden</a></li>
                                 <li><a href="#">Become a Sales Consultant</a></li>
                                 <li><a href="#">Become a Logistics Service Partner</a></li>
-                                <li><a href="#">Become a Foroden Delivery Agent</a></li>
-                                <li>View More<i class="ti-angle-down ti-angle-foot" id="toggle-dropdown-foot"></i>
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -91,6 +83,7 @@
                         <div class="grid gap-1 md:gap-2 flex-left-bottom grid">
                             <span class="hidden md:grid" style="color:#adacac;">© 2010-2022 Foroden</span>
                             <div class="flex gap-2">
+                                <a href="{% url 'app_admin:home' %}">Admin</a>
                                 <a href="#">Terms</a>
                                 <a href="#">Privacy</a>
                                 <a href="#">Legal</a>
@@ -117,14 +110,6 @@
             </div>
         </div>
     </footer>
-    <script>
-        const toggleDropdownFoot = document.querySelector('#toggle-dropdown-foot');
-        const dropdownFoot = document.querySelector('.dropdown-foot');
-        toggleDropdownFoot.addEventListener('click', () => {
-            // It looks like tailwind is blocking this class
-            dropdownFoot.classList.toggle('hide');
-        });
-    </script>
 
     <script src="{% static 'js/scripts.js' %}"></script>
 </body>

@@ -1,3 +1,6 @@
+img {
+    border-radius: 5px;
+}
 body {
     background-color: hsl(0, 0%, 99%);
     scroll-behavior: smooth;

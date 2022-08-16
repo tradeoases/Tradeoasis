@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // client page
         if (nav && nav.dataset['page'] === 'manager') {
-            const clientRoutes = ["manager-overview", "manager-showroom","manager-services", "manager-memberships","manager-products","manager-showroom-overview","manager-services-overview","manager-memberships-overview"];
+            const clientRoutes = ["manager-overview", "manager-showroom","manager-services", "manager-memberships","manager-showroom-overview","manager-services-overview","manager-memberships-overview"];
             
             // SWITCHING TABS
             activeTab = clientRoutes[0];
@@ -351,8 +351,8 @@ document.addEventListener('DOMContentLoaded', () => {
         subCategoryElem.classList.add(...['cs-grid', 'cs-align-center', 'subcategory-inputs']);
 
         subCategoryElem.innerHTML = `
-            <input type="text" name='subcategory-${subCategoryCount + 1}' id="subcategory-${subCategoryCount + 1}" placeholder="Sub Category Name">
-            <input type="file" name="sub-category-image-${subCategoryCount + 1}" id="sub-category-image-${subCategoryCount + 1}">
+            <input type="text" name='subcategory-${subCategoryCount + 1}' id="subcategory-${subCategoryCount + 1}" placeholder="Sub Category Name" required>
+            <input type="file" name="sub-category-image-${subCategoryCount + 1}" id="sub-category-image-${subCategoryCount + 1}" required>
             <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-hover-color cs-text-secondary br-full" id="add-input" style="padding: 1rem .5rem;" onclick="(function(){
             })();return false;">
                 <i class="fa fa-plus"></i>

@@ -1,0 +1,55 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% block content %}
+    <!-- section area -->
+        <!-- section selectors -->
+        <nav class="section-nav-area br-sm cs-bg-white outlined">
+            <ul class="cs-grid section-nav list-none list-outside" style="--gap: .25rem;">
+                <div class="cs-flex">
+                    <li class="cs-text-md cs-font-500">
+                        <a href="{% url 'app_admin:discussions' %}">Chatrooms</a>
+                    </li>
+                    <li class="cs-text-md cs-font-500 active">
+                        <a class="active" href="{% url 'app_admin:community' %}">Community</a>
+                    </li>
+                    <!-- <li class="cs-text-md cs-font-500">Chatrooms</li> -->
+                </div>
+            </ul>
+        </nav>
+        <!-- section selectors -->
+
+        <section class="content cs-grid br-sm" style="--gap: 1rem;">
+            <div class="inbox-area cs-grid" style="--gap: 1rem">
+                <div class="inbox outlined br-sm cs-align-start cs-content-start cs-grid" style="--gap:.5rem;padding: 1rem 1rem;">
+                    <div class="cs-flex cs-align-baseline cs-justify-between">
+                        <h4 class="cs-text-normal cs-text-secondary" style="margin: 0;">Discussions</h4>
+                        <span class="cs-text-md cs-text-accent" >10 Discussions</span>
+                    </div>
+                    <hr style="border: 1px solid hsl(0, 0%, 95%);">
+                    <ul class="list cs-grid cs-content-start" style="--gap: .25rem">
+                        <li>
+                            <a href="{% url 'app_admin:community-chat' %}" class="cs-grid" style="--gap:.25rem;">
+                                <p class="cs-flex cs-align-baseline cs-justify-between">
+                                    <span class="cs-grid cs-text-secondary cs-text-md">Failed Paypal Payment</span>
+                                </p>
+                                <p class="cs-flex cs-align-baseline cs-justify-start" style="--gap: .5rem;">                    
+                                    <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">10 Clients</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'app_admin:community-chat' %}" class="cs-grid" style="--gap:.25rem;">
+                                <p class="cs-flex cs-align-baseline cs-justify-between">
+                                    <span class="cs-grid cs-text-secondary cs-text-md">Failed Paypal Payment</span>
+                                </p>
+                                <p class="cs-flex cs-align-baseline cs-justify-start" style="--gap: .5rem;">                    
+                                    <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">10 Clients</span>
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    <!-- section area -->
+{% endblock %}

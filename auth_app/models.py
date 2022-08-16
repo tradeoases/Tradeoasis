@@ -53,9 +53,7 @@ class User(AbstractUser):
 
 class ClientProfile(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
-    business_name = models.CharField(
-        _("Business Name"), max_length=256, blank=True, null=True
-    )
+    business_name = models.CharField(_("Business Name"), max_length=256)
     slug = models.SlugField(
         _("Safe Url"),
         unique=True,

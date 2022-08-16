@@ -82,7 +82,9 @@ class ServiceImage(models.Model):
 class Showroom(models.Model):
     name = models.CharField(_("Name"), max_length=256)
     store = models.ManyToManyField(to=Store, related_name="store", default=None)
-    location = models.ForeignKey(to=Location, on_delete=models.CASCADE)
+    location = models.ForeignKey(
+        to=Location, on_delete=models.CASCADE, blank=True, null=True
+    )
     image = models.ImageField(
         verbose_name=_("Image"),
         upload_to=get_file_path,
