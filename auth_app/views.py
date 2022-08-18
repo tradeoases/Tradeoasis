@@ -17,12 +17,8 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.sites.shortcuts import get_current_site
 
 from auth_app import models as AuthModels
-from supplier import models as SupplierModels
-from buyer import models as BuyerModels
-from manager import models as ManagerModels
-from payment import models as PaymentModels
 
-from auth_app.forms import UserFormManager
+from auth_app.forms import UserProfileFormManager
 
 from auth_app.tasks import send_account_activation_email_task
 from auth_app.tokens import appTokenGenerator
@@ -31,6 +27,8 @@ class LoginView(View):
     template_name = 'auth_app/signin.html'
 
     def get(self, request):
+        if request.user.is_authenticated:
+            return redirect(reverse('manager:home'))
         context_data = {
             "view_name": _("Sign In")
         }
@@ -52,6 +50,8 @@ class LoginView(View):
             return redirect(reverse("auth_app:login"))
 
         login(request, user)
+        if request.GET.get('next'):
+            return redirect(reverse(request.GET.get('next')))
         return redirect(reverse('manager:home'))
 
 
@@ -59,6 +59,9 @@ class SignUpView(View):
     template_name = 'auth_app/signup.html'
 
     def get(self, request):
+        if request.user.is_authenticated:
+            return redirect(reverse('manager:home'))
+
         context_data = {
             "view_name": _("Sign Up")
         }
@@ -102,10 +105,10 @@ class SignUpView(View):
         email_body = render_to_string('email_message.html', {
             'name': user.username,
             'email': user.email,
-            'review': f"Your activation link is {activate_url}"
+            'review': "{} \n {}".format(_("Your activation link is"), activate_url)
         })
         email = EmailMessage(
-            'Activate Foroden Activation', email_body,
+            _('Activate Foroden Activation'), email_body,
             settings.DEFAULT_FROM_EMAIL, [user.email, ],
         )
         email.send(fail_silently=False)
@@ -126,7 +129,7 @@ class VerficationView(View):
             # to dashboard
             return redirect(reverse("auth_app:business"))
         else:
-            return HttpResponseNotFound("Bad Request")
+            return HttpResponseNotFound(_("Bad Request"))
 
 
 def LogoutView(request):
@@ -138,8 +141,37 @@ class BusinessProfileView(View):
     template_name = 'auth_app/business_infor.html'
 
     def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect(reverse('auth_app:login'))
+
+        if AuthModels.ClientProfile.objects.filter(user=request.user):
+            return redirect(reverse('manager:home'))
+
         context_data = {
             "view_name": _("Business Profile")
         }
 
         return render(request, self.template_name, context=context_data)
+
+    def post(self, request):
+        if not (request.POST.get('business_name') and request.POST.get('business_description') and request.POST.get('country') and request.POST.get('city') and request.POST.get('country_code') and request.POST.get('mobile_user')):
+            messages.add_message(request, messages.ERROR, _("Please Fill all reqiured fields."))
+            return redirect(reverse("auth_app:business"))
+
+
+        try:
+            AuthModels.ClientProfile.objects.create(
+                user = request.user,
+                business_name = request.POST.get('business_name'),
+                business_description = request.POST.get('business_description'),
+                country = request.POST.get('country'),
+                city = request.POST.get('city'),
+                country_code = request.POST.get('country_code'),
+                mobile_user = request.POST.get('mobile_user'),
+                vat_number = request.POST.get('vat_number', None),
+                legal_etity_identifier = request.POST.get('legal_etity_identifier', None),
+                website = request.POST.get('website', None)
+            )
+        except:
+            messages.add_message(request, messages.ERROR, _("An Error Occured. Try Again."))
+            return redirect(reverse("auth_app:business"))

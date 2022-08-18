@@ -66,6 +66,7 @@ class ProductListView(View):
         min_price = self.request.GET.get("min-price", 0)
         max_price = self.request.GET.get("max-price", None)
         supplier = self.request.GET.get("supplier", "All")
+        search = self.request.GET.get("search", None)
 
         if max_price and supplier != "All":
             return SupplierModels.Product.objects.filter(
@@ -92,6 +93,12 @@ class ProductListView(View):
                         clientprofile__business_name=supplier
                     ).first()
                 ),
+            )
+
+        elif search:
+            # we are searching for products based on name, sub category, category
+            return SupplierModels.Product.objects.filter(
+                Q(name__icontains=search) | Q(sub_category__name__icontains=search) | Q(category__name__icontains=search) 
             )
 
         return SupplierModels.Product.objects.filter(

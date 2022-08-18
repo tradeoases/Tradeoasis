@@ -136,7 +136,7 @@ class Contract(models.Model):
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def __str__(self) -> str:
-        return f"Supplier: {self.supplier.username}, Buyer: {self.supplier.username}"
+        return f"Supplier: {self.supplier.username}, Buyer: {self.buyer.username}"
 
 
 class ContractReceipt(models.Model):

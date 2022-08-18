@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views import View
 from django.views.generic import ListView, DetailView, TemplateView
 from django.db.models import Q
@@ -197,3 +198,17 @@ class AboutUsView(TemplateView):
 
         context["view_name"] = "About Us"
         return context
+
+
+def profile(request):
+    if not request.user.is_authenticated:
+        return redirect("{}?next={}".format(reverse("auth_app:login"), request.GET.get('next')))
+    
+    if request.user.account_type == "SUPPLIER":
+        # to supplier profile
+        return redirect(reverse("manager:home"))
+    elif request.user.account_type == "BUYER":
+        # to buyer profile
+        return redirect(reverse("buyer:profile"))
+    elif request.user.account_type == "SUPPORT" or request.user.is_superuser:
+        return redirect(reverse("app_admin:home"))

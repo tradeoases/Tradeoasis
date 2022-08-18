@@ -37,8 +37,8 @@ class User(AbstractUser):
         default=False
     )
     def save(self, *args, **kwargs):
-        # if self.base_type == self.Role.ADMIN:
-        #     self.is_superuser = True
+        if self.is_superuser:
+            self.is_email_activated = True
 
         if self.is_email_activated:
             self.is_active = True
@@ -66,10 +66,10 @@ class ClientProfile(models.Model):
     )
     business_description = models.TextField(_("Business Description"))
     country = models.CharField(_("Country"), max_length=256)
-    country_code = models.IntegerField(_("Country Code"))
+    country_code = models.CharField(_("Country Code"), max_length=20)
     city = models.CharField(_("City"), max_length=256)
-    mobile_user = models.CharField(_("Number"), max_length=12)
-    vat_number = models.IntegerField(_("VAT Number"), blank=True, null=True)
+    mobile_user = models.CharField(_("Number"), max_length=20)
+    vat_number = models.CharField(_("VAT Number"), blank=True, null=True, max_length=20)
     legal_etity_identifier = models.CharField(
         _("Legal Entity Identifier"), max_length=256, blank=True, null=True
     )

@@ -3,24 +3,40 @@
 {% block content %}
 
     <section class="grid">
-        <div class="grid px-8 py-8 rounded auth-area w-11/12 gap-4 mx-auto" style="border: 1px solid hsl(0, 0%, 95%);">
+        <div class="grid px-8 py-8 rounded auth-area w-10/12 gap-4 mx-auto" style="border: 1px solid hsl(0, 0%, 95%);">
             <div class="grid gap-1">
                 <h3 class="text-2xl font-medium text-lghterBackgroundColor" style="font-family: serif">Business Profile</h3>
-                <!-- <p class="text-base text-slate-700">Market your business with ease. -->
+                <p class="text-base text-slate-600">* Represents required fields.</p>
+                {% if messages %}
+                {% for message in messages %}
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                        <div class="flex justify-between content-center text-normal br-sm font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                            <p>{{ message }}</p>
+                            <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                        </div>
+                    {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                        <div class="flex justify-between content-center text-normal br-sm font-600" style="border: 1px solid rgb(37, 141, 2930);color: rgb(37, 141, 2930); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                            <p>{{ message }}</p>
+                            <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
             </div>
             <div class="grid gap-3 justify-content">
-                <form action="" class="grid gap-4">
+                <form action="{% url 'auth_app:business' %}" method="POST" class="grid gap-4">
+                    {% csrf_token %}
                     <div class="form-group grid gap-1">
-                        <label for="business_name" class="text-lghterBackgroundColor font-semibold text-base">Business Name</label>
+                        <label for="business_name" class="text-lghterBackgroundColor font-semibold text-base">Business Name *</label>
                         <input class="py-4" style="width: 100%;" type="text" id="business_name" required name="business_name">
                     </div>
                     <div class="form-group grid gap-1">
-                        <label for="description" class="text-lghterBackgroundColor font-semibold text-base">Business Description</label>
-                        <textarea class="py-4" rows="5" style="width: 100%;background: transparent;" type="text" id="description" required name="description"></textarea>
+                        <label for="description" class="text-lghterBackgroundColor font-semibold text-base">Business Description *</label>
+                        <textarea class="py-4" rows="5" style="width: 100%;background: transparent;" type="text" id="description" required name="business_description"></textarea>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="form-group grid gap-1">
-                            <label for="country" class="text-lghterBackgroundColor font-semibold text-base">Country</label>
+                            <label for="country" class="text-lghterBackgroundColor font-semibold text-base">Country *</label>
                             <input class="py-4" style="width: 100%;" type="text" id="country" required name="country" list="countries">
                             <datalist id="countries">
                                 <option value="Afghanistan" />
@@ -265,12 +281,12 @@
                             </datalist>
                         </div>
                         <div class="form-group grid gap-1">
-                            <label for="city" class="text-lghterBackgroundColor font-semibold text-base">City</label>
+                            <label for="city" class="text-lghterBackgroundColor font-semibold text-base">City *</label>
                             <input class="py-4" style="width: 100%;" type="text" id="city" required name="city">
                         </div>
                     </div>
                     <div class="form-group grid gap-1">
-                        <label for="business_line" class="text-lghterBackgroundColor font-semibold text-base">Business Line</label>
+                        <label for="business_line" class="text-lghterBackgroundColor font-semibold text-base">Business Line *</label>
                         <div class="grid gap-3" style="grid-template-columns: .15fr 1fr;">
                             <input class="py-4" style="width: 100%;" type="text" id="country_code" required name="country_code" list="tel-codes" placeholder="Country Code">
 
@@ -497,15 +513,15 @@
                     </div>
                     <div class="form-group grid gap-1">
                         <label for="vat_number" class="text-lghterBackgroundColor font-semibold text-base">VAT Number</label>
-                        <input class="py-4" style="width: 100%;" type="text" id="vat_number" required name="vat_number">
+                        <input class="py-4" style="width: 100%;" type="number" id="vat_number" name="vat_number">
                     </div>
                     <div class="form-group grid gap-1">
                         <label for="legal_etity_identifier" class="text-lghterBackgroundColor font-semibold text-base">Legal Entity Identifier</label>
-                        <input class="py-4" style="width: 100%;" type="text" id="legal_etity_identifier" required name="legal_etity_identifier">
+                        <input class="py-4" style="width: 100%;" type="text" id="legal_etity_identifier"  name="legal_etity_identifier">
                     </div>
                     <div class="form-group grid gap-1">
                         <label for="website" class="text-lghterBackgroundColor font-semibold text-base">Website</label>
-                        <input class="py-4" style="width: 100%;" type="url" id="website" required name="website">
+                        <input class="py-4" style="width: 100%;" type="url" id="website"  name="website">
                     </div>
                     <div class="form-group">
                         <input class="bg-backgroundColor hover:bg-backgroundColorHover text-white" style="width: 100%;" type="submit" value="Submit">
