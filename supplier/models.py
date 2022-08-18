@@ -9,6 +9,7 @@ from django.dispatch import receiver
 # python
 import os
 import uuid
+import string
 
 # apps
 from auth_app.models import Supplier
@@ -48,7 +49,7 @@ class Store(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
 
-        self.name = self.name.title()
+        self.name = string.capwords(self.name)
 
         super().save(*args, **kwargs)
 
@@ -70,7 +71,7 @@ class ProductCategory(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
 
-        self.name = self.name.title()
+        self.name = string.capwords(self.name)
 
         super().save(*args, **kwargs)
 
@@ -97,7 +98,7 @@ class ProductSubCategory(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
 
-        self.name = self.name.title()
+        self.name = string.capwords(self.name)
 
         super().save(*args, **kwargs)
 
@@ -122,7 +123,7 @@ class Product(models.Model):
         to=ProductSubCategory,
         on_delete=models.CASCADE,
     )
-    price = models.DecimalField(_("Price"), decimal_places=3, max_digits=6)
+    price = models.DecimalField(_("Price"), decimal_places=3, max_digits=12)
     currency = models.CharField(_("Currency"), max_length=6)
     slug = models.SlugField(
         _("Safe Url"),
@@ -138,7 +139,7 @@ class Product(models.Model):
         if not self.pk:
             self.category = self.sub_category.category
 
-        self.name = self.name.title()
+        self.name = string.capwords(self.name)
 
         super().save(*args, **kwargs)
 
@@ -177,7 +178,7 @@ class Service(models.Model):
     description = models.TextField(
         _("Description"),
     )
-    price = models.DecimalField(_("Price"), decimal_places=3, max_digits=12)
+    price = models.DecimalField(_("Price"), decimal_places=3, max_digits=122)
     currency = models.CharField(_("Currency"), max_length=6)
     contract_count = models.IntegerField(_("Number of contracts"), default=0)
     slug = models.SlugField(
@@ -191,7 +192,7 @@ class Service(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
 
-        self.name = self.name.title()
+        self.name = string.capwords(self.name)
 
         super().save(*args, **kwargs)
 

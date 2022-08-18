@@ -19,7 +19,7 @@
                             {% endfor %}
                         </ul>
                     </div>
-                    <a  class="side-menu-footer bg-yellowColor flex gap-1 py-3 text-white" href="{% url 'supplier:category-list' %}">
+                    <a class="side-menu-footer bg-yellowColor flex gap-1 px-6 items-center py-3 text-white rounded-b-md" href="{% url 'supplier:category-list' %}">
                         <i class="ti-menu"></i>
                         <span>All Categories</span>
                     </a>
@@ -29,7 +29,7 @@
                         <div class="single-image-product-card overflow-hidden rounded-md flex gap-0.5 card-outlined">
                             <div class="grid gap-1">
                                 <a class="grid gap-2" href="{% url 'supplier:product-detail' product.product.slug %}">
-                                    <img src="/media/{{product.images.image}}" alt="{{product.name}}" class="item-img rounded-sm" >
+                                    <img src="/media/{{product.images.image}}" style="object-fit: cover;" alt="{{product.name}}" class="item-img rounded-sm" >
                                     <div class="item-details grid gap-0 py-1 px-4 gap-2" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
                                         <p class="grid justify-start text-left">            
                                             <h5 class="text-sm font-bold leading-5">    

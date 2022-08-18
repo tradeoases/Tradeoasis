@@ -38,8 +38,8 @@
                 </div>
                 <div class="grid gap-2 justify-start">
                     <p class="flex items-center justify-items-start text-slate-700 gap-2" data-context="{{product_supplier.context_name}}">
-                        <span class="justify-self-start" style="inline-size: min-content;">Supplier: </span>
-                        <a href="{% url 'supplier:supplier-detail' product_supplier.results.profile.slug %}" class="grid px-4 py-1 bg-slate-200 place-items-center rounded-full text-backgroundColor" style="inline-size: min-content;">{{product_supplier.results.profile.business_name}}</a>
+                        <span class="justify-self-start">Supplier: </span>
+                        <a href="{% url 'supplier:supplier-detail' product_supplier.results.profile.slug %}" class="grid px-4 py-1 bg-slate-200 place-items-center rounded-full text-backgroundColor">{{product_supplier.results.profile.business_name}}</a>
                     </p>
                     <p class="text-slate-700 grid grid-flow-col flex-wrap gap-3 justify-start items-center" data-context="{{product_stores.context_name}}">
                         <span>Stores: </span>

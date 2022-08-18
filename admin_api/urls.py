@@ -14,6 +14,7 @@ urlpatterns = [
     path("products/", views.ProductsListView.as_view(), name="products-list"),
     path("product-images/<str:slug>", views.ProductImageListView.as_view(), name="product-images-list"),
     path("product/<str:slug>", views.ProductRetrieveView.as_view(), name="product"),
+    path("product/delete/<str:slug>", views.ProductDeleteView.as_view(), name="product-delete"),
     path("products/supplier/<str:slug>", views.SupplierProductsListView.as_view(), name="supplier-product"),
 
     path("contracts/", views.ContractsListView.as_view(), name="contracts-list"),
@@ -35,4 +36,6 @@ urlpatterns = [
     path("services/", views.ServicesListView.as_view(), name="services-list"),
     path("service/<str:slug>", views.ServiceRetrieveView.as_view(), name="service"),
 
+
+    path("suspend-account/<str:slug>", views.SuspendAccountView.as_view(), name="suspend"),
 ]

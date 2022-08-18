@@ -68,25 +68,33 @@
             </div>
             <div class="cs-grid" style="padding: .1rem 0;--gap: 1rem;--row-size: 21%;grid-template-columns: repeat(2, 1fr);">
                 <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
-                    <div class="cs-grid">
-                        <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
-                            showroom By Location
-                        </p>
-                        <span class="cs-text-sm" style="color: var(--text-color);">showroom Stats By Location</span>
+                    <div class="cs-grid cs-justify-between" style="--gap: 1rem;grid-template-columns: 1fr 1fr;">
+                        <div class="cs-grid">
+                            <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
+                                Requests
+                            </p>
+                            <span class="cs-text-sm" style="color: var(--text-color);">Requests Statistics</span>
+                        </div>
+                        <div id="request-selectors" class="selectors cs-flex cs-align-start" style="--gap: .5rem;">
+                            <button style="padding: 0.25rem .75rem;" class="active btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="day">Day</button>
+                            <button style="padding: 0.25rem .75rem;" class="btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="week">Week</button>
+                            <button style="padding: 0.25rem .75rem;" class="btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="month">Month</button>
+                            <button style="padding: 0.25rem .75rem;" class="btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="year">Year</button>
+                        </div>
                     </div>
-                    <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
-                        <img loading="lazy" class="stats-card-img" src="{% static 'assets/imgs/resources/20220812_083902.jpg' %}" alt="">
+                    <div>
+                        <canvas id="requests"></canvas>
                     </div>
                 </div>
                 <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
                     <div class="cs-grid">
                         <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
-                            services By Location
+                            Users
                         </p>
-                        <span class="cs-text-sm" style="color: var(--text-color);">services Stats By Location</span>
+                        <span class="cs-text-sm" style="color: var(--text-color);">Users Statistics</span>
                     </div>
-                    <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
-                        <img loading="lazy" class="stats-card-img" src="{% static 'assets/imgs/resources/20220812_083930.jpg' %}" alt="">
+                    <div>
+                        <canvas id="users" style="max-height: 266px;"></canvas>
                     </div>
                 </div>
             </div>
@@ -320,4 +328,87 @@
         <!-- modals -->
 
     <!-- section area -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            let mChart1 = createChart('Requests.',
+                'line',
+                ['10/08/2000', '10/08/2000', '10/08/2000','10/08/2000'],
+                [80, 100, 46, 70],
+                'requests'
+            );
+
+            let mChart2 = createChart('Users',
+                'doughnut',
+                ['Admin', 'Suppliers', 'Buyers'],
+                [20, 200, 100],
+                'users'
+            );
+
+            let mChart3 = createChart('Requests by location',
+                'bar',
+                ['Africa', 'Europe', 'Asia'],
+                [20, 200, 100],
+                'requests-by-location'
+            );
+
+
+            const actionBtns = document.querySelectorAll('.selectors button');
+            for (let i = 0; i < actionBtns.length; i++) {
+                actionBtns[i].addEventListener('click', e => {
+                    actionBtns.forEach(btn => {
+                        if (btn.classList.contains('active')) btn.classList.remove('active');
+                    });
+
+                    actionBtns[i].classList.add('active');
+
+                    if (actionBtns[i].getAttribute('id') === "day") {
+
+                        mChart1.destroy();
+                        mChart1 = createChart('Revenue per day.',
+                            'line',
+                            ['10/08/2000', '10/08/2000', '10/08/2000','10/08/2000'],
+                            [80, 100, 46, 70],
+                            'requests'
+                        );
+
+                    } else if (actionBtns[i].getAttribute('id') === "week") {
+
+                        mChart1.destroy();
+                        mChart1 = createChart('Revenue per week.',
+                            'line',
+                            ['week 1', 'week 1', 'week 1','week 1'],
+                            [80, 100, 46, 70],
+                            'requests'
+                        );
+
+                    } else if (actionBtns[i].getAttribute('id') === "month") {
+
+                        mChart1.destroy();
+                        mChart1 = createChart('Revenue per month.',
+                            'line',
+                            ['08/2000', '08/2000', '08/2000','08/2000'],
+                            [80, 100, 46, 70],
+                            'requests'
+                        );
+
+                    } else if (actionBtns[i].getAttribute('id') === "year") {
+
+                        mChart1.destroy();
+                        mChart1 = createChart('Revenue per year.',
+                            'line',
+                            ['2000', '2000', '2000','2000'],
+                            [40, 50, 46, 70],
+                            'requests'
+                        );
+                    } else {
+                        // console.log("");
+                    }
+                });
+            }
+        });
+    </script>
+
+
 {% endblock %}

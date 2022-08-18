@@ -1,0 +1,76 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% block content %}
+
+    <section class="grid container gap-6 items-start grid-cols-2 w-10/12">
+        <div class="grid px-8 py-8 rounded auth-area gap-4" style="border: 1px solid hsl(0, 0%, 80%);">
+            <div class="grid gap-1">
+                <h3 class="text-2xl font-medium text-lghterBackgroundColor" style="font-family: serif">Welcome Back</h3>
+                <p class="text-base text-slate-700">Thousands of products await.</p>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                            <div class="flex justify-between content-center text-normal br-sm font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                <p>{{ message }}</p>
+                                <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                            </div>
+                        {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                            <div class="flex justify-between content-center text-normal br-sm font-600" style="border: 1px solid rgb(37, 141, 2930);color: rgb(37, 141, 2930); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                <p>{{ message }}</p>
+                                <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="grid gap-3 justify-content">
+                <form action="{% url 'auth_app:login' %}" method="POST" class="grid gap-4">
+                    {% csrf_token %}
+                    <div class="form-group grid gap-1">
+                        <label for="username" class="text-lghterBackgroundColor font-semibold text-base">Username</label>
+                        <input class="py-4" style="width: 100%;" type="text" id="username" name="username" required>
+                    </div>
+                    <div class="form-group grid gap-1">
+                        <label for="password" class="text-lghterBackgroundColor font-semibold text-base">Password</label>
+                        <input class="py-4" style="width: 100%;" type="password" id="password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <input class="bg-backgroundColor hover:bg-backgroundColorHover text-white" style="width: 100%;" type="submit" value="Login">
+                    </div>
+                </form>
+            </div>
+            <div class="separator">
+                <span>Or</span>
+            </div>
+            <div class="sign-in-with grid gap-2">
+                <a href="" class="flex justify-center gap-10 border border-solid border-slate-400  hover:border-slate-600 px-6 py-3 items-center rounded color text-lghterBackgroundColor">
+                    <i class="fa fa-google"></i>
+                    <span>Continue With Google</span>
+                </a>
+                <a href="" class="flex justify-center gap-10 border border-solid border-slate-400  hover:border-slate-600 px-6 py-3 items-center rounded color text-lghterBackgroundColor">
+                    <i class="fa fa-linkedin"></i>
+                    <span>Continue With LinkedIn</span>
+                </a>
+            </div>
+        </div>
+        <div class="grid container px-8 py-8 rounded auth-area gap-4" style="border: 1px solid hsl(0, 0%, 80%);">
+            <div class="grid gap-1">
+                <h3 class="text-2xl font-medium text-lghterBackgroundColor" style="font-family: serif">Welcome To Foroden</h3>
+                <p class="text-base font-normal text-slate-700">Join the biggest community of over 70,000 Business People.
+                </p>
+            </div>
+            <div class="separator" style="--line-width: 35%;">
+                <span>Sign Up As</span>
+            </div>
+            <div class="sign-in-with grid grid-cols-1 md:grid-cols-2 grid-cols-1 gap-2">
+                <a href="{% url 'auth_app:signup' %}?supplier=1" class="flex justify-center gap-10 bg-yellowColor text-white px-6 py-3 items-center rounded color text-lghterBackgroundColor">
+                    <span>Supplier</span>
+                </a>
+                <a href="{% url 'auth_app:signup' %}?buyer=1" class="flex justify-center gap-10 bg-lghterBackgroundColor text-white px-6 py-3 items-center rounded color text-lghterBackgroundColor">
+                    <span>Buyer</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

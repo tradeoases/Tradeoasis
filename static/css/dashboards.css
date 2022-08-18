@@ -548,4 +548,14 @@ tbody tr td.delete {
 
 /* body */
 
+.selectors button {
+    transition: all .2s ease-out;
+}
+
+.selectors .btn.active {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+}
+
 /* components */

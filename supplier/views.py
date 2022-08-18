@@ -585,4 +585,5 @@ class SearchView(View):
         )
 
     def get_queryset(self):
-        context['str']
+        # context['str']
+        pass

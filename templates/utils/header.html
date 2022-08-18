@@ -129,14 +129,17 @@
                                     <a class="grid items-center py-3 px-8" href="">Dashboard</a>
                                 </li>
                                 <li>
-                                    <a class="grid items-center py-3 px-8" href="">Wishlists</a>
-                                </li>
-                                <li>
                                     <a class="grid items-center py-3 px-8" href="">Settings</a>
                                 </li>
-                                <li>
-                                    <a class="grid items-center py-3 px-8" href="">Logout</a>
-                                </li>
+                                {%  if request.user.is_authenticated %}
+                                    <li>
+                                        <a class="grid items-center py-3 px-8" href="{% url 'auth_app:logout' %}">Logout</a>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <a class="grid items-center py-3 px-8" href="{% url 'auth_app:login' %}">Login</a>
+                                    </li>
+                                {% endif %}
                             </ul>
                         </li>
                     </ul>
@@ -159,7 +162,7 @@
 
             <ul class="flex text-base text-white">
                 <li>
-                    <a class="grid py-3 px-4 bg-yellowColor hover:bg-yellowColorHover font-semibold transition-colors transition-200 ease-in" href="#">Sell On Foroden</a>
+                    <a class="grid py-3 px-4 bg-yellowColor hover:bg-yellowColorHover font-semibold transition-colors transition-200 ease-in" href="{% url 'auth_app:signup' %}">Sell On Foroden</a>
                 </li>
             </ul>
         </div>

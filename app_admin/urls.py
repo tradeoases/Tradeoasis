@@ -22,4 +22,7 @@ urlpatterns = [
     path(
         "community/chat", views.AdminCommunityChatView.as_view(), name="community-chat"
     ),
+
+    # contact
+    path("contact/<str:slug>", views.ContactClient.as_view(), name='contact')
 ]

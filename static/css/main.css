@@ -1,5 +1,5 @@
 img {
-    border-radius: 5px;
+    border-radius: 5px !important;
 }
 body {
     background-color: hsl(0, 0%, 99%);
@@ -55,7 +55,7 @@ body.menuOpen::after {
 .search-form-mobile input {
     border: none;
     outline: none;
-    background-color: #fff !important;
+    background-color: #fff;
 }
 
 .search-bar:focus {
@@ -702,4 +702,25 @@ footer a:hover {
 
 .sec-title {
     color: hsl(38, 95%, 47%) !important;
+}
+
+.separator {
+    --line-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: hsl(185, 21%, 75%);
+    gap: .75rem;
+}
+
+.separator::after,
+.separator::before {
+    content: "";
+    inline-size: var(--line-width);
+    border: 1px solid hsl(0, 0%, 90%);
+}
+
+form input.error {
+    --danger-color: hsl(0, 100%, 35%);
+    border: 2px solid var(--danger-color);
 }

@@ -1,0 +1,116 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% block content %}
+
+    <section class="grid">
+        <div class="grid container px-8 py-8 rounded auth-area w-6/12 gap-4" style="border: 1px solid hsl(0, 0%, 85%);">
+            <div class="grid gap-1">
+                <h3 class="text-2xl font-medium text-lghterBackgroundColor" style="font-family: serif">Welcome To Foroden</h3>
+                <p class="text-base text-slate-700">Join the biggest community of over 70,000 Business People.
+                    
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                            <div class="flex justify-between content-center text-normal br-sm font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                <p>{{ message }}</p>
+                                <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                            </div>
+                        {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                            <div class="flex justify-between content-center text-normal br-sm font-600" style="border: 1px solid rgb(37, 141, 2930);color: rgb(37, 141, 2930); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                <p>{{ message }}</p>
+                                <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="grid gap-3 justify-content">
+                <form action="{% url 'auth_app:signup' %}" method="POST" class="grid gap-4">
+                    {% csrf_token %}
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="form-group grid gap-1">
+                            <label for="first_name" class="text-lghterBackgroundColor font-semibold text-base">First Name</label>
+                            <input class="py-4" style="width: 100%;" type="text" id="first_name" required name="first_name">
+                        </div>
+                        <div class="form-group grid gap-1">
+                            <label for="last_name" class="text-lghterBackgroundColor font-semibold text-base">Last Name</label>
+                            <input class="py-4" style="width: 100%;" type="text" id="last_name" required name="last_name">
+                        </div>
+                    </div>
+                    <div class="form-group grid gap-1">
+                        <label for="username" class="text-lghterBackgroundColor font-semibold text-base">Username</label>
+                        <input class="py-4" style="width: 100%;" type="text" id="username" required name="username">
+                    </div>
+                    <div class="form-group grid gap-1">
+                        <label for="email" class="text-lghterBackgroundColor font-semibold text-base">Email</label>
+                        <input class="py-4" style="width: 100%;" type="email" id="email" required name="email">
+                    </div>
+                    <div class="form-group grid gap-1">
+                        <label for="password" class="text-lghterBackgroundColor font-semibold text-base">Password</label>
+                        <input class="py-4" style="width: 100%;" type="password" id="password" required name="password">
+                        <div class="flex gap-2 my-2">
+                            <input class="border-none outline-none focus:outline-none focus:border-none hover:outline-none hover:border-none" type="checkbox" id="show-password">
+                            <label for="show-password">Show Password</label>
+                        </div>
+                    </div>
+                    <div class="form-group grid gap-1">
+                        <label for="confirm-password" class="text-lghterBackgroundColor font-semibold text-base">Confirm Password</label>
+                        <input class="py-4" style="width: 100%;" type="password" id="confirm-password" required name="confirm-password">
+                    </div>
+                    <div class="form-group">
+                        <input class="bg-backgroundColor hover:bg-backgroundColorHover text-white" style="width: 100%;" type="submit" value="Sign Up">
+                    </div>
+                </form>
+                <p class="text-center" style="color: rgb(2, 74, 80)">New To Foroden? 
+                    <a href="">Create An Account</a></p>
+            </div>
+            <div class="separator">
+                <span>Or</span>
+            </div>
+            <div class="sign-in-with grid grid-cols-1 md:grid-cols-2 gap-2">
+                <a href="" class="flex justify-center gap-10 border border-solid border-slate-400  hover:border-slate-600 px-6 py-3 items-center rounded color text-lghterBackgroundColor">
+                    <i class="fa fa-google"></i>
+                    <span>Continue With Google</span>
+                </a>
+                <a href="" class="flex justify-center gap-10 border border-solid border-slate-400  hover:border-slate-600 px-6 py-3 items-center rounded color text-lghterBackgroundColor">
+                    <i class="fa fa-linkedin"></i>
+                    <span>Continue With LinkedIn</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <script>
+        const confirmPassword = document.querySelector('#confirm-password');
+        const password = document.querySelector('#password');
+        const form = document.querySelector('form');
+        
+        if (confirmPassword) {
+            confirmPassword.addEventListener('keyup', () => {
+                if (confirmPassword.value !== password.value) {
+                    confirmPassword.classList.add('error');
+                    form.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        return false;
+                    })
+                }
+                else {
+                    confirmPassword.classList.remove('error')
+                }
+            })
+        }
+
+        document.querySelector("#show-password").addEventListener('change', () => {
+            console.log(password.value)
+            if (password.value) {
+                if(password.type != 'text') {
+                    password.type = 'text';
+                } else {
+                    password.type = 'password';
+                }
+            }
+        })
+    </script>
+
+{% endblock %}

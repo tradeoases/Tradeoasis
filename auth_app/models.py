@@ -4,11 +4,10 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils.translation import gettext_lazy as _
 from django.utils.text import slugify
 
-
 # python
 import os
 import uuid
-
+import string
 
 # utility functions
 def get_file_path(instance, filename):
@@ -24,7 +23,7 @@ class User(AbstractUser):
         SUPPLIER = "SUPPLIER", "Supplier"
         BUYER = "BUYER", "Buyer"
 
-    base_type = Role.ADMIN
+    base_type = Role.SUPPLIER
 
     account_type = models.CharField(
         _("Account Type"), max_length=50, choices=Role.choices
@@ -33,17 +32,22 @@ class User(AbstractUser):
     image = models.ImageField(
         verbose_name=_("Image"), upload_to=get_file_path, blank=True, null=True
     )
-
+    is_email_activated = models.BooleanField(
+        _("Email Activated"),
+        default=False
+    )
     def save(self, *args, **kwargs):
-        # check if instance is already existing
+        # if self.base_type == self.Role.ADMIN:
+        #     self.is_superuser = True
+
+        if self.is_email_activated:
+            self.is_active = True
+        else:
+            self.is_active = False
+
         if not self.pk:
-            # by default is admin
-            if self.base_type == self.Role.ADMIN:
-                self.is_superuser = True
-            else:
-                self.is_active = False
             self.account_type = self.base_type
-            super().save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         if self.get_username:
@@ -73,7 +77,7 @@ class ClientProfile(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.business_name:
-            self.business_name = self.user.username.title()
+            self.business_name = string.capwords(self.user.username)
 
         self.slug = slugify(self.business_name)
         super().save(*args, **kwargs)
@@ -86,7 +90,6 @@ class SupplierManager(BaseUserManager):
     def get_queryset(self, *args, **kwargs):
         results = super().get_queryset(*args, **kwargs)
         return results.filter(account_type=User.Role.SUPPLIER)
-
 
 class Supplier(User):
 

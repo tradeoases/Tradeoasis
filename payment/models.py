@@ -9,6 +9,7 @@ from django.dispatch import receiver
 # python
 import datetime
 from dateutil.relativedelta import relativedelta
+import string
 
 # apps
 from auth_app.models import Buyer, Supplier
@@ -33,7 +34,7 @@ class MembershipPlan(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
 
-        self.name = self.name.title()
+        self.name = string.capwords(self.name)
 
         super().save(*args, **kwargs)
 

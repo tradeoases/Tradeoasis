@@ -41,25 +41,33 @@
             </div>
             <div class="cs-grid" style="padding: .1rem 0;--gap: 1rem;--row-size: 21%;grid-template-columns: repeat(2, 1fr);">
                 <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
-                    <div class="cs-grid">
-                        <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
-                            Suppliers By Location
-                        </p>
-                        <span class="cs-text-sm" style="color: var(--text-color);">Suppliers Stats By Location</span>
+                    <div class="cs-grid cs-justify-between" style="--gap: 1rem;grid-template-columns: 1fr 1fr;">
+                        <div class="cs-grid">
+                            <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
+                                Requests
+                            </p>
+                            <span class="cs-text-sm" style="color: var(--text-color);">Requests Statistics</span>
+                        </div>
+                        <div id="request-selectors" class="selectors cs-flex cs-align-start" style="--gap: .5rem;">
+                            <button style="padding: 0.25rem .75rem;" class="active btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="day">Day</button>
+                            <button style="padding: 0.25rem .75rem;" class="btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="week">Week</button>
+                            <button style="padding: 0.25rem .75rem;" class="btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="month">Month</button>
+                            <button style="padding: 0.25rem .75rem;" class="btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="year">Year</button>
+                        </div>
                     </div>
-                    <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
-                        <img loading="lazy" class="stats-card-img" src="{% static 'assets/imgs/resources/20220812_083902.jpg' %}" alt="">
+                    <div>
+                        <canvas id="requests"></canvas>
                     </div>
                 </div>
                 <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
                     <div class="cs-grid">
                         <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
-                            Buyers By Location
+                            Users
                         </p>
-                        <span class="cs-text-sm" style="color: var(--text-color);">Buyers Stats By Location</span>
+                        <span class="cs-text-sm" style="color: var(--text-color);">Users Statistics</span>
                     </div>
-                    <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
-                        <img loading="lazy" class="stats-card-img" src="{% static 'assets/imgs/resources/20220812_083930.jpg' %}" alt="">
+                    <div>
+                        <canvas id="users" style="max-height: 266px;"></canvas>
                     </div>
                 </div>
             </div>
@@ -334,7 +342,7 @@
                     <button id="veiw-product-cta" class="btn cs-grid cs-justify-center cs-align-center cs-bg-primary cs-text-white cs-text-md br-sm">
                         View Products
                     </button>
-                    <a href="./create_mail.html" class="btn cs-grid cs-justify-center cs-align-center cs-bg-secondary cs-text-white cs-text-md br-sm">
+                    <a id="contact-user-cta" class="btn cs-grid cs-justify-center cs-align-center cs-bg-secondary cs-text-white cs-text-md br-sm">
                         Contact Client
                     </a>
                     <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-danger cs-text-white cs-text-md br-sm" data-userId="1" id="suspend-btn">
@@ -394,7 +402,7 @@
                     <a id="view-product-page" class="btn cs-grid cs-justify-center cs-align-center cs-bg-white outlined cs-text-secondary cs-text-md br-sm">
                         View Product Page
                     </a>
-                    <a href="./create_mail.html" class="btn cs-grid cs-justify-center cs-align-center cs-bg-secondary cs-text-white cs-text-md br-sm">
+                    <a id="contact-user-cta" class="btn cs-grid cs-justify-center cs-align-center cs-bg-secondary cs-text-white cs-text-md br-sm">
                         Contact Client
                     </a>
                     <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-danger cs-text-white cs-text-md br-sm" data-productId="1" id="suspend-btn">
@@ -447,9 +455,9 @@
                     <a href="./create_mail.html" class="btn cs-grid cs-justify-center cs-align-center cs-bg-secondary cs-text-white cs-text-md br-sm">
                         Contact Client
                     </a>
-                    <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-danger cs-text-white cs-text-md br-sm" data-contractId="1" id="suspend-btn">
+                    <!-- <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-danger cs-text-white cs-text-md br-sm" data-contractId="1" id="suspend-btn">
                         Suspend Contract
-                    </button>
+                    </button> -->
                 </div>
             </div>
         </div>
@@ -463,9 +471,11 @@
                 </div>
             </div>
             <hr class="cs-block" style="border: 1px solid hsl(0, 0%, 95%);">
-            <p class="cs-text-normal cs-text-secondary" id="confirm-msg"></p>
+            <div class="cs-grid" id="msg">
+                <p class="cs-text-normal cs-text-secondary" id="confirm-msg"></p>
+            </div>
             <div class="modal-cta cs-flex" style="--gap: 1rem;margin-block-start: .5rem;">
-                <form action="" method="post">
+                <form action="" method="POST">
                     <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-danger cs-text-white cs-text-md br-sm">
                         Continue
                     </button>
@@ -478,4 +488,86 @@
         <!-- modals -->
 
     <!-- section area -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            let mChart1 = createChart('Requests.',
+                'line',
+                ['10/08/2000', '10/08/2000', '10/08/2000','10/08/2000'],
+                [80, 100, 46, 70],
+                'requests'
+            );
+
+            let mChart2 = createChart('Users',
+                'doughnut',
+                ['Admin', 'Suppliers', 'Buyers'],
+                [20, 200, 100],
+                'users'
+            );
+
+            let mChart3 = createChart('Requests by location',
+                'bar',
+                ['Africa', 'Europe', 'Asia'],
+                [20, 200, 100],
+                'requests-by-location'
+            );
+
+
+            const actionBtns = document.querySelectorAll('.selectors button');
+            for (let i = 0; i < actionBtns.length; i++) {
+                actionBtns[i].addEventListener('click', e => {
+                    actionBtns.forEach(btn => {
+                        if (btn.classList.contains('active')) btn.classList.remove('active');
+                    });
+
+                    actionBtns[i].classList.add('active');
+
+                    if (actionBtns[i].getAttribute('id') === "day") {
+
+                        mChart1.destroy();
+                        mChart1 = createChart('Revenue per day.',
+                            'line',
+                            ['10/08/2000', '10/08/2000', '10/08/2000','10/08/2000'],
+                            [80, 100, 46, 70],
+                            'requests'
+                        );
+
+                    } else if (actionBtns[i].getAttribute('id') === "week") {
+
+                        mChart1.destroy();
+                        mChart1 = createChart('Revenue per week.',
+                            'line',
+                            ['week 1', 'week 1', 'week 1','week 1'],
+                            [80, 100, 46, 70],
+                            'requests'
+                        );
+
+                    } else if (actionBtns[i].getAttribute('id') === "month") {
+
+                        mChart1.destroy();
+                        mChart1 = createChart('Revenue per month.',
+                            'line',
+                            ['08/2000', '08/2000', '08/2000','08/2000'],
+                            [80, 100, 46, 70],
+                            'requests'
+                        );
+
+                    } else if (actionBtns[i].getAttribute('id') === "year") {
+
+                        mChart1.destroy();
+                        mChart1 = createChart('Revenue per year.',
+                            'line',
+                            ['2000', '2000', '2000','2000'],
+                            [40, 50, 46, 70],
+                            'requests'
+                        );
+                    } else {
+                        // console.log("");
+                    }
+                });
+            }
+        });
+    </script>
+
 {% endblock %}

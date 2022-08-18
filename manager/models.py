@@ -1,3 +1,4 @@
+import string
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -49,7 +50,7 @@ class Service(models.Model):
     def save(self, *args, **kwargs):
         self.slug = f"{slugify(self.name)}-{uuid.uuid4()}"[:50]
 
-        self.name = self.name.title()
+        self.name = string.capwords(self.name)
 
         super().save(*args, **kwargs)
 
@@ -102,7 +103,7 @@ class Showroom(models.Model):
     def save(self, *args, **kwargs):
         self.slug = f"{slugify(self.name)}-{uuid.uuid4()}"[:50]
 
-        self.name = self.name.title()
+        self.name = string.capwords(self.name)
 
         super().save(*args, **kwargs)
 

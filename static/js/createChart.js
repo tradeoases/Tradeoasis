@@ -1,8 +1,3 @@
-
-
-
-
-
 // Charts
 function createChart(title = '', type = 'bar', labels = [], mdata = [], canvasId) {
     if (labels.length == 0 && mdata.length == 0) return;
@@ -61,8 +56,6 @@ function createChart(title = '', type = 'bar', labels = [], mdata = [], canvasId
             }
         };
     }
-
-
 
     // Render chart
     const myChart = new Chart(

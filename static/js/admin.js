@@ -35,6 +35,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const BASE_URL = 'http://localhost:8000/';
 
 
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+
     const paginate = (response, invoker) => {
         document.querySelector('section.content:not(.cs-hidden) #next-page').addEventListener('click', () => {
             if (response.count / 10 > pageNum)
@@ -79,8 +96,12 @@ document.addEventListener('DOMContentLoaded', () => {
         clientModal.querySelector('#client-lei').textContent = response.legal_etity_identifier;
         clientModal.querySelector('#client-membership').textContent = response.membership;
         
-        clientModal.querySelector('#view-client-page').href = `${BASE_URL}suppliers/supplier/${response.slug}`
-        
+        if (response.user.account_type == "SUPPLER") {
+            clientModal.querySelector('#view-client-page').href = `${BASE_URL}suppliers/supplier/${response.slug}`
+        }
+
+        // contact user
+        clientModal.querySelector('#contact-user-cta').href = `${BASE_URL}support/admin/contact/${response.slug}`
 
         // get stores
         if (response.user.account_type == 'SUPPLIER') {
@@ -140,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (isClientModalOpen) {
-            clientModal.querySelector('#suspend-btn').addEventListener('click', (e) => openOperationConfirmModal(msg='Are you sure you want to suspend client account.', postUrl='test/', data={"id": e.target.dataset['userid']}))
+            clientModal.querySelector('#suspend-btn').addEventListener('click', (e) => openOperationConfirmModal(msg='Are you sure you want to suspend client account.', postUrl= `suspend-account/${response.slug}`, data={"id": e.target.dataset['userid']}))
         }
     }
 
@@ -175,6 +196,8 @@ document.addEventListener('DOMContentLoaded', () => {
         productModal.querySelector('#product-description').textContent = response.description;
         
         productModal.querySelector('#view-product-page').href = `${BASE_URL}suppliers/products/${response.slug}`
+        // contact user
+        productModal.querySelector('#contact-user-cta').href = `${BASE_URL}support/admin/contact/${response.supplier_slug}`
 
 
         let storesElem = document.querySelector('#product-images');
@@ -198,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         if (isProductModalOpen) {
-            productModal.querySelector('#suspend-btn').addEventListener('click', (e) => openOperationConfirmModal(msg='Are you sure you want to suspend product.', postUrl='test/', data={"id": e.target.dataset['productid']}))
+            productModal.querySelector('#suspend-btn').addEventListener('click', (e) => openOperationConfirmModal(msg='Are you sure you want to suspend product.', postUrl=`product/delete/${response.slug}`, data={"id": e.target.dataset['productid']}))
         }
     }
 
@@ -748,7 +771,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // CONFIRM MODAL
     const openOperationConfirmModal = (msg, postUrl, data) => {
         operationConfirmModal.querySelector('#confirm-msg').textContent = msg;
-        operationConfirmModal.querySelector('form').action = postUrl;
+        operationConfirmModal.querySelector('form').action = `${BASE_API_URL}/${postUrl}`;
 
         document.body.classList.add('modal-open');
         operationConfirmModal.classList.remove('cs-hidden');
@@ -762,8 +785,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 isOperationConfirmModal = false;
             })
 
-            operationConfirmModal.querySelector('form').addEventListener('click', (e) => {
+            operationConfirmModal.querySelector('form').addEventListener('submit', (e) => {
                 e.preventDefault();
+
+                fetch(`${BASE_API_URL}/${postUrl}`, {
+                    method: "POST",
+                    headers: {'X-CSRFToken': getCookie('csrftoken')},
+                })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.reload()
+                    }
+                    else {
+                        const err = document.createElement('p');
+                        err.className = 'cs-text-md';
+                        err.style.color = 'red';
+                        err.textContent = "An Error Occured! Reload Page."
+                        operationConfirmModal.querySelector('#msg').appendChild(err);
+                    }
+                })
             })
         }
     }

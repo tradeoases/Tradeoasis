@@ -1,11 +1,11 @@
-from audioop import reverse
-from unicodedata import category
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 from django.views.generic import CreateView
 from django.utils.translation import gettext as _
 from django.contrib import messages
+
+import string
 
 from auth_app import models as AuthModels
 from supplier import models as SupplierModels
@@ -15,8 +15,10 @@ from payment import models as PaymentModels
 
 from manager import forms as ManagerForms
 
+from app_admin.mixins import SupportOnlyAccessMixin
 
-class AdminDashboardView(View):
+
+class AdminDashboardView(SupportOnlyAccessMixin, View):
     template_name = "app_admin/index.html"
 
     def get(self, request):
@@ -79,7 +81,7 @@ class AdminDashboardView(View):
         return context_data
 
 
-class AdminClientsView(View):
+class AdminClientsView(SupportOnlyAccessMixin, View):
     template_name = "app_admin/clients.html"
 
     def get(self, request):
@@ -127,7 +129,7 @@ class AdminClientsView(View):
         return context_data
 
 
-class AdminManagersView(View):
+class AdminManagersView(SupportOnlyAccessMixin, View):
     template_name = "app_admin/manager.html"
 
     def get(self, request):
@@ -166,7 +168,7 @@ class AdminManagersView(View):
         return context_data
 
 
-class ServiceCreateView(CreateView):
+class ServiceCreateView(SupportOnlyAccessMixin, CreateView):
     template_name = "app_admin/service_create.html"
     model = ManagerModels.Service
     fields = ["name", "description"]
@@ -198,7 +200,7 @@ class ServiceCreateView(CreateView):
         return context_data
 
 
-class ShowroomCreateView(CreateView):
+class ShowroomCreateView(SupportOnlyAccessMixin, CreateView):
     template_name = "app_admin/showroom_create.html"
     model = ManagerModels.Showroom
     fields = ["name", "location", "image"]
@@ -230,7 +232,7 @@ class ShowroomCreateView(CreateView):
         return context_data
 
 
-class CategoryCreateView(View):
+class CategoryCreateView(SupportOnlyAccessMixin, View):
     template_name = "app_admin/productcategorycreate.html"
 
     def get_context_data(self):
@@ -248,7 +250,7 @@ class CategoryCreateView(View):
         name = request.POST.get("category-name")
         image = request.FILES.get("category-image")
 
-        category = SupplierModels.ProductCategory.objects.filter(name=name.title())
+        category = SupplierModels.ProductCategory.objects.filter(name=string.capwords(name))
         if category.exists():
             messages.add_message(
                 request, messages.ERROR, _(f"Category({name}) already exists.")
@@ -264,7 +266,7 @@ class CategoryCreateView(View):
             sub_cat_image = request.FILES.get(f"subcategory-{i}")
 
             if SupplierModels.ProductSubCategory.objects.filter(
-                name=sub_cat_name.title()
+                name=string.capwords(sub_cat_name)
             ).exists():
                 messages.add_message(
                     request,
@@ -285,7 +287,7 @@ class CategoryCreateView(View):
         return redirect(reverse("app_admin:category-create"))
 
 
-class AdminDiscussionsView(View):
+class AdminDiscussionsView(SupportOnlyAccessMixin, View):
     template_name = "app_admin/support/index.html"
 
     def get_context_data(self):
@@ -300,7 +302,7 @@ class AdminDiscussionsView(View):
         return render(request, self.template_name, context=self.get_context_data())
 
 
-class AdminChatView(View):
+class AdminChatView(SupportOnlyAccessMixin, View):
     template_name = "app_admin/support/chat.html"
 
     def get_context_data(self):
@@ -315,7 +317,7 @@ class AdminChatView(View):
         return render(request, self.template_name, context=self.get_context_data())
 
 
-class AdminCommunityView(View):
+class AdminCommunityView(SupportOnlyAccessMixin, View):
     template_name = "app_admin/support/community.html"
 
     def get_context_data(self):
@@ -330,7 +332,7 @@ class AdminCommunityView(View):
         return render(request, self.template_name, context=self.get_context_data())
 
 
-class AdminCommunityChatView(View):
+class AdminCommunityChatView(SupportOnlyAccessMixin, View):
     template_name = "app_admin/support/discussion.html"
 
     def get_context_data(self):
@@ -343,3 +345,27 @@ class AdminCommunityChatView(View):
 
     def get(self, request):
         return render(request, self.template_name, context=self.get_context_data())
+
+class ContactClient(SupportOnlyAccessMixin, View):
+    template_name = "app_admin/create_mail.html"
+    def get(self, request, slug):
+
+        # client profile slug sent
+        user = AuthModels.ClientProfile.objects.filter(slug=slug).first().user
+
+        # get user
+        context_data = {
+            "user": user,
+            "view_name" : "Client Contact",
+            "slug" : slug,
+            "active_tab": "Manager"
+        }
+
+        return render(request, self.template_name, context=context_data)
+
+    def post(self, request):
+        # send email
+
+        # save a copy
+
+        pass

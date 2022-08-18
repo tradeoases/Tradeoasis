@@ -20,7 +20,6 @@ class UserSerializer(serializers.ModelSerializer):
             "date_joined",
         )
 
-
 class MembershipSerializer(serializers.ModelSerializer):
     class Meta:
         model = PaymentModels.Membership
@@ -92,6 +91,9 @@ class ProductsSerializer(serializers.ModelSerializer):
         representation["supplier"] = SuppliersSerializer(
             instance.store.all().first().supplier.profile
         ).data.get("business_name")
+        representation["supplier_slug"] = SuppliersSerializer(
+            instance.store.all().first().supplier.profile
+        ).data.get("slug")
         return representation
 
 class ProductImagesSerializer(serializers.ModelSerializer):

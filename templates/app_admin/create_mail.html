@@ -7,13 +7,17 @@
             <!-- when not in display -> cs-hidden -->
         
         <section class="content br-sm outlined" style="--gap: 1rem;">
-            <form action="" id="mail-form" class="cs-grid br-sm" enctype="multipart/form-data" style="padding: 2rem;--gap:1rem;">
+            <form action="{% url 'app_admin:contact' slug %}" method="POST" id="mail-form" class="cs-grid br-sm" style="padding: 2rem;--gap:1rem;">
                 <h2 style="margin: 0;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
                     Compose Email.
                 </h2>
                 <div class="form-group cs-grid" style="--gap: .5rem;">
                     <label for="client-name" class="cs-text-normal" style="color: var(--text-color);">Client</label>
-                    <input type="text" name="client-name" id="client-name">
+                    <input type="text" name="client-name" id="client-name" readonly value="{{user.username}}">
+                </div>
+                <div class="form-group cs-grid" style="--gap: .5rem;">
+                    <label for="client-email" class="cs-text-normal" style="color: var(--text-color);">Client</label>
+                    <input type="text" email="client-email" id="client-email" readonly value="{{user.email}}">
                 </div>
                 <div class="form-group cs-grid" style="--gap: .5rem;">
                     <label for="subject" class="cs-text-normal" style="color: var(--text-color);">Subject</label>
