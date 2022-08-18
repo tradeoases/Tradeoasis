@@ -34,7 +34,7 @@
                                 <span class="cs-text-sm" style="color: var(--text-color);">
                                     {{statistic.description}}</span>
                             </div>
-                            <a href="" class="cs-text-sm cs-text-accent cs-font-500" style="align-self: flex-end">View All</a>
+                            <a id="{% if 'Total Buyers' == statistic.name %}client-buyers-overview-activator{% elif 'Total Product' == statistic.name %}client-products-overview-activator{% elif 'Total Contracts' == statistic.name %}client-contracts-overview-activator{% else %}client-suppliers-overview-activator{% endif %}" class="cs-text-sm cs-text-accent cs-font-500" style="align-self: flex-end">View All</a>
                         </div>
                     </div>
                 {% endfor %}
@@ -48,7 +48,7 @@
                         <span class="cs-text-sm" style="color: var(--text-color);">Suppliers Stats By Location</span>
                     </div>
                     <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
-                        <img loading="lazy" class="stats-card-img" src="../../static/assets/imgs/resources/20220812_083902.jpg" alt="">
+                        <img loading="lazy" class="stats-card-img" src="{% static 'assets/imgs/resources/20220812_083902.jpg' %}" alt="">
                     </div>
                 </div>
                 <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
@@ -59,7 +59,7 @@
                         <span class="cs-text-sm" style="color: var(--text-color);">Buyers Stats By Location</span>
                     </div>
                     <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
-                        <img loading="lazy" class="stats-card-img" src="../../static/assets/imgs/resources/20220812_083930.jpg" alt="">
+                        <img loading="lazy" class="stats-card-img" src="{% static 'assets/imgs/resources/20220812_083930.jpg' %}" alt="">
                     </div>
                 </div>
             </div>
@@ -122,106 +122,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="cs-text-md cs-font-500 client-item">
-                        <td>1</td>
-                        <td>Alex Fashions</td>
-                        <td>France</td>
-                        <td>192047239</td>
-                        <td>39N23J23MF</td>
-                        <td>Premium</td>
-                        <td>4</td>
-                        <td>12/03/2020</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 client-item">
-                        <td>2</td>
-                        <td>Alex Fashions</td>
-                        <td>France</td>
-                        <td>192047239</td>
-                        <td>39N23J23MF</td>
-                        <td>Premium</td>
-                        <td>4</td>
-                        <td>12/03/2020</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 client-item">
-                        <td>3</td>
-                        <td>Alex Fashions</td>
-                        <td>France</td>
-                        <td>192047239</td>
-                        <td>39N23J23MF</td>
-                        <td>Premium</td>
-                        <td>4</td>
-                        <td>12/03/2020</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 client-item">
-                        <td>4</td>
-                        <td>Alex Fashions</td>
-                        <td>France</td>
-                        <td>192047239</td>
-                        <td>39N23J23MF</td>
-                        <td>Premium</td>
-                        <td>4</td>
-                        <td>12/03/2020</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 client-item">
-                        <td>5</td>
-                        <td>Alex Fashions</td>
-                        <td>France</td>
-                        <td>192047239</td>
-                        <td>39N23J23MF</td>
-                        <td>Premium</td>
-                        <td>4</td>
-                        <td>12/03/2020</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 client-item">
-                        <td>6</td>
-                        <td>Alex Fashions</td>
-                        <td>France</td>
-                        <td>192047239</td>
-                        <td>39N23J23MF</td>
-                        <td>Premium</td>
-                        <td>4</td>
-                        <td>12/03/2020</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 client-item">
-                        <td>7</td>
-                        <td>Alex Fashions</td>
-                        <td>France</td>
-                        <td>192047239</td>
-                        <td>39N23J23MF</td>
-                        <td>Premium</td>
-                        <td>4</td>
-                        <td>12/03/2020</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 client-item">
-                        <td>8</td>
-                        <td>Alex Fashions</td>
-                        <td>France</td>
-                        <td>192047239</td>
-                        <td>39N23J23MF</td>
-                        <td>Premium</td>
-                        <td>4</td>
-                        <td>12/03/2020</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 client-item">
-                        <td>9</td>
-                        <td>Alex Fashions</td>
-                        <td>France</td>
-                        <td>192047239</td>
-                        <td>39N23J23MF</td>
-                        <td>Premium</td>
-                        <td>4</td>
-                        <td>12/03/2020</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 client-item">
-                        <td>10</td>
-                        <td>Alex Fashions</td>
-                        <td>France</td>
-                        <td>192047239</td>
-                        <td>39N23J23MF</td>
-                        <td>Premium</td>
-                        <td>4</td>
-                        <td>12/03/2020</td>
-                    </tr>
+
                 </tbody>
                 <tfoot>
                     <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
@@ -238,12 +139,12 @@
             </table>
             <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
                 <div class="cs-grid cs-align-center">
-                    <p class="cs-text-md" style="color: var(--text-color);">Showing Page 1 of 10. (1000 Entries)</p>
+                    <p class="cs-text-md" style="color: var(--text-color);">Showing Page <span id="current-page-0"></span> of <span id="max-page"></span>. (<span id="table-item-count"></span> Entries)</p>
                 </div>
                 <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
-                    <button class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
-                    <span class="cs-text-md">1</span>
-                    <button class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
+                    <button id="previous-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
+                    <span id="current-page" class="cs-text-md"></span>
+                    <button id="next-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
                 </div>
             </div>
         </section>
@@ -257,8 +158,6 @@
                         <th>country</th>
                         <th>VAT Number</th>
                         <th>Legal Entity Identifier</th>
-                        <th>Membership</th>
-                        <th>Stores</th>
                         <th>Joined On</th>
                     </tr>
                 </thead>
@@ -269,98 +168,6 @@
                         <td>France</td>
                         <td>192047239</td>
                         <td>39N23J23MF</td>
-                        <td>Premium</td>
-                        <td>4</td>
-                        <td>12/03/2020</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 client-item">
-                        <td>2</td>
-                        <td>Alex Fashions</td>
-                        <td>France</td>
-                        <td>192047239</td>
-                        <td>39N23J23MF</td>
-                        <td>Premium</td>
-                        <td>4</td>
-                        <td>12/03/2020</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 client-item">
-                        <td>3</td>
-                        <td>Alex Fashions</td>
-                        <td>France</td>
-                        <td>192047239</td>
-                        <td>39N23J23MF</td>
-                        <td>Premium</td>
-                        <td>4</td>
-                        <td>12/03/2020</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 client-item">
-                        <td>4</td>
-                        <td>Alex Fashions</td>
-                        <td>France</td>
-                        <td>192047239</td>
-                        <td>39N23J23MF</td>
-                        <td>Premium</td>
-                        <td>4</td>
-                        <td>12/03/2020</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 client-item">
-                        <td>5</td>
-                        <td>Alex Fashions</td>
-                        <td>France</td>
-                        <td>192047239</td>
-                        <td>39N23J23MF</td>
-                        <td>Premium</td>
-                        <td>4</td>
-                        <td>12/03/2020</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 client-item">
-                        <td>6</td>
-                        <td>Alex Fashions</td>
-                        <td>France</td>
-                        <td>192047239</td>
-                        <td>39N23J23MF</td>
-                        <td>Premium</td>
-                        <td>4</td>
-                        <td>12/03/2020</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 client-item">
-                        <td>7</td>
-                        <td>Alex Fashions</td>
-                        <td>France</td>
-                        <td>192047239</td>
-                        <td>39N23J23MF</td>
-                        <td>Premium</td>
-                        <td>4</td>
-                        <td>12/03/2020</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 client-item">
-                        <td>8</td>
-                        <td>Alex Fashions</td>
-                        <td>France</td>
-                        <td>192047239</td>
-                        <td>39N23J23MF</td>
-                        <td>Premium</td>
-                        <td>4</td>
-                        <td>12/03/2020</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 client-item">
-                        <td>9</td>
-                        <td>Alex Fashions</td>
-                        <td>France</td>
-                        <td>192047239</td>
-                        <td>39N23J23MF</td>
-                        <td>Premium</td>
-                        <td>4</td>
-                        <td>12/03/2020</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 client-item">
-                        <td>10</td>
-                        <td>Alex Fashions</td>
-                        <td>France</td>
-                        <td>192047239</td>
-                        <td>39N23J23MF</td>
-                        <td>Premium</td>
-                        <td>4</td>
                         <td>12/03/2020</td>
                     </tr>
                 </tbody>
@@ -371,20 +178,18 @@
                         <th>country</th>
                         <th>VAT Number</th>
                         <th>Legal Entity Identifier</th>
-                        <th>Membership</th>
-                        <th>Stores</th>
                         <th>Joined On</th>
                     </tr>
                 </tfoot>
             </table>
             <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
                 <div class="cs-grid cs-align-center">
-                    <p class="cs-text-md" style="color: var(--text-color);">Showing Page 1 of 10. (1000 Entries)</p>
+                    <p class="cs-text-md" style="color: var(--text-color);">Showing Page <span id="current-page-0"></span> of <span id="max-page"></span>. (<span id="table-item-count"></span> Entries)</p>
                 </div>
                 <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
-                    <button class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
-                    <span class="cs-text-md">1</span>
-                    <button class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
+                    <button id="previous-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
+                    <span id="current-page" class="cs-text-md"></span>
+                    <button id="next-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
                 </div>
             </div>
         </section>
@@ -403,51 +208,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="cs-text-md cs-font-500 contract-item">
-                        <td>1</td>
-                        <td>Alex Fashions</td>
-                        <td>Mark Shops</td>
-                        <td>Representation</td>
-                        <td>False</td>
-                        <td>USD 10000</td>
-                        <td>12/03/2020</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 contract-item">
-                        <td>2</td>
-                        <td>Alex Fashions</td>
-                        <td>Mark Shops</td>
-                        <td>Representation</td>
-                        <td>False</td>
-                        <td>USD 10000</td>
-                        <td>12/03/2020</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 contract-item">
-                        <td>3</td>
-                        <td>Alex Fashions</td>
-                        <td>Mark Shops</td>
-                        <td>Representation</td>
-                        <td>False</td>
-                        <td>USD 10000</td>
-                        <td>12/03/2020</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 contract-item">
-                        <td>4</td>
-                        <td>Alex Fashions</td>
-                        <td>Mark Shops</td>
-                        <td>Representation</td>
-                        <td>False</td>
-                        <td>USD 10000</td>
-                        <td>12/03/2020</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 contract-item">
-                        <td>5</td>
-                        <td>Alex Fashions</td>
-                        <td>Mark Shops</td>
-                        <td>Representation</td>
-                        <td>False</td>
-                        <td>USD 10000</td>
-                        <td>12/03/2020</td>
-                    </tr>
                 </tbody>
                 <tfoot>
                     <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
@@ -463,12 +223,12 @@
             </table>
             <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
                 <div class="cs-grid cs-align-center">
-                    <p class="cs-text-md" style="color: var(--text-color);">Showing Page 1 of 2. (10 Entries)</p>
+                    <p class="cs-text-md" style="color: var(--text-color);">Showing Page <span id="current-page-0"></span> of <span id="max-page"></span>. (<span id="table-item-count"></span> Entries)</p>
                 </div>
                 <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
-                    <button class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
-                    <span class="cs-text-md">1</span>
-                    <button class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
+                    <button id="previous-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
+                    <span id="current-page" class="cs-text-md"></span>
+                    <button id="next-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
                 </div>
             </div>
         </section>
@@ -486,54 +246,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="cs-text-md cs-font-500 product-item">
-                        <td>1</td>
-                        <td>Air Jordans</td>
-                        <td>Al Shoes Store </td>
-                        <td>Fashion</td>
-                        <td>Shoes</td>
-                        <td>10</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 product-item">
-                        <td>2</td>
-                        <td>Air Jordans</td>
-                        <td>Al Shoes Store </td>
-                        <td>Fashion</td>
-                        <td>Shoes</td>
-                        <td>10</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 product-item">
-                        <td>3</td>
-                        <td>Air Jordans</td>
-                        <td>Al Shoes Store </td>
-                        <td>Fashion</td>
-                        <td>Shoes</td>
-                        <td>10</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 product-item">
-                        <td>4</td>
-                        <td>Air Jordans</td>
-                        <td>Al Shoes Store </td>
-                        <td>Fashion</td>
-                        <td>Shoes</td>
-                        <td>10</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 product-item">
-                        <td>5</td>
-                        <td>Air Jordans</td>
-                        <td>Al Shoes Store </td>
-                        <td>Fashion</td>
-                        <td>Shoes</td>
-                        <td>10</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 product-item">
-                        <td>6</td>
-                        <td>Air Jordans</td>
-                        <td>Al Shoes Store </td>
-                        <td>Fashion</td>
-                        <td>Shoes</td>
-                        <td>10</td>
-                    </tr>
                 </tbody>
                 <tfoot>
                     <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
@@ -548,12 +260,12 @@
             </table>
             <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
                 <div class="cs-grid cs-align-center">
-                    <p class="cs-text-md" style="color: var(--text-color);">Showing Page 1 of 10. (1000 Entries)</p>
+                    <p class="cs-text-md" style="color: var(--text-color);">Showing Page <span id="current-page-0"></span> of <span id="max-page"></span>. (<span id="table-item-count"></span> Entries)</p>
                 </div>
                 <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
-                    <button class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
-                    <span class="cs-text-md">1</span>
-                    <button class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
+                    <button id="previous-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
+                    <span id="current-page" class="cs-text-md"></span>
+                    <button id="next-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
                 </div>
             </div>
         </section>
@@ -577,53 +289,49 @@
                     <div class="cs-grid cs-content-start"  style="--gap: .5rem;">
                         <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
                             <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Name:</h4>
-                            <p class="cs-text-normal cs-text-secondary">Alexandar Mackey</p>
+                            <p class="cs-text-normal cs-text-secondary" id="client-username"></p>
                         </div>
                         <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
                             <h4 class="cs-text-normal cs-text-secondary cs-font-500" style="color: var(--text-color);margin: 0;">Business:</h4>
-                            <p class="cs-text-normal cs-text-secondary">Alexandar Mackey Fashions</p>
+                            <p class="cs-text-normal cs-text-secondary"  id="client-business_name"></p>
                         </div>
                         <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
                             <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Country:</h4>
-                            <p class="cs-text-normal cs-text-secondary">France</p>
+                            <p class="cs-text-normal cs-text-secondary" id="client-country"></p>
                         </div>
                         <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
                             <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">VAT Number:</h4>
-                            <p class="cs-text-normal cs-text-secondary">320283023290</p>
+                            <p class="cs-text-normal cs-text-secondary" id="client-vta"></p>
                         </div>
                     </div>
                     <hr style="border: 1px solid hsla(213, 28%, 80%, 30%);">
                     <div class="cs-grid cs-content-start" style="--gap: .5rem;">
-                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;flex-wrap: wrap;">
                             <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Legal Entity Identifier:</h4>
-                            <p class="cs-text-normal cs-text-secondary">238VWEB230932NO</p>
+                            <p class="cs-text-normal cs-text-secondary" id="client-lei"></p>
                         </div>
-                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                        <div id="membership-group" class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
                             <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Membership:</h4>
-                            <p class="cs-text-normal cs-text-secondary">Premium</p>
+                            <p class="cs-text-normal cs-text-secondary" id="client-membership"></p>
                         </div>
-                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                        <div id="stores-group" class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
                             <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Stores:</h4>
-                            <div class="cs-flex" style="--gap: .5rem;padding: .25rem .75rem;flex-wrap: wrap;">
-                                <a class="cs-bg-hover-color br-md cs-text-md" style="padding: .25rem .75rem;">Shoes</a>
-                                <a class="cs-bg-hover-color br-md cs-text-md" style="padding: .25rem .75rem;">Home</a>
+                            <div class="cs-flex" id="client-stores" style="--gap: .5rem;padding: .25rem .75rem;flex-wrap: wrap;">
                             </div>
                         </div>
-                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                        <div id="showrooms-group" class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
                             <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Showrooms:</h4>
-                            <div class="cs-flex" style="--gap: .5rem;padding: .25rem .75rem;flex-wrap: wrap;">
-                                <a class="cs-bg-hover-color br-md cs-text-md" style="padding: .25rem .75rem;">Shoes</a>
-                                <a class="cs-bg-hover-color br-md cs-text-md" style="padding: .25rem .75rem;">Home</a>
+                            <div class="cs-flex" style="--gap: .5rem;padding: .25rem .75rem;flex-wrap: wrap;" id="client-showrooms">
                             </div>
                         </div>
                     </div>
                 </div>
                 <hr style="border: 1px solid hsl(0, 0%, 95%);">
                 <div class="modal-cta cs-flex" style="--gap: 1rem;">
-                    <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-white outlined cs-text-secondary cs-text-md br-sm">
+                    <a id="view-client-page" class="btn cs-grid cs-justify-center cs-align-center cs-bg-white outlined cs-text-secondary cs-text-md br-sm">
                         View Client Page
-                    </button>
-                    <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-primary cs-text-white cs-text-md br-sm">
+                    </a>
+                    <button id="veiw-product-cta" class="btn cs-grid cs-justify-center cs-align-center cs-bg-primary cs-text-white cs-text-md br-sm">
                         View Products
                     </button>
                     <a href="./create_mail.html" class="btn cs-grid cs-justify-center cs-align-center cs-bg-secondary cs-text-white cs-text-md br-sm">
@@ -653,41 +361,37 @@
                     <div class="cs-grid cs-content-start" style="--gap: .5rem;">
                         <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
                             <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Name:</h4>
-                            <p class="cs-text-normal cs-text-secondary">Air Jordans</p>
+                            <p class="cs-text-normal cs-text-secondary" id="product-name"></p>
                         </div>
                         <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
                             <h4 class="cs-text-normal cs-text-secondary cs-font-500" style="color: var(--text-color);margin: 0;">Supplier:</h4>
-                            <p class="cs-text-normal cs-text-secondary">Alexandar Mackey Fashions</p>
+                            <p class="cs-text-normal cs-text-secondary" id="product-supplier"></p>
                         </div>
                         <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
-                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Country:</h4>
-                            <p class="cs-text-normal cs-text-secondary">Fashon</p>
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Category:</h4>
+                            <p class="cs-text-normal cs-text-secondary" id="product-category"></p>
                         </div>
                         <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
                             <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Sub Category:</h4>
-                            <p class="cs-text-normal cs-text-secondary">Shoes</p>
+                            <p class="cs-text-normal cs-text-secondary" id="product-subCategory"></p>
                         </div>
                         <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
                             <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Price:</h4>
-                            <p class="cs-text-normal cs-text-secondary">USD 150</p>
+                            <p class="cs-text-normal cs-text-secondary" id="product-price"></p>
                         </div>
                         
-                        <div class="cs-grid" style="grid-template-columns: repeat(5, 1fr);--gap: .5rem;">
-                            <img loading="lazy" src="../../static/assets/imgs/resources/download (5).jpeg" alt="" style="object-fit: cover;aspect-ratio: 1;">
-                            <img loading="lazy" src="../../static/assets/imgs/resources/download (8).jpeg" alt="" style="object-fit: cover;aspect-ratio: 1;">
-                            <img loading="lazy" src="../../static/assets/imgs/resources/download (16).jpeg" alt="" style="object-fit: cover;aspect-ratio: 1;">
+                        <div id="product-images" class="cs-grid" style="grid-template-columns: repeat(5, 1fr);--gap: .5rem;">
                         </div>
                     </div>
                     <hr style="border: 1px solid hsla(213, 28%, 80%, 30%);">
                     <div class="cs-grid cs-content-start">
-                        <p class="cs-text-medium cs-font-500" style="color: var(--text-color);">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident ducimus in velit consequuntur error nostrum, ab dignissimos dolorum. Nesciunt fuga delectus dignissimos natus iusto qui vitae libero quam mollitia omnis!
+                        <p class="cs-text-medium cs-font-500" style="color: var(--text-color);" id="product-description">
                         </p>
                     </div>
                 </div>
                 <hr style="border: 1px solid hsl(0, 0%, 95%);">
                 <div class="modal-cta cs-flex" style="--gap: 1rem;">
-                    <a href="" class="btn cs-grid cs-justify-center cs-align-center cs-bg-white outlined cs-text-secondary cs-text-md br-sm">
+                    <a id="view-product-page" class="btn cs-grid cs-justify-center cs-align-center cs-bg-white outlined cs-text-secondary cs-text-md br-sm">
                         View Product Page
                     </a>
                     <a href="./create_mail.html" class="btn cs-grid cs-justify-center cs-align-center cs-bg-secondary cs-text-white cs-text-md br-sm">
@@ -712,39 +416,31 @@
                 </div>
             </div>
             <hr class="cs-block" style="border: 1px solid hsl(0, 0%, 95%);">
-            <div class="modal-body cs-grid cs-justify-center" style="--gap: 1rem;">
-                <div class="cs-grid cs-justify-between" style="grid-template-columns: 1fr 0fr 1fr;--gap: 1rem;">
-                    <div class="cs-grid cs-content-start" style="--gap: .5rem;">
-                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
-                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Supplier:</h4>
-                            <p class="cs-text-normal cs-text-secondary">Alexandar Mackey Fashions</p>
-                        </div>
-                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
-                            <h4 class="cs-text-normal cs-text-secondary cs-font-500" style="color: var(--text-color);margin: 0;">Buyer:</h4>
-                            <p class="cs-text-normal cs-text-secondary">Alexandar Mackey Fashions</p>
-                        </div>
-                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
-                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Service:</h4>
-                            <p class="cs-text-normal cs-text-secondary">Representation</p>
-                        </div>
-                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
-                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Price:</h4>
-                            <p class="cs-text-normal cs-text-secondary">USD 1000</p>
-                        </div>
-                        <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
-                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Complete:</h4>
-                            <p class="cs-text-normal cs-text-secondary">False</p>
-                        </div>
+            <div class="modal-body cs-grid" style="--gap: 1rem;">
+                <div class="cs-grid cs-content-start" style="--gap: .5rem;">
+                    <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                        <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Supplier:</h4>
+                        <p class="cs-text-normal cs-text-secondary" id="contract-supplier"></p>
                     </div>
-                    <hr style="border: 1px solid hsla(213, 28%, 80%, 30%);">
-                    <div class="cs-grid cs-content-start">
-                        <p class="cs-text-medium cs-font-500" style="color: var(--text-color);">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident ducimus in velit consequuntur error nostrum, ab dignissimos dolorum. Nesciunt fuga delectus dignissimos natus iusto qui vitae libero quam mollitia omnis!
-                        </p>
+                    <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                        <h4 class="cs-text-normal cs-text-secondary cs-font-500" style="color: var(--text-color);margin: 0;">Buyer:</h4>
+                        <p class="cs-text-normal cs-text-secondary" id="contract-buyer"></p>
+                    </div>
+                    <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                        <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Service:</h4>
+                        <p class="cs-text-normal cs-text-secondary" id="contract-service"></p>
+                    </div>
+                    <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                        <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Price:</h4>
+                        <p class="cs-text-normal cs-text-secondary" id="contract-price"></p>
+                    </div>
+                    <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
+                        <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Complete:</h4>
+                        <p class="cs-text-normal cs-text-secondary" id="contract-iscomplete"></p>
                     </div>
                 </div>
                 <hr style="border: 1px solid hsl(0, 0%, 95%);">
-                <div class="modal-cta cs-flex" style="--gap: 1rem;">
+                <div class="modal-cta cs-flex cs-justify-center" style="--gap: 1rem;">
                     <a href="./create_mail.html"  class="btn cs-grid cs-justify-center cs-align-center cs-bg-primary cs-text-white cs-text-md br-sm">
                         Contact Buyer
                     </a>

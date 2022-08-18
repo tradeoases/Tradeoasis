@@ -75,7 +75,7 @@
                 <h2 class="sec-title text-xl capitalize md:text-2xl font-bold text-lightBackgroundColor">Other Showrooms</h2>
                 <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="">View All</a>
             </div>
-            <div class="showroows section-body grid gap-4 horizontal-scroll" data-context="{{other_showroom.context_name}}">
+            <div class="showrooms section-body grid gap-4 horizontal-scroll" data-context="{{other_showroom.context_name}}">
                 {% for showroom in other_showroom.results %}
                     <a href="{% url 'manager:showroom-detail' showroom.showroom.slug %}" class="grid card">
                         <div class="img-wrapper">

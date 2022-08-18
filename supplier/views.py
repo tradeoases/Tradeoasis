@@ -572,3 +572,17 @@ class StoreListView(ListView):
         }
 
         return context
+
+class SearchView(View):
+    model = SupplierModels.Product
+    template_name = "supplier/product_list.html"
+    PER_PAGE_COUNT = 20
+
+    def get(self, request):
+
+        return render(
+            request, template_name=self.template_name, context=self.get_context_data()
+        )
+
+    def get_queryset(self):
+        context['str']

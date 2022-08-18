@@ -23,7 +23,7 @@ class BuyerTest(TestCase):
         test_category = ProductCategory.objects.create(
             name="Fashion",
             image=SimpleUploadedFile(
-                name="test_image.jpg",
+                name="test_image.jpg' %}",
                 content=open(
                     f"{settings.STATICFILES_DIRS[0]}/images/test/django.png", "rb"
                 ).read(),

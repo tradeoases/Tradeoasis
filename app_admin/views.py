@@ -157,9 +157,9 @@ class AdminManagersView(View):
                     "count": PaymentModels.Membership.objects.all().count(),
                 },
                 {
-                    "name": _("Total Product"),
-                    "description": _("Total Product Count"),
-                    "count": SupplierModels.Product.objects.all().count(),
+                    "name": _("Total Services"),
+                    "description": _("Total Services Count"),
+                    "count": ManagerModels.Service.objects.all().count(),
                 },
             ],
         }

@@ -35,7 +35,7 @@
                         <div class="grid grid-flow-row grid-cols-2 gap-3 card p-1">
                             <div class="grid small-item">
                                 <div class="card-img-wrapper overflow-hidden rounded-none">
-                                    <img src="../static/assets/imgs/resources/prod-1.jpg" style="object-fit: cover;"
+                                    <img src="../static/assets/imgs/resources/prod-1.jpg' %}" style="object-fit: cover;"
                                         alt="">
                                 </div>
                                 <div class="body grid grid-flow-row">
@@ -44,7 +44,7 @@
                             </div>
                             <div class="grid small-item">
                                 <div class="card-img-wrapper overflow-hidden rounded-none">
-                                    <img src="../static/assets/imgs/resources/prod-1.jpg" style="object-fit: cover;"
+                                    <img src="../static/assets/imgs/resources/prod-1.jpg' %}" style="object-fit: cover;"
                                         alt="">
                                 </div>
                                 <div class="body grid grid-flow-row">
@@ -180,7 +180,7 @@
                 <h2 class="sec-title text-xl capitalize md:text-2xl font-bold text-yellowColor">Foroden Showrooms</h2>
                 <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="">View All</a>
             </div>
-            <div class="showroows section-body grid gap-4 horizontal-scroll items-start">
+            <div class="showrooms section-body grid gap-4 horizontal-scroll items-start">
                 
                 {% for showroom in showrooms.results %}
                     <a href="{% url 'manager:showroom-detail' showroom.slug %}" class="grid card rounded overflow-hidden">

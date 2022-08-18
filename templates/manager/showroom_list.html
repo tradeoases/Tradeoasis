@@ -13,7 +13,7 @@
                 <div class="section-heading">
                     <h2 class="sec-title text-xl capitalize md:text-2xl font-bold text-yellowColor">Showrooms</h2>
                 </div>
-                <div class="showroows section-body grid gap-4 grid-cols-2 md:grid-cols-5">
+                <div class="showrooms section-body grid gap-4 grid-cols-2 md:grid-cols-5">
                     {% for showroom in object_list.results %}
                         <a href="{% url 'manager:showroom-detail' showroom.showroom.slug %}" class="grid card">
                             <div class="img-wrapper">

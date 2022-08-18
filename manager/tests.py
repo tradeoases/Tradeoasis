@@ -36,7 +36,7 @@ class ModelTest(TestCase):
         service_img_test = models.ServiceImage(
             service=service_test,
             image=SimpleUploadedFile(
-                name="test_image.jpg",
+                name="test_image.jpg' %}",
                 content=open(
                     f"{settings.STATICFILES_DIRS[0]}/images/test/django.png", "rb"
                 ).read(),
@@ -58,7 +58,7 @@ class ModelTest(TestCase):
         showroom_test = models.Showroom.objects.create(
             location=location_test,
             image=SimpleUploadedFile(
-                name="test_image.jpg",
+                name="test_image.jpg' %}",
                 content=open(
                     f"{settings.STATICFILES_DIRS[0]}/images/test/django.png", "rb"
                 ).read(),
@@ -67,7 +67,7 @@ class ModelTest(TestCase):
             visits=10,
         )
 
-        # store can exist in multiple showroows
+        # store can exist in multiple showrooms
 
         showroom_test.store.add(test_store)
         self.assertIn(showroom_test, models.Showroom.objects.filter(store=test_store))

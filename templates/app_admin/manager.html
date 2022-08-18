@@ -61,7 +61,7 @@
                                 <span class="cs-text-sm" style="color: var(--text-color);">
                                     {{statistic.description}}</span>
                             </div>
-                            <a href="" class="cs-text-sm cs-text-accent cs-font-500" style="align-self: flex-end">View All</a>
+                            <a id="{% if 'Total Memberships' == statistic.name %}manager-memberships-overview-activator{% elif 'Total Stores' == statistic.name %}manager-stores-overview-activator{% elif 'Total Services' == statistic.name %}manager-services-overview-activator{% else %}manager-showroom-overview-activator{% endif %}" class="cs-text-sm cs-text-accent cs-font-500" style="align-self: flex-end;cursor: pointer;">View All</a>
                         </div>
                     </div>
                 {% endfor %}
@@ -75,7 +75,7 @@
                         <span class="cs-text-sm" style="color: var(--text-color);">showroom Stats By Location</span>
                     </div>
                     <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
-                        <img loading="lazy" class="stats-card-img" src="../../static/assets/imgs/resources/20220812_083902.jpg" alt="">
+                        <img loading="lazy" class="stats-card-img" src="{% static 'assets/imgs/resources/20220812_083902.jpg' %}" alt="">
                     </div>
                 </div>
                 <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
@@ -86,7 +86,7 @@
                         <span class="cs-text-sm" style="color: var(--text-color);">services Stats By Location</span>
                     </div>
                     <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
-                        <img loading="lazy" class="stats-card-img" src="../../static/assets/imgs/resources/20220812_083930.jpg" alt="">
+                        <img loading="lazy" class="stats-card-img" src="{% static 'assets/imgs/resources/20220812_083930.jpg' %}" alt="">
                     </div>
                 </div>
             </div>
@@ -98,7 +98,7 @@
                     <div class="cs-grid cs-justify-start horizontal-scroll" style="--gap: 1rem;--row-size: 21%;">
                         <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
                             <div class="avator br-full cs-overflow-hidden">
-                                <img loading="lazy" src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
+                                <img loading="lazy" src="{% static 'assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
                             </div>
                             <div class="cs-grid">
                                 <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
@@ -107,7 +107,7 @@
                         </a>
                         <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
                             <div class="avator br-full cs-overflow-hidden">
-                                <img loading="lazy" src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
+                                <img loading="lazy" src="{% static 'assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
                             </div>
                             <div class="cs-grid">
                                 <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
@@ -116,7 +116,7 @@
                         </a>
                         <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
                             <div class="avator br-full cs-overflow-hidden">
-                                <img loading="lazy" src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
+                                <img loading="lazy" src="{% static 'assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
                             </div>
                             <div class="cs-grid">
                                 <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
@@ -125,7 +125,7 @@
                         </a>
                         <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
                             <div class="avator br-full cs-overflow-hidden">
-                                <img loading="lazy" src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
+                                <img loading="lazy" src="{% static 'assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
                             </div>
                             <div class="cs-grid">
                                 <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
@@ -134,7 +134,7 @@
                         </a>
                         <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
                             <div class="avator br-full cs-overflow-hidden">
-                                <img loading="lazy" src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
+                                <img loading="lazy" src="{% static 'assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
                             </div>
                             <div class="cs-grid">
                                 <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
@@ -143,7 +143,7 @@
                         </a>
                         <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;">
                             <div class="avator br-full cs-overflow-hidden">
-                                <img loading="lazy" src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
+                                <img loading="lazy" src="{% static 'assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
                             </div>
                             <div class="cs-grid">
                                 <h5 class="cs-text-secondary" style="margin: 0;">Cameron Fashions</h5>
@@ -167,41 +167,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="cs-text-md cs-font-500 manager-item">
-                        <td>1</td>
-                        <td>Dudai</td>
-                        <td>UAE</td>
-                        <td>20</td>
-                        <td>1000</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 manager-item">
-                        <td>2</td>
-                        <td>Dudai</td>
-                        <td>UAE</td>
-                        <td>20</td>
-                        <td>1000</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 manager-item">
-                        <td>3</td>
-                        <td>Dudai</td>
-                        <td>UAE</td>
-                        <td>20</td>
-                        <td>1000</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 manager-item">
-                        <td>4</td>
-                        <td>Dudai</td>
-                        <td>UAE</td>
-                        <td>20</td>
-                        <td>1000</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 manager-item">
-                        <td>5</td>
-                        <td>Dudai</td>
-                        <td>UAE</td>
-                        <td>20</td>
-                        <td>1000</td>
-                    </tr>
                 </tbody>
                 <tfoot>
                     <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
@@ -215,12 +180,12 @@
             </table>
             <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
                 <div class="cs-grid cs-align-center">
-                    <p class="cs-text-md" style="color: var(--text-color);">Showing Page 1 of 10. (1000 Entries)</p>
+                    <p class="cs-text-md" style="color: var(--text-color);">Showing Page <span id="current-page-0"></span> of <span id="max-page"></span>. (<span id="table-item-count"></span> Entries)</p>
                 </div>
                 <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
-                    <button class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
-                    <span class="cs-text-md">1</span>
-                    <button class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
+                    <button id="previous-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
+                    <span id="current-page" class="cs-text-md"></span>
+                    <button id="next-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
                 </div>
             </div>
         </section>
@@ -236,66 +201,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="cs-text-md cs-font-500 manager-service-item" data-itemId="1">
-                        <td>1</td>
-                        <td>Customer Representation</td>
-                        <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic quaerat, eius molestiae numquam, accusamus omnis doloremque dolore deserunt placeat ad dignissimos reiciendis magnam aliquam esse consequuntur excepturi distinctio laboriosam tempora ullam saepe. Numquam impedit nam nobis ipsam beatae temporibus, sit alias, dolore cum labore repellendus dolor ut deleniti incidunt culpa!</td>
-                        <!-- <td class="delete">
-                            <button class="btn cs-grid cs-align-center cs-justify-center cs-bg-secondary cs-text-white br-sm">
-                                <i class="fa fa-trash"></i>
-                            </button>
-                        </td> -->
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 manager-service-item" data-itemId="1">
-                        <td>2</td>
-                        <td>Customer Representation</td>
-                        <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic quaerat, eius molestiae numquam, accusamus omnis doloremque dolore deserunt placeat ad dignissimos reiciendis magnam aliquam esse consequuntur excepturi distinctio laboriosam tempora ullam saepe. Numquam impedit nam nobis ipsam beatae temporibus, sit alias, dolore cum labore repellendus dolor ut deleniti incidunt culpa!</td>
-                        <!-- <td class="delete">
-                            <button class="btn cs-grid cs-align-center cs-justify-center cs-bg-secondary cs-text-white br-sm">
-                                <i class="fa fa-trash"></i>
-                            </button>
-                        </td> -->
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 manager-service-item" data-itemId="1">
-                        <td>3</td>
-                        <td>Customer Representation</td>
-                        <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic quaerat, eius molestiae numquam, accusamus omnis doloremque dolore deserunt placeat ad dignissimos reiciendis magnam aliquam esse consequuntur excepturi distinctio laboriosam tempora ullam saepe. Numquam impedit nam nobis ipsam beatae temporibus, sit alias, dolore cum labore repellendus dolor ut deleniti incidunt culpa!</td>
-                        <!-- <td class="delete">
-                            <button class="btn cs-grid cs-align-center cs-justify-center cs-bg-secondary cs-text-white br-sm">
-                                <i class="fa fa-trash"></i>
-                            </button>
-                        </td> -->
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 manager-service-item" data-itemId="1">
-                        <td>4</td>
-                        <td>Customer Representation</td>
-                        <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic quaerat, eius molestiae numquam, accusamus omnis doloremque dolore deserunt placeat ad dignissimos reiciendis magnam aliquam esse consequuntur excepturi distinctio laboriosam tempora ullam saepe. Numquam impedit nam nobis ipsam beatae temporibus, sit alias, dolore cum labore repellendus dolor ut deleniti incidunt culpa!</td>
-                        <!-- <td class="delete">
-                            <button class="btn cs-grid cs-align-center cs-justify-center cs-bg-secondary cs-text-white br-sm">
-                                <i class="fa fa-trash"></i>
-                            </button>
-                        </td> -->
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 manager-service-item" data-itemId="1">
-                        <td>5</td>
-                        <td>Customer Representation</td>
-                        <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic quaerat, eius molestiae numquam, accusamus omnis doloremque dolore deserunt placeat ad dignissimos reiciendis magnam aliquam esse consequuntur excepturi distinctio laboriosam tempora ullam saepe. Numquam impedit nam nobis ipsam beatae temporibus, sit alias, dolore cum labore repellendus dolor ut deleniti incidunt culpa!</td>
-                        <!-- <td class="delete">
-                            <button class="btn cs-grid cs-align-center cs-justify-center cs-bg-secondary cs-text-white br-sm">
-                                <i class="fa fa-trash"></i>
-                            </button>
-                        </td> -->
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 manager-service-item">
-                        <td>6</td>
-                        <td>Customer Representation</td>
-                        <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic quaerat, eius molestiae numquam, accusamus omnis doloremque dolore deserunt placeat ad dignissimos reiciendis magnam aliquam esse consequuntur excepturi distinctio laboriosam tempora ullam saepe. Numquam impedit nam nobis ipsam beatae temporibus, sit alias, dolore cum labore repellendus dolor ut deleniti incidunt culpa!</td>
-                        <!-- <td class="delete">
-                            <button class="btn cs-grid cs-align-center cs-justify-center cs-bg-secondary cs-text-white br-sm">
-                                <i class="fa fa-trash"></i>
-                            </button>
-                        </td> -->
-                    </tr>
                 </tbody>
                 <tfoot>
                     <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
@@ -308,12 +213,12 @@
             </table>
             <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
                 <div class="cs-grid cs-align-center">
-                    <p class="cs-text-md" style="color: var(--text-color);">Showing Page 1 of 10. (1000 Entries)</p>
+                    <p class="cs-text-md" style="color: var(--text-color);">Showing Page <span id="current-page-0"></span> of <span id="max-page"></span>. (<span id="table-item-count"></span> Entries)</p>
                 </div>
                 <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
-                    <button class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
-                    <span class="cs-text-md">1</span>
-                    <button class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
+                    <button id="previous-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
+                    <span id="current-page" class="cs-text-md"></span>
+                    <button id="next-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
                 </div>
             </div>
         </section>
@@ -323,7 +228,6 @@
                 <thead>
                     <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
                         <th>No.</th>
-                        <th>Supplier</th>
                         <th>Client</th>
                         <th>Membership</th>
                         <th>Paid On</th>
@@ -331,51 +235,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="cs-text-md cs-font-500 manager-membership-item" data-itemId="1">
-                        <td>1</td>
-                        <td>Alex Fashions</td>
-                        <td>Kampala Men's Fashion</td>
-                        <td>Premium</td>
-                        <td>30/12/2020</td>
-                        <td>30/12/2020</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 manager-membership-item" data-itemId="1">
-                        <td>1</td>
-                        <td>Alex Fashions</td>
-                        <td>Kampala Men's Fashion</td>
-                        <td>Premium</td>
-                        <td>30/12/2020</td>
-                        <td>30/12/2020</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 manager-membership-item" data-itemId="1">
-                        <td>1</td>
-                        <td>Alex Fashions</td>
-                        <td>Kampala Men's Fashion</td>
-                        <td>Premium</td>
-                        <td>30/12/2020</td>
-                        <td>30/12/2020</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 manager-membership-item" data-itemId="1">
-                        <td>1</td>
-                        <td>Alex Fashions</td>
-                        <td>Kampala Men's Fashion</td>
-                        <td>Premium</td>
-                        <td>30/12/2020</td>
-                        <td>30/12/2020</td>
-                    </tr>
-                    <tr class="cs-text-md cs-font-500 manager-membership-item" data-itemId="1">
-                        <td>1</td>
-                        <td>Alex Fashions</td>
-                        <td>Kampala Men's Fashion</td>
-                        <td>Premium</td>
-                        <td>30/12/2020</td>
-                        <td>30/12/2020</td>
-                    </tr>
+
                 </tbody>
                 <tfoot>
                     <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
                         <th>No.</th>
-                        <th>Supplier</th>
                         <th>Client</th>
                         <th>Membership</th>
                         <th>Paid On</th>
@@ -385,12 +249,12 @@
             </table>
             <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
                 <div class="cs-grid cs-align-center">
-                    <p class="cs-text-md" style="color: var(--text-color);">Showing Page 1 of 10. (1000 Entries)</p>
+                    <p class="cs-text-md" style="color: var(--text-color);">Showing Page <span id="current-page-0"></span> of <span id="max-page"></span>. (<span id="table-item-count"></span> Entries)</p>
                 </div>
                 <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
-                    <button class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
-                    <span class="cs-text-md">1</span>
-                    <button class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
+                    <button id="previous-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
+                    <span id="current-page" class="cs-text-md"></span>
+                    <button id="next-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
                 </div>
             </div> 
         </section>
@@ -408,22 +272,20 @@
                 </div>
             </div>
             <hr class="cs-block" style="border: 1px solid hsl(0, 0%, 95%);">
-            <div class="modal-body cs-grid cs-justify-center" style="--gap: 1rem;">
+            <div class="modal-body cs-grid" style="--gap: 1rem;">
                 <div class="cs-grid cs-justify-between" style="grid-template-columns: 1fr;--gap: 1rem;">
                     <div class="cs-grid cs-content-start" style="--gap: .5rem;">
                         <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
-                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Name</h4>
-                            <p class="cs-text-normal cs-text-secondary">Customer Representation</p>
+                            <h4 class="cs-text-normal cs-font-500" style="color: var(--text-color);margin: 0;">Name:</h4>
+                            <p class="cs-text-normal cs-text-secondary" id="modal-service-name"></p>
                         </div>
                         <div class="body-group cs-flex cs-align-baseline" style="--gap: .5rem;">
-                            <p class="cs-text-medium cs-font-500" style="color: var(--text-color);">
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident ducimus in velit consequuntur error nostrum, ab dignissimos dolorum. Nesciunt fuga delectus dignissimos natus iusto qui vitae libero quam mollitia omnis!
-                            </p>
+                            <p class="cs-text-medium cs-font-500" style="color: var(--text-color);" id="modal-service-description"></p>
                         </div>
                     </div>
                 </div>
                 <hr style="border: 1px solid hsl(0, 0%, 95%);">
-                <div class="modal-cta cs-flex" style="--gap: 1rem;">
+                <div class="modal-cta cs-flex cs-justify-center" style="--gap: 1rem;">
                     <a href="" class="btn cs-grid cs-justify-center cs-align-center cs-bg-secondary cs-text-white cs-text-md br-sm">
                         Edit
                     </a>

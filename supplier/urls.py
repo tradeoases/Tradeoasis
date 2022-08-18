@@ -40,11 +40,16 @@ urlpatterns = [
         "stores",
         views.StoreListView.as_view(),
         name="store-list",
-    )
+    ),
     # path("stores/", views.CategoryListView.as_view(), name="store-list"),
     # path(
     #     "category/<str:slug>",
     #     views.CategoryDetailView.as_view(),
     #     name="category-detail",
     # ),
+    path(
+        "search",
+        views.SearchView.as_view(),
+        name="search",
+    )
 ]

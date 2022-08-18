@@ -28,7 +28,7 @@
         <div class="header cs-grid">
             <div class="cs-flex cs-align-center cs-justify-between" style="--gap: 2rem">
                 <div class="logo-wrapper cs-overflow-hidden">
-                    <img loading="lazy" src="../../static/assets/imgs/resources/logo_website-e1652772171833-1.png" alt="Logo" class="logo" style="object-fit: cover;">
+                    <img loading="lazy" src="{% static 'assets/imgs/resources/logo_website-e1652772171833-1.png" alt="Logo" class="logo" style="object-fit: cover;">
                 </div>
                 <button class="btn cs-bg-transparent cs-text-primary"><i class="fa fa-bars"></i></button>
             </div>
@@ -52,7 +52,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{% url 'app_admin:manager' %}" class="{%if active_tab == 'Manager'%} active {% endif %} side-tab br-sm cs-flex justify-start cs-align-center" style="--gap: .5rem;">
+                            <a href="{% url 'app_admin:manager' %}" class="manager {%if active_tab == 'Manager'%} active {% endif %} side-tab br-sm cs-flex justify-start cs-align-center" style="--gap: .5rem;">
                                 <i class="fa fa-home cs-text-normal-md cs-text-primary"></i>
                                 <h5 class="item-label cs-font-500 cs-text-md cs-text-cs-bg-secondary">Manager</h5>
                             </a>
@@ -161,7 +161,7 @@
                             <p class="cs-text-sm cs-font-500" style="color: hsl(0, 0%, 60%);">Support</p>
                         </div>
                         <div class="avator br-full cs-overflow-hidden">
-                            <img src="../../static/assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
+                            <img src="{% static 'assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
                         </div>
                     </a>
                 </div>
@@ -180,18 +180,20 @@
         const password = document.querySelector('#password');
         const form = document.querySelector('#profile-form');
         
-        confirmPassword.addEventListener('keyup', () => {
-            if (confirmPassword.value !== password.value) {
-                confirmPassword.classList.add('error');
-                form.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    return false;
-                })
-            }
-            else {
-                confirmPassword.classList.remove('error')
-            }
-        })
+        if (confirmPassword) {
+            confirmPassword.addEventListener('keyup', () => {
+                if (confirmPassword.value !== password.value) {
+                    confirmPassword.classList.add('error');
+                    form.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        return false;
+                    })
+                }
+                else {
+                    confirmPassword.classList.remove('error')
+                }
+            })
+        }
     </script>
 
     <script src="{% static 'js/admin.js' %}"></script>

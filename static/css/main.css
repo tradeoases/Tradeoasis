@@ -582,12 +582,12 @@ footer a:hover {
     }
 } */
 
-.showroows img {
+.showrooms img {
     max-height: 25vh;
 }
 
 @media (max-width: 786px) {    
-    .showroows img {
+    .showrooms img {
         max-height: 20vh;
     }
 }

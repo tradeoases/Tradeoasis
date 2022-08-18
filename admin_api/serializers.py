@@ -15,6 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
             "email",
+            "account_type",
             "is_active",
             "date_joined",
         )
@@ -70,14 +71,6 @@ class BuyersSerializer(serializers.ModelSerializer):
         model = AuthModels.ClientProfile
         fields = "__all__"
 
-    def to_representation(self, instance):
-        representation = super().to_representation(instance)
-        representation["membership"] = PaymentModels.Contract.objects.filter(
-            buyer=instance.user
-        ).count()
-        return representation
-
-
 class _StoreSerializer(serializers.RelatedField, StoreSerializer):
     def to_internal_value(self, data):
         return self.queryset.get(name=data).pk
@@ -101,16 +94,26 @@ class ProductsSerializer(serializers.ModelSerializer):
         ).data.get("business_name")
         return representation
 
+class ProductImagesSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = SupplierModels.ProductImage
+        fields = "__all__"
+
 
 class ServiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = SupplierModels.Service
         fields = "__all__"
 
+class ContractReciptSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PaymentModels.ContractReceipt
+        fields = "__all__"
 
 class ContractsSerializer(serializers.ModelSerializer):
-    supplier = SuppliersSerializer()
-    buyer = BuyersSerializer()
+    supplier = UserSerializer()
+    buyer = UserSerializer()
     service = ServiceSerializer()
 
     class Meta:
@@ -119,9 +122,9 @@ class ContractsSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        representation["amount"] = (
-            PaymentModels.ContractReceipt.objects.filter(contract=instance).first().data
-        )
+        representation["receipt"] = ContractReciptSerializer(
+            PaymentModels.ContractReceipt.objects.filter(contract=instance).first()
+        ).data
         return representation
 
 
@@ -151,18 +154,23 @@ class ShowroomsSerializer(serializers.ModelSerializer):
         representation["products"] = product_count
         return representation
 
+class MembershipReciptSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PaymentModels.MembershipReceipt
+        fields = "__all__"
+
 class MembershipSerializer(serializers.ModelSerializer):
-    supplier = SuppliersSerializer()
-    buyer = BuyersSerializer()
+    supplier = UserSerializer()
 
     class Meta:
         model = PaymentModels.Membership
         fields = "__all__"
+        depth = 1
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        representation["amount"] = (
-            PaymentModels.MembershipReceipt.objects.filter(membership=instance).first().data
-        )
+        representation["receipt"] = MembershipReciptSerializer(
+            PaymentModels.MembershipReceipt.objects.filter(membership=instance).first()
+        ).data
         return representation
 

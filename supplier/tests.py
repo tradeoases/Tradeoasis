@@ -30,7 +30,7 @@ class SupplierTest(TestCase):
         test_category = models.ProductCategory.objects.create(
             name="Fashion",
             image=SimpleUploadedFile(
-                name="test_image.jpg",
+                name="test_image.jpg' %}",
                 content=open(
                     f"{settings.STATICFILES_DIRS[0]}/images/test/django.png", "rb"
                 ).read(),
@@ -43,7 +43,7 @@ class SupplierTest(TestCase):
             name="men fashion",
             category=test_category,
             image=SimpleUploadedFile(
-                name="test_image.jpg",
+                name="test_image.jpg' %}",
                 content=open(
                     f"{settings.STATICFILES_DIRS[0]}/images/test/django.png", "rb"
                 ).read(),
@@ -69,7 +69,7 @@ class SupplierTest(TestCase):
         test_product_image = models.ProductImage(
             product=test_product,
             image=SimpleUploadedFile(
-                name="test_image.jpg",
+                name="test_image.jpg' %}",
                 content=open(
                     f"{settings.STATICFILES_DIRS[0]}/images/test/django.png", "rb"
                 ).read(),
