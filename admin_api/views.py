@@ -19,37 +19,49 @@ class CustomListPagination(PageNumberPagination):
 
 
 class SupplierListView(ListAPIView):
-    queryset = AuthModels.ClientProfile.objects.filter(user__account_type="SUPPLIER").order_by('-id')
+    queryset = AuthModels.ClientProfile.objects.filter(
+        user__account_type="SUPPLIER"
+    ).order_by("-id")
     serializer_class = serializers.SuppliersSerializer
     pagination_class = CustomListPagination
 
+
 class SupplierRetrieveView(RetrieveAPIView):
-    queryset = AuthModels.ClientProfile.objects.filter(user__account_type="SUPPLIER").order_by('-id')
+    queryset = AuthModels.ClientProfile.objects.filter(
+        user__account_type="SUPPLIER"
+    ).order_by("-id")
     serializer_class = serializers.SuppliersSerializer
-    lookup_field = 'slug'
+    lookup_field = "slug"
 
 
 class BuyersListView(ListAPIView):
-    queryset = AuthModels.ClientProfile.objects.filter(user__account_type="BUYER").order_by('-id')
+    queryset = AuthModels.ClientProfile.objects.filter(
+        user__account_type="BUYER"
+    ).order_by("-id")
     serializer_class = serializers.BuyersSerializer
     pagination_class = CustomListPagination
-    
+
+
 class BuyerRetrieveView(RetrieveAPIView):
-    queryset = AuthModels.ClientProfile.objects.filter(user__account_type="BUYER").order_by('-id')
+    queryset = AuthModels.ClientProfile.objects.filter(
+        user__account_type="BUYER"
+    ).order_by("-id")
     serializer_class = serializers.BuyersSerializer
-    lookup_field = 'slug'
+    lookup_field = "slug"
 
 
 class ProductsListView(ListAPIView):
-    queryset = SupplierModels.Product.objects.all().order_by('-id')
+    queryset = SupplierModels.Product.objects.all().order_by("-id")
     serializer_class = serializers.ProductsSerializer
     pagination_class = CustomListPagination
 
+
 class ProductRetrieveView(RetrieveAPIView):
-    queryset = SupplierModels.Product.objects.all().order_by('-id')
+    queryset = SupplierModels.Product.objects.all().order_by("-id")
     serializer_class = serializers.ProductsSerializer
     pagination_class = CustomListPagination
-    lookup_field = 'slug'
+    lookup_field = "slug"
+
 
 class ProductDeleteView(APIView):
     def post(self, request, slug):
@@ -63,117 +75,139 @@ class ProductDeleteView(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
 class SupplierProductsListView(ListAPIView):
     serializer_class = serializers.ProductsSerializer
     pagination_class = CustomListPagination
-    lookup_field = 'slug'
+    lookup_field = "slug"
 
     def get_queryset(self):
-        supplier = AuthModels.ClientProfile.objects.filter(slug=self.kwargs.get('slug')).first()
+        supplier = AuthModels.ClientProfile.objects.filter(
+            slug=self.kwargs.get("slug")
+        ).first()
 
-        queryset = SupplierModels.Product.objects.filter(store__supplier = supplier.user)
+        queryset = SupplierModels.Product.objects.filter(store__supplier=supplier.user)
 
         return queryset
+
 
 class ProductImageListView(ListAPIView):
     serializer_class = serializers.ProductImagesSerializer
     pagination_class = CustomListPagination
-    lookup_field = 'slug'
-    
-    def get_queryset(self):
-        product = SupplierModels.Product.objects.filter(slug=self.kwargs.get('slug')).first()
+    lookup_field = "slug"
 
-        queryset = SupplierModels.ProductImage.objects.filter(product=product).order_by()
+    def get_queryset(self):
+        product = SupplierModels.Product.objects.filter(
+            slug=self.kwargs.get("slug")
+        ).first()
+
+        queryset = SupplierModels.ProductImage.objects.filter(
+            product=product
+        ).order_by()
 
         return queryset
 
 
 class ContractsListView(ListAPIView):
-    queryset = PaymentModels.Contract.objects.all().order_by('-id')
+    queryset = PaymentModels.Contract.objects.all().order_by("-id")
     serializer_class = serializers.ContractsSerializer
     pagination_class = CustomListPagination
 
+
 class ContractRetrieveView(RetrieveAPIView):
-    queryset = PaymentModels.Contract.objects.all().order_by('-id')
+    queryset = PaymentModels.Contract.objects.all().order_by("-id")
     serializer_class = serializers.ContractsSerializer
     pagination_class = CustomListPagination
-    lookup_field = 'id'
+    lookup_field = "id"
 
 
 class ShowroowListView(ListAPIView):
-    queryset = ManagerModels.Showroom.objects.all().order_by('-id')
+    queryset = ManagerModels.Showroom.objects.all().order_by("-id")
     serializer_class = serializers.ShowroomsSerializer
     pagination_class = CustomListPagination
+
 
 class ShowroowRetrieveView(RetrieveAPIView):
-    queryset = ManagerModels.Showroom.objects.all().order_by('-id')
+    queryset = ManagerModels.Showroom.objects.all().order_by("-id")
     serializer_class = serializers.ShowroomsSerializer
     pagination_class = CustomListPagination
-    lookup_field = 'slug'
+    lookup_field = "slug"
+
 
 class SupplierShowroowListView(ListAPIView):
-    queryset = ManagerModels.Showroom.objects.all().order_by('-id')
+    queryset = ManagerModels.Showroom.objects.all().order_by("-id")
     serializer_class = serializers.ShowroomsSerializer
 
     def get_queryset(self):
-        supplier = AuthModels.ClientProfile.objects.filter(slug=self.kwargs.get('slug')).first()
+        supplier = AuthModels.ClientProfile.objects.filter(
+            slug=self.kwargs.get("slug")
+        ).first()
 
-        queryset = ManagerModels.Showroom.objects.filter(store__in = supplier.user.store_set.all().order_by('-id'))
+        queryset = ManagerModels.Showroom.objects.filter(
+            store__in=supplier.user.store_set.all().order_by("-id")
+        )
 
         return queryset
 
 
-
 class ManagerServicesListView(ListAPIView):
-    queryset = ManagerModels.Service.objects.all().order_by('-id')
+    queryset = ManagerModels.Service.objects.all().order_by("-id")
     serializer_class = serializers.ManagerServicesSerializer
     pagination_class = CustomListPagination
+
 
 class ManagerServiceRetrieveView(RetrieveAPIView):
-    queryset = ManagerModels.Service.objects.all().order_by('-id')
+    queryset = ManagerModels.Service.objects.all().order_by("-id")
     serializer_class = serializers.ManagerServicesSerializer
     pagination_class = CustomListPagination
-    lookup_field = 'slug'
+    lookup_field = "slug"
+
 
 class MembershipListView(ListAPIView):
-    queryset = PaymentModels.Membership.objects.all().order_by('-id')
+    queryset = PaymentModels.Membership.objects.all().order_by("-id")
     serializer_class = serializers.MembershipSerializer
     pagination_class = CustomListPagination
 
 
 class StoreListView(ListAPIView):
-    queryset = SupplierModels.Store.objects.all().order_by('-id')
+    queryset = SupplierModels.Store.objects.all().order_by("-id")
     serializer_class = serializers.StoreSerializer
     pagination_class = CustomListPagination
+
 
 class StoreRetrieveView(RetrieveAPIView):
-    queryset = SupplierModels.Store.objects.all().order_by('-id')
+    queryset = SupplierModels.Store.objects.all().order_by("-id")
     serializer_class = serializers.StoreSerializer
     pagination_class = CustomListPagination
-    lookup_field = 'slug'
+    lookup_field = "slug"
+
 
 class SupplierStoresListView(ListAPIView):
-    queryset = SupplierModels.Store.objects.all().order_by('-id')
+    queryset = SupplierModels.Store.objects.all().order_by("-id")
     serializer_class = serializers.StoreSerializer
     pagination_class = CustomListPagination
 
     def get_queryset(self):
-        supplier = AuthModels.ClientProfile.objects.filter(slug=self.kwargs.get('slug')).first()
+        supplier = AuthModels.ClientProfile.objects.filter(
+            slug=self.kwargs.get("slug")
+        ).first()
 
-        queryset = SupplierModels.Store.objects.filter(supplier = supplier.user)
+        queryset = SupplierModels.Store.objects.filter(supplier=supplier.user)
 
         return queryset
 
+
 class ServicesListView(ListAPIView):
-    queryset = ManagerModels.Service.objects.all().order_by('-id')
+    queryset = ManagerModels.Service.objects.all().order_by("-id")
     serializer_class = serializers.ManagerServicesSerializer
     pagination_class = CustomListPagination
 
+
 class ServiceRetrieveView(RetrieveAPIView):
-    queryset = ManagerModels.Service.objects.all().order_by('-id')
+    queryset = ManagerModels.Service.objects.all().order_by("-id")
     serializer_class = serializers.ManagerServicesSerializer
     pagination_class = CustomListPagination
-    lookup_field = 'slug'
+    lookup_field = "slug"
 
 
 class SuspendAccountView(APIView):

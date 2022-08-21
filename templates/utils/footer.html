@@ -1,5 +1,6 @@
 
 {% load static %}
+{% load i18n %}
     <hr>
     <footer class="mt-0 md:mt-10">
         <div class="container-fluid foot mt-0 md:mt-50">
@@ -10,40 +11,36 @@
                 <div class="fc gap-6 w-9/12 grid gap-4" style="height:70vh;margin:0">
                     <div class="flex hoverables" style="width:100%;">
                         <div class="cl cl2">
-                            <h1>Let us help you</h1>
+                            <h1>{% trans 'Let us help you' %}</h1>
                             <ul>
-                                <li><a href="#">Help Center</a></li>
-                                <li><a href="#">Contact us</a></li>
-                                <li><a href="#">How to buy on Foroden</a></li>
-                                <li><a href="#">Payment Methods</a></li>
-                                <li><a href="#">Report a Product</a></li>
+                                <li><a href="#">{% trans 'Help Center' %}</a></li>
+                                <li><a href="#">{% trans 'Contact us' %}</a></li>
+                                <li><a href="#">{% trans 'Payment Methods' %}</a></li>
+                                <li><a href="#">{% trans 'Report a Product' %}</a></li>
                             </ul>
                         </div>
                         <div class="cl cl3">
-                            <h1>About Foroden</h1>
+                            <h1>{% trans 'About Foroden' %}</h1>
                             <ul>
-                                <li><a href="./about.html">About us</a></li>
-                                <li><a href="#">Foroden Careers</a></li>
-                                <li><a href="#">IPR Protection Policy</a></li>
-                                <li><a href="#">Terms and Conditions</a></li>
-                                <li><a href="#">Dispute Resolution Policy</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Cookie Notice</a></li>
+                                <li><a href="./about.html">{% trans 'About us' %}</a></li>
+                                <li><a href="#">{% trans 'Terms and Conditions' %}</a></li>
+                                <li><a href="#">{% trans 'Dispute Resolution Policy' %}</a></li>
+                                <li><a href="#">{% trans 'Privacy Policy' %}</a></li>
+                                <li><a href="#">{% trans 'Cookie Notice' %}</a></li>
                             </ul>
                         </div>
                         <div class="cl cl4">
-                            <h1>Make money with us</h1>
+                            <h1>{% trans 'Make money with us' %}</h1>
                             <ul>
-                                <li><a href="#">Sell on Foroden</a></li>
-                                <li><a href="#">Become a Sales Consultant</a></li>
-                                <li><a href="#">Become a Logistics Service Partner</a></li>
+                                <li><a href="#">{% trans 'Sell on Foroden' %}</a></li>
+                                <li><a href="#">{% trans 'Make Business Contracts' %}</a></li>
                             </ul>
                         </div>
                     </div>
                     <hr style="border-top: 1px solid #d5d5d5;width:100%;">
                     <div class="flex justify-items-start items-start fc dropdown-foot hide gap-4" style="padding:0;height:fit-content;margin:0;align-items:flex-start;">
                         <div class="grid gap-2 w-5/12">
-                            <h1>Payment Methods</h1>
+                            <h1>{% trans 'Payment Methods' %}</h1>
                             <ul>
                                 <li><a href="#">PayPal</a></li>
                                 <li><a href="#">Stripe</a></li>
@@ -52,18 +49,17 @@
                             </ul>
                         </div>
                         <div class="cl cl3" style="width: 100%">
-                            <h1>FAQs</h1>
+                            <h1>{% trans 'FAQs' %}</h1>
                             <div class="cl cl3 flex gap-12" style="width: 100%">
                                 <ul>
-                                    <li><a href="#">What is a showroom? </a></li>
-                                    <li><a href="#">How to join a showroom</a></li>
-                                    <li><a href="#">Get seen in the showroom</a></li>
+                                    <li><a href="#">{% trans 'What is a showroom?' %} </a></li>
+                                    <li><a href="#">{% trans 'How to join a showroom' %}</a></li>
+                                    <li><a href="#">{% trans 'Get seen in the showroom' %}</a></li>
                                 </ul>
                                 <ul>
-                                    <li><a href="#">How to create a store?</a></li>
-                                    <li><a href="#">How to create products</a></li>
-                                    <li><a href="#">Manage your products</a></li>
-                                    <li><a href="#">More Tutorials</a></li>
+                                    <li><a href="#">{% trans 'How to create a store?' %}</a></li>
+                                    <li><a href="#">{% trans 'How to create products' %}</a></li>
+                                    <li><a href="#">{% trans 'Manage your products' %}</a></li>
                                     </li>
                                 </ul>
                             </div>
@@ -83,11 +79,11 @@
                         <div class="grid gap-1 md:gap-2 flex-left-bottom grid">
                             <span class="hidden md:grid" style="color:#adacac;">© 2010-2022 Foroden</span>
                             <div class="flex gap-2">
-                                <a href="{% url 'app_admin:home' %}">Admin</a>
-                                <a href="#">Terms</a>
-                                <a href="#">Privacy</a>
-                                <a href="#">Legal</a>
-                                <a href="#">Accessibility Statement</a>
+                                <a href="{% url 'app_admin:home' %}">{% trans 'Admin' %}</a>
+                                <a href="#">{% trans 'Terms' %}</a>
+                                <a href="#">{% trans 'Privacy' %}</a>
+                                <a href="#">{% trans 'Legal' %}</a>
+                                <a href="#">{% trans 'Accessibility Statement' %}</a>
                             </div>
                         </div>
                     </div>

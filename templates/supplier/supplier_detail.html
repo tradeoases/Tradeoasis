@@ -1,11 +1,12 @@
 {% extends '../utils/layout.html' %}
 {% load static %}
+{% load i18n %}
 {% block content %}
 
     <div class="breadcrumb flex flex-wrap justify-start gap-2 w-full md:w-full mx-auto px-5 pt-8">
-        <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">Home</a>
+        <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">{% trans 'Home' %}</a>
         <a>/</a>
-        <a class="text-gray-600 hover:text-gray-900" href=''>Suppliers</a>
+        <a class="text-gray-600 hover:text-gray-900" href=''>{% trans 'Suppliers' %}</a>
         <a>/</a>
         <span class="text-lightBackgroundColor capitalize">{{object.business_name}}</span>
     </div>
@@ -18,19 +19,19 @@
                 </div>
                 <div class="client-infor grid gap-6 py-4 justify-items-start" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
                     <div class="grid gap-2">
-                        <h4 class="text-lg font-semibold text-lightBackgroundColor">About Supplier</h4>
+                        <h4 class="text-lg font-semibold text-lightBackgroundColor">{% trans 'About Supplier' %}</h4>
                         <p class="text-base font-normal text-slate-800">
                             {{object.business_description}}
                         </p>
                     </div>
                     <div class="grid items-start gap-2">
-                        <h4 class="text-lg font-semibold">Detailed Supplier Information</h4>
+                        <h4 class="text-lg font-semibold">{% trans 'Detailed Supplier Information' %}</h4>
                         <span class="flex gap-1 items-start">
-                            <h3 class="text-base font-semibold text-lightBackgroundColor">Business Name: </h3>
+                            <h3 class="text-base font-semibold text-lightBackgroundColor">{% trans 'Business Name' %}: </h3>
                             <p class="font-normal text-slate-700">{{object.business_name}}</p>
                         </span>
                         <span class="grid gap-1 md:grid-flow-col gap-2">
-                            <h3 class="text-base font-semibold text-lightBackgroundColor">Business Address:</h3>
+                            <h3 class="text-base font-semibold text-lightBackgroundColor">{% trans 'Business Address' %}:</h3>
                             <ul class="list-none grid gap-1 list-inside mc:ml-0 font-normal text-slate-700">
                                 <li><span class="text-slate-500">VAT No:</span> {{object.vat_number}}</li>
                                 <li><span class="text-slate-500">LEI:</span> {{object.legal_etity_identifier}}</li>
@@ -52,11 +53,11 @@
                 <div class="cta flex flex-wrap gap-3 my-3">
                     <a href="./contact.html" class="flex place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-yellowColor hover:bg-yellowColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
                         <span class="text-white"><i class="fa fa-address-book"></i></span>
-                        <span>Contact Supplier</span>
+                        <span>{% trans 'Contact Supplier' %}</span>
                     </a>
                     <a href="./contract.html" class="flex place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-lghterBackgroundColor hover:bg-lighterBackgroundColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
                         <span class="text-white"><i class="fa fa-file"></i></span>
-                        <span>Make Contract</span>
+                        <span>{% trans 'Make Contract' %}</span>
                     </a>
                 </div>
             </div>
@@ -67,7 +68,7 @@
         <section class="main w-12/12 py-6 md:py-10" style="background-color: #FFFFFF;">
             <div class="grid w-full mx-auto cf-1 gap-4 md:gap-6 w-full md:w-full mx-auto">
                 <div class="section-heading  flex justify-between px-4 items-center">
-                    <h2 class="sec-title text-xl capitalize md:text-2xl font-bold text-lghterBackgroundColor capitalize">{{object.business_name}} Services</h2>
+                    <h2 class="sec-title text-xl capitalize md:text-2xl font-bold text-lghterBackgroundColor capitalize">{{object.business_name}} {% trans 'Services' %}</h2>
                 </div>
                 <div class="section-body grid gap-4 md:gap-3 grid-cols-1 md:grid-cols-4" data-content="{{supplier_service.context_name}}">
                     {% for service in supplier_service.results %}

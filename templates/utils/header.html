@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +13,7 @@
     <link href="{% static 'icons/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet"  type='text/css'>
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <title>Golden - {{ view_name }}</title>
+    <title>Golden - {% trans view_name %}</title>
 </head>
 
 <script>
@@ -75,11 +76,11 @@
                     </div>
                     <form action="{% url 'supplier:products' %}" method="GET" class="search-form grid w-12/12 gap-0 justify-items-stretch">
                         <input type="search" name="search" id="search-bar"
-                            class="py-3 px-6 rounded-tl-md rounded-bl-md focus:outline-none text-lghterBackgroundColor"
-                            placeholder="Search">
+                            class="py-3 px-6 focus:outline-none text-lghterBackgroundColor"
+                            placeholder="{% trans 'Search' %}" style="border-start-start-radius: 5px; border-end-start-radius: 5px">
 
                         <button type="submit"
-                            class="grid place-items-center bg-yellowColor rounded-tr-md rounded-br-md">
+                            class="grid place-items-center bg-yellowColor" style="border-start-end-radius: 5px; border-end-end-radius: 5px">
                             <i class="ti-search"></i>
                         </button>
                     </form>
@@ -90,31 +91,28 @@
                                 <span class="item-name grid place-items-center py-2">
                                     <i class="ti-world font-bold"></i>
                                 </span>
-                                <span class="grid place-items-center py-2">
-                                    EN
+                                <span class="grid place-items-center py-2" style="text-transform: uppercase;">
+                                    {% get_current_language as LANGUAGE_CODE %}
+                                    {{LANGUAGE_CODE}}
                                 </span>
                             </a>
                             <ul
                                 class="dropdown-list   list-none list-outside bg-lghterBackgroundColor overflow-hidden rounded-md text-base">
-                                <li>
-                                    <a class="grid items-center py-3 px-8" href="">English</a>
-                                </li>
-                                <li>
-                                    <a class="grid items-center py-3 px-8" href="">Arabic</a>
-                                </li>
-                                <li>
-                                    <a class="grid items-center py-3 px-8" href="">French</a>
-                                </li>
-                                <li>
-                                    <a class="grid items-center py-3 px-8" href="">Nederlands</a>
-                                </li>
+                                {% get_current_language as LANGUAGE_CODE %}
+                                {% get_available_languages as LANGUAGES %}
+                                {% get_language_info_list for LANGUAGES as languages %}
+                                {% for language in languages %}
+                                    <li>
+                                        <a href="/{{language.code}}/" class="grid items-center py-3 px-8" href="">{{ language.name_local }}</a>
+                                    </li>
+                                {% endfor %}
                             </ul>
                         </li>
                         <li class="grid place-items-center h-full positive-relative">
                             <a href="" onClick="(function(){
                             })();return false;" class="flex gap-1 px-4 gap-2 text-sm items-center">
                                 <span class="item-name grid place-items-center py-2">
-                                    My Account
+                                    {% trans "My Account" %}
                                 </span>
                                 <span class="grid items-center py-2">
                                     <i class="ti-angle-down font-bold"></i>
@@ -123,21 +121,21 @@
                             <ul
                                 class="dropdown-list   list-none list-outside bg-lghterBackgroundColor overflow-hidden rounded-md text-base">
                                 <li>
-                                    <a href="{% url 'manager:profile' %}{% if not request.user.is_authenticated %}?next=profile{% endif %}" class="grid items-center py-3 px-8" href="">Profile</a>
+                                    <a href="{% url 'manager:profile' %}{% if not request.user.is_authenticated %}?next=profile{% endif %}" class="grid items-center py-3 px-8" href="">{% trans "Profile" %}</a>
                                 </li>
                                 <li>
-                                    <a href="{% url 'manager:profile' %}{% if not request.user.is_authenticated %}?next=profile{% endif %}" class="grid items-center py-3 px-8" href="">Dashboard</a>
+                                    <a href="{% url 'manager:profile' %}{% if not request.user.is_authenticated %}?next=profile{% endif %}" class="grid items-center py-3 px-8" href="">{% trans "Dashboard" %}</a>
                                 </li>
                                 <!-- <li>
                                     <a class="grid items-center py-3 px-8" href="">Settings</a>
                                 </li> -->
                                 {%  if request.user.is_authenticated %}
                                     <li>
-                                        <a class="grid items-center py-3 px-8" href="{% url 'auth_app:logout' %}">Logout</a>
+                                        <a class="grid items-center py-3 px-8" href="{% url 'auth_app:logout' %}">{% trans "Logout" %}</a>
                                     </li>
                                 {% else %}
                                     <li>
-                                        <a class="grid items-center py-3 px-8" href="{% url 'auth_app:login' %}">Login</a>
+                                        <a class="grid items-center py-3 px-8" href="{% url 'auth_app:login' %}">{% trans "Login" %}</a>
                                     </li>
                                 {% endif %}
                             </ul>
@@ -152,17 +150,17 @@
     <nav class="hidden md:grid desktop w-12/12 bg-lghterBackgroundColor">
         <div class="w-full mx-auto flex justify-between  overflow-hidden">
             <ul class="flex text-base text-white">
-                <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="{% url 'manager:home' %}">Home</a></li>
-                <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="{% url 'supplier:products' %}">Products</a></li>
-                <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="{% url 'manager:showrooms' %}">Showrooms</a></li>
-                <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="{% url 'manager:about-us' %}">About us</a></li>
-                <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="{% url 'manager:services' %}">Services</a></li>
-                <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="#">Contact</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="{% url 'manager:home' %}">{% trans "Home" %}</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="{% url 'supplier:products' %}">{% translate "Products" %}</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="{% url 'manager:showrooms' %}">{% trans "Showrooms" %}</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="{% url 'manager:about-us' %}">{% trans "About Us" %}</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="{% url 'manager:services' %}">{% trans "Services" %}</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="#">{% trans "Contact" %}</a></li>
             </ul>
 
             <ul class="flex text-base text-white">
                 <li>
-                    <a class="grid py-3 px-4 bg-yellowColor hover:bg-yellowColorHover font-semibold transition-colors transition-200 ease-in" href="{% url 'auth_app:signup' %}">Sell On Foroden</a>
+                    <a class="grid py-3 px-4 bg-yellowColor hover:bg-yellowColorHover font-semibold transition-colors transition-200 ease-in" href="{% url 'auth_app:signup' %}">{% trans "Sell On Foroden" %}</a>
                 </li>
             </ul>
         </div>
@@ -189,13 +187,13 @@
                     <i class="fa fa-globe text-white"></i>
                 </button>
                 <a href="{% url 'auth_app:login' %}" class="flex place-items-center px-4 py-2 text-base bg-yellowColor focus:bg-yellowColorHover duration-200 transition-all ease-in text-white font-semibold">
-                    Sign In
+                    {% trans "Sign In" %}
                 </a>
             </div>
         </nav>
         <form action="" id="mobile-searchbar" class="search-form-mobile w-full mx-auto mx-auto py-3 gap-0">
             <input type="search" name="search-bar" id="search-bar" class="py-3 px-6 w-12/12 rounded-md rounded-md focus:outline-none text-lghterBackgroundColor"
-                placeholder="Search">
+                placeholder="{% trans 'Search' %}">
         </form>
     </header>
     <div class="mobile-menu gap-4 bg-backgroundColor content-start px-4" id="mobile-menu">            
@@ -205,10 +203,10 @@
             </div>
             <div class="flex gap-2 justify-center auth">
                 <a href="{% url 'auth_app:login' %}" class="flex place-items-center px-6 py-2 text-base bg-lighterBackgroundColorHover focus:bg-yellowColorHover duration-200 transition-all ease-in text-white font-semibold">
-                    Sign In
+                    {% trans "Sign In" %}
                 </a>
                 <a href="{% url 'auth_app:signup' %}?supplier=1" class="flex place-items-center px-6 py-2 text-base bg-yellowColor focus:bg-yellowColorHover duration-200 transition-all ease-in text-white font-semibold">
-                    Sell on Foroden
+                    {% trans "Sell on Foroden" %}
                 </a>
             </div>
         </div>
@@ -222,42 +220,42 @@
                         class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
                         <a class="flex items-center justify-start gap-2 py-2" href="./index.html">
                             <i class="ti-home"></i>
-                            <span>Home</span>
+                            <span>{% trans "Home" %}</span>
                         </a>
                     </li>
                     <li
                         class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
                         <a class="flex items-center justify-start gap-2 py-2" href="{% url 'supplier:products' %}">
                             <i class="ti-camera"></i>
-                            <span>Products</span>
+                            <span>{% trans "Products" %}</span>
                         </a>
                     </li>
                     <li
                         class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
                         <a class="flex items-center justify-start gap-2 py-2" href="{% url 'manager:showrooms' %}">
                             <i class="ti-link"></i>
-                            <span>Showrooms</span>
+                            <span>{% trans "Showrooms" %}</span>
                         </a>
                     </li>
                     <li
                         class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
                         <a class="flex items-center justify-start gap-2 py-2" href="{% url 'manager:about-us' %}">
                             <i class="ti-car"></i>
-                            <span>About Us</span>
+                            <span>{% trans "About Us" %}</span>
                         </a>
                     </li>
                     <li
                         class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
                         <a class="flex items-center justify-start gap-2 py-2" href="{% url 'manager:services' %}">
                             <i class="ti-camera"></i>
-                            <span>Services</span>
+                            <span>{% trans "Services" %}</span>
                         </a>
                     </li>
                     <li
                         class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
                         <a class="flex items-center justify-start gap-2 py-2" href="./index.html">
                             <i class="ti-file"></i>
-                            <span>Support</span>
+                            <span>{% trans "Support" %}</span>
                         </a>
                     </li>
                 </ul>
@@ -265,7 +263,7 @@
             <hr style="border:none; border-block-end: 1px solid rgba(211, 211, 211, 0.377);">
             <div class="grid gap-3">
                 <h4 class="text-lg font-bold text-slate-100">
-                    Categories for you
+                    {% trans "Categories for you" %}
                 </h4>
                 <ul class="text-slate-300 grid gap-2 pl-4">
                     {% for category in product_categories.results %} 
@@ -282,80 +280,34 @@
             <hr style="border:none; border-block-end: 1px solid rgba(211, 211, 211, 0.377);">
             <div class="grid gap-3">
                 <h4 class="text-lg font-bold text-slate-100">
-                    Showrooms
+                    {% trans "Showrooms" %}
                 </h4>
                 <ul class="text-slate-300 grid gap-2 pl-4">
-                    <li
+                    {% for showroom in showroows_headers %}
+                        <li
                         class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
-                        <a class="flex items-center justify-start gap-2 py-2" href="#">
-                            <i class="ti-folder"></i>
-                            <span>Oman - Muscat</span>
-                        </a>
-                    </li>
-                    <li
-                        class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
-                        <a class="flex items-center justify-start gap-2 py-2" href="#">
-                            <i class="ti-car"></i>
-                            <span>UAE - Dubai</span>
-                        </a>
-                    </li>
-                    <li
-                        class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
-                        <a class="flex items-center justify-start gap-2 py-2" href="#">
-                            <i class="ti-camera"></i>
-                            <span>Kuwait - Kuwait</span>
-                        </a>
-                    </li>
-                    <li
-                        class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
-                        <a class="flex items-center justify-start gap-2 py-2" href="#">
-                            <i class="ti-link"></i>
-                            <span>Qatar - Doha</span>
-                        </a>
-                    </li>
-                    <li
-                        class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
-                        <a class="flex items-center justify-start gap-2 py-2" href="#">
-                            <i class="ti-file"></i>
-                            <span>Saudi Arabia - Riyadh</span>
-                        </a>
-                    </li>
+                            <a class="flex items-center justify-start gap-2 py-2" href="#">
+                                <i class="ti-folder"></i>
+                                <span>{{showroom.name}}</span>
+                            </a>
+                        </li>
+                    {% endfor %}
                 </ul>
             </div>
             <hr style="border:none; border-block-end: 1px solid rgba(211, 211, 211, 0.377);">
             <div class="grid gap-3">
                 <h4 class="text-lg font-bold text-slate-100">
-                    Languages
+                    {% trans "Languages" %}
                 </h4>
                 <ul class="text-slate-300 grid gap-2 pl-4">
-                    <li
-                        class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
-                        <a class="flex items-center justify-start gap-2 py-2" href="#">
-                            <i class="ti-folder"></i>
-                            <span>English</span>
-                        </a>
-                    </li>
-                    <li
-                        class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
-                        <a class="flex items-center justify-start gap-2 py-2" href="#">
-                            <i class="ti-car"></i>
-                            <span>Arabic</span>
-                        </a>
-                    </li>
-                    <li
-                        class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
-                        <a class="flex items-center justify-start gap-2 py-2" href="#">
-                            <i class="ti-camera"></i>
-                            <span>French</span>
-                        </a>
-                    </li>
-                    <li
-                        class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
-                        <a class="flex items-center justify-start gap-2 py-2" href="#">
-                            <i class="ti-link"></i>
-                            <span>Spanish</span>
-                        </a>
-                    </li>
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% for language in languages %}
+                        <li>
+                            <a href="/{{language.code}}/" class="grid items-center py-3 px-8" href="">{{ language.name_local }}</a>
+                        </li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>

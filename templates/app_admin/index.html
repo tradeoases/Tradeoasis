@@ -1,5 +1,6 @@
 {% extends './utils/layout.html' %}
 {% load static %}
+{% load i18n %}
 {% block content %}
     <!-- section area -->
         <!-- section selectors -->
@@ -23,15 +24,15 @@
                 {% for statistic in statistics.results %}
                     <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
                         <h4 class="cs-text-md cs-font-500" style="margin: 0;color: var(--text-color);">
-                            {{statistic.name}}
+                            {% trans statistic.name %}
                         </h4>
                         <div class="cs-flex cs-justify-between" style="--gap: 1rem;">
                             <div class="cs-grid">
                                 <p class="cs-text-body cs-font-bold cs-text-secondary" style="margin: 0;">
-                                    {{statistic.count}}
+                                    {{ statistic.count }}
                                 </p>
                                 <span class="cs-text-sm" style="color: var(--text-color);">
-                                    {{statistic.description}}</span>
+                                    {% trans statistic.description %}</span>
                             </div>
                             <!-- <a href="" class="cs-text-sm cs-text-accent cs-font-500" style="align-self: flex-end">View All</a> -->
                         </div>

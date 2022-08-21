@@ -20,6 +20,7 @@ class UserSerializer(serializers.ModelSerializer):
             "date_joined",
         )
 
+
 class MembershipSerializer(serializers.ModelSerializer):
     class Meta:
         model = PaymentModels.Membership
@@ -70,12 +71,13 @@ class BuyersSerializer(serializers.ModelSerializer):
         model = AuthModels.ClientProfile
         fields = "__all__"
 
+
 class _StoreSerializer(serializers.RelatedField, StoreSerializer):
     def to_internal_value(self, data):
         return self.queryset.get(name=data).pk
 
     def to_representation(self, value):
-        return {'name': value.name, 'slug': value.slug}
+        return {"name": value.name, "slug": value.slug}
 
 
 class ProductsSerializer(serializers.ModelSerializer):
@@ -96,8 +98,8 @@ class ProductsSerializer(serializers.ModelSerializer):
         ).data.get("slug")
         return representation
 
-class ProductImagesSerializer(serializers.ModelSerializer):
 
+class ProductImagesSerializer(serializers.ModelSerializer):
     class Meta:
         model = SupplierModels.ProductImage
         fields = "__all__"
@@ -108,10 +110,12 @@ class ServiceSerializer(serializers.ModelSerializer):
         model = SupplierModels.Service
         fields = "__all__"
 
+
 class ContractReciptSerializer(serializers.ModelSerializer):
     class Meta:
         model = PaymentModels.ContractReceipt
         fields = "__all__"
+
 
 class ContractsSerializer(serializers.ModelSerializer):
     supplier = UserSerializer()
@@ -135,14 +139,17 @@ class LocationsSerializer(serializers.ModelSerializer):
         model = ManagerModels.Location
         fields = "__all__"
 
+
 class ManagerServicesSerializer(serializers.ModelSerializer):
     class Meta:
         model = ManagerModels.Service
         fields = "__all__"
 
+
 class ShowroomsSerializer(serializers.ModelSerializer):
     location = LocationsSerializer()
     store = _StoreSerializer(queryset=SupplierModels.Store.objects.all(), many=True)
+
     class Meta:
         model = ManagerModels.Showroom
         fields = "__all__"
@@ -156,10 +163,12 @@ class ShowroomsSerializer(serializers.ModelSerializer):
         representation["products"] = product_count
         return representation
 
+
 class MembershipReciptSerializer(serializers.ModelSerializer):
     class Meta:
         model = PaymentModels.MembershipReceipt
         fields = "__all__"
+
 
 class MembershipSerializer(serializers.ModelSerializer):
     supplier = UserSerializer()
@@ -175,4 +184,3 @@ class MembershipSerializer(serializers.ModelSerializer):
             PaymentModels.MembershipReceipt.objects.filter(membership=instance).first()
         ).data
         return representation
-

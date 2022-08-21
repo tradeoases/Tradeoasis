@@ -32,10 +32,8 @@ class User(AbstractUser):
     image = models.ImageField(
         verbose_name=_("Image"), upload_to=get_file_path, blank=True, null=True
     )
-    is_email_activated = models.BooleanField(
-        _("Email Activated"),
-        default=False
-    )
+    is_email_activated = models.BooleanField(_("Email Activated"), default=False)
+
     def save(self, *args, **kwargs):
         if self.is_superuser:
             self.is_email_activated = True
@@ -90,6 +88,7 @@ class SupplierManager(BaseUserManager):
     def get_queryset(self, *args, **kwargs):
         results = super().get_queryset(*args, **kwargs)
         return results.filter(account_type=User.Role.SUPPLIER)
+
 
 class Supplier(User):
 

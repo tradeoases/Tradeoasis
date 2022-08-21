@@ -51,5 +51,5 @@ urlpatterns = [
         "search",
         views.SearchView.as_view(),
         name="search",
-    )
+    ),
 ]

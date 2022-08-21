@@ -2,6 +2,7 @@ from django.forms import ModelForm
 
 from auth_app import models as AuthModels
 
+
 class UserProfileFormManager(ModelForm):
     class Meta:
         model = AuthModels.ClientProfile

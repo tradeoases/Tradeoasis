@@ -1,0 +1,826 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-19 18:26+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app_admin/views.py:30 app_admin/views.py:93
+msgid "Admin Dashboard"
+msgstr ""
+
+#: app_admin/views.py:36 app_admin/views.py:99
+msgid "Total Suppliers"
+msgstr ""
+
+#: app_admin/views.py:37 app_admin/views.py:100
+msgid "Total Supplier Count"
+msgstr ""
+
+#: app_admin/views.py:41 app_admin/views.py:104
+msgid "Total Buyers"
+msgstr ""
+
+#: app_admin/views.py:42 app_admin/views.py:105
+msgid "Total Buyer Count"
+msgstr ""
+
+#: app_admin/views.py:46 app_admin/views.py:109
+msgid "Total Product"
+msgstr ""
+
+#: app_admin/views.py:47 app_admin/views.py:110
+msgid "Total Product Count"
+msgstr ""
+
+#: app_admin/views.py:51 app_admin/views.py:147
+msgid "Total Showrooms"
+msgstr ""
+
+#: app_admin/views.py:52 app_admin/views.py:148
+msgid "Showroom Count"
+msgstr ""
+
+#: app_admin/views.py:56 app_admin/views.py:152
+msgid "Total Stores"
+msgstr ""
+
+#: app_admin/views.py:57 app_admin/views.py:153
+msgid "Total Store Count"
+msgstr ""
+
+#: app_admin/views.py:61 app_admin/views.py:157
+msgid "Total Memberships"
+msgstr ""
+
+#: app_admin/views.py:62 app_admin/views.py:158
+msgid "Memberships"
+msgstr ""
+
+#: app_admin/views.py:66 app_admin/views.py:114
+msgid "Total Contracts"
+msgstr ""
+
+#: app_admin/views.py:67 app_admin/views.py:115
+msgid "Contract Created"
+msgstr ""
+
+#: app_admin/views.py:141 app_admin/views.py:241
+msgid "Admin Dashboard - Clients"
+msgstr ""
+
+#: app_admin/views.py:162
+msgid "Total Services"
+msgstr ""
+
+#: app_admin/views.py:163
+msgid "Total Services Count"
+msgstr ""
+
+#: app_admin/views.py:181 app_admin/views.py:213 auth_app/views.py:39
+#: auth_app/views.py:83 auth_app/views.py:87
+msgid "Please Fill all fields."
+msgstr ""
+
+#: app_admin/views.py:186
+msgid "Invalid Data Entered."
+msgstr ""
+
+#: app_admin/views.py:191 app_admin/views.py:223
+#, python-brace-format
+msgid "Service ({name}) created successfully."
+msgstr ""
+
+#: app_admin/views.py:198 app_admin/views.py:230
+msgid "Admin Dashboard - Manager"
+msgstr ""
+
+#: app_admin/views.py:219
+msgid "Error Occurred. Try Again"
+msgstr ""
+
+#: app_admin/views.py:258
+#, python-brace-format
+msgid "Category({name}) already exists."
+msgstr ""
+
+#: app_admin/views.py:276
+#, python-brace-format
+msgid "Sub category ({sub_cat_name}) already exists."
+msgstr ""
+
+#: app_admin/views.py:287
+msgid "Category ({}) created successfully."
+msgstr ""
+
+#: app_admin/views.py:298 app_admin/views.py:313 app_admin/views.py:328
+#: app_admin/views.py:343
+msgid "Admin Dashboard - Support"
+msgstr ""
+
+#: auth_app/models.py:29
+msgid "Account Type"
+msgstr ""
+
+#: auth_app/models.py:33 manager/models.py:90 supplier/models.py:64
+#: supplier/models.py:86 supplier/models.py:153
+msgid "Image"
+msgstr ""
+
+#: auth_app/models.py:35
+msgid "Email Activated"
+msgstr ""
+
+#: auth_app/models.py:58 templates/auth_app/business_infor.html:31
+#: templates/buyer/profile.html:20 templates/buyer/profile.html:49
+#: templates/supplier/supplier_detail.html:30
+msgid "Business Name"
+msgstr ""
+
+#: auth_app/models.py:60 manager/models.py:23 manager/models.py:43
+#: manager/models.py:68 manager/models.py:96 payment/models.py:27
+#: payment/models.py:86 supplier/models.py:36 supplier/models.py:68
+#: supplier/models.py:91 supplier/models.py:129 supplier/models.py:157
+#: supplier/models.py:185
+msgid "Safe Url"
+msgstr ""
+
+#: auth_app/models.py:65 templates/auth_app/business_infor.html:35
+msgid "Business Description"
+msgstr ""
+
+#: auth_app/models.py:66 templates/auth_app/business_infor.html:40
+#: templates/buyer/profile.html:58
+msgid "Country"
+msgstr ""
+
+#: auth_app/models.py:67
+msgid "Country Code"
+msgstr ""
+
+#: auth_app/models.py:68 templates/auth_app/business_infor.html:285
+#: templates/buyer/profile.html:62
+msgid "City"
+msgstr ""
+
+#: auth_app/models.py:69
+msgid "Number"
+msgstr ""
+
+#: auth_app/models.py:70 templates/auth_app/business_infor.html:516
+#: templates/buyer/profile.html:71
+msgid "VAT Number"
+msgstr ""
+
+#: auth_app/models.py:72 templates/auth_app/business_infor.html:520
+#: templates/buyer/profile.html:75
+msgid "Legal Entity Identifier"
+msgstr ""
+
+#: auth_app/models.py:74 templates/auth_app/business_infor.html:524
+#: templates/buyer/profile.html:79
+msgid "Website"
+msgstr ""
+
+#: auth_app/models.py:141
+msgid "Responses to clients"
+msgstr ""
+
+#: auth_app/views.py:33 templates/utils/header.html:190
+#: templates/utils/header.html:206
+msgid "Sign In"
+msgstr ""
+
+#: auth_app/views.py:47
+msgid "Account not found. Try Again."
+msgstr ""
+
+#: auth_app/views.py:53
+msgid "Please Activate your Email"
+msgstr ""
+
+#: auth_app/views.py:70
+msgid "Sign Up"
+msgstr ""
+
+#: auth_app/views.py:91
+msgid "Password mismatch."
+msgstr ""
+
+#: auth_app/views.py:125
+msgid "Your activation link is"
+msgstr ""
+
+#: auth_app/views.py:129
+msgid "Activate Foroden Activation"
+msgstr ""
+
+#: auth_app/views.py:141
+msgid ""
+"Account Created Successfully. Please check your email for a verfication link."
+msgstr ""
+
+#: auth_app/views.py:159
+msgid "Bad Request"
+msgstr ""
+
+#: auth_app/views.py:177 templates/auth_app/business_infor.html:9
+msgid "Business Profile"
+msgstr ""
+
+#: auth_app/views.py:191
+msgid "Please Fill all reqiured fields."
+msgstr ""
+
+#: auth_app/views.py:210
+msgid "An Error Occurred. Try Again."
+msgstr ""
+
+#: buyer/models.py:19
+msgid "interest handled"
+msgstr ""
+
+#: buyer/models.py:20
+msgid "Viewed by supplier"
+msgstr ""
+
+#: buyer/models.py:21 manager/models.py:21 manager/models.py:48
+#: manager/models.py:73 manager/models.py:101 payment/models.py:32
+#: payment/models.py:56 payment/models.py:91 payment/models.py:136
+#: supplier/models.py:47 supplier/models.py:69 supplier/models.py:96
+#: supplier/models.py:134 supplier/models.py:162 supplier/models.py:190
+msgid "Created on"
+msgstr ""
+
+#: buyer/views.py:21 templates/utils/header.html:124
+msgid "Profile"
+msgstr ""
+
+#: buyer/views.py:38 buyer/views.py:55 templates/buyer/profile.html:10
+msgid "Contracts"
+msgstr ""
+
+#: core/settings.py:181
+msgid "English"
+msgstr ""
+
+#: core/settings.py:182
+msgid "Arabic"
+msgstr ""
+
+#: core/settings.py:183
+msgid "French"
+msgstr ""
+
+#: core/urls.py:10
+msgid "suppliers/"
+msgstr ""
+
+#: core/urls.py:11
+msgid "buyer/"
+msgstr ""
+
+#: core/urls.py:12
+msgid "auth/"
+msgstr ""
+
+#: core/urls.py:13
+msgid "support/admin/"
+msgstr ""
+
+#: core/urls.py:14
+msgid "admin-api/"
+msgstr ""
+
+#: core/urls.py:15
+msgid "admin/"
+msgstr ""
+
+#: manager/models.py:20
+msgid "Country or City"
+msgstr ""
+
+#: manager/models.py:38 manager/models.py:84 payment/models.py:20
+#: payment/models.py:83 supplier/models.py:61 supplier/models.py:83
+#: supplier/models.py:113 supplier/models.py:177
+msgid "Name"
+msgstr ""
+
+#: manager/models.py:40 payment/models.py:22 supplier/models.py:115
+#: supplier/models.py:179 templates/buyer/profile.html:53
+msgid "Description"
+msgstr ""
+
+#: manager/models.py:64 supplier/models.py:43
+msgid "Service Image"
+msgstr ""
+
+#: manager/models.py:94
+msgid "Number of visits"
+msgstr ""
+
+#: manager/views.py:48 templates/app_admin/utils/layout.html:53
+#: templates/manager/service_list.html:8
+#: templates/manager/showroom_detail.html:7
+#: templates/manager/showroom_list.html:7
+#: templates/supplier/product_detail.html:7
+#: templates/supplier/product_list.html:8
+#: templates/supplier/store_detail.html:9 templates/supplier/store_list.html:9
+#: templates/supplier/supplier_detail.html:7 templates/utils/header.html:153
+#: templates/utils/header.html:223
+msgid "Home"
+msgstr ""
+
+#: manager/views.py:122 templates/manager/about.html:54
+#: templates/manager/index.html:83 templates/manager/showroom_detail.html:9
+#: templates/manager/showroom_list.html:9
+#: templates/manager/showroom_list.html:15 templates/utils/header.html:155
+#: templates/utils/header.html:237 templates/utils/header.html:283
+msgid "Showrooms"
+msgstr ""
+
+#: manager/views.py:190 templates/manager/service_list.html:10
+#: templates/supplier/supplier_detail.html:71 templates/utils/header.html:157
+#: templates/utils/header.html:251
+msgid "Services"
+msgstr ""
+
+#: manager/views.py:200 templates/manager/about.html:10
+#: templates/utils/header.html:156 templates/utils/header.html:244
+msgid "About Us"
+msgstr ""
+
+#: payment/models.py:24 supplier/models.py:126 supplier/models.py:181
+#: templates/supplier/product_list.html:19
+msgid "Price"
+msgstr ""
+
+#: payment/models.py:25 payment/models.py:109 payment/models.py:153
+#: supplier/models.py:127 supplier/models.py:182
+msgid "Currency"
+msgstr ""
+
+#: payment/models.py:54
+msgid "Plan expiry date"
+msgstr ""
+
+#: payment/models.py:55
+msgid "Duration"
+msgstr ""
+
+#: payment/models.py:84
+msgid "Number of transactions"
+msgstr ""
+
+#: payment/models.py:104 payment/models.py:148
+msgid "Address"
+msgstr ""
+
+#: payment/models.py:105 payment/models.py:149
+msgid "Payment Id"
+msgstr ""
+
+#: payment/models.py:107 payment/models.py:151
+msgid "Total Amount Paid"
+msgstr ""
+
+#: payment/models.py:134
+msgid "Contract completed"
+msgstr ""
+
+#: supplier/models.py:25
+msgid "Store Name"
+msgstr ""
+
+#: supplier/models.py:62
+msgid "Number of products"
+msgstr ""
+
+#: supplier/models.py:183
+msgid "Number of contracts"
+msgstr ""
+
+#: supplier/views.py:130 templates/manager/showroom_detail.html:45
+#: templates/supplier/product_list.html:10
+#: templates/supplier/product_list.html:15
+#: templates/supplier/store_detail.html:25 templates/utils/header.html:154
+#: templates/utils/header.html:230
+msgid "Products"
+msgstr ""
+
+#: supplier/views.py:243
+msgid "Categories"
+msgstr ""
+
+#: supplier/views.py:577 templates/manager/showroom_detail.html:17
+#: templates/manager/showroom_detail.html:87
+#: templates/manager/showroom_list.html:25
+#: templates/supplier/product_detail.html:46
+#: templates/supplier/store_detail.html:11
+#: templates/supplier/store_list.html:11 templates/supplier/store_list.html:16
+msgid "Stores"
+msgstr ""
+
+#: templates/app_admin/utils/layout.html:59
+msgid "Clients"
+msgstr ""
+
+#: templates/app_admin/utils/layout.html:65
+msgid "Manager"
+msgstr ""
+
+#: templates/app_admin/utils/layout.html:71 templates/utils/header.html:258
+msgid "Support"
+msgstr ""
+
+#: templates/auth_app/business_infor.html:10
+msgid "Represents required fields"
+msgstr ""
+
+#: templates/auth_app/business_infor.html:290 templates/buyer/profile.html:67
+msgid "Business Line"
+msgstr ""
+
+#: templates/auth_app/signin.html:9
+msgid "Welcome Back"
+msgstr ""
+
+#: templates/auth_app/signin.html:10
+msgid "Thousands of products await."
+msgstr ""
+
+#: templates/auth_app/signin.html:31 templates/auth_app/signup.html:41
+#: templates/buyer/profile.html:16 templates/buyer/profile.html:38
+msgid "Username"
+msgstr ""
+
+#: templates/auth_app/signin.html:35 templates/auth_app/signup.html:49
+msgid "Password"
+msgstr ""
+
+#: templates/auth_app/signin.html:49 templates/auth_app/signup.html:73
+msgid "Continue With Google"
+msgstr ""
+
+#: templates/auth_app/signin.html:53 templates/auth_app/signup.html:77
+msgid "Continue With LinkedIn"
+msgstr ""
+
+#: templates/auth_app/signin.html:59 templates/auth_app/signup.html:9
+msgid "Welcome To Foroden"
+msgstr ""
+
+#: templates/auth_app/signin.html:60 templates/auth_app/signup.html:10
+msgid "Join the biggest community of over 70,000 Business People."
+msgstr ""
+
+#: templates/auth_app/signin.html:63
+msgid "Sign Up As"
+msgstr ""
+
+#: templates/auth_app/signin.html:67 templates/supplier/product_detail.html:42
+#: templates/supplier/product_list.html:36
+#: templates/supplier/store_detail.html:21
+#: templates/supplier/store_list.html:20
+msgid "Supplier"
+msgstr ""
+
+#: templates/auth_app/signin.html:70
+msgid "Buyer"
+msgstr ""
+
+#: templates/auth_app/signup.html:32
+msgid "First Name"
+msgstr ""
+
+#: templates/auth_app/signup.html:36
+msgid "Last Name"
+msgstr ""
+
+#: templates/auth_app/signup.html:45 templates/buyer/profile.html:24
+#: templates/buyer/profile.html:42
+msgid "Email"
+msgstr ""
+
+#: templates/auth_app/signup.html:53
+msgid "Show Password"
+msgstr ""
+
+#: templates/auth_app/signup.html:57
+msgid "Confirm Password"
+msgstr ""
+
+#: templates/auth_app/signup.html:64
+msgid "Already Have An Account?"
+msgstr ""
+
+#: templates/auth_app/signup.html:65
+msgid "Sign into account"
+msgstr ""
+
+#: templates/buyer/profile.html:9 templates/utils/header.html:115
+msgid "My Account"
+msgstr ""
+
+#: templates/buyer/profile.html:11
+msgid "Visited Products"
+msgstr ""
+
+#: templates/buyer/profile.html:14
+msgid "Account Details"
+msgstr ""
+
+#: templates/buyer/profile.html:28
+msgid "Edit Account"
+msgstr ""
+
+#: templates/buyer/profile.html:29 templates/utils/header.html:134
+msgid "Logout"
+msgstr ""
+
+#: templates/buyer/profile.html:36
+msgid "User Profile"
+msgstr ""
+
+#: templates/buyer/profile.html:47
+msgid "Business Details"
+msgstr ""
+
+#: templates/manager/about.html:15
+msgid "We are empowering entrepreneurs around the world to chase their dreams."
+msgstr ""
+
+#: templates/manager/about.html:23 templates/manager/about.html:37
+msgid "Vision Statement"
+msgstr ""
+
+#: templates/manager/about.html:25 templates/manager/about.html:39
+msgid ""
+"Now more than ever, consumers are choosing to support local shops over big-"
+"box chains. There are millions of thriving small businesses in North America "
+"and Europe alone, who collectively represent a $2T market. With our global "
+"community and the power of technology, Faire is helping fuel the growth of "
+"entrepreneurs everywhere."
+msgstr ""
+
+#: templates/manager/about.html:49 templates/manager/about.html:64
+#: templates/supplier/supplier_detail.html:9
+msgid "Suppliers"
+msgstr ""
+
+#: templates/manager/about.html:50 templates/manager/about.html:55
+#: templates/manager/about.html:60 templates/manager/about.html:65
+msgid "All over the world."
+msgstr ""
+
+#: templates/manager/about.html:59
+msgid "Countries"
+msgstr ""
+
+#: templates/manager/index.html:11
+msgid "Product Categories"
+msgstr ""
+
+#: templates/manager/index.html:27
+msgid "All Categories"
+msgstr ""
+
+#: templates/manager/index.html:98
+msgid "All Showrooms"
+msgstr ""
+
+#: templates/manager/index.html:108
+msgid "Foroden Marketplace"
+msgstr ""
+
+#: templates/manager/index.html:116 templates/manager/index.html:152
+#: templates/manager/index.html:181 templates/manager/showroom_list.html:39
+#: templates/supplier/store_detail.html:118
+msgid "View All"
+msgstr ""
+
+#: templates/manager/index.html:148
+msgid "Discounted Products"
+msgstr ""
+
+#: templates/manager/index.html:180
+msgid "Foroden Showrooms"
+msgstr ""
+
+#: templates/manager/index.html:203
+msgid "Popular Products"
+msgstr ""
+
+#: templates/manager/service_list.html:17
+msgid "Foroden Services"
+msgstr ""
+
+#: templates/manager/showroom_detail.html:76
+msgid "Other Showrooms"
+msgstr ""
+
+#: templates/manager/showroom_list.html:37
+msgid "Popular Stores"
+msgstr ""
+
+#: templates/supplier/product_detail.html:57
+#: templates/supplier/supplier_detail.html:56
+msgid "Contact Supplier"
+msgstr ""
+
+#: templates/supplier/product_detail.html:61
+#: templates/supplier/supplier_detail.html:60
+msgid "Make Contract"
+msgstr ""
+
+#: templates/supplier/product_detail.html:65
+msgid "Show Interest"
+msgstr ""
+
+#: templates/supplier/product_detail.html:76
+msgid "Products Just For you"
+msgstr ""
+
+#: templates/supplier/product_list.html:22
+msgid "min"
+msgstr ""
+
+#: templates/supplier/product_list.html:26
+msgid "max"
+msgstr ""
+
+#: templates/supplier/product_list.html:39
+#: templates/supplier/store_list.html:23
+msgid "All"
+msgstr ""
+
+#: templates/supplier/store_detail.html:66
+#: templates/supplier/store_detail.html:103
+msgid "Previous"
+msgstr ""
+
+#: templates/supplier/store_detail.html:80
+#: templates/supplier/store_detail.html:107
+msgid "Next"
+msgstr ""
+
+#: templates/supplier/store_detail.html:116
+msgid "Related Stores"
+msgstr ""
+
+#: templates/supplier/supplier_detail.html:22
+msgid "About Supplier"
+msgstr ""
+
+#: templates/supplier/supplier_detail.html:28
+msgid "Detailed Supplier Information"
+msgstr ""
+
+#: templates/supplier/supplier_detail.html:34
+msgid "Business Address"
+msgstr ""
+
+#: templates/utils/footer.html:14
+msgid "Let us help you"
+msgstr ""
+
+#: templates/utils/footer.html:16
+msgid "Help Center"
+msgstr ""
+
+#: templates/utils/footer.html:17
+msgid "Contact us"
+msgstr ""
+
+#: templates/utils/footer.html:18 templates/utils/footer.html:43
+msgid "Payment Methods"
+msgstr ""
+
+#: templates/utils/footer.html:19
+msgid "Report a Product"
+msgstr ""
+
+#: templates/utils/footer.html:23
+msgid "About Foroden"
+msgstr ""
+
+#: templates/utils/footer.html:25
+msgid "About us"
+msgstr ""
+
+#: templates/utils/footer.html:26
+msgid "Terms and Conditions"
+msgstr ""
+
+#: templates/utils/footer.html:27
+msgid "Dispute Resolution Policy"
+msgstr ""
+
+#: templates/utils/footer.html:28
+msgid "Privacy Policy"
+msgstr ""
+
+#: templates/utils/footer.html:29
+msgid "Cookie Notice"
+msgstr ""
+
+#: templates/utils/footer.html:33
+msgid "Make money with us"
+msgstr ""
+
+#: templates/utils/footer.html:35 templates/utils/header.html:209
+msgid "Sell on Foroden"
+msgstr ""
+
+#: templates/utils/footer.html:36
+msgid "Make Business Contracts"
+msgstr ""
+
+#: templates/utils/footer.html:52
+msgid "FAQs"
+msgstr ""
+
+#: templates/utils/footer.html:55
+msgid "What is a showroom?"
+msgstr ""
+
+#: templates/utils/footer.html:56
+msgid "How to join a showroom"
+msgstr ""
+
+#: templates/utils/footer.html:57
+msgid "Get seen in the showroom"
+msgstr ""
+
+#: templates/utils/footer.html:60
+msgid "How to create a store?"
+msgstr ""
+
+#: templates/utils/footer.html:61
+msgid "How to create products"
+msgstr ""
+
+#: templates/utils/footer.html:62
+msgid "Manage your products"
+msgstr ""
+
+#: templates/utils/footer.html:82
+msgid "Admin"
+msgstr ""
+
+#: templates/utils/footer.html:83
+msgid "Terms"
+msgstr ""
+
+#: templates/utils/footer.html:84
+msgid "Privacy"
+msgstr ""
+
+#: templates/utils/footer.html:85
+msgid "Legal"
+msgstr ""
+
+#: templates/utils/footer.html:86
+msgid "Accessibility Statement"
+msgstr ""
+
+#: templates/utils/header.html:80 templates/utils/header.html:196
+msgid "Search"
+msgstr ""
+
+#: templates/utils/header.html:127
+msgid "Dashboard"
+msgstr ""
+
+#: templates/utils/header.html:138
+msgid "Login"
+msgstr ""
+
+#: templates/utils/header.html:158
+msgid "Contact"
+msgstr ""
+
+#: templates/utils/header.html:163
+msgid "Sell On Foroden"
+msgstr ""
+
+#: templates/utils/header.html:266
+msgid "Categories for you"
+msgstr ""
+
+#: templates/utils/header.html:300
+msgid "Languages"
+msgstr ""

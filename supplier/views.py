@@ -3,6 +3,7 @@ from django.views import View
 from django.views.generic import ListView, DetailView
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.utils.translation import gettext as _
 
 import random
 
@@ -98,7 +99,9 @@ class ProductListView(View):
         elif search:
             # we are searching for products based on name, sub category, category
             return SupplierModels.Product.objects.filter(
-                Q(name__icontains=search) | Q(sub_category__name__icontains=search) | Q(category__name__icontains=search) 
+                Q(name__icontains=search)
+                | Q(sub_category__name__icontains=search)
+                | Q(category__name__icontains=search)
             )
 
         return SupplierModels.Product.objects.filter(
@@ -124,7 +127,7 @@ class ProductListView(View):
 
         products_paginator = self.get_products_paginator()
 
-        context_data["view_name"] = "Products"
+        context_data["view_name"] = _("Products")
         context_data["page_obj"] = products_paginator
         context_data["product_count"] = len(self.products)
         context_data["current_page_number"] = self.request.GET.get("page", 1)
@@ -237,7 +240,7 @@ class CategoryListView(ListView):
 
         categories = self.get_queryset()
 
-        context["view_name"] = "Categories"
+        context["view_name"] = _("Categories")
 
         object_list = []
         for category in categories:
@@ -571,7 +574,7 @@ class StoreListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context["view_name"] = "Stores"
+        context["view_name"] = _("Stores")
 
         context["suppliers"] = {
             "context_name": "suppliers",
@@ -579,6 +582,7 @@ class StoreListView(ListView):
         }
 
         return context
+
 
 class SearchView(View):
     model = SupplierModels.Product

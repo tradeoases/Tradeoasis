@@ -4,6 +4,10 @@ img {
 body {
     background-color: hsl(0, 0%, 99%);
     scroll-behavior: smooth;
+    direction: ltr;
+}
+body.rtl {
+    direction: rtl;
 }
 body.menuOpen {
     overflow: hidden;

@@ -1,5 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    if (window.location.href.includes('/ar/')) {
+        document.body.classList.add('rtl');
+    }
+
     // global state
     let IsMobileMenuOpen = false;
 

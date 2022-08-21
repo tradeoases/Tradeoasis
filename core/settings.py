@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -53,6 +54,8 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    # translations
+    "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -61,6 +64,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "core.urls"
+
+USE_I18N = True
 
 TEMPLATES = [
     {
@@ -73,6 +78,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                'django.template.context_processors.i18n',
             ],
         },
     },
@@ -158,12 +164,24 @@ INTERNAL_IPS = [
 ]
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'phillipmugisa4@gmail.com'
-EMAIL_HOST_PASSWORD = 'xkeagmjrhlcwlanb'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "phillipmugisa4@gmail.com"
+EMAIL_HOST_PASSWORD = "xkeagmjrhlcwlanb"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'phillipmugisa4@gmail.com'
+DEFAULT_FROM_EMAIL = "phillipmugisa4@gmail.com"
 
-LOGIN_REDIRECT = '/auth/login/'
+LOGIN_REDIRECT = "/auth/login/"
+
+
+# translations
+LANGUAGE_CODE = "en"
+LANGUAGES = (
+    ("en", _("English")),
+    ('ar', _('Arabic')),
+    ("fr", _("French")),
+)
+
+SITE_ROOT = os.path.dirname(os.path.realpath(__name__))
+LOCALE_PATHS = ( os.path.join(SITE_ROOT, 'locale'), )

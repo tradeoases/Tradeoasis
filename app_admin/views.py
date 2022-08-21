@@ -4,8 +4,21 @@ from django.views import View
 from django.views.generic import CreateView
 from django.utils.translation import gettext as _
 from django.contrib import messages
+from django.http import HttpResponseNotFound
+from django.contrib.auth import login
 
 import string
+
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
+from django.conf import settings
+
+from django.utils.encoding import force_bytes, force_str, DjangoUnicodeDecodeError
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.contrib.sites.shortcuts import get_current_site
+
+
+from auth_app.tokens import appTokenGenerator
 
 from auth_app import models as AuthModels
 from supplier import models as SupplierModels
@@ -14,6 +27,7 @@ from manager import models as ManagerModels
 from payment import models as PaymentModels
 
 from manager import forms as ManagerForms
+from auth_app import forms as AuthForms
 
 from app_admin.mixins import SupportOnlyAccessMixin
 
@@ -216,7 +230,7 @@ class ShowroomCreateView(SupportOnlyAccessMixin, CreateView):
         showroom = ManagerModels.Showroom.objects.create(name=name, image=image)
 
         if not showroom:
-            messages.add_message(request, messages.ERROR, _("Error occured. Try Again"))
+            messages.add_message(request, messages.ERROR, _("Error Occurred. Try Again"))
             return redirect(reverse("app_admin:showroom-create"))
 
         messages.add_message(
@@ -250,7 +264,9 @@ class CategoryCreateView(SupportOnlyAccessMixin, View):
         name = request.POST.get("category-name")
         image = request.FILES.get("category-image")
 
-        category = SupplierModels.ProductCategory.objects.filter(name=string.capwords(name))
+        category = SupplierModels.ProductCategory.objects.filter(
+            name=string.capwords(name)
+        )
         if category.exists():
             messages.add_message(
                 request, messages.ERROR, _(f"Category({name}) already exists.")
@@ -346,8 +362,10 @@ class AdminCommunityChatView(SupportOnlyAccessMixin, View):
     def get(self, request):
         return render(request, self.template_name, context=self.get_context_data())
 
+
 class ContactClient(SupportOnlyAccessMixin, View):
     template_name = "app_admin/create_mail.html"
+
     def get(self, request, slug):
 
         # client profile slug sent
@@ -356,9 +374,9 @@ class ContactClient(SupportOnlyAccessMixin, View):
         # get user
         context_data = {
             "user": user,
-            "view_name" : "Client Contact",
-            "slug" : slug,
-            "active_tab": "Manager"
+            "view_name": "Client Contact",
+            "slug": slug,
+            "active_tab": "Manager",
         }
 
         return render(request, self.template_name, context=context_data)
@@ -369,3 +387,131 @@ class ContactClient(SupportOnlyAccessMixin, View):
         # save a copy
 
         pass
+
+
+class ProfileView(SupportOnlyAccessMixin, View):
+    template_name = "app_admin/profile.html"
+
+    def get(self, request):
+
+        # get user
+        context_data = {
+            "view_name": "Admin Profile",
+            "active_tab": "Manager",
+        }
+
+        return render(request, self.template_name, context=context_data)
+
+class EditProfileView(SupportOnlyAccessMixin, View):
+    template_name = "app_admin/editProfile.html"
+
+    def get(self, request):
+        # get user
+        context_data = {
+            "view_name": "Admin Profile",
+            "active_tab": "Manager",
+        }
+
+        return render(request, self.template_name, context=context_data)
+
+    def post(self, request):
+        user = AuthModels.User.objects.filter(id=request.user.id).first()
+        try:
+            if request.POST.get('username'):
+                user.first_name = request.POST.get('first_name')
+            if request.POST.get('username'):
+                user.last_name = request.POST.get('last_name')
+            if request.POST.get('username'):
+                user.username = request.POST.get('username')
+            if request.POST.get('username'):
+                user.email = request.POST.get('email')
+
+            user.save()
+            messages.add_message(request, messages.SUCCESS, _("Account Edited Successfully"))
+            return redirect(reverse('app_admin:profile'))
+        except:
+            messages.add_message(request, messages.ERROR, _("An Error Occured. Please Try Again"))
+            return redirect(reverse('app_admin:editprofile'))
+
+class CreateSupportView(SupportOnlyAccessMixin, View):
+    template_name = "app_admin/createProfile.html"
+
+    def get(self, request):
+        # get user
+        context_data = {
+            "view_name": "Admin Profile",
+            "active_tab": "Manager",
+        }
+
+        return render(request, self.template_name, context=context_data)
+
+    def post(self, request):
+        if not (
+            request.POST.get("username")
+            and request.POST.get("email")
+            and request.POST.get("password")
+            and request.POST.get("confirm-password")
+        ):
+            messages.add_message(request, messages.ERROR, _("Please Fill all fields."))
+            return redirect(reverse("app_admin:createsupport"))
+
+        if AuthModels.User.objects.filter(username=request.POST.get("username")):
+            messages.add_message(request, messages.ERROR, _("Username not available."))
+            return redirect(reverse("app_admin:createsupport"))
+
+        if request.POST.get("confirm-password") != request.POST.get("password"):
+            messages.add_message(request, messages.ERROR, _("Password mismatch."))
+            return redirect(reverse("app_admin:createsupport"))
+
+        user = AuthModels.Support.objects.create_user(
+            username=request.POST.get("username"),
+            email=request.POST.get("email"),
+            password=request.POST.get("password"),
+        )
+        
+        uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
+        token = appTokenGenerator.make_token(user)
+        domain = get_current_site(request).domain
+        link = reverse("app_admin:activate", kwargs={"uidb64": uidb64, "token": token})
+
+        activate_url = f"http://{domain}{link}"
+
+        email_body = render_to_string(
+            "email_message.html",
+            {
+                "name": user.username,
+                "email": user.email,
+                "review": "{} \n {} \n Please edit your account details and set a desired password after activating your account.".format(_("Your activation link is"), activate_url),
+            },
+        )
+        email = EmailMessage(
+            _("Activate Foroden Activation"),
+            email_body,
+            settings.DEFAULT_FROM_EMAIL,
+            [
+                user.email,
+            ],
+        )
+        email.send(fail_silently=False)
+
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            _("Account Created Successfully. Verfication link was sent user's email."),
+        )
+        return redirect(reverse("app_admin:profile"))
+
+class VerficationView(View):
+    def get(self, request, uidb64, token):
+        uid = force_str(urlsafe_base64_decode(uidb64))
+
+        user = AuthModels.User.objects.filter(pk=uid).first()
+
+        if user and appTokenGenerator.check_token(user, token):
+            user.is_email_activated = True
+            user.save()
+            login(request, user)
+            # to set password
+            return redirect(reverse("app_admin:profile"))
+        else:
+            return HttpResponseNotFound(_("Bad Request"))

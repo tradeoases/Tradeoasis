@@ -1,11 +1,12 @@
 {% extends '../utils/layout.html' %}
 {% load static %}
+{% load i18n %}
 {% block content %}
 
     <div class="breadcrumb flex flex-wrap justify-start gap-2 md:w-full mx-auto px-5 ">
-        <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">Home</a>
+        <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">{% trans 'Home' %}</a>
         <a>/</a>
-        <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:showrooms' %}">Showrooms</a>
+        <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:showrooms' %}">{% trans 'Showrooms' %}</a>
         <a>/</a>
         <span class="text-lightBackgroundColor">{{ object.name }}</span>
     </div>
@@ -13,7 +14,7 @@
     <section class="main w-12/12 py-3">
         <div class="grid w-11/12 md:w-full mx-auto cf-1 gap-2">
             <div class="section-heading flex justify-start items-baseline gap-2">
-                <h2 class="sec-title text-xl capitalize md:text-2xl font-bold text-lightBackgroundColor">{{ object.name }} Stores</h2>
+                <h2 class="sec-title text-xl capitalize md:text-2xl font-bold text-lightBackgroundColor">{{ object.name }} {% trans 'Stores' %}</h2>
             </div>
             <div class="grid gap-3 horizontal-scroll rounded-md py-3" data-context="{{ stores.context_name }}">
                 {% for store in stores.results %}
@@ -41,7 +42,7 @@
         <section class="main w-12/12 py-3 pt-0" style="height: auto">
             <div class="grid w-full mx-auto cf-1 gap-4" style="grid-template-columns: 1fr;">
                 <div class="section-heading flex justify-start items-baseline gap-2">
-                    <h2 class="sec-title text-xl capitalize md:text-2xl font-bold text-lightBackgroundColor">{{ object.name }} Products</h2>
+                    <h2 class="sec-title text-xl capitalize md:text-2xl font-bold text-lightBackgroundColor">{{ object.name }} {% trans 'Products' %}</h2>
                 </div>
                 <div class="section-body grid gap-2 md:gap-6 grid-cols-2 md:grid-cols-5 py-4"
                 data-context="{{products.context_name}}">
@@ -71,8 +72,8 @@
     
     <section class="main w-12/12 py-3">
         <div class="grid w-full mx-auto cf-1 gap-6">
-            <div class="section-heading flex justify-between">
-                <h2 class="sec-title text-xl capitalize md:text-2xl font-bold text-lightBackgroundColor">Other Showrooms</h2>
+            <div class="section-heading flex items-center justify-between">
+                <h2 class="sec-title text-xl capitalize md:text-2xl font-bold text-lightBackgroundColor">{% trans 'Other Showrooms' %}</h2>
                 <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="">View All</a>
             </div>
             <div class="showrooms section-body grid gap-4 horizontal-scroll" data-context="{{other_showroom.context_name}}">
@@ -83,7 +84,7 @@
                         </div>
                         <div class="items-start card-content grid px-4 py-2">
                             <h2 class="text-lg md:text-lg bg-lightBackgroundColor">{{showroom.showroom.name}}</h2>
-                            <p class="text-base text-slate-400 font-normal">{{showroom.store_count}} Stores</p>
+                            <p class="text-base text-slate-400 font-normal">{{showroom.store_count}} {% trans 'Stores' %}</p>
                         </div>
                     </a>
                 {% endfor %}

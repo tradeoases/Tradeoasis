@@ -1,12 +1,13 @@
 {% extends '../utils/layout.html' %}
 {% load static %}
+{% load i18n %}
 {% block content %}
 
     <section class="grid">
         <div class="grid px-8 py-8 rounded auth-area w-10/12 gap-4 mx-auto" style="border: 1px solid hsl(0, 0%, 95%);">
             <div class="grid gap-1">
-                <h3 class="text-2xl font-medium text-lghterBackgroundColor" style="font-family: serif">Business Profile</h3>
-                <p class="text-base text-slate-600">* Represents required fields.</p>
+                <h3 class="text-2xl font-medium text-lghterBackgroundColor" style="font-family: serif">{% trans 'Business Profile' %}</h3>
+                <p class="text-base text-slate-600">* {% trans 'Represents required fields' %}.</p>
                 {% if messages %}
                 {% for message in messages %}
                     {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
@@ -27,16 +28,16 @@
                 <form action="{% url 'auth_app:business' %}" method="POST" class="grid gap-4">
                     {% csrf_token %}
                     <div class="form-group grid gap-1">
-                        <label for="business_name" class="text-lghterBackgroundColor font-semibold text-base">Business Name *</label>
+                        <label for="business_name" class="text-lghterBackgroundColor font-semibold text-base">{% trans 'Business Name' %} *</label>
                         <input class="py-4" style="width: 100%;" type="text" id="business_name" required name="business_name">
                     </div>
                     <div class="form-group grid gap-1">
-                        <label for="description" class="text-lghterBackgroundColor font-semibold text-base">Business Description *</label>
+                        <label for="description" class="text-lghterBackgroundColor font-semibold text-base">{% trans 'Business Description' %} *</label>
                         <textarea class="py-4" rows="5" style="width: 100%;background: transparent;" type="text" id="description" required name="business_description"></textarea>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="form-group grid gap-1">
-                            <label for="country" class="text-lghterBackgroundColor font-semibold text-base">Country *</label>
+                            <label for="country" class="text-lghterBackgroundColor font-semibold text-base">{% trans 'Country' %} *</label>
                             <input class="py-4" style="width: 100%;" type="text" id="country" required name="country" list="countries">
                             <datalist id="countries">
                                 <option value="Afghanistan" />
@@ -281,12 +282,12 @@
                             </datalist>
                         </div>
                         <div class="form-group grid gap-1">
-                            <label for="city" class="text-lghterBackgroundColor font-semibold text-base">City *</label>
+                            <label for="city" class="text-lghterBackgroundColor font-semibold text-base">{% trans 'City' %} *</label>
                             <input class="py-4" style="width: 100%;" type="text" id="city" required name="city">
                         </div>
                     </div>
                     <div class="form-group grid gap-1">
-                        <label for="business_line" class="text-lghterBackgroundColor font-semibold text-base">Business Line *</label>
+                        <label for="business_line" class="text-lghterBackgroundColor font-semibold text-base">{% trans 'Business Line' %} *</label>
                         <div class="grid gap-3" style="grid-template-columns: .15fr 1fr;">
                             <input class="py-4" style="width: 100%;" type="text" id="country_code" required name="country_code" list="tel-codes" placeholder="Country Code">
 
@@ -512,15 +513,15 @@
                         </datalist>
                     </div>
                     <div class="form-group grid gap-1">
-                        <label for="vat_number" class="text-lghterBackgroundColor font-semibold text-base">VAT Number</label>
+                        <label for="vat_number" class="text-lghterBackgroundColor font-semibold text-base">{% trans 'VAT Number' %}</label>
                         <input class="py-4" style="width: 100%;" type="number" id="vat_number" name="vat_number">
                     </div>
                     <div class="form-group grid gap-1">
-                        <label for="legal_etity_identifier" class="text-lghterBackgroundColor font-semibold text-base">Legal Entity Identifier</label>
+                        <label for="legal_etity_identifier" class="text-lghterBackgroundColor font-semibold text-base">{% trans 'Legal Entity Identifier' %}</label>
                         <input class="py-4" style="width: 100%;" type="text" id="legal_etity_identifier"  name="legal_etity_identifier">
                     </div>
                     <div class="form-group grid gap-1">
-                        <label for="website" class="text-lghterBackgroundColor font-semibold text-base">Website</label>
+                        <label for="website" class="text-lghterBackgroundColor font-semibold text-base">{% trans 'Website' %}</label>
                         <input class="py-4" style="width: 100%;" type="url" id="website"  name="website">
                     </div>
                     <div class="form-group">

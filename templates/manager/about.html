@@ -1,17 +1,18 @@
 {% extends '../utils/layout.html' %}
 {% load static %}
+{% load i18n %}
 {% block content %}
 
     <section class="main w-12/12 py-6 pt-0" style="background-color: #FFFFFF;">
         <div class="grid gap-2 w-12/12 about-intro" style="background-color: rgb(242, 245, 248);">
             <div class="grid gap-2 justify-center">
                 <h4 class="text-xl md:text-2xl text-gray-600 font-bold">
-                    About Us
+                    {% trans 'About Us' %}
                 </h4>
             </div>
             <div class="grid gap-2">
                 <p class="text-lightBackgroundColor text-3xl md:text-4xl text-semi-bold w-full md:w-8/12 mx-auto text-center" style="font-family: serif;">
-                    We are empowering entrepreneurs around the world to chase their dreams.
+                    {% trans 'We are empowering entrepreneurs around the world to chase their dreams.' %}
                 </p>
             </div>
         </div>
@@ -19,9 +20,9 @@
     <section class="grid gap-10 about-us-content">
         <div class="md:grid right md:grid-cols-2 gap-20 w-12/12 md:w-10/12 mx-auto overflow-hidden">
             <div class="grid gap-4 content-center about-description">
-                <h2 class="text-xl md:text-2xl font-semibold text-lightBackgroundColor" style="font-family: serif">Vision Statement</h2>
+                <h2 class="text-xl md:text-2xl font-semibold text-lightBackgroundColor" style="font-family: serif">{% trans 'Vision Statement' %}</h2>
                 <p class="text-base md:text-lg text-slate-700">
-                    Now more than ever, consumers are choosing to support local shops over big-box chains. There are millions of thriving small businesses in North America and Europe alone, who collectively represent a $2T market. With our global community and the power of technology, Faire is helping fuel the growth of entrepreneurs everywhere.
+                    {% trans 'Now more than ever, consumers are choosing to support local shops over big-box chains. There are millions of thriving small businesses in North America and Europe alone, who collectively represent a $2T market. With our global community and the power of technology, Faire is helping fuel the growth of entrepreneurs everywhere.' %}
                 </p>
             </div>
             <div class="grid gap-2 img-wrapper">
@@ -33,9 +34,9 @@
                 <img src="https://images.unsplash.com/photo-1467318339494-a32c2ada54d4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fG9mZmljZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60" alt="">
             </div>
             <div class="grid gap-2 md:gap-4 content-center about-description">
-                <h2 class="text-xl md:text-2xl font-semibold text-lightBackgroundColor" style="font-family: serif">Vision Statement</h2>
+                <h2 class="text-xl md:text-2xl font-semibold text-lightBackgroundColor" style="font-family: serif">{% trans 'Vision Statement' %}</h2>
                 <p class="text-base md:text-lg text-slate-700">
-                    Now more than ever, consumers are choosing to support local shops over big-box chains. There are millions of thriving small businesses in North America and Europe alone, who collectively represent a $2T market. With our global community and the power of technology, Faire is helping fuel the growth of entrepreneurs everywhere.
+                    {% trans 'Now more than ever, consumers are choosing to support local shops over big-box chains. There are millions of thriving small businesses in North America and Europe alone, who collectively represent a $2T market. With our global community and the power of technology, Faire is helping fuel the growth of entrepreneurs everywhere.' %}
                 </p>
             </div>
         </div>
@@ -45,23 +46,23 @@
         <div class="stats grid gap-4 grid-cols-1 md:grid-cols-4 w-10/12 mx-auto justify-start">
             <div class="grid gap-1 stats-card">
                 <span class="num font-semibold text-white">50,000</span>
-                <span class="text-xl md:text-2xl text-white font-semibold">Suppliers</span>
-                <span class="text-slate-300">All over the world.</span>
+                <span class="text-xl md:text-2xl text-white font-semibold">{% trans 'Suppliers' %}</span>
+                <span class="text-slate-300">{% trans 'All over the world.' %}</span>
             </div>
             <div class="grid gap-1 stats-card">
                 <span class="num font-semibold text-white">50</span>
-                <span class="text-xl md:text-2xl text-white font-semibold">Showrooms</span>
-                <span class="text-slate-300">All over the world.</span>
+                <span class="text-xl md:text-2xl text-white font-semibold">{% trans 'Showrooms' %}</span>
+                <span class="text-slate-300">{% trans 'All over the world.' %}</span>
             </div>
             <div class="grid gap-1 stats-card">
                 <span class="num font-semibold text-white">100</span>
-                <span class="text-xl md:text-2xl text-white font-semibold">Countries</span>
-                <span class="text-slate-300">All over the world.</span>
+                <span class="text-xl md:text-2xl text-white font-semibold">{% trans 'Countries' %}</span>
+                <span class="text-slate-300">{% trans 'All over the world.' %}</span>
             </div>
             <div class="grid gap-1 stats-card">
                 <span class="num font-semibold text-white">50,000</span>
-                <span class="text-xl md:text-2xl text-white font-semibold">Suppliers</span>
-                <span class="text-slate-300">All over the world.</span>
+                <span class="text-xl md:text-2xl text-white font-semibold">{% trans 'Suppliers' %}</span>
+                <span class="text-slate-300">{% trans 'All over the world.' %}</span>
             </div>
         </div>
     </section>

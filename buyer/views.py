@@ -8,8 +8,9 @@ from payment import models as PaymentModels
 
 from buyer.mixins import BuyerOnlyAccessMixin
 
+
 class ProfileView(BuyerOnlyAccessMixin, View):
-    template_name = 'buyer/profile.html'
+    template_name = "buyer/profile.html"
 
     def get(self, request):
         return render(request, self.template_name, context=self.get_context_data())
@@ -18,12 +19,15 @@ class ProfileView(BuyerOnlyAccessMixin, View):
         context_data = dict()
 
         context_data["view_name"] = _("Profile")
-        context_data["buyer"] = AuthModels.Buyer.buyer.filter(id=self.request.user.id).first()
+        context_data["buyer"] = AuthModels.Buyer.buyer.filter(
+            id=self.request.user.id
+        ).first()
 
         return context_data
+
 
 class ContractListView(BuyerOnlyAccessMixin, ListView):
-    template_name = 'buyer/contracts.html'
+    template_name = "buyer/contracts.html"
 
     def get(self, request):
         return render(request, self.template_name, context=self.get_context_data())
@@ -31,13 +35,16 @@ class ContractListView(BuyerOnlyAccessMixin, ListView):
     def get_context_data(self):
         context_data = dict()
 
-        context_data['view_name'] = _("Contracts")
-        context_data['contracts'] = PaymentModels.ContractReceipt.objects.filter(contract__buyer=self.request.user)
+        context_data["view_name"] = _("Contracts")
+        context_data["contracts"] = PaymentModels.ContractReceipt.objects.filter(
+            contract__buyer=self.request.user
+        )
 
         return context_data
 
+
 class VisitedProductsListView(BuyerOnlyAccessMixin, ListView):
-    template_name = 'buyer/products.html'
+    template_name = "buyer/products.html"
 
     def get(self, request):
         return render(request, self.template_name, context=self.get_context_data())
@@ -45,7 +52,7 @@ class VisitedProductsListView(BuyerOnlyAccessMixin, ListView):
     def get_context_data(self):
         context_data = dict()
 
-        context_data['view_name'] = _("Contracts")
-        context_data['contracts'] = ""
+        context_data["view_name"] = _("Contracts")
+        context_data["contracts"] = ""
 
         return context_data

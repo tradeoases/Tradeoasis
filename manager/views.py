@@ -4,6 +4,7 @@ from django.views import View
 from django.views.generic import ListView, DetailView, TemplateView
 from django.db.models import Q
 import random
+from django.utils.translation import gettext as _
 
 # apps
 from supplier.models import (
@@ -44,7 +45,7 @@ class HomeView(View):
                 product_object_list.append(sub_category_group)
 
         context_data = {
-            "view_name": "Home",
+            "view_name": _("Home"),
             "product_categories": {
                 "context_name": "product-categories",
                 "results": [
@@ -118,7 +119,7 @@ class ShowRoomListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context["view_name"] = "Showrooms"
+        context["view_name"] = _("Showrooms")
         context["object_list"] = {
             "context_name": "showrooms",
             "results": [
@@ -186,7 +187,7 @@ class ServiceListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context["view_name"] = "Services"
+        context["view_name"] = _("Services")
         return context
 
 
@@ -196,14 +197,16 @@ class AboutUsView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context["view_name"] = "About Us"
+        context["view_name"] = _("About Us")
         return context
 
 
 def profile(request):
     if not request.user.is_authenticated:
-        return redirect("{}?next={}".format(reverse("auth_app:login"), request.GET.get('next')))
-    
+        return redirect(
+            "{}?next={}".format(reverse("auth_app:login"), request.GET.get("next"))
+        )
+
     if request.user.account_type == "SUPPLIER":
         # to supplier profile
         return redirect(reverse("manager:home"))

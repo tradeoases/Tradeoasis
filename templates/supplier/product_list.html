@@ -1,28 +1,29 @@
 {% load static %}
+{% load i18n %}
 {% load isEqual %}
 {% include '../utils/header.html' %}
     <main class="grid gap-10 my-10 mt-4">
         <div class="grid gap-6 md:gap-3 bg-white">
             <div class="breadcrumb flex flex-wrap justify-start gap-2 md:w-full mx-auto pt-1 md:mb-2 px-5 md:px-0">
-                <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">Home</a>
+                <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">{% trans 'Home' %}</a>
                 <span>/</span>
-                <span class="text-lightBackgroundColor">Products</span>
+                <span class="text-lightBackgroundColor">{% trans 'Products' %}</span>
             </div>
 
             <div class="product-filter grid md:flex gap-4 justify-between px-5 md:px-8 py-3" style="background-color: rgb(242, 245, 248);">
                 <div class="flex items-center gap-2">
-                    <h3 class="text-xl text-lightBackgroundColor font-semibold">Products</h3>
+                    <h3 class="text-xl text-lightBackgroundColor font-semibold">{% trans 'Products' %}</h3>
                 </div>
                 <div class="filter grid md:grid-flow-col gap-6 md:justify-self-end items-center justify-start">
                     <form class="filter-group md:flex gap-2 items-center justify-start" method="GET" action="" data-context="{{price_limits.context_name}}">
-                        <p class="hidden md:grid font-medium text-slate-800">Price: </p>
+                        <p class="hidden md:grid font-medium text-slate-800">{% trans 'Price' %}: </p>
                         <div class="flex gap-2">
                             <div class="filter-form-group flex gap-2 items-center">
-                                <label for="min-price" class="font-normal text-slate-600">min</label>
+                                <label for="min-price" class="font-normal text-slate-600">{% trans 'min' %}</label>
                                 <input type="number" name="min-price" class="px-2 py-1 rounded text-sm focus:outli5e-none" style="width: 100px;" id="min-price" value="{{price_limits.results.min_price}}">
                             </div>
                             <div class="filter-form-group flex gap-2 items-center">
-                                <label for="max-price" class="font-normal text-slate-600">max</label>
+                                <label for="max-price" class="font-normal text-slate-600">{% trans 'max' %}</label>
                                 <input type="number" name="max-price" class="px-2 py-1 rounded text-sm text-slate-500 focus:outline-none" style="width: 100px;" id="max-price" value="{{price_limits.results.max_price}}">
                             </div>
                         </div>
@@ -32,10 +33,10 @@
                         <input type="submit" hidden />
                     </form>
                     <form id="supplier-filter-form" class="filter-group flex gap-2 items-center justify-start" method="GET" action="" data-context="{{suppliers.context_name}}">
-                        <p class="font-medium text-slate-800">Supplier: </p>
+                        <p class="font-medium text-slate-800">{% trans 'Supplier' %}: </p>
                         <div class="filter-form-group flex gap-3 items-center">
                             <select name="supplier" id="supplier-filter" class="px-2 py-1 rounded text-sm text-slate-700 focus:outline-none" onchange="(function(){document.querySelector('#supplier-filter-form').submit()})()">
-                                <option value="all">All</option>
+                                <option value="all">{% trans 'All' %}</option>
                                 {% for supplier in suppliers.results %}
                                     {% if  supplier.profile.business_name == supplier_filter.results %}
                                         <option value="{{supplier.profile.business_name}}" selected>{{supplier.profile.business_name}}</option>

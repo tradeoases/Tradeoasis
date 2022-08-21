@@ -800,7 +800,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         const err = document.createElement('p');
                         err.className = 'cs-text-md';
                         err.style.color = 'red';
-                        err.textContent = "An Error Occured! Reload Page."
+                        err.textContent = "An Error Occurred! Reload Page."
                         operationConfirmModal.querySelector('#msg').appendChild(err);
                     }
                 })

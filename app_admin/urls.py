@@ -22,7 +22,14 @@ urlpatterns = [
     path(
         "community/chat", views.AdminCommunityChatView.as_view(), name="community-chat"
     ),
-
     # contact
-    path("contact/<str:slug>", views.ContactClient.as_view(), name='contact')
+    path("contact/<str:slug>", views.ContactClient.as_view(), name="contact"),
+
+    # profile
+    path("profile/", views.ProfileView.as_view(), name="profile"),
+    path("editprofile/", views.EditProfileView.as_view(), name="editprofile"),
+    path("createsupport/", views.CreateSupportView.as_view(), name="createsupport"),
+    path(
+        "activate/<uidb64>/<token>/", views.VerficationView.as_view(), name="activate"
+    ),
 ]

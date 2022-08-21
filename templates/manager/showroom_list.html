@@ -1,17 +1,18 @@
 {% extends '../utils/layout.html' %}
 {% load static %}
+{% load i18n %}
 {% block content %}
 
         <div class="breadcrumb flex flex-wrap justify-start gap-2 md:w-full mx-auto px-5 ">
-            <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">Home</a>
+            <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">{% trans 'Home' %}</a>
             <a>/</a>
-            <span class="text-lightBackgroundColor">Showrooms</span>
+            <span class="text-lightBackgroundColor">{% trans 'Showrooms' %}</span>
         </div>
         
         <section class="main w-12/12">
             <div class="grid w-full mx-auto cf-1 gap-6">
                 <div class="section-heading">
-                    <h2 class="sec-title text-xl capitalize md:text-2xl font-bold text-yellowColor">Showrooms</h2>
+                    <h2 class="sec-title text-xl capitalize md:text-2xl font-bold text-yellowColor">{% trans 'Showrooms' %}</h2>
                 </div>
                 <div class="showrooms section-body grid gap-4 grid-cols-2 md:grid-cols-5">
                     {% for showroom in object_list.results %}
@@ -21,7 +22,7 @@
                             </div>
                             <div class="items-start card-content grid px-4 py-2">
                                 <h2 class="text-lg md:text-lg bg-lightBackgroundColor">{{showroom.showroom.name}}</h2>
-                                <p class="text-base text-slate-400 font-normal">{{showroom.store_count}} Stores</p>
+                                <p class="text-base text-slate-400 font-normal">{{showroom.store_count}} {% trans 'Stores' %}</p>
                             </div>
                         </a>
                     {% endfor %}
@@ -33,9 +34,9 @@
             <div class="w-full mx-auto grid">                    
                 <div class="flex p-2 px-2 pt-0 justify-between items-baseline">
                     <div class="flex gap-5">                            
-                        <h1 class="sec-title text-xl capitalize md:text-2xl font-bold text-yellowColor">Popular Stores</h1>
+                        <h1 class="sec-title text-xl capitalize md:text-2xl font-bold text-yellowColor">{% trans 'Popular Stores' %}</h1>
                     </div>
-                    <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="">View All</a>
+                    <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="{% url 'supplier:store-list' %}">{% trans 'View All' %}</a>
                 </div>
                 <div class="grid gap-3 horizontal-scroll rounded-md py-3">
                     {% for store in stores.results %}

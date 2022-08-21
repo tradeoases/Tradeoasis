@@ -23,74 +23,89 @@ from auth_app.forms import UserProfileFormManager
 from auth_app.tasks import send_account_activation_email_task
 from auth_app.tokens import appTokenGenerator
 
+
 class LoginView(View):
-    template_name = 'auth_app/signin.html'
+    template_name = "auth_app/signin.html"
 
     def get(self, request):
         if request.user.is_authenticated:
-            return redirect(reverse('manager:home'))
-        context_data = {
-            "view_name": _("Sign In")
-        }
+            return redirect(reverse("manager:home"))
+        context_data = {"view_name": _("Sign In")}
 
         return render(request, self.template_name, context=context_data)
 
     def post(self, request):
-        if not (request.POST.get('username') and request.POST.get('password')):
+        if not (request.POST.get("username") and request.POST.get("password")):
             messages.add_message(request, messages.ERROR, _("Please Fill all fields."))
             return redirect(reverse("auth_app:login"))
 
-        user = authenticate(username=request.POST.get('username'), password=request.POST.get('password'))
+        user = authenticate(
+            username=request.POST.get("username"), password=request.POST.get("password")
+        )
         if not user:
-            messages.add_message(request, messages.ERROR, _("Account not found. Try Again."))
+            messages.add_message(
+                request, messages.ERROR, _("Account not found. Try Again.")
+            )
             return redirect(reverse("auth_app:login"))
 
         if not user.is_email_activated:
-            messages.add_message(request, messages.ERROR, _("Please Activate your Email"))
+            messages.add_message(
+                request, messages.ERROR, _("Please Activate your Email")
+            )
             return redirect(reverse("auth_app:login"))
 
         login(request, user)
-        if request.GET.get('next'):
-            return redirect(reverse(request.GET.get('next')))
-        return redirect(reverse('manager:home'))
+        if request.GET.get("next"):
+            return redirect(reverse(request.GET.get("next")))
+        return redirect(reverse("manager:home"))
 
 
 class SignUpView(View):
-    template_name = 'auth_app/signup.html'
+    template_name = "auth_app/signup.html"
 
     def get(self, request):
         if request.user.is_authenticated:
-            return redirect(reverse('manager:home'))
+            return redirect(reverse("manager:home"))
 
-        context_data = {
-            "view_name": _("Sign Up")
-        }
+        context_data = {"view_name": _("Sign Up")}
 
         return render(request, self.template_name, context=context_data)
 
-
     def post(self, request):
-        if not (request.POST.get('first_name') and request.POST.get('last_name') and request.POST.get('username') and request.POST.get('email') and request.POST.get('password') and request.POST.get('confirm-password')):
+        if not (
+            request.POST.get("first_name")
+            and request.POST.get("last_name")
+            and request.POST.get("username")
+            and request.POST.get("email")
+            and request.POST.get("password")
+            and request.POST.get("confirm-password")
+        ):
             messages.add_message(request, messages.ERROR, _("Please Fill all fields."))
             return redirect(reverse("auth_app:signup"))
 
-        if AuthModels.User.objects.filter(username=request.POST.get('username')):
-            messages.add_message(request, messages.ERROR, _("Please Fill all fields."))
+        if AuthModels.User.objects.filter(username=request.POST.get("username")):
+            messages.add_message(request, messages.ERROR, _("Username not available."))
             return redirect(reverse("auth_app:signup"))
 
-        if request.POST.get('confirm-password') != request.POST.get('password'):
+        if request.POST.get("confirm-password") != request.POST.get("password"):
             messages.add_message(request, messages.ERROR, _("Password mismatch."))
             return redirect(reverse("auth_app:signup"))
 
-        if self.request.GET.get('supplier'):
-            account_type = 'Supplier'
+        if self.request.GET.get("supplier"):
+            account_type = "Supplier"
             UserModel = AuthModels.Supplier
         else:
-            account_type = 'Buyer'
+            account_type = "Buyer"
             UserModel = AuthModels.Buyer
 
-        user = UserModel.objects.create_user(first_name = request.POST.get('first_name'), last_name = request.POST.get('last_name'), username = request.POST.get('username'), email = request.POST.get('email'), password = request.POST.get('password'), account_type=account_type)
-
+        user = UserModel.objects.create_user(
+            first_name=request.POST.get("first_name"),
+            last_name=request.POST.get("last_name"),
+            username=request.POST.get("username"),
+            email=request.POST.get("email"),
+            password=request.POST.get("password"),
+            account_type=account_type,
+        )
 
         # send activation link
         # send_account_activation_email_task.delay(user.username, user.email, "Activate Foroden Activation")
@@ -98,23 +113,35 @@ class SignUpView(View):
         uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
         token = appTokenGenerator.make_token(user)
         domain = get_current_site(request).domain
-        link = reverse('auth_app:activate', kwargs={"uidb64": uidb64, "token": token})
+        link = reverse("auth_app:activate", kwargs={"uidb64": uidb64, "token": token})
 
-        activate_url = f'http://{domain}{link}'
+        activate_url = f"http://{domain}{link}"
 
-        email_body = render_to_string('email_message.html', {
-            'name': user.username,
-            'email': user.email,
-            'review': "{} \n {}".format(_("Your activation link is"), activate_url)
-        })
+        email_body = render_to_string(
+            "email_message.html",
+            {
+                "name": user.username,
+                "email": user.email,
+                "review": "{} \n {}".format(_("Your activation link is"), activate_url),
+            },
+        )
         email = EmailMessage(
-            _('Activate Foroden Activation'), email_body,
-            settings.DEFAULT_FROM_EMAIL, [user.email, ],
+            _("Activate Foroden Activation"),
+            email_body,
+            settings.DEFAULT_FROM_EMAIL,
+            [
+                user.email,
+            ],
         )
         email.send(fail_silently=False)
 
-        messages.add_message(request, messages.SUCCESS, _("Account Created Successfully. Please check your email for a verfication link."))
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            _("Account Created Successfully. Please check your email for a verfication link."),
+        )
         return redirect(reverse("auth_app:login"))
+
 
 class VerficationView(View):
     def get(self, request, uidb64, token):
@@ -134,44 +161,52 @@ class VerficationView(View):
 
 def LogoutView(request):
     logout(request)
-    return redirect(reverse('auth_app:login'))
+    return redirect(reverse("auth_app:login"))
 
 
 class BusinessProfileView(View):
-    template_name = 'auth_app/business_infor.html'
+    template_name = "auth_app/business_infor.html"
 
     def get(self, request):
         if not request.user.is_authenticated:
-            return redirect(reverse('auth_app:login'))
+            return redirect(reverse("auth_app:login"))
 
         if AuthModels.ClientProfile.objects.filter(user=request.user):
-            return redirect(reverse('manager:home'))
+            return redirect(reverse("manager:home"))
 
-        context_data = {
-            "view_name": _("Business Profile")
-        }
+        context_data = {"view_name": _("Business Profile")}
 
         return render(request, self.template_name, context=context_data)
 
     def post(self, request):
-        if not (request.POST.get('business_name') and request.POST.get('business_description') and request.POST.get('country') and request.POST.get('city') and request.POST.get('country_code') and request.POST.get('mobile_user')):
-            messages.add_message(request, messages.ERROR, _("Please Fill all reqiured fields."))
+        if not (
+            request.POST.get("business_name")
+            and request.POST.get("business_description")
+            and request.POST.get("country")
+            and request.POST.get("city")
+            and request.POST.get("country_code")
+            and request.POST.get("mobile_user")
+        ):
+            messages.add_message(
+                request, messages.ERROR, _("Please Fill all reqiured fields.")
+            )
             return redirect(reverse("auth_app:business"))
-
 
         try:
             AuthModels.ClientProfile.objects.create(
-                user = request.user,
-                business_name = request.POST.get('business_name'),
-                business_description = request.POST.get('business_description'),
-                country = request.POST.get('country'),
-                city = request.POST.get('city'),
-                country_code = request.POST.get('country_code'),
-                mobile_user = request.POST.get('mobile_user'),
-                vat_number = request.POST.get('vat_number', None),
-                legal_etity_identifier = request.POST.get('legal_etity_identifier', None),
-                website = request.POST.get('website', None)
+                user=request.user,
+                business_name=request.POST.get("business_name"),
+                business_description=request.POST.get("business_description"),
+                country=request.POST.get("country"),
+                city=request.POST.get("city"),
+                country_code=request.POST.get("country_code"),
+                mobile_user=request.POST.get("mobile_user"),
+                vat_number=request.POST.get("vat_number", None),
+                legal_etity_identifier=request.POST.get("legal_etity_identifier", None),
+                website=request.POST.get("website", None),
             )
         except:
-            messages.add_message(request, messages.ERROR, _("An Error Occured. Try Again."))
+            messages.add_message(
+                request, messages.ERROR, _("An Error Occurred. Try Again.")
+            )
             return redirect(reverse("auth_app:business"))

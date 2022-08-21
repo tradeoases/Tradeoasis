@@ -51,7 +51,7 @@ class Membership(models.Model):
     )
     supplier = models.ForeignKey(to=Supplier, on_delete=models.CASCADE)
     plan = models.ForeignKey(to=MembershipPlan, on_delete=models.CASCADE)
-    expiry_date = models.DateField(_("Plan expiry data"), blank=True, null=True)
+    expiry_date = models.DateField(_("Plan expiry date"), blank=True, null=True)
     duration = models.CharField(_("Duration"), max_length=256, choices=PLAN_DURATION)
     created_on = models.DateField(_("Created on"), default=timezone.now)
 

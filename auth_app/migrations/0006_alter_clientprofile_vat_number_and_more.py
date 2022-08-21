@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('auth_app', '0005_alter_clientprofile_vat_number_and_more'),
+        ("auth_app", "0005_alter_clientprofile_vat_number_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='clientprofile',
-            name='vat_number',
-            field=models.IntegerField(blank=True, null=True, verbose_name='VAT Number'),
+            model_name="clientprofile",
+            name="vat_number",
+            field=models.IntegerField(blank=True, null=True, verbose_name="VAT Number"),
         ),
         migrations.AlterField(
-            model_name='clientprofile',
-            name='website',
-            field=models.URLField(blank=True, null=True, verbose_name='Website'),
+            model_name="clientprofile",
+            name="website",
+            field=models.URLField(blank=True, null=True, verbose_name="Website"),
         ),
     ]

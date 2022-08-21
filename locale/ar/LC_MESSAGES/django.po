@@ -1,0 +1,838 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-19 18:26+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: app_admin/views.py:30 app_admin/views.py:93
+msgid "Admin Dashboard"
+msgstr "لوحة تحكم المسؤول"
+
+#: app_admin/views.py:36 app_admin/views.py:99
+msgid "Total Suppliers"
+msgstr "إجمالي الموردين"
+
+#: app_admin/views.py:37 app_admin/views.py:100
+msgid "Total Supplier Count"
+msgstr "إجمالي عدد الموردين"
+
+#: app_admin/views.py:41 app_admin/views.py:104
+msgid "Total Buyers"
+msgstr "إجمالي المشترين"
+
+#: app_admin/views.py:42 app_admin/views.py:105
+msgid "Total Buyer Count"
+msgstr "إجمالي عدد المشتري"
+
+#: app_admin/views.py:46 app_admin/views.py:109
+msgid "Total Product"
+msgstr "إجمالي المنتج"
+
+#: app_admin/views.py:47 app_admin/views.py:110
+msgid "Total Product Count"
+msgstr "إجمالي عدد المنتجات"
+
+#: app_admin/views.py:51 app_admin/views.py:147
+msgid "Total Showrooms"
+msgstr "إجمالي صالات العرض"
+
+#: app_admin/views.py:52 app_admin/views.py:148
+msgid "Showroom Count"
+msgstr "عدد صالة العرض"
+
+#: app_admin/views.py:56 app_admin/views.py:152
+msgid "Total Stores"
+msgstr "إجمالي المتاجر"
+
+#: app_admin/views.py:57 app_admin/views.py:153
+msgid "Total Store Count"
+msgstr "إجمالي عدد المتاجر"
+
+#: app_admin/views.py:61 app_admin/views.py:157
+msgid "Total Memberships"
+msgstr "إجمالي العضويات"
+
+#: app_admin/views.py:62 app_admin/views.py:158
+msgid "Memberships"
+msgstr "العضويات"
+
+#: app_admin/views.py:66 app_admin/views.py:114
+msgid "Total Contracts"
+msgstr "إجمالي العقود"
+
+#: app_admin/views.py:67 app_admin/views.py:115
+msgid "Contract Created"
+msgstr "تم إنشاء العقد"
+
+#: app_admin/views.py:141 app_admin/views.py:241
+msgid "Admin Dashboard - Clients"
+msgstr "لوحة تحكم المسؤول"
+
+#: app_admin/views.py:162
+msgid "Total Services"
+msgstr "إجمالي الخدمات"
+
+#: app_admin/views.py:163
+msgid "Total Services Count"
+msgstr "إجمالي عدد الخدمات"
+
+#: app_admin/views.py:181 app_admin/views.py:213 auth_app/views.py:39
+#: auth_app/views.py:83 auth_app/views.py:87
+msgid "Please Fill all fields."
+msgstr "لو سمحت أملأ كل الحقول."
+
+#: app_admin/views.py:186
+msgid "Invalid Data Entered."
+msgstr "تم إدخال بيانات غير صحيحة."
+
+#: app_admin/views.py:191 app_admin/views.py:223
+#, python-brace-format
+msgid "Service ({name}) created successfully."
+msgstr "تم إنشاء الخدمة ({name}) بنجاح"
+
+#: app_admin/views.py:198 app_admin/views.py:230
+msgid "Admin Dashboard - Manager"
+msgstr "لوحة تحكم المسؤول"
+
+#: app_admin/views.py:219
+msgid "Error Occurred. Try Again"
+msgstr "حدث خطأ. حاول ثانية"
+
+#: app_admin/views.py:258
+#, python-brace-format
+msgid "Category({name}) already exists."
+msgstr "الفئة ({name}) موجودة بالفعل."
+
+#: app_admin/views.py:276
+#, python-brace-format
+msgid "Sub category ({sub_cat_name}) already exists."
+msgstr "الفئة الفرعية ({sub_cat_name}) موجودة بالفعل"
+
+#: app_admin/views.py:287
+msgid "Category ({}) created successfully."
+msgstr "الفئة الفرعية ({sub_cat_name}) موجودة بالفعل."
+
+#: app_admin/views.py:298 app_admin/views.py:313 app_admin/views.py:328
+#: app_admin/views.py:343
+msgid "Admin Dashboard - Support"
+msgstr "لوحة تحكم المسؤول"
+
+#: auth_app/models.py:29
+msgid "Account Type"
+msgstr "نوع الحساب"
+
+#: auth_app/models.py:33 manager/models.py:90 supplier/models.py:64
+#: supplier/models.py:86 supplier/models.py:153
+msgid "Image"
+msgstr "صورة"
+
+#: auth_app/models.py:35
+msgid "Email Activated"
+msgstr "تنشيط البريد الإلكتروني"
+
+#: auth_app/models.py:58 templates/auth_app/business_infor.html:31
+#: templates/buyer/profile.html:20 templates/buyer/profile.html:49
+#: templates/supplier/supplier_detail.html:30
+msgid "Business Name"
+msgstr "الاسم التجاري"
+
+#: auth_app/models.py:60 manager/models.py:23 manager/models.py:43
+#: manager/models.py:68 manager/models.py:96 payment/models.py:27
+#: payment/models.py:86 supplier/models.py:36 supplier/models.py:68
+#: supplier/models.py:91 supplier/models.py:129 supplier/models.py:157
+#: supplier/models.py:185
+msgid "Safe Url"
+msgstr "عنوان Url الآمن"
+
+#: auth_app/models.py:65 templates/auth_app/business_infor.html:35
+msgid "Business Description"
+msgstr "وصف العمل"
+
+#: auth_app/models.py:66 templates/auth_app/business_infor.html:40
+#: templates/buyer/profile.html:58
+msgid "Country"
+msgstr "دولة"
+
+#: auth_app/models.py:67
+msgid "Country Code"
+msgstr "الرقم الدولي"
+
+#: auth_app/models.py:68 templates/auth_app/business_infor.html:285
+#: templates/buyer/profile.html:62
+msgid "City"
+msgstr "مدينة"
+
+#: auth_app/models.py:69
+msgid "Number"
+msgstr "رقم"
+
+#: auth_app/models.py:70 templates/auth_app/business_infor.html:516
+#: templates/buyer/profile.html:71
+msgid "VAT Number"
+msgstr "ظريبه الشراء"
+
+#: auth_app/models.py:72 templates/auth_app/business_infor.html:520
+#: templates/buyer/profile.html:75
+msgid "Legal Entity Identifier"
+msgstr "معرّف الكيان القانوني"
+
+#: auth_app/models.py:74 templates/auth_app/business_infor.html:524
+#: templates/buyer/profile.html:79
+msgid "Website"
+msgstr "موقع الكتروني"
+
+#: auth_app/models.py:141
+msgid "Responses to clients"
+msgstr "الردود على العملاء"
+
+#: auth_app/views.py:33 templates/utils/header.html:190
+#: templates/utils/header.html:206
+msgid "Sign In"
+msgstr "Sign In"
+
+#: auth_app/views.py:47
+msgid "Account not found. Try Again."
+msgstr "الحساب غير موجود. حاول ثانية."
+
+#: auth_app/views.py:53
+msgid "Please Activate your Email"
+msgstr "يرجى تفعيل البريد الإلكتروني الخاص بك"
+
+#: auth_app/views.py:70
+msgid "Sign Up"
+msgstr "اشتراك"
+
+#: auth_app/views.py:91
+msgid "Password mismatch."
+msgstr "كلمة المرور غير متطابقة."
+
+#: auth_app/views.py:125
+msgid "Your activation link is"
+msgstr "رابط التنشيط الخاص بك هو"
+
+#: auth_app/views.py:129
+msgid "Activate Foroden Activation"
+msgstr "تنشيط التنشيط Foroden"
+
+#: auth_app/views.py:141
+msgid ""
+"Account Created Successfully. Please check your email for a verfication link."
+msgstr ""
+"الحساب اقيم بنجاح. يرجى التحقق من بريدك الإلكتروني للحصول على ارتباط التحقق."
+
+#: auth_app/views.py:159
+msgid "Bad Request"
+msgstr "اقتراح غير جيد"
+
+#: auth_app/views.py:177 templates/auth_app/business_infor.html:9
+msgid "Business Profile"
+msgstr "الملف التجاري"
+
+#: auth_app/views.py:191
+msgid "Please Fill all reqiured fields."
+msgstr "الرجاء تعبئة جميع الحقول المطلوبة."
+
+#: auth_app/views.py:210
+msgid "An Error Occurred. Try Again."
+msgstr "حدث خطأ. حاول ثانية."
+
+#: buyer/models.py:19
+msgid "interest handled"
+msgstr "التعامل مع الفائدة"
+
+#: buyer/models.py:20
+msgid "Viewed by supplier"
+msgstr "تم عرضها بواسطة المورد"
+
+#: buyer/models.py:21 manager/models.py:21 manager/models.py:48
+#: manager/models.py:73 manager/models.py:101 payment/models.py:32
+#: payment/models.py:56 payment/models.py:91 payment/models.py:136
+#: supplier/models.py:47 supplier/models.py:69 supplier/models.py:96
+#: supplier/models.py:134 supplier/models.py:162 supplier/models.py:190
+msgid "Created on"
+msgstr "تم إنشاؤها على"
+
+#: buyer/views.py:21 templates/utils/header.html:124
+msgid "Profile"
+msgstr "الملف الشخصي"
+
+#: buyer/views.py:38 buyer/views.py:55 templates/buyer/profile.html:10
+msgid "Contracts"
+msgstr "انكماش"
+
+#: core/settings.py:181
+msgid "English"
+msgstr "إنجليزي"
+
+#: core/settings.py:182
+msgid "Arabic"
+msgstr "عربي"
+
+#: core/settings.py:183
+msgid "French"
+msgstr "فرنسي"
+
+#: core/urls.py:10
+msgid "suppliers/"
+msgstr "الموردين /"
+
+#: core/urls.py:11
+msgid "buyer/"
+msgstr "مشتر/"
+
+#: core/urls.py:12
+msgid "auth/"
+msgstr "المصادقة /"
+
+#: core/urls.py:13
+msgid "support/admin/"
+msgstr "دعم / مشرف /"
+
+#: core/urls.py:14
+msgid "admin-api/"
+msgstr "مشرف-api/"
+
+#: core/urls.py:15
+msgid "admin/"
+msgstr "مشرف/"
+
+#: manager/models.py:20
+msgid "Country or City"
+msgstr "الدولة أو المدينة"
+
+#: manager/models.py:38 manager/models.py:84 payment/models.py:20
+#: payment/models.py:83 supplier/models.py:61 supplier/models.py:83
+#: supplier/models.py:113 supplier/models.py:177
+msgid "Name"
+msgstr "اسم"
+
+#: manager/models.py:40 payment/models.py:22 supplier/models.py:115
+#: supplier/models.py:179 templates/buyer/profile.html:53
+msgid "Description"
+msgstr "وصف"
+
+#: manager/models.py:64 supplier/models.py:43
+msgid "Service Image"
+msgstr "صورة الخدمة"
+
+#: manager/models.py:94
+msgid "Number of visits"
+msgstr "عدد الزيارات"
+
+#: manager/views.py:48 templates/app_admin/utils/layout.html:53
+#: templates/manager/service_list.html:8
+#: templates/manager/showroom_detail.html:7
+#: templates/manager/showroom_list.html:7
+#: templates/supplier/product_detail.html:7
+#: templates/supplier/product_list.html:8
+#: templates/supplier/store_detail.html:9 templates/supplier/store_list.html:9
+#: templates/supplier/supplier_detail.html:7 templates/utils/header.html:153
+#: templates/utils/header.html:223
+msgid "Home"
+msgstr "الصفحة الرئيسية"
+
+#: manager/views.py:122 templates/manager/about.html:54
+#: templates/manager/index.html:83 templates/manager/showroom_detail.html:9
+#: templates/manager/showroom_list.html:9
+#: templates/manager/showroom_list.html:15 templates/utils/header.html:155
+#: templates/utils/header.html:237 templates/utils/header.html:283
+msgid "Showrooms"
+msgstr "صالات العرض"
+
+#: manager/views.py:190 templates/manager/service_list.html:10
+#: templates/supplier/supplier_detail.html:71 templates/utils/header.html:157
+#: templates/utils/header.html:251
+msgid "Services"
+msgstr "خدمات"
+
+#: manager/views.py:200 templates/manager/about.html:10
+#: templates/utils/header.html:156 templates/utils/header.html:244
+msgid "About Us"
+msgstr "معلومات عنا"
+
+#: payment/models.py:24 supplier/models.py:126 supplier/models.py:181
+#: templates/supplier/product_list.html:19
+msgid "Price"
+msgstr "سعر"
+
+#: payment/models.py:25 payment/models.py:109 payment/models.py:153
+#: supplier/models.py:127 supplier/models.py:182
+msgid "Currency"
+msgstr "عملة"
+
+#: payment/models.py:54
+msgid "Plan expiry date"
+msgstr "تاريخ انتهاء الخطة"
+
+#: payment/models.py:55
+msgid "Duration"
+msgstr "مدة"
+
+#: payment/models.py:84
+msgid "Number of transactions"
+msgstr "عدد المعاملات"
+
+#: payment/models.py:104 payment/models.py:148
+msgid "Address"
+msgstr "تبوك"
+
+#: payment/models.py:105 payment/models.py:149
+msgid "Payment Id"
+msgstr "معرف الدفع"
+
+#: payment/models.py:107 payment/models.py:151
+msgid "Total Amount Paid"
+msgstr "المبلغ الإجمالي المدفوع"
+
+#: payment/models.py:134
+msgid "Contract completed"
+msgstr "اكتمل العقد"
+
+#: supplier/models.py:25
+msgid "Store Name"
+msgstr "اسم المتجر"
+
+#: supplier/models.py:62
+msgid "Number of products"
+msgstr "عدد من المنتجات"
+
+#: supplier/models.py:183
+msgid "Number of contracts"
+msgstr "عدد العقود"
+
+#: supplier/views.py:130 templates/manager/showroom_detail.html:45
+#: templates/supplier/product_list.html:10
+#: templates/supplier/product_list.html:15
+#: templates/supplier/store_detail.html:25 templates/utils/header.html:154
+#: templates/utils/header.html:230
+msgid "Products"
+msgstr "منتجات"
+
+#: supplier/views.py:243
+msgid "Categories"
+msgstr "فئات"
+
+#: supplier/views.py:577 templates/manager/showroom_detail.html:17
+#: templates/manager/showroom_detail.html:87
+#: templates/manager/showroom_list.html:25
+#: templates/supplier/product_detail.html:46
+#: templates/supplier/store_detail.html:11
+#: templates/supplier/store_list.html:11 templates/supplier/store_list.html:16
+msgid "Stores"
+msgstr "المتاجر"
+
+#: templates/app_admin/utils/layout.html:59
+msgid "Clients"
+msgstr "عملاء"
+
+#: templates/app_admin/utils/layout.html:65
+msgid "Manager"
+msgstr "مدير"
+
+#: templates/app_admin/utils/layout.html:71 templates/utils/header.html:258
+msgid "Support"
+msgstr "الدعم"
+
+#: templates/auth_app/business_infor.html:10
+msgid "Represents required fields"
+msgstr "يمثل الحقول المطلوبة"
+
+#: templates/auth_app/business_infor.html:290 templates/buyer/profile.html:67
+msgid "Business Line"
+msgstr "خط الأعمال"
+
+#: templates/auth_app/signin.html:9
+msgid "Welcome Back"
+msgstr "مرحبًا بعودتك"
+
+#: templates/auth_app/signin.html:10
+msgid "Thousands of products await."
+msgstr "الآلاف من المنتجات تنتظر."
+
+#: templates/auth_app/signin.html:31 templates/auth_app/signup.html:41
+#: templates/buyer/profile.html:16 templates/buyer/profile.html:38
+msgid "Username"
+msgstr "اسم المستخدم"
+
+#: templates/auth_app/signin.html:35 templates/auth_app/signup.html:49
+msgid "Password"
+msgstr "كلمة المرور"
+
+#: templates/auth_app/signin.html:49 templates/auth_app/signup.html:73
+msgid "Continue With Google"
+msgstr "تواصل مع جوجل"
+
+#: templates/auth_app/signin.html:53 templates/auth_app/signup.html:77
+msgid "Continue With LinkedIn"
+msgstr "تواصل مع ينكدين"
+
+#: templates/auth_app/signin.html:59 templates/auth_app/signup.html:9
+msgid "Welcome To Foroden"
+msgstr "مرحبا بكم في Foroden"
+
+#: templates/auth_app/signin.html:60 templates/auth_app/signup.html:10
+msgid "Join the biggest community of over 70,000 Business People."
+msgstr "انضم إلى أكبر مجتمع يضم أكثر من 70.000 رجل أعمال."
+
+#: templates/auth_app/signin.html:63
+msgid "Sign Up As"
+msgstr "سجل باسم"
+
+#: templates/auth_app/signin.html:67 templates/supplier/product_detail.html:42
+#: templates/supplier/product_list.html:36
+#: templates/supplier/store_detail.html:21
+#: templates/supplier/store_list.html:20
+msgid "Supplier"
+msgstr "المورد"
+
+#: templates/auth_app/signin.html:70
+msgid "Buyer"
+msgstr "مشتر"
+
+#: templates/auth_app/signup.html:32
+msgid "First Name"
+msgstr "الاسم الاول"
+
+#: templates/auth_app/signup.html:36
+msgid "Last Name"
+msgstr "الكنية"
+
+#: templates/auth_app/signup.html:45 templates/buyer/profile.html:24
+#: templates/buyer/profile.html:42
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#: templates/auth_app/signup.html:53
+msgid "Show Password"
+msgstr "عرض كلمة المرور"
+
+#: templates/auth_app/signup.html:57
+msgid "Confirm Password"
+msgstr "تأكيد كلمة المرور"
+
+#: templates/auth_app/signup.html:64
+msgid "Already Have An Account?"
+msgstr "هل لديك حساب؟"
+
+#: templates/auth_app/signup.html:65
+msgid "Sign into account"
+msgstr "سجّل الدخول إلى الحساب"
+
+#: templates/buyer/profile.html:9 templates/utils/header.html:115
+msgid "My Account"
+msgstr "حسابي"
+
+#: templates/buyer/profile.html:11
+msgid "Visited Products"
+msgstr "المنتجات التي تمت زيارتها"
+
+#: templates/buyer/profile.html:14
+msgid "Account Details"
+msgstr "تفاصيل العمل"
+
+#: templates/buyer/profile.html:28
+msgid "Edit Account"
+msgstr "تحرير الحساب"
+
+#: templates/buyer/profile.html:29 templates/utils/header.html:134
+msgid "Logout"
+msgstr "تسجيل خروج"
+
+#: templates/buyer/profile.html:36
+msgid "User Profile"
+msgstr "ملف تعريفي للمستخدم"
+
+#: templates/buyer/profile.html:47
+msgid "Business Details"
+msgstr "تفاصيل العمل"
+
+#: templates/manager/about.html:15
+msgid "We are empowering entrepreneurs around the world to chase their dreams."
+msgstr "نحن نمكن رواد الأعمال في جميع أنحاء العالم لتحقيق أحلامهم"
+
+#: templates/manager/about.html:23 templates/manager/about.html:37
+msgid "Vision Statement"
+msgstr "بيان الرؤية"
+
+#: templates/manager/about.html:25 templates/manager/about.html:39
+msgid ""
+"Now more than ever, consumers are choosing to support local shops over big-"
+"box chains. There are millions of thriving small businesses in North America "
+"and Europe alone, who collectively represent a $2T market. With our global "
+"community and the power of technology, Faire is helping fuel the growth of "
+"entrepreneurs everywhere."
+msgstr ""
+"الآن أكثر من أي وقت مضى ، يختار المستهلكون دعم المتاجر المحلية على سلاسل "
+"الصناديق الكبيرة. هناك الملايين من الشركات الصغيرة المزدهرة في أمريكا "
+"الشمالية وأوروبا وحدها ، والتي تمثل مجتمعة سوقًا بقيمة 2 تريليون دولار. بفضل "
+"مجتمعنا العالمي وقوة التكنولوجيا ، تساعد Faire في تعزيز نمو رواد الأعمال في "
+"كل مكان"
+
+#: templates/manager/about.html:49 templates/manager/about.html:64
+#: templates/supplier/supplier_detail.html:9
+msgid "Suppliers"
+msgstr "الموردين"
+
+#: templates/manager/about.html:50 templates/manager/about.html:55
+#: templates/manager/about.html:60 templates/manager/about.html:65
+msgid "All over the world."
+msgstr "في جميع أنحاء العالم"
+
+#: templates/manager/about.html:59
+msgid "Countries"
+msgstr "بلدان"
+
+#: templates/manager/index.html:11
+msgid "Product Categories"
+msgstr "فئات المنتجات"
+
+#: templates/manager/index.html:27
+msgid "All Categories"
+msgstr "جميع الفئات"
+
+#: templates/manager/index.html:98
+msgid "All Showrooms"
+msgstr "جميع المعارض"
+
+#: templates/manager/index.html:108
+msgid "Foroden Marketplace"
+msgstr "سوق Foroden"
+
+#: templates/manager/index.html:116 templates/manager/index.html:152
+#: templates/manager/index.html:181 templates/manager/showroom_list.html:39
+#: templates/supplier/store_detail.html:118
+msgid "View All"
+msgstr "مشاهدة الكل"
+
+#: templates/manager/index.html:148
+msgid "Discounted Products"
+msgstr "المنتجات المخفضة"
+
+#: templates/manager/index.html:180
+msgid "Foroden Showrooms"
+msgstr "معارض فورودن"
+
+#: templates/manager/index.html:203
+msgid "Popular Products"
+msgstr "المنتجات الشعبية"
+
+#: templates/manager/service_list.html:17
+msgid "Foroden Services"
+msgstr "خدمات Foroden"
+
+#: templates/manager/showroom_detail.html:76
+msgid "Other Showrooms"
+msgstr "معارض أخرى"
+
+#: templates/manager/showroom_list.html:37
+msgid "Popular Stores"
+msgstr "المتاجر الشعبية"
+
+#: templates/supplier/product_detail.html:57
+#: templates/supplier/supplier_detail.html:56
+msgid "Contact Supplier"
+msgstr "اتصل بالمورد"
+
+#: templates/supplier/product_detail.html:61
+#: templates/supplier/supplier_detail.html:60
+msgid "Make Contract"
+msgstr "عقد العقد"
+
+#: templates/supplier/product_detail.html:65
+msgid "Show Interest"
+msgstr "إظهار الاهتمام"
+
+#: templates/supplier/product_detail.html:76
+msgid "Products Just For you"
+msgstr "المنتجات فقط لأجلك"
+
+#: templates/supplier/product_list.html:22
+msgid "min"
+msgstr "دقيقة"
+
+#: templates/supplier/product_list.html:26
+msgid "max"
+msgstr "الأعلى"
+
+#: templates/supplier/product_list.html:39
+#: templates/supplier/store_list.html:23
+msgid "All"
+msgstr "الجميع"
+
+#: templates/supplier/store_detail.html:66
+#: templates/supplier/store_detail.html:103
+msgid "Previous"
+msgstr "سابق"
+
+#: templates/supplier/store_detail.html:80
+#: templates/supplier/store_detail.html:107
+msgid "Next"
+msgstr "التالي"
+
+#: templates/supplier/store_detail.html:116
+msgid "Related Stores"
+msgstr "المتاجر ذات الصلة"
+
+#: templates/supplier/supplier_detail.html:22
+msgid "About Supplier"
+msgstr "حول المورد"
+
+#: templates/supplier/supplier_detail.html:28
+msgid "Detailed Supplier Information"
+msgstr "معلومات مفصلة عن المورد"
+
+#: templates/supplier/supplier_detail.html:34
+msgid "Business Address"
+msgstr "عنوان العمل"
+
+#: templates/utils/footer.html:14
+msgid "Let us help you"
+msgstr "دعنا نساعدك"
+
+#: templates/utils/footer.html:16
+msgid "Help Center"
+msgstr "مركز المساعدة"
+
+#: templates/utils/footer.html:17
+msgid "Contact us"
+msgstr "اتصل بنا"
+
+#: templates/utils/footer.html:18 templates/utils/footer.html:43
+msgid "Payment Methods"
+msgstr "طرق الدفع"
+
+#: templates/utils/footer.html:19
+msgid "Report a Product"
+msgstr "الإبلاغ عن منتج"
+
+#: templates/utils/footer.html:23
+msgid "About Foroden"
+msgstr "حول Foroden"
+
+#: templates/utils/footer.html:25
+msgid "About us"
+msgstr "معلومات عنا"
+
+#: templates/utils/footer.html:26
+msgid "Terms and Conditions"
+msgstr "الأحكام والشروط"
+
+#: templates/utils/footer.html:27
+msgid "Dispute Resolution Policy"
+msgstr "سياسة حل النزاعات"
+
+#: templates/utils/footer.html:28
+msgid "Privacy Policy"
+msgstr "سياسة الخصوصية"
+
+#: templates/utils/footer.html:29
+msgid "Cookie Notice"
+msgstr "إشعار ملفات تعريف الارتباط"
+
+#: templates/utils/footer.html:33
+msgid "Make money with us"
+msgstr "كسب المال معنا"
+
+#: templates/utils/footer.html:35 templates/utils/header.html:209
+msgid "Sell on Foroden"
+msgstr "بيع على Foroden"
+
+#: templates/utils/footer.html:36
+msgid "Make Business Contracts"
+msgstr "إبرام عقود العمل"
+
+#: templates/utils/footer.html:52
+msgid "FAQs"
+msgstr "أسئلة وأجوبة"
+
+#: templates/utils/footer.html:55
+msgid "What is a showroom?"
+msgstr "ما هي صالة العرض؟"
+
+#: templates/utils/footer.html:56
+msgid "How to join a showroom"
+msgstr "كيف تنضم إلى صالة العرض"
+
+#: templates/utils/footer.html:57
+msgid "Get seen in the showroom"
+msgstr "يمكنك رؤيته في صالة العرض"
+
+#: templates/utils/footer.html:60
+msgid "How to create a store?"
+msgstr "كيف تصنع متجر؟"
+
+#: templates/utils/footer.html:61
+msgid "How to create products"
+msgstr "كيف تصنع المنتجات"
+
+#: templates/utils/footer.html:62
+msgid "Manage your products"
+msgstr "إدارة منتجاتك"
+
+#: templates/utils/footer.html:82
+msgid "Admin"
+msgstr "مسؤل"
+
+#: templates/utils/footer.html:83
+msgid "Terms"
+msgstr "شروط"
+
+#: templates/utils/footer.html:84
+msgid "Privacy"
+msgstr "خصوصية"
+
+#: templates/utils/footer.html:85
+msgid "Legal"
+msgstr "قانوني"
+
+#: templates/utils/footer.html:86
+msgid "Accessibility Statement"
+msgstr "بيان إمكانية الوصول"
+
+#: templates/utils/header.html:80 templates/utils/header.html:196
+msgid "Search"
+msgstr "يبحث"
+
+#: templates/utils/header.html:127
+msgid "Dashboard"
+msgstr "لوحة القيادة"
+
+#: templates/utils/header.html:138
+msgid "Login"
+msgstr "تسجيل الدخول"
+
+#: templates/utils/header.html:158
+msgid "Contact"
+msgstr "اتصال"
+
+#: templates/utils/header.html:163
+msgid "Sell On Foroden"
+msgstr "بيع على Foroden"
+
+#: templates/utils/header.html:266
+msgid "Categories for you"
+msgstr "فئات لك"
+
+#: templates/utils/header.html:300
+msgid "Languages"
+msgstr "اللغات"
+
+#, fuzzy
+#~| msgid "My Account"
+#~ msgid "Account"
+#~ msgstr "حسابي"

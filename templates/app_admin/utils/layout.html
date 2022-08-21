@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,11 +12,11 @@
     <link rel="stylesheet" href="{% static 'css/dashboards.css' %}">
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
 </head>
 <body
     class="admin-body cs-bg-white cs-grid"
@@ -35,7 +36,7 @@
         <div class="header cs-grid">
             <div class="cs-flex cs-align-center cs-justify-between" style="--gap: 2rem">
                 <div class="logo-wrapper cs-overflow-hidden">
-                    <img loading="lazy" src="{% static 'assets/imgs/resources/logo_website-e1652772171833-1.png" alt="Logo" class="logo" style="object-fit: cover;">
+                    <img loading="lazy" src="{% static 'assets/imgs/resources/logo_website-e1652772171833-1.png' %}" alt="Logo" class="logo" style="object-fit: cover;">
                 </div>
                 <button class="btn cs-bg-transparent cs-text-primary"><i class="fa fa-bars"></i></button>
             </div>
@@ -49,25 +50,25 @@
                         <li>
                             <a href="{% url 'app_admin:home' %}" class="{%if active_tab == 'Home'%} active {% endif %} side-tab br-sm cs-flex justify-start cs-align-center" style="--gap: .5rem;">
                                 <i class="fa fa-home cs-text-normal-md cs-text-primary"></i>
-                                <h5 class="item-label cs-font-500 cs-text-md cs-text-cs-bg-secondary">Home</h5>
+                                <h5 class="item-label cs-font-500 cs-text-md cs-text-cs-bg-secondary">{% trans "Home" %}</h5>
                             </a>
                         </li>
                         <li>
                             <a href="{% url 'app_admin:clients' %}" class="{%if active_tab == 'Clients'%} active {% endif %} side-tab br-sm cs-flex justify-start cs-align-center" style="--gap: .5rem;">
                                 <i class="fa fa-user cs-text-normal-md cs-text-primary"></i>
-                                <h5 class="item-label cs-font-500 cs-text-md cs-text-cs-bg-secondary">Clients</h5>
+                                <h5 class="item-label cs-font-500 cs-text-md cs-text-cs-bg-secondary">{% trans "Clients" %}</h5>
                             </a>
                         </li>
                         <li>
                             <a href="{% url 'app_admin:manager' %}" class="manager {%if active_tab == 'Manager'%} active {% endif %} side-tab br-sm cs-flex justify-start cs-align-center" style="--gap: .5rem;">
                                 <i class="fa fa-home cs-text-normal-md cs-text-primary"></i>
-                                <h5 class="item-label cs-font-500 cs-text-md cs-text-cs-bg-secondary">Manager</h5>
+                                <h5 class="item-label cs-font-500 cs-text-md cs-text-cs-bg-secondary">{% trans "Manager" %}</h5>
                             </a>
                         </li>
                         <li>
                             <a href="{% url 'app_admin:discussions' %}" class="{%if active_tab == 'Support'%} active {% endif %} side-tab br-sm cs-flex justify-start cs-align-center" style="--gap: .5rem;">
                                 <i class="fa fa-home cs-text-normal-md cs-text-primary"></i>
-                                <h5 class="item-label cs-font-500 cs-text-md cs-text-cs-bg-secondary">Support</h5>
+                                <h5 class="item-label cs-font-500 cs-text-md cs-text-cs-bg-secondary">{% trans "Support" %}</h5>
                             </a>
                         </li>
                     </ul>
@@ -80,11 +81,11 @@
                 <button class="btn icon-btn cs-bg-white cs-grid cs-justify-center cs-align-center br-sm">
                     <i class="fa fa-cog"></i>
                 </button>
-                <a href="./createProfile.html" class="btn icon-btn cs-bg-white cs-grid cs-justify-center cs-align-center br-sm">
+                <a href="{% url 'app_admin:profile' %}" class="btn icon-btn cs-bg-white cs-grid cs-justify-center cs-align-center br-sm">
                     <i class="fa fa-user"></i>
                 </a>
-                <a class="btn icon-btn cs-bg-white cs-grid cs-justify-center cs-align-center br-sm">
-                    <i class="fa fa-user"></i>
+                <a href="{% url 'manager:home' %}" class="btn icon-btn cs-bg-white cs-grid cs-justify-center cs-align-center br-sm">
+                    <i class="fa fa-home"></i>
                 </a>
             </div>
             <a href="{% url 'auth_app:logout' %}" class="cs-grid btn outlined cs-text-md cs-font-500 br-sm cs-bg-hover-color" style="place-items: center;">Log out</a>
@@ -97,9 +98,9 @@
         <!-- header area -->
             <header class="content-area-header cs-grid br-sm" style="--gap: .5rem;">
                 <div class="cs-grid cs-align-center" style="align-content: center;--gap: .35rem">
-                    <h1 class="section-title cs-font-700 cs-font-500 cs-text-secondary" style="line-height: 20px;margin: 0;font-size: 1.4rem;">Admin Dashboard</h1>
+                    <h1 class="section-title cs-font-700 cs-font-500 cs-text-secondary" style="line-height: 20px;margin: 0;font-size: 1.4rem;">{% trans 'Admin Dashboard' %}</h1>
                     <p class="cs-flex cs-text-md cs-text-secondary" style="gap: .5rem;">
-                        <a href="./index.html" style="color: hsla(213, 28%, 60%, 100%);">Home</a>
+                        <a href="{% url 'app_admin:home' %}" style="color: hsla(213, 28%, 60%, 100%);">{% trans 'Home' %}</a>
                         {% if active_tab != 'Home' %}
                             <span>/</span>
                             <span>{{active_tab}}</span>
@@ -119,7 +120,7 @@
                         <span class="count">4</span>
                         <i class="fa fa-bell"></i>
                         <div class="notification-list cs-hidden outlined cs-bg-white br-sm" style="--gap: 1rem;text-align: left;">
-                            <h4 class="cs-text-normal cs-font-600 cs-text-secondary" style="margin: 0;">Nofications</h4>
+                            <h4 class="cs-text-normal cs-font-600 cs-text-secondary" style="margin: 0;">{% trans 'Nofications' %}</h4>
                             <hr style="border: 1px solid hsl(0, 0%, 95%);">
                             <ul class="cs-grid" style="--gap: .25rem">
                                 <li>
@@ -162,10 +163,10 @@
                         </div>
                     </button>
                     
-                    <a href="./profile.html" class="cs-flex br-md" style="--gap: 1rem;padding: .5rem 1rem;background-color: hsla(213, 28%, 70%, 10%);align-content: center;align-items: center;">
+                    <a href="{% url 'app_admin:profile' %}" class="cs-flex br-md" style="--gap: 1rem;padding: .5rem 1rem;background-color: hsla(213, 28%, 70%, 10%);align-content: center;align-items: center;">
                         <div class="cs-grid" style="--gap: 0;justify-items: flex-end;align-content: center;">
-                            <h4 class="cs-text-md cs-font-500" style="line-height: 14px;margin: 0;">Nola Riska</h4>
-                            <p class="cs-text-sm cs-font-500" style="color: hsl(0, 0%, 60%);">Support</p>
+                            <h4 class="cs-text-md cs-font-500" style="line-height: 14px;margin: 0;">{% trans request.user.username %}</h4>
+                            <p class="cs-text-sm cs-font-500" style="color: hsl(0, 0%, 60%);">{% trans 'Support' %}</p>
                         </div>
                         <div class="avator br-full cs-overflow-hidden">
                             <img src="{% static 'assets/imgs/resources/profiledefault.png" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
@@ -181,27 +182,6 @@
         <!-- section area -->
     </main>
     <!-- main -->
-
-    <script>
-        const confirmPassword = document.querySelector('#confirm-password');
-        const password = document.querySelector('#password');
-        const form = document.querySelector('#profile-form');
-        
-        if (confirmPassword) {
-            confirmPassword.addEventListener('keyup', () => {
-                if (confirmPassword.value !== password.value) {
-                    confirmPassword.classList.add('error');
-                    form.addEventListener('submit', (e) => {
-                        e.preventDefault();
-                        return false;
-                    })
-                }
-                else {
-                    confirmPassword.classList.remove('error')
-                }
-            })
-        }
-    </script>
 
     <script src="{% static 'js/admin.js' %}"></script>
     <script src="{% static 'js/createChart.js' %}"></script>
