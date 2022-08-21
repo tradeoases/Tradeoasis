@@ -67,11 +67,27 @@ class SignUpView(View):
         if request.user.is_authenticated:
             return redirect(reverse("manager:home"))
 
-        context_data = {"view_name": _("Sign Up")}
+        if request.GET.get("Supplier"):
+            account_type = "Supplier"
+        elif request.GET.get("Buyer"):
+            account_type = "Buyer"
+        else:
+            return redirect(reverse("auth_app:login"))
+
+        context_data = {"view_name": _("Sign Up"), "account_type": account_type}
 
         return render(request, self.template_name, context=context_data)
 
     def post(self, request):
+        if request.POST.get("account_type") == "Supplier":
+            account_type = request.POST.get("account_type")
+            UserModel = AuthModels.Supplier
+        elif request.POST.get("account_type") == "Buyer":
+            account_type = "Buyer"
+            UserModel = AuthModels.Buyer
+        else:
+            return redirect(reverse("auth_app:login"))
+
         if not (
             request.POST.get("first_name")
             and request.POST.get("last_name")
@@ -81,22 +97,19 @@ class SignUpView(View):
             and request.POST.get("confirm-password")
         ):
             messages.add_message(request, messages.ERROR, _("Please Fill all fields."))
-            return redirect(reverse("auth_app:signup"))
+            return redirect("{}?{}=1".format(reverse("auth_app:signup"), account_type.lower()))
 
         if AuthModels.User.objects.filter(username=request.POST.get("username")):
             messages.add_message(request, messages.ERROR, _("Username not available."))
-            return redirect(reverse("auth_app:signup"))
+            return redirect("{}?{}=1".format(reverse("auth_app:signup"), account_type.lower()))
+
+        if AuthModels.User.objects.filter(email=request.POST.get("email")):
+            messages.add_message(request, messages.ERROR, _("Email not available."))
+            return redirect("{}?{}=1".format(reverse("auth_app:signup"), account_type.lower()))
 
         if request.POST.get("confirm-password") != request.POST.get("password"):
             messages.add_message(request, messages.ERROR, _("Password mismatch."))
-            return redirect(reverse("auth_app:signup"))
-
-        if self.request.GET.get("supplier"):
-            account_type = "Supplier"
-            UserModel = AuthModels.Supplier
-        else:
-            account_type = "Buyer"
-            UserModel = AuthModels.Buyer
+            return redirect("{}?{}=1".format(reverse("auth_app:signup"), account_type.lower()))
 
         user = UserModel.objects.create_user(
             first_name=request.POST.get("first_name"),
@@ -205,6 +218,7 @@ class BusinessProfileView(View):
                 legal_etity_identifier=request.POST.get("legal_etity_identifier", None),
                 website=request.POST.get("website", None),
             )
+            return redirect(reverse("supplier:dashboard"))
         except:
             messages.add_message(
                 request, messages.ERROR, _("An Error Occurred. Try Again.")

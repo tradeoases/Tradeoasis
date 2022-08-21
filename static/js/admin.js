@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     const paginate = (response, invoker) => {
+        console.log(invoker)
         document.querySelector('section.content:not(.cs-hidden) #next-page').addEventListener('click', () => {
             if (response.count / 10 > pageNum)
             {
@@ -337,7 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // change page number
-        paginate(response, invoker = renderServices);
+        paginate(response, invoker = renderSuppliers);
     }
 
     const renderBuyer = async () => {

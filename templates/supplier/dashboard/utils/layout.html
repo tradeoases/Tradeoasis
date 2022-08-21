@@ -1,0 +1,209 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/_main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboards.css' %}">
+    <link rel="stylesheet" href="{% static 'icons/themify-icons.css' %}">
+    <link href="{% static 'icons/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet"  type='text/css'>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <title>Golden - {% trans 'Supplier Dashboard' %}</title>
+</head>
+
+<body>
+    <div class="app-container container">
+        <div class="app-content">
+            <div class="sidebar card">
+                <div class="sidebar-header">
+                    <div class="app-logo">
+                        <i class="ti-layout-grid2"></i>
+                        <span>Supplier's Portal</span>
+                    </div>
+                </div>
+                <div class="sidebar-body">
+                    <ul class="main-menu">
+                        <li class="link">
+                            <a href="{% url 'supplier:dashboard' %}">
+                                <span class="flex">
+                                    <span><i class="icon ti-home"></i><span class="text">Dashboard</span></span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="link">
+                            <a href="#">
+                                <span class="flex">
+                                    <span><i class="icon ti-folder"></i><span class="text">Stores</span></span>
+                                    <!-- <i class="ti-angle-down"></i> -->
+                                </span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="link"><a href="{% url 'supplier:dashboard-stores' %}"> Create store</a></li>
+                                <li class="link"><a href="{% url 'supplier:dashboard-stores' %}"> Manage store</a></li>
+                            </ul>
+                        </li>
+                        <li class="link">
+                            <a href="#">
+                                <span class="flex">
+                                    <span><i class="icon ti-receipt"></i><span class="text">Products</span></span>
+                                    <!-- <i class="ti-angle-down"></i> -->
+                                </span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="link"><a href="{% url 'supplier:dashboard-products' %}"> Create products</a></li>
+                                <li class="link"><a href="{% url 'supplier:dashboard-products' %}"> Manage products</a></li>
+                            </ul>
+                        </li>
+                        <li class="link">
+                            <a href="_contract.html">
+                                <span class="flex">
+                                    <span><i class="icon ti-layout-accordion-list"></i><span
+                                            class="text">Contracts</span></span>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="sidebar-footer"></div>
+            </div>
+            <div class="main">
+                <div class="navbar card">
+                    <div class="logo">
+                        <form class="search-form">
+                            <div class="form-control">
+                                <input type="search" name="" id="" placeholder="Search">
+                                <button type="submit"><i class="ti-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                    <nav>
+                        <ul class="nav-links flex">
+                            <li class="link bell">
+                                <i class="ti-bell"></i>
+                            </li>
+                            <li class="link settings">
+                                <i class="ti-settings"></i>
+                            </li>
+                            <li class="link customer-display">
+                                <i class="fa fa-desktop"></i>
+                            </li>
+
+                            <div class="dropdown">
+                                <div class="flex" style="margin-inline-start: 1rem;">
+                                    <h4>Phillip M.</h4>
+                                    <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt=""
+                                        class="avatar" id="toggle-dropdown" >
+                                </div>
+                                <!-- <div class="dropdown-menu" id="dropdown-menu">
+                                    <ul class="dropdown-items">
+                                        <li class="dropdown-item"><i class="ti-help"></i> <a href="#">Help</a></li>
+                                        <li class="dropdown-item"><i class="ti-settings"></i> <a
+                                                href="#">Settings</a></li>
+                                        </li>
+                                        <li class="dropdown-item footer"><a href="#">Sign Out</a></li>
+                                    </ul>
+                                </div> -->
+                            </div>
+                        </ul>
+                    </nav>
+                </div>
+
+                {% block content %}
+                {% endblock %}
+
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/createChart.js' %}"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            let mChart1 = createChart('Requests.',
+                'line',
+                ['10/08/2000', '10/08/2000', '10/08/2000','10/08/2000'],
+                [80, 100, 46, 70],
+                'requests'
+            );
+
+            let mChart2 = createChart('Users',
+                'doughnut',
+                ['Fashion', 'Electronics', 'Sports'],
+                [20, 200, 100],
+                'users'
+            );
+
+
+            const actionBtns = document.querySelectorAll('.selectors button');
+            for (let i = 0; i < actionBtns.length; i++) {
+                actionBtns[i].addEventListener('click', e => {
+                    actionBtns.forEach(btn => {
+                        if (btn.classList.contains('active')) btn.classList.remove('active');
+                    });
+
+                    actionBtns[i].classList.add('active');
+
+                    if (actionBtns[i].getAttribute('id') === "day") {
+
+                        mChart1.destroy();
+                        mChart1 = createChart('Revenue per day.',
+                            'line',
+                            ['10/08/2000', '10/08/2000', '10/08/2000','10/08/2000'],
+                            [80, 100, 46, 70],
+                            'requests'
+                        );
+
+                    } else if (actionBtns[i].getAttribute('id') === "week") {
+
+                        mChart1.destroy();
+                        mChart1 = createChart('Revenue per week.',
+                            'line',
+                            ['week 1', 'week 1', 'week 1','week 1'],
+                            [80, 100, 46, 70],
+                            'requests'
+                        );
+
+                    } else if (actionBtns[i].getAttribute('id') === "month") {
+
+                        mChart1.destroy();
+                        mChart1 = createChart('Revenue per month.',
+                            'line',
+                            ['08/2000', '08/2000', '08/2000','08/2000'],
+                            [80, 100, 46, 70],
+                            'requests'
+                        );
+
+                    } else if (actionBtns[i].getAttribute('id') === "year") {
+
+                        mChart1.destroy();
+                        mChart1 = createChart('Revenue per year.',
+                            'line',
+                            ['2000', '2000', '2000','2000'],
+                            [40, 50, 46, 70],
+                            'requests'
+                        );
+                    } else {
+                        // console.log("");
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

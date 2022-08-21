@@ -214,4 +214,20 @@ def profile(request):
         # to buyer profile
         return redirect(reverse("buyer:profile"))
     elif request.user.account_type == "SUPPORT" or request.user.is_superuser:
+        return redirect(reverse("app_admin:profile"))
+        
+
+def dashboard(request):
+    if not request.user.is_authenticated:
+        return redirect(
+            "{}?next={}".format(reverse("auth_app:login"), request.GET.get("next"))
+        )
+
+    if request.user.account_type == "SUPPLIER":
+        # to supplier dashboard
+        return redirect(reverse("manager:home"))
+    elif request.user.account_type == "BUYER":
+        # to buyer dashboard
+        return redirect(reverse("buyer:profile"))
+    elif request.user.account_type == "SUPPORT" or request.user.is_superuser:
         return redirect(reverse("app_admin:home"))

@@ -49,7 +49,7 @@
         </div>
     </div>
 
-    <section class="main w-12/12" style="height: auto">
+    <section class="main w-12/12" style="block-size: auto">
         <div class="grid w-full mx-auto cf-1 gap-4" style="grid-template-columns: 1fr;">
             {% if products.results %}
                 <div class="section-body grid gap-2 md:gap-6 grid-cols-2 md:grid-cols-5 py-4"
@@ -184,7 +184,7 @@
                                 <div class="grid grid-flow-col justify-start gap-2">
                                     {% for product in subcategory.products %}
                                         <a class="grid gap-1 rounded-md" href="{% url 'supplier:product-detail' product.product.slug %}">
-                                            <img loading="lazy" src="/media/{{product.main_image.image}}" alt="{{ product.product.name }}" class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;max-height: 15vh;">
+                                            <img loading="lazy" src="/media/{{product.main_image.image}}" alt="{{ product.product.name }}" class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;max-block-size: 15vh;">
                                         </a>
                                     {% endfor %}
                                 </div>
@@ -211,7 +211,7 @@
                             <div class="grid grid-cols-3 justify-evenly gap-2 products justify-self-start" >
                                 {% for product in store.products %}
                                     <a class="product grid gap-1 rounded-md justify-self-start" href="{% url 'supplier:store-detail' store.store.slug %}">
-                                        <img loading="lazy" src="/media/{{product.main_image.image}}" alt="{{product.product.name}}" class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;max-height: 15vh;inline-size: 100%;">
+                                        <img loading="lazy" src="/media/{{product.main_image.image}}" alt="{{product.product.name}}" class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;max-block-size: 15vh;inline-size: 100%;">
                                     </a>
                                 {% endfor %}
                             </div>

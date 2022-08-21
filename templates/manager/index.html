@@ -3,6 +3,35 @@
 {% load i18n %}
 {% block content %}
 
+
+    <style>
+        #banner {
+            /* display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: 100%;
+            --gap: 0 1rem; */
+            block-size: 400px;
+        }
+        #banner .item {
+            margin: 0;
+            inline-size: 100%;
+            block-size: 100%;
+        }
+
+        #banner .item img {
+            display: block;
+            aspect-ratio: 1;
+            block-size: 400px;
+            object-fit: cover;
+        }
+        @media (max-width: 786px) {
+            #banner,
+            #banner .item img {
+                block-size: 40vh;
+            }
+        }
+    </style>
+
     <section class="main w-12/12">
         <div class="page-starter grid w-full mx-auto cf-1 gap-4 overflow-hidden">
             <div class="hidden md:grid side-bar gap-3 content-start product-categories w-12/12 ">
@@ -28,55 +57,59 @@
                 </a>
             </div>
             <div class="hidden promotion-area w-12/12 md:grid gap-3">
-                <div class="upper grid gap-3 rounded-md overflow-hidden">
-                    <div class="grid banner">
-                        <img style="object-fit: cover;" src="../static/assets/imgs//resources/01.png" alt="">
+                <div class="upper gap-3 rounded-md overflow-hidden" style="block-size:450px;">
+                    <!-- Owl carousel -->
+                    <div id="banner" style="block-size:100%;">
+                        <div class="item"><img src="../static/assets/imgs/resources/01.jpg" alt="Owl Image"></div>
+                        <div class="item"><img src="../static/assets/imgs/resources/011.jpg" alt="Owl Image"></div>
+                        <div class="item"><img src="../static/assets/imgs/resources/01.jpg" alt="Owl Image"></div>
+                        <div class="item"><img src="../static/assets/imgs/resources/011.jpg" alt="Owl Image"></div>
+                        <div class="item"><img src="../static/assets/imgs/resources/01.jpg" alt="Owl Image"></div>
+                        <div class="item"><img src="../static/assets/imgs/resources/011.jpg" alt="Owl Image"></div>
+                        <div class="item"><img src="../static/assets/imgs/resources/01.jpg" alt="Owl Image"></div>
+                        <div class="item"><img src="../static/assets/imgs/resources/011.jpg" alt="Owl Image"></div>
+                        <div class="item"><img src="../static/assets/imgs/resources/01.jpg" alt="Owl Image"></div>
+                        <div class="item"><img src="../static/assets/imgs/resources/011.jpg" alt="Owl Image"></div>
+                        <div class="item"><img src="../static/assets/imgs/resources/01.jpg" alt="Owl Image"></div>
+                        <div class="item"><img src="../static/assets/imgs/resources/011.jpg" alt="Owl Image"></div>
+                        <div class="item"><img src="../static/assets/imgs/resources/01.jpg" alt="Owl Image"></div>
+                        <div class="item"><img src="../static/assets/imgs/resources/011.jpg" alt="Owl Image"></div>
+                        <div class="item"><img src="../static/assets/imgs/resources/01.jpg" alt="Owl Image"></div>
+                        <div class="item"><img src="../static/assets/imgs/resources/011.jpg" alt="Owl Image"></div>
                     </div>
-                    <div class="grid grid-rows-2 cards gap-3">
-                        <div class="grid grid-flow-row grid-cols-2 gap-3 card p-1">
-                            <div class="grid small-item">
-                                <div class="card-img-wrapper overflow-hidden rounded-none">
-                                    <img src="../static/assets/imgs/resources/prod-1.jpg' %}" style="object-fit: cover;"
-                                        alt="">
-                                </div>
-                                <div class="body grid grid-flow-row">
-                                    <span class="font-bold text-sm">USD 50.00</span>
-                                </div>
-                            </div>
-                            <div class="grid small-item">
-                                <div class="card-img-wrapper overflow-hidden rounded-none">
-                                    <img src="../static/assets/imgs/resources/prod-1.jpg' %}" style="object-fit: cover;"
-                                        alt="">
-                                </div>
-                                <div class="body grid grid-flow-row">
-                                    <span class="font-bold text-sm">USD 50.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="grid card"></div>
-                    </div>
+                    <!-- Owl carousel -->
                 </div>
-                <div class="lower grid gap-3 grid-flow-row grid-cols-2">
+                <!-- <div class="lower grid gap-3 grid-flow-row grid-cols-2">
                     <div class="grid rounded-md overflow-hidden card">
                     </div>
                     <div class="grid rounded-md overflow-hidden banner-lower">
                         <img style="object-fit: cover;" src="../static/assets/imgs//resources/01.png" alt="">
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="mobile promotion-area w-12/12 grid md:hidden gap-3">
-                <div class="upper grid gap-3 rounded-md overflow-hidden">
-                    <div class="grid banner">
-                        <img style="object-fit: cover;" src="../static/assets/imgs//resources/01.png" alt="">
+                <div class="upper gap-3 rounded-md overflow-hidden">
+                    <!-- Owl carousel -->
+                    <div id="banner">
+                        <div class="item"><img src="../static/assets/imgs/resources/01.jpg" alt="Owl Image"></div>
+                        <div class="item"><img src="../static/assets/imgs/resources/011.jpg" alt="Owl Image"></div>
+                        <div class="item"><img src="../static/assets/imgs/resources/01.jpg" alt="Owl Image"></div>
+                        <div class="item"><img src="../static/assets/imgs/resources/011.jpg" alt="Owl Image"></div>
+                        <div class="item"><img src="../static/assets/imgs/resources/01.jpg" alt="Owl Image"></div>
+                        <div class="item"><img src="../static/assets/imgs/resources/011.jpg" alt="Owl Image"></div>
+                        <div class="item"><img src="../static/assets/imgs/resources/01.jpg" alt="Owl Image"></div>
+                        <div class="item"><img src="../static/assets/imgs/resources/011.jpg" alt="Owl Image"></div>
+                        <div class="item"><img src="../static/assets/imgs/resources/01.jpg" alt="Owl Image"></div>
                     </div>
+                    <!-- Owl carousel -->
                 </div>
-                <div class="lower grid gap-3 grid-flow-row grid-cols-2">
+                <!-- <div class="lower grid gap-3 grid-flow-row grid-cols-2">
                     <div class="grid rounded-md overflow-hidden card">
                     </div>
                     <div class="grid rounded-md overflow-hidden banner-lower">
                         <img style="object-fit: cover;" src="../static/assets/imgs//resources/01.png" alt="">
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="hidden md:grid side-bar gap-3 content-start product-categories w-12/12">
                 <div class="grid p-0 side-menu card rounded-none rounded-t-md overflow-hidden">
@@ -99,11 +132,10 @@
                 </a>
             </div>
         </div>
-
     </section>
 
-    <section class="main w-12/12">
-        <div class="grid w-full mx-auto cf-1 gap-6">
+    <section class="main w-12/12 mt-4 md:mt-0">
+        <div class="grid w-full mx-auto cf-1 gap-2 md:gap-6">
             <div class="section-heading">
                 <h2 class="sec-title text-xl capitalize md:text-2xl font-bold text-yellowColor">{% trans 'Foroden Marketplace' %}</h2>
             </div>
@@ -145,26 +177,27 @@
             <div class="section-body grid gap-2 card p-3 py-6 rounded-md">
                 <div class="flex p-2 pt-0 justify-between items-baseline">
                     <div class="flex gap-5">
-                        <h1 class="text-xl md:text-2xl text-yellowColor font-bold">{% trans 'Discounted Products' %}</h1>
-                        <h1 class="hidden md:flex gap-1 items-baseline text-lg text-slate-400 font-bold"><span
-                                class="text-lg text-xl text-slate-500">30%</span> OFF</h1>
+                        <h1 class="text-xl md:text-2xl text-yellowColor font-bold">{% trans 'New Arrivals' %}</h1>
+                        <!-- <h1 class="hidden md:flex gap-1 items-baseline text-lg text-slate-400 font-bold"><span
+                                class="text-lg text-xl text-slate-500">30%</span> OFF</h1> -->
                     </div>
                     <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="">{% trans "View All" %}</a>
                 </div>
-                <div class="grid gap-2 horizontal-scroll" data-context="{{new_arrivals.context_name}}">
+                <div class="grid gap-1 horizontal-scroll" data-context="{{new_arrivals.context_name}}">
                     {% for new_arrival in new_arrivals.results %}
                         <div class="promotion-card grid"  data-new_arrival-index="{{forloop.counter}}">
-                            <a class="grid gap-1 rounded-md" href="{% url 'supplier:product-detail' new_arrival.product.slug %}">
+                            <a class="grid rounded-md" href="{% url 'supplier:product-detail' new_arrival.product.slug %}">
                                 <div class="grid p-2">
                                     <img loading="lazy" src="/media/{{new_arrival.main_image.image}}" alt="{{new_arrival.product.name}}" class="item-img rounded" style="width: 100%;aspect-ratio:1/.8;object-fit:cover;">
                                 </div>
-                                <div class="item-details grid gap-1 px-2">
-                                    <h5 class="text-sm font-normal leading-5">
+                                <div class="item-details grid gap-0 px-2 items-start content-start">
+                                    <h5 class="text-base font-semibold leading-5">
                                         {{new_arrival.product.name}}
                                     </h5>
-                                    <p class="text-base font-bold flex gap-2 items-baseline">
-                                        {{new_arrival.product.currency}} <span>{{new_arrival.product.price}}</span><s class="text-slate-400 font-normal text-sm">{{new_arrival.product.price}}</s>
-                                    </p>
+                                    <!-- <p class="text-base font-bold flex gap-2 items-baseline">
+                                        {{new_arrival.product.currency}} <span>{{new_arrival.product.price}}</span>
+                                        <s class="text-slate-400 font-normal text-sm">{{new_arrival.product.price}}</s>
+                                    </p> -->
                                 </div>
                             </a>
                         </div>
@@ -197,7 +230,7 @@
         </div>
     </section>
 
-    <section class="main w-12/12 pt-0" style="height: auto">
+    <section class="main w-12/12 pt-0" style="block-size: auto">
         <div class="grid w-full mx-auto cf-1 gap-6" style="grid-template-columns: 1fr;">
             <div class="section-heading">
                 <h2 class="sec-title text-xl capitalize md:text-2xl font-bold text-yellowColor">{% trans 'Popular Products' %}</h2>

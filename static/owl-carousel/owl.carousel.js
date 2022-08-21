@@ -135,8 +135,8 @@ if (typeof Object.create !== "function") {
             if (base.options.lazyLoad === true) {
                 base.lazyLoad();
             }
-            if (base.options.autoHeight === true) {
-                base.autoHeight();
+            if (base.options.autoblock-size === true) {
+                base.autoblock-size();
             }
             base.onVisibleItems();
 
@@ -1211,17 +1211,17 @@ if (typeof Object.create !== "function") {
             checkLazyImage();
         },
 
-        autoHeight : function () {
+        autoblock-size : function () {
             var base = this,
                 $currentimg = $(base.$owlItems[base.currentItem]).find("img"),
                 iterations;
 
-            function addHeight() {
-                var $currentItem = $(base.$owlItems[base.currentItem]).height();
-                base.wrapperOuter.css("height", $currentItem + "px");
-                if (!base.wrapperOuter.hasClass("autoHeight")) {
+            function addblock-size() {
+                var $currentItem = $(base.$owlItems[base.currentItem]).block-size();
+                base.wrapperOuter.css("block-size", $currentItem + "px");
+                if (!base.wrapperOuter.hasClass("autoblock-size")) {
                     window.setTimeout(function () {
-                        base.wrapperOuter.addClass("autoHeight");
+                        base.wrapperOuter.addClass("autoblock-size");
                     }, 0);
                 }
             }
@@ -1229,11 +1229,11 @@ if (typeof Object.create !== "function") {
             function checkImage() {
                 iterations += 1;
                 if (base.completeImg($currentimg.get(0))) {
-                    addHeight();
+                    addblock-size();
                 } else if (iterations <= 100) { //if image loads in less than 10 seconds 
                     window.setTimeout(checkImage, 100);
                 } else {
-                    base.wrapperOuter.css("height", ""); //Else remove height attribute
+                    base.wrapperOuter.css("block-size", ""); //Else remove block-size attribute
                 }
             }
 
@@ -1241,7 +1241,7 @@ if (typeof Object.create !== "function") {
                 iterations = 0;
                 checkImage();
             } else {
-                addHeight();
+                addblock-size();
             }
         },
 
@@ -1492,7 +1492,7 @@ if (typeof Object.create !== "function") {
         lazyFollow : true,
         lazyEffect : "fade",
 
-        autoHeight : false,
+        autoblock-size : false,
 
         jsonPath : false,
         jsonSuccess : false,

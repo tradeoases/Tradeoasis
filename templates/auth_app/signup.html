@@ -27,6 +27,7 @@
             <div class="grid gap-3 justify-content">
                 <form action="{% url 'auth_app:signup' %}" method="POST" class="grid gap-4">
                     {% csrf_token %}
+                    <input type="hidden" name="account_type" value="{{account_type}}">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="form-group grid gap-1">
                             <label for="first_name" class="text-lghterBackgroundColor font-semibold text-base">{% trans 'First Name' %}</label>

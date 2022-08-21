@@ -1,0 +1,108 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    <div class="main-content">
+        <h3 style="margin: .5rem 0;font-weight:600;">My Stores</h3>
+        <div class="alert card card-info" id="orders-help">
+            <i class="ti-close exit"></i>
+            <div class="title">
+                <small>Please, select a store from the table</small>
+            </div>
+            <div class="text">
+                <small>To add products to it.</small>
+            </div>
+        </div>
+        <div class="card data-table products-table">
+            <table id="table-1" class="display" style="width:100%;margin-top:.5rem;">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Products</th>
+                        <th>Services</th>
+                        <th>Created At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="select">
+                        <td>STRE11414</td>
+                        <td>Lancaster Fashions</td>
+                        <td>1000</td>
+                        <td>10</td>
+                        <td style="color: unset;">08/16/2022</td>
+                    </tr>
+                    <tr class="select">
+                        <td>STRE11200</td>
+                        <td>Go Green Solutions</td>
+                        <td>500</td>
+                        <td>47</td>
+                        <td style="color: unset;">08/04/2022</td>
+                    </tr>
+                    <tr class="select">
+                        <td>STRE11210</td>
+                        <td>Modern Electronics</td>
+                        <td>1560</td>
+                        <td>1</td>
+                        <td style="color: unset;">08/04/2022</td>
+                    </tr>
+                    <tr class="select">
+                        <td>STRE11240</td>
+                        <td>LMK Shells</td>
+                        <td>40</td>
+                        <td>3</td>
+                        <td style="color: unset;">08/11/2022</td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
+                <div class="cs-grid cs-align-center">
+                    <p class="cs-text-md" style="color: var(--text-color);">Showing Page <span id="current-page-0"></span> of <span id="max-page"></span>. (<span id="table-item-count"></span> Entries)</p>
+                </div>
+                <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
+                    <button id="previous-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
+                    <span id="current-page" class="cs-text-md"></span>
+                    <button id="next-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <script src="../static/js/dropdown.js"></script>
+    <script src="../static/js/sidebar.js"></script>
+    <script src="../static/js/modal.js"></script> -->
+    <script>
+        // Table
+        $(document).ready(function () {
+            $('#table-1').DataTable();
+        });
+
+
+        // Open Modal
+        const rows = document.querySelectorAll('.select');
+        rows.forEach(row => {
+            row.style.cursor = "pointer";
+            row.addEventListener('click', navigateToStore);
+
+        });
+
+        function navigateToStore() {
+            location.href = "_create-product.html";
+        }
+
+        const closeCard = document.querySelector('.ti-close.exit');
+        if (closeCard) {
+            closeCard.addEventListener('click', function (e) {
+                e.target.parentElement.remove();
+            });
+        }
+
+    </script>
+
+{% endblock %}

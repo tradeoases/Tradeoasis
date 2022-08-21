@@ -3,7 +3,7 @@
 
 @mixin fa-icon() {
   display: inline-block;
-  font: normal normal normal #{$fa-font-size-base}/#{$fa-line-height-base} FontAwesome; // shortening font declaration
+  font: normal normal normal #{$fa-font-size-base}/#{$fa-line-block-size-base} FontAwesome; // shortening font declaration
   font-size: inherit; // can't have font-size inherit on line above, so need to override
   text-rendering: auto; // optimizelegibility throws things off #1094
   -webkit-font-smoothing: antialiased;
@@ -33,7 +33,7 @@
 @mixin sr-only {
   position: absolute;
   width: 1px;
-  height: 1px;
+  block-size: 1px;
   padding: 0;
   margin: -1px;
   overflow: hidden;
@@ -52,7 +52,7 @@
   &:focus {
     position: static;
     width: auto;
-    height: auto;
+    block-size: auto;
     margin: 0;
     overflow: visible;
     clip: auto;

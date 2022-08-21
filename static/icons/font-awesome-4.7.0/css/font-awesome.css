@@ -22,7 +22,7 @@
 /* makes the font 33% larger relative to the icon container */
 .fa-lg {
   font-size: 1.33333333em;
-  line-height: 0.75em;
+  line-block-size: 0.75em;
   vertical-align: -15%;
 }
 .fa-2x {
@@ -158,8 +158,8 @@
   position: relative;
   display: inline-block;
   width: 2em;
-  height: 2em;
-  line-height: 2em;
+  block-size: 2em;
+  line-block-size: 2em;
   vertical-align: middle;
 }
 .fa-stack-1x,
@@ -170,7 +170,7 @@
   text-align: center;
 }
 .fa-stack-1x {
-  line-height: inherit;
+  line-block-size: inherit;
 }
 .fa-stack-2x {
   font-size: 2em;
@@ -331,7 +331,7 @@
 .fa-italic:before {
   content: "\f033";
 }
-.fa-text-height:before {
+.fa-text-block-size:before {
   content: "\f034";
 }
 .fa-text-width:before {
@@ -2319,7 +2319,7 @@
 .sr-only {
   position: absolute;
   width: 1px;
-  height: 1px;
+  block-size: 1px;
   padding: 0;
   margin: -1px;
   overflow: hidden;
@@ -2330,7 +2330,7 @@
 .sr-only-focusable:focus {
   position: static;
   width: auto;
-  height: auto;
+  block-size: auto;
   margin: 0;
   overflow: visible;
   clip: auto;

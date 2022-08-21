@@ -286,7 +286,7 @@ form textarea:focus-within {
 body.admin-body {
     --text-color: hsla(213, 28%, 35%, 100%);
     grid-template-columns: .5fr 3fr;
-    height: 100vh;
+    block-size: 100vh;
     overflow: hidden;
 }
 .admin-side-nav {

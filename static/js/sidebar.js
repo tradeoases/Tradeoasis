@@ -8,8 +8,8 @@ const path = window.location.pathname;
 const page = path.split("/").pop();
 
 
-if (page === "_create-store.html" || page === "_manage-store.html") {
-    sidebarSubMenus[0].style.display = "block";
+if (page === "create-store.html" || page === "manage-store.html") {
+    sidebarSubMenus[0].style.display = "grid";
     for (i = 0; i < sidebarSubMenuToggleDropdowns.length; i++) {
         sidebarSubMenuToggleDropdowns[i].addEventListener("click", function () {
 
@@ -18,7 +18,7 @@ if (page === "_create-store.html" || page === "_manage-store.html") {
 
             // this.querySelector('.ti-angle-down').classList.toggle('toggle');
 
-            if (dropdownContent.style.display === "block") {
+            if (dropdownContent.style.display === "grid") {
                 sidebarSubMenus.forEach(subMenu => {
                     subMenu.style.display = "none";
                 });
@@ -27,12 +27,12 @@ if (page === "_create-store.html" || page === "_manage-store.html") {
                 sidebarSubMenus.forEach(subMenu => {
                     subMenu.style.display = "none";
                 });
-                dropdownContent.style.display = "block";
+                dropdownContent.style.display = "grid";
             }
         });
     }
-} else if (page === "_manage-product.html") {
-    sidebarSubMenus[1].style.display = "block";
+} else if (page === "manage-product.html") {
+    sidebarSubMenus[1].style.display = "grid";
     for (i = 0; i < sidebarSubMenuToggleDropdowns.length; i++) {
         sidebarSubMenuToggleDropdowns[i].addEventListener("click", function () {
             this.classList.toggle("active");
@@ -40,7 +40,7 @@ if (page === "_create-store.html" || page === "_manage-store.html") {
 
             // this.querySelector('.ti-angle-down').classList.toggle('toggle');
 
-            if (dropdownContent.style.display === "block") {
+            if (dropdownContent.style.display === "grid") {
                 sidebarSubMenus.forEach(subMenu => {
                     subMenu.style.display = "none";
                 });
@@ -49,7 +49,7 @@ if (page === "_create-store.html" || page === "_manage-store.html") {
                 sidebarSubMenus.forEach(subMenu => {
                     subMenu.style.display = "none";
                 });
-                dropdownContent.style.display = "block";
+                dropdownContent.style.display = "grid";
             }
         });
     }
@@ -61,7 +61,7 @@ if (page === "_create-store.html" || page === "_manage-store.html") {
 
             // this.querySelector('.ti-angle-down').classList.toggle('toggle');
 
-            if (dropdownContent.style.display === "block") {
+            if (dropdownContent.style.display === "grid") {
                 sidebarSubMenus.forEach(subMenu => {
                     subMenu.style.display = "none";
                 });
@@ -70,7 +70,7 @@ if (page === "_create-store.html" || page === "_manage-store.html") {
                 sidebarSubMenus.forEach(subMenu => {
                     subMenu.style.display = "none";
                 });
-                dropdownContent.style.display = "block";
+                dropdownContent.style.display = "grid";
             }
         });
     }
@@ -78,3 +78,6 @@ if (page === "_create-store.html" || page === "_manage-store.html") {
 
 
 
+document.addEventListener("DOMContentLoaded", () => {
+
+})

@@ -146,7 +146,7 @@ body.menuOpen::after {
 
 .desktop nav {
     position: relative;
-    max-height: 8vh;
+    max-block-size: 8vh;
     z-index: 100;
 }
 
@@ -202,14 +202,14 @@ nav.cs-fixed li:hover * {
     }
 }
 
-
+/* 
 .promotion-area {
-    height: auto;
+    block-size: auto;
     grid-template-rows: 40vh 25vh;
 }
 
 .mobile.promotion-area {
-    height: auto;
+    block-size: auto;
     grid-template-rows: 35vh 20vh;
     padding: .5rem;
 }
@@ -252,12 +252,12 @@ nav.cs-fixed li:hover * {
 
 .promotion-area img {
     align-self: 16/9;
-    height: 100%;
-}
+    block-size: 100%;
+} */
 
 /* 
 .promotion-area .lower .banner-lower {
-    height: 50vh;
+    block-size: 50vh;
 } */
 
 /* page starter */
@@ -290,7 +290,7 @@ nav.cs-fixed li:hover * {
 } */
 /* 
 .main .cf-1 {
-    height: 28rem;
+    block-size: 28rem;
     margin-top: 1.2rem;
     padding: .8rem 0;
 }
@@ -299,7 +299,7 @@ nav.cs-fixed li:hover * {
 .carousel-sliders,
 .show-rooms {
     margin: .8rem;
-    height: 100%;
+    block-size: 100%;
 }
 
 .product-categories,
@@ -314,7 +314,7 @@ nav.cs-fixed li:hover * {
 
 .side-menu {
     width: 100%;
-    height: 100%;
+    block-size: 100%;
     margin: 0;
     border-radius: 20px;
 }
@@ -360,12 +360,12 @@ nav.cs-fixed li:hover * {
 .carousel-sliders,
 .sliders,
 .slider {
-    height: 70vh;
+    block-size: 70vh;
 }
 
 .slider img {
     width: 100%;
-    height: 100% !important;
+    block-size: 100% !important;
     object-fit: cover;
     aspect-ratio: 1/2;
 }
@@ -395,7 +395,7 @@ nav.cs-fixed li:hover * {
 
 .item-img {
     width: 100%;
-    height: 6rem;
+    block-size: 6rem;
     border-radius: .4rem;
 }
 
@@ -405,13 +405,13 @@ nav.cs-fixed li:hover * {
 }
 
 .weekly-deals .left {
-    height: 350px;
+    block-size: 350px;
     width: 80%;
     margin-right: .6rem;
 }
 
 .weekly-deals .left .item .item-img {
-    height: 100%;
+    block-size: 100%;
 }
 
 .weekly-deals .right {
@@ -434,14 +434,14 @@ nav.cs-fixed li:hover * {
 }
 
 .multi-image-product-card .sub-images>div {
-    max-height: 7rem;
+    max-block-size: 7rem;
     aspect-ratio: 1;
     overflow: hidden;
 }
 
 .multi-image-product-card img {
     width: 100%;
-    height: 100%;
+    block-size: 100%;
     object-fit: cover;
     border-radius: 2.5px;
 }
@@ -488,7 +488,7 @@ nav.cs-fixed li:hover * {
 }
 
 .promotion-area .small-item .body * {
-    line-height: 1;
+    line-block-size: 1;
 }
 
 
@@ -514,7 +514,7 @@ nav.cs-fixed li:hover * {
 
 .store-card .img-wrapper {
     width: 100%;
-    height: 100%;
+    block-size: 100%;
     overflow: hidden;
 }
 
@@ -528,7 +528,7 @@ nav.cs-fixed li:hover * {
     position: absolute;
     inset: 0;
     width: 100%;
-    height: 100%;
+    block-size: 100%;
     background-color: hsla(213, 28%, 19%, 0.219);
 
     display: grid;
@@ -543,19 +543,19 @@ nav.cs-fixed li:hover * {
 /* Start Footer */
 .fc {
     padding: 0 0;
-    height: 400px;
+    block-size: 400px;
     overflow: hidden;
 }
 
 .fc .cl {
     margin: .6rem;
     width: 33.3%;
-    height: 100%;
+    block-size: 100%;
 }
 
 .fc .cl1 img {
     width: 90px;
-    height: 45px;
+    block-size: 45px;
 }
 
 .fc h1 {
@@ -588,12 +588,12 @@ footer a:hover {
 } */
 
 .showrooms img {
-    max-height: 25vh;
+    max-block-size: 25vh;
 }
 
 @media (max-width: 786px) {    
     .showrooms img {
-        max-height: 20vh;
+        max-block-size: 20vh;
     }
 }
 
@@ -625,7 +625,7 @@ footer a:hover {
 }
 
 .about-us-content .img-wrapper {
-    height: 90vh;
+    block-size: 90vh;
 }
 
 .about-us-content img {
@@ -646,7 +646,7 @@ footer a:hover {
 
 .stats .num {
     font-size: 2.5rem;
-    line-height: 3rem;
+    line-block-size: 3rem;
 }
 
 @media (max-width: 786px) {

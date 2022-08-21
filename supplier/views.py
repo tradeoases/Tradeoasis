@@ -598,3 +598,24 @@ class SearchView(View):
     def get_queryset(self):
         # context['str']
         pass
+
+
+
+# dashboard
+class DashboardView(View):
+    template_name = 'supplier/dashboard/dashboard.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+class DashboardProductsView(View):
+    template_name = 'supplier/dashboard/manage-product.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+class DashboardStoresView(View):
+    template_name = 'supplier/dashboard/manage-store.html'
+
+    def get(self, request):
+        return render(request, self.template_name)

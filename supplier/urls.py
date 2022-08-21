@@ -52,4 +52,9 @@ urlpatterns = [
         views.SearchView.as_view(),
         name="search",
     ),
+
+    # dashboard
+    path('dashboard', views.DashboardView.as_view(), name='dashboard'),
+    path('dashboard/products', views.DashboardProductsView.as_view(), name='dashboard-products'),
+    path('dashboard/stores', views.DashboardStoresView.as_view(), name='dashboard-stores'),
 ]

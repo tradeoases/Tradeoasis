@@ -14,6 +14,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <title>Golden - {% trans view_name %}</title>
+
+    
+
+    <!-- Owl Carousel Assets -->
+    <link href="../static/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="../static/owl-carousel/owl.theme.css" rel="stylesheet">
 </head>
 
 <script>
@@ -124,7 +130,7 @@
                                     <a href="{% url 'manager:profile' %}{% if not request.user.is_authenticated %}?next=profile{% endif %}" class="grid items-center py-3 px-8" href="">{% trans "Profile" %}</a>
                                 </li>
                                 <li>
-                                    <a href="{% url 'manager:profile' %}{% if not request.user.is_authenticated %}?next=profile{% endif %}" class="grid items-center py-3 px-8" href="">{% trans "Dashboard" %}</a>
+                                    <a href="{% url 'manager:dashboard' %}{% if not request.user.is_authenticated %}?next=dashboard{% endif %}" class="grid items-center py-3 px-8" href="">{% trans "Dashboard" %}</a>
                                 </li>
                                 <!-- <li>
                                     <a class="grid items-center py-3 px-8" href="">Settings</a>
@@ -160,7 +166,7 @@
 
             <ul class="flex text-base text-white">
                 <li>
-                    <a class="grid py-3 px-4 bg-yellowColor hover:bg-yellowColorHover font-semibold transition-colors transition-200 ease-in" href="{% url 'auth_app:signup' %}">{% trans "Sell On Foroden" %}</a>
+                    <a class="grid py-3 px-4 bg-yellowColor hover:bg-yellowColorHover font-semibold transition-colors transition-200 ease-in" href="{% url 'auth_app:signup' %}?Supplier=1">{% trans "Sell On Foroden" %}</a>
                 </li>
             </ul>
         </div>
@@ -205,7 +211,7 @@
                 <a href="{% url 'auth_app:login' %}" class="flex place-items-center px-6 py-2 text-base bg-lighterBackgroundColorHover focus:bg-yellowColorHover duration-200 transition-all ease-in text-white font-semibold">
                     {% trans "Sign In" %}
                 </a>
-                <a href="{% url 'auth_app:signup' %}?supplier=1" class="flex place-items-center px-6 py-2 text-base bg-yellowColor focus:bg-yellowColorHover duration-200 transition-all ease-in text-white font-semibold">
+                <a href="{% url 'auth_app:signup' %}?Supplier=1" class="flex place-items-center px-6 py-2 text-base bg-yellowColor focus:bg-yellowColorHover duration-200 transition-all ease-in text-white font-semibold">
                     {% trans "Sell on Foroden" %}
                 </a>
             </div>
