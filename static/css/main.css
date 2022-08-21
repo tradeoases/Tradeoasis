@@ -9,6 +9,7 @@ body {
 body.rtl {
     direction: rtl;
 }
+
 body.menuOpen {
     overflow: hidden;
     inline-size: 100vw;
@@ -56,6 +57,7 @@ body.menuOpen::after {
 .search-form-mobile.open {
     display: grid;
 }
+
 .search-form-mobile input {
     border: none;
     outline: none;
@@ -225,6 +227,7 @@ nav.cs-fixed li:hover * {
 .mobile.promotion-area .upper {
     grid-template-columns: 1fr;
 }
+
 .mobile.promotion-area .lower {
     grid-template-columns: 1fr 1fr;
 }
@@ -239,7 +242,7 @@ nav.cs-fixed li:hover * {
     grid-row: 1/-1;
 }
 
-.promotion-area .lower > * {
+.promotion-area .lower>* {
     grid-row: 1/-1;
 }
 
@@ -476,12 +479,14 @@ nav.cs-fixed li:hover * {
     grid-row: 1/2;
     border-radius: 0;
 }
+
 .promotion-area .small-item .body {
     grid-column: 1/-1;
     grid-row: 2/-1;
     gap: .35rem;
     padding: .25rem;
 }
+
 .promotion-area .small-item .body * {
     line-height: 1;
 }
@@ -497,6 +502,7 @@ nav.cs-fixed li:hover * {
 .product-images-list img {
     transform: scale(1);
 }
+
 .product-images-list img.active {
     transform: scale(1.1);
 }
@@ -514,8 +520,8 @@ nav.cs-fixed li:hover * {
 
 .store-card img {
     width: 100%;
-    aspect-ratio:2/1;
-    object-fit:cover;
+    aspect-ratio: 2/1;
+    object-fit: cover;
 }
 
 .store-card .card-details {
@@ -535,11 +541,6 @@ nav.cs-fixed li:hover * {
 }
 
 /* Start Footer */
-.foot {
-    /* border-top: 1px solid #d5d5d5; */
-    /* border-bottom: 1px solid #f3f3f3; */
-}
-
 .fc {
     padding: 0 0;
     height: 400px;
@@ -643,7 +644,7 @@ footer a:hover {
     border-radius: 10px;
 }
 
-.stats .num{
+.stats .num {
     font-size: 2.5rem;
     line-height: 3rem;
 }
@@ -652,31 +653,37 @@ footer a:hover {
     .about-intro {
         padding: 4rem 2rem;
     }
-    
+
     .about-us-content {
         padding: 0;
     }
-    .about-us-content .img-wrapper{
+
+    .about-us-content .img-wrapper {
         inline-size: 100vw;
         block-size: 40vh;
     }
+
     .about-us-content img {
         aspect-ratio: 2/1.5;
     }
+
     .about-description {
         padding: 2rem;
     }
-    
+
     .about-us-content::after {
         display: none;
     }
+
     .stats {
         padding: 2rem 1rem;
     }
+
     .stats-card {
         padding: 1rem 1.5rem;
     }
-    .stats .num{
+
+    .stats .num {
         font-size: 2rem;
     }
 }
