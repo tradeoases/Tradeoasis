@@ -213,7 +213,9 @@ def profile(request):
     elif request.user.account_type == "BUYER":
         # to buyer profile
         return redirect(reverse("buyer:profile"))
-    elif request.user.account_type == "SUPPORT" or request.user.is_superuser:
+    elif request.user.account_type == "SUPPORT": 
+        return redirect(reverse("app_admin:profile"))
+    elif request.user.is_superuser:
         return redirect(reverse("app_admin:profile"))
         
 
@@ -229,5 +231,7 @@ def dashboard(request):
     elif request.user.account_type == "BUYER":
         # to buyer dashboard
         return redirect(reverse("buyer:profile"))
-    elif request.user.account_type == "SUPPORT" or request.user.is_superuser:
+    elif request.user.account_type == "SUPPORT":
+        return redirect(reverse("app_admin:home"))
+    elif request.user.is_superuser:
         return redirect(reverse("app_admin:home"))
