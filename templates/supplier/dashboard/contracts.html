@@ -12,40 +12,28 @@
                     <small>{% trans 'To view the contract details' %}</small>
                 </div>
                 <div class="text">
-                    <small>{% trans 'Click the "View Details" label' %}.</small>
+                    <small>{% trans 'Click the "<i class="fa fa-info-circle"></i>" label' %}.</small>
                 </div>
             </div>
             <div class="card data-table products-table">
-                <table id="table-1" class="display" style="width:100%;margin-top:.5rem;">
+                <table id="contracts" class="display" style="width:100%;margin-top:.5rem;">
                     <thead>
                         <tr>
-                            <th>{% trans 'ID' %}</th>
+                            <th>{% trans 'No' %}</th>
                             <th>{% trans 'Service' %}</th>
-                            <th>{% trans 'Price' %}</th>
+                            <th>{% trans 'Buyer' %}</th>
                             <th>{% trans 'Start date' %}</th>
-                            <th>{% trans 'End date' %}</th>
                             <th>{% trans 'Action' %}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="select">
-                            <td>CNTR11414</td>
-                            <td>Customer representation</td>
-                            <td>1200</td>
-                            <td>08/16/2022</td>
-                            <td>09/16/2022</td>
-                            <td>
-                                <a href="{% url 'supplier:dashboard-contractsdetails' %}">{% trans 'View Details' %}</a>
-                            </td>
-                        </tr>
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>{% trans 'ID' %}</th>
+                            <th>{% trans 'No' %}</th>
                             <th>{% trans 'Service' %}</th>
-                            <th>{% trans 'Price' %}</th>
-                            <th>{% trans 'Start date' %}</th>
-                            <th>{% trans 'End date' %}</th>
+                            <th>{% trans 'Buyer' %}</th>
+                            <th>{% trans 'Created on' %}</th>
                             <th>{% trans 'Action' %}</th>
                         </tr>
                     </tfoot>

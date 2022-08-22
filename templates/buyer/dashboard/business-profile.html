@@ -24,71 +24,41 @@
                         {% endif %}
                     {% endfor %}
                 {% endif %}
-                <div class="cs-grid cs-content-start" style="--gap: 1rem;padding: 1rem 0;">
-                    <h2 class="cs-text-secondary">Account Details</h2>
-                    <div class="group cs-grid" style="--gap: .5rem;">
-                        <span class="cs-text-normal" style="color: var(--text-color);">{% trans 'Name' %}:</span>
-                        <span class="cs-text-normal cs-text-secondary outlined br-sm" style="padding: .5rem .5rem">{{ request.user.first_name }} {{ request.user.last_name }}</span>
-                    </div>
-                    <div class="group cs-grid" style="--gap: .5rem;">
-                        <span class="cs-text-normal" style="color: var(--text-color);">{% trans 'Username' %}:</span>
-                        <span class="cs-text-normal cs-text-secondary outlined br-sm" style="padding: .5rem .5rem">{{ request.user.username }}</span>
-                    </div>
-                    <div class="group cs-grid" style="--gap: .5rem;">
-                        <span class="cs-text-normal" style="color: var(--text-color);">{% trans 'Email' %}:</span>
-                        <span class="cs-text-normal cs-text-secondary outlined br-sm" style="padding: .5rem .5rem">{{ request.user.email }}</span>
-                    </div>
-                    <div class="group cs-grid" style="--gap: .5rem;">
-                        <span class="cs-text-normal" style="color: var(--text-color);">{% trans 'Account Type' %}:</span>
-                        <span class="cs-text-normal cs-text-secondary outlined br-sm" style="padding: .5rem .5rem">{{ request.user.account_type }}</span>
-                    </div>
-                    <div class="group cs-grid" style="--gap: .5rem;">
-                        <span class="cs-text-normal" style="color: var(--text-color);">{% trans 'Membership' %}:</span>
-                        <div class="cs-grid" style="--gap: .75rem;grid-template-columns: 1fr .1fr;">
-                            <span class="cs-text-normal cs-text-secondary outlined br-sm" style="padding: .5rem .5rem">Basic</span>
-                            <a class="btn cs-bg-secondary br-sm" href="{% url 'app_admin:editprofile' %}">{% trans 'Upgrade' %}</a>
-                        </div>
-                    </div>
-                    <div class="group cs-flex" style="--gap: .5rem;">
-                        <a class="btn br-sm" href="{% url 'app_admin:editprofile' %}">{% trans 'Edit Profile' %}</a>
-                        <a class="btn cs-bg-primary  cs-text-white br-sm br-sm" href="{% url 'app_admin:editprofile' %}">{% trans 'Reset Password' %}</a>
-                    </div>
-                </div>
                 <div class="cs-grid cs-content-start" style="--gap: 1rem;">
                     <h2>{% trans 'Business Details' %}</h2>
                     <div class="group cs-grid" style="--gap: .75rem;">
                         <p class="">{% trans 'Business Name' %}:</p>
-                        <p class="outlined br-sm" style="padding: .5rem 1.5rem;">{{profile.business_name}}</p>
+                        <p class="outlined br-sm" style="padding: .5rem 1.5rem;">{{buyer.profile.business_name}}</p>
                     </div>
                     <div class="group cs-grid" style="--gap: .75rem;">
                         <p class="">{% trans 'Description' %}:</p>
-                        <p class="outlined br-sm" style="padding: .5rem 1.5rem; line-height: 1.6rem;">{{profile.business_description}}</p>
+                        <p class="outlined br-sm" style="padding: .5rem 1.5rem; line-height: 1.6rem;">{{buyer.profile.business_description}}</p>
                     </div>
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="group cs-grid" style="--gap: .75rem;">
                             <p class="">{% trans 'Country' %}:</p>
-                            <p class="outlined br-sm" style="padding: .5rem 1.5rem;">{{profile.country}}</p>
+                            <p class="outlined br-sm" style="padding: .5rem 1.5rem;">{{buyer.profile.country}}</p>
                         </div>
                         <div class="group cs-grid" style="--gap: .75rem;">
                             <p class="">{% trans 'City' %}:</p>
-                            <p class="outlined br-sm" style="padding: .5rem 1.5rem;">{{profile.city}}</p>
+                            <p class="outlined br-sm" style="padding: .5rem 1.5rem;">{{buyer.profile.city}}</p>
                         </div>
                     </div>
                     <div class="group cs-grid" style="--gap: .75rem;">
                         <p class="">{% trans 'Business Line' %}:</p>
-                        <p class="outlined br-sm" style="padding: .5rem 1.5rem;">+ ({{profile.country_code}}) {{profile.mobile_user}}</p>
+                        <p class="outlined br-sm" style="padding: .5rem 1.5rem;">+ ({{buyer.profile.country_code}}) {{buyer.profile.mobile_user}}</p>
                     </div>
                     <div class="group cs-grid" style="--gap: .75rem;">
                         <p class="">{% trans 'VAT Number' %}:</p>
-                        <p class="outlined br-sm" style="padding: .5rem 1.5rem;">{{profile.vat_number}}</p>
+                        <p class="outlined br-sm" style="padding: .5rem 1.5rem;">{{buyer.profile.vat_number}}</p>
                     </div>
                     <div class="group cs-grid" style="--gap: .75rem;">
                         <p class="">{% trans 'Legal Entity Identifier' %}:</p>
-                        <p class="outlined br-sm" style="padding: .5rem 1.5rem;">{{profile.legal_etity_identifier}}</p>
+                        <p class="outlined br-sm" style="padding: .5rem 1.5rem;">{{buyer.profile.legal_etity_identifier}}</p>
                     </div>
                     <div class="group cs-grid" style="--gap: .75rem;">
                         <p class="">{% trans 'Website' %}:</p>
-                        <p class="outlined br-sm" style="padding: .5rem 1.5rem;">{{profile.website}}</p>
+                        <p class="outlined br-sm" style="padding: .5rem 1.5rem;">{{buyer.profile.website}}</p>
                     </div>
                     <div class="group cs-flex" style="--gap: .5rem;">
                         <a class="btn br-sm" href="{% url 'app_admin:editprofile' %}">{% trans 'Edit Bussiness Details' %}</a>

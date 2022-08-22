@@ -11,6 +11,7 @@ urlpatterns = i18n_patterns(
     path(_("buyer/"), include("buyer.urls", namespace="buyer")),
     path(_("auth/"), include("auth_app.urls", namespace="auth")),
     path(_("support/admin/"), include("app_admin.urls", namespace="app_admin")),
+    path(_("api/"), include("api.urls", namespace="api")),
     path(_("admin-api/"), include("admin_api.urls", namespace="admin-api")),
     path(_("admin/"), admin.site.urls),
 )

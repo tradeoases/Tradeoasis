@@ -6,43 +6,18 @@
 <div class="main-content split">
     <div class="content-area card">
 
-        <div class="upper-content-area top-cards">
-            <div class="top-card flex">
-                <div class="card-content card-content-left">
-                    <span><i class="ti ti-money"></i></span>
+        <div class="upper-content-area top-cards" data-context="{{statistics.context_name}}">
+            {% for statistic in statistics.results %}
+                <div class="top-card flex">
+                    <div class="card-content card-content-left">
+                        <span><i class="ti ti-money"></i></span>
+                    </div>
+                    <div class="card-content card-content-right">
+                        <h4>{{statistic.name}}</h4>
+                        <h6 id="stores">{{statistic.count}}</h6>
+                    </div>
                 </div>
-                <div class="card-content card-content-right">
-                    <h4>{% trans 'Stores' %}</h4>
-                    <h6 id="stores">0</h6>
-                </div>
-            </div>
-            <div class="top-card flex">
-                <div class="card-content card-content-left">
-                    <span><i class="ti ti-money"></i></span>
-                </div>
-                <div class="card-content card-content-right">
-                    <h4>{% trans 'Services' %}</h4>
-                    <h6 id="services">0</h6>
-                </div>
-            </div>
-            <div class="top-card flex">
-                <div class="card-content card-content-left">
-                    <span><i class="ti ti-credit-card"></i></span>
-                </div>
-                <div class="card-content card-content-right">
-                    <h4>{% trans 'Products' %}</h4>
-                    <h6 id="products">0</h6>
-                </div>
-            </div>
-            <div class="top-card flex">
-                <div class="card-content card-content-left">
-                    <span><i class="ti ti-credit-card"></i></span>
-                </div>
-                <div class="card-content card-content-right">
-                    <h4>{% trans 'Contracts' %}</h4>
-                    <h6 id="categories">0</h6>
-                </div>
-            </div>
+            {% endfor %}
         </div>
         <div class="lower-content-area">
             <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;padding: .5rem;">

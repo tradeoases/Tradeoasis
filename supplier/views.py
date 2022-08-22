@@ -1,15 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views import View
 from django.views.generic import ListView, DetailView
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.utils.translation import gettext as _
+from django.contrib import messages
 
 import random
 
 from supplier import models as SupplierModels
 from auth_app import models as AuthModels
 from manager import models as ManagerModels
+from payment import models as PaymentModels
+
+from supplier.mixins import SupplierOnlyAccessMixin
 
 
 class SupplierDetailView(DetailView):
@@ -602,50 +607,182 @@ class SearchView(View):
 
 
 # dashboard
-class DashboardView(View):
+class DashboardView(SupplierOnlyAccessMixin, View):
     template_name = 'supplier/dashboard/dashboard.html'
 
+
     def get(self, request):
-        return render(request, self.template_name)
+        return render(request, self.template_name, self.get_context_data())
+
+    def get_context_data(self, **kwargs):
+        context_data = dict()
+
+        context_data["view_name"] = _("Supplier Dashboard")
+        context_data["active_tab"] = "Dashboard"
+        context_data["statistics"] = {
+            "context_name": "statistics",
+            "results": [
+                {
+                    "name": _("Stores"),
+                    "count": SupplierModels.Store.objects.filter(supplier=self.request.user).count()
+                },
+                {
+                    "name": _("Products"),
+                    "count": SupplierModels.Product.objects.filter(store__in = SupplierModels.Store.objects.filter(supplier=self.request.user)).count()
+                },
+                {
+                    "name": _("Services"),
+                    "count": SupplierModels.Service.objects.filter(supplier=self.request.user).count()
+                },
+                {
+                    "name": _("Contracts"),
+                    "count": PaymentModels.Contract.objects.filter(supplier=self.request.user).count()
+                }
+            ],
+        }
+
+        context_data["top_products"] = {
+            "context_name": "top-products",
+            "results": SupplierModels.Product.objects.all()[:4] # should base on products request table
+        }
+        return context_data
+
 
 class ProfileView(View):
     template_name = 'supplier/dashboard/profile.html'
 
     def get(self, request):
-        return render(request, self.template_name)
+        context_data = {
+            "profile": AuthModels.ClientProfile.objects.filter(user=request.user).first()
+        }
+        return render(request, self.template_name, context=context_data)
 
-class DashboardProductsView(View):
+class DashboardProductsView(SupplierOnlyAccessMixin, View):
     template_name = 'supplier/dashboard/manage-product.html'
 
     def get(self, request):
         return render(request, self.template_name)
 
-class DashboardProductsCreateView(View):
+class DashboardProductsCreateView(SupplierOnlyAccessMixin, View):
     template_name = 'supplier/dashboard/create-product.html'
 
     def get(self, request):
-        return render(request, self.template_name)
+        context_data = {
+            "stores" : SupplierModels.Store.objects.filter(supplier=request.user),
+            "subcategories" : SupplierModels.ProductSubCategory.objects.all(),
+        }
+        return render(request, self.template_name, context=context_data)
 
-class DashboardStoresView(View):
+    def post(self, request, *args, **kwargs):
+        if not (request.POST.get('name') and request.POST.get('store') and request.POST.get('sub_category') and request.POST.get('description') and request.POST.get('currency') and request.POST.get('price') and request.FILES.get("images")):
+            messages.add_message(request, messages.ERROR, _("Please Fill all fields."))
+            return redirect(reverse("supplier:dashboard-productscreate"))
+        try:
+            product = SupplierModels.Product.objects.create(
+                name=request.POST.get('name'),
+                sub_category=SupplierModels.ProductSubCategory.objects.filter(name=request.POST.get('sub_category')).first(),
+                description=request.POST.get('description'),
+                currency=request.POST.get('currency'),
+                price=request.POST.get('price'),
+            )
+            store=SupplierModels.Store.objects.filter(name=request.POST.get('store')).first()
+            product.store.add(store)
+            if product:
+                for file in request.FILES.getlist('images'):
+                    SupplierModels.ProductImage.objects.create(product=product, image=file)
+
+            messages.add_message(request, messages.SUCCESS, _("Product create successfully."))
+            return redirect(reverse("supplier:dashboard-productscreate"))
+        except:
+            messages.add_message(request, messages.ERROR, _("An Error Occured. Try Again"))
+            return redirect(reverse("supplier:dashboard-productscreate"))
+
+class DashboardStoresView(SupplierOnlyAccessMixin, View):
     template_name = 'supplier/dashboard/manage-store.html'
 
     def get(self, request):
         return render(request, self.template_name)
 
-class DashboardStoresCreateView(View):
+class DashboardStoresCreateView(SupplierOnlyAccessMixin, View):
     template_name = 'supplier/dashboard/create-store.html'
 
     def get(self, request):
         return render(request, self.template_name)
 
-class DashboardContractsView(View):
+    def post(self, request, *args, **kwargs):
+        if not (request.POST.get('name') and request.FILES.get("image")):
+            messages.add_message(request, messages.ERROR, _("Please Fill all fields."))
+            return redirect(reverse("supplier:dashboard-storescreate"))
+
+        name = request.POST.get("name")
+        image = request.FILES.get("image")
+
+        if SupplierModels.Store.objects.filter(name=name):
+            messages.add_message(request, messages.ERROR, _("Please use a different store name."))
+            return redirect(reverse("supplier:dashboard-storescreate"))
+
+        try:
+            SupplierModels.Store.objects.create(name=name, image=image, supplier=request.user)
+            messages.add_message(request, messages.SUCCESS, _("Store create successfully."))
+            return redirect(reverse("supplier:dashboard-storescreate"))
+        except:
+            messages.add_message(request, messages.ERROR, _("Sorry, an error occured. Please Try Again"))
+            return redirect(reverse("supplier:dashboard-storescreate"))
+
+
+class DashboardContractsView(SupplierOnlyAccessMixin, View):
     template_name = 'supplier/dashboard/contracts.html'
 
     def get(self, request):
         return render(request, self.template_name)
 
-class DashboardContractsDetailsView(View):
+class DashboardContractsDetailsView(SupplierOnlyAccessMixin, DetailView):
     template_name = 'supplier/dashboard/contract-detail.html'
+    model = PaymentModels.Contract
+
+    def get(self, request, pk):
+        contract = PaymentModels.Contract.objects.filter(pk=pk).first()
+        context_data = {
+            "contract" : contract,
+            "receipt" : PaymentModels.ContractReceipt.objects.filter(contract=contract).first()
+        }
+        return render(request, self.template_name, context=context_data)
+
+
+    def get_queryset(self):
+        return self.model.objects.all()
+
+
+class DashboardServicesView(SupplierOnlyAccessMixin, View):
+    template_name = 'supplier/dashboard/services.html'
 
     def get(self, request):
         return render(request, self.template_name)
+
+class DashboardServicesCreateView(SupplierOnlyAccessMixin, View):
+    template_name = 'supplier/dashboard/create-service.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+    def post(self, request, *args, **kwargs):
+        if not (request.POST.get('name') and request.POST.get("description") and request.POST.get('currency') and request.POST.get("price")):
+            messages.add_message(request, messages.ERROR, _("Please Fill all fields."))
+            return redirect(reverse("supplier:dashboard-servicescreate"))
+
+        name = request.POST.get("name")
+        description = request.POST.get("description")
+        currency = request.POST.get("currency")
+        price = request.POST.get("price")
+
+        if SupplierModels.Service.objects.filter(name=name):
+            messages.add_message(request, messages.ERROR, _("Please use a different service name."))
+            return redirect(reverse("supplier:dashboard-servicescreate"))
+
+        # try:
+        SupplierModels.Service.objects.create(name=name, description=description, currency=currency, price=price, supplier=request.user)
+        messages.add_message(request, messages.SUCCESS, _("Service create successfully."))
+        return redirect(reverse("supplier:dashboard-servicescreate"))
+        # except:
+        #     messages.add_message(request, messages.ERROR, _("Sorry, an error occured. Please Try Again"))
+        #     return redirect(reverse("supplier:dashboard-servicescreate"))

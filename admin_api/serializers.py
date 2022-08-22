@@ -45,6 +45,11 @@ class StoreSerializer(serializers.ModelSerializer):
         model = SupplierModels.Store
         fields = "__all__"
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation["products"] = SupplierModels.Store.objects.filter(id=instance.id).first().store_product.all().count()
+        return representation   
+
 
 class SuppliersSerializer(serializers.ModelSerializer):
     user = UserSerializer()

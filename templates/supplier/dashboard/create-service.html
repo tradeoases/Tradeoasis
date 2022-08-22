@@ -5,9 +5,9 @@
 
     <div class="main-content">
         <div class="content-area">
-            <form action="{% url 'supplier:dashboard-productscreate' %}" method="POST" id="category-form" class="cs-grid br-sm outlined" enctype="multipart/form-data" style="padding: 2rem;--gap:1rem;">
+            <form action="{% url 'supplier:dashboard-servicescreate' %}" method="POST" id="category-form" class="cs-grid br-sm outlined" enctype="multipart/form-data" style="padding: 2rem;--gap:1rem;">
                 <h2 style="margin: 0;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
-                    {% trans 'Fill in form to create product' %}
+                    {% trans 'Fill in form to create service' %}
                 </h2>
                 <p class="text-base text-slate-600">* {% trans 'Represents required fields' %}.</p>
                 {% if messages %}
@@ -29,30 +29,6 @@
                 <div class="form-group cs-grid" style="--gap: .5rem;">
                     <label for="name" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Name' %} *</label>
                     <input type="text" class="cs-text-normal" name="name" id="name" required>
-                </div>
-                <div class="form-group cs-grid cs-grid-flow-col" style="--gap: .5rem;">
-                    <div class="form-group cs-grid" style="--gap: .5rem;">
-                        <label for="store" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Store' %} *</label>
-                        <input type="text" class="cs-text-normal" name="store" id="store" required list="stores">
-                        <datalist id="stores">
-                            {% for store in stores %}
-                                <option value="{{store.name}}" />
-                            {% endfor %}
-                        </datalist>
-                    </div>
-                    <div class="form-group cs-grid" style="--gap: .5rem;">
-                        <label for="sub_category" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Sub category' %} *</label>
-                        <input type="text" class="cs-text-normal" name="sub_category" id="sub_category" required list="sub_categories">
-                        <datalist id="sub_categories">
-                            {% for subcategory in subcategories %}
-                                <option value="{{subcategory.name}}" >
-                            {% endfor %}
-                        </datalist>
-                    </div>
-                </div>
-                <div class="form-group cs-grid" style="--gap: .5rem;">
-                    <label for="description" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Description' %} *</label>
-                    <textarea style="padding: .5rem;" name="description" id="description" cols="30" rows="10" required></textarea>
                 </div>
                 <div class="form-group cs-grid cs-grid-flow-col" style="--gap: .5rem;">
                     <div class="form-group cs-grid" style="--gap: .5rem;">
@@ -231,8 +207,8 @@
                     </div>
                 </div>
                 <div class="form-group cs-grid" style="--gap: .5rem;">
-                    <label for="images" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Product Images' %} *</label>
-                    <input type="file" name="images" id="images" multiple required>
+                    <label for="description" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Description' %} *</label>
+                    <textarea style="padding: .5rem;" name="description" id="description" cols="30" rows="10" required></textarea>
                 </div>
                 <div class="form-group cs-grid" style="--gap: .5rem;justify-content: flex-start;">
                     <input class="btn cs-text-white" type="submit" name="contract-start-date" id="contract-start-date"

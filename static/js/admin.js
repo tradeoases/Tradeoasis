@@ -53,7 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     const paginate = (response, invoker) => {
-        console.log(invoker)
         document.querySelector('section.content:not(.cs-hidden) #next-page').addEventListener('click', () => {
             if (response.count / 10 > pageNum)
             {

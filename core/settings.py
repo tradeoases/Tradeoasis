@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "auth_app.apps.AuthAppConfig",
     "app_admin.apps.AppAdminConfig",
     "admin_api.apps.AdminApiConfig",
+    "api.apps.ApiConfig",
     # third party
     "rest_framework",
 ]

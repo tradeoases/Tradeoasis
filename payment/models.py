@@ -133,6 +133,8 @@ class Contract(models.Model):
 
     is_complete = models.BooleanField(_("Contract completed"), default=False)
 
+    is_accepted = models.BooleanField(_("Contract accepted"), default=False)
+
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def __str__(self) -> str:
