@@ -4,7 +4,7 @@
 {% block content %}
 
 <div class="main-content split">
-    <div class="content-area">
+    <div class="content-area card">
 
         <div class="upper-content-area top-cards">
             <div class="top-card flex">
@@ -12,7 +12,7 @@
                     <span><i class="ti ti-money"></i></span>
                 </div>
                 <div class="card-content card-content-right">
-                    <h4>Stores</h4>
+                    <h4>{% trans 'Stores' %}</h4>
                     <h6 id="stores">0</h6>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                     <span><i class="ti ti-money"></i></span>
                 </div>
                 <div class="card-content card-content-right">
-                    <h4>Services</h4>
+                    <h4>{% trans 'Services' %}</h4>
                     <h6 id="services">0</h6>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                     <span><i class="ti ti-credit-card"></i></span>
                 </div>
                 <div class="card-content card-content-right">
-                    <h4>Products</h4>
+                    <h4>{% trans 'Products' %}</h4>
                     <h6 id="products">0</h6>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                     <span><i class="ti ti-credit-card"></i></span>
                 </div>
                 <div class="card-content card-content-right">
-                    <h4>Categories</h4>
+                    <h4>{% trans 'Contracts' %}</h4>
                     <h6 id="categories">0</h6>
                 </div>
             </div>
@@ -48,29 +48,29 @@
             <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;padding: .5rem;">
                 <div class="cs-grid cs-justify-between" style="--gap: 1rem;grid-template-columns: 1fr 1fr;">
                     <div id="request-selectors" class="selectors cs-flex cs-align-start" style="--gap: .5rem;">
-                        <button style="padding: 0.25rem .75rem;" class="active btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="day">Day</button>
-                        <button style="padding: 0.25rem .75rem;" class="btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="week">Week</button>
-                        <button style="padding: 0.25rem .75rem;" class="btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="month">Month</button>
-                        <button style="padding: 0.25rem .75rem;" class="btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="year">Year</button>
+                        <button style="padding: 0.25rem .75rem;" class="active btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="day">{% trans 'Day' %}</button>
+                        <button style="padding: 0.25rem .75rem;" class="btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="week">{% trans 'Week' %}</button>
+                        <button style="padding: 0.25rem .75rem;" class="btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="month">{% trans 'Month' %}</button>
+                        <button style="padding: 0.25rem .75rem;" class="btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="year">{% trans 'Year' %}</button>
                     </div>
                 </div>
                 <div style="display: grid;">
                     <canvas id="requests"></canvas>
-                    <span class="cs-text-md cs-font-bold cs-text-secondary" style="color: var(--secondary-color);justify-self: center;">Requests Statistics</span>
+                    <span class="cs-text-md cs-font-bold cs-text-secondary" style="color: var(--secondary-color);justify-self: center;">{% trans 'Requests Statistics' %}</span>
                 </div>
 
             </div>
             <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;padding: .5rem;">
                 <div style="display: grid;">
                     <canvas id="users" style="max-block-size: 266px;"></canvas>
-                    <span class="cs-text-md cs-font-bold cs-text-secondary" style="color: var(--secondary-color);justify-self: center;">Product Sub Categories Statistics</span>
+                    <span class="cs-text-md cs-font-bold cs-text-secondary" style="color: var(--secondary-color);justify-self: center;">{% trans 'Product Sub Categories Statistics' %}</span>
                 </div>
             </div>
         </div>
     </div>
     <div class="right">
         <div class="right-card card">
-            <h2>Top Viewed Products</h2>
+            <h2>{% trans 'Top Viewed Products' %}</h2>
             <div class="body">
                 <div class="top-selling-product-details">
                     <h4>Cosmetic & Jewellery</h4>

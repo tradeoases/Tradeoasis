@@ -1,156 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="../static/css/utils.css"> -->
-    <link rel="stylesheet" href="../static/css/_main.css">
-    <link rel="stylesheet" href="../static/icons/themify-icons.css">
-
-
-    <title>Golden - GOLDEN</title>
-</head>
-
-<body>
-    <div class="app-container container">
-        <div class="app-content flex">
-            <div class="sidebar card">
-                <div class="sidebar-header">
-                    <div class="app-logo">
-                        <i class="ti-layout-grid2"></i>
-                        <span>Seller's Portal</span>
-                    </div>
+    <div class="main-content">
+        <div class="content-area">
+            <div class="alert card card-info" id="orders-help">
+                <i class="ti-close exit"></i>
+                <div class="title">
+                    <small>{% trans 'Choose a good name' %}</small>
                 </div>
-                <div class="sidebar-body">
-                    <ul class="main-menu">
-                        <li class="link">
-                            <a href="_dashboard.html">
-                                <span class="flex">
-                                    <span><i class="icon ti-home"></i><span class="text">Dashboard</span></span>
-                                </span>
-                            </a>
-                        </li>
-                        <li class="link">
-                            <a href="#">
-                                <span class="flex">
-                                    <span><i class="icon ti-folder"></i><span class="text">Stores</span></span><i
-                                        class="ti-angle-down" style="color:#fff;"></i>
-                                </span>
-                            </a>
-                            <ul class="sub-menu">
-                                <li class="link"><a href="_create-store.html"> Create store</a></li>
-                                <li class="link"><a href="_manage-store.html"> Manage store</a></li>
-                            </ul>
-                        </li>
-                        <li class="link">
-                            <a href="#">
-                                <span class="flex">
-                                    <span><i class="icon ti-receipt"></i><span class="text">Products</span></span><i
-                                        class="ti-angle-down" style="color:#fff;"></i>
-                                </span>
-                            </a>
-                            <ul class="sub-menu">
-                                <li class="link"><a href="_manage-product.html"> Manage products</a></li>
-                            </ul>
-                        </li>
-                        <li class="link">
-                            <a href="_contract.html">
-                                <span class="flex">
-                                    <span><i class="icon ti-layout-accordion-list"></i><span
-                                            class="text">Contracts</span></span>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="sidebar-footer"></div>
-            </div>
-            <div class="main">
-                <div class="navbar">
-                    <div class="flex">
-                        <div class="logo">
-                            <form class="search-form">
-                                <div class="form-control">
-                                    <input type="search" name="" id="" placeholder="Search">
-                                    <button type="submit"><i class="ti-search"></i></button>
-                                </div>
-                            </form>
-                        </div>
-                        <nav>
-                            <ul class="nav-links flex">
-                                <li class="link bell"><i class="ti-bell"></i></li>
-                                <li class="link settings"><i class="ti-settings"></i></li>
-                                <li class="link customer-display"><i class="ti-screen"></i></li>
-
-                                <div class="dropdown">
-                                    <div class="flex">
-                                        <img src="../static/assets/imgs/resources/profiledefault.png" alt=""
-                                            class="avatar" id="toggle-dropdown">
-                                        <h4>Phillip M.</h4>
-                                    </div>
-                                    <div class="dropdown-menu" id="dropdown-menu">
-                                        <ul class="dropdown-items">
-                                            <li class="dropdown-item"><i class="ti-help"></i> <a href="#">Help</a></li>
-                                            <li class="dropdown-item"><i class="ti-settings"></i> <a
-                                                    href="#">Settings</a></li>
-                                            </li>
-                                            <li class="dropdown-item footer"><a href="#">Sign Out</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-                <div class="main-content">
-                    <h3 style="margin:1.6rem 0 .4rem 0;font-weight:600;">Create New Store</h3>
-                    <div class="card card-info" id="orders-help">
-                        <i class="ti-close exit"></i>
-                        <div class="title">
-                            <small>Choose a good name</small>
-                        </div>
-                        <div class="text">
-                            <small>To create your store.</small>
-                        </div>
-                    </div>
-                    <div class="card product-form">
-                        <div class="create-form" style="padding-top:1.2rem;padding-bottom:1.2rem;">
-                            <form action="">
-                                <div class="" style="position:relative;z-index:5;block-size:auto;width:100%;">
-                                    <div
-                                        style="background-color:#fafbfc;padding:0 .2rem;width:fit-content;block-size:auto;position:absolute;z-index:10;top:1%;left:0%;transform: translate(50%, -50%);">
-                                        <h3 class="flex" style="margin:0;">Store Information</h3>
-                                    </div>
-                                    <div class="product-name-category"
-                                        style="justify-content:flex-start;block-size:fit-content;width:100%;border:1px solid rgb(238, 234, 234);border-radius:0;padding:.8rem .6rem;">
-                                        <div class="" style="margin-top:.8rem;">
-                                            <div class="form-control">
-                                                <label for="produt-name">Store Name</label>
-                                                <input type="text" name="product-name" id="product-name"
-                                                    placeholder="Lancaster Fashions">
-                                            </div>
-                                            <div class="form-control">
-                                                <label for="product-image">Service Image</label>
-                                                <input type="file" name="product-image" id="product-image">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-save-cancel flex mt-5" style="margin-top:.8rem;">
-                                    <div class="form-control">
-                                        <input type="submit" value="Create" name="btn-create" class="btn">
-                                    </div>
-                                    <div class="form-control">
-                                        <input type="submit" value="Cancel" name="btn-cancel" class="btn">
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                <div class="text">
+                    <small>{% trans 'To create your store' %}.</small>
                 </div>
             </div>
+            <form action="{% url 'app_admin:category-create' %}" method="POST" id="category-form" class="cs-grid br-sm outlined" enctype="multipart/form-data" style="padding: 2rem;--gap:1rem;">
+                <h2 style="margin: 0;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
+                    {% trans 'Fill in form to create new store' %}
+                </h2>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                            <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                <p>{{ message }}</p>
+                                <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                            </div>
+                        {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                            <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid rgb(37, 141, 2930);color: rgb(37, 141, 2930); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                <p>{{ message }}</p>
+                                <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                {% csrf_token %}
+                <div class="form-group cs-grid" style="--gap: .5rem;">
+                    <label for="name" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Name' %}</label>
+                    <input type="text" class="cs-text-normal" name="name" id="name" required>
+                </div>
+                <div class="form-group cs-grid" style="--gap: .5rem;">
+                    <label for="image" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Store Image' %}</label>
+                    <input type="file" name="image" id="image" required>
+                </div>
+                <div class="form-group cs-grid" style="--gap: .5rem;justify-content: flex-start;">
+                    <input class="btn cs-text-white" type="submit" name="contract-start-date" id="contract-start-date"
+                    value="Create" style="padding: .7rem 1.5rem;font-size: 1rem;">
+                </div>
+            </form>
         </div>
     </div>
 
@@ -166,6 +62,5 @@
             });
         }
     </script>
-</body>
 
-</html>
+{% endblock %}

@@ -55,6 +55,11 @@ urlpatterns = [
 
     # dashboard
     path('dashboard', views.DashboardView.as_view(), name='dashboard'),
+    path('profile', views.ProfileView.as_view(), name='profile'),
     path('dashboard/products', views.DashboardProductsView.as_view(), name='dashboard-products'),
+    path('dashboard/productscreate', views.DashboardProductsCreateView.as_view(), name='dashboard-productscreate'),
     path('dashboard/stores', views.DashboardStoresView.as_view(), name='dashboard-stores'),
+    path('dashboard/storescreate', views.DashboardStoresCreateView.as_view(), name='dashboard-storescreate'),
+    path('dashboard/contracts', views.DashboardContractsView.as_view(), name='dashboard-contracts'),
+    path('dashboard/contractsdetails', views.DashboardContractsDetailsView.as_view(), name='dashboard-contractsdetails'),
 ]

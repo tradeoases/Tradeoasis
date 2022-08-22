@@ -27,9 +27,8 @@
     box-sizing: border-box;
 }
 
-html,
 body {
-    block-size: 100%;
+    block-size: 100vh;
     overflow: hidden;
 }
 
@@ -38,7 +37,7 @@ body {
     background: var(--brand-secondary);
     font-size: 16px;
     font-family: var(--font-quicksand);
-    overflow-x: hidden;
+    overflow: hidden;
     position: relative;
 }
 
@@ -160,6 +159,10 @@ h3 {
 /* .card-info {
     position: relative;
 } */
+
+.card.card-info {
+    background-color: var(--white-color);
+}
 
 .card-info .exit {
     font-family: "themify";
@@ -329,6 +332,7 @@ h3 {
 .app-container {
     background-color: var(--brand-secondary);
     padding: 2rem;
+    overflow: hidden;
 }
 
 .app-content {
@@ -443,15 +447,29 @@ h3 {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
-    min-block-size: 80vh;
+    block-size: 80vh;
     align-content: flex-start;
     position: relative;
 }
+
+.main-content.split {
+    grid-template-columns: 1fr .3fr;
+}
+.content-area {
+    overflow-y: scroll;
+    scrollbar-width: none;
+    /* block-size: ; */
+}
+.content-area ::-webkit-scrollbar {
+    display: none;
+}
+
 .main-content .alert {
     position: absolute;
     inset-inline-end: 0;
     inset-block-start: 0;
     inline-size: 20vw;
+    z-index: 100;
     /* display: none; */
     /* animation-delay: 10s;
     animation-name: alertOut;
@@ -464,9 +482,6 @@ h3 {
     
 } */
 
-.main-content.split {
-    grid-template-columns: 1fr .3fr;
-}
 
 .main-content .top {
     justify-content: space-between;
@@ -834,9 +849,10 @@ h3 {
 }
 
 .content-area {
+    --gap: 1rem;
     display: grid;
     align-content: flex-start;
-    gap: 1rem;
+    gap: var(--gap);
 }
 
 .upper-content-area {

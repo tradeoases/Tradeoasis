@@ -608,14 +608,44 @@ class DashboardView(View):
     def get(self, request):
         return render(request, self.template_name)
 
+class ProfileView(View):
+    template_name = 'supplier/dashboard/profile.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
+
 class DashboardProductsView(View):
     template_name = 'supplier/dashboard/manage-product.html'
 
     def get(self, request):
         return render(request, self.template_name)
 
+class DashboardProductsCreateView(View):
+    template_name = 'supplier/dashboard/create-product.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
+
 class DashboardStoresView(View):
     template_name = 'supplier/dashboard/manage-store.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+class DashboardStoresCreateView(View):
+    template_name = 'supplier/dashboard/create-store.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+class DashboardContractsView(View):
+    template_name = 'supplier/dashboard/contracts.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+class DashboardContractsDetailsView(View):
+    template_name = 'supplier/dashboard/contract-detail.html'
 
     def get(self, request):
         return render(request, self.template_name)
