@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-import os
+import os, sys
 from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -186,3 +186,15 @@ LANGUAGES = (
 
 SITE_ROOT = os.path.dirname(os.path.realpath(__name__))
 LOCALE_PATHS = ( os.path.join(SITE_ROOT, 'locale'), )
+
+
+
+# PAYMENTS
+# braintee
+# if (len(sys.argv) >= 2 and sys.argv[1] == 'runserver'):
+#     BRAINTREE_PRODUCTION = False
+# else:
+BRAINTREE_PRODUCTION = False
+BRAINTREE_MERCHANT_ID = os.environ.get("BRAINTREE_MERCHANT_ID")
+BRAINTREE_PUBLIC_KEY = os.environ.get("BRAINTREE_PUBLIC_KEY")
+BRAINTREE_PRIVATE_KEY = os.environ.get("BRAINTREE_PRIVATE_KEY")

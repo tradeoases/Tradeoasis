@@ -209,7 +209,7 @@ def profile(request):
 
     if request.user.account_type == "SUPPLIER":
         # to supplier profile
-        return redirect(reverse("manager:home"))
+        return redirect(reverse("supplier:profile"))
     elif request.user.account_type == "BUYER":
         # to buyer profile
         return redirect(reverse("buyer:profile"))
@@ -227,7 +227,7 @@ def dashboard(request):
 
     if request.user.account_type == "SUPPLIER":
         # to supplier dashboard
-        return redirect(reverse("manager:home"))
+        return redirect(reverse("supplier:dashboard"))
     elif request.user.account_type == "BUYER":
         # to buyer dashboard
         return redirect(reverse("buyer:profile"))

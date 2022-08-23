@@ -18,8 +18,8 @@
     
 
     <!-- Owl Carousel Assets -->
-    <link href="../static/owl-carousel/owl.carousel.css" rel="stylesheet">
-    <link href="../static/owl-carousel/owl.theme.css" rel="stylesheet">
+    <link href="{% static 'owl-carousel/owl.carousel.css' %}" rel="stylesheet">
+    <link href="{% static 'owl-carousel/owl.theme.css' %}" rel="stylesheet">
 </head>
 
 <script>
@@ -162,6 +162,7 @@
                 <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="{% url 'manager:about-us' %}">{% trans "About Us" %}</a></li>
                 <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="{% url 'manager:services' %}">{% trans "Services" %}</a></li>
                 <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="#">{% trans "Contact" %}</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="{% url 'payments:memberships' %}">{% trans "Memberships" %}</a></li>
             </ul>
 
             <ul class="flex text-base text-white">
@@ -182,7 +183,7 @@
                     <i class="fa fa-bars"></i>
                 </button>
                 <div class="logo-wrapper">
-                    <img src="../static/assets/imgs/resources/logo_trans.png" alt="Logo" class="logo" style="object-fit: cover;">
+                    <img src="{% static 'assets/imgs/resources/logo_trans.png' %}" alt="Logo" class="logo" style="object-fit: cover;">
                 </div>
             </div>
             <div class="flex items-center gap-2 justify-end">
@@ -205,7 +206,7 @@
     <div class="mobile-menu gap-4 bg-backgroundColor content-start px-4" id="mobile-menu">            
         <div class="menu-header py-6 grid gap-2 justify-center">
             <div class="logo-wrapper justify-self-center">
-                <img src="../static/assets/imgs/resources/logo_trans.png" alt="Logo" class="logo" style="object-fit: cover;">
+                <img src="{% static 'assets/imgs/resources/logo_trans.png' %}" alt="Logo" class="logo" style="object-fit: cover;">
             </div>
             <div class="flex gap-2 justify-center auth">
                 <a href="{% url 'auth_app:login' %}" class="flex place-items-center px-6 py-2 text-base bg-lighterBackgroundColorHover focus:bg-yellowColorHover duration-200 transition-all ease-in text-white font-semibold">

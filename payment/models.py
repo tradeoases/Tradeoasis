@@ -21,7 +21,7 @@ class MembershipPlan(models.Model):
     description = models.TextField(
         _("Description"),
     )
-    price = models.DecimalField(_("Price"), decimal_places=3, max_digits=12)
+    price = models.DecimalField(_("Price"), decimal_places=2, max_digits=6)
     currency = models.CharField(_("Currency"), max_length=6)
     slug = models.SlugField(
         _("Safe Url"),
@@ -34,13 +34,19 @@ class MembershipPlan(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
 
-        self.name = string.capwords(self.name)
+        self.name = self.name
 
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
         return f"{self.name}"
 
+class Features(models.Model):
+    name = models.CharField(_("Name"), max_length=256)
+    membership = models.ManyToManyField(to=MembershipPlan, related_name="features")
+    
+    def __str__(self) -> str:
+        return f"{self.name}"
 
 class Membership(models.Model):
 
@@ -104,9 +110,12 @@ class MembershipReceipt(models.Model):
     address = models.CharField(_("Address"), max_length=256)
     payment_id = models.CharField(_("Payment Id"), max_length=256)
     amount_paid = models.DecimalField(
-        _("Total Amount Paid"), decimal_places=3, max_digits=12
+        _("Total Amount Paid"), decimal_places=2, max_digits=12
     )
     currency = models.CharField(_("Currency"), max_length=6)
+    reference_id = models.CharField(_("reference_id"), max_length=20, blank=True, null=True)
+    # authorizations_id = models.CharField(_("authorizations_id"), max_length=20)
+    status = models.CharField(_("status"), max_length=20, default="NOT APPROVED")
 
     def __str__(self) -> str:
         return f"User: {self.payment_id}"
@@ -150,7 +159,7 @@ class ContractReceipt(models.Model):
     address = models.CharField(_("Address"), max_length=256)
     payment_id = models.CharField(_("Payment Id"), max_length=256)
     amount_paid = models.DecimalField(
-        _("Total Amount Paid"), decimal_places=3, max_digits=12
+        _("Total Amount Paid"), decimal_places=2, max_digits=12
     )
     currency = models.CharField(_("Currency"), max_length=6)
 

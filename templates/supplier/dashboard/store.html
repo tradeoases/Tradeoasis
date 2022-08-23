@@ -5,9 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="../static/css/utils.css"> -->
-    <link rel="stylesheet" href="../static/css/_main.css">
-    <link rel="stylesheet" href="../static/icons/themify-icons.css">
+    <link rel="stylesheet" href="{% static 'css/_main.css' %}">
+    <link rel="stylesheet" href="{% static 'icons/themify-icons.css' %}">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
@@ -92,7 +91,7 @@
 
                                 <div class="dropdown">
                                     <div class="flex">
-                                        <img src="../static/assets/imgs/resources/profiledefault.png" alt=""
+                                        <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt=""
                                             class="avatar" id="toggle-dropdown">
                                         <h4>Phillip M.</h4>
                                     </div>
@@ -270,9 +269,9 @@
     </div>
 
 
-    <script src="../static/js/dropdown.js"></script>
-    <script src="../static/js/sidebar.js"></script>
-    <script src="../static/js/createChart.js"></script>
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/createChart.js' %}"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {

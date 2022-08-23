@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
                 (
                     "price",
                     models.DecimalField(
-                        decimal_places=3, max_digits=12, verbose_name="Price"
+                        decimal_places=2, max_digits=12, verbose_name="Price"
                     ),
                 ),
                 ("currency", models.CharField(max_length=6, verbose_name="Currency")),
@@ -151,7 +151,7 @@ class Migration(migrations.Migration):
                 (
                     "price",
                     models.DecimalField(
-                        decimal_places=3, max_digits=122, verbose_name="Price"
+                        decimal_places=2, max_digits=122, verbose_name="Price"
                     ),
                 ),
                 ("currency", models.CharField(max_length=6, verbose_name="Currency")),

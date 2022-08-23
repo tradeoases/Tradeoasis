@@ -735,3 +735,10 @@ form input.error {
     --danger-color: hsl(0, 100%, 35%);
     border: 2px solid var(--danger-color);
 }
+
+.breadcrumb {
+    margin-block: 1.5rem;
+}
+.membership-card {
+    
+}
