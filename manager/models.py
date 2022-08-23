@@ -8,6 +8,7 @@ import uuid
 
 # from apps
 from supplier.models import Store
+from auth_app import models as Authmodels
 
 
 def get_file_path(instance, filename):
@@ -50,7 +51,7 @@ class Service(models.Model):
     def save(self, *args, **kwargs):
         self.slug = f"{slugify(self.name)}-{uuid.uuid4()}"[:50]
 
-        self.name = string.capwords(self.name)
+        self.name = self.name
 
         super().save(*args, **kwargs)
 
@@ -103,9 +104,47 @@ class Showroom(models.Model):
     def save(self, *args, **kwargs):
         self.slug = f"{slugify(self.name)}-{uuid.uuid4()}"[:50]
 
-        self.name = string.capwords(self.name)
+        self.name = self.name
 
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
         return f"{self.name}"
+
+
+class Discussion(models.Model):
+
+    class Meta:
+        ordering=['-id']
+
+    subject = models.CharField(_("Subject"), max_length=256)
+    description = models.TextField(_("Description"))
+    user = models.ForeignKey(to=Authmodels.User, on_delete=models.CASCADE)
+    slug = models.SlugField(
+        _("Safe Url"),
+        unique=True,
+        blank=True,
+        null=True,
+    )
+    created_on = models.DateField(_("Created on"), default=timezone.now)
+
+
+    def save(self, *args, **kwargs):
+        self.slug = f"{slugify(self.subject)}-{uuid.uuid4()}"[:50]
+
+        self.name = self.subject
+
+        super().save(*args, **kwargs)
+
+    def __str__(self) -> str:
+        return f"{self.subject}"
+
+class DiscussionReply(models.Model):
+
+    discussion = models.ForeignKey(to=Discussion, on_delete=models.CASCADE)
+    user = models.ForeignKey(to=Authmodels.User, on_delete=models.CASCADE)
+    description = models.TextField(_("Description"))
+    created_on = models.DateField(_("Created on"), default=timezone.now)
+
+    def __str__(self) -> str:
+        return f"{self.discussion.subject}"

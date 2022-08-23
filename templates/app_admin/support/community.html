@@ -1,6 +1,7 @@
 {% extends '../utils/layout.html' %}
 {% load static %}
 {% load i18n %}
+{% load format_date %}
 {% block content %}
     <!-- section area -->
         <!-- section selectors -->
@@ -24,30 +25,22 @@
                 <div class="inbox outlined br-sm cs-align-start cs-content-start cs-grid" style="--gap:.5rem;padding: 1rem 1rem;">
                     <div class="cs-flex cs-align-baseline cs-justify-between">
                         <h4 class="cs-text-normal cs-text-secondary" style="margin: 0;">Discussions</h4>
-                        <span class="cs-text-md cs-text-accent" >10 Discussions</span>
+                        <span class="cs-text-md cs-text-accent" >{{discussions|length}} Discussions</span>
                     </div>
                     <hr style="border: 1px solid hsl(0, 0%, 95%);">
                     <ul class="list cs-grid cs-content-start" style="--gap: .25rem">
-                        <li>
-                            <a href="{% url 'app_admin:community-chat' %}" class="cs-grid" style="--gap:.25rem;">
-                                <p class="cs-flex cs-align-baseline cs-justify-between">
-                                    <span class="cs-grid cs-text-secondary cs-text-md">Failed Paypal Payment</span>
-                                </p>
-                                <p class="cs-flex cs-align-baseline cs-justify-start" style="--gap: .5rem;">                    
-                                    <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">10 Clients</span>
-                                </p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'app_admin:community-chat' %}" class="cs-grid" style="--gap:.25rem;">
-                                <p class="cs-flex cs-align-baseline cs-justify-between">
-                                    <span class="cs-grid cs-text-secondary cs-text-md">Failed Paypal Payment</span>
-                                </p>
-                                <p class="cs-flex cs-align-baseline cs-justify-start" style="--gap: .5rem;">                    
-                                    <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">10 Clients</span>
-                                </p>
-                            </a>
-                        </li>
+                        {% for discussion in discussions %}
+                            <li>
+                                <a href="{% url 'app_admin:community-chat' discussion.slug %}" class="cs-grid" style="--gap:.25rem;">
+                                    <p class="cs-flex cs-align-baseline cs-justify-between">
+                                        <span class="cs-grid cs-text-secondary cs-text-md">{{discussion.subject}}</span>
+                                    </p>
+                                    <p class="cs-flex cs-align-baseline cs-justify-start" style="--gap: .5rem;">                    
+                                        <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">{{discussion.created_on|format_date}}</span>
+                                    </p>
+                                </a>
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>

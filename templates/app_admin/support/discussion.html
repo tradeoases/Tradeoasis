@@ -1,6 +1,7 @@
 {% extends '../utils/layout.html' %}
 {% load static %}
 {% load i18n %}
+{% load format_date %}
 {% block content %}
     <!-- section area -->
         <!-- section selectors -->
@@ -24,73 +25,40 @@
                 <div class="inbox outlined br-sm cs-align-start cs-content-start cs-grid" style="--gap:.5rem;padding: 1rem 1rem;">
                     <div class="cs-flex cs-align-baseline cs-justify-between">
                         <h4 class="cs-text-normal cs-text-secondary" style="margin: 0;">Discussion</h4>
-                        <span class="cs-text-md cs-text-accent" >10 Discussions</span>
+                        <span class="cs-text-md cs-text-accent" >{{discussions|length}} Discussions</span>
                     </div>
                     <hr style="border: 1px solid hsl(0, 0%, 95%);">
                     <ul class="list cs-grid cs-content-start" style="--gap: .25rem">
-                        <li>
-                            <a href="" class="cs-grid" style="--gap:.25rem;">
-                                <p class="cs-flex cs-align-baseline cs-justify-between">
-                                    <span class="cs-grid cs-text-secondary cs-text-md">Failed Paypal Payment</span>
-                                </p>
-                                <p class="cs-flex cs-align-baseline cs-justify-start" style="--gap: .5rem;">                    
-                                    <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">10 Clients</span>
-                                </p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="" class="cs-grid" style="--gap:.25rem;">
-                                <p class="cs-flex cs-align-baseline cs-justify-between">
-                                    <span class="cs-grid cs-text-secondary cs-text-md">Failed Paypal Payment</span>
-                                </p>
-                                <p class="cs-flex cs-align-baseline cs-justify-start" style="--gap: .5rem;">                    
-                                    <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">10 Clients</span>
-                                </p>
-                            </a>
-                        </li>
+                        {% for discussion in discussions %}
+                            <li>
+                                <a href="{% url 'app_admin:community-chat' discussion.slug %}" class="cs-grid" style="--gap:.25rem;">
+                                    <p class="cs-flex cs-align-baseline cs-justify-between">
+                                        <span class="cs-grid cs-text-secondary cs-text-md">{{discussion.subject}}</span>
+                                    </p>
+                                    <p class="cs-flex cs-align-baseline cs-justify-start" style="--gap: .5rem;">                    
+                                        <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">{{discussion.created_on|format_date}}</span>
+                                    </p>
+                                </a>
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
                 <div class="chat outlined br-sm cs-align-start cs-content-start cs-grid" style="--gap:1rem;padding: 1rem 1rem;">
                     <div class="cs-flex cs-align-baseline cs-justify-between">
-                        <h4 class="cs-text-normal cs-text-secondary" style="margin: 0;">Failed Paypal Payments</h4>
+                        <h4 class="cs-text-normal cs-text-secondary" style="margin: 0;">{{discussion}}</h4>
                     </div>
                     <hr style="border: 1px solid hsl(0, 0%, 95%);">
                     <ul class="list cs-grid cs-content-start" style="--gap: .25rem">
-                        <li class="cs-grid sent" style="--gap:.25rem;">
-                            <p class="cs-text-md">Lorem ipsum dolor sit amet consectetur adipisicing
-                            </p>
-                        </li>
-                        <li class="cs-grid received" style="--gap:.25rem;">
-                            <p class="cs-text-md">Lorem ipsum dolor sit amet consectetur adipisicing
-                            </p>
-                            <span class="cs-text-md" style="color: rgb(206, 197, 197);text-align: left;padding: 0 .0rem;">Nowela</span>
-                        </li>
-                        <li class="cs-grid received" style="--gap:.25rem;">
-                            <p class="cs-text-md">Lorem ipsum dolor sit amet consectetur adipisicing
-                            </p>
-                            <span class="cs-text-md" style="color: rgb(206, 197, 197);text-align: left;padding: 0 .0rem;">Nowela</span>
-                        </li>
-                        <li class="cs-grid sent" style="--gap:.25rem;">
-                            <p class="cs-text-md">Lorem ipsum dolor sit amet consectetur adipisicing
-                            </p>
-                        </li>
-                        <li class="cs-grid received" style="--gap:.25rem;">
-                            <p class="cs-text-md">Lorem ipsum dolor sit amet consectetur adipisicing
-                            </p>
-                            <span class="cs-text-md" style="color: rgb(206, 197, 197);text-align: left;padding: 0 .0rem;">Nowela</span>
-                        </li>
-                        <li class="cs-grid sent" style="--gap:.25rem;">
-                            <p class="cs-text-md">Lorem ipsum dolor sit amet consectetur adipisicing
-                            </p>
-                        </li>
-                        <li class="cs-grid sent" style="--gap:.25rem;">
-                            <p class="cs-text-md">Lorem ipsum dolor sit amet consectetur adipisicing
-                            </p>
-                        </li>
+                        {% for reply in replies %}
+                            <li class="cs-grid {% if reply.user == request.user %} received {% else %} sent {% endif %}" style="--gap:.25rem;">
+                                <p class="cs-text-md">{{reply.description}}</p>
+                            </li>
+                        {% endfor %}
                     </ul>
-                    <form action="" class="cs-grid" style="grid-template-columns: 1fr .2fr;--gap: .5rem;">
-                        <input type="text" name="" id="message" placeholder="Message">
-                        <input class="btn cs-text-white cs-bg-secondary" type="submit" name="" value="Send">
+                    <form action="{% url 'app_admin:community-chat' discussion.slug %}" method="POST" class="cs-grid" style="grid-template-columns: 1fr .2fr;--gap: .5rem;">
+                        {% csrf_token %}
+                        <input type="text" name="description" id="description" placeholder="Message">
+                        <input class="btn cs-text-white cs-bg-secondary" type="submit" value="Send">
                     </form>
                 </div>
             </div>

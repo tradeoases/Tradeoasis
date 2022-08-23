@@ -20,7 +20,7 @@ urlpatterns = [
     path("discussions/chat", views.AdminChatView.as_view(), name="discussion"),
     path("community/", views.AdminCommunityView.as_view(), name="community"),
     path(
-        "community/chat", views.AdminCommunityChatView.as_view(), name="community-chat"
+        "community/chat/<str:slug>", views.AdminCommunityChatView.as_view(), name="community-chat"
     ),
     # contact
     path("contact/<str:slug>", views.ContactClient.as_view(), name="contact"),

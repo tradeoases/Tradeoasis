@@ -4,7 +4,7 @@ from django.views import View
 from django.views.generic import CreateView
 from django.utils.translation import gettext as _
 from django.contrib import messages
-from django.http import HttpResponseNotFound
+from django.http import HttpResponseNotFound, HttpResponse
 from django.contrib.auth import login
 
 import string
@@ -342,6 +342,8 @@ class AdminCommunityView(SupportOnlyAccessMixin, View):
         context_data["view_name"] = _("Admin Dashboard - Support")
         context_data["active_tab"] = "Support"
 
+        context_data["discussions"] = ManagerModels.Discussion.objects.all().order_by('-id')
+
         return context_data
 
     def get(self, request):
@@ -351,16 +353,33 @@ class AdminCommunityView(SupportOnlyAccessMixin, View):
 class AdminCommunityChatView(SupportOnlyAccessMixin, View):
     template_name = "app_admin/support/discussion.html"
 
-    def get_context_data(self):
+    def get_context_data(self, slug):
         context_data = dict()
 
         context_data["view_name"] = _("Admin Dashboard - Support")
         context_data["active_tab"] = "Support"
+        context_data["discussions"] = ManagerModels.Discussion.objects.all().order_by('-id')
+
+        discussion = ManagerModels.Discussion.objects.filter(slug=slug).first()
+        context_data["discussion"] = discussion
+        context_data["replies"] = ManagerModels.DiscussionReply.objects.filter(discussion=discussion)
 
         return context_data
 
-    def get(self, request):
-        return render(request, self.template_name, context=self.get_context_data())
+    def get(self, request, slug):
+        return render(request, self.template_name, context=self.get_context_data(slug))
+
+    def post(self, request, slug):
+        description = request.POST.get('description')
+        discussion = ManagerModels.Discussion.objects.filter(slug=slug).first()
+
+        discussion_reply = ManagerModels.DiscussionReply.objects.create(
+            description=description,
+            user=request.user,
+            discussion=discussion
+        )
+
+        return redirect(reverse('app_admin:community-chat', kwargs={"slug": discussion.slug}))
 
 
 class ContactClient(SupportOnlyAccessMixin, View):

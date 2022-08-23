@@ -5,6 +5,7 @@ from django.views.generic import ListView, DetailView, TemplateView
 from django.db.models import Q
 import random
 from django.utils.translation import gettext as _
+from django.contrib import messages
 
 # apps
 from supplier.models import (
@@ -15,6 +16,9 @@ from supplier.models import (
     ProductSubCategory,
 )
 from manager import models as ManagerModels
+
+
+from payment.mixins import AuthedOnlyAccessMixin
 
 
 class HomeView(View):
@@ -242,12 +246,13 @@ class SupportView(View):
     def get(self, request):
 
         context_data = {
-            "view_name" : _("Support")
+            "view_name" : _("Support"),
+            "discussions": ManagerModels.Discussion.objects.all().order_by('-id')[:10]
         }
 
         return render(request, self.template_name, context=context_data)
 
-class SupportChatroomView(View):
+class SupportChatroomView(AuthedOnlyAccessMixin, View):
     template_name = 'manager/chatroom.html'
     def get(self, request):
 
@@ -257,12 +262,56 @@ class SupportChatroomView(View):
 
         return render(request, self.template_name, context=context_data)
 
-class SupportDiscussionView(View):
-    template_name = 'manager/discussion.html'
-    def get(self, request, pk):
-
+class SupportCreateDiscussionView(AuthedOnlyAccessMixin, View):
+    template_name = 'manager/create_discussion.html'
+    def get(self, request):
         context_data = {
             "view_name" : _("Support")
         }
-
         return render(request, self.template_name, context=context_data)
+
+    def post(self, request):
+        subject = request.POST.get('subject')
+        description = request.POST.get('description')
+
+        discussion = ManagerModels.Discussion.objects.create(
+            subject=subject,
+            description=description,
+            user=request.user
+        )
+
+        if not discussion:
+            messages.add_message(request, messages.ERROR, _("Error Occured. Try Again"))
+            return redirect(reverse("manager:create-discussion"))
+
+        
+        messages.add_message(request, messages.SUCCESS, _("Discussion created successfully."))
+        return redirect(reverse("manager:create-discussion"))
+
+class SupportDiscussionView(View):
+    template_name = 'manager/discussion.html'
+    def get(self, request, slug):
+        discussion = ManagerModels.Discussion.objects.filter(slug=slug).first()
+        context_data = {
+            "view_name" : _("Support"),
+            "discussion" : discussion,
+            "replies": ManagerModels.DiscussionReply.objects.filter(discussion=discussion)
+        }
+        return render(request, self.template_name, context=context_data)
+
+    def post(self, request, slug):
+        description = request.POST.get('description')
+        discussion = ManagerModels.Discussion.objects.filter(slug=slug).first()
+
+        discussion_reply = ManagerModels.DiscussionReply.objects.create(
+            description=description,
+            user=request.user,
+            discussion=discussion
+        )
+
+        if not discussion_reply:
+            messages.add_message(request, messages.ERROR, _("Error Occured. Try Again"))
+            return redirect(reverse("manager:discussion", kwargs={'slug': discussion.slug}))
+
+        messages.add_message(request, messages.SUCCESS, _("Reply submitted successfully."))
+        return redirect(reverse("manager:discussion", kwargs={'slug': discussion.slug}))

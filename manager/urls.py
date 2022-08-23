@@ -21,6 +21,7 @@ urlpatterns = [
     path("dashboard/", views.dashboard, name="dashboard"),
 
     path("support/", views.SupportView.as_view(), name="support"),
-    path("support/chatroom", views.SupportChatroomView.as_view(), name="chatroom"),
-    path("support/discussion/<int:pk>", views.SupportDiscussionView.as_view(), name="discussion"),
+    path("support/chatroom/", views.SupportChatroomView.as_view(), name="chatroom"),
+    path("support/discussion/<str:slug>/", views.SupportDiscussionView.as_view(), name="discussion"),
+    path("support/create-discussion/", views.SupportCreateDiscussionView.as_view(), name="create-discussion"),
 ]
