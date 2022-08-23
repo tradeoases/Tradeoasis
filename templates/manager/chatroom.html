@@ -1,0 +1,76 @@
+{% load static %}
+{% load i18n %}
+{% load isEqual %}
+{% include '../utils/header.html' %}
+<style>
+    .inbox, .chat {
+        block-size: 70vh;
+        overflow: hidden;
+    }
+    .inbox-area .list {
+        overflow-y: auto;
+        scroll-behavior: smooth;
+    }
+    .inbox .list {
+        block-size: 55vh;
+        padding: .5rem .5rem .5rem 0;
+    }
+
+    .chat .list {
+        block-size: 50vh;
+        padding: 0 .5rem .5rem 0;
+    }
+    .chat ul li {
+        padding: .25rem .5rem;
+        border: 1px solid hsl(0, 4%, 93%);
+        border-radius: 5px;
+        max-inline-size: 55%;
+        color: var(--text-color);
+        align-self: flex-start;
+        align-content: flex-start;
+    }
+    .chat ul li.received {
+        justify-self: flex-end;
+        text-align: left;
+        background-color: hsl(213, 28%, 25%);
+    }
+    .chat ul li.received p {
+        color: white;
+    }
+    .chat form input {
+        align-self: flex-end;
+    }
+</style>
+
+<section class="main w-12/12 py-6 pt-0 gap-8 my-8" style="block-size: auto;">
+    <div class="chat border border-solid border-slate-300 rounded items-start content-start grid gap-2 px-5 py-5 w-11/12 md:w-6/12 mx-auto">
+        <div class="flex items-baseline justify-between">
+            <h4 class="cs-text-normal cs-text-secondary" style="margin: 0;">Nowela Mary</h4>
+            <a class="text-md text-yellowColor" href="">{% trans 'Close Chat' %}</a>
+        </div>
+        <hr style="border: 1px solid hsl(0, 0%, 95%);">
+        <ul class="list grid content-start gap-2">
+            <li class="grid sent" style="gap:.25rem;">
+                <p class="cs-text-md">Lorem ipsum dolor sit amet consectetur adipisicing
+                </p>
+            <li class="grid received" style="gap:.25rem;">
+                <p class="cs-text-md">Lorem ipsum dolor sit amet consectetur adipisicing
+                </p>
+            </li>
+            <li class="grid received" style="gap:.25rem;">
+                <p class="cs-text-md">Lorem ipsum dolor sit amet consectetur adipisicing
+                </p>
+            </li>
+        </ul>
+        <form action="" class="grid" style="grid-template-columns: 1fr .2fr;--gap: .5rem;">
+            <input type="text" name="" id="message" placeholder="Message">
+            <input class="btn text-white bg-lghterBackgroundColor" type="submit" name="" value="{% trans 'Send' %}">
+        </form>
+    </div>
+</section>
+
+
+<script src="{% static 'js/scripts.js' %}"></script>
+</body>
+
+</html>

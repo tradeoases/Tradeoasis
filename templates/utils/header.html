@@ -161,7 +161,7 @@
                 <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="{% url 'manager:showrooms' %}">{% trans "Showrooms" %}</a></li>
                 <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="{% url 'manager:about-us' %}">{% trans "About Us" %}</a></li>
                 <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="{% url 'manager:services' %}">{% trans "Services" %}</a></li>
-                <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="#">{% trans "Contact" %}</a></li>
+                <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="{% url 'manager:support' %}">{% trans "Support" %}</a></li>
                 <li><a class="grid py-3 px-4 hover:bg-lighterBackgroundColorHover transition-colors transition-200 ease-in" href="{% url 'payments:memberships' %}">{% trans "Memberships" %}</a></li>
             </ul>
 
@@ -260,9 +260,16 @@
                     </li>
                     <li
                         class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
-                        <a class="flex items-center justify-start gap-2 py-2" href="./index.html">
+                        <a class="flex items-center justify-start gap-2 py-2" href="{% url 'manager:support' %}">
                             <i class="ti-file"></i>
                             <span>{% trans "Support" %}</span>
+                        </a>
+                    </li>
+                    <li
+                        class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
+                        <a class="flex items-center justify-start gap-2 py-2" href="{% url 'payments:memberships' %}">
+                            <i class="ti-file"></i>
+                            <span>{% trans "Memberships" %}</span>
                         </a>
                     </li>
                 </ul>
@@ -276,7 +283,7 @@
                     {% for category in product_categories.results %} 
                         <li
                             class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
-                            <a class="flex items-center justify-start gap-2 py-2" href="./category.html">
+                            <a class="flex items-center justify-start gap-2 py-2" href="{% url 'supplier:category-detail' category.category.slug  %}">
                                 <i class="ti-folder"></i>
                                 <span>{{ category.category.name }}</span>
                             </a>

@@ -235,3 +235,34 @@ def dashboard(request):
         return redirect(reverse("app_admin:home"))
     elif request.user.is_superuser:
         return redirect(reverse("app_admin:home"))
+
+
+class SupportView(View):
+    template_name = 'manager/support.html'
+    def get(self, request):
+
+        context_data = {
+            "view_name" : _("Support")
+        }
+
+        return render(request, self.template_name, context=context_data)
+
+class SupportChatroomView(View):
+    template_name = 'manager/chatroom.html'
+    def get(self, request):
+
+        context_data = {
+            "view_name" : _("Support")
+        }
+
+        return render(request, self.template_name, context=context_data)
+
+class SupportDiscussionView(View):
+    template_name = 'manager/discussion.html'
+    def get(self, request, pk):
+
+        context_data = {
+            "view_name" : _("Support")
+        }
+
+        return render(request, self.template_name, context=context_data)

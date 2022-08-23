@@ -16,8 +16,11 @@ urlpatterns = [
     ),
     # services
     path("services/", views.ServiceListView.as_view(), name="services"),
-    path("support/", views.HomeView.as_view(), name="support"),
     path("about/", views.AboutUsView.as_view(), name="about-us"),
     path("profile/", views.profile, name="profile"),
     path("dashboard/", views.dashboard, name="dashboard"),
+
+    path("support/", views.SupportView.as_view(), name="support"),
+    path("support/chatroom", views.SupportChatroomView.as_view(), name="chatroom"),
+    path("support/discussion/<int:pk>", views.SupportDiscussionView.as_view(), name="discussion"),
 ]

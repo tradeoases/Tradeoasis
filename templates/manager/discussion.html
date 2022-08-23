@@ -1,0 +1,53 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<section class="main w-12/12 py-6 pt-0 gap-8" style="block-size: auto;">
+    <div class="grid gap-10 w-10/12 mx-auto my-6">
+        <div class="grid gap-4">
+            <div class="grid gap-2 border border-solid border-yellowColor px-4 py-3 rounded">
+                <span class="flex gap-1 items-center">
+                    <h4 class="font-semibold text-xl text-yellowColor">Declined Payment</h4>
+                    <span>-</span>
+                    <span class="font-semibold text-base text-slate-500">Alex Mark </span>
+                </span>
+                <div class="grid gap-2">
+                    <p class="text-base text-slate-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, iure repellendus voluptatem nostrum quia ratione maxime tempore dolorum molestias, ab, quam non. Voluptatibus, dolorem provident!</p>
+                    <span class="text-sm text-slate-500">2 minutes ago</span>
+                </div>
+                <div class="flex gap-2">
+                    <a href="{% url 'manager:chatroom' %}" class="bg-yellowColor text-white text-base px-4 py-2 rounded-full">{% trans 'Reply' %}</a>
+                </div>
+            </div>
+            <div class="grid gap-4 ml-10">
+                <h4 class="text-xl font-semibold">Replies</h4>
+                <div class="grid gap-2 border border-solid border-slate-300 px-4 py-3 rounded">
+                    <span class="flex gap-1 items-center">
+                        <h4 class="font-semibold text-lg">Peter Makia</h4>
+                    </span>
+                    <div class="grid gap-2">
+                        <p class="text-base text-slate-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, iure repellendus voluptatem nostrum quia ratione maxime tempore dolorum molestias, ab, quam non. Voluptatibus, dolorem provident!</p>
+                        <span class="text-sm text-slate-500">2 minutes ago</span>
+                    </div>
+                </div>
+                <div class="grid gap-2 border border-solid border-slate-300 px-4 py-3 rounded">
+                    <span class="flex gap-1 items-center">
+                        <h4 class="font-semibold text-lg">Alex Mark</h4>
+                    </span>
+                    <div class="grid gap-2">
+                        <p class="text-base text-slate-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, iure repellendus voluptatem nostrum quia ratione maxime tempore dolorum molestias, ab, quam non. Voluptatibus, dolorem provident!</p>
+                        <span class="text-sm text-slate-500">2 minutes ago</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form class="grid gap-4">
+            <h3 class="font-semibold text-xl">Send a Reply</h3>
+            <textarea name="" id="" cols="30" rows="5"></textarea>
+            <input type="submit" value="Send" class="justify-self-start bg-yellowColor text-white text-base px-4 py-2 rounded-full">
+        </form>
+    </div>
+</section>
+
+{% endblock %}
