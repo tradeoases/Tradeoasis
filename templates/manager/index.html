@@ -40,12 +40,12 @@
                         {% trans "Product Categories" %}</h2>
                     <ul class="grid gap-0.5 px-5 py-2" data-context='{{ product_categories.context_name }}'>
                         
-                        {% for category in product_categories.results %}  
+                        {% for category in categories_header %}  
                             <li
                                 class="side-menu-item text-slate-800 hover:text-black transition-colors transition-200 ease-in" data-category-index="{{ forloop.counter }}">
-                                <a class="flex items-center justify-start gap-2 py-2" href='{% url "supplier:category-detail" category.category.slug %}'>
-                                    <i class="ti-folder"></i>
-                                    <span>{{ category.category.name }}</span>
+                                <a class="flex items-center justify-start gap-2 py-2" href='{% url "supplier:category-detail" category.slug %}'>
+                                    <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="/media/{{ category.image }}" alt="{{ category.name }}">
+                                    <span>{{ category.name }}</span>
                                 </a>
                             </li>
                         {% endfor %}
@@ -101,11 +101,11 @@
                 <div class="grid p-0 side-menu card rounded-none rounded-t-md overflow-hidden">
                     <h2 class="text-xl font-bold px-5 py-3" style="background-color: hsla(213, 28%, 90%, .8);">{% trans 'Showrooms' %}</h2>
                     <ul class="grid gap-0.5 px-5 py-2" data-context='{{ product_categories.context_name }}'>
-                        {% for showroom in showrooms.results %}
+                        {% for showroom in showroows_headers %}
                             <li
                                 class="side-menu-item text-slate-800 hover:text-black transition-colors transition-200 ease-in">
                                 <a class="flex items-center justify-start gap-2 py-2" href="{% url 'manager:showroom-detail' showroom.slug %}"  data-showroom-index="{{forloop.counter}}">
-                                    <i class="ti-folder"></i>
+                                    <!-- <i class="ti-home"></i> -->
                                     <span>{{ showroom.name }}</span>
                                 </a>
                             </li>
@@ -167,7 +167,7 @@
                         <!-- <h1 class="hidden md:flex gap-1 items-baseline text-lg text-slate-400 font-bold"><span
                                 class="text-lg text-xl text-slate-500">30%</span> OFF</h1> -->
                     </div>
-                    <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="">{% trans "View All" %}</a>
+                    <!-- <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="">{% trans "View All" %}</a> -->
                 </div>
                 <div class="grid gap-1 horizontal-scroll" data-context="{{new_arrivals.context_name}}">
                     {% for new_arrival in new_arrivals.results %}

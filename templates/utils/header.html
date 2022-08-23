@@ -285,7 +285,7 @@
                             <li
                                 class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
                                 <a class="flex items-center justify-start gap-2 py-2" href="{% url 'supplier:category-detail' category.slug  %}">
-                                    <img src="/media/{{{ category.image }}}" alt="{{ category.name }}">
+                                    <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="/media/{{ category.image }}" alt="{{ category.name }}">
                                     <span>{{ category.name }}</span>
                                 </a>
                             </li>
@@ -304,7 +304,7 @@
                             <li
                             class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
                                 <a class="flex items-center justify-start gap-2 py-2" href="{% url 'manager:showroom-detail' showroom.slug %}">
-                                    <i class="ti-folder"></i>
+                                    <!-- <i class="ti-folder"></i> -->
                                     <span>{{showroom.name}}</span>
                                 </a>
                             </li>

@@ -10,6 +10,7 @@ from django.dispatch import receiver
 import datetime
 from dateutil.relativedelta import relativedelta
 import string
+import uuid
 
 # apps
 from auth_app.models import Buyer, Supplier
@@ -32,7 +33,7 @@ class MembershipPlan(models.Model):
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
+        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:10]
 
         self.name = self.name
 
@@ -97,7 +98,7 @@ class ModeOfPayment(models.Model):
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
+        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:10]
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:

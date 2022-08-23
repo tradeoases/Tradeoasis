@@ -47,7 +47,7 @@ class Store(models.Model):
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
+        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:10]
 
         self.name = self.name
 
@@ -60,7 +60,7 @@ class Store(models.Model):
 class ProductCategory(models.Model):
     name = models.CharField(_("Name"), max_length=256)
     product_count = models.IntegerField(_("Number of products"), default=0)
-    image = models.ImageField(
+    image = models.FileField(
         verbose_name=_("Image"),
         upload_to=get_file_path,
         default="test/django.png",
@@ -69,7 +69,7 @@ class ProductCategory(models.Model):
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
+        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:10]
 
         self.name = self.name
 
@@ -96,7 +96,7 @@ class ProductSubCategory(models.Model):
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
+        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:10]
 
         self.name = self.name
 
@@ -134,7 +134,7 @@ class Product(models.Model):
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
+        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:10]
 
         if not self.pk:
             self.category = self.sub_category.category
@@ -179,7 +179,7 @@ class ProductTag(models.Model):
     )
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
+        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:10]
 
         super().save(*args, **kwargs)
 
@@ -207,7 +207,7 @@ class Service(models.Model):
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
+        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:10]
 
         self.name = self.name
 

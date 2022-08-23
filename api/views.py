@@ -17,6 +17,10 @@ class CustomListPagination(PageNumberPagination):
     page_size = 10
     page_size_query_param = "page_size"
 
+class LargeCustomListPagination(PageNumberPagination):
+    page_size = 2
+    page_size_query_param = "page_size"
+
 
 class StoresListView(ListAPIView):
     serializer_class = serializers.StoreSerializer
@@ -32,6 +36,12 @@ class ProductsListView(ListAPIView):
     def get_queryset(self):
         return SupplierModels.Product.objects.filter(store__in = SupplierModels.Store.objects.filter(supplier=self.request.user))
         
+
+class LoadingProductsListView(ListAPIView):
+    serializer_class = serializers.ProductsSerializer
+    pagination_class = LargeCustomListPagination
+    queryset = SupplierModels.Product.objects.all()
+
 
 class ContractsListView(ListAPIView):
     serializer_class = serializers.ContractsSerializer

@@ -692,9 +692,18 @@ class DashboardProductsCreateView(SupplierOnlyAccessMixin, View):
                 for file in request.FILES.getlist('images'):
                     SupplierModels.ProductImage.objects.create(product=product, image=file)
 
+            # add tags
+            for i in range(1,6):
+                tag = request.POST.get(f'tag_{i}', None)
+                if not tag:
+                    continue
+
+                SupplierModels.ProductTag.objects.create(name=tag, product=product)                
+
             messages.add_message(request, messages.SUCCESS, _("Product create successfully."))
             return redirect(reverse("supplier:dashboard-productscreate"))
-        except:
+        except Exception as e:
+            print(e)
             messages.add_message(request, messages.ERROR, _("An Error Occured. Try Again"))
             return redirect(reverse("supplier:dashboard-productscreate"))
 

@@ -3,9 +3,20 @@
 {% load i18n %}
 {% block content %}
 
+<style>
+    .split {
+        grid-template-columns: 1fr;
+    }
+    @media (min-width: 786px) {
+        .split {
+            grid-template-columns: .6fr 2fr;
+        }
+    }
+</style>
+
         <section class="main w-12/12 py-6" style="block-size: auto">
-            <div class="grid w-full mx-auto cf-1 gap-4" style="grid-template-columns: .6fr 2fr;">
-                <div class="grid side-bar gap-3 content-start product-categories w-12/12 ">
+            <div class="split grid w-full mx-auto cf-1 gap-4">
+                <div class="hidden md:grid side-bar gap-3 content-start product-categories w-12/12 ">
                     <div class="grid p-0 side-menu card rounded-md overflow-hidden">
                         <h2 class="text-xl font-bold px-5 py-3" style="background-color: hsla(213, 28%, 90%, .8);">{{ object.name }}</h2>
                         <ul class="grid gap-0.5 px-5 py-2" data-context='{{ sub_categories.context_name }}' >
@@ -25,27 +36,25 @@
                         <span>All Categories</span>
                     </a>
                 </div>
-                <div class="section-body grid gap-6 grid-cols-4" data-context="{{propular_products.context_name}}">
+                <div class="section-body grid gap-2 md:gap-6 grid-cols-2 md:grid-cols-4" data-context="{{propular_products.context_name}}">
                     {% for product in products.results %}
-                        <div class="single-image-product-card overflow-hidden rounded-md flex gap-0.5 card-outlined">
-                            <div class="grid gap-1">
-                                <a class="grid gap-2" href="{% url 'supplier:product-detail' product.product.slug %}">
-                                    <img src="/media/{{product.images.image}}" style="object-fit: cover;" alt="{{product.name}}" class="item-img rounded-sm" >
-                                    <div class="item-details grid gap-0 py-1 px-4 gap-2" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
-                                        <p class="grid justify-start text-left">            
-                                            <h5 class="text-sm font-bold leading-5">    
-                                                {{product.product.name}}
-                                            </h5>
-                                            <p class="text-xs font-medium">
-                                                <span>{{product.product.currency}}</span>
-                                                <span>{{product.product.price}}</span>
-                                            </p>
-                                        </p>
-                                    </div>
-                                    <span class="py-1 px-4 font-semibold text-sm">By {{ product.supplier }}</span>
-                                </a>
+                    <div class="single-image-product-card overflow-hidden rounded grid gap-0.5 card-outlined">
+                        <a class="grid gap-2 p-1 rounded overflow-hidden" href="{% url 'supplier:product-detail' product.product.slug %}">
+                            <img loading="lazy" src="/media/{{product.images.image}}" alt="{{product.name}}"
+                                class="item-img rounded" style="width: 100%;aspect-ratio:1/1.2;object-fit:cover;">
+                            <div class="item-details grid gap-0 py-2 md:py-3 px-4 gap-2"
+                                style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
+                                <h5 class="text-sm font-bold leading-5 text-lightBackgroundColor">
+                                    {{product.product.name}}
+                                </h5>
+                                <p class="text-xs font-medium">
+                                    <span>{{product.product.currency}}</span>
+                                    <span>{{product.product.price}}</span>
+                                </p>
                             </div>
-                        </div>
+                            <span class="grid items-center pb-2 px-4 font-semibold text-sm">By {{ product.supplier }}</span>
+                        </a>
+                    </div>
                     {% endfor %}
                 </div>
             </div>

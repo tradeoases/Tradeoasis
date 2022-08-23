@@ -48,10 +48,14 @@
                         {% for store in product_stores.results %}
                             <a href="{% url 'supplier:store-detail' store.slug %}" class="grid px-4 py-1 bg-slate-200 rounded-full text-backgroundColor">{{ store }}</a>
                         {% endfor %}
-
+                    </p>
+                    <p class="text-slate-700 grid grid-flow-col flex-wrap gap-3 justify-start items-center" data-context="{{product_stores.context_name}}">
+                        {% for tag in tags %}
+                            <a href="" class="grid px-4 py-1 bg-slate-200 rounded-full text-backgroundColor">{{ tag.name }}</a>
+                        {% endfor %}
                     </p>
                 </div>
-                <div class="cta grid grid-flow-col gap-3">
+                <div class="cta grid md:grid-flow-col gap-3">
                     <a href="{% url 'supplier:supplier-detail' product_supplier.results.profile.slug %}" class="grid grid-flow-col place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-yellowColor hover:bg-yellowColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
                         <span class="text-white"><i class="fa fa-address-book"></i></span>
                         <span>{% trans 'Contact Supplier' %}</span>

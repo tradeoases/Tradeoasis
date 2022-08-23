@@ -101,6 +101,9 @@ class ProductsSerializer(serializers.ModelSerializer):
         representation["supplier_slug"] = SuppliersSerializer(
             instance.store.all().first().supplier.profile
         ).data.get("slug")
+        representation["image"] = ProductImagesSerializer(
+            SupplierModels.ProductImage.objects.filter(product=instance).first()
+        ).data.get("image")
         return representation
 
 
