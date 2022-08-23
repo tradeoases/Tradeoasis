@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "api.apps.ApiConfig",
     # third party
     "rest_framework",
+    # "channels",
 ]
 
 MIDDLEWARE = [
@@ -80,12 +81,14 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 'django.template.context_processors.i18n',
+                'manager.context_processors.categories_showroows',
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = "core.wsgi.application"
+# ASGI_APPLICATION = "core.wsgi.application"
 
 
 # Database

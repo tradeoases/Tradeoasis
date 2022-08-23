@@ -9,7 +9,7 @@
 	display: block;
 	clear: both;
 	visibility: hidden;
-	line-block-size: 0;
+	block-size: 0;
 	block-size: 0;
 }
 /* display none until init */

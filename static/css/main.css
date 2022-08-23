@@ -488,7 +488,7 @@ nav.cs-fixed li:hover * {
 }
 
 .promotion-area .small-item .body * {
-    line-block-size: 1;
+    block-size: 1;
 }
 
 
@@ -646,7 +646,7 @@ footer a:hover {
 
 .stats .num {
     font-size: 2.5rem;
-    line-block-size: 3rem;
+    block-size: 3rem;
 }
 
 @media (max-width: 786px) {

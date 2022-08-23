@@ -274,40 +274,44 @@
                     </li>
                 </ul>
             </div>
-            <hr style="border:none; border-block-end: 1px solid rgba(211, 211, 211, 0.377);">
-            <div class="grid gap-3">
-                <h4 class="text-lg font-bold text-slate-100">
-                    {% trans "Categories for you" %}
-                </h4>
-                <ul class="text-slate-300 grid gap-2 pl-4">
-                    {% for category in product_categories.results %} 
-                        <li
+            {% if categories_header %}
+                <hr style="border:none; border-block-end: 1px solid rgba(211, 211, 211, 0.377);">
+                <div class="grid gap-3">
+                    <h4 class="text-lg font-bold text-slate-100">
+                        {% trans "Categories for you" %}
+                    </h4>
+                    <ul class="text-slate-300 grid gap-2 pl-4">
+                        {% for category in categories_header %} 
+                            <li
+                                class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
+                                <a class="flex items-center justify-start gap-2 py-2" href="{% url 'supplier:category-detail' category.slug  %}">
+                                    <img src="/media/{{{ category.image }}}" alt="{{ category.name }}">
+                                    <span>{{ category.name }}</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            {% if showroows_headers  %}
+                <hr style="border:none; border-block-end: 1px solid rgba(211, 211, 211, 0.377);">
+                <div class="grid gap-3">
+                    <h4 class="text-lg font-bold text-slate-100">
+                        {% trans "Showrooms" %}
+                    </h4>
+                    <ul class="text-slate-300 grid gap-2 pl-4">
+                        {% for showroom in showroows_headers %}
+                            <li
                             class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
-                            <a class="flex items-center justify-start gap-2 py-2" href="{% url 'supplier:category-detail' category.category.slug  %}">
-                                <i class="ti-folder"></i>
-                                <span>{{ category.category.name }}</span>
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <hr style="border:none; border-block-end: 1px solid rgba(211, 211, 211, 0.377);">
-            <div class="grid gap-3">
-                <h4 class="text-lg font-bold text-slate-100">
-                    {% trans "Showrooms" %}
-                </h4>
-                <ul class="text-slate-300 grid gap-2 pl-4">
-                    {% for showroom in showroows_headers %}
-                        <li
-                        class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
-                            <a class="flex items-center justify-start gap-2 py-2" href="#">
-                                <i class="ti-folder"></i>
-                                <span>{{showroom.name}}</span>
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
+                                <a class="flex items-center justify-start gap-2 py-2" href="{% url 'manager:showroom-detail' showroom.slug %}">
+                                    <i class="ti-folder"></i>
+                                    <span>{{showroom.name}}</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
             <hr style="border:none; border-block-end: 1px solid rgba(211, 211, 211, 0.377);">
             <div class="grid gap-3">
                 <h4 class="text-lg font-bold text-slate-100">

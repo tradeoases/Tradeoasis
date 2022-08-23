@@ -60,10 +60,10 @@ class HomeView(View):
                         ),
                     }
                     for category in ProductCategory.objects.all().order_by(
-                        "-created_on"
+                        "-id"
                     )[:6]
-                    if category.product_count > 0
-                    and category.productsubcategory_set.count()
+                    # if category.product_count > 0
+                    # and category.productsubcategory_set.count()
                 ],
             },
             "showrooms": {

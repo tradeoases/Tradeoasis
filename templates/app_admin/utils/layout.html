@@ -98,7 +98,7 @@
         <!-- header area -->
             <header class="content-area-header cs-grid br-sm" style="--gap: .5rem;">
                 <div class="cs-grid cs-align-center" style="align-content: center;--gap: .35rem">
-                    <h1 class="section-title cs-font-700 cs-font-500 cs-text-secondary" style="line-block-size: 20px;margin: 0;font-size: 1.4rem;">{% trans 'Admin Dashboard' %}</h1>
+                    <h1 class="section-title cs-font-700 cs-font-500 cs-text-secondary" style="block-size: 20px;margin: 0;font-size: 1.4rem;">{% trans 'Admin Dashboard' %}</h1>
                     <p class="cs-flex cs-text-md cs-text-secondary" style="gap: .5rem;">
                         <a href="{% url 'app_admin:home' %}" style="color: hsla(213, 28%, 60%, 100%);">{% trans 'Home' %}</a>
                         {% if active_tab != 'Home' %}
@@ -165,7 +165,7 @@
                     
                     <a href="{% url 'app_admin:profile' %}" class="cs-flex br-md" style="--gap: 1rem;padding: .5rem 1rem;background-color: hsla(213, 28%, 70%, 10%);align-content: center;align-items: center;">
                         <div class="cs-grid" style="--gap: 0;justify-items: flex-end;align-content: center;">
-                            <h4 class="cs-text-md cs-font-500" style="line-block-size: 14px;margin: 0;">{% trans request.user.username %}</h4>
+                            <h4 class="cs-text-md cs-font-500" style="block-size: 14px;margin: 0;">{% trans request.user.username %}</h4>
                             <p class="cs-text-sm cs-font-500" style="color: hsl(0, 0%, 60%);">{% trans 'Support' %}</p>
                         </div>
                         <div class="avator br-full cs-overflow-hidden">

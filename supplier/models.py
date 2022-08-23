@@ -168,6 +168,23 @@ class ProductImage(models.Model):
     def __str__(self) -> str:
         return f"{self.product.name}"
 
+class ProductTag(models.Model):
+    name = models.CharField(_("Name"), max_length=256)
+    product = models.ForeignKey(to=Product, on_delete=models.CASCADE)
+    slug = models.SlugField(
+        _("Safe Url"),
+        unique=True,
+        blank=True,
+        null=True,
+    )
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+
+        super().save(*args, **kwargs)
+
+    def __str__(self) -> str:
+        return f"{self.product.name}"
 
 class Service(models.Model):
     supplier = models.ForeignKey(

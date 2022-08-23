@@ -211,6 +211,7 @@ class ProductDetailView(DetailView):
             "context_name": "product-images",
             "results": SupplierModels.ProductImage.objects.filter(product=product),
         }
+        context["tags"] = SupplierModels.ProductTag.objects.filter(product=product)
         context["related_products"] = {
             "context_name": "related-products",
             "results": [
