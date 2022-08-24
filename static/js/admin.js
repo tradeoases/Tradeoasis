@@ -276,7 +276,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const fetchData = async (url, has_page_num=true) => {
         let response;
         if (has_page_num) {
-            response = await fetch(`${BASE_API_URL}/${url}/?page=${pageNum}`);
+            response = await fetch(`${BASE_API_URL}/${url}/?page=${pageNum}`, {
+
+                method: "GET",
+                headers: {
+                    'Content-Type' : 'application/json'
+                },
+                mode: "cors",
+                cache: "no-cache",
+                redirect: 'follow',
+                referrerPolicy: 'no-referrer',
+            });
         }
         else {
             response = await fetch(`${BASE_API_URL}/${url}`);
