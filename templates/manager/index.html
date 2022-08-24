@@ -105,7 +105,7 @@
                             <li
                                 class="side-menu-item text-slate-800 hover:text-black transition-colors transition-200 ease-in">
                                 <a class="flex items-center justify-start gap-2 py-2" href="{% url 'manager:showroom-detail' showroom.slug %}"  data-showroom-index="{{forloop.counter}}">
-                                    <!-- <i class="ti-home"></i> -->
+                                    <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="/media/{{ showroom.image }}" alt="{{ showroom.name }}">
                                     <span>{{ showroom.name }}</span>
                                 </a>
                             </li>
@@ -258,8 +258,8 @@
                 autoPlay: 5000, //Set AutoPlay to 3 seconds
                 responsiveClass:true,
                 items: 1,
-                // itemsDesktop: [1199, 3],
-                // itemsDesktopSmall: [979, 3],
+                lazyLoad: true,
+                pagination: false
             });
         });
     </script>

@@ -133,3 +133,6 @@ test_files/*
 media/*
 ./functional_tests.py
 .test.py
+
+# node npm
+node_modules/

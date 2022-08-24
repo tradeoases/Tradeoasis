@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="{% static 'icons/themify-icons.css' %}">
     <link href="{% static 'icons/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet"  type='text/css'>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="{% static 'css/tailwcss.css' %}" rel="stylesheet">
 
     <title>Golden - {% trans view_name %}</title>
 
@@ -26,50 +26,6 @@
     <link href="{% static 'owl-carousel/owl.theme.css' %}" rel="stylesheet">
 </head>
 
-<script>
-    tailwind.config = {
-        theme: {
-            screens: {
-                sm: '480px',
-                md: '768px',
-                lg: '976px',
-                xl: '1440px',
-            },
-            extend: {
-                colors: {
-                    yellowColor: 'hsl(38, 95%, 47%)',
-                    yellowColorHover: 'hsl(38, 95%, 44%)',
-                    backgroundColor: 'hsl(0, 0%, 9%)',
-                    lghterBackgroundColor: 'hsl(213, 28%, 19%)',
-                    lighterBackgroundColorHover: 'hsl(213, 28%, 14%)',
-                    // headerBg: 'hsla(0, 100%, 97%, .8)',
-                    // hoverBackgroundColor: 'hsla(0, 100%, 95%, 1)',
-                },
-                width: {
-                    'full': '95%',
-                },
-                gridTemplateRows: {
-                    'auto-2': 'repeat(min-content, 2)',
-                    'auto-3': 'repeat(min-content, 3)',
-                }
-            },
-            // fontSize: {
-            // 'xs': '.85rem',
-            // 'sm': '.975rem',
-            // 'tiny': '.975rem',
-            // 'base': '1.1rem',
-            // 'lg': '1.325rem',
-            // 'xl': '1.35rem',
-            // '2xl': '1.6rem',
-            // '3xl': '1.975rem',
-            // '4xl': '2.35rem',
-            // '5xl': '3rem',
-            // '6xl': '4rem',
-            // '7xl': '6rem',
-            // }
-        }
-    }
-</script>
 <body>
 
     <!-- desktop -->
@@ -308,7 +264,7 @@
                             <li
                             class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
                                 <a class="flex items-center justify-start gap-2 py-2" href="{% url 'manager:showroom-detail' showroom.slug %}">
-                                    <!-- <i class="ti-folder"></i> -->
+                                    <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="/media/{{ showroom.image }}" alt="{{ showroom.name }}">
                                     <span>{{showroom.name}}</span>
                                 </a>
                             </li>
