@@ -137,7 +137,7 @@
                             
                             {% for sub_category in category.sub_categories %}
                                 <div class="item">
-                                    <a class="grid gap-0.5" href='{% url "supplier:subcategory-detail" category.category sub_category.slug %}'  data-subcategory-index="{{ forloop.counter }}">
+                                    <a class="grid gap-0.5" href='{% url "supplier:subcategory-detail" category.category.slug sub_category.slug %}'  data-subcategory-index="{{ forloop.counter }}">
                                         <img loading="lazy"
                                             src="/media/{{sub_category.image}}"
                                             alt="Product" class="item-img rounded"

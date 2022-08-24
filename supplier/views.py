@@ -16,6 +16,10 @@ from payment import models as PaymentModels
 
 from supplier.mixins import SupplierOnlyAccessMixin
 
+from django.utils.translation import get_language
+from googletrans import Translator
+from django.conf import settings
+translator = Translator()
 
 class SupplierDetailView(DetailView):
     model = AuthModels.ClientProfile
@@ -692,13 +696,54 @@ class DashboardProductsCreateView(SupplierOnlyAccessMixin, View):
                 for file in request.FILES.getlist('images'):
                     SupplierModels.ProductImage.objects.create(product=product, image=file)
 
-            # add tags
-            for i in range(1,6):
-                tag = request.POST.get(f'tag_{i}', None)
-                if not tag:
-                    continue
+                fields = ('name','description', 'price', 'currency')
+                instance = product
+                modal = SupplierModels.Product
+                for field in fields:
+                    for language in settings.LANGUAGES:
+                        try:
+                            if language[0] == get_language():
+                                # already set
+                                continue
+                            result = translator.translate(getattr(instance, field), dest=language[0])
+                            for model_field in modal._meta.get_fields():
+                                if not model_field.name in f"{field}_{language[0]}":
+                                    continue
 
-                SupplierModels.ProductTag.objects.create(name=tag, product=product)                
+                                if model_field.name == f"{field}_{language[0]}":
+                                    setattr(instance, model_field.name, result.text)
+                                    instance.save()
+                        except:  
+                            setattr(instance, f'{field}_{language[0]}', getattr(instance, field))
+                            instance.save()
+                            
+                # add tags
+                for i in range(1,6):
+                    tag = request.POST.get(f'tag_{i}', None)
+                    if not tag:
+                        continue
+
+                    tag = SupplierModels.ProductTag.objects.create(name=tag, product=product)
+                    fields = ('name',)
+                    instance = tag
+                    modal = SupplierModels.ProductTag
+                    for field in fields:
+                        for language in settings.LANGUAGES:
+                            try:
+                                if language[0] == get_language():
+                                    # already set
+                                    continue
+                                result = translator.translate(getattr(instance, field), dest=language[0])
+                                for model_field in modal._meta.get_fields():
+                                    if not model_field.name in f"{field}_{language[0]}":
+                                        continue
+
+                                    if model_field.name == f"{field}_{language[0]}":
+                                        setattr(instance, model_field.name, result.text)
+                                        instance.save()
+                            except:  
+                                setattr(instance, f'{field}_{language[0]}', getattr(instance, field))
+                                instance.save()
 
             messages.add_message(request, messages.SUCCESS, _("Product create successfully."))
             return redirect(reverse("supplier:dashboard-productscreate"))
@@ -732,8 +777,31 @@ class DashboardStoresCreateView(SupplierOnlyAccessMixin, View):
             return redirect(reverse("supplier:dashboard-storescreate"))
 
         try:
-            SupplierModels.Store.objects.create(name=name, image=image, supplier=request.user)
+            store = SupplierModels.Store.objects.create(name=name, image=image, supplier=request.user)
             messages.add_message(request, messages.SUCCESS, _("Store create successfully."))
+
+
+            fields = ('name',)
+            instance = store
+            modal = SupplierModels.Store
+            for field in fields:
+                for language in settings.LANGUAGES:
+                    try:
+                        if language[0] == get_language():
+                            # already set
+                            continue
+                        result = translator.translate(getattr(instance, field), dest=language[0])
+                        for model_field in modal._meta.get_fields():
+                            if not model_field.name in f"{field}_{language[0]}":
+                                continue
+
+                            if model_field.name == f"{field}_{language[0]}":
+                                setattr(instance, model_field.name, result.text)
+                                instance.save()
+                    except:  
+                        setattr(instance, f'{field}_{language[0]}', getattr(instance, field))
+                        instance.save()
+
             return redirect(reverse("supplier:dashboard-storescreate"))
         except:
             messages.add_message(request, messages.ERROR, _("Sorry, an error occured. Please Try Again"))
@@ -789,10 +857,32 @@ class DashboardServicesCreateView(SupplierOnlyAccessMixin, View):
             messages.add_message(request, messages.ERROR, _("Please use a different service name."))
             return redirect(reverse("supplier:dashboard-servicescreate"))
 
-        # try:
-        SupplierModels.Service.objects.create(name=name, description=description, currency=currency, price=price, supplier=request.user)
-        messages.add_message(request, messages.SUCCESS, _("Service create successfully."))
-        return redirect(reverse("supplier:dashboard-servicescreate"))
-        # except:
-        #     messages.add_message(request, messages.ERROR, _("Sorry, an error occured. Please Try Again"))
-        #     return redirect(reverse("supplier:dashboard-servicescreate"))
+        try:
+            service = SupplierModels.Service.objects.create(name=name, description=description, currency=currency, price=price, supplier=request.user)
+            messages.add_message(request, messages.SUCCESS, _("Service create successfully."))
+
+            fields = ('name','description', 'price', 'currency')
+            instance = service
+            modal = SupplierModels.Service
+            for field in fields:
+                for language in settings.LANGUAGES:
+                    try:
+                        if language[0] == get_language():
+                            # already set
+                            continue
+                        result = translator.translate(getattr(instance, field), dest=language[0])
+                        for model_field in modal._meta.get_fields():
+                            if not model_field.name in f"{field}_{language[0]}":
+                                continue
+
+                            if model_field.name == f"{field}_{language[0]}":
+                                setattr(instance, model_field.name, result.text)
+                                instance.save()
+                    except:  
+                        setattr(instance, f'{field}_{language[0]}', getattr(instance, field))
+                        instance.save()
+
+            return redirect(reverse("supplier:dashboard-servicescreate"))
+        except:
+            messages.add_message(request, messages.ERROR, _("Sorry, an error occured. Please Try Again"))
+            return redirect(reverse("supplier:dashboard-servicescreate"))

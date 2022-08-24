@@ -23,6 +23,9 @@ from auth_app.forms import UserProfileFormManager
 from auth_app.tasks import send_account_activation_email_task
 from auth_app.tokens import appTokenGenerator
 
+from django.utils.translation import get_language
+from googletrans import Translator
+translator = Translator()
 
 class LoginView(View):
     template_name = "auth_app/signin.html"
@@ -120,8 +123,26 @@ class SignUpView(View):
             account_type=account_type,
         )
 
-        # send activation link
-        # send_account_activation_email_task.delay(user.username, user.email, "Activate Foroden Activation")
+        fields = ('first_name','last_name')
+        instance = user
+        modal = UserModel
+        for field in fields:
+            for language in settings.LANGUAGES:
+                try:
+                    if language[0] == get_language():
+                        # already set
+                        continue
+                    result = translator.translate(getattr(instance, field), dest=language[0])
+                    for model_field in modal._meta.get_fields():
+                        if not model_field.name in f"{field}_{language[0]}":
+                            continue
+
+                        if model_field.name == f"{field}_{language[0]}":
+                            setattr(instance, model_field.name, result.text)
+                            instance.save()
+                except:                    
+                    setattr(instance, f'{field}_{language[0]}', getattr(instance, field))
+                    instance.save()
 
         uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
         token = appTokenGenerator.make_token(user)
@@ -206,7 +227,7 @@ class BusinessProfileView(View):
             return redirect(reverse("auth_app:business"))
 
         try:
-            AuthModels.ClientProfile.objects.create(
+            profile = AuthModels.ClientProfile.objects.create(
                 user=request.user,
                 business_name=request.POST.get("business_name"),
                 business_description=request.POST.get("business_description"),
@@ -218,6 +239,29 @@ class BusinessProfileView(View):
                 legal_etity_identifier=request.POST.get("legal_etity_identifier", None),
                 website=request.POST.get("website", None),
             )
+
+            fields = ('business_name','business_description','country','country_code','city','mobile_user')
+            instance = profile
+            modal = AuthModels.ClientProfile
+            for field in fields:
+                for language in settings.LANGUAGES:
+                    try:
+                        if language[0] == get_language():
+                            # already set
+                            continue
+                        result = translator.translate(getattr(instance, field), dest=language[0])
+                        for model_field in modal._meta.get_fields():
+                            if not model_field.name in f"{field}_{language[0]}":
+                                continue
+
+                            if model_field.name == f"{field}_{language[0]}":
+                                setattr(instance, model_field.name, result.text)
+                                instance.save()
+                    except:                        
+                        setattr(instance, f'{field}_{language[0]}', getattr(instance, field))
+                        instance.save()
+
+
             return redirect(reverse("supplier:dashboard"))
         except:
             messages.add_message(

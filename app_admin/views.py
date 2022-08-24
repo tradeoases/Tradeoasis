@@ -31,6 +31,10 @@ from auth_app import forms as AuthForms
 
 from app_admin.mixins import SupportOnlyAccessMixin
 
+from django.utils.translation import get_language
+from googletrans import Translator
+from django.conf import settings
+translator = Translator()
 
 class AdminDashboardView(SupportOnlyAccessMixin, View):
     template_name = "app_admin/index.html"
@@ -195,12 +199,34 @@ class ServiceCreateView(SupportOnlyAccessMixin, CreateView):
             messages.add_message(request, messages.ERROR, _("Please Fill all fields."))
             return redirect(reverse("app_admin:service-create"))
 
-        form = ManagerForms.ServiceFormManager(request.POST)
-        if not form.is_valid():
+        # form = ManagerForms.ServiceFormManager(request.POST)
+        # if not form.is_valid():
+        service = ManagerModels.Service.objects.create(name=request.POST.get('name'), description=request.POST.get('description'))
+        if not service:
             messages.add_message(request, messages.ERROR, _("Invalid Data Entered."))
             return redirect(reverse("app_admin:service-create"))
 
-        form.save()
+        fields = ('name','description')
+        instance = service
+        modal = ManagerModels.Service
+        for field in fields:
+            for language in settings.LANGUAGES:
+                try:
+                    if language[0] == get_language():
+                        # already set
+                        continue
+                    result = translator.translate(getattr(instance, field), dest=language[0])
+                    for model_field in modal._meta.get_fields():
+                        if not model_field.name in f"{field}_{language[0]}":
+                            continue
+
+                        if model_field.name == f"{field}_{language[0]}":
+                            setattr(instance, model_field.name, result.text)
+                            instance.save()
+                except:
+                    setattr(instance, f'{field}_{language[0]}', getattr(instance, field))
+                    instance.save()
+
         messages.add_message(
             request, messages.SUCCESS, _(f"Service ({name}) created successfully.")
         )
@@ -228,6 +254,27 @@ class ShowroomCreateView(SupportOnlyAccessMixin, CreateView):
             return redirect(reverse("app_admin:showroom-create"))
 
         showroom = ManagerModels.Showroom.objects.create(name=name, image=image)
+
+        fields = ('name',)
+        instance = showroom
+        modal = ManagerModels.Showroom
+        for field in fields:
+            for language in settings.LANGUAGES:
+                try:
+                    if language[0] == get_language():
+                        # already set
+                        continue
+                    result = translator.translate(getattr(instance, field), dest=language[0])
+                    for model_field in modal._meta.get_fields():
+                        if not model_field.name in f"{field}_{language[0]}":
+                            continue
+
+                        if model_field.name == f"{field}_{language[0]}":
+                            setattr(instance, model_field.name, result.text)
+                            instance.save()
+                except:  
+                    setattr(instance, f'{field}_{language[0]}', getattr(instance, field))
+                    instance.save()
 
         if not showroom:
             messages.add_message(request, messages.ERROR, _("Error Occurred. Try Again"))
@@ -274,6 +321,26 @@ class CategoryCreateView(SupportOnlyAccessMixin, View):
             return redirect(reverse("app_admin:category-create"))
 
         category = SupplierModels.ProductCategory.objects.create(name=name, image=image)
+        fields = ('name',)
+        instance = category
+        modal = SupplierModels.ProductCategory
+        for field in fields:
+            for language in settings.LANGUAGES:
+                try:
+                    if language[0] == get_language():
+                        # already set
+                        continue
+                    result = translator.translate(getattr(instance, field), dest=language[0])
+                    for model_field in modal._meta.get_fields():
+                        if not model_field.name in f"{field}_{language[0]}":
+                            continue
+
+                        if model_field.name == f"{field}_{language[0]}":
+                            setattr(instance, model_field.name, result.text)
+                            instance.save()
+                except:  
+                    setattr(instance, f'{field}_{language[0]}', getattr(instance, field))
+                    instance.save()
 
         # create sub categories if any
         sub_category_len = len(request.FILES) - 1
@@ -291,9 +358,30 @@ class CategoryCreateView(SupportOnlyAccessMixin, View):
                 )
                 continue
 
-            SupplierModels.ProductSubCategory.objects.create(
+            sub_categgory = SupplierModels.ProductSubCategory.objects.create(
                 name=sub_cat_name, image=sub_cat_image, category=category
             )
+
+            fields = ('name',)
+            instance = sub_categgory
+            modal = SupplierModels.ProductSubCategory
+            for field in fields:
+                for language in settings.LANGUAGES:
+                    try:
+                        if language[0] == get_language():
+                            # already set
+                            continue
+                        result = translator.translate(getattr(instance, field), dest=language[0])
+                        for model_field in modal._meta.get_fields():
+                            if not model_field.name in f"{field}_{language[0]}":
+                                continue
+
+                            if model_field.name == f"{field}_{language[0]}":
+                                setattr(instance, model_field.name, result.text)
+                                instance.save()
+                    except:  
+                        setattr(instance, f'{field}_{language[0]}', getattr(instance, field))
+                        instance.save()
 
         messages.add_message(
             request,
@@ -378,6 +466,27 @@ class AdminCommunityChatView(SupportOnlyAccessMixin, View):
             user=request.user,
             discussion=discussion
         )
+
+        fields = ('description',)
+        instance = discussion_reply
+        modal = ManagerModels.DiscussionReply
+        for field in fields:
+            for language in settings.LANGUAGES:
+                try:
+                    if language[0] == get_language():
+                        # already set
+                        continue
+                    result = translator.translate(getattr(instance, field), dest=language[0])
+                    for model_field in modal._meta.get_fields():
+                        if not model_field.name in f"{field}_{language[0]}":
+                            continue
+
+                        if model_field.name == f"{field}_{language[0]}":
+                            setattr(instance, model_field.name, result.text)
+                            instance.save()
+                except:                    
+                    setattr(instance, f'{field}_{language[0]}', getattr(instance, field))
+                    instance.save()
 
         return redirect(reverse('app_admin:community-chat', kwargs={"slug": discussion.slug}))
 

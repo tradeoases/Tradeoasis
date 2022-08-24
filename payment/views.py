@@ -27,7 +27,10 @@ from paypalcheckoutsdk.orders import OrdersGetRequest
 from .paypal import PayPalClient
 import stripe
 
-
+from django.utils.translation import get_language
+from googletrans import Translator
+from django.conf import settings
+translator = Translator()
 
 class MembershipsView(AuthedOnlyAccessMixin, View):
     model = PaymentModels.MembershipPlan
@@ -208,6 +211,7 @@ def payment(request, pk):
         # timestamp, status, amount, user
         if result.status in ("submitted_for_settlement"):
             if request.user.account_type == "SUPPLIER":
+
                 plan = PaymentModels.Membership.objects.filter(supplier = request.user,plan = PaymentModels.MembershipPlan.objects.filter(id=pk).first())
                 if plan:
                     messages.add_message(
@@ -235,12 +239,13 @@ def payment(request, pk):
                             status = result.transation.status
                         )
                     receipt.save()
-            if membership and receipt:
-                # send email
+                    
+                if membership and receipt:
+                    # send email
 
-                return HttpResponse(status=204)
-            else:
-                return HttpResponseNotFound()
+                    return HttpResponse(status=204)
+                else:
+                    return HttpResponseNotFound()
         else:
             return HttpResponseNotFound()
 
