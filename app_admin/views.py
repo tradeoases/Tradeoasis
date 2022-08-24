@@ -211,21 +211,21 @@ class ServiceCreateView(SupportOnlyAccessMixin, CreateView):
         modal = ManagerModels.Service
         for field in fields:
             for language in settings.LANGUAGES:
-                # try:
-                if language[0] == get_language():
-                    # already set
-                    continue
-                result = translator.translate(getattr(instance, field), dest=language[0])
-                for model_field in modal._meta.get_fields():
-                    if not model_field.name in f"{field}_{language[0]}":
+                try:
+                    if language[0] == get_language():
+                        # already set
                         continue
+                    result = translator.translate(getattr(instance, field), dest=language[0])
+                    for model_field in modal._meta.get_fields():
+                        if not model_field.name in f"{field}_{language[0]}":
+                            continue
 
-                    if model_field.name == f"{field}_{language[0]}":
-                        setattr(instance, model_field.name, result.text)
-                        instance.save()
-                # except:
-                #     setattr(instance, f'{field}_{language[0]}', getattr(instance, field))
-                #     instance.save()
+                        if model_field.name == f"{field}_{language[0]}":
+                            setattr(instance, model_field.name, result.text)
+                            instance.save()
+                except:
+                    setattr(instance, f'{field}_{language[0]}', getattr(instance, field))
+                    instance.save()
 
         messages.add_message(
             request, messages.SUCCESS, _(f"Service ({name}) created successfully.")
@@ -260,21 +260,21 @@ class ShowroomCreateView(SupportOnlyAccessMixin, CreateView):
         modal = ManagerModels.Showroom
         for field in fields:
             for language in settings.LANGUAGES:
-                # try:
-                if language[0] == get_language():
-                    # already set
-                    continue
-                result = translator.translate(getattr(instance, field), dest=language[0])
-                for model_field in modal._meta.get_fields():
-                    if not model_field.name in f"{field}_{language[0]}":
+                try:
+                    if language[0] == get_language():
+                        # already set
                         continue
+                    result = translator.translate(getattr(instance, field), dest=language[0])
+                    for model_field in modal._meta.get_fields():
+                        if not model_field.name in f"{field}_{language[0]}":
+                            continue
 
-                    if model_field.name == f"{field}_{language[0]}":
-                        setattr(instance, model_field.name, result.text)
-                        instance.save()
-                # except:  
-                #     setattr(instance, f'{field}_{language[0]}', getattr(instance, field))
-                #     instance.save()
+                        if model_field.name == f"{field}_{language[0]}":
+                            setattr(instance, model_field.name, result.text)
+                            instance.save()
+                except:  
+                    setattr(instance, f'{field}_{language[0]}', getattr(instance, field))
+                    instance.save()
 
         if not showroom:
             messages.add_message(request, messages.ERROR, _("Error Occurred. Try Again"))
