@@ -182,6 +182,7 @@ DEFAULT_FROM_EMAIL = "phillipmugisa4@gmail.com"
 
 LOGIN_REDIRECT = "/auth/login/"
 
+CORS_ALLOW_ALL_ORIGINS = True
 
 # translations
 LANGUAGE_CODE = "en"
