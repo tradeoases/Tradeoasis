@@ -31,8 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "memberships_was_loaded" : false,
     }
 
-    const BASE_API_URL = 'http://localhost:8000/admin-api';
-    const BASE_URL = 'http://localhost:8000/';
+    const BASE_API_URL = 'http://141.136.42.49/en/admin-api';
+    const BASE_URL = 'http://141.136.42.49/';
 
 
     function getCookie(name) {
