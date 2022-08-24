@@ -18,13 +18,13 @@
             </div>
             <div class="section-body grid gap-6 grid-cols-1 md:grid-cols-2">
                 {% for service in object_list %}
-                    <div class="service grid gap-3 p-4 card-outlined rounded">
+                    <div class="service grid gap-3 p-4 card-outlined items-start content-start rounded">
                         <h2 class="text-lg font-semibold text-lghterBackgroundColor">{{service.name}}</h2>
                         <hr>
                         <div class="grid gap-2">
-                            <p class="text-base text-slate-700 font-normal">
+                            <pre class="text-base text-slate-700 font-normal">
                                 {{service.description}} 
-                            </p>
+                            </pre>
                         </div>
                     </div>
                 {% endfor %}
