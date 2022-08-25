@@ -171,7 +171,6 @@ Safety and Security Equipments
 Consumer Electronics
     - Camera, Photo & Accessories
     - Chargers, Batteries & Power Supplies
-    - Commonly Used Accessories & Parts
     - Computer Hardware & Software
     - Earphone & Headphone & Accessories
     - Electronic Publications
@@ -179,7 +178,6 @@ Consumer Electronics
     - Mobile Phone & Accessories
 
 Electrical Equipment
-    - Connectors & Terminals
     - Electrical Instruments
     - Electrical Supplies
     - Generators
@@ -189,46 +187,34 @@ Electrical Equipment
     - Power Supplies
 
 Energy Sector
-    - Biodiesel
-    - Biogas
-    - Charcoal
-    - Coal
-    - Coal Gas
-    - Coke Fuel
-    - Crude Oil
-    - Industrial Fuel
+    - Biodiesel and Biogas
+    - Charcoal and Coal
+    - Solar
 
 Environment and Recycling
     - Environmental Products
     - Recycling
-    - Sewer Products
 
 Food Industry
     - Baby Food
     - Baked Goods
-    - Bean Products
     - Beverages
     - Canned Food
     - Confectionery
     - Dairy Products
     - Egg Products
+    - others
 
 Jewelry
     - Beads & Jewelry Making
-    - Jewelry making
-    - Customized Jewelry
-    - Fine Jewelry
     - Wedding & Engagement Jewelry
     - Earrings
     - Necklaces & Pendants
     - Bracelets & Bangles
-    - Jewelry Sets & More
-    - Rings
+    - other
 
-Medical Products – Healthcare – Pharmaceutical
+Medical Products
     - Animal & Veterinary
-    - Chinese Medicine
-    - Extracts
     - Health Care Products
     - Household Medical Devices
     - Medical Consumables
@@ -237,26 +223,20 @@ Medical Products – Healthcare – Pharmaceutical
 
 Plastic and Rubber Industry
     - Plastic Products
-    - Plastic Projects
     - Plastic Raw Materials
-    - Plastic Stocks
     - Recycled Plastic
     - Recycled Rubber
     - Rubber Products
-    - Rubber Projects
+    - Others
 
 School and Office Stationery
-    -   Art Supplies
-    -   Badge Holder & Accessories
-    -   Board Erasers
-    -   Boards
-    -   Book Covers
-    -   Books
-    -   Calculators
-    -   Calendars
+    - Art Supplies
+    - Books
+    - Calculators
+    - Calendars
+    - Others
 
 Sporting and Recreation Equipments
-    - Amusement Park Products
     - Artificial Grass & Sports Flooring
     - Boats & Ships
     - Camping & Hiking
@@ -268,28 +248,23 @@ Sporting and Recreation Equipments
     - Indoor Sports
     - Musical Instruments
 
-Materials Textile Products
-    - Down & Feather
+Textile Products
+    - Feather Textile
     - Fabric
     - Fiber
     - Fur
     - Leather
-    - Leather Products
-    - Other Textiles & Leather Products
-    - Textile Accessories
 
 Home Appliances
     - Air Conditioning Appliances
     - Baby Appliances
     - Cleaning Appliances
-    - Home Appliance Parts
-    - Home Appliance Stock
     - Home Heaters
     - Laundry Appliances
-    - Major Kitchen Appliances
-    - Other Home Appliances
+    - Kitchen Appliances
     - Personal Care & Beauty Appliances
     - Refrigerators & Freezers
+    - Other Home Appliances
 
 
 Marine Vehicles and Equipment
