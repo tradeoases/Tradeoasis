@@ -5,6 +5,7 @@ module.exports = {
     './templates/supplier/*html',
     './templates/payments/*html',
     './templates/manager/*html',
+    './templates/manager/utils/*html',
     './templates/auth_app/*html',
   ],
   theme: {
