@@ -62,7 +62,7 @@ class HomeView(View):
                         "category": category,
                         "sub_categories": ProductSubCategory.objects.filter(
                             category=category
-                        ),
+                        )[:3],
                     }
                     for category in ProductCategory.objects.all().order_by(
                         "-id"
