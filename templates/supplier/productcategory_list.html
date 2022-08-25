@@ -12,7 +12,7 @@
                 </div>
                 <div class="section-body grid gap-6 grid-cols-6" data-context-name="{{context_name}}">
                     {% for category_group in object_list %}
-                        <div class="grid gap-2 align-start p-2 px-4" data-category-index="{{ forloop.counter }}">
+                        <div class="grid gap-2 align-start p-2 px-4 border border-solid border-slate-400 rounded" style="align-items: flex-start;align-content: flex-start;" data-category-index="{{ forloop.counter }}">
                             <a href='{% url "supplier:category-detail" category_group.category.slug %}' class="text-base font-semibold">{{ category_group.category.name }}</a>
                             <ul class="grid gap-1 list-inside">
 
