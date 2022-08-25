@@ -347,6 +347,9 @@ class CategoryCreateView(SupportOnlyAccessMixin, View):
         for i in range(1, sub_category_len + 1):
             sub_cat_name = request.POST.get(f"subcategory-{i}")
             sub_cat_image = request.FILES.get(f"subcategory-{i}")
+            print("*"*50)
+            print(sub_cat_image)
+            print("*"*50)
 
             if SupplierModels.ProductSubCategory.objects.filter(
                 name=string.capwords(sub_cat_name)
