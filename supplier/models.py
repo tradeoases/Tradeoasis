@@ -39,7 +39,7 @@ class Store(models.Model):
         null=True,
     )
 
-    image = models.ImageField(
+    image = models.FileField(
         verbose_name=_("Service Image"),
         upload_to=get_file_path,
         default="test/django.png",
@@ -82,7 +82,7 @@ class ProductCategory(models.Model):
 class ProductSubCategory(models.Model):
     name = models.CharField(_("Name"), max_length=256)
     category = models.ForeignKey(to=ProductCategory, on_delete=models.CASCADE)
-    image = models.ImageField(
+    image = models.FileField(
         verbose_name=_("Image"),
         upload_to=get_file_path,
         default="test/django.png",
@@ -149,7 +149,7 @@ class Product(models.Model):
 
 class ProductImage(models.Model):
     product = models.ForeignKey(to=Product, on_delete=models.CASCADE)
-    image = models.ImageField(
+    image = models.FileField(
         verbose_name=_("Image"),
         upload_to=get_file_path,
     )
