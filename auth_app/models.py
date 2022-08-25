@@ -77,7 +77,7 @@ class ClientProfile(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.business_name:
-            self.business_name = string.capwords(self.user.username)
+            self.business_name = self.user.username
 
         self.slug = slugify(self.business_name)
         super().save(*args, **kwargs)

@@ -224,8 +224,6 @@ Medical Products
 Plastic and Rubber Industry
     - Plastic Products
     - Plastic Raw Materials
-    - Recycled Plastic
-    - Recycled Rubber
     - Rubber Products
     - Others
 

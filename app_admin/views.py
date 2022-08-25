@@ -312,7 +312,7 @@ class CategoryCreateView(SupportOnlyAccessMixin, View):
         image = request.FILES.get("category-image")
 
         category = SupplierModels.ProductCategory.objects.filter(
-            name=string.capwords(name)
+            name=name
         )
         if category.exists():
             messages.add_message(
@@ -349,7 +349,7 @@ class CategoryCreateView(SupportOnlyAccessMixin, View):
             sub_cat_image = request.FILES.get(f"sub-category-image-{i}")
 
             if SupplierModels.ProductSubCategory.objects.filter(
-                name=string.capwords(sub_cat_name)
+                name=sub_cat_name
             ).exists():
                 messages.add_message(
                     request,
