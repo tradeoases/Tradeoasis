@@ -827,6 +827,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     const handleAddInput = (target, subCategoryCount, subCategoryGroup, lastAddElem) => {
+        if (subCategoryCount == 10) return;
         // remove add btn
         lastAddElem.removeChild(target)
         const deleteInputBtn = lastAddElem.querySelector('.delete-input');

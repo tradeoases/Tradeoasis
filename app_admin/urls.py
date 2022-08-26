@@ -15,6 +15,9 @@ urlpatterns = [
     path(
         "manager/category", views.CategoryCreateView.as_view(), name="category-create"
     ),
+    path(
+        "manager/subcategory", views.SubCategoryCreateView.as_view(), name="subcategory-create"
+    ),
     # support
     path("discussions/", views.AdminDiscussionsView.as_view(), name="discussions"),
     path("discussions/chat", views.AdminChatView.as_view(), name="discussion"),

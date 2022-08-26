@@ -33,7 +33,7 @@ class MembershipPlan(models.Model):
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:10]
+        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:50]
 
         self.name = self.name
 
@@ -98,7 +98,7 @@ class ModeOfPayment(models.Model):
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:10]
+        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:50]
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:

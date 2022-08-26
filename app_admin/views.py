@@ -391,6 +391,78 @@ class CategoryCreateView(SupportOnlyAccessMixin, View):
         return redirect(reverse("app_admin:category-create"))
 
 
+class SubCategoryCreateView(SupportOnlyAccessMixin, View):
+    template_name = "app_admin/productsubcategorycreate.html"
+
+    def get_context_data(self):
+        context_data = dict()
+
+        context_data["view_name"] = _("Admin Dashboard - Clients")
+        context_data["active_tab"] = "Manager"
+        context_data["categories"] = SupplierModels.ProductCategory.objects.all()
+
+        return context_data
+
+    def get(self, request):
+        return render(request, self.template_name, context=self.get_context_data())
+
+    def post(self, request):
+        name = request.POST.get("category-name")
+
+        category = SupplierModels.ProductCategory.objects.filter(
+            name=name
+        )
+
+        # create sub categories if any
+        sub_category_len = len(request.FILES) - 1
+        for i in range(1, sub_category_len + 1):
+            sub_cat_name = request.POST.get(f"subcategory-{i}")
+            sub_cat_image = request.FILES.get(f"sub-category-image-{i}")
+
+            if SupplierModels.ProductSubCategory.objects.filter(
+                name=sub_cat_name
+            ).exists():
+                messages.add_message(
+                    request,
+                    messages.ERROR,
+                    _(f"Sub category ({sub_cat_name}) already exists."),
+                )
+                continue
+
+            sub_categgory = SupplierModels.ProductSubCategory.objects.create(
+                name=sub_cat_name, image=sub_cat_image, category=category
+            )
+
+            fields = ('name',)
+            instance = sub_categgory
+            modal = SupplierModels.ProductSubCategory
+            for field in fields:
+                for language in settings.LANGUAGES:
+                    try:
+                        if language[0] == get_language():
+                            # already set
+                            continue
+                        result = translator.translate(getattr(instance, field), dest=language[0])
+                        for model_field in modal._meta.get_fields():
+                            if not model_field.name in f"{field}_{language[0]}":
+                                continue
+
+                            if model_field.name == f"{field}_{language[0]}":
+                                setattr(instance, model_field.name, result.text)
+                                instance.save()
+                    except:  
+                        setattr(instance, f'{field}_{language[0]}', getattr(instance, field))
+                        instance.save()
+
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            _("Subcategories created successfully.").format(name),
+        )
+        return redirect(reverse("app_admin:subcategory-create"))
+
+
+
 class AdminDiscussionsView(SupportOnlyAccessMixin, View):
     template_name = "app_admin/support/index.html"
 

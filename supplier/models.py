@@ -37,6 +37,7 @@ class Store(models.Model):
         unique=True,
         blank=True,
         null=True,
+        max_length=200
     )
 
     image = models.FileField(
@@ -47,7 +48,7 @@ class Store(models.Model):
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:10]
+        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:200]
 
         self.name = self.name
 
@@ -65,11 +66,11 @@ class ProductCategory(models.Model):
         upload_to=get_file_path,
         default="test/django.png",
     )
-    slug = models.SlugField(_("Safe Url"), unique=True, blank=True, null=True)
+    slug = models.SlugField(_("Safe Url"), unique=True, blank=True, null=True, max_length=200)
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:10]
+        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:200]
 
         self.name = self.name
 
@@ -92,11 +93,12 @@ class ProductSubCategory(models.Model):
         unique=True,
         blank=True,
         null=True,
+        max_length=200
     )
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:10]
+        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:200]
 
         self.name = self.name
 
@@ -130,11 +132,12 @@ class Product(models.Model):
         unique=True,
         blank=True,
         null=True,
+        max_length=200
     )
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:10]
+        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:200]
 
         if not self.pk:
             self.category = self.sub_category.category
@@ -158,11 +161,12 @@ class ProductImage(models.Model):
         unique=True,
         blank=True,
         null=True,
+        max_length=100
     )
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(f"{self.product.name[:10]}-{uuid.uuid4()}")[:50]
+        self.slug = slugify(f"{self.product.name}-{uuid.uuid4()}")[:100]
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
@@ -179,7 +183,7 @@ class ProductTag(models.Model):
     )
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:10]
+        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:50]
 
         super().save(*args, **kwargs)
 
@@ -207,7 +211,7 @@ class Service(models.Model):
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:10]
+        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:50]
 
         self.name = self.name
 
