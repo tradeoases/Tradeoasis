@@ -411,7 +411,7 @@ class SubCategoryCreateView(SupportOnlyAccessMixin, View):
 
         category = SupplierModels.ProductCategory.objects.filter(
             name=name
-        )
+        ).first()
 
         # create sub categories if any
         sub_category_len = len(request.FILES) - 1
