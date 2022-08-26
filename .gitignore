@@ -133,8 +133,8 @@ test_files/*
 media/*
 ./functional_tests.py
 .test.py
-*/migrations/*.py
-*/migrations/*.pyc
+# */migrations/*.py
+# */migrations/*.pyc
 
 # node npm
 node_modules/
