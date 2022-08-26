@@ -163,7 +163,7 @@ class ShowRoomDetailView(DetailView):
                 {"showroom": showroom, "store_count": showroom.store.count()}
                 for showroom in (
                     lambda showrooms: random.sample(showrooms, len(showrooms))
-                )(list(ManagerModels.Showroom.objects.all()[:10]))
+                )(list(ManagerModels.Showroom.objects.filter(~Q(id=showroom.id))[:10]))
             ],
         }
         context["products"] = {

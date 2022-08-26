@@ -37,7 +37,7 @@ class Store(models.Model):
         unique=True,
         blank=True,
         null=True,
-        max_length=200
+        max_length=50
     )
 
     image = models.FileField(
@@ -48,7 +48,7 @@ class Store(models.Model):
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:200]
+        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:50]
 
         self.name = self.name
 
@@ -66,11 +66,11 @@ class ProductCategory(models.Model):
         upload_to=get_file_path,
         default="test/django.png",
     )
-    slug = models.SlugField(_("Safe Url"), unique=True, blank=True, null=True, max_length=200)
+    slug = models.SlugField(_("Safe Url"), unique=True, blank=True, null=True, max_length=50)
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:200]
+        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:50]
 
         self.name = self.name
 
@@ -93,12 +93,12 @@ class ProductSubCategory(models.Model):
         unique=True,
         blank=True,
         null=True,
-        max_length=200
+        max_length=50
     )
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:200]
+        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:50]
 
         self.name = self.name
 
@@ -132,12 +132,12 @@ class Product(models.Model):
         unique=True,
         blank=True,
         null=True,
-        max_length=200
+        max_length=50
     )
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:200]
+        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:50]
 
         if not self.pk:
             self.category = self.sub_category.category
