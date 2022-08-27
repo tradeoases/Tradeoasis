@@ -36,7 +36,7 @@
         <div class="page-starter grid w-full mx-auto cf-1 gap-4 overflow-hidden">
             <div class="hidden md:grid side-bar gap-3 content-start product-categories w-12/12 ">
                 <div class="grid p-0 side-menu card rounded-none rounded-t-md overflow-hidden">
-                    <h2 class="text-xl font-bold px-5 py-3" style="background-color: hsla(213, 28%, 90%, .8);">
+                    <h2 class="text-xl font-bold px-5 py-3 text-lighterBackgroundColor" style="background-color: hsla(213, 28%, 90%, .8);">
                         {% trans "Product Categories" %}</h2>
                     <ul class="grid gap-0.5 px-5 py-2" data-context='{{ product_categories.context_name }}'>
                         
@@ -99,7 +99,7 @@
             </div>
             <div class="hidden md:grid side-bar gap-3 content-start product-categories w-12/12">
                 <div class="grid p-0 side-menu card rounded-none rounded-t-md overflow-hidden">
-                    <h2 class="text-xl font-bold px-5 py-3" style="background-color: hsla(213, 28%, 90%, .8);">{% trans 'Showrooms' %}</h2>
+                    <h2 class="text-xl font-bold px-5 py-3 text-lighterBackgroundColor" style="background-color: hsla(213, 28%, 90%, .8);">{% trans 'Showrooms' %}</h2>
                     <ul class="grid gap-0.5 px-5 py-2" data-context='{{ product_categories.context_name }}'>
                         {% for showroom in showroows_headers %}
                             <li
@@ -201,7 +201,7 @@
                 <h2 class="sec-title text-xl capitalize md:text-2xl font-bold text-yellowColor">{% trans 'Foroden Showrooms' %}</h2>
                 <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="">{% trans 'View All' %}</a>
             </div>
-            <div class="showrooms section-body grid gap-4 horizontal-scroll items-start" style="--row-size:14%">
+            <div class="showrooms section-body grid gap-4 horizontal-scroll items-start" style="--row-size: 44%">
                 
                 {% for showroom in showrooms.results %}
                     <a href="{% url 'manager:showroom-detail' showroom.slug %}" class="grid card rounded overflow-hidden">

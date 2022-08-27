@@ -277,27 +277,27 @@ class CategoryDetailView(DetailView):
 
         context["view_name"] = category.name
 
-        products = []
-        for sub_category in SupplierModels.ProductSubCategory.objects.filter(
-            category=category
-        ):
-            if not sub_category.product_set.count() < 1:
-                sub_category_group = {
-                    "sub_category": sub_category.name,
-                    "count": sub_category.product_set.count(),
-                    "results": {
-                        "products": [
-                            {
-                                "product": product,
-                                "image": SupplierModels.ProductImage.objects.filter(
-                                    product=product
-                                ).first(),
-                            }
-                            for product in sub_category.product_set.all()
-                        ]
-                    },
-                }
-                products.append(sub_category_group)
+        # products = []
+        # for sub_category in SupplierModels.ProductSubCategory.objects.filter(
+        #     category=category
+        # ):
+        #     if not sub_category.product_set.count() < 1:
+        #         sub_category_group = {
+        #             "sub_category": sub_category.name,
+        #             "count": sub_category.product_set.count(),
+        #             "results": {
+        #                 "products": [
+        #                     {
+        #                         "product": product,
+        #                         "image": SupplierModels.ProductImage.objects.filter(
+        #                             product=product
+        #                         ).first(),
+        #                     }
+        #                     for product in sub_category.product_set.all()
+        #                 ]
+        #             },
+        #         }
+        #         products.append(sub_category_group)
 
         context["products"] = {
             "context_name": "products",

@@ -4,25 +4,25 @@
 {% block content %}
 
 <section class="main w-12/12 py-6 pt-0" style="block-size: auto;">
-    <div class="grid justify-center content-center text-center gap-4 capitalize" style="block-size: 50vh;background-color: #0F172A;">
-        <h3 class="text-6xl text-white font-bold">{% trans 'Simple, predictable pricing' %}</h3>
-        <p class="text-xl text-white font-semibold">{% trans 'Reach more businesses with our different promotion deals' %}</p>
+    <div class="grid justify-center content-center md:px-0 px-4 text-center gap-4 capitalize" style="block-size: 50vh;background-color: #0F172A;">
+        <h3 class="md:text-6xl text-3xl text-white font-bold">{% trans 'Simple, predictable pricing' %}</h3>
+        <p class="md:text-xl text-base text-slate-300 font-semibold">{% trans 'Reach more businesses with our different promotion deals' %}</p>
     </div>
 
     <div class="main w-12/12 py-10 grid gap-6" style="block-size: auto; background-color: hsl(210, 30%, 95%)">
         <div class="grid justify-center items-center">
-            <h3 class="text-3xl font-bold text-lghterBackgroundColor">{% trans 'Memberships Packages' %}</h3>
+            <h3 class="md:text-3xl text-xl font-bold text-lghterBackgroundColor">{% trans 'Memberships Packages' %}</h3>
         </div>
-        <div class="grid gap-4 md:grid-cols-3 gap-10 justify-between w-11/12 py-5 mx-auto" data-context="memberships.context_name">
+        <div class="grid gap-4 md:grid-cols-3 gap-5 md:gap-10 justify-stretch md:justify-between w-11/12 py-5 mx-auto" data-context="memberships.context_name">
             {% for plan in memberships.results %}
-                <div class="membership-card px-7 py-5 card grid gap-2 rounded-xl scale-95 hover:scale-100 transition-200 transition-all ease-in" style="background-image: linear-gradient(to right top,hsl(216, 83%, 12%),#00213a,hsl(199, 100%, 11%),hsl(190, 100%, 11%),hsl(180, 100%, 10%));">
-                    <div class="header grid px-4 py-4">
-                        <h2 class="text-3xl font-bold text-white">{{plan.plan.name}}</h2>
+            <div class="membership-card p-4 p-6 card grid gap-2 rounded-xl scale-95 hover:scale-100 transition-200 transition-all ease-in" style="background-image: linear-gradient(to right top,hsl(216, 83%, 12%),#00213a,hsl(199, 100%, 11%),hsl(190, 100%, 11%),hsl(180, 100%, 10%));">
+                <div class="header grid px-4 py-4">
+                    <h2 class="md:text-3xl text-xl font-bold text-white">{{plan.plan.name}}</h2>
                     </div>
                     <div class="price grid px-4 py-4">
                         <h2 class="font-bold text-yellowColor">
                             <span class="text-4xl">$</span>
-                            <span class="text-5xl">450</span>
+                            <span class="text-3xl">450</span>
                             <span class="text-lg">/ month</span>
                         </h2>
                     </div>

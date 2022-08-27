@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load isEqual %}
 {% include '../utils/header.html' %}
-    <main class="grid gap-10 my-10 mt-0 justify-start justify-self-start">
+    <main class="grid gap-10 my-10 mt-0 justify-start justify-self-start" style="min-inline-size: 100vw;">
         <div class="grid bg-white gap-0">
             <div class="breadcrumb grid grid-flow-col justify-start gap-2 pt-1 px-5 md:px-0 md:w-full md:mx-auto">
                 <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">Home</a>
@@ -42,6 +42,7 @@
             </div>
         </div>
 
+        {% if new_arrivals.results %}
         <section class="main w-12/12">
             <div class="grid md:w-full mx-auto p-2 md:p-0 cf-1 gap-4">
                 <div class="section-body grid card p-3 py-6 rounded-md">
@@ -74,6 +75,7 @@
                 </div>
             </div>
         </section>
+        {% endif %}
 
         <section class="main w-12/12" style="block-size: auto">
             <div class="grid w-full mx-auto cf-1 gap-4" style="grid-template-columns: 1fr;">
@@ -121,6 +123,7 @@
 
         const productsEl = document.querySelector('#products-area');
         const loaderEl = document.querySelector('.scroll-loading');
+        loaderEl.style.display = "none";
 
         // Get the products from API
         const getProducts = async (page, limit) => {

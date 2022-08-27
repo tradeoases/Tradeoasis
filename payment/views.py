@@ -32,7 +32,7 @@ from googletrans import Translator
 from django.conf import settings
 translator = Translator()
 
-class MembershipsView(AuthedOnlyAccessMixin, View):
+class MembershipsView(View):
     model = PaymentModels.MembershipPlan
     template_name = 'payments/memberships.html'
 

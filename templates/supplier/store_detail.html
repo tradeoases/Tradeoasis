@@ -4,8 +4,8 @@
 {% load isEqual %}
 {% block content %}
 
-    <div class="grid gap-6 md:gap-3 bg-white">
-        <div class="breadcrumb flex flex-wrap justify-start gap-2 md:w-full mx-auto pt-1 px-5 md:px-0">
+    <div class="grid gap-3 bg-white">
+        <div class="breadcrumb grid grid-flow-col justify-start gap-2 pt-1 px-5 md:px-0 md:w-full md:mx-auto">
             <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">{% trans 'Home' %}</a>
             <span>/</span>
             <a class="text-gray-600 hover:text-gray-900" href=''>{% trans 'Stores' %}</a>

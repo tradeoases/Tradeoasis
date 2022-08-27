@@ -593,7 +593,7 @@ footer a:hover {
 
 @media (max-width: 786px) {    
     .showrooms img {
-        max-block-size: 20vh;
+        max-block-size: 15vh;
     }
 }
 
