@@ -241,15 +241,23 @@
                         {% trans "Categories for you" %}
                     </h4>
                     <ul class="text-slate-300 grid gap-2 pl-4">
-                        {% for category in categories_header %} 
+                        {% for category in categories_header %}
                             <li
                                 class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
                                 <a class="flex items-center justify-start gap-2 py-2" href="{% url 'supplier:category-detail' category.slug  %}">
-                                    <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="/media/{{ category.image }}" alt="{{ category.name }}">
+                                    <!-- <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="/media/{{ category.image }}" alt="{{ category.name }}"> -->
                                     <span>{{ category.name }}</span>
                                 </a>
                             </li>
                         {% endfor %}
+                        {% for category in categories_header %}
+                            <li
+                                class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
+                                <a class="flex items-center justify-start gap-2 py-2" href="{% url 'supplier:category-list' %}">
+                                    <!-- <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="/media/{{ category.image }}" alt="{{ category.name }}"> -->
+                                    <span>View All</span>
+                                </a>
+                            </li>
                     </ul>
                 </div>
             {% endif %}

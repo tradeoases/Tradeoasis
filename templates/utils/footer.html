@@ -4,7 +4,7 @@
     <hr>
     <footer class="mt-0 md:mt-10">
         <div class="container-fluid foot mt-0 md:mt-50">
-            <div class="container my-8 hidden md:flex" style="display: grid;gap: 2rem; grid-template-columns: 1fr 2fr;">
+            <div class="footer-md-hide container my-8">
                 <div class="cl cl1 w-3/12">
                     <img loading="lazy" src="{% static 'assets/imgs/resources/logo_website-e1652772171833-1.png' %}" alt="footer-logo" style="inline-size: 5rem;">
                 </div>
@@ -76,9 +76,9 @@
                                 States
                                 . English</a>
                         </div> -->
-                        <div class="grid gap-1 md:gap-2 flex-left-bottom grid">
+                        <div class="grid gap-1 md:gap-2 flex-left-bottom">
                             <span class="hidden md:grid" style="color:#adacac;">© 2010-2022 Foroden</span>
-                            <div class="flex gap-2">
+                            <div class="flex flex-wrap justify-center gap-2">
                                 <a href="{% url 'app_admin:home' %}">{% trans 'Admin' %}</a>
                                 <a href="#">{% trans 'Terms' %}</a>
                                 <a href="#">{% trans 'Privacy' %}</a>
@@ -90,18 +90,18 @@
                     <div class="flex-right flex md:grid gap-3 items-center justify-center">
                         <div class="flex-left-top flex gap-4">
                             <i class="ti-facebook"></i>
-                            <i class="ti-youtube"></i>
+                            <!-- <i class="ti-youtube"></i> -->
                             <i class="ti-twitter"></i>
-                            <i class="ti-instagram"></i>
-                            <i class="ti-linkedin"></i>
-                            <i class="ti-microphone"></i>
+                            <a href=""><i class="ti-instagram"></i></a>
+                            <a href=""><i class="ti-linkedin"></i></a>
+                            <!-- <i class="ti-microphone"></i> -->
                         </div>
                         <!-- <div class="flex-left-bottom flex" style="justify-content:flex-end;">
                             <img src="{% static 'assets/imgs/resources/apple-logo.jpg' %}" alt=""
                                 style="width:80px;block-size:30px;">
-                        </div>
-                    </div> -->
-                    <span class="justify-self-center grid md:hidden" style="color:#adacac;">© 2010-2022 Foroden</span>
+                        </div> -->
+                    </div>
+                    <span class="justify-self-center grid md:hidden" style="color:#adacac;">© <script>document.write(new Date().getFullYear())</script> Foroden</span>
                 </div>
             </div>
         </div>

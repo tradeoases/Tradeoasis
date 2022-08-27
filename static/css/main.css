@@ -742,3 +742,14 @@ form input.error {
 .membership-card {
     
 }
+
+
+.footer-md-hide {
+    display: none;
+}
+
+@media (min-width: 786px) {
+    .footer-md-hide {
+        display: grid;gap: 2rem; grid-template-columns: 1fr 2fr;
+    }
+}
