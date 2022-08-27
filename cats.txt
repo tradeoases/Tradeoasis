@@ -85,10 +85,10 @@ Chemical Industry
     - Custom Chemical Services
     - Daily Chemicals
 
-Womem's Fashion
+Women's Fashion
     - Rompers
     - Bodysuits
-    - Pants & Capris
+    - Women's Pants & Capris
     - Dress
     - Skirt
     - Jeans
@@ -107,17 +107,14 @@ Womem's Fashion
     - Hoodies & Sweatshirts
 
 Mens's Fashion
-    - Men's Sets
-    - Pants
-    - Tops & Tees
-    - Board Shorts
-    - Sweaters
+    - Men's Pants
+    - Men's Shirts
+    - Men's Sweaters
     - Suits & Blazers
-    - Shirts
-    - Jackets & Coats
-    - Jeans
+    - Men's Jackets & Coats
     - Casual Shorts
     - Hoodies & Sweatshirts
+    - Other Mens' Clothes
 
 Cosmetic Products
     - Sanitary Paper
@@ -125,15 +122,12 @@ Cosmetic Products
     - Skin Care
     - Makeup
     - Shaving & Hair Removal
-    - Health Care
+    - Health Care Products
     - Bath & Shower
     - Hair Care & Styling
     - Fragrances & Deodorants
     - Tattoo & Body Art
-    - Tools & Accessories
-    - Nails Art & Tools
-    - Skin Care Tools
-    - Beauty Essentials
+    - Nails Art Tools
 
 Construction and Building Industry
     - Balustrades & Handrails
@@ -142,9 +136,6 @@ Construction and Building Industry
     - Building Boards
     - Ceilings
     - Corner Guards
-    - Countertops, Vanity Tops & Table Tops
-    - Curtain Walls & Accessories
-    - Decorative Films
     - Door, Window & Accessories
     - Earthwork Products
 
@@ -162,11 +153,10 @@ Safety and Security Equipments
     - Alarms
     - Self Defense Supplies
     - Surveillance Products
-    - Other Security & Protection Products
     - Locks & Keys
     - Safes
-    - Access Control Systems & Products
     - IoT Solutions & Software
+    - Other Security & Protection Products
 
 Consumer Electronics
     - Camera, Photo & Accessories

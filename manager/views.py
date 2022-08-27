@@ -31,27 +31,27 @@ class HomeView(View):
 
     def get(self, request):
         # generating products context
-        sub_categories = ProductSubCategory.objects.all()[:10]
-        product_object_list = []
-        for sub_category in sub_categories:
-            if not sub_category.product_set.count() < 1:
-                sub_category_group = {
-                    "sub_category": sub_category.name,
-                    "category": sub_category.category.name,
-                    "count": sub_category.category.product_count,
-                    "results": {
-                        "products": [
-                            {
-                                "product": product,
-                                "image": ProductImage.objects.filter(
-                                    product=product
-                                ).first(),
-                            }
-                            for product in sub_category.product_set.all()
-                        ]
-                    },
-                }
-                product_object_list.append(sub_category_group)
+        # sub_categories = ProductSubCategory.objects.all()[:10]
+        # product_object_list = []
+        # for sub_category in sub_categories:
+        #     if not sub_category.product_set.count() < 1:
+        #         sub_category_group = {
+        #             "sub_category": sub_category.name,
+        #             "category": sub_category.category.name,
+        #             "count": sub_category.category.product_count,
+        #             "results": {
+        #                 "products": [
+        #                     {
+        #                         "product": product,
+        #                         "image": ProductImage.objects.filter(
+        #                             product=product
+        #                         ).first(),
+        #                     }
+        #                     for product in sub_category.product_set.all()
+        #                 ]
+        #             },
+        #         }
+        #         product_object_list.append(sub_category_group)
 
         context_data = {
             "view_name": _("Home"),
@@ -60,13 +60,12 @@ class HomeView(View):
                 "results": [
                     {
                         "category": category,
-                        "sub_categories": ProductSubCategory.objects.filter(
+                        "sub_categories": (
+                        lambda sub_categories: random.sample(sub_categories, len(sub_categories)))(list(ProductSubCategory.objects.filter(
                             category=category
-                        )[:3],
+                        ).order_by("-id")))[:3]
                     }
-                    for category in ProductCategory.objects.all().order_by(
-                        "-id"
-                    )[:6]
+                    for category in (lambda categories: random.sample(categories, len(categories)))(list(ProductCategory.objects.all().order_by("-id")))[:6]
                     # if category.product_count > 0
                     # and category.productsubcategory_set.count()
                 ],
@@ -75,10 +74,10 @@ class HomeView(View):
                 "context_name": "showrooms",
                 "results": ManagerModels.Showroom.objects.all().order_by("-id")[:6],
             },
-            "catogory_product_group": {
-                "context_name": "catogory-product-group",
-                "results": product_object_list,
-            },
+            # "catogory_product_group": {
+            #     "context_name": "catogory-product-group",
+            #     "results": product_object_list,
+            # },
             "new_arrivals": {
                 "context_name": "new-arrivals",
                 "results": [

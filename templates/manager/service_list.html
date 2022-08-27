@@ -19,10 +19,10 @@
             <div class="section-body grid gap-6 grid-cols-1 md:grid-cols-2">
                 {% for service in object_list %}
                     <div class="service grid gap-3 p-4 card-outlined items-start content-start rounded">
-                        <h2 class="text-lg font-semibold text-lghterBackgroundColor">{{service.name}}</h2>
+                        <h2 class="text-lg font-semibold text-lghterBackgroundColor" style="text-transform: capitalize;">{{service.name}}</h2>
                         <hr>
-                        <div class="grid gap-2">
-                            <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;margin-inline-start: 0;" class="text-base text-slate-700 font-normal">
+                        <div class="grid gap-2" style="text-align: left;">
+                            <pre style="white-space: pre-line;font-family: inherit;" class="text-base text-slate-700 font-normal">
                                 {{service.description}} 
                             </pre>
                         </div>
