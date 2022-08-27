@@ -588,7 +588,7 @@ footer a:hover {
 } */
 
 .showrooms img {
-    max-block-size: 25vh;
+    max-block-size: 20vh;
 }
 
 @media (max-width: 786px) {    

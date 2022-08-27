@@ -250,14 +250,13 @@
                                 </a>
                             </li>
                         {% endfor %}
-                        {% for category in categories_header %}
-                            <li
-                                class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
-                                <a class="flex items-center justify-start gap-2 py-2" href="{% url 'supplier:category-list' %}">
-                                    <!-- <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="/media/{{ category.image }}" alt="{{ category.name }}"> -->
-                                    <span>View All</span>
-                                </a>
-                            </li>
+                        <li
+                            class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
+                            <a class="flex items-center justify-start gap-2 py-2" href="{% url 'supplier:category-list' %}">
+                                <!-- <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="/media/{{ category.image }}" alt="{{ category.name }}"> -->
+                                <span>View All</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             {% endif %}
@@ -277,6 +276,13 @@
                                 </a>
                             </li>
                         {% endfor %}
+                        <li
+                            class="text-slate-200 hover:text-white transition-colors transition-200 ease-in">
+                            <a class="flex items-center justify-start gap-2 py-2" href="{% url 'manager:showrooms' %}">
+                                <!-- <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="/media/{{ category.image }}" alt="{{ category.name }}"> -->
+                                <span>View All</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             {% endif %}
