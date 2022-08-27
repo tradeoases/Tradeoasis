@@ -36,10 +36,12 @@
                         <span>All Categories</span>
                     </a> -->
                 </div>
-                <div class="grid md:hidden gap-1 horizontal-scroll items-start" style="--row-size: min-content;">
+                <div class="grid md:hidden gap-1 horizontal-scroll items-start" style="--row-size: 44%;">
                     {% for sub_category in sub_categories.results %}  
-                        <a href="{% url "supplier:subcategory-detail" object.slug sub_category.slug %}" class="grid place-items-center px-3 py-1 text-slate-700 text-base rounded-full" style="background-color: hsla(213, 28%, 90%, .8);">{{ sub_category.name }}</a>
+                        <a href="{% url 'supplier:subcategory-detail' object.slug sub_category.slug %}" class="sub-link grid place-items-center px-3 py-1 text-slate-700 text-base rounded-full" style="background-color: hsla(213, 28%, 90%, .8);">{{ sub_category.name }}</a>
                     {% endfor %}
+                    <a href="" class="sub-link grid place-items-center px-3 py-1 text-slate-700 text-base rounded-full" style="background-color: hsla(213, 28%, 90%, .8);">The coming of the upraising</a>
+                    <a href="" class="sub-link grid place-items-center px-3 py-1 text-slate-700 text-base rounded-full" style="background-color: hsla(213, 28%, 90%, .8);">The coming of the upraising</a>
                 </div>
                 <div class="section-body grid gap-2 md:gap-6 grid-cols-2 md:grid-cols-4" data-context="{{propular_products.context_name}}">
                     {% for product in products.results %}
@@ -64,5 +66,14 @@
                 </div>
             </div>
         </section>
+
+        <script>
+            const sub_links = document.querySelectorAll('.sub-link');
+            sub_links.forEach(link => {
+                if (link.textContent.length >= 15) {
+                    link.textContent = link.textContent.slice(0,15) + "..."
+                }
+            })
+        </script>
 
 {% endblock %}
