@@ -19,7 +19,7 @@
             </div>
             <p class="flex gap-1">
                 <span class="text-base text-lghterBackgroundColor font-medium">{% trans 'Supplier' %}: </span>
-                <a class="text-slate-600" href="{% url 'supplier:supplier-detail' object.supplier.profile.business_name %}">{{object.supplier}}</a>
+                <a class="text-slate-600" href="{% url 'supplier:supplier-detail' object.supplier.profile.slug %}">{{object.supplier}}</a>
             </p>
             <p class="flex gap-1" data-content="{{product_count.context_name}}">
                 <span class="text-base text-lghterBackgroundColor font-medium">{% trans 'Products' %}: </span>
