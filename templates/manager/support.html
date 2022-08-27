@@ -5,18 +5,19 @@
 {% block content %}
 
 <section class="main w-12/12 py-6 pt-0 gap-10" style="block-size: auto;">
-    <div class="grid justify-center justify-center content-start justify-items-center cont2nt-center text-center gap-4 capitalize" style="block-size: 50vh;background-color: #0F172A;">
+    <div class="grid justify-center justify-center content-center justify-items-center cont2nt-center text-center gap-4 capitalize h-80 md:h-96" style="background-color: #0F172A;">
         <div class="grid gap-2 w-10/12">
             <h3 class="md:text-4xl text-2xl text-white font-bold">{% trans 'Support and Discussions' %}</h3>
             <p class="text-base text-slate-300 font-normal">{% trans 'Find help  and workarounds for the most common account-related issues.' %} </p>
         </div>
 
-        <form action=""  class="flex bg-white rounded-full overflow-hidden w-10/12">
-            <input type="text" style="width: 100%;padding: .7rem 2rem;font-size: 1rem;" placeholder="Search for help...">
+        <form action="{% url 'manager:discussions' %}" method="GET" class="flex bg-white rounded-full overflow-hidden w-10/12">
+            <input type="text" style="width: 100%;padding: .7rem 2rem;font-size: 1rem;" name="search" placeholder="Search for help...">
             <button type="submit" class="bg-yellowColor" style="border: none;padding: 1rem 2rem;">
                 <i class="fa fa-search"></i>
             </button>
         </form>
+        
         <div class="flex gap-2 my-4">
             <a href="{% url 'manager:chatroom' %}" class="bg-yellowColor text-white px-6 py-3 rounded-full">{% trans 'Send Message' %}</a>
             <a href="{% url 'manager:create-discussion' %}" class="bg-yellowColor text-white px-6 py-3 rounded-full">{% trans 'Create Discussion' %}</a>
@@ -38,7 +39,7 @@
                 <p class="text-slate-500">{% trans 'Get help on payment related issues.' %}</p>
             </div>
         </a>
-        <a href="" class="grid px-5 py-5 bg-slate-200 rounded-md card justify-center content-start justify-items-center gap-2">
+        <a href="" class="grid px-6 py-5 bg-slate-200 rounded-md card justify-center content-start justify-items-center gap-2">
             <i class="fa fa-cog  text-6xl md:text-8xl text-lghterBackgroundColor"></i>
             <div class="grid gap-1 justify-center text-center">
                 <h2 class="font-bold md:text-lg text-xl">{% trans 'Configurations' %}</h2>

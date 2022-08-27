@@ -23,5 +23,6 @@ urlpatterns = [
     path("support/", views.SupportView.as_view(), name="support"),
     path("support/chatroom/", views.SupportChatroomView.as_view(), name="chatroom"),
     path("support/discussion/<str:slug>/", views.SupportDiscussionView.as_view(), name="discussion"),
+    path("support/discussions/", views.SupportDiscussionListView.as_view(), name="discussions"),
     path("support/create-discussion/", views.SupportCreateDiscussionView.as_view(), name="create-discussion"),
 ]

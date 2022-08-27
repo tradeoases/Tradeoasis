@@ -266,6 +266,21 @@ class SupportChatroomView(AuthedOnlyAccessMixin, View):
         }
 
         return render(request, self.template_name, context=context_data)
+    
+class SupportDiscussionListView(View):
+    model = ManagerModels.Discussion
+    template_name = 'manager/discussion_list.html'
+    def get(self, request):
+
+        context_data = {
+            "view_name" : _("Discussion"),
+            "discussions": ManagerModels.Discussion.objects.filter(
+                Q(subject__icontains=self.request.GET.get("search", None))
+                | Q(description__icontains=self.request.GET.get("search", None))
+            )
+        }
+
+        return render(request, self.template_name, context=context_data)
 
 class SupportCreateDiscussionView(AuthedOnlyAccessMixin, View):
     template_name = 'manager/create_discussion.html'
