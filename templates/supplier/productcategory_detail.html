@@ -36,7 +36,7 @@
                         <span>All Categories</span>
                     </a> -->
                 </div>
-                <div class="grid md:hidden gap-1 horizontal-scroll items-start" style="--row-size: 44%;">
+                <div class="grid md:hidden gap-1 horizontal-scroll items-start" style="--row-size: 33%;">
                     {% for sub_category in sub_categories.results %}  
                         <a href="{% url 'supplier:subcategory-detail' object.slug sub_category.slug %}" class="sub-link grid place-items-center px-3 py-1 text-slate-700 text-base rounded-full" style="background-color: hsla(213, 28%, 90%, .8);">{{ sub_category.name }}</a>
                     {% endfor %}
@@ -71,7 +71,7 @@
             const sub_links = document.querySelectorAll('.sub-link');
             sub_links.forEach(link => {
                 if (link.textContent.length >= 15) {
-                    link.textContent = link.textContent.slice(0,15) + "..."
+                    link.textContent = link.textContent.slice(0,15) + " ..."
                 }
             })
         </script>
