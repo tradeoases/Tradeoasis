@@ -145,7 +145,6 @@ msgid "Account Edited Successfully"
 msgstr "تم تحرير الحساب بنجاح"
 
 #: app_admin/views.py:668
-#| msgid "An Error Occured. Please Try Again"
 msgid "An Error occurred. Please Try Again"
 msgstr "حدث خطأ. حاول مرة اخرى"
 
@@ -166,7 +165,6 @@ msgid "Activate Foroden Activation"
 msgstr "تنشيط التنشيط Foroden"
 
 #: app_admin/views.py:739
-#| msgid ""
 #| "Account Created Successfully. Verfication link was sent user's email."
 msgid ""
 "Account Created Successfully.  A verification link was sent user's email."
@@ -469,7 +467,6 @@ msgid "Discussion"
 msgstr "مناقشة"
 
 #: manager/views.py:317 manager/views.py:374
-#| msgid "Error Occurred. Try Again"
 msgid "Error occurred. Try Again"
 msgstr "حدث خطأ. حاول ثانية"
 
@@ -597,7 +594,6 @@ msgid "Product created successfully."
 msgstr "تم إنشاء المنتج بنجاح."
 
 #: supplier/views.py:799
-#| msgid "An Error Occurred. Try Again."
 msgid "An Error occurred. Try Again"
 msgstr "حدث خطأ. حاول ثانية"
 
@@ -610,7 +606,6 @@ msgid "Store created successfully."
 msgstr "تم إنشاء المتجر بنجاح."
 
 #: supplier/views.py:867 supplier/views.py:971
-#| msgid "Sorry, an error occured. Please Try Again"
 msgid "Sorry, an error occurred. Please Try Again"
 msgstr "عفوا لقد حصل خطأ. حاول مرة اخرى"
 
@@ -653,7 +648,6 @@ msgid "Manager"
 msgstr "مدير"
 
 #: templates/app_admin/utils/layout.html:127
-#| msgid "Nofications"
 msgid "Notifications"
 msgstr "إشعارات"
 
@@ -1331,7 +1325,6 @@ msgid "Products Just For you"
 msgstr "المنتجات فقط لأجلك"
 
 #: templates/supplier/products.html:19
-#| msgid "Products"
 msgid "products"
 msgstr "منتجات"
 
@@ -1348,12 +1341,10 @@ msgid "All"
 msgstr "الجميع"
 
 #: templates/supplier/products.html:79
-#| msgid "Total Product Count"
 msgid "No Products Found"
 msgstr "لا توجد منتجات"
 
 #: templates/supplier/products.html:176
-#| msgid "Create products"
 msgid "Related Products"
 msgstr "منتجات ذات صله"
 

@@ -145,7 +145,6 @@ msgid "Account Edited Successfully"
 msgstr "Compte modifié avec succès"
 
 #: app_admin/views.py:668
-#| msgid "An Error Occured. Please Try Again"
 msgid "An Error occurred. Please Try Again"
 msgstr "Une erreur s'est produite. Veuillez réessayer"
 
@@ -166,7 +165,6 @@ msgid "Activate Foroden Activation"
 msgstr "Activer l'activation Foroden"
 
 #: app_admin/views.py:739
-#| msgid ""
 #| "Account Created Successfully. Verfication link was sent user's email."
 msgid ""
 "Account Created Successfully.  A verification link was sent user's email."
@@ -471,7 +469,6 @@ msgid "Discussion"
 msgstr "Discussion"
 
 #: manager/views.py:317 manager/views.py:374
-#| msgid "Error Occurred. Try Again"
 msgid "Error occurred. Try Again"
 msgstr "Erreur est survenue. Réessayer"
 
@@ -599,7 +596,6 @@ msgid "Product created successfully."
 msgstr "Produit créé avec succès."
 
 #: supplier/views.py:799
-#| msgid "An Error Occurred. Try Again."
 msgid "An Error occurred. Try Again"
 msgstr "Une erreur s'est produite. Réessayer"
 
@@ -612,7 +608,6 @@ msgid "Store created successfully."
 msgstr "Magasin créé avec succès."
 
 #: supplier/views.py:867 supplier/views.py:971
-#| msgid "Sorry, an error occured. Please Try Again"
 msgid "Sorry, an error occurred. Please Try Again"
 msgstr "Désolé, une erreur s'est produite. Veuillez réessayer"
 
@@ -655,7 +650,6 @@ msgid "Manager"
 msgstr "Gestionnaire"
 
 #: templates/app_admin/utils/layout.html:127
-#| msgid "Nofications"
 msgid "Notifications"
 msgstr "Avis"
 
@@ -1341,7 +1335,6 @@ msgid "Products Just For you"
 msgstr "Des produits rien que pour vous"
 
 #: templates/supplier/products.html:19
-#| msgid "Products"
 msgid "products"
 msgstr "des produits"
 
@@ -1358,12 +1351,10 @@ msgid "All"
 msgstr "Toute"
 
 #: templates/supplier/products.html:79
-#| msgid "Total Product Count"
 msgid "No Products Found"
 msgstr "Aucun produit trouvé"
 
 #: templates/supplier/products.html:176
-#| msgid "Create products"
 msgid "Related Products"
 msgstr "Produits connexes"
 
