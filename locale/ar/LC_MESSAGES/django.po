@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-27 20:16+0000\n"
-"PO-Revision-Date: 2022-08-28 09:03+0000\n"
+"POT-Creation-Date: 2022-08-28 10:56+0000\n"
+"PO-Revision-Date: 2022-08-28 10:58+0000\n"
 "Last-Translator:   <phillipmugisa4@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,161 +19,161 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: app_admin/views.py:48 app_admin/views.py:111
+#: app_admin/views.py:50 app_admin/views.py:113
 #: templates/app_admin/utils/layout.html:105
 msgid "Admin Dashboard"
 msgstr "لوحة تحكم المسؤول"
 
-#: app_admin/views.py:54 app_admin/views.py:117
+#: app_admin/views.py:56 app_admin/views.py:119
 msgid "Total Suppliers"
 msgstr "إجمالي الموردين"
 
-#: app_admin/views.py:55 app_admin/views.py:118
+#: app_admin/views.py:57 app_admin/views.py:120
 msgid "Total Supplier Count"
 msgstr "إجمالي عدد الموردين"
 
-#: app_admin/views.py:59 app_admin/views.py:122
+#: app_admin/views.py:61 app_admin/views.py:124
 msgid "Total Buyers"
 msgstr "إجمالي المشترين"
 
-#: app_admin/views.py:60 app_admin/views.py:123
+#: app_admin/views.py:62 app_admin/views.py:125
 msgid "Total Buyer Count"
 msgstr "إجمالي عدد المشتري"
 
-#: app_admin/views.py:64 app_admin/views.py:127
+#: app_admin/views.py:66 app_admin/views.py:129
 msgid "Total Product"
 msgstr "إجمالي المنتج"
 
-#: app_admin/views.py:65 app_admin/views.py:128
+#: app_admin/views.py:67 app_admin/views.py:130
 msgid "Total Product Count"
 msgstr "إجمالي عدد المنتجات"
 
-#: app_admin/views.py:69 app_admin/views.py:165
+#: app_admin/views.py:71 app_admin/views.py:167
 msgid "Total Showrooms"
 msgstr "إجمالي صالات العرض"
 
-#: app_admin/views.py:70 app_admin/views.py:166
+#: app_admin/views.py:72 app_admin/views.py:168
 msgid "Showroom Count"
 msgstr "عدد صالة العرض"
 
-#: app_admin/views.py:74 app_admin/views.py:170
+#: app_admin/views.py:76 app_admin/views.py:172
 msgid "Total Stores"
 msgstr "إجمالي المتاجر"
 
-#: app_admin/views.py:75 app_admin/views.py:171
+#: app_admin/views.py:77 app_admin/views.py:173
 msgid "Total Store Count"
 msgstr "إجمالي عدد المتاجر"
 
-#: app_admin/views.py:79 app_admin/views.py:175
+#: app_admin/views.py:81 app_admin/views.py:177
 msgid "Total Memberships"
 msgstr "إجمالي العضويات"
 
-#: app_admin/views.py:80 app_admin/views.py:176 payment/views.py:45
-#: payment/views.py:68 templates/manager/support.html:59
+#: app_admin/views.py:82 app_admin/views.py:178 payment/views.py:49
+#: payment/views.py:70 templates/manager/support.html:59
 #: templates/utils/header.html:125 templates/utils/header.html:232
 msgid "Memberships"
 msgstr "العضويات"
 
-#: app_admin/views.py:84 app_admin/views.py:132
+#: app_admin/views.py:86 app_admin/views.py:134
 msgid "Total Contracts"
 msgstr "إجمالي العقود"
 
-#: app_admin/views.py:85 app_admin/views.py:133
+#: app_admin/views.py:87 app_admin/views.py:135
 msgid "Contract Created"
 msgstr "تم إنشاء العقد"
 
-#: app_admin/views.py:159 app_admin/views.py:302 app_admin/views.py:400
+#: app_admin/views.py:161 app_admin/views.py:316 app_admin/views.py:420
 msgid "Admin Dashboard - Clients"
 msgstr "لوحة تحكم المسؤول"
 
-#: app_admin/views.py:180
+#: app_admin/views.py:182
 msgid "Total Services"
 msgstr "إجمالي الخدمات"
 
-#: app_admin/views.py:181
+#: app_admin/views.py:183
 msgid "Total Services Count"
 msgstr "إجمالي عدد الخدمات"
 
-#: app_admin/views.py:199 app_admin/views.py:253 app_admin/views.py:655
-#: auth_app/views.py:42 auth_app/views.py:102 supplier/views.py:683
-#: supplier/views.py:769 supplier/views.py:848
+#: app_admin/views.py:201 app_admin/views.py:261 app_admin/views.py:692
+#: auth_app/views.py:44 auth_app/views.py:104 supplier/views.py:707
+#: supplier/views.py:819 supplier/views.py:917
 msgid "Please Fill all fields."
 msgstr "لو سمحت أملأ كل الحقول."
 
-#: app_admin/views.py:206
+#: app_admin/views.py:210
 msgid "Invalid Data Entered."
 msgstr "تم إدخال بيانات غير صحيحة."
 
-#: app_admin/views.py:231 app_admin/views.py:284
+#: app_admin/views.py:239 app_admin/views.py:298
 #, python-brace-format
 msgid "Service ({name}) created successfully."
 msgstr "تم إنشاء الخدمة ({name}) بنجاح"
 
-#: app_admin/views.py:238 app_admin/views.py:291
+#: app_admin/views.py:246 app_admin/views.py:305
 msgid "Admin Dashboard - Manager"
 msgstr "لوحة تحكم المسؤول"
 
-#: app_admin/views.py:280
+#: app_admin/views.py:293
 msgid "Error Occurred. Try Again"
 msgstr "حدث خطأ. حاول ثانية"
 
-#: app_admin/views.py:319
+#: app_admin/views.py:331
 #, python-brace-format
 msgid "Category({name}) already exists."
 msgstr "الفئة ({name}) موجودة بالفعل."
 
-#: app_admin/views.py:357 app_admin/views.py:428
+#: app_admin/views.py:373 app_admin/views.py:446
 #, python-brace-format
 msgid "Sub category ({sub_cat_name}) already exists."
 msgstr "الفئة الفرعية ({sub_cat_name}) موجودة بالفعل"
 
-#: app_admin/views.py:389
+#: app_admin/views.py:409
 msgid "Category ({}) created successfully."
 msgstr "الفئة الفرعية ({sub_cat_name}) موجودة بالفعل."
 
-#: app_admin/views.py:460
-#| msgid "Category ({}) created successfully."
+#: app_admin/views.py:482
 msgid "Subcategories created successfully."
 msgstr "تم إنشاء الفئات الفرعية بنجاح."
 
-#: app_admin/views.py:472 app_admin/views.py:487 app_admin/views.py:502
-#: app_admin/views.py:519
+#: app_admin/views.py:493 app_admin/views.py:508 app_admin/views.py:523
+#: app_admin/views.py:542
 msgid "Admin Dashboard - Support"
 msgstr "لوحة تحكم المسؤول"
 
-#: app_admin/views.py:630
+#: app_admin/views.py:663
 msgid "Account Edited Successfully"
 msgstr "تم تحرير الحساب بنجاح"
 
-#: app_admin/views.py:633
-#| msgid "An Error Occurred. Try Again."
-msgid "An Error Occured. Please Try Again"
+#: app_admin/views.py:668
+#| msgid "An Error Occured. Please Try Again"
+msgid "An Error occurred. Please Try Again"
 msgstr "حدث خطأ. حاول مرة اخرى"
 
-#: app_admin/views.py:659 auth_app/views.py:106
+#: app_admin/views.py:696 auth_app/views.py:110
 msgid "Username not available."
 msgstr "اسم المستخدم غير متاح."
 
-#: app_admin/views.py:663 auth_app/views.py:114
+#: app_admin/views.py:700 auth_app/views.py:122
 msgid "Password mismatch."
 msgstr "كلمة المرور غير متطابقة."
 
-#: app_admin/views.py:684 auth_app/views.py:159
+#: app_admin/views.py:722 auth_app/views.py:173
 msgid "Your activation link is"
 msgstr "رابط التنشيط الخاص بك هو"
 
-#: app_admin/views.py:688 auth_app/views.py:163
+#: app_admin/views.py:727 auth_app/views.py:177
 msgid "Activate Foroden Activation"
 msgstr "تنشيط التنشيط Foroden"
 
-#: app_admin/views.py:700
+#: app_admin/views.py:739
 #| msgid ""
-#| "Account Created Successfully. Please check your email for a verfication "
-#| "link."
-msgid "Account Created Successfully. Verfication link was sent user's email."
-msgstr "الحساب اقيم بنجاح. تم إرسال رابط التحقق البريد الإلكتروني للمستخدم."
+#| "Account Created Successfully. Verfication link was sent user's email."
+msgid ""
+"Account Created Successfully.  A verification link was sent user's email."
+msgstr ""
+"الحساب اقيم بنجاح. تم إرسال رابط التحقق عبر البريد الإلكتروني للمستخدم."
 
-#: app_admin/views.py:717 auth_app/views.py:193
+#: app_admin/views.py:757 auth_app/views.py:209
 msgid "Bad Request"
 msgstr "اقتراح غير جيد"
 
@@ -182,16 +182,16 @@ msgstr "اقتراح غير جيد"
 msgid "Account Type"
 msgstr "نوع الحساب"
 
-#: auth_app/models.py:34 manager/models.py:91 supplier/models.py:65
-#: supplier/models.py:87 supplier/models.py:156
+#: auth_app/models.py:34 manager/models.py:91 supplier/models.py:61
+#: supplier/models.py:85 supplier/models.py:146
 msgid "Image"
 msgstr "صورة"
 
-#: auth_app/models.py:37
+#: auth_app/models.py:40
 msgid "Email Activated"
 msgstr "تنشيط البريد الإلكتروني"
 
-#: auth_app/models.py:60 templates/auth_app/business_infor.html:31
+#: auth_app/models.py:63 templates/auth_app/business_infor.html:31
 #: templates/buyer/dashboard/business-profile.html:30
 #: templates/buyer/profile.html:20 templates/buyer/profile.html:49
 #: templates/supplier/dashboard/profile.html:60
@@ -199,102 +199,102 @@ msgstr "تنشيط البريد الإلكتروني"
 msgid "Business Name"
 msgstr "الاسم التجاري"
 
-#: auth_app/models.py:62 manager/models.py:24 manager/models.py:44
-#: manager/models.py:69 manager/models.py:97 manager/models.py:124
-#: payment/models.py:28 payment/models.py:93 supplier/models.py:36
-#: supplier/models.py:69 supplier/models.py:92 supplier/models.py:131
-#: supplier/models.py:160 supplier/models.py:179 supplier/models.py:206
+#: auth_app/models.py:65 manager/models.py:24 manager/models.py:44
+#: manager/models.py:69 manager/models.py:97 manager/models.py:123
+#: payment/models.py:28 payment/models.py:95 supplier/models.py:36
+#: supplier/models.py:66 supplier/models.py:90 supplier/models.py:125
+#: supplier/models.py:150 supplier/models.py:166 supplier/models.py:194
 msgid "Safe Url"
 msgstr "عنوان Url الآمن"
 
-#: auth_app/models.py:67 templates/auth_app/business_infor.html:35
+#: auth_app/models.py:70 templates/auth_app/business_infor.html:35
 msgid "Business Description"
 msgstr "وصف العمل"
 
-#: auth_app/models.py:68 templates/auth_app/business_infor.html:40
+#: auth_app/models.py:71 templates/auth_app/business_infor.html:40
 #: templates/buyer/dashboard/business-profile.html:39
 #: templates/buyer/profile.html:58
 #: templates/supplier/dashboard/profile.html:69
 msgid "Country"
 msgstr "دولة"
 
-#: auth_app/models.py:69
+#: auth_app/models.py:72
 msgid "Country Code"
 msgstr "الرقم الدولي"
 
-#: auth_app/models.py:70 templates/auth_app/business_infor.html:285
+#: auth_app/models.py:73 templates/auth_app/business_infor.html:285
 #: templates/buyer/dashboard/business-profile.html:43
 #: templates/buyer/profile.html:62
 #: templates/supplier/dashboard/profile.html:73
 msgid "City"
 msgstr "مدينة"
 
-#: auth_app/models.py:71
+#: auth_app/models.py:74
 msgid "Number"
 msgstr "رقم"
 
-#: auth_app/models.py:72 templates/auth_app/business_infor.html:516
+#: auth_app/models.py:75 templates/auth_app/business_infor.html:516
 #: templates/buyer/dashboard/business-profile.html:52
 #: templates/buyer/profile.html:71
 #: templates/supplier/dashboard/profile.html:82
 msgid "VAT Number"
 msgstr "ظريبه الشراء"
 
-#: auth_app/models.py:74 templates/auth_app/business_infor.html:520
+#: auth_app/models.py:77 templates/auth_app/business_infor.html:520
 #: templates/buyer/dashboard/business-profile.html:56
 #: templates/buyer/profile.html:75
 #: templates/supplier/dashboard/profile.html:86
 msgid "Legal Entity Identifier"
 msgstr "معرّف الكيان القانوني"
 
-#: auth_app/models.py:76 templates/auth_app/business_infor.html:524
+#: auth_app/models.py:79 templates/auth_app/business_infor.html:524
 #: templates/buyer/dashboard/business-profile.html:60
 #: templates/buyer/profile.html:79
 #: templates/supplier/dashboard/profile.html:90
 msgid "Website"
 msgstr "موقع الكتروني"
 
-#: auth_app/models.py:143
+#: auth_app/models.py:146
 msgid "Responses to clients"
 msgstr "الردود على العملاء"
 
-#: auth_app/views.py:36 templates/utils/header.html:157
+#: auth_app/views.py:38 templates/utils/header.html:157
 #: templates/utils/header.html:173
 msgid "Sign In"
 msgstr "Sign In"
 
-#: auth_app/views.py:50
+#: auth_app/views.py:52
 msgid "Account not found. Try Again."
 msgstr "الحساب غير موجود. حاول ثانية."
 
-#: auth_app/views.py:56
+#: auth_app/views.py:58
 msgid "Please Activate your Email"
 msgstr "يرجى تفعيل البريد الإلكتروني الخاص بك"
 
-#: auth_app/views.py:80
+#: auth_app/views.py:82
 msgid "Sign Up"
 msgstr "اشتراك"
 
-#: auth_app/views.py:110
+#: auth_app/views.py:116
 msgid "Email not available."
 msgstr "البريد الإلكتروني غير متوفر."
 
-#: auth_app/views.py:175
+#: auth_app/views.py:190
 msgid ""
 "Account Created Successfully. Please check your email for a verfication "
 "link."
 msgstr ""
 "الحساب اقيم بنجاح. يرجى التحقق من بريدك الإلكتروني للحصول على ارتباط التحقق."
 
-#: auth_app/views.py:211 templates/auth_app/business_infor.html:9
+#: auth_app/views.py:227 templates/auth_app/business_infor.html:9
 msgid "Business Profile"
 msgstr "الملف التجاري"
 
-#: auth_app/views.py:225
+#: auth_app/views.py:241
 msgid "Please Fill all reqiured fields."
 msgstr "الرجاء تعبئة جميع الحقول المطلوبة."
 
-#: auth_app/views.py:268
+#: auth_app/views.py:294
 msgid "An Error Occurred. Try Again."
 msgstr "حدث خطأ. حاول ثانية."
 
@@ -307,42 +307,42 @@ msgid "Viewed by supplier"
 msgstr "تم عرضها بواسطة المورد"
 
 #: buyer/models.py:21 manager/models.py:22 manager/models.py:49
-#: manager/models.py:74 manager/models.py:102 manager/models.py:129
-#: manager/models.py:147 payment/models.py:33 payment/models.py:63
-#: payment/models.py:98 payment/models.py:148 supplier/models.py:48
-#: supplier/models.py:70 supplier/models.py:98 supplier/models.py:137
-#: supplier/models.py:166 supplier/models.py:211
+#: manager/models.py:74 manager/models.py:102 manager/models.py:128
+#: manager/models.py:146 payment/models.py:33 payment/models.py:65
+#: payment/models.py:100 payment/models.py:152 supplier/models.py:44
+#: supplier/models.py:68 supplier/models.py:92 supplier/models.py:127
+#: supplier/models.py:152 supplier/models.py:199
 #: templates/buyer/dashboard/contracts.html:36
 #: templates/supplier/dashboard/contracts.html:36
 msgid "Created on"
 msgstr "تم إنشاؤها على"
 
-#: buyer/views.py:21 buyer/views.py:37
+#: buyer/views.py:21 buyer/views.py:38
 #: templates/buyer/dashboard/utils/layout.html:46
 #: templates/buyer/profile.html:9 templates/utils/header.html:90
 msgid "Profile"
 msgstr "الملف الشخصي"
 
-#: buyer/views.py:54 buyer/views.py:71 supplier/views.py:643
+#: buyer/views.py:55 buyer/views.py:72 supplier/views.py:651
 #: templates/buyer/dashboard/utils/layout.html:60
 #: templates/buyer/profile.html:10
 #: templates/supplier/dashboard/utils/layout.html:93
 msgid "Contracts"
 msgstr "انكماش"
 
-#: core/settings.py:190
+#: core/settings.py:188
 msgid "English"
 msgstr "إنجليزي"
 
-#: core/settings.py:191
+#: core/settings.py:189
 msgid "Arabic"
 msgstr "عربي"
 
-#: core/settings.py:192
+#: core/settings.py:190
 msgid "French"
 msgstr "فرنسي"
 
-#: core/settings.py:193
+#: core/settings.py:191
 msgid "German"
 msgstr "ألمانية"
 
@@ -359,7 +359,6 @@ msgid "auth/"
 msgstr "المصادقة /"
 
 #: core/urls.py:13
-#| msgid "Payment Id"
 msgid "payments/"
 msgstr "المدفوعات /"
 
@@ -384,9 +383,9 @@ msgid "Country or City"
 msgstr "الدولة أو المدينة"
 
 #: manager/models.py:39 manager/models.py:85 payment/models.py:21
-#: payment/models.py:46 payment/models.py:90 supplier/models.py:62
-#: supplier/models.py:84 supplier/models.py:115 supplier/models.py:176
-#: supplier/models.py:198 templates/buyer/dashboard/profile.html:30
+#: payment/models.py:47 payment/models.py:92 supplier/models.py:58
+#: supplier/models.py:82 supplier/models.py:109 supplier/models.py:163
+#: supplier/models.py:186 templates/buyer/dashboard/profile.html:30
 #: templates/supplier/dashboard/create-product.html:30
 #: templates/supplier/dashboard/create-service.html:30
 #: templates/supplier/dashboard/create-store.html:38
@@ -400,8 +399,8 @@ msgstr "الدولة أو المدينة"
 msgid "Name"
 msgstr "اسم"
 
-#: manager/models.py:41 manager/models.py:121 manager/models.py:146
-#: payment/models.py:23 supplier/models.py:117 supplier/models.py:200
+#: manager/models.py:41 manager/models.py:120 manager/models.py:145
+#: payment/models.py:23 supplier/models.py:111 supplier/models.py:188
 #: templates/buyer/dashboard/business-profile.html:34
 #: templates/buyer/profile.html:53
 #: templates/supplier/dashboard/create-product.html:54
@@ -412,7 +411,7 @@ msgstr "اسم"
 msgid "Description"
 msgstr "وصف"
 
-#: manager/models.py:65 supplier/models.py:44
+#: manager/models.py:65 supplier/models.py:40
 msgid "Service Image"
 msgstr "صورة الخدمة"
 
@@ -420,23 +419,23 @@ msgstr "صورة الخدمة"
 msgid "Number of visits"
 msgstr "عدد الزيارات"
 
-#: manager/models.py:120
+#: manager/models.py:119
 msgid "Subject"
 msgstr "موضوعات"
 
-#: manager/views.py:57 templates/app_admin/utils/layout.html:57
+#: manager/views.py:59 templates/app_admin/utils/layout.html:57
 #: templates/app_admin/utils/layout.html:107
 #: templates/manager/service_list.html:8
 #: templates/manager/showroom_detail.html:7
 #: templates/manager/showroom_list.html:7
-#: templates/supplier/product_detail.html:7
+#: templates/supplier/product_detail.html:7 templates/supplier/products.html:9
 #: templates/supplier/store_detail.html:9 templates/supplier/store_list.html:9
 #: templates/supplier/supplier_detail.html:7 templates/utils/header.html:119
 #: templates/utils/header.html:190
 msgid "Home"
 msgstr "الصفحة الرئيسية"
 
-#: manager/views.py:130 templates/manager/about.html:77
+#: manager/views.py:143 templates/manager/about.html:77
 #: templates/manager/index.html:102 templates/manager/showroom_detail.html:9
 #: templates/manager/showroom_list.html:9
 #: templates/manager/showroom_list.html:15 templates/manager/support.html:52
@@ -445,7 +444,7 @@ msgstr "الصفحة الرئيسية"
 msgid "Showrooms"
 msgstr "صالات العرض"
 
-#: manager/views.py:198 supplier/views.py:639
+#: manager/views.py:211 supplier/views.py:645
 #: templates/manager/service_list.html:10
 #: templates/supplier/dashboard/utils/layout.html:63
 #: templates/supplier/supplier_detail.html:71 templates/utils/header.html:123
@@ -453,35 +452,32 @@ msgstr "صالات العرض"
 msgid "Services"
 msgstr "خدمات"
 
-#: manager/views.py:208 templates/utils/header.html:122
+#: manager/views.py:221 templates/utils/header.html:122
 #: templates/utils/header.html:211
 msgid "About Us"
 msgstr "معلومات عنا"
 
-#: manager/views.py:253 manager/views.py:264 manager/views.py:288
-#: manager/views.py:335 templates/app_admin/utils/layout.html:75
+#: manager/views.py:267 manager/views.py:279 manager/views.py:305
+#: manager/views.py:357 templates/app_admin/utils/layout.html:75
 #: templates/app_admin/utils/layout.html:173 templates/utils/header.html:124
 #: templates/utils/header.html:225
 msgid "Support"
 msgstr "الدعم"
 
-#: manager/views.py:275
-#| msgid "Created on"
+#: manager/views.py:291
 msgid "Discussion"
 msgstr "مناقشة"
 
-#: manager/views.py:303 manager/views.py:352
+#: manager/views.py:317 manager/views.py:374
 #| msgid "Error Occurred. Try Again"
-msgid "Error Occured. Try Again"
+msgid "Error occurred. Try Again"
 msgstr "حدث خطأ. حاول ثانية"
 
-#: manager/views.py:327
-#| msgid "Service ({name}) created successfully."
+#: manager/views.py:346
 msgid "Discussion created successfully."
 msgstr "تم إنشاء المناقشة بنجاح."
 
-#: manager/views.py:376
-#| msgid "Category ({}) created successfully."
+#: manager/views.py:405
 msgid "Reply submitted successfully."
 msgstr "تم إرسال الرد بنجاح."
 
@@ -489,7 +485,7 @@ msgstr "تم إرسال الرد بنجاح."
 msgid "We couldn't verify your payment. Please try again."
 msgstr "لم نتمكن من التحقق من الدفع الخاص بك. حاول مرة اخرى."
 
-#: payment/models.py:25 supplier/models.py:128 supplier/models.py:202
+#: payment/models.py:25 supplier/models.py:122 supplier/models.py:190
 #: templates/buyer/dashboard/contract-detail.html:40
 #: templates/payments/checkout.html:17
 #: templates/payments/membership_detail.html:28
@@ -498,59 +494,58 @@ msgstr "لم نتمكن من التحقق من الدفع الخاص بك. حا�
 #: templates/supplier/dashboard/create-service.html:205
 #: templates/supplier/dashboard/services.html:25
 #: templates/supplier/dashboard/services.html:36
+#: templates/supplier/products.html:23
 msgid "Price"
 msgstr "سعر"
 
-#: payment/models.py:26 payment/models.py:116 payment/models.py:165
-#: supplier/models.py:129 supplier/models.py:203
+#: payment/models.py:26 payment/models.py:118 payment/models.py:169
+#: supplier/models.py:123 supplier/models.py:191
 #: templates/supplier/dashboard/create-product.html:59
 #: templates/supplier/dashboard/create-service.html:35
 msgid "Currency"
 msgstr "عملة"
 
-#: payment/models.py:61
+#: payment/models.py:63
 msgid "Plan expiry date"
 msgstr "تاريخ انتهاء الخطة"
 
-#: payment/models.py:62
+#: payment/models.py:64
 msgid "Duration"
 msgstr "مدة"
 
-#: payment/models.py:91
+#: payment/models.py:93
 msgid "Number of transactions"
 msgstr "عدد المعاملات"
 
-#: payment/models.py:111 payment/models.py:160
+#: payment/models.py:113 payment/models.py:164
 msgid "Address"
 msgstr "تبوك"
 
-#: payment/models.py:112 payment/models.py:161
+#: payment/models.py:114 payment/models.py:165
 msgid "Payment Id"
 msgstr "معرف الدفع"
 
-#: payment/models.py:114 payment/models.py:163
+#: payment/models.py:116 payment/models.py:167
 msgid "Total Amount Paid"
 msgstr "المبلغ الإجمالي المدفوع"
 
-#: payment/models.py:117
+#: payment/models.py:120
 msgid "reference_id"
 msgstr "الرقم المرجعي"
 
-#: payment/models.py:119
+#: payment/models.py:123
 msgid "status"
 msgstr "الحالة"
 
-#: payment/models.py:144
+#: payment/models.py:148
 msgid "Contract completed"
 msgstr "اكتمل العقد"
 
-#: payment/models.py:146
-#| msgid "Contract completed"
+#: payment/models.py:150
 msgid "Contract accepted"
 msgstr "تم قبول العقد"
 
-#: payment/views.py:218
-#| msgid "Category({name}) already exists."
+#: payment/views.py:223
 msgid "Membership already exists."
 msgstr "العضوية موجودة بالفعل."
 
@@ -558,15 +553,15 @@ msgstr "العضوية موجودة بالفعل."
 msgid "Store Name"
 msgstr "اسم المتجر"
 
-#: supplier/models.py:63
+#: supplier/models.py:59
 msgid "Number of products"
 msgstr "عدد من المنتجات"
 
-#: supplier/models.py:204
+#: supplier/models.py:192
 msgid "Number of contracts"
 msgstr "عدد العقود"
 
-#: supplier/views.py:139 supplier/views.py:635
+#: supplier/views.py:141 supplier/views.py:637
 #: templates/manager/showroom_detail.html:47 templates/manager/support.html:66
 #: templates/supplier/dashboard/manage-store.html:24
 #: templates/supplier/dashboard/manage-store.html:34
@@ -577,11 +572,11 @@ msgstr "عدد العقود"
 msgid "Products"
 msgstr "منتجات"
 
-#: supplier/views.py:253
+#: supplier/views.py:255
 msgid "Categories"
 msgstr "فئات"
 
-#: supplier/views.py:587 supplier/views.py:631
+#: supplier/views.py:589 supplier/views.py:631
 #: templates/manager/showroom_detail.html:18
 #: templates/manager/showroom_detail.html:89
 #: templates/manager/showroom_list.html:25
@@ -594,40 +589,36 @@ msgstr "المتاجر"
 
 #: supplier/views.py:625 templates/buyer/dashboard/utils/layout.html:27
 #: templates/supplier/dashboard/utils/layout.html:23
-#| msgid "Admin Dashboard"
 msgid "Supplier Dashboard"
 msgstr "لوحة تحكم المورد"
 
-#: supplier/views.py:748
-#| msgid "Category ({}) created successfully."
+#: supplier/views.py:793
 msgid "Product created successfully."
 msgstr "تم إنشاء المنتج بنجاح."
 
-#: supplier/views.py:752
+#: supplier/views.py:799
 #| msgid "An Error Occurred. Try Again."
-msgid "An Error Occured. Try Again"
+msgid "An Error occurred. Try Again"
 msgstr "حدث خطأ. حاول ثانية"
 
-#: supplier/views.py:776
+#: supplier/views.py:827
 msgid "Please use a different store name."
 msgstr "الرجاء استخدام اسم متجر مختلف."
 
-#: supplier/views.py:781
-#| msgid "Category ({}) created successfully."
+#: supplier/views.py:836
 msgid "Store created successfully."
 msgstr "تم إنشاء المتجر بنجاح."
 
-#: supplier/views.py:807 supplier/views.py:887
-#| msgid "An Error Occurred. Try Again."
-msgid "Sorry, an error occured. Please Try Again"
+#: supplier/views.py:867 supplier/views.py:971
+#| msgid "Sorry, an error occured. Please Try Again"
+msgid "Sorry, an error occurred. Please Try Again"
 msgstr "عفوا لقد حصل خطأ. حاول مرة اخرى"
 
-#: supplier/views.py:857
+#: supplier/views.py:927
 msgid "Please use a different service name."
 msgstr "الرجاء استخدام اسم خدمة مختلف."
 
-#: supplier/views.py:862
-#| msgid "Service ({name}) created successfully."
+#: supplier/views.py:940
 msgid "Service created successfully."
 msgstr "تم إنشاء الخدمة بنجاح."
 
@@ -662,7 +653,8 @@ msgid "Manager"
 msgstr "مدير"
 
 #: templates/app_admin/utils/layout.html:127
-msgid "Nofications"
+#| msgid "Nofications"
+msgid "Notifications"
 msgstr "إشعارات"
 
 #: templates/auth_app/business_infor.html:10
@@ -714,7 +706,7 @@ msgstr "سجل باسم"
 #: templates/buyer/dashboard/contracts.html:24
 #: templates/buyer/dashboard/contracts.html:35
 #: templates/supplier/product_detail.html:42
-#: templates/supplier/store_detail.html:21
+#: templates/supplier/products.html:37 templates/supplier/store_detail.html:21
 #: templates/supplier/store_list.html:20
 msgid "Supplier"
 msgstr "المورد"
@@ -750,7 +742,6 @@ msgstr "تفاصيل العمل"
 
 #: templates/buyer/dashboard/business-profile.html:64
 #: templates/supplier/dashboard/profile.html:94
-#| msgid "Business Details"
 msgid "Edit Bussiness Details"
 msgstr "تحرير تفاصيل الأعمال"
 
@@ -758,13 +749,11 @@ msgstr "تحرير تفاصيل الأعمال"
 #: templates/buyer/dashboard/contracts.html:8
 #: templates/supplier/dashboard/contract-detail.html:8
 #: templates/supplier/dashboard/contracts.html:8
-#| msgid "Contracts"
 msgid "My Contracts"
 msgstr "العقود الخاصة بي"
 
 #: templates/buyer/dashboard/contract-detail.html:12
 #: templates/supplier/dashboard/contract-detail.html:12
-#| msgid "Account Details"
 msgid "Details"
 msgstr "تفاصيل"
 
@@ -780,7 +769,6 @@ msgstr "مطلوب من"
 
 #: templates/buyer/dashboard/contract-detail.html:34
 #: templates/supplier/dashboard/contract-detail.html:34
-#| msgid "Contracts"
 msgid "Contract info"
 msgstr "معلومات العقد"
 
@@ -790,7 +778,6 @@ msgstr "معلومات العقد"
 #: templates/supplier/dashboard/contract-detail.html:39
 #: templates/supplier/dashboard/contracts.html:23
 #: templates/supplier/dashboard/contracts.html:34
-#| msgid "Services"
 msgid "Service"
 msgstr "خدمة"
 
@@ -866,7 +853,6 @@ msgstr "من"
 #: templates/supplier/dashboard/manage-product.html:47
 #: templates/supplier/dashboard/manage-store.html:41
 #: templates/supplier/dashboard/services.html:43
-#| msgid "Countries"
 msgid "Entries"
 msgstr "إدخالات"
 
@@ -875,7 +861,7 @@ msgstr "إدخالات"
 #: templates/supplier/dashboard/manage-product.html:50
 #: templates/supplier/dashboard/manage-store.html:44
 #: templates/supplier/dashboard/services.html:46
-#: templates/supplier/store_detail.html:66
+#: templates/supplier/products.html:87 templates/supplier/store_detail.html:66
 #: templates/supplier/store_detail.html:103
 msgid "Previous"
 msgstr "سابق"
@@ -885,6 +871,7 @@ msgstr "سابق"
 #: templates/supplier/dashboard/manage-product.html:52
 #: templates/supplier/dashboard/manage-store.html:46
 #: templates/supplier/dashboard/services.html:48
+#: templates/supplier/products.html:101
 #: templates/supplier/store_detail.html:80
 #: templates/supplier/store_detail.html:107
 msgid "Next"
@@ -892,7 +879,6 @@ msgstr "التالي"
 
 #: templates/buyer/dashboard/profile.html:46
 #: templates/supplier/dashboard/profile.html:46
-#| msgid "Memberships"
 msgid "Membership"
 msgstr "عضوية"
 
@@ -903,13 +889,11 @@ msgstr "رفع مستوى"
 
 #: templates/buyer/dashboard/profile.html:53
 #: templates/supplier/dashboard/profile.html:53
-#| msgid "Profile"
 msgid "Edit Profile"
 msgstr "تعديل الملف الشخصي"
 
 #: templates/buyer/dashboard/profile.html:54
 #: templates/supplier/dashboard/profile.html:54
-#| msgid "Password"
 msgid "Reset Password"
 msgstr "إعادة تعيين كلمة المرور"
 
@@ -994,12 +978,10 @@ msgid "Countries"
 msgstr "بلدان"
 
 #: templates/manager/about.html:83 templates/payments/memberships.html:56
-#| msgid "Sell on Foroden"
 msgid "Using Foroden."
 msgstr "باستخدام Foroden."
 
 #: templates/manager/about.html:87 templates/payments/memberships.html:60
-#| msgid "Buyer"
 msgid "Buyers"
 msgstr "المشترون"
 
@@ -1016,7 +998,6 @@ msgid "Send"
 msgstr "إرسال"
 
 #: templates/manager/create_discussion.html:9
-#| msgid "Created on"
 msgid "Create a discussion"
 msgstr "خلق مناقشة"
 
@@ -1050,11 +1031,12 @@ msgstr "سوق Foroden"
 
 #: templates/manager/index.html:134 templates/manager/index.html:171
 #: templates/manager/index.html:202 templates/manager/showroom_list.html:39
+#: templates/supplier/products.html:143 templates/supplier/products.html:204
 #: templates/supplier/store_detail.html:118
 msgid "View All"
 msgstr "مشاهدة الكل"
 
-#: templates/manager/index.html:167
+#: templates/manager/index.html:167 templates/supplier/products.html:139
 msgid "New Arrivals"
 msgstr "القادمون الجدد"
 
@@ -1075,6 +1057,7 @@ msgid "Other Showrooms"
 msgstr "معارض أخرى"
 
 #: templates/manager/showroom_list.html:37
+#: templates/supplier/products.html:202
 msgid "Popular Stores"
 msgstr "المتاجر الشعبية"
 
@@ -1092,12 +1075,10 @@ msgid "Send Message"
 msgstr "أرسل رسالة"
 
 #: templates/manager/support.html:23
-#| msgid "Created on"
 msgid "Create Discussion"
 msgstr "خلق مناقشة"
 
 #: templates/manager/support.html:31
-#| msgid "My Account"
 msgid "Accounts"
 msgstr "حسابات"
 
@@ -1106,7 +1087,6 @@ msgid "Get help on account related issues."
 msgstr "احصل على مساعدة بشأن القضايا المتعلقة بالحساب."
 
 #: templates/manager/support.html:38
-#| msgid "Payment Id"
 msgid "Payments"
 msgstr "المدفوعات"
 
@@ -1115,7 +1095,6 @@ msgid "Get help on payment related issues."
 msgstr "احصل على مساعدة بشأن القضايا المتعلقة بالدفع."
 
 #: templates/manager/support.html:45
-#| msgid "Duration"
 msgid "Configurations"
 msgstr "التكوينات"
 
@@ -1142,7 +1121,6 @@ msgstr "واحد"
 
 #: templates/payments/checkout.html:13
 #: templates/payments/membership_detail.html:24
-#| msgid "Memberships"
 msgid "Membership Package"
 msgstr "باقة العضوية"
 
@@ -1158,7 +1136,6 @@ msgstr "إثنان"
 
 #: templates/payments/checkout.html:29
 #: templates/payments/membership_detail.html:41
-#| msgid "Payment Methods"
 msgid "Select Payment Method"
 msgstr "اختار طريقة الدفع"
 
@@ -1171,7 +1148,6 @@ msgid "Reach more businesses with our different promotion deals"
 msgstr "أسعار بسيطة ويمكن التنبؤ بها"
 
 #: templates/payments/memberships.html:14
-#| msgid "Memberships"
 msgid "Memberships Packages"
 msgstr "حزم العضويات"
 
@@ -1180,12 +1156,10 @@ msgid "Get Started"
 msgstr "البدء"
 
 #: templates/supplier/dashboard/create-product.html:10
-#| msgid "How to create products"
 msgid "Fill in form to create product"
 msgstr "املأ النموذج لإنشاء المنتج"
 
 #: templates/supplier/dashboard/create-product.html:35
-#| msgid "Stores"
 msgid "Store"
 msgstr "متجر"
 
@@ -1194,12 +1168,10 @@ msgid "Sub category"
 msgstr "تصنيف فرعي"
 
 #: templates/supplier/dashboard/create-product.html:234
-#| msgid "Products"
 msgid "Product Tags"
 msgstr "علامات المنتج"
 
 #: templates/supplier/dashboard/create-product.html:244
-#| msgid "Product Categories"
 msgid "Product Images"
 msgstr "صور المنتج"
 
@@ -1212,17 +1184,14 @@ msgid "Choose a good name"
 msgstr "اختر اسمًا جيدًا"
 
 #: templates/supplier/dashboard/create-store.html:14
-#| msgid "How to create a store?"
 msgid "To create your store"
 msgstr "لإنشاء متجرك"
 
 #: templates/supplier/dashboard/create-store.html:19
-#| msgid "How to create a store?"
 msgid "Fill in form to create new store"
 msgstr "املأ النموذج لإنشاء متجر جديد"
 
 #: templates/supplier/dashboard/create-store.html:42
-#| msgid "Store Name"
 msgid "Store Image"
 msgstr "صورة المتجر"
 
@@ -1247,12 +1216,10 @@ msgid "Requests Statistics"
 msgstr "يطلب الإحصاء"
 
 #: templates/supplier/dashboard/dashboard.html:41
-#| msgid "Product Categories"
 msgid "Product Sub Categories Statistics"
 msgstr "إحصائيات فئات المنتجات الفرعية"
 
 #: templates/supplier/dashboard/dashboard.html:48
-#| msgid "Visited Products"
 msgid "Top Viewed Products"
 msgstr "أعلى المنتجات مشاهدة"
 
@@ -1261,25 +1228,21 @@ msgid "Click the \"Edit\" label"
 msgstr "انقر فوق التصنيف \"تحرير\""
 
 #: templates/supplier/dashboard/manage-product.html:15
-#| msgid "Manage your products"
 msgid "To make changes to your product"
 msgstr "لإجراء تغييرات على منتجك"
 
 #: templates/supplier/dashboard/manage-product.html:24
 #: templates/supplier/dashboard/manage-product.html:37
-#| msgid "Categories"
 msgid "Category"
 msgstr "فئة"
 
 #: templates/supplier/dashboard/manage-product.html:25
 #: templates/supplier/dashboard/manage-product.html:38
-#| msgid "Categories"
 msgid "Sub Category"
 msgstr "تصنيف فرعي"
 
 #: templates/supplier/dashboard/manage-product.html:26
 #: templates/supplier/dashboard/manage-product.html:39
-#| msgid "Price"
 msgid "Unit Price"
 msgstr "سعر الوحدة"
 
@@ -1287,12 +1250,10 @@ msgstr "سعر الوحدة"
 #: templates/supplier/dashboard/manage-product.html:40
 #: templates/supplier/dashboard/manage-store.html:25
 #: templates/supplier/dashboard/manage-store.html:35
-#| msgid "Created on"
 msgid "Created At"
 msgstr "أنشئت في"
 
 #: templates/supplier/dashboard/manage-store.html:8
-#| msgid "Stores"
 msgid "My Stores"
 msgstr "متاجري"
 
@@ -1301,7 +1262,6 @@ msgid "Please, select a store from the table"
 msgstr "من فضلك ، اختر متجرا من الجدول"
 
 #: templates/supplier/dashboard/manage-store.html:15
-#| msgid "Thousands of products await."
 msgid "To add products to it"
 msgstr "لإضافة منتجات إليها"
 
@@ -1316,12 +1276,10 @@ msgstr "لإجراء تغييرات على خدمتك"
 
 #: templates/supplier/dashboard/services.html:26
 #: templates/supplier/dashboard/services.html:37
-#| msgid "Created on"
 msgid "Created On"
 msgstr "تم إنشاؤها على"
 
 #: templates/supplier/dashboard/utils/layout.html:34
-#| msgid "Suppliers"
 msgid "Supplier's Portal"
 msgstr "بوابة المورد"
 
@@ -1331,32 +1289,26 @@ msgid "Dashboard"
 msgstr "لوحة القيادة"
 
 #: templates/supplier/dashboard/utils/layout.html:55
-#| msgid "Created on"
 msgid "Create store"
 msgstr "إنشاء متجر"
 
 #: templates/supplier/dashboard/utils/layout.html:56
-#| msgid "Manager"
 msgid "Manage store"
 msgstr "إدارة المتجر"
 
 #: templates/supplier/dashboard/utils/layout.html:68
-#| msgid "Foroden Services"
 msgid "Create service"
 msgstr "إنشاء الخدمة"
 
 #: templates/supplier/dashboard/utils/layout.html:69
-#| msgid "Manager"
 msgid "Manage service"
 msgstr "إدارة الخدمة"
 
 #: templates/supplier/dashboard/utils/layout.html:82
-#| msgid "How to create products"
 msgid "Create products"
 msgstr "إنشاء المنتجات"
 
 #: templates/supplier/dashboard/utils/layout.html:83
-#| msgid "Manage your products"
 msgid "Manage products"
 msgstr "إنشاء المنتجات"
 
@@ -1378,13 +1330,36 @@ msgstr "إظهار الاهتمام"
 msgid "Products Just For you"
 msgstr "المنتجات فقط لأجلك"
 
+#: templates/supplier/products.html:19
+#| msgid "Products"
+msgid "products"
+msgstr "منتجات"
+
+#: templates/supplier/products.html:26
+msgid "min"
+msgstr "دقيقة"
+
+#: templates/supplier/products.html:30
+msgid "max"
+msgstr "الأعلى"
+
+#: templates/supplier/products.html:40 templates/supplier/store_list.html:23
+msgid "All"
+msgstr "الجميع"
+
+#: templates/supplier/products.html:79
+#| msgid "Total Product Count"
+msgid "No Products Found"
+msgstr "لا توجد منتجات"
+
+#: templates/supplier/products.html:176
+#| msgid "Create products"
+msgid "Related Products"
+msgstr "منتجات ذات صله"
+
 #: templates/supplier/store_detail.html:116
 msgid "Related Stores"
 msgstr "المتاجر ذات الصلة"
-
-#: templates/supplier/store_list.html:23
-msgid "All"
-msgstr "الجميع"
 
 #: templates/supplier/supplier_detail.html:22
 msgid "About Supplier"
@@ -1526,6 +1501,12 @@ msgstr "فئات لك"
 msgid "Languages"
 msgstr "اللغات"
 
+#~ msgid "Error Occured. Try Again"
+#~ msgstr "حدث خطأ. حاول ثانية"
+
+#~ msgid "An Error Occured. Try Again"
+#~ msgstr "حدث خطأ. حاول ثانية"
+
 #~ msgid ""
 #~ "Now more than ever, consumers are choosing to support local shops over big-"
 #~ "box chains. There are millions of thriving small businesses in North America"
@@ -1539,14 +1520,8 @@ msgstr "اللغات"
 #~ " مجتمعنا العالمي وقوة التكنولوجيا ، تساعد Faire في تعزيز نمو رواد الأعمال في"
 #~ " كل مكان"
 
-~ msgid "Discounted Products"
-~ msgstr "المنتجات المخفضة"
+#~ msgid "Discounted Products"
+#~ msgstr "المنتجات المخفضة"
 
-~ msgid "min"
-~ msgstr "دقيقة"
-
-~ msgid "max"
-~ msgstr "الأعلى"
-
-~ msgid "Contact"
-~ msgstr "اتصال"
+#~ msgid "Contact"
+#~ msgstr "اتصال"
