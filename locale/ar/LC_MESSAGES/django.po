@@ -165,7 +165,6 @@ msgid "Activate Foroden Activation"
 msgstr "تنشيط التنشيط Foroden"
 
 #: app_admin/views.py:739
-#| "Account Created Successfully. Verfication link was sent user's email."
 msgid ""
 "Account Created Successfully.  A verification link was sent user's email."
 msgstr ""
