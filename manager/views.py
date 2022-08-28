@@ -6,6 +6,7 @@ from django.db.models import Q
 import random
 from django.utils.translation import gettext as _
 from django.contrib import messages
+
 # apps
 from supplier.models import (
     Product,
@@ -23,6 +24,7 @@ from payment.mixins import AuthedOnlyAccessMixin
 from django.utils.translation import get_language
 from googletrans import Translator
 from django.conf import settings
+
 translator = Translator()
 
 
@@ -61,11 +63,22 @@ class HomeView(View):
                     {
                         "category": category,
                         "sub_categories": (
-                        lambda sub_categories: random.sample(sub_categories, len(sub_categories)))(list(ProductSubCategory.objects.filter(
-                            category=category
-                        ).order_by("-id")))[:3]
+                            lambda sub_categories: random.sample(
+                                sub_categories, len(sub_categories)
+                            )
+                        )(
+                            list(
+                                ProductSubCategory.objects.filter(
+                                    category=category
+                                ).order_by("-id")
+                            )
+                        )[
+                            :3
+                        ],
                     }
-                    for category in (lambda categories: random.sample(categories, len(categories)))(list(ProductCategory.objects.all().order_by("-id")))[:6]
+                    for category in (
+                        lambda categories: random.sample(categories, len(categories))
+                    )(list(ProductCategory.objects.all().order_by("-id")))[:6]
                     # if category.product_count > 0
                     # and category.productsubcategory_set.count()
                 ],
@@ -221,11 +234,11 @@ def profile(request):
     elif request.user.account_type == "BUYER":
         # to buyer profile
         return redirect(reverse("buyer:profile"))
-    elif request.user.account_type == "SUPPORT": 
+    elif request.user.account_type == "SUPPORT":
         return redirect(reverse("app_admin:profile"))
     elif request.user.is_superuser:
         return redirect(reverse("app_admin:profile"))
-        
+
 
 def dashboard(request):
     if not request.user.is_authenticated:
@@ -246,64 +259,65 @@ def dashboard(request):
 
 
 class SupportView(View):
-    template_name = 'manager/support.html'
+    template_name = "manager/support.html"
+
     def get(self, request):
 
         context_data = {
-            "view_name" : _("Support"),
-            "discussions": ManagerModels.Discussion.objects.all().order_by('-id')[:10]
+            "view_name": _("Support"),
+            "discussions": ManagerModels.Discussion.objects.all().order_by("-id")[:10],
         }
 
         return render(request, self.template_name, context=context_data)
+
 
 class SupportChatroomView(AuthedOnlyAccessMixin, View):
-    template_name = 'manager/chatroom.html'
+    template_name = "manager/chatroom.html"
+
     def get(self, request):
 
-        context_data = {
-            "view_name" : _("Support")
-        }
+        context_data = {"view_name": _("Support")}
 
         return render(request, self.template_name, context=context_data)
-    
+
+
 class SupportDiscussionListView(View):
     model = ManagerModels.Discussion
-    template_name = 'manager/discussion_list.html'
+    template_name = "manager/discussion_list.html"
+
     def get(self, request):
 
         context_data = {
-            "view_name" : _("Discussion"),
+            "view_name": _("Discussion"),
             "discussions": ManagerModels.Discussion.objects.filter(
                 Q(subject__icontains=self.request.GET.get("search", None))
                 | Q(description__icontains=self.request.GET.get("search", None))
-            )
+            ),
         }
 
         return render(request, self.template_name, context=context_data)
 
+
 class SupportCreateDiscussionView(AuthedOnlyAccessMixin, View):
-    template_name = 'manager/create_discussion.html'
+    template_name = "manager/create_discussion.html"
+
     def get(self, request):
-        context_data = {
-            "view_name" : _("Support")
-        }
+        context_data = {"view_name": _("Support")}
         return render(request, self.template_name, context=context_data)
 
     def post(self, request):
-        subject = request.POST.get('subject')
-        description = request.POST.get('description')
+        subject = request.POST.get("subject")
+        description = request.POST.get("description")
 
         discussion = ManagerModels.Discussion.objects.create(
-            subject=subject,
-            description=description,
-            user=request.user
+            subject=subject, description=description, user=request.user
         )
 
         if not discussion:
-            messages.add_message(request, messages.ERROR, _("Error Occured. Try Again"))
+            messages.add_message(request, messages.ERROR, _("Error occurred. Try Again"))
             return redirect(reverse("manager:create-discussion"))
-        
-        fields = ('subject','description')
+
+        fields = ("subject", "description")
         instance = discussion
         modal = ManagerModels.Discussion
         for field in fields:
@@ -312,7 +326,9 @@ class SupportCreateDiscussionView(AuthedOnlyAccessMixin, View):
                     if language[0] == get_language():
                         # already set
                         continue
-                    result = translator.translate(getattr(instance, field), dest=language[0])
+                    result = translator.translate(
+                        getattr(instance, field), dest=language[0]
+                    )
                     for model_field in modal._meta.get_fields():
                         if not model_field.name in f"{field}_{language[0]}":
                             continue
@@ -321,38 +337,46 @@ class SupportCreateDiscussionView(AuthedOnlyAccessMixin, View):
                             setattr(instance, model_field.name, result.text)
                             instance.save()
                 except:
-                    setattr(instance, f'{field}_{language[0]}', getattr(instance, field))
+                    setattr(
+                        instance, f"{field}_{language[0]}", getattr(instance, field)
+                    )
                     instance.save()
 
-        messages.add_message(request, messages.SUCCESS, _("Discussion created successfully."))
+        messages.add_message(
+            request, messages.SUCCESS, _("Discussion created successfully.")
+        )
         return redirect(reverse("manager:create-discussion"))
 
+
 class SupportDiscussionView(View):
-    template_name = 'manager/discussion.html'
+    template_name = "manager/discussion.html"
+
     def get(self, request, slug):
         discussion = ManagerModels.Discussion.objects.filter(slug=slug).first()
         context_data = {
-            "view_name" : _("Support"),
-            "discussion" : discussion,
-            "replies": ManagerModels.DiscussionReply.objects.filter(discussion=discussion)
+            "view_name": _("Support"),
+            "discussion": discussion,
+            "replies": ManagerModels.DiscussionReply.objects.filter(
+                discussion=discussion
+            ),
         }
         return render(request, self.template_name, context=context_data)
 
     def post(self, request, slug):
-        description = request.POST.get('description')
+        description = request.POST.get("description")
         discussion = ManagerModels.Discussion.objects.filter(slug=slug).first()
 
         discussion_reply = ManagerModels.DiscussionReply.objects.create(
-            description=description,
-            user=request.user,
-            discussion=discussion
+            description=description, user=request.user, discussion=discussion
         )
 
         if not discussion_reply:
-            messages.add_message(request, messages.ERROR, _("Error Occured. Try Again"))
-            return redirect(reverse("manager:discussion", kwargs={'slug': discussion.slug}))
+            messages.add_message(request, messages.ERROR, _("Error occurred. Try Again"))
+            return redirect(
+                reverse("manager:discussion", kwargs={"slug": discussion.slug})
+            )
 
-        fields = ('description',)
+        fields = ("description",)
         instance = discussion_reply
         modal = ManagerModels.DiscussionReply
         for field in fields:
@@ -361,7 +385,9 @@ class SupportDiscussionView(View):
                     if language[0] == get_language():
                         # already set
                         continue
-                    result = translator.translate(getattr(instance, field), dest=language[0])
+                    result = translator.translate(
+                        getattr(instance, field), dest=language[0]
+                    )
                     for model_field in modal._meta.get_fields():
                         if not model_field.name in f"{field}_{language[0]}":
                             continue
@@ -369,9 +395,13 @@ class SupportDiscussionView(View):
                         if model_field.name == f"{field}_{language[0]}":
                             setattr(instance, model_field.name, result.text)
                             instance.save()
-                except:                    
-                    setattr(instance, f'{field}_{language[0]}', getattr(instance, field))
+                except:
+                    setattr(
+                        instance, f"{field}_{language[0]}", getattr(instance, field)
+                    )
                     instance.save()
 
-        messages.add_message(request, messages.SUCCESS, _("Reply submitted successfully."))
-        return redirect(reverse("manager:discussion", kwargs={'slug': discussion.slug}))
+        messages.add_message(
+            request, messages.SUCCESS, _("Reply submitted successfully.")
+        )
+        return redirect(reverse("manager:discussion", kwargs={"slug": discussion.slug}))

@@ -25,7 +25,9 @@ from auth_app.tokens import appTokenGenerator
 
 from django.utils.translation import get_language
 from googletrans import Translator
+
 translator = Translator()
+
 
 class LoginView(View):
     template_name = "auth_app/signin.html"
@@ -100,19 +102,27 @@ class SignUpView(View):
             and request.POST.get("confirm-password")
         ):
             messages.add_message(request, messages.ERROR, _("Please Fill all fields."))
-            return redirect("{}?{}=1".format(reverse("auth_app:signup"), account_type.lower()))
+            return redirect(
+                "{}?{}=1".format(reverse("auth_app:signup"), account_type.lower())
+            )
 
         if AuthModels.User.objects.filter(username=request.POST.get("username")):
             messages.add_message(request, messages.ERROR, _("Username not available."))
-            return redirect("{}?{}=1".format(reverse("auth_app:signup"), account_type.lower()))
+            return redirect(
+                "{}?{}=1".format(reverse("auth_app:signup"), account_type.lower())
+            )
 
         if AuthModels.User.objects.filter(email=request.POST.get("email")):
             messages.add_message(request, messages.ERROR, _("Email not available."))
-            return redirect("{}?{}=1".format(reverse("auth_app:signup"), account_type.lower()))
+            return redirect(
+                "{}?{}=1".format(reverse("auth_app:signup"), account_type.lower())
+            )
 
         if request.POST.get("confirm-password") != request.POST.get("password"):
             messages.add_message(request, messages.ERROR, _("Password mismatch."))
-            return redirect("{}?{}=1".format(reverse("auth_app:signup"), account_type.lower()))
+            return redirect(
+                "{}?{}=1".format(reverse("auth_app:signup"), account_type.lower())
+            )
 
         user = UserModel.objects.create_user(
             first_name=request.POST.get("first_name"),
@@ -123,7 +133,7 @@ class SignUpView(View):
             account_type=account_type,
         )
 
-        fields = ('first_name','last_name')
+        fields = ("first_name", "last_name")
         instance = user
         modal = UserModel
         for field in fields:
@@ -132,7 +142,9 @@ class SignUpView(View):
                     if language[0] == get_language():
                         # already set
                         continue
-                    result = translator.translate(getattr(instance, field), dest=language[0])
+                    result = translator.translate(
+                        getattr(instance, field), dest=language[0]
+                    )
                     for model_field in modal._meta.get_fields():
                         if not model_field.name in f"{field}_{language[0]}":
                             continue
@@ -140,8 +152,10 @@ class SignUpView(View):
                         if model_field.name == f"{field}_{language[0]}":
                             setattr(instance, model_field.name, result.text)
                             instance.save()
-                except:                    
-                    setattr(instance, f'{field}_{language[0]}', getattr(instance, field))
+                except:
+                    setattr(
+                        instance, f"{field}_{language[0]}", getattr(instance, field)
+                    )
                     instance.save()
 
         uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
@@ -172,7 +186,9 @@ class SignUpView(View):
         messages.add_message(
             request,
             messages.SUCCESS,
-            _("Account Created Successfully. Please check your email for a verfication link."),
+            _(
+                "Account Created Successfully. Please check your email for a verfication link."
+            ),
         )
         return redirect(reverse("auth_app:login"))
 
@@ -240,7 +256,14 @@ class BusinessProfileView(View):
                 website=request.POST.get("website", None),
             )
 
-            fields = ('business_name','business_description','country','country_code','city','mobile_user')
+            fields = (
+                "business_name",
+                "business_description",
+                "country",
+                "country_code",
+                "city",
+                "mobile_user",
+            )
             instance = profile
             modal = AuthModels.ClientProfile
             for field in fields:
@@ -249,7 +272,9 @@ class BusinessProfileView(View):
                         if language[0] == get_language():
                             # already set
                             continue
-                        result = translator.translate(getattr(instance, field), dest=language[0])
+                        result = translator.translate(
+                            getattr(instance, field), dest=language[0]
+                        )
                         for model_field in modal._meta.get_fields():
                             if not model_field.name in f"{field}_{language[0]}":
                                 continue
@@ -257,10 +282,11 @@ class BusinessProfileView(View):
                             if model_field.name == f"{field}_{language[0]}":
                                 setattr(instance, model_field.name, result.text)
                                 instance.save()
-                    except:                        
-                        setattr(instance, f'{field}_{language[0]}', getattr(instance, field))
+                    except:
+                        setattr(
+                            instance, f"{field}_{language[0]}", getattr(instance, field)
+                        )
                         instance.save()
-
 
             return redirect(reverse("supplier:dashboard"))
         except:

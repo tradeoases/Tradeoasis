@@ -113,9 +113,8 @@ class Showroom(models.Model):
 
 
 class Discussion(models.Model):
-
     class Meta:
-        ordering=['-id']
+        ordering = ["-id"]
 
     subject = models.CharField(_("Subject"), max_length=256)
     description = models.TextField(_("Description"))
@@ -128,7 +127,6 @@ class Discussion(models.Model):
     )
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
-
     def save(self, *args, **kwargs):
         self.slug = f"{slugify(self.subject)}-{uuid.uuid4()}"[:50]
 
@@ -138,6 +136,7 @@ class Discussion(models.Model):
 
     def __str__(self) -> str:
         return f"{self.subject}"
+
 
 class DiscussionReply(models.Model):
 

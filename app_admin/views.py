@@ -34,7 +34,9 @@ from app_admin.mixins import SupportOnlyAccessMixin
 from django.utils.translation import get_language
 from googletrans import Translator
 from django.conf import settings
+
 translator = Translator()
+
 
 class AdminDashboardView(SupportOnlyAccessMixin, View):
     template_name = "app_admin/index.html"
@@ -201,12 +203,14 @@ class ServiceCreateView(SupportOnlyAccessMixin, CreateView):
 
         # form = ManagerForms.ServiceFormManager(request.POST)
         # if not form.is_valid():
-        service = ManagerModels.Service.objects.create(name=request.POST.get('name'), description=request.POST.get('description'))
+        service = ManagerModels.Service.objects.create(
+            name=request.POST.get("name"), description=request.POST.get("description")
+        )
         if not service:
             messages.add_message(request, messages.ERROR, _("Invalid Data Entered."))
             return redirect(reverse("app_admin:service-create"))
 
-        fields = ('name','description')
+        fields = ("name", "description")
         instance = service
         modal = ManagerModels.Service
         for field in fields:
@@ -215,7 +219,9 @@ class ServiceCreateView(SupportOnlyAccessMixin, CreateView):
                     if language[0] == get_language():
                         # already set
                         continue
-                    result = translator.translate(getattr(instance, field), dest=language[0])
+                    result = translator.translate(
+                        getattr(instance, field), dest=language[0]
+                    )
                     for model_field in modal._meta.get_fields():
                         if not model_field.name in f"{field}_{language[0]}":
                             continue
@@ -224,7 +230,9 @@ class ServiceCreateView(SupportOnlyAccessMixin, CreateView):
                             setattr(instance, model_field.name, result.text)
                             instance.save()
                 except:
-                    setattr(instance, f'{field}_{language[0]}', getattr(instance, field))
+                    setattr(
+                        instance, f"{field}_{language[0]}", getattr(instance, field)
+                    )
                     instance.save()
 
         messages.add_message(
@@ -255,7 +263,7 @@ class ShowroomCreateView(SupportOnlyAccessMixin, CreateView):
 
         showroom = ManagerModels.Showroom.objects.create(name=name, image=image)
 
-        fields = ('name',)
+        fields = ("name",)
         instance = showroom
         modal = ManagerModels.Showroom
         for field in fields:
@@ -264,7 +272,9 @@ class ShowroomCreateView(SupportOnlyAccessMixin, CreateView):
                     if language[0] == get_language():
                         # already set
                         continue
-                    result = translator.translate(getattr(instance, field), dest=language[0])
+                    result = translator.translate(
+                        getattr(instance, field), dest=language[0]
+                    )
                     for model_field in modal._meta.get_fields():
                         if not model_field.name in f"{field}_{language[0]}":
                             continue
@@ -272,12 +282,16 @@ class ShowroomCreateView(SupportOnlyAccessMixin, CreateView):
                         if model_field.name == f"{field}_{language[0]}":
                             setattr(instance, model_field.name, result.text)
                             instance.save()
-                except:  
-                    setattr(instance, f'{field}_{language[0]}', getattr(instance, field))
+                except:
+                    setattr(
+                        instance, f"{field}_{language[0]}", getattr(instance, field)
+                    )
                     instance.save()
 
         if not showroom:
-            messages.add_message(request, messages.ERROR, _("Error Occurred. Try Again"))
+            messages.add_message(
+                request, messages.ERROR, _("Error Occurred. Try Again")
+            )
             return redirect(reverse("app_admin:showroom-create"))
 
         messages.add_message(
@@ -311,9 +325,7 @@ class CategoryCreateView(SupportOnlyAccessMixin, View):
         name = request.POST.get("category-name")
         image = request.FILES.get("category-image")
 
-        category = SupplierModels.ProductCategory.objects.filter(
-            name=name
-        )
+        category = SupplierModels.ProductCategory.objects.filter(name=name)
         if category.exists():
             messages.add_message(
                 request, messages.ERROR, _(f"Category({name}) already exists.")
@@ -321,7 +333,7 @@ class CategoryCreateView(SupportOnlyAccessMixin, View):
             return redirect(reverse("app_admin:category-create"))
 
         category = SupplierModels.ProductCategory.objects.create(name=name, image=image)
-        fields = ('name',)
+        fields = ("name",)
         instance = category
         modal = SupplierModels.ProductCategory
         for field in fields:
@@ -330,7 +342,9 @@ class CategoryCreateView(SupportOnlyAccessMixin, View):
                     if language[0] == get_language():
                         # already set
                         continue
-                    result = translator.translate(getattr(instance, field), dest=language[0])
+                    result = translator.translate(
+                        getattr(instance, field), dest=language[0]
+                    )
                     for model_field in modal._meta.get_fields():
                         if not model_field.name in f"{field}_{language[0]}":
                             continue
@@ -338,8 +352,10 @@ class CategoryCreateView(SupportOnlyAccessMixin, View):
                         if model_field.name == f"{field}_{language[0]}":
                             setattr(instance, model_field.name, result.text)
                             instance.save()
-                except:  
-                    setattr(instance, f'{field}_{language[0]}', getattr(instance, field))
+                except:
+                    setattr(
+                        instance, f"{field}_{language[0]}", getattr(instance, field)
+                    )
                     instance.save()
 
         # create sub categories if any
@@ -362,7 +378,7 @@ class CategoryCreateView(SupportOnlyAccessMixin, View):
                 name=sub_cat_name, image=sub_cat_image, category=category
             )
 
-            fields = ('name',)
+            fields = ("name",)
             instance = sub_categgory
             modal = SupplierModels.ProductSubCategory
             for field in fields:
@@ -371,7 +387,9 @@ class CategoryCreateView(SupportOnlyAccessMixin, View):
                         if language[0] == get_language():
                             # already set
                             continue
-                        result = translator.translate(getattr(instance, field), dest=language[0])
+                        result = translator.translate(
+                            getattr(instance, field), dest=language[0]
+                        )
                         for model_field in modal._meta.get_fields():
                             if not model_field.name in f"{field}_{language[0]}":
                                 continue
@@ -379,8 +397,10 @@ class CategoryCreateView(SupportOnlyAccessMixin, View):
                             if model_field.name == f"{field}_{language[0]}":
                                 setattr(instance, model_field.name, result.text)
                                 instance.save()
-                    except:  
-                        setattr(instance, f'{field}_{language[0]}', getattr(instance, field))
+                    except:
+                        setattr(
+                            instance, f"{field}_{language[0]}", getattr(instance, field)
+                        )
                         instance.save()
 
         messages.add_message(
@@ -409,9 +429,7 @@ class SubCategoryCreateView(SupportOnlyAccessMixin, View):
     def post(self, request):
         name = request.POST.get("category-name")
 
-        category = SupplierModels.ProductCategory.objects.filter(
-            name=name
-        ).first()
+        category = SupplierModels.ProductCategory.objects.filter(name=name).first()
 
         # create sub categories if any
         sub_category_len = len(request.FILES) - 1
@@ -433,7 +451,7 @@ class SubCategoryCreateView(SupportOnlyAccessMixin, View):
                 name=sub_cat_name, image=sub_cat_image, category=category
             )
 
-            fields = ('name',)
+            fields = ("name",)
             instance = sub_categgory
             modal = SupplierModels.ProductSubCategory
             for field in fields:
@@ -442,7 +460,9 @@ class SubCategoryCreateView(SupportOnlyAccessMixin, View):
                         if language[0] == get_language():
                             # already set
                             continue
-                        result = translator.translate(getattr(instance, field), dest=language[0])
+                        result = translator.translate(
+                            getattr(instance, field), dest=language[0]
+                        )
                         for model_field in modal._meta.get_fields():
                             if not model_field.name in f"{field}_{language[0]}":
                                 continue
@@ -450,8 +470,10 @@ class SubCategoryCreateView(SupportOnlyAccessMixin, View):
                             if model_field.name == f"{field}_{language[0]}":
                                 setattr(instance, model_field.name, result.text)
                                 instance.save()
-                    except:  
-                        setattr(instance, f'{field}_{language[0]}', getattr(instance, field))
+                    except:
+                        setattr(
+                            instance, f"{field}_{language[0]}", getattr(instance, field)
+                        )
                         instance.save()
 
         messages.add_message(
@@ -460,7 +482,6 @@ class SubCategoryCreateView(SupportOnlyAccessMixin, View):
             _("Subcategories created successfully.").format(name),
         )
         return redirect(reverse("app_admin:subcategory-create"))
-
 
 
 class AdminDiscussionsView(SupportOnlyAccessMixin, View):
@@ -502,7 +523,9 @@ class AdminCommunityView(SupportOnlyAccessMixin, View):
         context_data["view_name"] = _("Admin Dashboard - Support")
         context_data["active_tab"] = "Support"
 
-        context_data["discussions"] = ManagerModels.Discussion.objects.all().order_by('-id')
+        context_data["discussions"] = ManagerModels.Discussion.objects.all().order_by(
+            "-id"
+        )
 
         return context_data
 
@@ -518,11 +541,15 @@ class AdminCommunityChatView(SupportOnlyAccessMixin, View):
 
         context_data["view_name"] = _("Admin Dashboard - Support")
         context_data["active_tab"] = "Support"
-        context_data["discussions"] = ManagerModels.Discussion.objects.all().order_by('-id')
+        context_data["discussions"] = ManagerModels.Discussion.objects.all().order_by(
+            "-id"
+        )
 
         discussion = ManagerModels.Discussion.objects.filter(slug=slug).first()
         context_data["discussion"] = discussion
-        context_data["replies"] = ManagerModels.DiscussionReply.objects.filter(discussion=discussion)
+        context_data["replies"] = ManagerModels.DiscussionReply.objects.filter(
+            discussion=discussion
+        )
 
         return context_data
 
@@ -530,16 +557,14 @@ class AdminCommunityChatView(SupportOnlyAccessMixin, View):
         return render(request, self.template_name, context=self.get_context_data(slug))
 
     def post(self, request, slug):
-        description = request.POST.get('description')
+        description = request.POST.get("description")
         discussion = ManagerModels.Discussion.objects.filter(slug=slug).first()
 
         discussion_reply = ManagerModels.DiscussionReply.objects.create(
-            description=description,
-            user=request.user,
-            discussion=discussion
+            description=description, user=request.user, discussion=discussion
         )
 
-        fields = ('description',)
+        fields = ("description",)
         instance = discussion_reply
         modal = ManagerModels.DiscussionReply
         for field in fields:
@@ -548,7 +573,9 @@ class AdminCommunityChatView(SupportOnlyAccessMixin, View):
                     if language[0] == get_language():
                         # already set
                         continue
-                    result = translator.translate(getattr(instance, field), dest=language[0])
+                    result = translator.translate(
+                        getattr(instance, field), dest=language[0]
+                    )
                     for model_field in modal._meta.get_fields():
                         if not model_field.name in f"{field}_{language[0]}":
                             continue
@@ -556,11 +583,15 @@ class AdminCommunityChatView(SupportOnlyAccessMixin, View):
                         if model_field.name == f"{field}_{language[0]}":
                             setattr(instance, model_field.name, result.text)
                             instance.save()
-                except:                    
-                    setattr(instance, f'{field}_{language[0]}', getattr(instance, field))
+                except:
+                    setattr(
+                        instance, f"{field}_{language[0]}", getattr(instance, field)
+                    )
                     instance.save()
 
-        return redirect(reverse('app_admin:community-chat', kwargs={"slug": discussion.slug}))
+        return redirect(
+            reverse("app_admin:community-chat", kwargs={"slug": discussion.slug})
+        )
 
 
 class ContactClient(SupportOnlyAccessMixin, View):
@@ -602,6 +633,7 @@ class ProfileView(SupportOnlyAccessMixin, View):
 
         return render(request, self.template_name, context=context_data)
 
+
 class EditProfileView(SupportOnlyAccessMixin, View):
     template_name = "app_admin/editProfile.html"
 
@@ -617,21 +649,26 @@ class EditProfileView(SupportOnlyAccessMixin, View):
     def post(self, request):
         user = AuthModels.User.objects.filter(id=request.user.id).first()
         try:
-            if request.POST.get('username'):
-                user.first_name = request.POST.get('first_name')
-            if request.POST.get('username'):
-                user.last_name = request.POST.get('last_name')
-            if request.POST.get('username'):
-                user.username = request.POST.get('username')
-            if request.POST.get('username'):
-                user.email = request.POST.get('email')
+            if request.POST.get("username"):
+                user.first_name = request.POST.get("first_name")
+            if request.POST.get("username"):
+                user.last_name = request.POST.get("last_name")
+            if request.POST.get("username"):
+                user.username = request.POST.get("username")
+            if request.POST.get("username"):
+                user.email = request.POST.get("email")
 
             user.save()
-            messages.add_message(request, messages.SUCCESS, _("Account Edited Successfully"))
-            return redirect(reverse('app_admin:profile'))
+            messages.add_message(
+                request, messages.SUCCESS, _("Account Edited Successfully")
+            )
+            return redirect(reverse("app_admin:profile"))
         except:
-            messages.add_message(request, messages.ERROR, _("An Error Occured. Please Try Again"))
-            return redirect(reverse('app_admin:editprofile'))
+            messages.add_message(
+                request, messages.ERROR, _("An Error occurred. Please Try Again")
+            )
+            return redirect(reverse("app_admin:editprofile"))
+
 
 class CreateSupportView(SupportOnlyAccessMixin, View):
     template_name = "app_admin/createProfile.html"
@@ -668,7 +705,7 @@ class CreateSupportView(SupportOnlyAccessMixin, View):
             email=request.POST.get("email"),
             password=request.POST.get("password"),
         )
-        
+
         uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
         token = appTokenGenerator.make_token(user)
         domain = get_current_site(request).domain
@@ -681,7 +718,9 @@ class CreateSupportView(SupportOnlyAccessMixin, View):
             {
                 "name": user.username,
                 "email": user.email,
-                "review": "{} \n {} \n Please edit your account details and set a desired password after activating your account.".format(_("Your activation link is"), activate_url),
+                "review": "{} \n {} \n Please edit your account details and set a desired password after activating your account.".format(
+                    _("Your activation link is"), activate_url
+                ),
             },
         )
         email = EmailMessage(
@@ -697,9 +736,10 @@ class CreateSupportView(SupportOnlyAccessMixin, View):
         messages.add_message(
             request,
             messages.SUCCESS,
-            _("Account Created Successfully. Verfication link was sent user's email."),
+            _("Account Created Successfully.  A verification link was sent user's email."),
         )
         return redirect(reverse("app_admin:profile"))
+
 
 class VerficationView(View):
     def get(self, request, uidb64, token):

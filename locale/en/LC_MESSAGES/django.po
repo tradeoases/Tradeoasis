@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-24 04:39+0000\n"
+"POT-Creation-Date: 2022-08-28 07:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,152 +18,156 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app_admin/views.py:44 app_admin/views.py:107
-#: templates/app_admin/utils/layout.html:101
+#: app_admin/views.py:48 app_admin/views.py:111
+#: templates/app_admin/utils/layout.html:105
 msgid "Admin Dashboard"
 msgstr ""
 
-#: app_admin/views.py:50 app_admin/views.py:113
+#: app_admin/views.py:54 app_admin/views.py:117
 msgid "Total Suppliers"
 msgstr ""
 
-#: app_admin/views.py:51 app_admin/views.py:114
+#: app_admin/views.py:55 app_admin/views.py:118
 msgid "Total Supplier Count"
 msgstr ""
 
-#: app_admin/views.py:55 app_admin/views.py:118
+#: app_admin/views.py:59 app_admin/views.py:122
 msgid "Total Buyers"
 msgstr ""
 
-#: app_admin/views.py:56 app_admin/views.py:119
+#: app_admin/views.py:60 app_admin/views.py:123
 msgid "Total Buyer Count"
 msgstr ""
 
-#: app_admin/views.py:60 app_admin/views.py:123
+#: app_admin/views.py:64 app_admin/views.py:127
 msgid "Total Product"
 msgstr ""
 
-#: app_admin/views.py:61 app_admin/views.py:124
+#: app_admin/views.py:65 app_admin/views.py:128
 msgid "Total Product Count"
 msgstr ""
 
-#: app_admin/views.py:65 app_admin/views.py:161
+#: app_admin/views.py:69 app_admin/views.py:165
 msgid "Total Showrooms"
 msgstr ""
 
-#: app_admin/views.py:66 app_admin/views.py:162
+#: app_admin/views.py:70 app_admin/views.py:166
 msgid "Showroom Count"
 msgstr ""
 
-#: app_admin/views.py:70 app_admin/views.py:166
+#: app_admin/views.py:74 app_admin/views.py:170
 msgid "Total Stores"
 msgstr ""
 
-#: app_admin/views.py:71 app_admin/views.py:167
+#: app_admin/views.py:75 app_admin/views.py:171
 msgid "Total Store Count"
 msgstr ""
 
-#: app_admin/views.py:75 app_admin/views.py:171
+#: app_admin/views.py:79 app_admin/views.py:175
 msgid "Total Memberships"
 msgstr ""
 
-#: app_admin/views.py:76 app_admin/views.py:172 payment/views.py:42
-#: payment/views.py:65 templates/manager/support.html:58
-#: templates/utils/header.html:165 templates/utils/header.html:272
+#: app_admin/views.py:80 app_admin/views.py:176 payment/views.py:45
+#: payment/views.py:68 templates/manager/support.html:59
+#: templates/utils/header.html:125 templates/utils/header.html:232
 msgid "Memberships"
 msgstr ""
 
-#: app_admin/views.py:80 app_admin/views.py:128
+#: app_admin/views.py:84 app_admin/views.py:132
 msgid "Total Contracts"
 msgstr ""
 
-#: app_admin/views.py:81 app_admin/views.py:129
+#: app_admin/views.py:85 app_admin/views.py:133
 msgid "Contract Created"
 msgstr ""
 
-#: app_admin/views.py:155 app_admin/views.py:255
+#: app_admin/views.py:159 app_admin/views.py:302 app_admin/views.py:400
 msgid "Admin Dashboard - Clients"
 msgstr ""
 
-#: app_admin/views.py:176
+#: app_admin/views.py:180
 msgid "Total Services"
 msgstr ""
 
-#: app_admin/views.py:177
+#: app_admin/views.py:181
 msgid "Total Services Count"
 msgstr ""
 
-#: app_admin/views.py:195 app_admin/views.py:227 app_admin/views.py:474
-#: auth_app/views.py:39 auth_app/views.py:99 supplier/views.py:679
-#: supplier/views.py:724 supplier/views.py:780
+#: app_admin/views.py:199 app_admin/views.py:253 app_admin/views.py:655
+#: auth_app/views.py:42 auth_app/views.py:102 supplier/views.py:683
+#: supplier/views.py:769 supplier/views.py:848
 msgid "Please Fill all fields."
 msgstr ""
 
-#: app_admin/views.py:200
+#: app_admin/views.py:206
 msgid "Invalid Data Entered."
 msgstr ""
 
-#: app_admin/views.py:205 app_admin/views.py:237
+#: app_admin/views.py:231 app_admin/views.py:284
 #, python-brace-format
 msgid "Service ({name}) created successfully."
 msgstr ""
 
-#: app_admin/views.py:212 app_admin/views.py:244
+#: app_admin/views.py:238 app_admin/views.py:291
 msgid "Admin Dashboard - Manager"
 msgstr ""
 
-#: app_admin/views.py:233
+#: app_admin/views.py:280
 msgid "Error Occurred. Try Again"
 msgstr ""
 
-#: app_admin/views.py:272
+#: app_admin/views.py:319
 #, python-brace-format
 msgid "Category({name}) already exists."
 msgstr ""
 
-#: app_admin/views.py:290
+#: app_admin/views.py:357 app_admin/views.py:428
 #, python-brace-format
 msgid "Sub category ({sub_cat_name}) already exists."
 msgstr ""
 
-#: app_admin/views.py:301
+#: app_admin/views.py:389
 msgid "Category ({}) created successfully."
 msgstr ""
 
-#: app_admin/views.py:312 app_admin/views.py:327 app_admin/views.py:342
-#: app_admin/views.py:359
+#: app_admin/views.py:460
+msgid "Subcategories created successfully."
+msgstr ""
+
+#: app_admin/views.py:472 app_admin/views.py:487 app_admin/views.py:502
+#: app_admin/views.py:519
 msgid "Admin Dashboard - Support"
 msgstr ""
 
-#: app_admin/views.py:449
+#: app_admin/views.py:630
 msgid "Account Edited Successfully"
 msgstr ""
 
-#: app_admin/views.py:452
-msgid "An Error Occured. Please Try Again"
+#: app_admin/views.py:633
+msgid "An Error occurred. Please Try Again"
 msgstr ""
 
-#: app_admin/views.py:478 auth_app/views.py:103
+#: app_admin/views.py:659 auth_app/views.py:106
 msgid "Username not available."
 msgstr ""
 
-#: app_admin/views.py:482 auth_app/views.py:111
+#: app_admin/views.py:663 auth_app/views.py:114
 msgid "Password mismatch."
 msgstr ""
 
-#: app_admin/views.py:503 auth_app/views.py:138
+#: app_admin/views.py:684 auth_app/views.py:159
 msgid "Your activation link is"
 msgstr ""
 
-#: app_admin/views.py:507 auth_app/views.py:142
+#: app_admin/views.py:688 auth_app/views.py:163
 msgid "Activate Foroden Activation"
 msgstr ""
 
-#: app_admin/views.py:519
-msgid "Account Created Successfully. Verfication link was sent user's email."
+#: app_admin/views.py:700
+msgid "Account Created Successfully.  A verification link was sent user's email."
 msgstr ""
 
-#: app_admin/views.py:536 auth_app/views.py:172
+#: app_admin/views.py:717 auth_app/views.py:193
 msgid "Bad Request"
 msgstr ""
 
@@ -172,8 +176,8 @@ msgstr ""
 msgid "Account Type"
 msgstr ""
 
-#: auth_app/models.py:34 manager/models.py:91 supplier/models.py:64
-#: supplier/models.py:86 supplier/models.py:153
+#: auth_app/models.py:34 manager/models.py:91 supplier/models.py:65
+#: supplier/models.py:87 supplier/models.py:156
 msgid "Image"
 msgstr ""
 
@@ -192,8 +196,8 @@ msgstr ""
 #: auth_app/models.py:62 manager/models.py:24 manager/models.py:44
 #: manager/models.py:69 manager/models.py:97 manager/models.py:124
 #: payment/models.py:28 payment/models.py:93 supplier/models.py:36
-#: supplier/models.py:68 supplier/models.py:91 supplier/models.py:129
-#: supplier/models.py:157 supplier/models.py:175 supplier/models.py:202
+#: supplier/models.py:69 supplier/models.py:92 supplier/models.py:131
+#: supplier/models.py:160 supplier/models.py:179 supplier/models.py:206
 msgid "Safe Url"
 msgstr ""
 
@@ -243,41 +247,41 @@ msgstr ""
 msgid "Responses to clients"
 msgstr ""
 
-#: auth_app/views.py:33 templates/utils/header.html:197
-#: templates/utils/header.html:213
+#: auth_app/views.py:36 templates/utils/header.html:157
+#: templates/utils/header.html:173
 msgid "Sign In"
 msgstr ""
 
-#: auth_app/views.py:47
+#: auth_app/views.py:50
 msgid "Account not found. Try Again."
 msgstr ""
 
-#: auth_app/views.py:53
+#: auth_app/views.py:56
 msgid "Please Activate your Email"
 msgstr ""
 
-#: auth_app/views.py:77
+#: auth_app/views.py:80
 msgid "Sign Up"
 msgstr ""
 
-#: auth_app/views.py:107
+#: auth_app/views.py:110
 msgid "Email not available."
 msgstr ""
 
-#: auth_app/views.py:154
+#: auth_app/views.py:175
 msgid ""
 "Account Created Successfully. Please check your email for a verfication link."
 msgstr ""
 
-#: auth_app/views.py:190 templates/auth_app/business_infor.html:9
+#: auth_app/views.py:211 templates/auth_app/business_infor.html:9
 msgid "Business Profile"
 msgstr ""
 
-#: auth_app/views.py:204
+#: auth_app/views.py:225
 msgid "Please Fill all reqiured fields."
 msgstr ""
 
-#: auth_app/views.py:224
+#: auth_app/views.py:268
 msgid "An Error Occurred. Try Again."
 msgstr ""
 
@@ -292,40 +296,40 @@ msgstr ""
 #: buyer/models.py:21 manager/models.py:22 manager/models.py:49
 #: manager/models.py:74 manager/models.py:102 manager/models.py:129
 #: manager/models.py:147 payment/models.py:33 payment/models.py:63
-#: payment/models.py:98 payment/models.py:148 supplier/models.py:47
-#: supplier/models.py:69 supplier/models.py:96 supplier/models.py:134
-#: supplier/models.py:162 supplier/models.py:207
+#: payment/models.py:98 payment/models.py:148 supplier/models.py:48
+#: supplier/models.py:70 supplier/models.py:98 supplier/models.py:137
+#: supplier/models.py:166 supplier/models.py:211
 #: templates/buyer/dashboard/contracts.html:36
 #: templates/supplier/dashboard/contracts.html:36
 msgid "Created on"
 msgstr ""
 
 #: buyer/views.py:21 buyer/views.py:37
-#: templates/buyer/dashboard/utils/layout.html:42
-#: templates/buyer/profile.html:9 templates/utils/header.html:130
+#: templates/buyer/dashboard/utils/layout.html:46
+#: templates/buyer/profile.html:9 templates/utils/header.html:90
 msgid "Profile"
 msgstr ""
 
-#: buyer/views.py:54 buyer/views.py:71 supplier/views.py:639
-#: templates/buyer/dashboard/utils/layout.html:56
+#: buyer/views.py:54 buyer/views.py:71 supplier/views.py:643
+#: templates/buyer/dashboard/utils/layout.html:60
 #: templates/buyer/profile.html:10
 #: templates/supplier/dashboard/utils/layout.html:93
 msgid "Contracts"
 msgstr ""
 
-#: core/settings.py:189
+#: core/settings.py:190
 msgid "English"
 msgstr ""
 
-#: core/settings.py:190
+#: core/settings.py:191
 msgid "Arabic"
 msgstr ""
 
-#: core/settings.py:191
+#: core/settings.py:192
 msgid "French"
 msgstr ""
 
-#: core/settings.py:192
+#: core/settings.py:193
 msgid "German"
 msgstr ""
 
@@ -366,9 +370,9 @@ msgid "Country or City"
 msgstr ""
 
 #: manager/models.py:39 manager/models.py:85 payment/models.py:21
-#: payment/models.py:46 payment/models.py:90 supplier/models.py:61
-#: supplier/models.py:83 supplier/models.py:113 supplier/models.py:172
-#: supplier/models.py:194 templates/buyer/dashboard/profile.html:30
+#: payment/models.py:46 payment/models.py:90 supplier/models.py:62
+#: supplier/models.py:84 supplier/models.py:115 supplier/models.py:176
+#: supplier/models.py:198 templates/buyer/dashboard/profile.html:30
 #: templates/supplier/dashboard/create-product.html:30
 #: templates/supplier/dashboard/create-service.html:30
 #: templates/supplier/dashboard/create-store.html:38
@@ -383,7 +387,7 @@ msgid "Name"
 msgstr ""
 
 #: manager/models.py:41 manager/models.py:121 manager/models.py:146
-#: payment/models.py:23 supplier/models.py:115 supplier/models.py:196
+#: payment/models.py:23 supplier/models.py:117 supplier/models.py:200
 #: templates/buyer/dashboard/business-profile.html:34
 #: templates/buyer/profile.html:53
 #: templates/supplier/dashboard/create-product.html:54
@@ -394,7 +398,7 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: manager/models.py:65 supplier/models.py:43
+#: manager/models.py:65 supplier/models.py:44
 msgid "Service Image"
 msgstr ""
 
@@ -406,56 +410,60 @@ msgstr ""
 msgid "Subject"
 msgstr ""
 
-#: manager/views.py:52 templates/app_admin/utils/layout.html:53
-#: templates/app_admin/utils/layout.html:103
+#: manager/views.py:57 templates/app_admin/utils/layout.html:57
+#: templates/app_admin/utils/layout.html:107
 #: templates/manager/service_list.html:8
 #: templates/manager/showroom_detail.html:7
 #: templates/manager/showroom_list.html:7
 #: templates/supplier/product_detail.html:7
 #: templates/supplier/store_detail.html:9 templates/supplier/store_list.html:9
-#: templates/supplier/supplier_detail.html:7 templates/utils/header.html:159
-#: templates/utils/header.html:230
+#: templates/supplier/supplier_detail.html:7 templates/utils/header.html:119
+#: templates/utils/header.html:190
 msgid "Home"
 msgstr ""
 
-#: manager/views.py:126 templates/manager/about.html:54
+#: manager/views.py:130 templates/manager/about.html:77
 #: templates/manager/index.html:102 templates/manager/showroom_detail.html:9
 #: templates/manager/showroom_list.html:9
-#: templates/manager/showroom_list.html:15 templates/manager/support.html:51
-#: templates/payments/memberships.html:50 templates/utils/header.html:161
-#: templates/utils/header.html:244 templates/utils/header.html:300
+#: templates/manager/showroom_list.html:15 templates/manager/support.html:52
+#: templates/payments/memberships.html:50 templates/utils/header.html:121
+#: templates/utils/header.html:204 templates/utils/header.html:267
 msgid "Showrooms"
 msgstr ""
 
-#: manager/views.py:194 supplier/views.py:635
+#: manager/views.py:198 supplier/views.py:639
 #: templates/manager/service_list.html:10
 #: templates/supplier/dashboard/utils/layout.html:63
-#: templates/supplier/supplier_detail.html:71 templates/utils/header.html:163
-#: templates/utils/header.html:258
+#: templates/supplier/supplier_detail.html:71 templates/utils/header.html:123
+#: templates/utils/header.html:218
 msgid "Services"
 msgstr ""
 
-#: manager/views.py:204 templates/manager/about.html:10
-#: templates/utils/header.html:162 templates/utils/header.html:251
+#: manager/views.py:208 templates/utils/header.html:122
+#: templates/utils/header.html:211
 msgid "About Us"
 msgstr ""
 
-#: manager/views.py:249 manager/views.py:260 manager/views.py:269
-#: manager/views.py:296 templates/app_admin/utils/layout.html:71
-#: templates/app_admin/utils/layout.html:169 templates/manager/support.html:44
-#: templates/utils/header.html:164 templates/utils/header.html:265
+#: manager/views.py:253 manager/views.py:264 manager/views.py:288
+#: manager/views.py:335 templates/app_admin/utils/layout.html:75
+#: templates/app_admin/utils/layout.html:173 templates/utils/header.html:124
+#: templates/utils/header.html:225
 msgid "Support"
 msgstr ""
 
-#: manager/views.py:284 manager/views.py:313
-msgid "Error Occured. Try Again"
+#: manager/views.py:275
+msgid "Discussion"
 msgstr ""
 
-#: manager/views.py:288
+#: manager/views.py:303 manager/views.py:352
+msgid "Error occurred. Try Again"
+msgstr ""
+
+#: manager/views.py:327
 msgid "Discussion created successfully."
 msgstr ""
 
-#: manager/views.py:316
+#: manager/views.py:376
 msgid "Reply submitted successfully."
 msgstr ""
 
@@ -463,7 +471,7 @@ msgstr ""
 msgid "We couldn't verify your payment. Please try again."
 msgstr ""
 
-#: payment/models.py:25 supplier/models.py:126 supplier/models.py:198
+#: payment/models.py:25 supplier/models.py:128 supplier/models.py:202
 #: templates/buyer/dashboard/contract-detail.html:40
 #: templates/payments/checkout.html:17
 #: templates/payments/membership_detail.html:28
@@ -476,7 +484,7 @@ msgid "Price"
 msgstr ""
 
 #: payment/models.py:26 payment/models.py:116 payment/models.py:165
-#: supplier/models.py:127 supplier/models.py:199
+#: supplier/models.py:129 supplier/models.py:203
 #: templates/supplier/dashboard/create-product.html:59
 #: templates/supplier/dashboard/create-service.html:35
 msgid "Currency"
@@ -522,7 +530,7 @@ msgstr ""
 msgid "Contract accepted"
 msgstr ""
 
-#: payment/views.py:214
+#: payment/views.py:218
 msgid "Membership already exists."
 msgstr ""
 
@@ -530,32 +538,32 @@ msgstr ""
 msgid "Store Name"
 msgstr ""
 
-#: supplier/models.py:62
+#: supplier/models.py:63
 msgid "Number of products"
 msgstr ""
 
-#: supplier/models.py:200
+#: supplier/models.py:204
 msgid "Number of contracts"
 msgstr ""
 
-#: supplier/views.py:135 supplier/views.py:631
-#: templates/manager/showroom_detail.html:45 templates/manager/support.html:65
+#: supplier/views.py:139 supplier/views.py:635
+#: templates/manager/showroom_detail.html:47 templates/manager/support.html:66
 #: templates/supplier/dashboard/manage-store.html:24
 #: templates/supplier/dashboard/manage-store.html:34
 #: templates/supplier/dashboard/utils/layout.html:77
 #: templates/supplier/product_list.html:10
-#: templates/supplier/store_detail.html:25 templates/utils/header.html:160
-#: templates/utils/header.html:237
+#: templates/supplier/store_detail.html:25 templates/utils/header.html:120
+#: templates/utils/header.html:197
 msgid "Products"
 msgstr ""
 
-#: supplier/views.py:249
+#: supplier/views.py:253
 msgid "Categories"
 msgstr ""
 
-#: supplier/views.py:583 supplier/views.py:627
-#: templates/manager/showroom_detail.html:17
-#: templates/manager/showroom_detail.html:87
+#: supplier/views.py:587 supplier/views.py:631
+#: templates/manager/showroom_detail.html:18
+#: templates/manager/showroom_detail.html:89
 #: templates/manager/showroom_list.html:25
 #: templates/supplier/dashboard/utils/layout.html:50
 #: templates/supplier/product_detail.html:46
@@ -564,37 +572,37 @@ msgstr ""
 msgid "Stores"
 msgstr ""
 
-#: supplier/views.py:621 templates/buyer/dashboard/utils/layout.html:23
+#: supplier/views.py:625 templates/buyer/dashboard/utils/layout.html:27
 #: templates/supplier/dashboard/utils/layout.html:23
 msgid "Supplier Dashboard"
 msgstr ""
 
-#: supplier/views.py:703
-msgid "Product create successfully."
+#: supplier/views.py:748
+msgid "Product created successfully."
 msgstr ""
 
-#: supplier/views.py:707
-msgid "An Error Occured. Try Again"
+#: supplier/views.py:752
+msgid "An Error occurred. Try Again"
 msgstr ""
 
-#: supplier/views.py:731
+#: supplier/views.py:776
 msgid "Please use a different store name."
 msgstr ""
 
-#: supplier/views.py:736
-msgid "Store create successfully."
+#: supplier/views.py:781
+msgid "Store created successfully."
 msgstr ""
 
-#: supplier/views.py:739
-msgid "Sorry, an error occured. Please Try Again"
+#: supplier/views.py:807 supplier/views.py:887
+msgid "Sorry, an error occurred. Please Try Again"
 msgstr ""
 
-#: supplier/views.py:789
+#: supplier/views.py:857
 msgid "Please use a different service name."
 msgstr ""
 
-#: supplier/views.py:794
-msgid "Service create successfully."
+#: supplier/views.py:862
+msgid "Service created successfully."
 msgstr ""
 
 #: templates/app_admin/editProfile.html:30 templates/auth_app/signup.html:33
@@ -618,16 +626,16 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: templates/app_admin/utils/layout.html:59
+#: templates/app_admin/utils/layout.html:63
 msgid "Clients"
 msgstr ""
 
-#: templates/app_admin/utils/layout.html:65
+#: templates/app_admin/utils/layout.html:69
 msgid "Manager"
 msgstr ""
 
-#: templates/app_admin/utils/layout.html:123
-msgid "Nofications"
+#: templates/app_admin/utils/layout.html:127
+msgid "Notifications"
 msgstr ""
 
 #: templates/auth_app/business_infor.html:10
@@ -706,7 +714,7 @@ msgid "Sign into account"
 msgstr ""
 
 #: templates/buyer/dashboard/business-profile.html:28
-#: templates/buyer/dashboard/utils/layout.html:47
+#: templates/buyer/dashboard/utils/layout.html:51
 #: templates/buyer/profile.html:47 templates/supplier/dashboard/profile.html:58
 msgid "Business Details"
 msgstr ""
@@ -867,19 +875,19 @@ msgstr ""
 msgid "Reset Password"
 msgstr ""
 
-#: templates/buyer/dashboard/utils/layout.html:34
+#: templates/buyer/dashboard/utils/layout.html:38
 msgid "Buyer's Portal"
 msgstr ""
 
-#: templates/buyer/dashboard/utils/layout.html:46
+#: templates/buyer/dashboard/utils/layout.html:50
 #: templates/buyer/profile.html:14
 msgid "Account Details"
 msgstr ""
 
-#: templates/buyer/dashboard/utils/layout.html:65
+#: templates/buyer/dashboard/utils/layout.html:69
 #: templates/buyer/profile.html:29
 #: templates/supplier/dashboard/utils/layout.html:102
-#: templates/utils/header.html:140
+#: templates/utils/header.html:100
 msgid "Logout"
 msgstr ""
 
@@ -895,41 +903,62 @@ msgstr ""
 msgid "User Profile"
 msgstr ""
 
+#: templates/manager/about.html:10
+msgid "Who are we?"
+msgstr ""
+
 #: templates/manager/about.html:15
 msgid "We are empowering entrepreneurs around the world to chase their dreams."
 msgstr ""
 
-#: templates/manager/about.html:23 templates/manager/about.html:37
+#: templates/manager/about.html:23
 msgid "Vision Statement"
 msgstr ""
 
-#: templates/manager/about.html:25 templates/manager/about.html:39
+#: templates/manager/about.html:25
 msgid ""
-"Now more than ever, consumers are choosing to support local shops over big-"
-"box chains. There are millions of thriving small businesses in North America "
-"and Europe alone, who collectively represent a $2T market. With our global "
-"community and the power of technology, Faire is helping fuel the growth of "
-"entrepreneurs everywhere."
+"We represent a wide network of Digital Promoting and local and Traditional "
+"Marketing and Advertising  services  of products (in large scale) of various "
+"companies. Our offices and specialized and indigenous forces are operating "
+"in different countries. We have created a sustainable, learning and "
+"progressive system. We decide and act as a team. Our organization is an "
+"interconnected and learning system. Over time, we make the necessary "
+"adjustments to both maintain and increase our success."
 msgstr ""
 
-#: templates/manager/about.html:49 templates/manager/about.html:64
-#: templates/payments/memberships.html:45
-#: templates/payments/memberships.html:60
+#: templates/manager/about.html:46
+msgid "Our Mission"
+msgstr ""
+
+#: templates/manager/about.html:56
+msgid "Our Vision"
+msgstr ""
+
+#: templates/manager/about.html:72 templates/payments/memberships.html:45
 #: templates/supplier/supplier_detail.html:9
 msgid "Suppliers"
 msgstr ""
 
-#: templates/manager/about.html:50 templates/manager/about.html:55
-#: templates/manager/about.html:60 templates/manager/about.html:65
+#: templates/manager/about.html:73 templates/manager/about.html:78
 #: templates/payments/memberships.html:46
 #: templates/payments/memberships.html:51
-#: templates/payments/memberships.html:56
-#: templates/payments/memberships.html:61
 msgid "All over the world."
 msgstr ""
 
-#: templates/manager/about.html:59 templates/payments/memberships.html:55
+#: templates/manager/about.html:82 templates/payments/memberships.html:55
 msgid "Countries"
+msgstr ""
+
+#: templates/manager/about.html:83 templates/payments/memberships.html:56
+msgid "Using Foroden."
+msgstr ""
+
+#: templates/manager/about.html:87 templates/payments/memberships.html:60
+msgid "Buyers"
+msgstr ""
+
+#: templates/manager/about.html:88 templates/payments/memberships.html:61
+msgid "Trading Everyday."
 msgstr ""
 
 #: templates/manager/chatroom.html:49
@@ -952,6 +981,10 @@ msgstr ""
 msgid "Send a Reply"
 msgstr ""
 
+#: templates/manager/discussion_list.html:10 templates/manager/support.html:74
+msgid "Discussions"
+msgstr ""
+
 #: templates/manager/index.html:40
 msgid "Product Categories"
 msgstr ""
@@ -968,21 +1001,21 @@ msgstr ""
 msgid "Foroden Marketplace"
 msgstr ""
 
-#: templates/manager/index.html:134 templates/manager/index.html:170
-#: templates/manager/index.html:200 templates/manager/showroom_list.html:39
+#: templates/manager/index.html:134 templates/manager/index.html:171
+#: templates/manager/index.html:202 templates/manager/showroom_list.html:39
 #: templates/supplier/store_detail.html:118
 msgid "View All"
 msgstr ""
 
-#: templates/manager/index.html:166
+#: templates/manager/index.html:167
 msgid "New Arrivals"
 msgstr ""
 
-#: templates/manager/index.html:199
+#: templates/manager/index.html:201
 msgid "Foroden Showrooms"
 msgstr ""
 
-#: templates/manager/index.html:222
+#: templates/manager/index.html:225
 msgid "Popular Products"
 msgstr ""
 
@@ -990,7 +1023,7 @@ msgstr ""
 msgid "Foroden Services"
 msgstr ""
 
-#: templates/manager/showroom_detail.html:76
+#: templates/manager/showroom_detail.html:78
 msgid "Other Showrooms"
 msgstr ""
 
@@ -1006,30 +1039,48 @@ msgstr ""
 msgid "Find help  and workarounds for the most common account-related issues."
 msgstr ""
 
-#: templates/manager/support.html:21
+#: templates/manager/support.html:22
 msgid "Send Message"
 msgstr ""
 
-#: templates/manager/support.html:22
+#: templates/manager/support.html:23
 msgid "Create Discussion"
 msgstr ""
 
-#: templates/manager/support.html:30
+#: templates/manager/support.html:31
 msgid "Accounts"
 msgstr ""
 
-#: templates/manager/support.html:31 templates/manager/support.html:38
-#: templates/manager/support.html:45 templates/manager/support.html:52
-#: templates/manager/support.html:59 templates/manager/support.html:66
+#: templates/manager/support.html:32
 msgid "Get help on account related issues."
 msgstr ""
 
-#: templates/manager/support.html:37
+#: templates/manager/support.html:38
 msgid "Payments"
 msgstr ""
 
-#: templates/manager/support.html:73
-msgid "Discussions"
+#: templates/manager/support.html:39
+msgid "Get help on payment related issues."
+msgstr ""
+
+#: templates/manager/support.html:45
+msgid "Configurations"
+msgstr ""
+
+#: templates/manager/support.html:46
+msgid "Help on Configuration related issues."
+msgstr ""
+
+#: templates/manager/support.html:53
+msgid "Get help on showroom related issues."
+msgstr ""
+
+#: templates/manager/support.html:60
+msgid "Get help on membership related issues."
+msgstr ""
+
+#: templates/manager/support.html:67
+msgid "Get help on product related issues."
 msgstr ""
 
 #: templates/payments/checkout.html:13
@@ -1202,7 +1253,7 @@ msgid "Supplier's Portal"
 msgstr ""
 
 #: templates/supplier/dashboard/utils/layout.html:42
-#: templates/utils/header.html:133
+#: templates/utils/header.html:93
 msgid "Dashboard"
 msgstr ""
 
@@ -1316,7 +1367,7 @@ msgstr ""
 msgid "Make money with us"
 msgstr ""
 
-#: templates/utils/footer.html:35 templates/utils/header.html:216
+#: templates/utils/footer.html:35 templates/utils/header.html:176
 msgid "Sell on Foroden"
 msgstr ""
 
@@ -1372,26 +1423,26 @@ msgstr ""
 msgid "Accessibility Statement"
 msgstr ""
 
-#: templates/utils/header.html:86 templates/utils/header.html:203
+#: templates/utils/header.html:46 templates/utils/header.html:163
 msgid "Search"
 msgstr ""
 
-#: templates/utils/header.html:121
+#: templates/utils/header.html:81
 msgid "My Account"
 msgstr ""
 
-#: templates/utils/header.html:144
+#: templates/utils/header.html:104
 msgid "Login"
 msgstr ""
 
-#: templates/utils/header.html:170
+#: templates/utils/header.html:130
 msgid "Sell On Foroden"
 msgstr ""
 
-#: templates/utils/header.html:281
+#: templates/utils/header.html:241
 msgid "Categories for you"
 msgstr ""
 
-#: templates/utils/header.html:318
+#: templates/utils/header.html:292
 msgid "Languages"
 msgstr ""

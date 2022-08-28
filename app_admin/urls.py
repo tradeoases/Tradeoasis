@@ -16,18 +16,21 @@ urlpatterns = [
         "manager/category", views.CategoryCreateView.as_view(), name="category-create"
     ),
     path(
-        "manager/subcategory", views.SubCategoryCreateView.as_view(), name="subcategory-create"
+        "manager/subcategory",
+        views.SubCategoryCreateView.as_view(),
+        name="subcategory-create",
     ),
     # support
     path("discussions/", views.AdminDiscussionsView.as_view(), name="discussions"),
     path("discussions/chat", views.AdminChatView.as_view(), name="discussion"),
     path("community/", views.AdminCommunityView.as_view(), name="community"),
     path(
-        "community/chat/<str:slug>", views.AdminCommunityChatView.as_view(), name="community-chat"
+        "community/chat/<str:slug>",
+        views.AdminCommunityChatView.as_view(),
+        name="community-chat",
     ),
     # contact
     path("contact/<str:slug>", views.ContactClient.as_view(), name="contact"),
-
     # profile
     path("profile/", views.ProfileView.as_view(), name="profile"),
     path("editprofile/", views.EditProfileView.as_view(), name="editprofile"),

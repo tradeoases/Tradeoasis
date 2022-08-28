@@ -7,48 +7,88 @@ import supplier.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('supplier', '0004_product_currency_de_product_description_de_and_more'),
+        ("supplier", "0004_product_currency_de_product_description_de_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='product',
-            name='slug',
-            field=models.SlugField(blank=True, max_length=200, null=True, unique=True, verbose_name='Safe Url'),
+            model_name="product",
+            name="slug",
+            field=models.SlugField(
+                blank=True,
+                max_length=200,
+                null=True,
+                unique=True,
+                verbose_name="Safe Url",
+            ),
         ),
         migrations.AlterField(
-            model_name='productcategory',
-            name='slug',
-            field=models.SlugField(blank=True, max_length=200, null=True, unique=True, verbose_name='Safe Url'),
+            model_name="productcategory",
+            name="slug",
+            field=models.SlugField(
+                blank=True,
+                max_length=200,
+                null=True,
+                unique=True,
+                verbose_name="Safe Url",
+            ),
         ),
         migrations.AlterField(
-            model_name='productimage',
-            name='image',
-            field=models.FileField(upload_to=supplier.models.get_file_path, verbose_name='Image'),
+            model_name="productimage",
+            name="image",
+            field=models.FileField(
+                upload_to=supplier.models.get_file_path, verbose_name="Image"
+            ),
         ),
         migrations.AlterField(
-            model_name='productimage',
-            name='slug',
-            field=models.SlugField(blank=True, max_length=100, null=True, unique=True, verbose_name='Safe Url'),
+            model_name="productimage",
+            name="slug",
+            field=models.SlugField(
+                blank=True,
+                max_length=100,
+                null=True,
+                unique=True,
+                verbose_name="Safe Url",
+            ),
         ),
         migrations.AlterField(
-            model_name='productsubcategory',
-            name='image',
-            field=models.FileField(default='test/django.png', upload_to=supplier.models.get_file_path, verbose_name='Image'),
+            model_name="productsubcategory",
+            name="image",
+            field=models.FileField(
+                default="test/django.png",
+                upload_to=supplier.models.get_file_path,
+                verbose_name="Image",
+            ),
         ),
         migrations.AlterField(
-            model_name='productsubcategory',
-            name='slug',
-            field=models.SlugField(blank=True, max_length=200, null=True, unique=True, verbose_name='Safe Url'),
+            model_name="productsubcategory",
+            name="slug",
+            field=models.SlugField(
+                blank=True,
+                max_length=200,
+                null=True,
+                unique=True,
+                verbose_name="Safe Url",
+            ),
         ),
         migrations.AlterField(
-            model_name='store',
-            name='image',
-            field=models.FileField(default='test/django.png', upload_to=supplier.models.get_file_path, verbose_name='Service Image'),
+            model_name="store",
+            name="image",
+            field=models.FileField(
+                default="test/django.png",
+                upload_to=supplier.models.get_file_path,
+                verbose_name="Service Image",
+            ),
         ),
         migrations.AlterField(
-            model_name='store',
-            name='slug',
-            field=models.SlugField(blank=True, max_length=200, null=True, unique=True, verbose_name='Safe Url'),
+            model_name="store",
+            name="slug",
+            field=models.SlugField(
+                blank=True,
+                max_length=200,
+                null=True,
+                unique=True,
+                verbose_name="Safe Url",
+            ),
         ),
     ]

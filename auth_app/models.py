@@ -31,8 +31,11 @@ class User(AbstractUser):
     )
 
     image = models.ImageField(
-        verbose_name=_("Image"), upload_to=get_file_path, blank=True, null=True,
-        default='test/profiledefault.png'
+        verbose_name=_("Image"),
+        upload_to=get_file_path,
+        blank=True,
+        null=True,
+        default="test/profiledefault.png",
     )
     is_email_activated = models.BooleanField(_("Email Activated"), default=False)
 

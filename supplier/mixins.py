@@ -7,6 +7,8 @@ class SupplierOnlyAccessMixin(AccessMixin):
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return redirect(reverse("auth_app:login"))
-        if not (request.user.is_authenticated and request.user.account_type == "SUPPLIER"):
+        if not (
+            request.user.is_authenticated and request.user.account_type == "SUPPLIER"
+        ):
             return redirect(reverse("manager:home"))
         return super().dispatch(request, *args, **kwargs)

@@ -33,11 +33,7 @@ class Store(models.Model):
     #     default=None
     # )
     slug = models.SlugField(
-        _("Safe Url"),
-        unique=True,
-        blank=True,
-        null=True,
-        max_length=200
+        _("Safe Url"), unique=True, blank=True, null=True, max_length=200
     )
 
     image = models.FileField(
@@ -66,7 +62,9 @@ class ProductCategory(models.Model):
         upload_to=get_file_path,
         default="test/django.png",
     )
-    slug = models.SlugField(_("Safe Url"), unique=True, blank=True, null=True, max_length=200)
+    slug = models.SlugField(
+        _("Safe Url"), unique=True, blank=True, null=True, max_length=200
+    )
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
@@ -89,11 +87,7 @@ class ProductSubCategory(models.Model):
         default="test/django.png",
     )
     slug = models.SlugField(
-        _("Safe Url"),
-        unique=True,
-        blank=True,
-        null=True,
-        max_length=200
+        _("Safe Url"), unique=True, blank=True, null=True, max_length=200
     )
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
@@ -128,11 +122,7 @@ class Product(models.Model):
     price = models.DecimalField(_("Price"), decimal_places=2, max_digits=12)
     currency = models.CharField(_("Currency"), max_length=6)
     slug = models.SlugField(
-        _("Safe Url"),
-        unique=True,
-        blank=True,
-        null=True,
-        max_length=200
+        _("Safe Url"), unique=True, blank=True, null=True, max_length=200
     )
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
@@ -157,11 +147,7 @@ class ProductImage(models.Model):
         upload_to=get_file_path,
     )
     slug = models.SlugField(
-        _("Safe Url"),
-        unique=True,
-        blank=True,
-        null=True,
-        max_length=100
+        _("Safe Url"), unique=True, blank=True, null=True, max_length=100
     )
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
@@ -171,6 +157,7 @@ class ProductImage(models.Model):
 
     def __str__(self) -> str:
         return f"{self.product.name}"
+
 
 class ProductTag(models.Model):
     name = models.CharField(_("Name"), max_length=256)
@@ -189,6 +176,7 @@ class ProductTag(models.Model):
 
     def __str__(self) -> str:
         return f"{self.product.name}"
+
 
 class Service(models.Model):
     supplier = models.ForeignKey(

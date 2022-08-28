@@ -6,28 +6,28 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('manager', '0006_discussion_description_de_discussion_subject_de_and_more'),
+        ("manager", "0006_discussion_description_de_discussion_subject_de_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='showroom',
-            name='name_ar',
-            field=models.CharField(max_length=256, null=True, verbose_name='Name'),
+            model_name="showroom",
+            name="name_ar",
+            field=models.CharField(max_length=256, null=True, verbose_name="Name"),
         ),
         migrations.AddField(
-            model_name='showroom',
-            name='name_de',
-            field=models.CharField(max_length=256, null=True, verbose_name='Name'),
+            model_name="showroom",
+            name="name_de",
+            field=models.CharField(max_length=256, null=True, verbose_name="Name"),
         ),
         migrations.AddField(
-            model_name='showroom',
-            name='name_en',
-            field=models.CharField(max_length=256, null=True, verbose_name='Name'),
+            model_name="showroom",
+            name="name_en",
+            field=models.CharField(max_length=256, null=True, verbose_name="Name"),
         ),
         migrations.AddField(
-            model_name='showroom',
-            name='name_fr',
-            field=models.CharField(max_length=256, null=True, verbose_name='Name'),
+            model_name="showroom",
+            name="name_fr",
+            field=models.CharField(max_length=256, null=True, verbose_name="Name"),
         ),
     ]

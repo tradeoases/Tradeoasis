@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('manager', '0003_discussionreply_description'),
+        ("manager", "0003_discussionreply_description"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='discussionreply',
+            name="discussionreply",
             options={},
         ),
     ]

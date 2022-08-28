@@ -8,22 +8,45 @@ import supplier.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('supplier', '0001_initial'),
+        ("supplier", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='productcategory',
-            name='image',
-            field=models.FileField(default='test/django.png', upload_to=supplier.models.get_file_path, verbose_name='Image'),
+            model_name="productcategory",
+            name="image",
+            field=models.FileField(
+                default="test/django.png",
+                upload_to=supplier.models.get_file_path,
+                verbose_name="Image",
+            ),
         ),
         migrations.CreateModel(
-            name='ProductTag',
+            name="ProductTag",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=256, verbose_name='Name')),
-                ('slug', models.SlugField(blank=True, null=True, unique=True, verbose_name='Safe Url')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='supplier.product')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=256, verbose_name="Name")),
+                (
+                    "slug",
+                    models.SlugField(
+                        blank=True, null=True, unique=True, verbose_name="Safe Url"
+                    ),
+                ),
+                (
+                    "product",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="supplier.product",
+                    ),
+                ),
             ],
         ),
     ]

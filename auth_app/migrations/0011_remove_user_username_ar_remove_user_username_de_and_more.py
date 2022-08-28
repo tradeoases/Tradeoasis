@@ -6,24 +6,24 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('auth_app', '0010_clientprofile_business_description_de_and_more'),
+        ("auth_app", "0010_clientprofile_business_description_de_and_more"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='user',
-            name='username_ar',
+            model_name="user",
+            name="username_ar",
         ),
         migrations.RemoveField(
-            model_name='user',
-            name='username_de',
+            model_name="user",
+            name="username_de",
         ),
         migrations.RemoveField(
-            model_name='user',
-            name='username_en',
+            model_name="user",
+            name="username_en",
         ),
         migrations.RemoveField(
-            model_name='user',
-            name='username_fr',
+            model_name="user",
+            name="username_fr",
         ),
     ]

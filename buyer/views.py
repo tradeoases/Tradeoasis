@@ -25,6 +25,7 @@ class ProfileView(BuyerOnlyAccessMixin, View):
 
         return context_data
 
+
 class BusinessProfileView(BuyerOnlyAccessMixin, View):
     template_name = "buyer/dashboard/business-profile.html"
 
@@ -73,15 +74,17 @@ class VisitedProductsListView(BuyerOnlyAccessMixin, ListView):
 
         return context_data
 
+
 class DashboardContractsDetailsView(View):
-    template_name = 'buyer/dashboard/contract-detail.html'
+    template_name = "buyer/dashboard/contract-detail.html"
     model = PaymentModels.Contract
 
     def get(self, request, pk):
         contract = PaymentModels.Contract.objects.filter(pk=pk).first()
         context_data = {
-            "contract" : contract,
-            "receipt" : PaymentModels.ContractReceipt.objects.filter(contract=contract).first()
+            "contract": contract,
+            "receipt": PaymentModels.ContractReceipt.objects.filter(
+                contract=contract
+            ).first(),
         }
         return render(request, self.template_name, context=context_data)
-

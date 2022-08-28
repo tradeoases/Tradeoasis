@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('payment', '0004_rename_membershipplanfeature_features'),
+        ("payment", "0004_rename_membershipplanfeature_features"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='features',
-            name='membership',
-            field=models.ManyToManyField(related_name='features', to='payment.membershipplan'),
+            model_name="features",
+            name="membership",
+            field=models.ManyToManyField(
+                related_name="features", to="payment.membershipplan"
+            ),
         ),
     ]

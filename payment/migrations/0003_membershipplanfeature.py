@@ -6,16 +6,29 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('payment', '0002_contract_is_accepted'),
+        ("payment", "0002_contract_is_accepted"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='MembershipPlanFeature',
+            name="MembershipPlanFeature",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=256, verbose_name='Name')),
-                ('membership', models.ManyToManyField(related_name='membership_plans', to='payment.membershipplan')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=256, verbose_name="Name")),
+                (
+                    "membership",
+                    models.ManyToManyField(
+                        related_name="membership_plans", to="payment.membershipplan"
+                    ),
+                ),
             ],
         ),
     ]

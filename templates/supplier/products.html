@@ -6,7 +6,7 @@
 
     <div class="grid gap-6 md:gap-3 bg-white">
         <div class="breadcrumb flex flex-wrap justify-start gap-2 md:w-full mx-auto pt-1 px-5 md:px-0">
-            <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">Home</a>
+            <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">{% trans 'Home' %}</a>
             <span>/</span>
             <a class="text-gray-600 hover:text-gray-900" href='{% url "supplier:category-detail" subcategory_data.results.category.slug %}'>{{subcategory_data.results.category}}</a>
             <span>/</span>
@@ -16,28 +16,28 @@
         <div class="product-filter grid md:flex gap-4 justify-between px-5 md:px-8 py-3" style="background-color: rgb(242, 245, 248);">
             <div class="flex items-center gap-2">
                 <h3 class="text-xl text-lightBackgroundColor font-semibold">{{subcategory_data.results.sub_category}}</h3>
-                <span class="text-slate-500">({{product_count}} products)</span>
+                <span class="text-slate-500">({{product_count}} {% trans 'products' %})</span>
             </div>
             <div class="filter grid md:grid-flow-col gap-6 md:justify-self-end items-center justify-start">
                 <form class="filter-group md:flex gap-2 items-center justify-start" method="GET" action="" data-context="{{price_limits.context_name}}">
-                    <p class="hidden md:grid font-medium text-slate-800">Price: </p>
+                    <p class="hidden md:grid font-medium text-slate-800">{% trans 'Price' %}: </p>
                     <div class="flex gap-2">
                         <div class="filter-form-group flex gap-2 items-center">
-                            <label for="min-price" class="font-normal text-slate-600">min</label>
+                            <label for="min-price" class="font-normal text-slate-600">{% trans 'min' %}</label>
                             <input type="number" name="min-price" class="px-2 py-1 rounded text-sm focus:outli5e-none" style="width: 100px;" id="min-price" value="{{price_limits.results.min_price}}">
                         </div>
                         <div class="filter-form-group flex gap-2 items-center">
-                            <label for="max-price" class="font-normal text-slate-600">max</label>
+                            <label for="max-price" class="font-normal text-slate-600">{% trans 'max' %}</label>
                             <input type="number" name="max-price" class="px-2 py-1 rounded text-sm text-slate-500 focus:outline-none" style="width: 100px;" id="max-price" value="{{price_limits.results.max_price}}">
                         </div>
                     </div>
                     <input type="submit" hidden />
                 </form>
                 <form id="supplier-filter-form" class="filter-group flex gap-2 items-center justify-start" method="GET" action="" data-context="{{suppliers.context_name}}">
-                    <p class="font-medium text-slate-800">Supplier: </p>
+                    <p class="font-medium text-slate-800">{% trans 'Supplier' %}: </p>
                     <div class="filter-form-group flex gap-3 items-center">
                         <select name="supplier" id="supplier-filter" class="px-2 py-1 rounded text-sm text-slate-700 focus:outline-none" onchange="(function(){document.querySelector('#supplier-filter-form').submit()})()">
-                            <option value="all">All</option>
+                            <option value="all">{% trans 'All' %}</option>
                             {% for supplier in suppliers.results %}
                                 <option value="{{supplier.profile.business_name}}">{{supplier.profile.business_name}}</option>
                             {% endfor %}
@@ -76,7 +76,7 @@
                 </div>
             {% else %}
                 <div class="flex justify-between items-center px-6 pb-3 py-2 text-lighterBackgroundColor text-lg rounded-md font-semibold leading-5 justify-self-center">
-                    <p>No Products Found</p>
+                    <p>{% trans 'No Products Found' %}</p>
                 </div>
             {% endif %}
         </div>
@@ -84,7 +84,7 @@
 
     <div class="hidden pagination md:grid grid-flow-col gap-2 justify-center py-3 my-2 md:w-full mx-auto border-b border-t border-solid border-slate-200">
         {% if page_obj.has_previous %}
-            <a href="?page={{ page_obj.previous_page_number }}" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">Previous</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">{% trans 'Previous' %}</a>
 
             <a href="?page=1" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page }}</a>
         {% endif %}
@@ -98,7 +98,7 @@
         {% if page_obj.has_next %}
             <a href="?page={{ page_obj.paginator.num_pages }}" class="grid place-items-center px-4 py-2 bg-white outline-none rounded">{{ page_obj.paginator.num_pages }}</a>
 
-            <a href="?page={{ page_obj.next_page_number }}" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">Next</a>
+            <a href="?page={{ page_obj.next_page_number }}" class="grid place-items-center px-4 py-2 bg-lghterBackgroundColor text-white outline-none rounded">{% trans 'Next' %}</a>
         {% endif %}
     </div>
 
@@ -130,16 +130,17 @@
         </div>
     </div>
 
+    {% if discounts.results %}
     <section class="main w-12/12">
         <div class="grid md:w-full mx-auto p-2 md:p-0 cf-1 gap-4">
             <div class="section-body grid gap-2 card p-3 py-6 rounded-md">
-                <div class="flex p-2 pt-0 justify-between items-baseline">
+                <div class="flex p-0 justify-between items-baseline">
                     <div class="flex gap-5">
-                        <h1 class="text-xl md:text-2xl text-yellowColor font-bold">Discounted Products</h1>
-                        <h1 class="hidden md:flex gap-1 items-baseline text-xl text-slate-400 font-bold"><span
-                                class="text-lg text-2xl text-slate-500">30%</span> OFF</h1>
+                        <h1 class="text-xl md:text-2xl text-yellowColor font-bold">{% trans 'New Arrivals' %}</h1>
+                        <!-- <h1 class="hidden md:flex gap-1 items-baseline text-xl text-slate-400 font-bold"><span
+                                class="text-lg text-2xl text-slate-500">30%</span> OFF</h1> -->
                     </div>
-                    <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="">View All</a>
+                    <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="">{% trans 'View All' %}</a>
                 </div>
                 <div class="grid gap-2 grid-cols-2 md:grid-cols-6" data-context="{{discounts.context_name}}">
                     {% for discount in discounts.results %}
@@ -163,14 +164,16 @@
             </div>
         </div>
     </section>
+    {% endif %}
 
+    {% if related_subcategories.results %}
     <section class="main w-12/12 my-3">
         <div class="w-full mx-auto grid md:grid-cols-2 items-start gap-6">
             {% if related_subcategories.results %}
                 <div class="grid gap-1">
                     <div class="flex py-2 pt-0 justify-between items-baseline">
                         <div class="flex gap-5">                            
-                            <h1 class="sec-title text-xl capitalize md:text-2xl font-bold text-yellowColor">Related Products</h1>
+                            <h1 class="sec-title text-xl capitalize md:text-2xl font-bold text-yellowColor">{% trans 'Related Products' %}</h1>
                         </div>
                     </div>
                     <div class="grid gap-3 grid-cols-2 rounded-md items-start justify-start" data-context="{{related_subcategories.context_name}}">
@@ -194,11 +197,11 @@
                 </div>
             {% endif %}
             <div class="grid gap-1">                     
-                <div class="flex py-2 pt-0 justify-between items-baseline">
+                <div class="flex py-2 pt-0 justify-between items-baseline" style="justify-content: space-between;">
                     <div class="flex gap-5">                            
-                        <h1 class="sec-title text-xl capitalize md:text-2xl font-bold text-yellowColor">Popular Stores</h1>
+                        <h1 class="sec-title text-xl capitalize md:text-2xl font-bold text-yellowColor">{% trans 'Popular Stores' %}</h1>
                     </div>
-                    <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="">View All</a>
+                    <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="">{% trans 'View All' %}</a>
                 </div>
                 <div class="grid gap-3 grid-cols-1 md:grid-cols-2 rounded-md store-list-sm" data-context="{{ stores.context_name }}">
                     {% for store in stores.results %}
@@ -221,5 +224,6 @@
             </div>
         </div>
     </section>
+    {% endif %}
 
 {% endblock %}

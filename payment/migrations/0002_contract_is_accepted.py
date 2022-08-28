@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('payment', '0001_initial'),
+        ("payment", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='contract',
-            name='is_accepted',
-            field=models.BooleanField(default=False, verbose_name='Contract accepted'),
+            model_name="contract",
+            name="is_accepted",
+            field=models.BooleanField(default=False, verbose_name="Contract accepted"),
         ),
     ]

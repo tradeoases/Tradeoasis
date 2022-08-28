@@ -38,10 +38,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
-    'modeltranslation',
-    'django.contrib.admin',
-    
+    "modeltranslation",
+    "django.contrib.admin",
     # custom apps
     "manager.apps.ManagerConfig",
     "supplier.apps.SupplierConfig",
@@ -84,8 +82,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                'django.template.context_processors.i18n',
-                'manager.context_processors.categories_showroows',
+                "django.template.context_processors.i18n",
+                "manager.context_processors.categories_showroows",
             ],
         },
     },
@@ -188,16 +186,16 @@ CORS_ALLOW_ALL_ORIGINS = True
 LANGUAGE_CODE = "en"
 LANGUAGES = (
     ("en", _("English")),
-    ('ar', _('Arabic')),
+    ("ar", _("Arabic")),
     ("fr", _("French")),
-    ('de', _('German')),
+    ("de", _("German")),
 )
 
 SITE_ROOT = os.path.dirname(os.path.realpath(__name__))
-LOCALE_PATHS = ( os.path.join(SITE_ROOT, 'locale'), )
+LOCALE_PATHS = (os.path.join(SITE_ROOT, "locale"),)
 
-MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
-MODELTRANSLATION_LANGUAGES = ('ar', 'fr', 'de', 'en')
+MODELTRANSLATION_DEFAULT_LANGUAGE = "en"
+MODELTRANSLATION_LANGUAGES = ("ar", "fr", "de", "en")
 
 # PAYMENTS
 # braintee
