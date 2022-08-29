@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-28 10:56+0000\n"
+"POT-Creation-Date: 2022-08-29 06:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,7 +69,7 @@ msgstr ""
 
 #: app_admin/views.py:82 app_admin/views.py:178 payment/views.py:49
 #: payment/views.py:70 templates/manager/support.html:59
-#: templates/utils/header.html:125 templates/utils/header.html:232
+#: templates/utils/header.html:126 templates/utils/header.html:233
 msgid "Memberships"
 msgstr ""
 
@@ -94,8 +94,8 @@ msgid "Total Services Count"
 msgstr ""
 
 #: app_admin/views.py:201 app_admin/views.py:261 app_admin/views.py:692
-#: auth_app/views.py:44 auth_app/views.py:104 supplier/views.py:707
-#: supplier/views.py:819 supplier/views.py:917
+#: auth_app/views.py:44 auth_app/views.py:104 supplier/views.py:767
+#: supplier/views.py:879 supplier/views.py:977
 msgid "Please Fill all fields."
 msgstr ""
 
@@ -206,7 +206,8 @@ msgstr ""
 msgid "Business Description"
 msgstr ""
 
-#: auth_app/models.py:71 templates/auth_app/business_infor.html:40
+#: auth_app/models.py:71 manager/models.py:153
+#: templates/auth_app/business_infor.html:40
 #: templates/buyer/dashboard/business-profile.html:39
 #: templates/buyer/profile.html:58 templates/supplier/dashboard/profile.html:69
 msgid "Country"
@@ -216,7 +217,8 @@ msgstr ""
 msgid "Country Code"
 msgstr ""
 
-#: auth_app/models.py:73 templates/auth_app/business_infor.html:285
+#: auth_app/models.py:73 manager/models.py:154
+#: templates/auth_app/business_infor.html:285
 #: templates/buyer/dashboard/business-profile.html:43
 #: templates/buyer/profile.html:62 templates/supplier/dashboard/profile.html:73
 msgid "City"
@@ -248,8 +250,8 @@ msgstr ""
 msgid "Responses to clients"
 msgstr ""
 
-#: auth_app/views.py:38 templates/utils/header.html:157
-#: templates/utils/header.html:173
+#: auth_app/views.py:38 templates/utils/header.html:158
+#: templates/utils/header.html:174
 msgid "Sign In"
 msgstr ""
 
@@ -296,10 +298,10 @@ msgstr ""
 
 #: buyer/models.py:21 manager/models.py:22 manager/models.py:49
 #: manager/models.py:74 manager/models.py:102 manager/models.py:128
-#: manager/models.py:146 payment/models.py:33 payment/models.py:65
-#: payment/models.py:100 payment/models.py:152 supplier/models.py:44
-#: supplier/models.py:68 supplier/models.py:92 supplier/models.py:127
-#: supplier/models.py:152 supplier/models.py:199
+#: manager/models.py:146 manager/models.py:159 payment/models.py:33
+#: payment/models.py:65 payment/models.py:100 payment/models.py:152
+#: supplier/models.py:44 supplier/models.py:68 supplier/models.py:92
+#: supplier/models.py:127 supplier/models.py:152 supplier/models.py:199
 #: templates/buyer/dashboard/contracts.html:36
 #: templates/supplier/dashboard/contracts.html:36
 msgid "Created on"
@@ -307,62 +309,62 @@ msgstr ""
 
 #: buyer/views.py:21 buyer/views.py:38
 #: templates/buyer/dashboard/utils/layout.html:46
-#: templates/buyer/profile.html:9 templates/utils/header.html:90
+#: templates/buyer/profile.html:9 templates/utils/header.html:91
 msgid "Profile"
 msgstr ""
 
-#: buyer/views.py:55 buyer/views.py:72 supplier/views.py:651
+#: buyer/views.py:55 buyer/views.py:72 supplier/views.py:711
 #: templates/buyer/dashboard/utils/layout.html:60
 #: templates/buyer/profile.html:10
 #: templates/supplier/dashboard/utils/layout.html:93
 msgid "Contracts"
 msgstr ""
 
-#: core/settings.py:188
+#: core/settings.py:200
 msgid "English"
 msgstr ""
 
-#: core/settings.py:189
+#: core/settings.py:201
 msgid "Arabic"
 msgstr ""
 
-#: core/settings.py:190
+#: core/settings.py:202
 msgid "French"
 msgstr ""
 
-#: core/settings.py:191
+#: core/settings.py:203
 msgid "German"
 msgstr ""
 
-#: core/urls.py:10
+#: core/urls.py:58
 msgid "suppliers/"
 msgstr ""
 
-#: core/urls.py:11
+#: core/urls.py:59
 msgid "buyer/"
 msgstr ""
 
-#: core/urls.py:12
+#: core/urls.py:60
 msgid "auth/"
 msgstr ""
 
-#: core/urls.py:13
+#: core/urls.py:61
 msgid "payments/"
 msgstr ""
 
-#: core/urls.py:14
+#: core/urls.py:62
 msgid "support/admin/"
 msgstr ""
 
-#: core/urls.py:15
+#: core/urls.py:63
 msgid "api/"
 msgstr ""
 
-#: core/urls.py:16
+#: core/urls.py:64
 msgid "admin-api/"
 msgstr ""
 
-#: core/urls.py:17
+#: core/urls.py:65
 msgid "admin/"
 msgstr ""
 
@@ -411,6 +413,22 @@ msgstr ""
 msgid "Subject"
 msgstr ""
 
+#: manager/models.py:155
+msgid "View"
+msgstr ""
+
+#: manager/models.py:156
+msgid "Request Method"
+msgstr ""
+
+#: manager/models.py:157
+msgid "Device"
+msgstr ""
+
+#: manager/models.py:158
+msgid "User Os"
+msgstr ""
+
 #: manager/views.py:59 templates/app_admin/utils/layout.html:57
 #: templates/app_admin/utils/layout.html:107
 #: templates/manager/service_list.html:8
@@ -418,37 +436,37 @@ msgstr ""
 #: templates/manager/showroom_list.html:7
 #: templates/supplier/product_detail.html:7 templates/supplier/products.html:9
 #: templates/supplier/store_detail.html:9 templates/supplier/store_list.html:9
-#: templates/supplier/supplier_detail.html:7 templates/utils/header.html:119
-#: templates/utils/header.html:190
+#: templates/supplier/supplier_detail.html:7 templates/utils/header.html:120
+#: templates/utils/header.html:191
 msgid "Home"
 msgstr ""
 
 #: manager/views.py:143 templates/manager/about.html:77
-#: templates/manager/index.html:102 templates/manager/showroom_detail.html:9
+#: templates/manager/index.html:111 templates/manager/showroom_detail.html:9
 #: templates/manager/showroom_list.html:9
 #: templates/manager/showroom_list.html:15 templates/manager/support.html:52
-#: templates/payments/memberships.html:50 templates/utils/header.html:121
-#: templates/utils/header.html:204 templates/utils/header.html:267
+#: templates/payments/memberships.html:50 templates/utils/header.html:122
+#: templates/utils/header.html:205 templates/utils/header.html:268
 msgid "Showrooms"
 msgstr ""
 
-#: manager/views.py:211 supplier/views.py:645
+#: manager/views.py:211 supplier/views.py:705
 #: templates/manager/service_list.html:10
 #: templates/supplier/dashboard/utils/layout.html:63
-#: templates/supplier/supplier_detail.html:71 templates/utils/header.html:123
-#: templates/utils/header.html:218
+#: templates/supplier/supplier_detail.html:71 templates/utils/header.html:124
+#: templates/utils/header.html:219
 msgid "Services"
 msgstr ""
 
-#: manager/views.py:221 templates/utils/header.html:122
-#: templates/utils/header.html:211
+#: manager/views.py:221 templates/utils/header.html:123
+#: templates/utils/header.html:212
 msgid "About Us"
 msgstr ""
 
 #: manager/views.py:267 manager/views.py:279 manager/views.py:305
 #: manager/views.py:357 templates/app_admin/utils/layout.html:75
-#: templates/app_admin/utils/layout.html:173 templates/utils/header.html:124
-#: templates/utils/header.html:225
+#: templates/app_admin/utils/layout.html:173 templates/utils/header.html:125
+#: templates/utils/header.html:226
 msgid "Support"
 msgstr ""
 
@@ -548,22 +566,22 @@ msgstr ""
 msgid "Number of contracts"
 msgstr ""
 
-#: supplier/views.py:141 supplier/views.py:637
+#: supplier/views.py:142 supplier/views.py:697
 #: templates/manager/showroom_detail.html:47 templates/manager/support.html:66
 #: templates/supplier/dashboard/manage-store.html:24
 #: templates/supplier/dashboard/manage-store.html:34
 #: templates/supplier/dashboard/utils/layout.html:77
 #: templates/supplier/product_list.html:10
-#: templates/supplier/store_detail.html:25 templates/utils/header.html:120
-#: templates/utils/header.html:197
+#: templates/supplier/store_detail.html:25 templates/utils/header.html:121
+#: templates/utils/header.html:198
 msgid "Products"
 msgstr ""
 
-#: supplier/views.py:255
+#: supplier/views.py:315
 msgid "Categories"
 msgstr ""
 
-#: supplier/views.py:589 supplier/views.py:631
+#: supplier/views.py:649 supplier/views.py:691
 #: templates/manager/showroom_detail.html:18
 #: templates/manager/showroom_detail.html:89
 #: templates/manager/showroom_list.html:25
@@ -574,36 +592,36 @@ msgstr ""
 msgid "Stores"
 msgstr ""
 
-#: supplier/views.py:625 templates/buyer/dashboard/utils/layout.html:27
+#: supplier/views.py:685 templates/buyer/dashboard/utils/layout.html:27
 #: templates/supplier/dashboard/utils/layout.html:23
 msgid "Supplier Dashboard"
 msgstr ""
 
-#: supplier/views.py:793
+#: supplier/views.py:853
 msgid "Product created successfully."
 msgstr ""
 
-#: supplier/views.py:799
+#: supplier/views.py:859
 msgid "An Error occurred. Try Again"
 msgstr ""
 
-#: supplier/views.py:827
+#: supplier/views.py:887
 msgid "Please use a different store name."
 msgstr ""
 
-#: supplier/views.py:836
+#: supplier/views.py:896
 msgid "Store created successfully."
 msgstr ""
 
-#: supplier/views.py:867 supplier/views.py:971
+#: supplier/views.py:927 supplier/views.py:1031
 msgid "Sorry, an error occurred. Please Try Again"
 msgstr ""
 
-#: supplier/views.py:927
+#: supplier/views.py:987
 msgid "Please use a different service name."
 msgstr ""
 
-#: supplier/views.py:940
+#: supplier/views.py:1000
 msgid "Service created successfully."
 msgstr ""
 
@@ -842,7 +860,8 @@ msgstr ""
 #: templates/supplier/dashboard/manage-product.html:50
 #: templates/supplier/dashboard/manage-store.html:44
 #: templates/supplier/dashboard/services.html:46
-#: templates/supplier/products.html:87 templates/supplier/store_detail.html:66
+#: templates/supplier/products.html:87 templates/supplier/promotions.html:111
+#: templates/supplier/store_detail.html:66
 #: templates/supplier/store_detail.html:103
 msgid "Previous"
 msgstr ""
@@ -852,7 +871,8 @@ msgstr ""
 #: templates/supplier/dashboard/manage-product.html:52
 #: templates/supplier/dashboard/manage-store.html:46
 #: templates/supplier/dashboard/services.html:48
-#: templates/supplier/products.html:101 templates/supplier/store_detail.html:80
+#: templates/supplier/products.html:101 templates/supplier/promotions.html:125
+#: templates/supplier/store_detail.html:80
 #: templates/supplier/store_detail.html:107
 msgid "Next"
 msgstr ""
@@ -889,7 +909,7 @@ msgstr ""
 #: templates/buyer/dashboard/utils/layout.html:69
 #: templates/buyer/profile.html:29
 #: templates/supplier/dashboard/utils/layout.html:102
-#: templates/utils/header.html:100
+#: templates/utils/header.html:101
 msgid "Logout"
 msgstr ""
 
@@ -987,38 +1007,38 @@ msgstr ""
 msgid "Discussions"
 msgstr ""
 
-#: templates/manager/index.html:40
+#: templates/manager/index.html:51
 msgid "Product Categories"
 msgstr ""
 
-#: templates/manager/index.html:56
+#: templates/manager/index.html:67
 msgid "All Categories"
 msgstr ""
 
-#: templates/manager/index.html:117
+#: templates/manager/index.html:126
 msgid "All Showrooms"
 msgstr ""
 
-#: templates/manager/index.html:126
+#: templates/manager/index.html:135
 msgid "Foroden Marketplace"
 msgstr ""
 
-#: templates/manager/index.html:134 templates/manager/index.html:171
-#: templates/manager/index.html:202 templates/manager/showroom_list.html:39
+#: templates/manager/index.html:143 templates/manager/index.html:180
+#: templates/manager/index.html:211 templates/manager/showroom_list.html:39
 #: templates/supplier/products.html:143 templates/supplier/products.html:204
 #: templates/supplier/store_detail.html:118
 msgid "View All"
 msgstr ""
 
-#: templates/manager/index.html:167 templates/supplier/products.html:139
+#: templates/manager/index.html:176 templates/supplier/products.html:139
 msgid "New Arrivals"
 msgstr ""
 
-#: templates/manager/index.html:201
+#: templates/manager/index.html:210
 msgid "Foroden Showrooms"
 msgstr ""
 
-#: templates/manager/index.html:225
+#: templates/manager/index.html:234
 msgid "Popular Products"
 msgstr ""
 
@@ -1256,7 +1276,7 @@ msgid "Supplier's Portal"
 msgstr ""
 
 #: templates/supplier/dashboard/utils/layout.html:42
-#: templates/utils/header.html:93
+#: templates/utils/header.html:94
 msgid "Dashboard"
 msgstr ""
 
@@ -1318,12 +1338,20 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: templates/supplier/products.html:79
+#: templates/supplier/products.html:79 templates/supplier/promotions.html:103
 msgid "No Products Found"
 msgstr ""
 
 #: templates/supplier/products.html:176
 msgid "Related Products"
+msgstr ""
+
+#: templates/supplier/promotions.html:44 templates/utils/header.html:242
+msgid "Categories for you"
+msgstr ""
+
+#: templates/supplier/promotions.html:82
+msgid "New"
 msgstr ""
 
 #: templates/supplier/store_detail.html:116
@@ -1340,6 +1368,14 @@ msgstr ""
 
 #: templates/supplier/supplier_detail.html:34
 msgid "Business Address"
+msgstr ""
+
+#: templates/utils/blockedAccess.html:39
+msgid "Please use a desktop to access site page"
+msgstr ""
+
+#: templates/utils/blockedAccess.html:40
+msgid "Return Home"
 msgstr ""
 
 #: templates/utils/footer.html:14
@@ -1390,7 +1426,7 @@ msgstr ""
 msgid "Make money with us"
 msgstr ""
 
-#: templates/utils/footer.html:35 templates/utils/header.html:176
+#: templates/utils/footer.html:35 templates/utils/header.html:177
 msgid "Sell on Foroden"
 msgstr ""
 
@@ -1446,26 +1482,22 @@ msgstr ""
 msgid "Accessibility Statement"
 msgstr ""
 
-#: templates/utils/header.html:46 templates/utils/header.html:163
+#: templates/utils/header.html:47 templates/utils/header.html:164
 msgid "Search"
 msgstr ""
 
-#: templates/utils/header.html:81
+#: templates/utils/header.html:82
 msgid "My Account"
 msgstr ""
 
-#: templates/utils/header.html:104
+#: templates/utils/header.html:105
 msgid "Login"
 msgstr ""
 
-#: templates/utils/header.html:130
+#: templates/utils/header.html:131
 msgid "Sell On Foroden"
 msgstr ""
 
-#: templates/utils/header.html:241
-msgid "Categories for you"
-msgstr ""
-
-#: templates/utils/header.html:292
+#: templates/utils/header.html:293
 msgid "Languages"
 msgstr ""
