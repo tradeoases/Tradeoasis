@@ -11,6 +11,7 @@
             grid-auto-columns: 100%;
             --gap: 0 1rem; */
             block-size: 400px;
+            display: grid;
         }
         #banner .item {
             margin: 0;
@@ -24,12 +25,22 @@
             block-size: 400px;
             object-fit: cover;
         }
-        @media (max-width: 786px) {
+        .promotion-area .upper {
+            block-size: 450px;
+        }
+
+        @media (max-width: 786px) {    
+            .promotion-area .upper,
+            .promotion-area .coursel,
+            .promotion-area .slider-container {
+                block-size: 40vh;
+            }
             #banner,
             #banner .item img {
                 block-size: 40vh;
             }
         }
+
     </style>
 
     <section class="main w-12/12 mt-5">
@@ -56,43 +67,41 @@
                     <span>{% trans "All Categories" %}</span>
                 </a>
             </div>
-            <div class="hidden promotion-area w-12/12 md:grid gap-3">
-                <div class="upper gap-3 rounded-md overflow-hidden" style="block-size:450px;">
-                    <!-- Owl carousel -->
-                    <div id="banner" style="block-size:100%;">
-                        <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                        <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                        <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                        <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                        <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                        <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                        <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                        <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                        <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                        <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                        <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                        <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                        <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                        <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                        <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                        <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                    </div>
-                    <!-- Owl carousel -->
-                </div>
-            </div>
-            <div class="mobile promotion-area w-12/12 grid md:hidden gap-3">
+            <div class="promotion-area w-12/12 md:grid gap-3">
                 <div class="upper gap-3 rounded-md overflow-hidden">
                     <!-- Owl carousel -->
-                    <div id="banner">
-                        <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                        <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                        <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                        <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                        <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                        <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                        <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                        <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                        <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
+                    <div id="banner" style="block-size:100%;">
+                        <div class="coursel" style="block-size: 100%;inline-size: 100%;">
+                            <div class="header">
+                              <div class="progress-bar"></div>
+                            </div>
+                            <div class="slider-container">
+                              <button class="handle left-handle">
+                                <div class="text">&#8249;</div>
+                              </button>
+                              <div class="slider">
+                                <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
+                                <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
+                                <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
+                                <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
+                                <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
+                                <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
+                                <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
+                                <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
+                                <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
+                                <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
+                                <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
+                                <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
+                                <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
+                                <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
+                                <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
+                                <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
+                              </div>
+                              <button class="handle right-handle">
+                                <div class="text">&#8250;</div>
+                              </button>
+                            </div>
+                        </div>
                     </div>
                     <!-- Owl carousel -->
                 </div>
@@ -168,7 +177,7 @@
                         <!-- <h1 class="hidden md:flex gap-1 items-baseline text-lg text-slate-400 font-bold"><span
                                 class="text-lg text-xl text-slate-500">30%</span> OFF</h1> -->
                     <!-- </div> -->
-                    <!-- <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="">{% trans "View All" %}</a> -->
+                    <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="{% url 'supplier:new-arivals' %}">{% trans "View All" %}</a>
                 </div>
                 <div class="grid gap-1 horizontal-scroll" data-context="{{new_arrivals.context_name}}">
                     {% for new_arrival in new_arrivals.results %}
@@ -252,7 +261,7 @@
     </section>
     {% endif %}
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="../../static/owl-carousel/owl.carousel.js"></script>
 
     <script>
@@ -265,6 +274,18 @@
                 pagination: false
             });
         });
+    </script> -->
+
+    <script>
+
+        (function() {
+          let slider = document.querySelector('.slider-container .slider');
+          slider.style.setProperty("--items-per-screen",  1)
+        })()
+      
     </script>
+      
+
+    <script src="{% static 'js/coursel.js' %}"></script>
 
 {% endblock %}

@@ -202,11 +202,14 @@ nav.cs-fixed li:hover * {
     }
 }
 
+
+
 /* 
 .promotion-area {
     block-size: auto;
     grid-template-rows: 40vh 25vh;
 }
+
 
 .mobile.promotion-area {
     block-size: auto;
@@ -450,6 +453,21 @@ nav.cs-fixed li:hover * {
     block-size: 30vh;
     min-inline-size: 100%;
     aspect-ratio: 1.6/1;
+}
+
+.single-image-product-card {
+    position: relative;
+}
+.single-image-product-card .card-badge {
+    position: absolute;
+    inset-block-start: 5px;
+    inset-inline-start: 5px;
+    background-color: hsl(38 95% 47% / 1);
+    color: white;
+    padding: .35rem .75rem;
+    font-size: .9rem;
+    font-weight: 600;
+    z-index: 100;
 }
 
 @media (max-width: 786px) {
@@ -752,4 +770,37 @@ form input.error {
     .footer-md-hide {
         display: grid;gap: 2rem; grid-template-columns: 1fr 2fr;
     }
+}
+
+
+.promotion-page-starter {
+    grid-template-columns: 3fr .6fr;
+}
+
+.promotion-page-starter .coursel,
+.promotion-page-starter .slider-container,
+.promotion-page-starter .slider,
+.promotion-page-starter .slider img {
+    block-size: 40vh;
+}
+
+.promotion-page-starter .slider .item {
+    position: relative;
+}
+
+.promotion-page-starter .slider .item-content {
+    position: absolute;
+    inset-block-end: 20px;
+    inset-inline-end: 20px;
+    padding: .75rem 1rem;
+    border-radius: .5rem;
+    inline-size: 60%;
+    justify-content: flex-start;
+    gap: .25rem;
+
+
+    background: rgba(255, 255, 255, 0.856);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }

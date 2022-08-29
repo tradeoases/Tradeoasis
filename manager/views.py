@@ -405,3 +405,8 @@ class SupportDiscussionView(View):
             request, messages.SUCCESS, _("Reply submitted successfully.")
         )
         return redirect(reverse("manager:discussion", kwargs={"slug": discussion.slug}))
+
+
+
+def blockDasboardAccess(request):
+    return render(request, 'utils/blockedAccess.html')

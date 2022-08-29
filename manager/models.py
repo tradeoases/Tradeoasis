@@ -147,3 +147,13 @@ class DiscussionReply(models.Model):
 
     def __str__(self) -> str:
         return f"{self.discussion.subject}"
+
+
+class UserRequest(models.Model):
+    country = models.CharField(_('Country'), max_length=256)
+    city = models.CharField(_('City'), max_length=256)
+    view = models.CharField(_('View'), max_length=256)
+    request_method = models.CharField(_('Request Method'), max_length=256)
+    device = models.CharField(_('Device'), max_length=256)
+    user_os = models.CharField(_('User Os'), max_length=256)
+    created_on = models.DateField(_("Created on"), default=timezone.now)

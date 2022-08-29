@@ -9,4 +9,8 @@ class BuyerOnlyAccessMixin(AccessMixin):
             return redirect(reverse("auth_app:login"))
         if not (request.user.is_authenticated and request.user.account_type == "BUYER"):
             return redirect(reverse("manager:home"))
+            
+        if request.user_agent.is_mobile and request.user_agent.is_tablet:
+            return redirect(reverse("manager:dashboard-blocked"))
+
         return super().dispatch(request, *args, **kwargs)

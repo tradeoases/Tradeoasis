@@ -1,3 +1,4 @@
+from re import template
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
@@ -243,6 +244,65 @@ class ProductDetailView(DetailView):
         }
         return context
 
+
+class NewArrivalView(View):
+    template_name = 'supplier/promotions.html'
+
+    def get(self, request):
+
+        return render(request, self.template_name, context=self.get_context_data())
+
+    def get_queryset(self):
+        return SupplierModels.Product.objects.all().order_by('-id')
+
+    def get_products_paginator(self):
+
+        PER_PAGE_COUNT = 20
+
+        self.subcategory_products = self.get_queryset()
+
+        paginator = Paginator(self.subcategory_products.order_by("-id"), PER_PAGE_COUNT)
+
+        page_num = self.request.GET.get("page", 1)
+        return paginator.page(page_num)
+
+    def get_context_data(self, **kwargs):
+        context_data = dict()
+
+        products_paginator = self.get_products_paginator()
+        context_data = dict()
+
+        context_data['view_name'] = 'Promotions'
+        context_data["page_obj"] = products_paginator
+        context_data["product_count"] = self.subcategory_products.count()
+        context_data["current_page_number"] = self.request.GET.get("page", 1)
+
+        context_data['products'] = {
+            "context_name" : "new_arrivals",
+            "results": [
+                {
+                    "product": product,
+                    "supplier": product.store.all().first().supplier,
+                    "images": product.productimage_set.all().first(),
+                }
+                for product in products_paginator.object_list
+            ],
+        }
+
+        # preview_products only show for suppliers with highest plan
+        context_data['preview_products'] = {
+            "context_name" : "preview_products",
+            "results": [
+                {
+                    "product": product,
+                    "supplier": product.store.all().first().supplier,
+                    "images": product.productimage_set.all().first(),
+                }
+                for product in products_paginator.object_list
+            ],
+        }
+
+        return context_data
 
 class CategoryListView(ListView):
     model = SupplierModels.ProductCategory

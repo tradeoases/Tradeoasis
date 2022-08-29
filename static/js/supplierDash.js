@@ -303,3 +303,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     // BUYER CONTRACTS
 });
+
+
+if(window.innerWidth < 800)
+{
+    if (window.location.href.includes('/admin/') || window.location.href.includes('dashboard')) {
+        let domain = full = location.protocol + '//' + location.host
+        window.location.replace(`${domain}/blocked`);
+    }
+}

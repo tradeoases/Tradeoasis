@@ -151,3 +151,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // }
 
 })
+
+
+// if(window.innerWidth < 800)
+// {
+//     if (window.location.href.includes('/admin/') || window.location.href.includes('/dashboard/')) {
+//         window.location.href = `${location.hostname}/blocked`;
+//     }
+// }
