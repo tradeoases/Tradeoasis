@@ -8,183 +8,186 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-29 06:20+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2022-08-28 10:56+0000\n"
+"PO-Revision-Date: 2022-08-28 14:01+0000\n"
+"Last-Translator:   <phillipmugisa4@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Translated-Using: django-rosetta 0.9.8\n"
 
 #: app_admin/views.py:50 app_admin/views.py:113
 #: templates/app_admin/utils/layout.html:105
 msgid "Admin Dashboard"
-msgstr ""
+msgstr "Admin-Dashboard"
 
 #: app_admin/views.py:56 app_admin/views.py:119
 msgid "Total Suppliers"
-msgstr ""
+msgstr "Lieferanten insgesamt"
 
 #: app_admin/views.py:57 app_admin/views.py:120
 msgid "Total Supplier Count"
-msgstr ""
+msgstr "Gesamtzahl der Lieferanten"
 
 #: app_admin/views.py:61 app_admin/views.py:124
 msgid "Total Buyers"
-msgstr ""
+msgstr "Käufer insgesamt"
 
 #: app_admin/views.py:62 app_admin/views.py:125
 msgid "Total Buyer Count"
-msgstr ""
+msgstr "Gesamtzahl der Käufer"
 
 #: app_admin/views.py:66 app_admin/views.py:129
 msgid "Total Product"
-msgstr ""
+msgstr "Gesamtprodukt"
 
 #: app_admin/views.py:67 app_admin/views.py:130
 msgid "Total Product Count"
-msgstr ""
+msgstr "Gesamtzahl der Produkte"
 
 #: app_admin/views.py:71 app_admin/views.py:167
 msgid "Total Showrooms"
-msgstr ""
+msgstr "Ausstellungsräume insgesamt"
 
 #: app_admin/views.py:72 app_admin/views.py:168
 msgid "Showroom Count"
-msgstr ""
+msgstr "Showroom-Zählung"
 
 #: app_admin/views.py:76 app_admin/views.py:172
 msgid "Total Stores"
-msgstr ""
+msgstr "Gesamtspeicher"
 
 #: app_admin/views.py:77 app_admin/views.py:173
 msgid "Total Store Count"
-msgstr ""
+msgstr "Gesamtspeicherzahl"
 
 #: app_admin/views.py:81 app_admin/views.py:177
 msgid "Total Memberships"
-msgstr ""
+msgstr "Gesamtzahl der Mitgliedschaften"
 
 #: app_admin/views.py:82 app_admin/views.py:178 payment/views.py:49
 #: payment/views.py:70 templates/manager/support.html:59
 #: templates/utils/header.html:126 templates/utils/header.html:233
 msgid "Memberships"
-msgstr ""
+msgstr "Mitgliedschaften"
 
 #: app_admin/views.py:86 app_admin/views.py:134
 msgid "Total Contracts"
-msgstr ""
+msgstr "Gesamtverträge"
 
 #: app_admin/views.py:87 app_admin/views.py:135
 msgid "Contract Created"
-msgstr ""
+msgstr "Vertrag erstellt"
 
 #: app_admin/views.py:161 app_admin/views.py:316 app_admin/views.py:420
 msgid "Admin Dashboard - Clients"
-msgstr ""
+msgstr "Admin-Dashboard – Kunden"
 
 #: app_admin/views.py:182
 msgid "Total Services"
-msgstr ""
+msgstr "Gesamtleistungen"
 
 #: app_admin/views.py:183
 msgid "Total Services Count"
-msgstr ""
+msgstr "Gesamtzahl der Dienste"
 
 #: app_admin/views.py:201 app_admin/views.py:261 app_admin/views.py:692
 #: auth_app/views.py:44 auth_app/views.py:104 supplier/views.py:767
 #: supplier/views.py:879 supplier/views.py:977
 msgid "Please Fill all fields."
-msgstr ""
+msgstr "Fülle bitte alle Felder aus."
 
 #: app_admin/views.py:210
 msgid "Invalid Data Entered."
-msgstr ""
+msgstr "Ungültige Daten eingegeben."
 
 #: app_admin/views.py:239 app_admin/views.py:298
 #, python-brace-format
 msgid "Service ({name}) created successfully."
-msgstr ""
+msgstr "Dienst ({name}) erfolgreich erstellt."
 
 #: app_admin/views.py:246 app_admin/views.py:305
 msgid "Admin Dashboard - Manager"
-msgstr ""
+msgstr "Admin-Dashboard – Manager"
 
 #: app_admin/views.py:293
 msgid "Error Occurred. Try Again"
-msgstr ""
+msgstr "Ein Fehler ist aufgetreten. Versuch es noch einmal"
 
 #: app_admin/views.py:331
 #, python-brace-format
 msgid "Category({name}) already exists."
-msgstr ""
+msgstr "Kategorie ({name}) existiert bereits."
 
 #: app_admin/views.py:373 app_admin/views.py:446
 #, python-brace-format
 msgid "Sub category ({sub_cat_name}) already exists."
-msgstr ""
+msgstr "Unterkategorie ({sub_cat_name}) existiert bereits."
 
 #: app_admin/views.py:409
 msgid "Category ({}) created successfully."
-msgstr ""
+msgstr "Kategorie ({}) erfolgreich erstellt."
 
 #: app_admin/views.py:482
 msgid "Subcategories created successfully."
-msgstr ""
+msgstr "Unterkategorien erfolgreich erstellt."
 
 #: app_admin/views.py:493 app_admin/views.py:508 app_admin/views.py:523
 #: app_admin/views.py:542
 msgid "Admin Dashboard - Support"
-msgstr ""
+msgstr "Admin-Dashboard - Unterstützung"
 
 #: app_admin/views.py:663
 msgid "Account Edited Successfully"
-msgstr ""
+msgstr "Konto erfolgreich bearbeitet"
 
 #: app_admin/views.py:668
 msgid "An Error occurred. Please Try Again"
-msgstr ""
+msgstr "Ein Fehler ist aufgetreten. Bitte versuche es erneut"
 
 #: app_admin/views.py:696 auth_app/views.py:110
 msgid "Username not available."
-msgstr ""
+msgstr "Benutzername nicht verfügbar."
 
 #: app_admin/views.py:700 auth_app/views.py:122
 msgid "Password mismatch."
-msgstr ""
+msgstr "Die Passwörter stimmen nicht überein."
 
 #: app_admin/views.py:722 auth_app/views.py:173
 msgid "Your activation link is"
-msgstr ""
+msgstr "Ihr Aktivierungslink ist"
 
 #: app_admin/views.py:727 auth_app/views.py:177
 msgid "Activate Foroden Activation"
-msgstr ""
+msgstr "Aktivieren Sie die Foroden-Aktivierung"
 
 #: app_admin/views.py:739
 msgid ""
 "Account Created Successfully.  A verification link was sent user's email."
 msgstr ""
+"Konto erfolgreich erstellt. Ein Bestätigungslink wurde an die E-Mail des "
+"Benutzers gesendet."
 
 #: app_admin/views.py:757 auth_app/views.py:209
 msgid "Bad Request"
-msgstr ""
+msgstr "Ungültige Anforderung"
 
 #: auth_app/models.py:30 templates/buyer/dashboard/profile.html:42
 #: templates/supplier/dashboard/profile.html:42
 msgid "Account Type"
-msgstr ""
+msgstr "Konto Typ"
 
 #: auth_app/models.py:34 manager/models.py:91 supplier/models.py:61
 #: supplier/models.py:85 supplier/models.py:146
 msgid "Image"
-msgstr ""
+msgstr "Bild"
 
 #: auth_app/models.py:40
 msgid "Email Activated"
-msgstr ""
+msgstr "E-Mail aktiviert"
 
 #: auth_app/models.py:63 templates/auth_app/business_infor.html:31
 #: templates/buyer/dashboard/business-profile.html:30
@@ -192,7 +195,7 @@ msgstr ""
 #: templates/supplier/dashboard/profile.html:60
 #: templates/supplier/supplier_detail.html:30
 msgid "Business Name"
-msgstr ""
+msgstr "Firmenname"
 
 #: auth_app/models.py:65 manager/models.py:24 manager/models.py:44
 #: manager/models.py:69 manager/models.py:97 manager/models.py:123
@@ -200,101 +203,109 @@ msgstr ""
 #: supplier/models.py:66 supplier/models.py:90 supplier/models.py:125
 #: supplier/models.py:150 supplier/models.py:166 supplier/models.py:194
 msgid "Safe Url"
-msgstr ""
+msgstr "Sichere URL"
 
 #: auth_app/models.py:70 templates/auth_app/business_infor.html:35
 msgid "Business Description"
-msgstr ""
+msgstr "Geschäftsbeschreibung"
 
 #: auth_app/models.py:71 manager/models.py:153
 #: templates/auth_app/business_infor.html:40
 #: templates/buyer/dashboard/business-profile.html:39
-#: templates/buyer/profile.html:58 templates/supplier/dashboard/profile.html:69
+#: templates/buyer/profile.html:58
+#: templates/supplier/dashboard/profile.html:69
 msgid "Country"
-msgstr ""
+msgstr "Land"
 
 #: auth_app/models.py:72
 msgid "Country Code"
-msgstr ""
+msgstr "Landesvorwahl"
 
 #: auth_app/models.py:73 manager/models.py:154
 #: templates/auth_app/business_infor.html:285
 #: templates/buyer/dashboard/business-profile.html:43
-#: templates/buyer/profile.html:62 templates/supplier/dashboard/profile.html:73
+#: templates/buyer/profile.html:62
+#: templates/supplier/dashboard/profile.html:73
 msgid "City"
-msgstr ""
+msgstr "City"
 
 #: auth_app/models.py:74
 msgid "Number"
-msgstr ""
+msgstr "Nummer"
 
 #: auth_app/models.py:75 templates/auth_app/business_infor.html:516
 #: templates/buyer/dashboard/business-profile.html:52
-#: templates/buyer/profile.html:71 templates/supplier/dashboard/profile.html:82
+#: templates/buyer/profile.html:71
+#: templates/supplier/dashboard/profile.html:82
 msgid "VAT Number"
-msgstr ""
+msgstr "Umsatzsteuer-Identifikationsnummer"
 
 #: auth_app/models.py:77 templates/auth_app/business_infor.html:520
 #: templates/buyer/dashboard/business-profile.html:56
-#: templates/buyer/profile.html:75 templates/supplier/dashboard/profile.html:86
+#: templates/buyer/profile.html:75
+#: templates/supplier/dashboard/profile.html:86
 msgid "Legal Entity Identifier"
-msgstr ""
+msgstr "Kennung der juristischen Person"
 
 #: auth_app/models.py:79 templates/auth_app/business_infor.html:524
 #: templates/buyer/dashboard/business-profile.html:60
-#: templates/buyer/profile.html:79 templates/supplier/dashboard/profile.html:90
+#: templates/buyer/profile.html:79
+#: templates/supplier/dashboard/profile.html:90
 msgid "Website"
-msgstr ""
+msgstr "Webseite"
 
 #: auth_app/models.py:146
 msgid "Responses to clients"
-msgstr ""
+msgstr "Antworten an Kunden"
 
 #: auth_app/views.py:38 templates/utils/header.html:158
 #: templates/utils/header.html:174
 msgid "Sign In"
-msgstr ""
+msgstr "Einloggen"
 
 #: auth_app/views.py:52
 msgid "Account not found. Try Again."
-msgstr ""
+msgstr "Konto nicht gefunden. Versuch es noch einmal."
 
 #: auth_app/views.py:58
 msgid "Please Activate your Email"
-msgstr ""
+msgstr "Bitte aktivieren Sie Ihre E-Mail"
 
 #: auth_app/views.py:82
 msgid "Sign Up"
-msgstr ""
+msgstr "Anmeldung"
 
 #: auth_app/views.py:116
 msgid "Email not available."
-msgstr ""
+msgstr "E-Mail nicht verfügbar."
 
 #: auth_app/views.py:190
 msgid ""
-"Account Created Successfully. Please check your email for a verfication link."
+"Account Created Successfully. Please check your email for a verfication "
+"link."
 msgstr ""
+"Konto erfolgreich erstellt. Bitte überprüfen Sie Ihre E-Mail auf einen "
+"Bestätigungslink."
 
 #: auth_app/views.py:227 templates/auth_app/business_infor.html:9
 msgid "Business Profile"
-msgstr ""
+msgstr "Geschäftsprofil"
 
 #: auth_app/views.py:241
 msgid "Please Fill all reqiured fields."
-msgstr ""
+msgstr "Bitte füllen Sie alle Pflichtfelder aus."
 
 #: auth_app/views.py:294
 msgid "An Error Occurred. Try Again."
-msgstr ""
+msgstr "Ein Fehler ist aufgetreten. Versuch es noch einmal."
 
 #: buyer/models.py:19
 msgid "interest handled"
-msgstr ""
+msgstr "Zinsen behandelt"
 
 #: buyer/models.py:20
 msgid "Viewed by supplier"
-msgstr ""
+msgstr "Gesehen vom Lieferanten"
 
 #: buyer/models.py:21 manager/models.py:22 manager/models.py:49
 #: manager/models.py:74 manager/models.py:102 manager/models.py:128
@@ -305,72 +316,72 @@ msgstr ""
 #: templates/buyer/dashboard/contracts.html:36
 #: templates/supplier/dashboard/contracts.html:36
 msgid "Created on"
-msgstr ""
+msgstr "Erstellt am"
 
 #: buyer/views.py:21 buyer/views.py:38
 #: templates/buyer/dashboard/utils/layout.html:46
 #: templates/buyer/profile.html:9 templates/utils/header.html:91
 msgid "Profile"
-msgstr ""
+msgstr "Profil"
 
 #: buyer/views.py:55 buyer/views.py:72 supplier/views.py:711
 #: templates/buyer/dashboard/utils/layout.html:60
 #: templates/buyer/profile.html:10
 #: templates/supplier/dashboard/utils/layout.html:93
 msgid "Contracts"
-msgstr ""
+msgstr "Verträge"
 
 #: core/settings.py:200
 msgid "English"
-msgstr ""
+msgstr "Englisch"
 
 #: core/settings.py:201
 msgid "Arabic"
-msgstr ""
+msgstr "Arabisch"
 
 #: core/settings.py:202
 msgid "French"
-msgstr ""
+msgstr "Französisch"
 
 #: core/settings.py:203
 msgid "German"
-msgstr ""
+msgstr "Deutsch"
 
 #: core/urls.py:58
 msgid "suppliers/"
-msgstr ""
+msgstr "Lieferanten/"
 
 #: core/urls.py:59
 msgid "buyer/"
-msgstr ""
+msgstr "Käufer/"
 
 #: core/urls.py:60
 msgid "auth/"
-msgstr ""
+msgstr "Authentifizierung/"
 
 #: core/urls.py:61
 msgid "payments/"
-msgstr ""
+msgstr "Zahlungen/"
 
 #: core/urls.py:62
 msgid "support/admin/"
-msgstr ""
+msgstr "support/admin/"
 
 #: core/urls.py:63
 msgid "api/"
-msgstr ""
+msgstr "API/"
 
 #: core/urls.py:64
 msgid "admin-api/"
-msgstr ""
+msgstr "admin-api/"
 
 #: core/urls.py:65
 msgid "admin/"
-msgstr ""
+msgstr "Administrator/"
 
 #: manager/models.py:21
 msgid "Country or City"
-msgstr ""
+msgstr "Land oder Stadt"
 
 #: manager/models.py:39 manager/models.py:85 payment/models.py:21
 #: payment/models.py:47 payment/models.py:92 supplier/models.py:58
@@ -387,7 +398,7 @@ msgstr ""
 #: templates/supplier/dashboard/services.html:23
 #: templates/supplier/dashboard/services.html:34
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: manager/models.py:41 manager/models.py:120 manager/models.py:145
 #: payment/models.py:23 supplier/models.py:111 supplier/models.py:188
@@ -399,19 +410,19 @@ msgstr ""
 #: templates/supplier/dashboard/services.html:24
 #: templates/supplier/dashboard/services.html:35
 msgid "Description"
-msgstr ""
+msgstr "Beschreibung"
 
 #: manager/models.py:65 supplier/models.py:40
 msgid "Service Image"
-msgstr ""
+msgstr "Dienstbild"
 
 #: manager/models.py:95
 msgid "Number of visits"
-msgstr ""
+msgstr "Anzahl der Besuche"
 
 #: manager/models.py:119
 msgid "Subject"
-msgstr ""
+msgstr "Thema"
 
 #: manager/models.py:155
 msgid "View"
@@ -439,7 +450,7 @@ msgstr ""
 #: templates/supplier/supplier_detail.html:7 templates/utils/header.html:120
 #: templates/utils/header.html:191
 msgid "Home"
-msgstr ""
+msgstr "Heim"
 
 #: manager/views.py:143 templates/manager/about.html:77
 #: templates/manager/index.html:111 templates/manager/showroom_detail.html:9
@@ -448,7 +459,7 @@ msgstr ""
 #: templates/payments/memberships.html:50 templates/utils/header.html:122
 #: templates/utils/header.html:205 templates/utils/header.html:268
 msgid "Showrooms"
-msgstr ""
+msgstr "Ausstellungsräume"
 
 #: manager/views.py:211 supplier/views.py:705
 #: templates/manager/service_list.html:10
@@ -456,39 +467,39 @@ msgstr ""
 #: templates/supplier/supplier_detail.html:71 templates/utils/header.html:124
 #: templates/utils/header.html:219
 msgid "Services"
-msgstr ""
+msgstr "Dienstleistungen"
 
 #: manager/views.py:221 templates/utils/header.html:123
 #: templates/utils/header.html:212
 msgid "About Us"
-msgstr ""
+msgstr "Über uns"
 
 #: manager/views.py:267 manager/views.py:279 manager/views.py:305
 #: manager/views.py:357 templates/app_admin/utils/layout.html:75
 #: templates/app_admin/utils/layout.html:173 templates/utils/header.html:125
 #: templates/utils/header.html:226
 msgid "Support"
-msgstr ""
+msgstr "Die Unterstützung"
 
 #: manager/views.py:291
 msgid "Discussion"
-msgstr ""
+msgstr "Diskussion"
 
 #: manager/views.py:317 manager/views.py:374
 msgid "Error occurred. Try Again"
-msgstr ""
+msgstr "Ein Fehler ist aufgetreten. Versuch es noch einmal"
 
 #: manager/views.py:346
 msgid "Discussion created successfully."
-msgstr ""
+msgstr "Diskussion erfolgreich erstellt."
 
 #: manager/views.py:405
 msgid "Reply submitted successfully."
-msgstr ""
+msgstr "Antwort erfolgreich gesendet."
 
 #: payment/forms.py:22
 msgid "We couldn't verify your payment. Please try again."
-msgstr ""
+msgstr "Wir konnten Ihre Zahlung nicht bestätigen. Bitte versuche es erneut."
 
 #: payment/models.py:25 supplier/models.py:122 supplier/models.py:190
 #: templates/buyer/dashboard/contract-detail.html:40
@@ -501,70 +512,70 @@ msgstr ""
 #: templates/supplier/dashboard/services.html:36
 #: templates/supplier/products.html:23
 msgid "Price"
-msgstr ""
+msgstr "Preis"
 
 #: payment/models.py:26 payment/models.py:118 payment/models.py:169
 #: supplier/models.py:123 supplier/models.py:191
 #: templates/supplier/dashboard/create-product.html:59
 #: templates/supplier/dashboard/create-service.html:35
 msgid "Currency"
-msgstr ""
+msgstr "Währung"
 
 #: payment/models.py:63
 msgid "Plan expiry date"
-msgstr ""
+msgstr "Ablaufdatum planen"
 
 #: payment/models.py:64
 msgid "Duration"
-msgstr ""
+msgstr "Dauer"
 
 #: payment/models.py:93
 msgid "Number of transactions"
-msgstr ""
+msgstr "Anzahl der Transaktionen"
 
 #: payment/models.py:113 payment/models.py:164
 msgid "Address"
-msgstr ""
+msgstr "Adresse"
 
 #: payment/models.py:114 payment/models.py:165
 msgid "Payment Id"
-msgstr ""
+msgstr "Zahlungs-ID"
 
 #: payment/models.py:116 payment/models.py:167
 msgid "Total Amount Paid"
-msgstr ""
+msgstr "Gezahlte Gesamtsumme"
 
 #: payment/models.py:120
 msgid "reference_id"
-msgstr ""
+msgstr "Referenz ID"
 
 #: payment/models.py:123
 msgid "status"
-msgstr ""
+msgstr "Status"
 
 #: payment/models.py:148
 msgid "Contract completed"
-msgstr ""
+msgstr "Vertrag abgeschlossen"
 
 #: payment/models.py:150
 msgid "Contract accepted"
-msgstr ""
+msgstr "Vertrag angenommen"
 
 #: payment/views.py:223
 msgid "Membership already exists."
-msgstr ""
+msgstr "Eine Mitgliedschaft besteht bereits."
 
 #: supplier/models.py:25
 msgid "Store Name"
-msgstr ""
+msgstr "Geschäftsname"
 
 #: supplier/models.py:59
 msgid "Number of products"
-msgstr ""
+msgstr "Anzahl der Produkte"
 
 #: supplier/models.py:192
 msgid "Number of contracts"
-msgstr ""
+msgstr "Anzahl der Verträge"
 
 #: supplier/views.py:142 supplier/views.py:697
 #: templates/manager/showroom_detail.html:47 templates/manager/support.html:66
@@ -575,11 +586,11 @@ msgstr ""
 #: templates/supplier/store_detail.html:25 templates/utils/header.html:121
 #: templates/utils/header.html:198
 msgid "Products"
-msgstr ""
+msgstr "Produkte"
 
 #: supplier/views.py:315
 msgid "Categories"
-msgstr ""
+msgstr "Kategorien"
 
 #: supplier/views.py:649 supplier/views.py:691
 #: templates/manager/showroom_detail.html:18
@@ -590,117 +601,119 @@ msgstr ""
 #: templates/supplier/store_detail.html:11
 #: templates/supplier/store_list.html:11 templates/supplier/store_list.html:16
 msgid "Stores"
-msgstr ""
+msgstr "Shops"
 
 #: supplier/views.py:685 templates/buyer/dashboard/utils/layout.html:27
 #: templates/supplier/dashboard/utils/layout.html:23
 msgid "Supplier Dashboard"
-msgstr ""
+msgstr "Lieferanten-Dashboard"
 
 #: supplier/views.py:853
 msgid "Product created successfully."
-msgstr ""
+msgstr "Produkt erfolgreich erstellt."
 
 #: supplier/views.py:859
 msgid "An Error occurred. Try Again"
-msgstr ""
+msgstr "Ein Fehler ist aufgetreten. Versuch es noch einmal"
 
 #: supplier/views.py:887
 msgid "Please use a different store name."
-msgstr ""
+msgstr "Bitte verwenden Sie einen anderen Shop-Namen."
 
 #: supplier/views.py:896
 msgid "Store created successfully."
-msgstr ""
+msgstr "Store erfolgreich erstellt."
 
 #: supplier/views.py:927 supplier/views.py:1031
 msgid "Sorry, an error occurred. Please Try Again"
-msgstr ""
+msgstr "Entschuldigung, ein Fehler ist aufgetreten. Bitte versuche es erneut"
 
 #: supplier/views.py:987
 msgid "Please use a different service name."
-msgstr ""
+msgstr "Bitte verwenden Sie einen anderen Dienstnamen."
 
 #: supplier/views.py:1000
 msgid "Service created successfully."
-msgstr ""
+msgstr "Dienst erfolgreich erstellt."
 
 #: templates/app_admin/editProfile.html:30 templates/auth_app/signup.html:33
 msgid "First Name"
-msgstr ""
+msgstr "Vorname"
 
 #: templates/app_admin/editProfile.html:34 templates/auth_app/signup.html:37
 msgid "Last Name"
-msgstr ""
+msgstr "Nachname"
 
 #: templates/app_admin/editProfile.html:39 templates/auth_app/signin.html:31
 #: templates/auth_app/signup.html:42 templates/buyer/dashboard/profile.html:34
 #: templates/buyer/profile.html:16 templates/buyer/profile.html:38
 #: templates/supplier/dashboard/profile.html:34
 msgid "Username"
-msgstr ""
+msgstr "Nutzername"
 
 #: templates/app_admin/editProfile.html:43 templates/auth_app/signup.html:46
 #: templates/buyer/dashboard/profile.html:38 templates/buyer/profile.html:24
-#: templates/buyer/profile.html:42 templates/supplier/dashboard/profile.html:38
+#: templates/buyer/profile.html:42
+#: templates/supplier/dashboard/profile.html:38
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #: templates/app_admin/utils/layout.html:63
 msgid "Clients"
-msgstr ""
+msgstr "Kunden"
 
 #: templates/app_admin/utils/layout.html:69
 msgid "Manager"
-msgstr ""
+msgstr "Manager"
 
 #: templates/app_admin/utils/layout.html:127
 msgid "Notifications"
-msgstr ""
+msgstr "Benachrichtigungen"
 
 #: templates/auth_app/business_infor.html:10
 #: templates/supplier/dashboard/create-product.html:12
 #: templates/supplier/dashboard/create-service.html:12
 msgid "Represents required fields"
-msgstr ""
+msgstr "Stellt erforderliche Felder dar"
 
 #: templates/auth_app/business_infor.html:290
 #: templates/buyer/dashboard/business-profile.html:48
-#: templates/buyer/profile.html:67 templates/supplier/dashboard/profile.html:78
+#: templates/buyer/profile.html:67
+#: templates/supplier/dashboard/profile.html:78
 msgid "Business Line"
-msgstr ""
+msgstr "Geschäftslinie"
 
 #: templates/auth_app/signin.html:9
 msgid "Welcome Back"
-msgstr ""
+msgstr "Willkommen zurück"
 
 #: templates/auth_app/signin.html:10
 msgid "Thousands of products await."
-msgstr ""
+msgstr "Tausende Produkte warten auf Sie."
 
 #: templates/auth_app/signin.html:35 templates/auth_app/signup.html:50
 msgid "Password"
-msgstr ""
+msgstr "Passwort"
 
 #: templates/auth_app/signin.html:49 templates/auth_app/signup.html:74
 msgid "Continue With Google"
-msgstr ""
+msgstr "Weiter mit Google"
 
 #: templates/auth_app/signin.html:53 templates/auth_app/signup.html:78
 msgid "Continue With LinkedIn"
-msgstr ""
+msgstr "Weiter mit LinkedIn"
 
 #: templates/auth_app/signin.html:59 templates/auth_app/signup.html:9
 msgid "Welcome To Foroden"
-msgstr ""
+msgstr "Willkommen bei Foroden"
 
 #: templates/auth_app/signin.html:60 templates/auth_app/signup.html:10
 msgid "Join the biggest community of over 70,000 Business People."
-msgstr ""
+msgstr "Treten Sie der größten Community von über 70.000 Geschäftsleuten bei."
 
 #: templates/auth_app/signin.html:63
 msgid "Sign Up As"
-msgstr ""
+msgstr "Registrieren Sie sich als"
 
 #: templates/auth_app/signin.html:67
 #: templates/buyer/dashboard/contracts.html:24
@@ -709,67 +722,68 @@ msgstr ""
 #: templates/supplier/products.html:37 templates/supplier/store_detail.html:21
 #: templates/supplier/store_list.html:20
 msgid "Supplier"
-msgstr ""
+msgstr "Anbieter"
 
 #: templates/auth_app/signin.html:70
 #: templates/supplier/dashboard/contracts.html:24
 #: templates/supplier/dashboard/contracts.html:35
 msgid "Buyer"
-msgstr ""
+msgstr "Käufer"
 
 #: templates/auth_app/signup.html:54
 msgid "Show Password"
-msgstr ""
+msgstr "Passwort anzeigen"
 
 #: templates/auth_app/signup.html:58
 msgid "Confirm Password"
-msgstr ""
+msgstr "Passwort bestätigen"
 
 #: templates/auth_app/signup.html:65
 msgid "Already Have An Account?"
-msgstr ""
+msgstr "Sie haben bereits ein Konto?"
 
 #: templates/auth_app/signup.html:66
 msgid "Sign into account"
-msgstr ""
+msgstr "Melden Sie sich an"
 
 #: templates/buyer/dashboard/business-profile.html:28
 #: templates/buyer/dashboard/utils/layout.html:51
-#: templates/buyer/profile.html:47 templates/supplier/dashboard/profile.html:58
+#: templates/buyer/profile.html:47
+#: templates/supplier/dashboard/profile.html:58
 msgid "Business Details"
-msgstr ""
+msgstr "Geschäftsdetails"
 
 #: templates/buyer/dashboard/business-profile.html:64
 #: templates/supplier/dashboard/profile.html:94
 msgid "Edit Bussiness Details"
-msgstr ""
+msgstr "Geschäftsdetails bearbeiten"
 
 #: templates/buyer/dashboard/contract-detail.html:8
 #: templates/buyer/dashboard/contracts.html:8
 #: templates/supplier/dashboard/contract-detail.html:8
 #: templates/supplier/dashboard/contracts.html:8
 msgid "My Contracts"
-msgstr ""
+msgstr "Meine Verträge"
 
 #: templates/buyer/dashboard/contract-detail.html:12
 #: templates/supplier/dashboard/contract-detail.html:12
 msgid "Details"
-msgstr ""
+msgstr "Einzelheiten"
 
 #: templates/buyer/dashboard/contract-detail.html:17
 #: templates/supplier/dashboard/contract-detail.html:17
 msgid "Client information"
-msgstr ""
+msgstr "Kundeninformation"
 
 #: templates/buyer/dashboard/contract-detail.html:30
 #: templates/supplier/dashboard/contract-detail.html:30
 msgid "Requested from"
-msgstr ""
+msgstr "Angefordert von"
 
 #: templates/buyer/dashboard/contract-detail.html:34
 #: templates/supplier/dashboard/contract-detail.html:34
 msgid "Contract info"
-msgstr ""
+msgstr "Vertragsinformationen"
 
 #: templates/buyer/dashboard/contract-detail.html:39
 #: templates/buyer/dashboard/contracts.html:23
@@ -778,33 +792,33 @@ msgstr ""
 #: templates/supplier/dashboard/contracts.html:23
 #: templates/supplier/dashboard/contracts.html:34
 msgid "Service"
-msgstr ""
+msgstr "Service"
 
 #: templates/buyer/dashboard/contract-detail.html:55
 #: templates/supplier/dashboard/contract-detail.html:55
 msgid "Accept"
-msgstr ""
+msgstr "Annehmen"
 
 #: templates/buyer/dashboard/contract-detail.html:58
 #: templates/supplier/dashboard/contract-detail.html:58
 msgid "Reject"
-msgstr ""
+msgstr "Ablehnen"
 
 #: templates/buyer/dashboard/contract-detail.html:61
 #: templates/supplier/dashboard/contract-detail.html:61
 msgid "Print"
-msgstr ""
+msgstr "Drucken"
 
 #: templates/buyer/dashboard/contracts.html:12
 #: templates/supplier/dashboard/contracts.html:12
 msgid "To view the contract details"
-msgstr ""
+msgstr "Zum Anzeigen der Vertragsdetails"
 
 #: templates/buyer/dashboard/contracts.html:15
 #: templates/supplier/dashboard/contracts.html:15
 #: templates/supplier/dashboard/services.html:12
 msgid "Click the \"<i class=\"fa fa-info-circle\"></i>\" label"
-msgstr ""
+msgstr "Klicken Sie auf das Label \"<i class=\"fa fa-info-circle\"></i>\"."
 
 #: templates/buyer/dashboard/contracts.html:22
 #: templates/buyer/dashboard/contracts.html:33
@@ -815,12 +829,12 @@ msgstr ""
 #: templates/supplier/dashboard/services.html:22
 #: templates/supplier/dashboard/services.html:33
 msgid "No"
-msgstr ""
+msgstr "Nein"
 
 #: templates/buyer/dashboard/contracts.html:25
 #: templates/supplier/dashboard/contracts.html:25
 msgid "Start date"
-msgstr ""
+msgstr "Anfangsdatum"
 
 #: templates/buyer/dashboard/contracts.html:26
 #: templates/buyer/dashboard/contracts.html:37
@@ -829,7 +843,7 @@ msgstr ""
 #: templates/supplier/dashboard/manage-product.html:28
 #: templates/supplier/dashboard/manage-product.html:41
 msgid "Action"
-msgstr ""
+msgstr "Aktion"
 
 #: templates/buyer/dashboard/contracts.html:43
 #: templates/supplier/dashboard/contracts.html:43
@@ -837,7 +851,7 @@ msgstr ""
 #: templates/supplier/dashboard/manage-store.html:41
 #: templates/supplier/dashboard/services.html:43
 msgid "Showing Page"
-msgstr ""
+msgstr "Seite anzeigen"
 
 #: templates/buyer/dashboard/contracts.html:43
 #: templates/supplier/dashboard/contracts.html:43
@@ -845,7 +859,7 @@ msgstr ""
 #: templates/supplier/dashboard/manage-store.html:41
 #: templates/supplier/dashboard/services.html:43
 msgid "of"
-msgstr ""
+msgstr "von"
 
 #: templates/buyer/dashboard/contracts.html:43
 #: templates/supplier/dashboard/contracts.html:43
@@ -853,7 +867,7 @@ msgstr ""
 #: templates/supplier/dashboard/manage-store.html:41
 #: templates/supplier/dashboard/services.html:43
 msgid "Entries"
-msgstr ""
+msgstr "Einträge"
 
 #: templates/buyer/dashboard/contracts.html:46
 #: templates/supplier/dashboard/contracts.html:46
@@ -864,487 +878,502 @@ msgstr ""
 #: templates/supplier/store_detail.html:66
 #: templates/supplier/store_detail.html:103
 msgid "Previous"
-msgstr ""
+msgstr "Vorherige"
 
 #: templates/buyer/dashboard/contracts.html:48
 #: templates/supplier/dashboard/contracts.html:48
 #: templates/supplier/dashboard/manage-product.html:52
 #: templates/supplier/dashboard/manage-store.html:46
 #: templates/supplier/dashboard/services.html:48
-#: templates/supplier/products.html:101 templates/supplier/promotions.html:125
+#: templates/supplier/products.html:101
+#: templates/supplier/promotions.html:125
 #: templates/supplier/store_detail.html:80
 #: templates/supplier/store_detail.html:107
 msgid "Next"
-msgstr ""
+msgstr "Nächste"
 
 #: templates/buyer/dashboard/profile.html:46
 #: templates/supplier/dashboard/profile.html:46
 msgid "Membership"
-msgstr ""
+msgstr "Mitgliedschaft"
 
 #: templates/buyer/dashboard/profile.html:49
 #: templates/supplier/dashboard/profile.html:49
 msgid "Upgrade"
-msgstr ""
+msgstr "Aktualisierung"
 
 #: templates/buyer/dashboard/profile.html:53
 #: templates/supplier/dashboard/profile.html:53
 msgid "Edit Profile"
-msgstr ""
+msgstr "Profil bearbeiten"
 
 #: templates/buyer/dashboard/profile.html:54
 #: templates/supplier/dashboard/profile.html:54
 msgid "Reset Password"
-msgstr ""
+msgstr "Passwort zurücksetzen"
 
 #: templates/buyer/dashboard/utils/layout.html:38
 msgid "Buyer's Portal"
-msgstr ""
+msgstr "Käuferportal"
 
 #: templates/buyer/dashboard/utils/layout.html:50
 #: templates/buyer/profile.html:14
 msgid "Account Details"
-msgstr ""
+msgstr "Kontodetails"
 
 #: templates/buyer/dashboard/utils/layout.html:69
 #: templates/buyer/profile.html:29
 #: templates/supplier/dashboard/utils/layout.html:102
 #: templates/utils/header.html:101
 msgid "Logout"
-msgstr ""
+msgstr "Ausloggen"
 
 #: templates/buyer/profile.html:11
 msgid "Visited Products"
-msgstr ""
+msgstr "Besuchte Produkte"
 
 #: templates/buyer/profile.html:28
 msgid "Edit Account"
-msgstr ""
+msgstr "Konto bearbeiten"
 
 #: templates/buyer/profile.html:36
 msgid "User Profile"
-msgstr ""
+msgstr "Benutzerprofil"
 
 #: templates/manager/about.html:10
 msgid "Who are we?"
-msgstr ""
+msgstr "Wer sind wir?"
 
 #: templates/manager/about.html:15
-msgid "We are empowering entrepreneurs around the world to chase their dreams."
+msgid ""
+"We are empowering entrepreneurs around the world to chase their dreams."
 msgstr ""
+"Wir befähigen Unternehmer auf der ganzen Welt, ihre Träume zu verwirklichen."
 
 #: templates/manager/about.html:23
 msgid "Vision Statement"
-msgstr ""
+msgstr "Vision-Statement"
 
 #: templates/manager/about.html:25
 msgid ""
 "We represent a wide network of Digital Promoting and local and Traditional "
-"Marketing and Advertising  services  of products (in large scale) of various "
-"companies. Our offices and specialized and indigenous forces are operating "
+"Marketing and Advertising  services  of products (in large scale) of various"
+" companies. Our offices and specialized and indigenous forces are operating "
 "in different countries. We have created a sustainable, learning and "
 "progressive system. We decide and act as a team. Our organization is an "
 "interconnected and learning system. Over time, we make the necessary "
 "adjustments to both maintain and increase our success."
 msgstr ""
+"Wir vertreten ein breites Netzwerk von digitalen Werbe- und lokalen und "
+"traditionellen Marketing- und Werbediensten für Produkte (in großem Umfang) "
+"verschiedener Unternehmen. Unsere Büros und spezialisierten und "
+"einheimischen Kräfte sind in verschiedenen Ländern tätig. Wir haben ein "
+"nachhaltiges, lernendes und fortschrittliches System geschaffen. Wir "
+"entscheiden und handeln als Team. Unsere Organisation ist ein vernetztes und"
+" lernendes System. Im Laufe der Zeit nehmen wir die notwendigen Anpassungen "
+"vor, um unseren Erfolg sowohl zu erhalten als auch zu steigern."
 
 #: templates/manager/about.html:46
 msgid "Our Mission"
-msgstr ""
+msgstr "Unsere Aufgabe"
 
 #: templates/manager/about.html:56
 msgid "Our Vision"
-msgstr ""
+msgstr "Unsere Vision"
 
 #: templates/manager/about.html:72 templates/payments/memberships.html:45
 #: templates/supplier/supplier_detail.html:9
 msgid "Suppliers"
-msgstr ""
+msgstr "Lieferanten"
 
 #: templates/manager/about.html:73 templates/manager/about.html:78
 #: templates/payments/memberships.html:46
 #: templates/payments/memberships.html:51
 msgid "All over the world."
-msgstr ""
+msgstr "Weltweit."
 
 #: templates/manager/about.html:82 templates/payments/memberships.html:55
 msgid "Countries"
-msgstr ""
+msgstr "Länder"
 
 #: templates/manager/about.html:83 templates/payments/memberships.html:56
 msgid "Using Foroden."
-msgstr ""
+msgstr "Verwenden von Foroden."
 
 #: templates/manager/about.html:87 templates/payments/memberships.html:60
 msgid "Buyers"
-msgstr ""
+msgstr "Käufer"
 
 #: templates/manager/about.html:88 templates/payments/memberships.html:61
 msgid "Trading Everyday."
-msgstr ""
+msgstr "Handel im Alltag."
 
 #: templates/manager/chatroom.html:49
 msgid "Close Chat"
-msgstr ""
+msgstr "Chat schließen"
 
 #: templates/manager/chatroom.html:67
 msgid "Send"
-msgstr ""
+msgstr "Senden"
 
 #: templates/manager/create_discussion.html:9
 msgid "Create a discussion"
-msgstr ""
+msgstr "Erstellen Sie eine Diskussion"
 
 #: templates/manager/discussion.html:38
 msgid "Reply"
-msgstr ""
+msgstr "Antwort"
 
 #: templates/manager/discussion.html:61
 msgid "Send a Reply"
-msgstr ""
+msgstr "Senden Sie eine Antwort"
 
 #: templates/manager/discussion_list.html:10 templates/manager/support.html:74
 msgid "Discussions"
-msgstr ""
+msgstr "Diskussionen"
 
 #: templates/manager/index.html:51
 msgid "Product Categories"
-msgstr ""
+msgstr "Produktkategorien"
 
 #: templates/manager/index.html:67
 msgid "All Categories"
-msgstr ""
+msgstr "Alle Kategorien"
 
 #: templates/manager/index.html:126
 msgid "All Showrooms"
-msgstr ""
+msgstr "Alle Showrooms"
 
 #: templates/manager/index.html:135
 msgid "Foroden Marketplace"
-msgstr ""
+msgstr "Foroden Marketplace"
 
 #: templates/manager/index.html:143 templates/manager/index.html:180
 #: templates/manager/index.html:211 templates/manager/showroom_list.html:39
 #: templates/supplier/products.html:143 templates/supplier/products.html:204
 #: templates/supplier/store_detail.html:118
 msgid "View All"
-msgstr ""
+msgstr "Alle ansehen"
 
 #: templates/manager/index.html:176 templates/supplier/products.html:139
 msgid "New Arrivals"
-msgstr ""
+msgstr "Neue Ankünfte"
 
 #: templates/manager/index.html:210
 msgid "Foroden Showrooms"
-msgstr ""
+msgstr "Foroden-Ausstellungsräume"
 
 #: templates/manager/index.html:234
 msgid "Popular Products"
-msgstr ""
+msgstr "beliebte Produkte"
 
 #: templates/manager/service_list.html:17
 msgid "Foroden Services"
-msgstr ""
+msgstr "Foroden-Dienste"
 
 #: templates/manager/showroom_detail.html:78
 msgid "Other Showrooms"
-msgstr ""
+msgstr "Andere Ausstellungsräume"
 
-#: templates/manager/showroom_list.html:37 templates/supplier/products.html:202
+#: templates/manager/showroom_list.html:37
+#: templates/supplier/products.html:202
 msgid "Popular Stores"
-msgstr ""
+msgstr "Beliebte Geschäfte"
 
 #: templates/manager/support.html:10
 msgid "Support and Discussions"
-msgstr ""
+msgstr "Unterstützung und Diskussionen"
 
 #: templates/manager/support.html:11
 msgid "Find help  and workarounds for the most common account-related issues."
 msgstr ""
+"Hier finden Sie Hilfe und Problemumgehungen für die häufigsten "
+"kontobezogenen Probleme."
 
 #: templates/manager/support.html:22
 msgid "Send Message"
-msgstr ""
+msgstr "Nachricht senden"
 
 #: templates/manager/support.html:23
 msgid "Create Discussion"
-msgstr ""
+msgstr "Diskussion erstellen"
 
 #: templates/manager/support.html:31
 msgid "Accounts"
-msgstr ""
+msgstr "Konten"
 
 #: templates/manager/support.html:32
 msgid "Get help on account related issues."
-msgstr ""
+msgstr "Holen Sie sich Hilfe bei kontobezogenen Problemen."
 
 #: templates/manager/support.html:38
 msgid "Payments"
-msgstr ""
+msgstr "Zahlungen"
 
 #: templates/manager/support.html:39
 msgid "Get help on payment related issues."
-msgstr ""
+msgstr "Holen Sie sich Hilfe bei zahlungsbezogenen Problemen."
 
 #: templates/manager/support.html:45
 msgid "Configurations"
-msgstr ""
+msgstr "Konfigurationen"
 
 #: templates/manager/support.html:46
 msgid "Help on Configuration related issues."
-msgstr ""
+msgstr "Hilfe zu konfigurationsbezogenen Problemen."
 
 #: templates/manager/support.html:53
 msgid "Get help on showroom related issues."
-msgstr ""
+msgstr "Holen Sie sich Hilfe bei Problemen mit Ausstellungsräumen."
 
 #: templates/manager/support.html:60
 msgid "Get help on membership related issues."
-msgstr ""
+msgstr "Holen Sie sich Hilfe bei Problemen mit der Mitgliedschaft."
 
 #: templates/manager/support.html:67
 msgid "Get help on product related issues."
-msgstr ""
+msgstr "Holen Sie sich Hilfe bei produktbezogenen Problemen."
 
 #: templates/payments/checkout.html:13
 #: templates/payments/membership_detail.html:24
 msgid "1."
-msgstr ""
+msgstr "1."
 
 #: templates/payments/checkout.html:13
 #: templates/payments/membership_detail.html:24
 msgid "Membership Package"
-msgstr ""
+msgstr "Mitgliedschaftspaket"
 
 #: templates/payments/checkout.html:16
 #: templates/payments/membership_detail.html:27
 msgid "Selected plan"
-msgstr ""
+msgstr "Ausgewählter Plan"
 
 #: templates/payments/checkout.html:29
 #: templates/payments/membership_detail.html:41
 msgid "2."
-msgstr ""
+msgstr "2."
 
 #: templates/payments/checkout.html:29
 #: templates/payments/membership_detail.html:41
 msgid "Select Payment Method"
-msgstr ""
+msgstr "Wählen Sie die Zahlungsmethode"
 
 #: templates/payments/memberships.html:8
 msgid "Simple, predictable pricing"
-msgstr ""
+msgstr "Einfache, vorhersehbare Preise"
 
 #: templates/payments/memberships.html:9
 msgid "Reach more businesses with our different promotion deals"
 msgstr ""
+"Erreichen Sie mehr Unternehmen mit unseren verschiedenen Werbeangeboten"
 
 #: templates/payments/memberships.html:14
 msgid "Memberships Packages"
-msgstr ""
+msgstr "Memberships Packages"
 
 #: templates/payments/memberships.html:35
 msgid "Get Started"
-msgstr ""
+msgstr "Loslegen"
 
 #: templates/supplier/dashboard/create-product.html:10
 msgid "Fill in form to create product"
-msgstr ""
+msgstr "Füllen Sie das Formular aus, um ein Produkt zu erstellen"
 
 #: templates/supplier/dashboard/create-product.html:35
 msgid "Store"
-msgstr ""
+msgstr "Speichern"
 
 #: templates/supplier/dashboard/create-product.html:44
 msgid "Sub category"
-msgstr ""
+msgstr "Unterkategorie"
 
 #: templates/supplier/dashboard/create-product.html:234
 msgid "Product Tags"
-msgstr ""
+msgstr "Produkt Tags"
 
 #: templates/supplier/dashboard/create-product.html:244
 msgid "Product Images"
-msgstr ""
+msgstr "Produktbilder"
 
 #: templates/supplier/dashboard/create-service.html:10
 msgid "Fill in form to create service"
-msgstr ""
+msgstr "Füllen Sie das Formular aus, um den Dienst zu erstellen"
 
 #: templates/supplier/dashboard/create-store.html:11
 msgid "Choose a good name"
-msgstr ""
+msgstr "Wähle einen guten Namen"
 
 #: templates/supplier/dashboard/create-store.html:14
 msgid "To create your store"
-msgstr ""
+msgstr "Um Ihren Shop zu erstellen"
 
 #: templates/supplier/dashboard/create-store.html:19
 msgid "Fill in form to create new store"
-msgstr ""
+msgstr "Füllen Sie das Formular aus, um einen neuen Shop zu erstellen"
 
 #: templates/supplier/dashboard/create-store.html:42
 msgid "Store Image"
-msgstr ""
+msgstr "Bild speichern"
 
 #: templates/supplier/dashboard/dashboard.html:26
 msgid "Day"
-msgstr ""
+msgstr "Tag"
 
 #: templates/supplier/dashboard/dashboard.html:27
 msgid "Week"
-msgstr ""
+msgstr "Woche"
 
 #: templates/supplier/dashboard/dashboard.html:28
 msgid "Month"
-msgstr ""
+msgstr "Monat"
 
 #: templates/supplier/dashboard/dashboard.html:29
 msgid "Year"
-msgstr ""
+msgstr "Jahr"
 
 #: templates/supplier/dashboard/dashboard.html:34
 msgid "Requests Statistics"
-msgstr ""
+msgstr "Fordert Statistiken an"
 
 #: templates/supplier/dashboard/dashboard.html:41
 msgid "Product Sub Categories Statistics"
-msgstr ""
+msgstr "Statistik der Produktunterkategorien"
 
 #: templates/supplier/dashboard/dashboard.html:48
 msgid "Top Viewed Products"
-msgstr ""
+msgstr "Meistgesehene Produkte"
 
 #: templates/supplier/dashboard/manage-product.html:12
 msgid "Click the \"Edit\" label"
-msgstr ""
+msgstr "Klicken Sie auf das Label \"Bearbeiten\"."
 
 #: templates/supplier/dashboard/manage-product.html:15
 msgid "To make changes to your product"
-msgstr ""
+msgstr "Um Änderungen an Ihrem Produkt vorzunehmen"
 
 #: templates/supplier/dashboard/manage-product.html:24
 #: templates/supplier/dashboard/manage-product.html:37
 msgid "Category"
-msgstr ""
+msgstr "Kategorie"
 
 #: templates/supplier/dashboard/manage-product.html:25
 #: templates/supplier/dashboard/manage-product.html:38
 msgid "Sub Category"
-msgstr ""
+msgstr "Unterkategorie"
 
 #: templates/supplier/dashboard/manage-product.html:26
 #: templates/supplier/dashboard/manage-product.html:39
 msgid "Unit Price"
-msgstr ""
+msgstr "Stückpreis"
 
 #: templates/supplier/dashboard/manage-product.html:27
 #: templates/supplier/dashboard/manage-product.html:40
 #: templates/supplier/dashboard/manage-store.html:25
 #: templates/supplier/dashboard/manage-store.html:35
 msgid "Created At"
-msgstr ""
+msgstr "Hergestellt in"
 
 #: templates/supplier/dashboard/manage-store.html:8
 msgid "My Stores"
-msgstr ""
+msgstr "Meine Geschäfte"
 
 #: templates/supplier/dashboard/manage-store.html:12
 msgid "Please, select a store from the table"
-msgstr ""
+msgstr "Bitte wählen Sie einen Shop aus der Tabelle aus"
 
 #: templates/supplier/dashboard/manage-store.html:15
 msgid "To add products to it"
-msgstr ""
+msgstr "Um Produkte hinzuzufügen"
 
 #: templates/supplier/dashboard/manage-store.html:22
 #: templates/supplier/dashboard/manage-store.html:32
 msgid "No."
-msgstr ""
+msgstr "Nein."
 
 #: templates/supplier/dashboard/services.html:15
 msgid "To make changes to your service"
-msgstr ""
+msgstr "Um Änderungen an Ihrem Dienst vorzunehmen"
 
 #: templates/supplier/dashboard/services.html:26
 #: templates/supplier/dashboard/services.html:37
 msgid "Created On"
-msgstr ""
+msgstr "Erstellt am"
 
 #: templates/supplier/dashboard/utils/layout.html:34
 msgid "Supplier's Portal"
-msgstr ""
+msgstr "Lieferantenportal"
 
 #: templates/supplier/dashboard/utils/layout.html:42
 #: templates/utils/header.html:94
 msgid "Dashboard"
-msgstr ""
+msgstr "Armaturenbrett"
 
 #: templates/supplier/dashboard/utils/layout.html:55
 msgid "Create store"
-msgstr ""
+msgstr "Laden erstellen"
 
 #: templates/supplier/dashboard/utils/layout.html:56
 msgid "Manage store"
-msgstr ""
+msgstr "Laden verwalten"
 
 #: templates/supplier/dashboard/utils/layout.html:68
 msgid "Create service"
-msgstr ""
+msgstr "Dienst erstellen"
 
 #: templates/supplier/dashboard/utils/layout.html:69
 msgid "Manage service"
-msgstr ""
+msgstr "Dienst verwalten"
 
 #: templates/supplier/dashboard/utils/layout.html:82
 msgid "Create products"
-msgstr ""
+msgstr "Produkte erstellen"
 
 #: templates/supplier/dashboard/utils/layout.html:83
 msgid "Manage products"
-msgstr ""
+msgstr "Produkte verwalten"
 
 #: templates/supplier/product_detail.html:61
 #: templates/supplier/supplier_detail.html:56
 msgid "Contact Supplier"
-msgstr ""
+msgstr "Wenden Sie sich an den Lieferanten"
 
 #: templates/supplier/product_detail.html:65
 #: templates/supplier/supplier_detail.html:60
 msgid "Make Contract"
-msgstr ""
+msgstr "Vertrag machen"
 
 #: templates/supplier/product_detail.html:69
 msgid "Show Interest"
-msgstr ""
+msgstr "Interesse zeigen"
 
 #: templates/supplier/product_detail.html:80
 msgid "Products Just For you"
-msgstr ""
+msgstr "Produkte nur für Sie"
 
 #: templates/supplier/products.html:19
 msgid "products"
-msgstr ""
+msgstr "Produkte"
 
 #: templates/supplier/products.html:26
 msgid "min"
-msgstr ""
+msgstr "Mindest"
 
 #: templates/supplier/products.html:30
 msgid "max"
-msgstr ""
+msgstr "max"
 
 #: templates/supplier/products.html:40 templates/supplier/store_list.html:23
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 #: templates/supplier/products.html:79 templates/supplier/promotions.html:103
 msgid "No Products Found"
-msgstr ""
+msgstr "Keine Produkte gefunden"
 
 #: templates/supplier/products.html:176
 msgid "Related Products"
-msgstr ""
+msgstr "Verwandte Produkte"
 
 #: templates/supplier/promotions.html:44 templates/utils/header.html:242
 msgid "Categories for you"
@@ -1356,19 +1385,19 @@ msgstr ""
 
 #: templates/supplier/store_detail.html:116
 msgid "Related Stores"
-msgstr ""
+msgstr "Verwandte Geschäfte"
 
 #: templates/supplier/supplier_detail.html:22
 msgid "About Supplier"
-msgstr ""
+msgstr "Über den Lieferanten"
 
 #: templates/supplier/supplier_detail.html:28
 msgid "Detailed Supplier Information"
-msgstr ""
+msgstr "Detaillierte Lieferanteninformationen"
 
 #: templates/supplier/supplier_detail.html:34
 msgid "Business Address"
-msgstr ""
+msgstr "Geschäftsadresse"
 
 #: templates/utils/blockedAccess.html:39
 msgid "Please use a desktop to access site page"
@@ -1380,124 +1409,128 @@ msgstr ""
 
 #: templates/utils/footer.html:14
 msgid "Let us help you"
-msgstr ""
+msgstr "Lass uns dir helfen"
 
 #: templates/utils/footer.html:16
 msgid "Help Center"
-msgstr ""
+msgstr "Hilfezentrum"
 
 #: templates/utils/footer.html:17
 msgid "Contact us"
-msgstr ""
+msgstr "Kontaktiere uns"
 
 #: templates/utils/footer.html:18 templates/utils/footer.html:43
 msgid "Payment Methods"
-msgstr ""
+msgstr "Zahlungsarten"
 
 #: templates/utils/footer.html:19
 msgid "Report a Product"
-msgstr ""
+msgstr "Melden Sie ein Produkt"
 
 #: templates/utils/footer.html:23
 msgid "About Foroden"
-msgstr ""
+msgstr "Über Foroden"
 
 #: templates/utils/footer.html:25
 msgid "About us"
-msgstr ""
+msgstr "Über uns"
 
 #: templates/utils/footer.html:26
 msgid "Terms and Conditions"
-msgstr ""
+msgstr "Geschäftsbedingungen"
 
 #: templates/utils/footer.html:27
 msgid "Dispute Resolution Policy"
-msgstr ""
+msgstr "Richtlinie zur Streitbeilegung"
 
 #: templates/utils/footer.html:28
 msgid "Privacy Policy"
-msgstr ""
+msgstr "Datenschutz-Bestimmungen"
 
 #: templates/utils/footer.html:29
 msgid "Cookie Notice"
-msgstr ""
+msgstr "Cookie-Hinweis"
 
 #: templates/utils/footer.html:33
 msgid "Make money with us"
-msgstr ""
+msgstr "Verdienen Sie Geld mit uns"
 
 #: templates/utils/footer.html:35 templates/utils/header.html:177
 msgid "Sell on Foroden"
-msgstr ""
+msgstr "Verkaufen auf Foroden"
 
 #: templates/utils/footer.html:36
 msgid "Make Business Contracts"
-msgstr ""
+msgstr "Geschäftsverträge abschließen"
 
 #: templates/utils/footer.html:52
 msgid "FAQs"
-msgstr ""
+msgstr "Häufig gestellte Fragen"
 
 #: templates/utils/footer.html:55
 msgid "What is a showroom?"
-msgstr ""
+msgstr "Was ist ein Showroom?"
 
 #: templates/utils/footer.html:56
 msgid "How to join a showroom"
-msgstr ""
+msgstr "So treten Sie einem Showroom bei"
 
 #: templates/utils/footer.html:57
 msgid "Get seen in the showroom"
-msgstr ""
+msgstr "Lassen Sie sich im Showroom sehen"
 
 #: templates/utils/footer.html:60
 msgid "How to create a store?"
-msgstr ""
+msgstr "Wie erstelle ich einen Shop?"
 
 #: templates/utils/footer.html:61
 msgid "How to create products"
-msgstr ""
+msgstr "Wie man Produkte erstellt"
 
 #: templates/utils/footer.html:62
 msgid "Manage your products"
-msgstr ""
+msgstr "Verwalten Sie Ihre Produkte"
 
 #: templates/utils/footer.html:82
 msgid "Admin"
-msgstr ""
+msgstr "Administrator"
 
 #: templates/utils/footer.html:83
 msgid "Terms"
-msgstr ""
+msgstr "Bedingungen"
 
 #: templates/utils/footer.html:84
 msgid "Privacy"
-msgstr ""
+msgstr "Privatsphäre"
 
 #: templates/utils/footer.html:85
 msgid "Legal"
-msgstr ""
+msgstr "Gesetzlich"
 
 #: templates/utils/footer.html:86
 msgid "Accessibility Statement"
-msgstr ""
+msgstr "Erklärung zur Barrierefreiheit"
 
 #: templates/utils/header.html:47 templates/utils/header.html:164
 msgid "Search"
-msgstr ""
+msgstr "Suche"
 
 #: templates/utils/header.html:82
 msgid "My Account"
-msgstr ""
+msgstr "Mein Konto"
 
 #: templates/utils/header.html:105
 msgid "Login"
-msgstr ""
+msgstr "Anmeldung"
 
 #: templates/utils/header.html:131
 msgid "Sell On Foroden"
-msgstr ""
+msgstr "Verkaufen Sie auf Foroden"
+
+#: templates/utils/header.html:241
+msgid "Categories for you"
+msgstr "Kategorien für Sie"
 
 #: templates/utils/header.html:293
 msgid "Languages"
-msgstr ""
+msgstr "Sprachen"

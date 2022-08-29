@@ -87,16 +87,16 @@
                             </a>
                             <ul
                                 class="dropdown-list   list-none list-outside bg-lghterBackgroundColor overflow-hidden rounded-md text-base">
-                                <li>
-                                    <a href="{% url 'manager:profile' %}{% if not request.user.is_authenticated %}?next=profile{% endif %}" class="grid items-center py-3 px-8" href="">{% trans "Profile" %}</a>
-                                </li>
-                                <li>
-                                    <a href="{% url 'manager:dashboard' %}{% if not request.user.is_authenticated %}?next=dashboard{% endif %}" class="grid items-center py-3 px-8" href="">{% trans "Dashboard" %}</a>
-                                </li>
                                 <!-- <li>
                                     <a class="grid items-center py-3 px-8" href="">Settings</a>
                                 </li> -->
                                 {%  if request.user.is_authenticated %}
+                                    <li>
+                                        <a href="{% url 'manager:profile' %}{% if not request.user.is_authenticated %}?next=profile{% endif %}" class="grid items-center py-3 px-8" href="">{% trans "Profile" %}</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'manager:dashboard' %}{% if not request.user.is_authenticated %}?next=dashboard{% endif %}" class="grid items-center py-3 px-8" href="">{% trans "Dashboard" %}</a>
+                                    </li>
                                     <li>
                                         <a class="grid items-center py-3 px-8" href="{% url 'auth_app:logout' %}">{% trans "Logout" %}</a>
                                     </li>
@@ -154,9 +154,15 @@
                 <!-- <button class="text-white border py-0 px-2 outline-none border-none px-4 py-2">
                     <i class="fa fa-globe text-white"></i>
                 </button> -->
-                <a href="{% url 'auth_app:login' %}" class="flex place-items-center px-4 py-2 text-base bg-yellowColor focus:bg-yellowColorHover duration-200 transition-all ease-in text-white font-semibold">
-                    {% trans "Sign In" %}
-                </a>
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'manager:dashboard' %}{% if not request.user.is_authenticated %}?next=dashboard{% endif %}" class="flex place-items-center px-4 py-2 text-base bg-yellowColor focus:bg-yellowColorHover duration-200 transition-all ease-in text-white font-semibold">
+                        {% trans "Dashboard" %}
+                    </a>
+                {% else %}
+                    <a href="{% url 'auth_app:login' %}" class="flex place-items-center px-4 py-2 text-base bg-yellowColor focus:bg-yellowColorHover duration-200 transition-all ease-in text-white font-semibold">
+                        {% trans "Sign In" %}
+                    </a>
+                {% endif %}
             </div>
         </nav>
         <form action="" id="mobile-searchbar" class="search-form-mobile w-full mx-auto mx-auto py-3 gap-0">
@@ -170,12 +176,21 @@
                 <img src="{% static 'assets/imgs/resources/logo_trans.png' %}" alt="Logo" class="logo" style="object-fit: cover;">
             </div>
             <div class="flex gap-2 justify-center auth">
-                <a href="{% url 'auth_app:login' %}" class="flex place-items-center px-6 py-2 text-base bg-lighterBackgroundColorHover focus:bg-yellowColorHover duration-200 transition-all ease-in text-white font-semibold">
-                    {% trans "Sign In" %}
-                </a>
-                <a href="{% url 'auth_app:signup' %}?Supplier=1" class="flex place-items-center px-6 py-2 text-base bg-yellowColor focus:bg-yellowColorHover duration-200 transition-all ease-in text-white font-semibold">
-                    {% trans "Sell on Foroden" %}
-                </a>
+                {% if not request.user.is_authenticated %}
+                    <a href="{% url 'auth_app:login' %}" class="flex place-items-center px-6 py-2 text-base bg-lighterBackgroundColorHover focus:bg-yellowColorHover duration-200 transition-all ease-in text-white font-semibold">
+                        {% trans "Sign In" %}
+                    </a>
+                    <a href="{% url 'auth_app:signup' %}?Supplier=1" class="flex place-items-center px-6 py-2 text-base bg-yellowColor focus:bg-yellowColorHover duration-200 transition-all ease-in text-white font-semibold">
+                        {% trans "Sell on Foroden" %}
+                    </a>
+                {% else %}
+                    <a href="{% url 'auth_app:logout' %}" class="flex place-items-center px-6 py-2 text-base bg-lighterBackgroundColorHover focus:bg-yellowColorHover duration-200 transition-all ease-in text-white font-semibold">
+                        {% trans "Logout" %}
+                    </a>
+                    <a href="{% url 'manager:dashboard' %}{% if not request.user.is_authenticated %}?next=dashboard{% endif %}" class="flex place-items-center px-6 py-2 text-base bg-yellowColor focus:bg-yellowColorHover duration-200 transition-all ease-in text-white font-semibold">
+                        {% trans "Dashboard" %}
+                    </a>
+                {% endif %}
             </div>
         </div>
 

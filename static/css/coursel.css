@@ -52,9 +52,9 @@ body.rtl {
 }
 
 .slider .item img {
-  inline-size: 100%;
+  /* inline-size: 100%;
   block-size: 100%;
-  /* aspect-ratio: 16 / 9; */
+  aspect-ratio: 16 / 9; */
 }
 
 .handle {

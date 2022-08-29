@@ -770,11 +770,14 @@ form input.error {
     .footer-md-hide {
         display: grid;gap: 2rem; grid-template-columns: 1fr 2fr;
     }
+    .promotion-page-starter {
+        grid-template-columns: 3fr .6fr;
+    }
 }
 
 
 .promotion-page-starter {
-    grid-template-columns: 3fr .6fr;
+    grid-template-columns: 1fr;
 }
 
 .promotion-page-starter .coursel,

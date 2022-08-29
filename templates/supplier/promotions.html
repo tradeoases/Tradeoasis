@@ -6,7 +6,7 @@
 
     {% if preview_products.results %}
     <section class="main w-full mx-auto my-6" style="block-size: auto">
-        <div class="promotion-page-starter grid bg-lghterBackgroundColor rounded-md p-5 gap-4">
+        <div class="promotion-page-starter grid bg-lghterBackgroundColor rounded-md p-2 md:p-5 gap-4">
             <div class="products-preview">
                 <div class="coursel" style="block-size: 100%;inline-size: 100%;">
                     <div class="header">
@@ -37,7 +37,7 @@
                     </div>
                 </div>
             </div>
-            <div class="grid py-2">
+            <div class="hidden md:grid py-2">
                 {% if categories_header %}
                     <div class="grid gap-3">
                         <h4 class="text-lg font-bold text-slate-100">
@@ -156,10 +156,20 @@
 
     <script>
 
-        (function() {
-          let slider = document.querySelector('.slider-container .slider');
-          slider.style.setProperty("--items-per-screen",  3)
-        })()
+        if(window.innerWidth < 800)
+        {
+            (function() {
+                let slider = document.querySelector('.slider-container .slider');
+                slider.style.setProperty("--items-per-screen",  1)
+            })()
+        }
+        else {
+
+            (function() {
+                let slider = document.querySelector('.slider-container .slider');
+                slider.style.setProperty("--items-per-screen",  3)
+            })()
+        }
       
     </script>
       
