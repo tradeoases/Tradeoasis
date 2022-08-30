@@ -17,7 +17,7 @@ from auth_app.models import Supplier
 # utility functions
 def get_file_path(instance, filename):
     ext = filename.split(".")[-1]
-    filename = "%s-%s.%s" % (instance.slug[:50], uuid.uuid4(), ext)
+    filename = "%s-%s.%s" % (instance.slug, uuid.uuid4(), ext)
     return os.path.join(f"{instance.__class__.__name__}/images/", filename)
 
 
@@ -152,7 +152,7 @@ class ProductImage(models.Model):
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(f"{self.product.name}-{uuid.uuid4()}")[:100]
+        self.slug = slugify(f"{self.product.name}-{uuid.uuid4()}")[:50]
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
