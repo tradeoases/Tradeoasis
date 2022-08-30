@@ -770,9 +770,9 @@ form input.error {
     .footer-md-hide {
         display: grid;gap: 2rem; grid-template-columns: 1fr 2fr;
     }
-    /* .promotion-page-starter {
+    .promotion-page-starter {
         grid-template-columns: 3fr .6fr;
-    } */
+    }
     /* .promotion-page-starter .categories {
         display: grid;
     } */
@@ -785,10 +785,6 @@ form input.error {
     grid-template-columns: 1fr;
 } */
 
-
-.promotion-page-starter {
-    grid-template-columns: 3fr .6fr;
-}
 .promotion-page-starter .coursel,
 .promotion-page-starter .slider-container,
 .promotion-page-starter .slider,
