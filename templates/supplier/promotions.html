@@ -44,7 +44,7 @@
                             {% trans "Categories for you" %}
                         </h4>
                         <ul class="text-slate-300 grid">
-                            {% for category in categories_header %}
+                            {% for category in categories_header|slice:":4" %}
                                 <li
                                     class="text-slate-100 hover:text-white transition-colors transition-200 ease-in">
                                     <a class="flex items-center justify-start gap-2 py-2" href="{% url 'supplier:category-detail' category.slug  %}">
