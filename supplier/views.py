@@ -766,29 +766,65 @@ class DashboardProductsCreateView(SupplierOnlyAccessMixin, View):
         ):
             messages.add_message(request, messages.ERROR, _("Please Fill all fields."))
             return redirect(reverse("supplier:dashboard-productscreate"))
-        try:
-            product = SupplierModels.Product.objects.create(
-                name=request.POST.get("name"),
-                sub_category=SupplierModels.ProductSubCategory.objects.filter(
-                    name=request.POST.get("sub_category")
-                ).first(),
-                description=request.POST.get("description"),
-                currency=request.POST.get("currency"),
-                price=request.POST.get("price"),
-            )
-            store = SupplierModels.Store.objects.filter(
-                name=request.POST.get("store")
-            ).first()
-            product.store.add(store)
-            if product:
-                for file in request.FILES.getlist("images"):
-                    SupplierModels.ProductImage.objects.create(
-                        product=product, image=file
-                    )
+        # try:
+        product = SupplierModels.Product.objects.create(
+            name=request.POST.get("name"),
+            sub_category=SupplierModels.ProductSubCategory.objects.filter(
+                name=request.POST.get("sub_category")
+            ).first(),
+            description=request.POST.get("description"),
+            currency=request.POST.get("currency"),
+            price=request.POST.get("price"),
+        )
+        store = SupplierModels.Store.objects.filter(
+            name=request.POST.get("store")
+        ).first()
+        product.store.add(store)
+        if product:
+            for file in request.FILES.getlist("images"):
+                SupplierModels.ProductImage.objects.create(
+                    product=product, image=file
+                )
 
-                fields = ("name", "description", "price", "currency")
-                instance = product
-                modal = SupplierModels.Product
+            fields = ("name", "description", "price", "currency")
+            instance = product
+            modal = SupplierModels.Product
+            for field in fields:
+                for language in settings.LANGUAGES:
+                    try:
+                        if language[0] == get_language():
+                            # already set
+                            continue
+                        result = translator.translate(
+                            getattr(instance, field), dest=language[0]
+                        )
+                        for model_field in modal._meta.get_fields():
+                            if not model_field.name in f"{field}_{language[0]}":
+                                continue
+
+                            if model_field.name == f"{field}_{language[0]}":
+                                setattr(instance, model_field.name, result.text)
+                                instance.save()
+                    except:
+                        setattr(
+                            instance,
+                            f"{field}_{language[0]}",
+                            getattr(instance, field),
+                        )
+                        instance.save()
+
+            # add tags
+            for i in range(1, 6):
+                tag = request.POST.get(f"tag_{i}", None)
+                if not tag:
+                    continue
+
+                tag = SupplierModels.ProductTag.objects.create(
+                    name=tag, product=product
+                )
+                fields = ("name",)
+                instance = tag
+                modal = SupplierModels.ProductTag
                 for field in fields:
                     for language in settings.LANGUAGES:
                         try:
@@ -813,52 +849,16 @@ class DashboardProductsCreateView(SupplierOnlyAccessMixin, View):
                             )
                             instance.save()
 
-                # add tags
-                for i in range(1, 6):
-                    tag = request.POST.get(f"tag_{i}", None)
-                    if not tag:
-                        continue
-
-                    tag = SupplierModels.ProductTag.objects.create(
-                        name=tag, product=product
-                    )
-                    fields = ("name",)
-                    instance = tag
-                    modal = SupplierModels.ProductTag
-                    for field in fields:
-                        for language in settings.LANGUAGES:
-                            try:
-                                if language[0] == get_language():
-                                    # already set
-                                    continue
-                                result = translator.translate(
-                                    getattr(instance, field), dest=language[0]
-                                )
-                                for model_field in modal._meta.get_fields():
-                                    if not model_field.name in f"{field}_{language[0]}":
-                                        continue
-
-                                    if model_field.name == f"{field}_{language[0]}":
-                                        setattr(instance, model_field.name, result.text)
-                                        instance.save()
-                            except:
-                                setattr(
-                                    instance,
-                                    f"{field}_{language[0]}",
-                                    getattr(instance, field),
-                                )
-                                instance.save()
-
-            messages.add_message(
-                request, messages.SUCCESS, _("Product created successfully.")
-            )
-            return redirect(reverse("supplier:dashboard-productscreate"))
-        except Exception as e:
-            print(e)
-            messages.add_message(
-                request, messages.ERROR, _("An Error occurred. Try Again")
-            )
-            return redirect(reverse("supplier:dashboard-productscreate"))
+        messages.add_message(
+            request, messages.SUCCESS, _("Product created successfully.")
+        )
+        return redirect(reverse("supplier:dashboard-productscreate"))
+        # except Exception as e:
+        #     print(e)
+        #     messages.add_message(
+        #         request, messages.ERROR, _("An Error occurred. Try Again")
+        #     )
+        #     return redirect(reverse("supplier:dashboard-productscreate"))
 
 
 class DashboardStoresView(SupplierOnlyAccessMixin, View):
