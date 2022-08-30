@@ -766,7 +766,7 @@ class DashboardProductsCreateView(SupplierOnlyAccessMixin, View):
         ):
             messages.add_message(request, messages.ERROR, _("Please Fill all fields."))
             return redirect(reverse("supplier:dashboard-productscreate"))
-        try:
+        # try:
             product = SupplierModels.Product.objects.create(
                 name=request.POST.get("name"),
                 sub_category=SupplierModels.ProductSubCategory.objects.filter(
@@ -853,12 +853,12 @@ class DashboardProductsCreateView(SupplierOnlyAccessMixin, View):
                 request, messages.SUCCESS, _("Product created successfully.")
             )
             return redirect(reverse("supplier:dashboard-productscreate"))
-        except Exception as e:
-            print(e)
-            messages.add_message(
-                request, messages.ERROR, _("An Error occurred. Try Again")
-            )
-            return redirect(reverse("supplier:dashboard-productscreate"))
+        # except Exception as e:
+        #     print(e)
+        #     messages.add_message(
+        #         request, messages.ERROR, _("An Error occurred. Try Again")
+        #     )
+        #     return redirect(reverse("supplier:dashboard-productscreate"))
 
 
 class DashboardStoresView(SupplierOnlyAccessMixin, View):
