@@ -20,7 +20,7 @@
                     <div class="grid p-0 side-menu card rounded-md overflow-hidden">
                         <h2 class="text-xl font-bold px-5 py-3 text-lighterBackgroundColor" style="background-color: hsla(213, 28%, 90%, .8);">{{ object.name }}</h2>
                         <ul class="grid gap-0.5 px-5 py-2" data-context='{{ sub_categories.context_name }}' >
-                            {% for sub_category in sub_categories.results %}                            
+                            {% for sub_category in sub_categories.results|slice:":4" %}                            
                                 <li class="side-menu-item text-slate-800 hover:text-black transition-colors transition-200 ease-in" data-sub-category-index="{{ forloop.counter }}">
                                     <a class="flex items-center justify-start gap-2 py-2" href='{% url "supplier:subcategory-detail" object.slug sub_category.slug %}'>
                                         <i class="ti-folder"></i>
@@ -41,7 +41,7 @@
                         <a href="{% url 'supplier:subcategory-detail' object.slug sub_category.slug %}" class="sub-link grid place-items-center px-3 py-1 text-slate-700 text-base rounded-full" style="background-color: hsla(213, 28%, 90%, .8);">{{ sub_category.name }}</a>
                     {% endfor %}
                 </div>
-                <div class="section-body grid gap-2 md:gap-6 grid-cols-2 md:grid-cols-4 items-start content-start" data-context="{{propular_products.context_name}}">
+                <div class="section-body grid gap-2 md:gap-6 grid-cols-2 md:grid-cols-5 items-start content-start" data-context="{{propular_products.context_name}}">
                     {% for product in products.results %}
                     <div class="single-image-product-card overflow-hidden rounded grid gap-0.5 card-outlined">
                         <a class="grid gap-2 p-1 rounded overflow-hidden" href="{% url 'supplier:product-detail' product.product.slug %}">
