@@ -37,13 +37,13 @@
                     </div>
                 </div>
             </div>
-            <div class="categories hidden md:grid py-2">
+            <div class="categories hidden md:grid py-1">
                 {% if categories_header %}
-                    <div class="grid gap-1">
+                    <div class="grid ">
                         <h4 class="text-lg font-bold text-slate-100">
                             {% trans "Categories for you" %}
                         </h4>
-                        <ul class="text-slate-300 grid gap-1">
+                        <ul class="text-slate-300 grid">
                             {% for category in categories_header %}
                                 <li
                                     class="text-slate-100 hover:text-white transition-colors transition-200 ease-in">
