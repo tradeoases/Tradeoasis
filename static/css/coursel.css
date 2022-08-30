@@ -161,15 +161,15 @@ body.rtl {
   background-color: rgba(255, 255, 255, .9);
 }
 
-@media (max-width: 1000px) {
+/* @media (max-width: 1000px) {
   .slider {
     --items-per-screen: 3;
   }
-}
+} */
 
 @media (max-width: 500px) {
   .slider {
-    --items-per-screen: 2;
+    --items-per-screen: 1;
   }
 }
 

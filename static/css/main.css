@@ -450,7 +450,7 @@ nav.cs-fixed li:hover * {
 }
 
 .single-image-product-card img {
-    block-size: 30vh;
+    block-size: 25vh;
     min-inline-size: 100%;
     aspect-ratio: 1.6/1;
 }
@@ -472,7 +472,7 @@ nav.cs-fixed li:hover * {
 
 @media (max-width: 786px) {
     .single-image-product-card img {
-        block-size: 30vh;
+        block-size: 20vh;
         aspect-ratio: 1.6/1;
     }
 }
