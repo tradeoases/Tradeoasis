@@ -41,7 +41,7 @@
                         <a href="{% url 'supplier:subcategory-detail' object.slug sub_category.slug %}" class="sub-link grid place-items-center px-3 py-1 text-slate-700 text-base rounded-full" style="background-color: hsla(213, 28%, 90%, .8);">{{ sub_category.name }}</a>
                     {% endfor %}
                 </div>
-                <div class="section-body grid gap-2 md:gap-6 grid-cols-2 md:grid-cols-6 items-start content-start" data-context="{{propular_products.context_name}}">
+                <div class="section-body grid gap-2 md:gap-6 grid-cols-2  md:grid-cols-6 items-start content-start" data-context="{{propular_products.context_name}}">
                     {% for product in products.results %}
                     <div class="single-image-product-card overflow-hidden rounded grid gap-0.5 card-outlined">
                         <a class="grid gap-2 p-1 rounded overflow-hidden" href="{% url 'supplier:product-detail' product.product.slug %}">
