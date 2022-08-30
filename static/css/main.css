@@ -773,14 +773,14 @@ form input.error {
     .promotion-page-starter {
         grid-template-columns: 3fr .6fr;
     }
-    .promotion-page-starter .categories {
+    /* .promotion-page-starter .categories {
         display: grid;
-    }
+    } */
 }
 
-.promotion-page-starter .categories {
+/* .promotion-page-starter .categories {
     display: none;
-}
+} */
 .promotion-page-starter {
     grid-template-columns: 1fr;
 }
