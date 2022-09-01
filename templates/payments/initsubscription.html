@@ -1,0 +1,303 @@
+{% extends '../utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<!-- Load the PayPal JS SDK with your PayPal Client ID-->
+<script src="https://www.paypal.com/sdk/js?client-id=AVtfMXZd9wxW19asF-CH9XMsGdzbSBqop8qCgwgR9zWEMlMeX4KOxuuHHiyhv282-SH7xAtl7z3eEmag"></script>
+
+<!-- Load the client component. -->
+<script src="https://js.braintreegateway.com/web/3.86.0/js/client.min.js"></script>
+
+<!-- Load the PayPal Checkout component. -->
+<script src="https://js.braintreegateway.com/web/3.86.0/js/paypal-checkout.min.js"></script>
+
+<script src="https://js.braintreegateway.com/web/dropin/1.18.0/js/dropin.min.js"></script>
+<script src="https://pay.google.com/gp/p/js/pay.js"></script>
+<script src="https://js.braintreegateway.com/web/3.86.0/js/google-payment.min.js"></script>
+<script src="https://js.braintreegateway.com/web/3.86.0/js/data-collector.min.js"></script>
+
+
+<style>
+    .package {
+        border: 1px solid rgb(219, 219, 219);
+        cursor: pointer;
+    }
+    .active {
+        border: none;
+        outline: 2px solid hsl(38 95% 47% / 1);
+        transform: scale(1.1);
+    }
+</style>
+
+    <section class="grid">
+        <div class="grid px-8 py-8 rounded auth-area w-11/12 md:w-10/12 gap-10 mx-auto my-10" style="border: 1px solid hsl(0, 0%, 95%);">
+            <div class="grid gap-6">
+                <h1 class="text-xl md:text-2xl font-bold text-lighterBackgroundColor">{% trans "1. Choose your Package" %}</h1>
+                <hr class="border-t border-solid border-slate-200">
+                <div class="grid gap-4 px-4">
+                    <h1 class="text-lg md:text-xl font-semibold text-lighterBackgroundColor">i. {% trans "Virtual Showrooms" %}</h1>
+                    <div class="grid md:flex gap-8 justify-center md:justify-start py-4 md:px-6">
+                        <div class="package active grid gap-3 p-6 md:p-8 rounded-md">
+                            <h2 class="text-lg md:text-xl font-bold text-lighterBackgroundColor">{% trans 'One Virtual Showroom' %}</h2>
+                            <hr class="border-t border-solid border-slate-300">
+                            <div class="grid gap-2">
+                                <div class="flex gap-2">
+                                    <input type="radio" name="one-showroom" id="one-showroom-monthly">
+                                    <label class="text-base font-semibold" for="one-showroom-monthly">600 USD <span class="font-normal text-sm text-slate-600">{% trans "per month" %}</span></label>
+                                </div>
+                                <div class="flex gap-2">
+                                    <input type="radio" name="one-showroom" id="one-showroom-monthly-6" checked>
+                                    <label class="text-base font-semibold" for="one-showroom-monthly-6">300 USD <span class="font-normal text-sm text-slate-600">{% trans "per 6 months" %}</span></label>
+                                </div>
+                                <div class="flex gap-2">
+                                    <input type="radio" name="one-showroom" id="one-showroom-yearly">
+                                    <label class="text-base font-semibold" for="one-showroom-yearly">600 USD <span class="font-normal text-sm text-slate-600">{% trans "per year" %}</span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="package grid gap-3 p-6 md:p-8 rounded-md">
+                            <h2 class="text-lg md:text-xl font-bold text-lighterBackgroundColor">{% trans 'Multiple Virtual Showrooms' %}</h2>
+                            <hr class="border-t border-solid border-slate-300">
+                            <div class="grid gap-2">
+                                <div class="flex gap-2">
+                                    <input type="radio" name="multiple-showroom" id="multiple-showroom-monthly">
+                                    <label class="text-base font-semibold" for="multiple-showroom-monthly">100 USD <span class="font-normal text-sm text-slate-600">{% trans "per month" %}</span></label>
+                                </div>
+                                <div class="flex gap-2">
+                                    <input type="radio" name="multiple-showroom" id="multiple-showroom-monthly-6" checked>
+                                    <label class="text-base font-semibold" for="multiple-showroom-monthly-6">400 USD <span class="font-normal text-sm text-slate-600">{% trans "per 6 months" %}</span></label>
+                                </div>
+                                <div class="flex gap-2">
+                                    <input type="radio" name="multiple-showroom" id="multiple-showroom-yearly">
+                                    <label class="text-base font-semibold" for="multiple-showroom-yearly">800 USD <span class="font-normal text-sm text-slate-600">{% trans "per year" %}</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid gap-4 px-4">
+                    <h1 class="text-lg md:text-xl font-semibold text-lighterBackgroundColor">ii. {% trans "Digital Marketing" %}</h1>
+                    <div class="grid md:flex gap-8 justify-center md:justify-start py-4 md:px-6">
+                        <div class="package grid gap-3 p-6 md:p-8 rounded-md">
+                            <h2 class="text-lg md:text-xl font-bold text-lighterBackgroundColor">{% trans 'One Virtual Showroom' %}</h2>
+                            <hr class="border-t border-solid border-slate-300">
+                            <div class="grid gap-2">
+                                <div class="flex gap-2">
+                                    <input type="radio" name="digital-one-showroom" id="digital-one-showroom-monthly">
+                                    <label class="text-base font-semibold" for="digital-one-showroom-monthly">50 USD <span class="font-normal text-sm text-slate-600">{% trans "per month" %}</span></label>
+                                </div>
+                                <div class="flex gap-2">
+                                    <input type="radio" name="digital-one-showroom" id="digital-one-showroom-monthly-6" checked>
+                                    <label class="text-base font-semibold" for="digital-one-showroom-monthly-6">250 USD <span class="font-normal text-sm text-slate-600">{% trans "per 6 months" %}</span></label>
+                                </div>
+                                <div class="flex gap-2">
+                                    <input type="radio" name="digital-one-showroom" id="digital-one-showroom-yearly">
+                                    <label class="text-base font-semibold" for="digital-one-showroom-yearly">500 USD <span class="font-normal text-sm text-slate-600">{% trans "per year" %}</span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="package grid gap-3 p-6 md:p-8 rounded-md">
+                            <h2 class="text-lg md:text-xl font-bold text-lighterBackgroundColor">{% trans 'Multiple Virtual Showrooms' %}</h2>
+                            <hr class="border-t border-solid border-slate-300">
+                            <div class="grid gap-2">
+                                <div class="flex gap-2">
+                                    <input type="radio" name="digital-multiple-showroom" id="digital-multiple-showroom-monthly">
+                                    <label class="text-base font-semibold" for="digital-multiple-showroom-monthly">100 USD <span class="font-normal text-sm text-slate-600">{% trans "per month" %}</span></label>
+                                </div>
+                                <div class="flex gap-2">
+                                    <input type="radio" name="digital-multiple-showroom" id="digital-multiple-showroom-monthly-6" checked>
+                                    <label class="text-base font-semibold" for="digital-multiple-showroom-monthly-6">500 USD <span class="font-normal text-sm text-slate-600">{% trans "per 6 months" %}</span></label>
+                                </div>
+                                <div class="flex gap-2">
+                                    <input type="radio" name="digital-multiple-showroom" id="digital-multiple-showroom-yearly">
+                                    <label class="text-base font-semibold" for="digital-multiple-showroom-yearly">1000 USD <span class="font-normal text-sm text-slate-600">{% trans "per year" %}</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid gap-4 px-4">
+                    <h1 class="text-lg md:text-xl font-semibold text-lighterBackgroundColor">ii. {% trans "Local Marketing" %}</h1>
+                    <div class="grid md:flex gap-8 justify-center md:justify-start py-4 md:px-6">
+                        <div class="package grid gap-3 p-6 md:p-8 rounded-md">
+                            <h2 class="text-lg md:text-xl font-bold text-lighterBackgroundColor">{% trans 'In Every Country' %}</h2>
+                            <hr class="border-t border-solid border-slate-300">
+                            <div class="grid gap-2">
+                                <div class="flex gap-2">
+                                    <input type="radio" name="one-showroom" id="one-showroom-monthly">
+                                    <label class="text-base font-semibold" for="one-showroom-monthly">500 USD <span class="font-normal text-sm text-slate-600">{% trans "per month" %}</span></label>
+                                </div>
+                                <div class="flex gap-2">
+                                    <input type="radio" name="one-showroom" id="one-showroom-monthly-6" checked>
+                                    <label class="text-base font-semibold" for="one-showroom-monthly-6">2500 USD <span class="font-normal text-sm text-slate-600">{% trans "per 6 months" %}</span></label>
+                                </div>
+                                <div class="flex gap-2">
+                                    <input type="radio" name="one-showroom" id="one-showroom-yearly">
+                                    <label class="text-base font-semibold" for="one-showroom-yearly">5000 USD <span class="font-normal text-sm text-slate-600">{% trans "per year" %}</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid gap-4">
+                <h1 class="text-xl md:text-2xl font-bold text-lighterBackgroundColor">2. Choose your Payment Method</h1>
+                <hr class="border-t border-solid border-slate-200">
+                <div class="grid gap-3 py-3">
+                    <div class="payment-methods grid gap-4 justify-start">
+                        <div class="flex gap-2">
+                            <div id="paypal-button"></div>
+                        </div>
+                        <form autocomplete="off">
+                            {% if braintree_error %}
+                            <div class="alert alert-danger fade in">
+                                <button class="close" data-dismiss="alert">&times;</button>
+                                {{ braintree_error|safe }}
+                            </div>
+                            {% endif %}
+                            <div class="braintree-notifications"></div>
+                            <div id="braintree-dropin"></div>
+                            <input style="background-color: #0783ca;color: white;" id="braintree-submit-button" class="btn btn-success btn-lg btn-block" type="button" value="Pay now!" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const packages = document.querySelectorAll(".package");
+            packages.forEach(package => {
+                package.addEventListener('click', (e) => {
+                    packages.forEach(_package => {
+                        if (_package.classList.contains('active')) _package.classList.remove('active');
+                    })
+                    if (e.target.classList.contains('package')) {
+                        e.target.classList.add('active');
+                    } else {
+                        e.target.closest('.package').classList.add('active');
+                    }
+                })
+            })
+
+            function getCookie(name) {
+                    let cookieValue = null;
+                    if (document.cookie && document.cookie !== '') {
+                        const cookies = document.cookie.split(';');
+                        for (let i = 0; i < cookies.length; i++) {
+                            const cookie = cookies[i].trim();
+                            // Does this cookie string begin with the name we want?
+                            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                break;
+                            }
+                        }
+                    }
+                    return cookieValue;
+                }
+
+
+            
+            var braintree_client_token = "{{ braintree_client_token }}";
+            var card_pay_button = document.querySelector('#braintree-submit-button');
+            
+            // CARDS
+            braintree.dropin.create({
+                authorization: braintree_client_token,
+                container: '#braintree-dropin',
+                card: {
+                cardholderName: {
+                    required: false
+                }
+                }
+            }, function (createErr, instance) {
+                card_pay_button.addEventListener('click', function () {
+                    instance.requestPaymentMethod(function (err, payload) {
+                        $.ajax({
+                            type: 'POST',
+                            url: '{% url "payment:braintree-payment" 1 %}',
+                            data: {'paymentMethodNonce': payload.nonce,
+                                    'csrfmiddlewaretoken': '{{ csrf_token }}'}
+                        }).done(function (result) {
+                            //do accordingly
+                        });
+                    });
+                });
+            });
+
+        })
+
+
+        // PAYPAL
+        // Create a client.
+        braintree.client.create({
+            authorization: "{{ braintree_client_token }}"
+        }, function (clientErr, clientInstance) {
+
+            // Stop if there was a problem creating the client.
+            // This could happen if there is a network error or if the authorization
+            // is invalid.
+            if (clientErr) {
+                console.error('Error creating client:', clientErr);
+                return;
+            }
+
+            // Create a PayPal Checkout component.
+            braintree.paypalCheckout.create({
+                client: clientInstance
+            }, function (paypalCheckoutErr, paypalCheckoutInstance) {
+                // Stop if there was a problem creating PayPal Checkout.
+                // This could happen if there was a network error or if it's incorrectly
+                // configured.
+                if (paypalCheckoutErr) {
+                    console.error('Error creating PayPal Checkout:', paypalCheckoutErr);
+                    return;
+                }
+
+                // Load the PayPal JS SDK (see Load the PayPal JS SDK section)
+                paypalCheckoutInstance.loadPayPalSDK({
+                    
+                }, function (loadSDKErr) {
+                // The PayPal script is now loaded on the page and
+                // window.paypal.Buttons is now available to use
+        
+                // render the PayPal button (see Render the PayPal Button section)
+                    // return paypal.Buttons({
+                    //     createOrder: function () {
+                    //         return paypalCheckoutInstance.createPayment({
+                    //         flow: 'checkout',
+                    //         currency: 'USD',
+                    //         amount: '10.00',
+                    //         intent: 'capture' // this value must either be `capture` or match the intent passed into the PayPal SDK intent query parameter
+                    //         // your other createPayment options here
+                    //         });
+                    //     },
+        
+                    //     onApprove: function (data, actions) {
+                    //         // some logic here before tokenization happens below
+                    //         return paypalCheckoutInstance.tokenizePayment(data).then(function (payload) {
+                    //         // Submit payload.nonce to your server
+                    //         });
+                    //     },
+        
+                    //     onCancel: function () {
+                    //         // handle case where user cancels
+                    //     },
+        
+                    //     onError: function (err) {
+                    //         // handle case where error occurs
+                    //     }
+                    // }).render('#paypal-button');
+                    
+                });
+            });
+
+        });
+
+
+
+    </script>
+
+{% endblock %}

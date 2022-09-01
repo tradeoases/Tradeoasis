@@ -165,8 +165,8 @@
                 {% endif %}
             </div>
         </nav>
-        <form action="" id="mobile-searchbar" class="search-form-mobile w-full mx-auto mx-auto py-3 gap-0">
-            <input type="search" name="search-bar" id="search-bar" class="py-3 px-6 w-12/12 rounded-md rounded-md focus:outline-none text-lghterBackgroundColor"
+        <form action="{% url 'supplier:products' %}" method="GET" id="mobile-searchbar" class="search-form-mobile w-full mx-auto mx-auto py-3 gap-0">
+            <input type="search" name="search-bar" id="search-bar" class="py-3 px-6 w-12/12 rounded-md rounded-md focus:outline-none text-white"
                 placeholder="{% trans 'Search' %}">
         </form>
     </header>

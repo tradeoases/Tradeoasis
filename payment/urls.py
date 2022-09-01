@@ -25,4 +25,7 @@ urlpatterns = [
     # path("checkout/", views.checkout_page, name='checkout'),
     path("braintree/payments/<int:pk>", views.payment, name="braintree-payment"),
     path("gPayPayment/<int:pk>", views.gPayPayment, name="gPayPayment"),
+
+    
+    path("initial/subscription/", views.InitSubscriptionView.as_view(), name="init-subscription"),
 ]

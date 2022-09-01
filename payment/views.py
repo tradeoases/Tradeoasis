@@ -312,3 +312,40 @@ def gPayPayment(request):
 
     else:
         return HttpResponseNotFound()
+
+
+class InitSubscriptionView(View):
+    template_name = 'payments/initsubscription.html'
+
+
+    def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect(reverse("auth_app:login"))
+
+        if settings.BRAINTREE_PRODUCTION:
+            braintree_env = braintree.Environment.Production
+        else:
+            braintree_env = braintree.Environment.Sandbox
+
+        # Configure Braintree
+        braintree.Configuration.configure(
+            braintree_env,
+            merchant_id=settings.BRAINTREE_MERCHANT_ID,
+            public_key=settings.BRAINTREE_PUBLIC_KEY,
+            private_key=settings.BRAINTREE_PRIVATE_KEY,
+        )
+
+        try:
+            braintree_client_token = braintree.ClientToken.generate(
+                {"customer_id": self.request.user.id}
+            )
+        except:
+            braintree_client_token = braintree.ClientToken.generate({})
+
+
+        context_data = {
+            "view_name": _("Business Profile"),
+            "braintree_client_token" : braintree_client_token
+        }
+
+        return render(request, self.template_name, context=context_data)
