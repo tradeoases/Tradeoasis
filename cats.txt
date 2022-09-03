@@ -270,12 +270,12 @@ Export - Import - Commercial Activities
 
 
 Pending Tasks in order of priority
-- Chatrooms (Mugisa)
-- Showroom detail page refractor (Either)
+- Chatrooms (Mugisa) 1
+- Showroom detail page refractor (Either) 3
 - Membership Payments refractor (Both) To be discussed
-- Supplier - Buyer contracts (Mugisa)
-- dashboard charts - requests analysis (Mugisa)
-- dashboards final refractor (Mugisa)
+- Supplier - Buyer contracts (Mugisa) 5
+- dashboard charts - requests analysis (Mugisa) 2
+- dashboards final refractor (Mugisa) 4
 - Footer Links (Azizz)
 - About Us Page refracter (Azizz)
 - homepage advertising area (Azizz)

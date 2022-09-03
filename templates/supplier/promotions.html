@@ -22,7 +22,7 @@
                                 <img src="/media/{{product.images.image}}" alt="{{product.name}}">
                                 <div class="item-content grid">
                                     <h1 class="text-lg font-semibold text-lighterBackgroundColor" style="margin: 0">{{product.product.name}}</h1>
-                                    <h3 class="font-base text-slate-600">{{product.product.sib_category}}</h3>
+                                    <h3 class="font-base text-slate-600">{{product.product.sub_category}}</h3>
 
                                     <a href="{% url 'supplier:product-detail' product.product.slug %}" class="grid grid-flow-col place-items-center gap-3 px-2 py-2 md:px-3 md:py-2 text-sm bg-lghterBackgroundColor hover:bg-lighterBackgroundColorHover duration-200 transition-all ease-in rounded text-white font-semibold">
                                         <span>View Product</span>
