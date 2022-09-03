@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
+SECRET_KEY = "django-insecure-g$r%p8=*y8i9vaj2y395i435!rymb3t##8snyqz-q7e_fk8&li"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -109,18 +109,18 @@ WSGI_APPLICATION = "core.wsgi.application"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": os.environ.get("DATABASE_PROJECT_NAME"),
-        "USER": os.environ.get("DATABASE_USER"),
-        "PASSWORD": os.environ.get("DATABASE_PASSWORD"),
-        "HOST": "localhost",
-        "PORT": "",
-    }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # "default": {
+    #     "ENGINE": "django.db.backends.postgresql_psycopg2",
+    #     "NAME": os.environ.get("DATABASE_PROJECT_NAME"),
+    #     "USER": os.environ.get("DATABASE_USER"),
+    #     "PASSWORD": os.environ.get("DATABASE_PASSWORD"),
+    #     "HOST": "localhost",
+    #     "PORT": "",
     # }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 
@@ -215,6 +215,6 @@ MODELTRANSLATION_LANGUAGES = ("ar", "fr", "de", "en")
 #     BRAINTREE_PRODUCTION = False
 # else:
 BRAINTREE_PRODUCTION = False
-BRAINTREE_MERCHANT_ID = os.environ.get("BRAINTREE_MERCHANT_ID")
-BRAINTREE_PUBLIC_KEY = os.environ.get("BRAINTREE_PUBLIC_KEY")
-BRAINTREE_PRIVATE_KEY = os.environ.get("BRAINTREE_PRIVATE_KEY")
+BRAINTREE_MERCHANT_ID="zq9jqbg246n5zjt6"
+BRAINTREE_PUBLIC_KEY="4spv6wdb3xqwbvv4"
+BRAINTREE_PRIVATE_KEY="4fa06482b576443eaaba4021d89cb9c0"

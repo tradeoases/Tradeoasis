@@ -29,7 +29,10 @@ class StoresListView(ListAPIView):
     pagination_class = CustomListPagination
 
     def get_queryset(self):
-        return SupplierModels.Store.objects.filter(supplier=self.request.user)
+        print("*"*40)
+        print(self.request.user)
+        print("*"*40)
+        return SupplierModels.Store.objects.all()
 
 
 class ProductsListView(ListAPIView):
@@ -38,7 +41,7 @@ class ProductsListView(ListAPIView):
 
     def get_queryset(self):
         return SupplierModels.Product.objects.filter(
-            store__in=SupplierModels.Store.objects.filter(supplier=self.request.user)
+            store__in=SupplierModels.Store.objects.all()
         )
 
 
@@ -61,4 +64,4 @@ class ServicesListView(ListAPIView):
     pagination_class = CustomListPagination
 
     def get_queryset(self):
-        return SupplierModels.Service.objects.filter(supplier=self.request.user)
+        return SupplierModels.Service.objects.all()
