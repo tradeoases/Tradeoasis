@@ -7,6 +7,7 @@ module.exports = {
     './templates/manager/*html',
     './templates/utils/*html',
     './templates/auth_app/*html',
+    '/venv/lib/python3.9/site-packages/allauth/templates/socialaccount',
   ],
   theme: {
     screens: {

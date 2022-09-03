@@ -187,7 +187,7 @@ Environment and Recycling
 
 Food Industry
     - Baby Food
-    - Baked Goods
+    - Baked Foods
     - Beverages
     - Canned Food
     - Confectionery
@@ -267,3 +267,21 @@ Horeca - Hospitality Industry
 Husbandry Industry
 Industrial Products
 Export - Import - Commercial Activities
+
+
+Pending Tasks in order of priority
+- Chatrooms (Mugisa)
+- Showroom detail page refractor (Either)
+- Membership Payments refractor (Both) To be discussed
+- Supplier - Buyer contracts (Mugisa)
+- dashboard charts - requests analysis (Mugisa)
+- dashboards final refractor (Mugisa)
+- Footer Links (Azizz)
+- About Us Page refracter (Azizz)
+- homepage advertising area (Azizz)
+
+Ongoing Tasks
+- Supplier Modal (Azizz)
+
+Complete Tasks
+- Social Authentication (Mugisa)

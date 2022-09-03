@@ -48,7 +48,7 @@
                                         <span>{{product.product.price}}</span>
                                     </p>
                                 </div>
-                                <span class="grid items-center pb-2 px-4 font-semibold text-sm">By {{ product.supplier }}</span>
+                                <span class="grid items-center pb-2 px-4 font-semibold text-sm">By {{ product.supplier.profile.business_name }}</span>
                             </a>
                         </div>
                     {% endfor %}

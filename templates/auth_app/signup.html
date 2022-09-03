@@ -1,6 +1,7 @@
 {% extends '../utils/layout.html' %}
 {% load static %}
 {% load i18n %}
+{% load socialaccount %}
 {% block content %}
 
     <section class="grid">
@@ -69,11 +70,11 @@
                 <span>Or</span>
             </div>
             <div class="sign-in-with grid grid-cols-1 md:grid-cols-2 gap-2">
-                <a href="" class="flex justify-center gap-5 md:gap-10 border border-solid border-slate-400  hover:border-slate-600 px-6 py-3 items-center rounded color text-lghterBackgroundColor">
+                <a href="{% provider_login_url 'google' %}{% if userType %}?request_user=extension{% endif %}" class="flex justify-center gap-5 md:gap-10 border border-solid border-slate-400  hover:border-slate-600 px-6 py-3 items-center rounded color text-lghterBackgroundColor">
                     <i class="fa fa-google"></i>
                     <span>{% trans 'Continue With Google' %}</span>
                 </a>
-                <a href="" class="flex justify-center gap-5 md:gap-10 border border-solid border-slate-400  hover:border-slate-600 px-6 py-3 items-center rounded color text-lghterBackgroundColor">
+                <a href="{% provider_login_url 'linkedin' %}{% if userType %}?request_user=extension{% endif %}" class="flex justify-center gap-5 md:gap-10 border border-solid border-slate-400  hover:border-slate-600 px-6 py-3 items-center rounded color text-lghterBackgroundColor">
                     <i class="fa fa-linkedin"></i>
                     <span>{% trans 'Continue With LinkedIn' %}</span>
                 </a>

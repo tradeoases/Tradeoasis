@@ -61,4 +61,79 @@
     </div> 
 </div>
 
+<script src="{% static 'js/createChart.js' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        let mChart1 = createChart('Requests.',
+            'line',
+            ['10/08/2000', '10/08/2000', '10/08/2000','10/08/2000'],
+            [80, 100, 46, 70],
+            'requests'
+        );
+
+        let mChart2 = createChart('Users',
+            'doughnut',
+            ['Fashion', 'Electronics', 'Sports'],
+            [20, 200, 100],
+            'users'
+        );
+
+
+        const actionBtns = document.querySelectorAll('.selectors button');
+        for (let i = 0; i < actionBtns.length; i++) {
+            actionBtns[i].addEventListener('click', e => {
+                actionBtns.forEach(btn => {
+                    if (btn.classList.contains('active')) btn.classList.remove('active');
+                });
+
+                actionBtns[i].classList.add('active');
+
+                if (actionBtns[i].getAttribute('id') === "day") {
+
+                    mChart1.destroy();
+                    mChart1 = createChart('Revenue per day.',
+                        'line',
+                        ['10/08/2000', '10/08/2000', '10/08/2000','10/08/2000'],
+                        [80, 100, 46, 70],
+                        'requests'
+                    );
+
+                } else if (actionBtns[i].getAttribute('id') === "week") {
+
+                    mChart1.destroy();
+                    mChart1 = createChart('Revenue per week.',
+                        'line',
+                        ['week 1', 'week 1', 'week 1','week 1'],
+                        [80, 100, 46, 70],
+                        'requests'
+                    );
+
+                } else if (actionBtns[i].getAttribute('id') === "month") {
+
+                    mChart1.destroy();
+                    mChart1 = createChart('Revenue per month.',
+                        'line',
+                        ['08/2000', '08/2000', '08/2000','08/2000'],
+                        [80, 100, 46, 70],
+                        'requests'
+                    );
+
+                } else if (actionBtns[i].getAttribute('id') === "year") {
+
+                    mChart1.destroy();
+                    mChart1 = createChart('Revenue per year.',
+                        'line',
+                        ['2000', '2000', '2000','2000'],
+                        [40, 50, 46, 70],
+                        'requests'
+                    );
+                } else {
+                    // console.log("");
+                }
+            });
+        }
+    });
+</script>
+
 {% endblock %}

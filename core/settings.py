@@ -14,6 +14,8 @@ from pathlib import Path
 import os, sys
 from django.utils.translation import gettext_lazy as _
 
+from django.urls import reverse_lazy
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
+SECRET_KEY = "django-insecure-g$r%p8=*y8i9vaj2y395i435!rymb3t##8snyqz-q7e_fk8&li"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "modeltranslation",
     "django.contrib.admin",
+    'django.contrib.sites',
     # custom apps
     "manager.apps.ManagerConfig",
     "supplier.apps.SupplierConfig",
@@ -54,6 +57,12 @@ INSTALLED_APPS = [
     # "channels",
     "rosetta",
     'django_user_agents',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.linkedin',
 ]
 
 # django_user_agents
@@ -79,6 +88,14 @@ MIDDLEWARE = [
     'django_user_agents.middleware.UserAgentMiddleware',
 ]
 
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
 ROOT_URLCONF = "core.urls"
 
 USE_I18N = True
@@ -95,6 +112,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "django.template.context_processors.i18n",
+                'django.template.context_processors.request',
                 "manager.context_processors.categories_showroows",
             ],
         },
@@ -109,18 +127,18 @@ WSGI_APPLICATION = "core.wsgi.application"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": os.environ.get("DATABASE_PROJECT_NAME"),
-        "USER": os.environ.get("DATABASE_USER"),
-        "PASSWORD": os.environ.get("DATABASE_PASSWORD"),
-        "HOST": "localhost",
-        "PORT": "",
-    }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # "default": {
+    #     "ENGINE": "django.db.backends.postgresql_psycopg2",
+    #     "NAME": os.environ.get("DATABASE_PROJECT_NAME"),
+    #     "USER": os.environ.get("DATABASE_USER"),
+    #     "PASSWORD": os.environ.get("DATABASE_PASSWORD"),
+    #     "HOST": "localhost",
+    #     "PORT": "",
     # }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 
@@ -191,8 +209,15 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = "phillipmugisa4@gmail.com"
 
 LOGIN_REDIRECT = "/auth/login/"
+LOGIN_URL = "/auth/login/"
 
 CORS_ALLOW_ALL_ORIGINS = True
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
+}
+CORS_URLS_REGEX = r'^/api/.*$'
 
 # translations
 LANGUAGE_CODE = "en"
@@ -215,6 +240,49 @@ MODELTRANSLATION_LANGUAGES = ("ar", "fr", "de", "en")
 #     BRAINTREE_PRODUCTION = False
 # else:
 BRAINTREE_PRODUCTION = False
-BRAINTREE_MERCHANT_ID = os.environ.get("BRAINTREE_MERCHANT_ID")
-BRAINTREE_PUBLIC_KEY = os.environ.get("BRAINTREE_PUBLIC_KEY")
-BRAINTREE_PRIVATE_KEY = os.environ.get("BRAINTREE_PRIVATE_KEY")
+
+BRAINTREE_MERCHANT_ID="zq9jqbg246n5zjt6"
+BRAINTREE_PUBLIC_KEY="4spv6wdb3xqwbvv4"
+BRAINTREE_PRIVATE_KEY="4fa06482b576443eaaba4021d89cb9c0"
+
+
+# allauth
+SITE_ID = 1
+# Provider specific settings
+SITE_ID = 1
+
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "SCOPE": [
+            "profile",
+            "email",
+        ],
+        "AUTH_PARAMS": {
+            "access_type": "online",
+        },
+    },
+    'linkedin': {
+        'SCOPE': [
+            'r_basicprofile',
+            'r_emailaddress'
+        ],
+        'PROFILE_FIELDS': [
+            'id',
+            'first-name',
+            'last-name',
+            'email-address',
+            'picture-url',
+            'public-profile-url',
+        ]
+    }
+}
+
+# ACCOUNT_SIGNUP_FORM_CLASS = 'auth_app.forms.CustomSignupForm'
+ACCOUNT_FORMS = {
+    # "signup": "allauth.account.forms.SignupForm",
+    # 'signup': 'auth_app.forms.CustomSignupForm',
+}
+
+ACCOUNT_EMAIL_REQUIRED = True
+SOCIALACCOUNT_AUTO_SIGNUP = False
+ACCOUNT_SIGNUP_REDIRECT_URL = reverse_lazy("auth_app:business")

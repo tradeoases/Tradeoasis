@@ -227,74 +227,74 @@
                 });
             });
 
+            // PAYPAL
+            // Create a client.
+            braintree.client.create({
+                authorization: braintree_client_token
+            }, function (clientErr, clientInstance) {
+    
+                // Stop if there was a problem creating the client.
+                // This could happen if there is a network error or if the authorization
+                // is invalid.
+                if (clientErr) {
+                    console.error('Error creating client:', clientErr);
+                    return;
+                }
+    
+                // Create a PayPal Checkout component.
+                braintree.paypalCheckout.create({
+                    client: clientInstance
+                }, function (paypalCheckoutErr, paypalCheckoutInstance) {
+                    // Stop if there was a problem creating PayPal Checkout.
+                    // This could happen if there was a network error or if it's incorrectly
+                    // configured.
+                    if (paypalCheckoutErr) {
+                        console.error('Error creating PayPal Checkout:', paypalCheckoutErr);
+                        return;
+                    }
+    
+                    // Load the PayPal JS SDK (see Load the PayPal JS SDK section)
+                    paypalCheckoutInstance.loadPayPalSDK({
+                        
+                    }, function (loadSDKErr) {
+                    // The PayPal script is now loaded on the page and
+                    // window.paypal.Buttons is now available to use
+            
+                    // render the PayPal button (see Render the PayPal Button section)
+                        // return paypal.Buttons({
+                        //     createOrder: function () {
+                        //         return paypalCheckoutInstance.createPayment({
+                        //         flow: 'checkout',
+                        //         currency: 'USD',
+                        //         amount: '10.00',
+                        //         intent: 'capture' // this value must either be `capture` or match the intent passed into the PayPal SDK intent query parameter
+                        //         // your other createPayment options here
+                        //         });
+                        //     },
+            
+                        //     onApprove: function (data, actions) {
+                        //         // some logic here before tokenization happens below
+                        //         return paypalCheckoutInstance.tokenizePayment(data).then(function (payload) {
+                        //         // Submit payload.nonce to your server
+                        //         });
+                        //     },
+            
+                        //     onCancel: function () {
+                        //         // handle case where user cancels
+                        //     },
+            
+                        //     onError: function (err) {
+                        //         // handle case where error occurs
+                        //     }
+                        // }).render('#paypal-button');
+                        
+                    });
+                });
+    
+            });
         })
 
 
-        // PAYPAL
-        // Create a client.
-        braintree.client.create({
-            authorization: "{{ braintree_client_token }}"
-        }, function (clientErr, clientInstance) {
-
-            // Stop if there was a problem creating the client.
-            // This could happen if there is a network error or if the authorization
-            // is invalid.
-            if (clientErr) {
-                console.error('Error creating client:', clientErr);
-                return;
-            }
-
-            // Create a PayPal Checkout component.
-            braintree.paypalCheckout.create({
-                client: clientInstance
-            }, function (paypalCheckoutErr, paypalCheckoutInstance) {
-                // Stop if there was a problem creating PayPal Checkout.
-                // This could happen if there was a network error or if it's incorrectly
-                // configured.
-                if (paypalCheckoutErr) {
-                    console.error('Error creating PayPal Checkout:', paypalCheckoutErr);
-                    return;
-                }
-
-                // Load the PayPal JS SDK (see Load the PayPal JS SDK section)
-                paypalCheckoutInstance.loadPayPalSDK({
-                    
-                }, function (loadSDKErr) {
-                // The PayPal script is now loaded on the page and
-                // window.paypal.Buttons is now available to use
-        
-                // render the PayPal button (see Render the PayPal Button section)
-                    // return paypal.Buttons({
-                    //     createOrder: function () {
-                    //         return paypalCheckoutInstance.createPayment({
-                    //         flow: 'checkout',
-                    //         currency: 'USD',
-                    //         amount: '10.00',
-                    //         intent: 'capture' // this value must either be `capture` or match the intent passed into the PayPal SDK intent query parameter
-                    //         // your other createPayment options here
-                    //         });
-                    //     },
-        
-                    //     onApprove: function (data, actions) {
-                    //         // some logic here before tokenization happens below
-                    //         return paypalCheckoutInstance.tokenizePayment(data).then(function (payload) {
-                    //         // Submit payload.nonce to your server
-                    //         });
-                    //     },
-        
-                    //     onCancel: function () {
-                    //         // handle case where user cancels
-                    //     },
-        
-                    //     onError: function (err) {
-                    //         // handle case where error occurs
-                    //     }
-                    // }).render('#paypal-button');
-                    
-                });
-            });
-
-        });
 
 
 

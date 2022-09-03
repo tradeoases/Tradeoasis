@@ -32,6 +32,11 @@ class HomeView(View):
     template_name = "manager/index.html"
 
     def get(self, request):
+
+        if request.user.is_authenticated:
+            # request.user.
+            pass
+
         # generating products context
         # sub_categories = ProductSubCategory.objects.all()[:10]
         # product_object_list = []

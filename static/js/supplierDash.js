@@ -14,7 +14,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const fetchData = async (url, has_page_num=true) => {
         let response;
         if (has_page_num) {
-            response = await fetch(`${BASE_API_URL}/${url}/?page=${pageNum}`);
+            response = await fetch(
+                `${BASE_API_URL}/${url}/?page=${pageNum}`, {
+                    method: "GET",
+                    mode: "no-cors",
+                    cache: "no-cache",
+                });
         }
         else {
             response = await fetch(`${BASE_API_URL}/${url}`);

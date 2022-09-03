@@ -1,4 +1,3 @@
-
 const sidebarSubMenus = document.querySelectorAll('.sub-menu');
 // const sidebarSubMenuToggleDropdowns = document.querySelectorAll('.ti-angle-down');
 const sidebarSubMenuToggleDropdowns = document.querySelectorAll('li.link a');
