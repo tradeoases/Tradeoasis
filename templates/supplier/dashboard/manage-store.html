@@ -3,82 +3,87 @@
 {% load i18n %}
 {% block content %}
 
-    <div class="main-content">
-        <div class="content-area">
-            <h3 style="margin: .5rem 0;font-weight:600;">{% trans 'My Stores' %}</h3>
-            <div class="alert card card-info" id="orders-help">
-                <i class="ti-close exit"></i>
-                <div class="title">
-                    <small>{% trans 'Please, select a store from the table' %}</small>
-                </div>
-                <div class="text">
-                    <small>{% trans 'To add products to it' %}.</small>
-                </div>
+<div class="main-content">
+    <div class="content-area">
+        <h3 style="margin: .5rem 0;font-weight:600;">{% trans 'My Stores' %}</h3>
+        <div class="alert card card-info" id="orders-help">
+            <i class="ti-close exit"></i>
+            <div class="title">
+                <small>{% trans 'Please, select a store from the table' %}</small>
             </div>
-            <div class="card data-table products-table">
-                <table class="display" id='stores' style="width:100%;margin-top:.5rem;">
-                    <thead>
-                        <tr>
-                            <th>{% trans 'No.' %}</th>
-                            <th>{% trans 'Name' %}</th>
-                            <th>{% trans 'Products' %}</th>
-                            <th>{% trans 'Created At' %}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>{% trans 'No.' %}</th>
-                            <th>{% trans 'Name' %}</th>
-                            <th>{% trans 'Products' %}</th>
-                            <th>{% trans 'Created At' %}</th>
-                        </tr>
-                    </tfoot>
-                </table>
-                <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
-                    <div class="cs-grid cs-align-center">
-                        <p class="cs-text-md" style="color: var(--text-color);">{% trans 'Showing Page' %} <span id="current-page-0"></span> {% trans 'of' %} <span id="max-page"></span>. (<span id="table-item-count"></span> {% trans 'Entries' %})</p>
-                    </div>
-                    <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
-                        <button id="previous-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">{% trans 'Previous' %}</button>
-                        <span id="current-page" class="cs-text-md"></span>
-                        <button id="next-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">{% trans 'Next' %}</button>
-                    </div>
+            <div class="text">
+                <small>{% trans 'To add products to it' %}.</small>
+            </div>
+        </div>
+        <div class="card data-table products-table">
+            <table class="display" id='stores' style="width:100%;margin-top:.5rem;">
+                <thead>
+                    <tr class="selected">
+                        <th>{% trans 'No.' %}</th>
+                        <th>{% trans 'Name' %}</th>
+                        <th>{% trans 'Products' %}</th>
+                        <th>{% trans 'Created At' %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>{% trans 'No.' %}</th>
+                        <th>{% trans 'Name' %}</th>
+                        <th>{% trans 'Products' %}</th>
+                        <th>{% trans 'Created At' %}</th>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="table-pagination cs-flex cs-justify-between cs-align-center"
+                style="--gap: 1rem;padding: 0 1rem;">
+                <div class="cs-grid cs-align-center">
+                    <p class="cs-text-md" style="color: var(--text-color);">{% trans 'Showing Page' %} <span
+                            id="current-page-0"></span> {% trans 'of' %} <span id="max-page"></span>. (<span
+                            id="table-item-count"></span> {% trans 'Entries' %})</p>
+                </div>
+                <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
+                    <button id="previous-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">{% trans
+                        'Previous' %}</button>
+                    <span id="current-page" class="cs-text-md"></span>
+                    <button id="next-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">{% trans 'Next'
+                        %}</button>
                 </div>
             </div>
         </div>
     </div>
-            </div>
-        </div>
-    </div>
+</div>
+</div>
+</div>
+</div>
 
-    <script>
-        // Table
-        $(document).ready(function () {
-            $('#table-1').DataTable();
+<script>
+    // Table
+    $(document).ready(function () {
+        $('#table-1').DataTable();
+    });
+
+
+    // Open Modal
+    const rows = document.querySelectorAll('.select');
+    rows.forEach(row => {
+        row.style.cursor = "pointer";
+        row.addEventListener('click', navigateToStore);
+
+    });
+
+    function navigateToStore() {
+        location.href = "_create-product.html";
+    }
+
+    const closeCard = document.querySelector('.ti-close.exit');
+    if (closeCard) {
+        closeCard.addEventListener('click', function (e) {
+            e.target.parentElement.remove();
         });
+    }
 
-
-        // Open Modal
-        const rows = document.querySelectorAll('.select');
-        rows.forEach(row => {
-            row.style.cursor = "pointer";
-            row.addEventListener('click', navigateToStore);
-
-        });
-
-        function navigateToStore() {
-            location.href = "_create-product.html";
-        }
-
-        const closeCard = document.querySelector('.ti-close.exit');
-        if (closeCard) {
-            closeCard.addEventListener('click', function (e) {
-                e.target.parentElement.remove();
-            });
-        }
-
-    </script>
+</script>
 
 {% endblock %}
