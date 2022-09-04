@@ -7,6 +7,8 @@ import random
 from django.utils.translation import gettext as _
 from django.contrib import messages
 
+import uuid
+
 # apps
 from supplier.models import (
     Product,
@@ -280,8 +282,9 @@ class SupportChatroomView(AuthedOnlyAccessMixin, View):
     template_name = "manager/chatroom.html"
 
     def get(self, request):
+        room_name = str(uuid.uuid4()).replace("-", "")
 
-        context_data = {"view_name": _("Support")}
+        context_data = {"view_name": _("Support"),"room_name": room_name}
 
         return render(request, self.template_name, context=context_data)
 

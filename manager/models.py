@@ -1,3 +1,6 @@
+from pyexpat import model
+from re import T
+from statistics import mode
 import string
 from django.db import models
 from django.utils import timezone
@@ -156,4 +159,31 @@ class UserRequest(models.Model):
     request_method = models.CharField(_('Request Method'), max_length=256)
     device = models.CharField(_('Device'), max_length=256)
     user_os = models.CharField(_('User Os'), max_length=256)
+    created_on = models.DateField(_("Created on"), default=timezone.now)
+
+# utility functions
+def get_file_path(instance, filename):
+    ext = '.json'
+    filename = instance.roomname
+    return os.path.join(f"chats/{filename}{ext}")
+
+class Chatroom(models.Model):
+    roomname = models.CharField(_('Chatroom Name'), max_length=256)
+    client = models.OneToOneField(
+        Authmodels.User,
+        on_delete=models.CASCADE,
+    )
+    support = models.OneToOneField(
+        Authmodels.SupportProfile,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
+    chatfile = models.FileField(
+        _("Chat file"),
+        blank=True,
+        null=True,
+        upload_to=get_file_path,
+    )
+    is_closed = models.BooleanField(_("Chat Closed"), default=False)
+    is_handled = models.BooleanField(_("Chat handled"), default=False)
     created_on = models.DateField(_("Created on"), default=timezone.now)

@@ -8,6 +8,7 @@ from django.http import HttpResponseNotFound, HttpResponse
 from django.contrib.auth import login
 
 import string
+import uuid
 
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
@@ -507,6 +508,7 @@ class AdminChatView(SupportOnlyAccessMixin, View):
 
         context_data["view_name"] = _("Admin Dashboard - Support")
         context_data["active_tab"] = "Support"
+        context_data["room_name"] = str(uuid.uuid4()).replace("-", "")
 
         return context_data
 

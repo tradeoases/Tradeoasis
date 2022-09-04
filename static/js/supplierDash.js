@@ -15,12 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
         let response;
         if (has_page_num) {
             response = await fetch(
-                `${BASE_API_URL}/${url}/?page=${pageNum}`, {
-                    method: "GET",
-                    mode: "same-origin",
-                    cache: "no-cache",
-                    credentials: 'same-origin'
-                });
+            `${BASE_API_URL}/${url}/?page=${pageNum}`, {
+                method: "GET",
+                mode: "same-origin",
+                cache: "no-cache",
+                credentials: 'same-origin'
+            });
         }
         else {
             response = await fetch(`${BASE_API_URL}/${url}`);

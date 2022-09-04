@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     "api.apps.ApiConfig",
     # third party
     "rest_framework",
-    # "channels",
+    "channels",
     "rosetta",
     'django_user_agents',
 
@@ -120,7 +120,21 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "core.wsgi.application"
-# ASGI_APPLICATION = "core.wsgi.application"
+# ASGI APP FOR CHANNELS
+ASGI_APPLICATION = 'core.routing.application'
+
+CHANNEL_LAYERS = {
+    # "default": {
+    #     "BACKEND": "channels_redis.core.RedisChannelLayer",
+    #     "CONFIG": {
+    #         "hosts": [("redis-server-name", 6379)],
+    #     },
+    # },
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    },
+}
+
 
 
 # Database

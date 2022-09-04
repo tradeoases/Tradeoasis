@@ -60,42 +60,57 @@
                         <a class="cs-text-md cs-text-accent" href="./index.html">Close Chat</a>
                     </div>
                     <hr style="border: 1px solid hsl(0, 0%, 95%);">
-                    <ul class="list cs-grid cs-content-start" style="--gap: .25rem">
-                        <li class="cs-grid sent" style="--gap:.25rem;">
-                            <p class="cs-text-md">Lorem ipsum dolor sit amet consectetur adipisicing
-                            </p>
-                        </li>
-                        <li class="cs-grid sent" style="--gap:.25rem;">
-                            <p class="cs-text-md">Lorem ipsum dolor sit amet consectetur adipisicing
-                            </p>
-                        </li>
-                        <li class="cs-grid sent" style="--gap:.25rem;">
-                            <p class="cs-text-md">Lorem ipsum dolor sit amet consectetur adipisicing
-                            </p>
-                        </li>
-                        <li class="cs-grid sent" style="--gap:.25rem;">
-                            <p class="cs-text-md">Lorem ipsum dolor sit amet consectetur adipisicing
-                            </p>
-                        </li>
-                        <li class="cs-grid received" style="--gap:.25rem;">
-                            <p class="cs-text-md">Lorem ipsum dolor sit amet consectetur adipisicing
-                            </p>
-                        </li>
-                        <li class="cs-grid received" style="--gap:.25rem;">
-                            <p class="cs-text-md">Lorem ipsum dolor sit amet consectetur adipisicing
-                            </p>
-                        </li>
-                        <li class="cs-grid sent" style="--gap:.25rem;">
-                            <p class="cs-text-md">Lorem ipsum dolor sit amet consectetur adipisicing
-                            </p>
-                        </li>
+                    <ul class="chat-list list cs-grid cs-content-start" style="--gap: .25rem">
+                       
                     </ul>
-                    <form action="" class="cs-grid" style="grid-template-columns: 1fr .2fr;--gap: .5rem;">
-                        <input type="text" name="" id="message" placeholder="Message">
+                    <form id="chat-form" class="cs-grid" style="grid-template-columns: 1fr .2fr;--gap: .5rem;">
+                        <input type="text" name="message" id="message" placeholder="Message">
                         <input class="btn cs-text-white cs-bg-secondary" type="submit" name="" value="Send">
                     </form>
                 </div>
             </div>
         </section>
+
+{{ room_name|json_script:"room_name" }}
+{{ request.user.username|json_script:"username" }}
+<script>
+
+    const chatList = document.querySelector('.chat-list');
+    const roomName = JSON.parse(document.getElementById('room_name').textContent);
+    const username = JSON.parse(document.getElementById('username').textContent);
+    const chatSocket = new WebSocket(
+        "ws://" + window.location.host + "/ws/chat/" + roomName + "/"
+    );
+
+    chatSocket.onmessage = function (e) {
+        const data = JSON.parse(e.data);
+        
+        const msgElem = document.createElement('li');
+        msgElem.className = data.user === 'Support' ? "grid received" : "grid sent";
+        msgElem.style.gap = ".25rem";
+        const msgElemContent = document.createElement('p');
+        msgElemContent.className = "cs-text-md";
+        msgElemContent.textContent = (data.message)
+        msgElem.appendChild(msgElemContent);
+    
+        chatList.appendChild(msgElem);
+    }
+    
+    const chatForm = document.querySelector("#chat-form");
+    chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let messageField = chatForm.querySelector("#message");
+
+        chatSocket.send(JSON.stringify({
+            "message": messageField.value,
+            "username": username,
+            "user": "Support"
+        }))
+        chatForm.reset();
+    })
+
+
+</script>
+
     <!-- section area -->
 {% endblock %}

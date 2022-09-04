@@ -45,30 +45,59 @@
 <section class="main w-12/12 py-6 pt-0 gap-8 my-8" style="block-size: auto;">
     <div class="chat border border-solid border-slate-300 rounded items-start content-start grid gap-2 px-5 py-5 w-11/12 md:w-6/12 mx-auto">
         <div class="flex items-baseline justify-between">
-            <h4 class="cs-text-normal cs-text-secondary" style="margin: 0;">Nowela Mary</h4>
-            <a class="text-md text-yellowColor" href="">{% trans 'Close Chat' %}</a>
+            <h4 class="cs-text-normal cs-text-secondary" style="margin: 0;">{{request.user.username}}</h4>
+            <a class="text-md text-yellowColor" href="{% url 'manager:support' %}">{% trans 'Close Chat' %}</a>
         </div>
         <hr style="border: 1px solid hsl(0, 0%, 95%);">
-        <ul class="list grid content-start gap-2">
-            <li class="grid sent" style="gap:.25rem;">
-                <p class="cs-text-md">Lorem ipsum dolor sit amet consectetur adipisicing
-                </p>
-            <li class="grid received" style="gap:.25rem;">
-                <p class="cs-text-md">Lorem ipsum dolor sit amet consectetur adipisicing
-                </p>
-            </li>
-            <li class="grid received" style="gap:.25rem;">
-                <p class="cs-text-md">Lorem ipsum dolor sit amet consectetur adipisicing
-                </p>
-            </li>
+        <ul class="chat-list list grid content-start gap-2">
         </ul>
-        <form action="" class="grid" style="grid-template-columns: 1fr .2fr;--gap: .5rem;">
-            <input type="text" name="" id="message" placeholder="Message">
+        <form id="chat-form" class="grid" style="grid-template-columns: 1fr .2fr;--gap: .5rem;">
+            <input type="text" name="message" id="message" placeholder="Message">
             <input class="btn text-white bg-lghterBackgroundColor" type="submit" name="" value="{% trans 'Send' %}">
         </form>
     </div>
 </section>
 
+{{ room_name|json_script:"room_name" }}
+{{ request.user.username|json_script:"username" }}
+<script>
+
+    const chatList = document.querySelector('.chat-list');
+    const roomName = JSON.parse(document.getElementById('room_name').textContent);
+    const username = JSON.parse(document.getElementById('username').textContent);
+    const chatSocket = new WebSocket(
+        "ws://" + window.location.host + "/ws/chat/" + roomName + "/"
+    );
+
+    chatSocket.onmessage = function (e) {
+        const data = JSON.parse(e.data);
+        
+        const msgElem = document.createElement('li');
+        msgElem.className = data.user === 'client' ? "grid received" : "grid sent";
+        msgElem.style.gap = ".25rem";
+        const msgElemContent = document.createElement('p');
+        msgElemContent.className = "cs-text-md";
+        msgElemContent.textContent = (data.message)
+        msgElem.appendChild(msgElemContent);
+    
+        chatList.appendChild(msgElem);
+    }
+    
+    const chatForm = document.querySelector("#chat-form");
+    chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let messageField = chatForm.querySelector("#message");
+
+        chatSocket.send(JSON.stringify({
+            "message": messageField.value,
+            "username": username,
+            "user": "client"
+        }))
+        chatForm.reset();
+    })
+
+
+</script>
 
 <script src="{% static 'js/scripts.js' %}"></script>
 </body>
