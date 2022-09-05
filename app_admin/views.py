@@ -9,6 +9,7 @@ from django.contrib.auth import login
 
 import string
 import uuid
+import json
 
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
@@ -485,6 +486,12 @@ class SubCategoryCreateView(SupportOnlyAccessMixin, View):
         return redirect(reverse("app_admin:subcategory-create"))
 
 
+
+def get_last_chatroom_msg( chatroom):
+    with open(chatroom.chatfilepath, "r") as file:
+        current_data = json.load(file)
+        return current_data[-1]
+
 class AdminDiscussionsView(SupportOnlyAccessMixin, View):
     template_name = "app_admin/support/index.html"
 
@@ -493,6 +500,16 @@ class AdminDiscussionsView(SupportOnlyAccessMixin, View):
 
         context_data["view_name"] = _("Admin Dashboard - Support")
         context_data["active_tab"] = "Support"
+
+        context_data['chatrooms'] = {
+            "context_name" : "chatrooms",
+            "results" : [
+                {
+                    "chatroom" : chatroom,
+                    "last_message" : get_last_chatroom_msg(chatroom)
+                } for chatroom in ManagerModels.Chatroom.objects.filter(is_handled=False)
+            ]
+        }
 
         return context_data
 
@@ -503,17 +520,30 @@ class AdminDiscussionsView(SupportOnlyAccessMixin, View):
 class AdminChatView(SupportOnlyAccessMixin, View):
     template_name = "app_admin/support/chat.html"
 
-    def get_context_data(self):
+    def get(self, request, roomname):
         context_data = dict()
 
+        context_data['room_name'] = roomname
         context_data["view_name"] = _("Admin Dashboard - Support")
         context_data["active_tab"] = "Support"
-        context_data["room_name"] = str(uuid.uuid4()).replace("-", "")
 
-        return context_data
+        context_data['chatrooms'] = {
+            "context_name" : "chatrooms",
+            "results" : [
+                {
+                    "chatroom" : chatroom,
+                    "last_message" : get_last_chatroom_msg(chatroom)
+                } for chatroom in ManagerModels.Chatroom.objects.filter(is_handled=False)
+            ]
+        }
 
-    def get(self, request):
-        return render(request, self.template_name, context=self.get_context_data())
+        selected_chatroom = ManagerModels.Chatroom.objects.filter(roomname=roomname)
+        if not selected_chatroom:
+            return redirect(reverse("app_admin:discussions"))
+
+        context_data['selected_chatroom'] = selected_chatroom.first()
+
+        return render(request, self.template_name, context=context_data)
 
 
 class AdminCommunityView(SupportOnlyAccessMixin, View):
@@ -702,11 +732,14 @@ class CreateSupportView(SupportOnlyAccessMixin, View):
             messages.add_message(request, messages.ERROR, _("Password mismatch."))
             return redirect(reverse("app_admin:createsupport"))
 
-        user = AuthModels.Support.objects.create_user(
+        user = AuthModels.User.objects.create_user(
             username=request.POST.get("username"),
             email=request.POST.get("email"),
             password=request.POST.get("password"),
+            account_type='SUPPORT'
         )
+
+        AuthModels.SupportProfile.objects.create(user=user)
 
         uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
         token = appTokenGenerator.make_token(user)
@@ -752,7 +785,7 @@ class VerficationView(View):
         if user and appTokenGenerator.check_token(user, token):
             user.is_email_activated = True
             user.save()
-            login(request, user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             # to set password
             return redirect(reverse("app_admin:profile"))
         else:

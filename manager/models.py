@@ -6,8 +6,13 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.utils.text import slugify
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+from django.conf import settings
+
 import os
 import uuid
+import json
 
 # from apps
 from supplier.models import Store
@@ -162,28 +167,44 @@ class UserRequest(models.Model):
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
 # utility functions
-def get_file_path(instance, filename):
+def get_chat_file_path(instance):
     ext = '.json'
     filename = instance.roomname
-    return os.path.join(f"chats/{filename}{ext}")
+    path = os.path.join(f"{settings.CHATROOMFILES_DIR}/{filename}{ext}")
+    return path
 
 class Chatroom(models.Model):
-    roomname = models.CharField(_('Chatroom Name'), max_length=256)
-    client = models.OneToOneField(
+    roomname = models.CharField(_('Chatroom Name'), max_length=256, unique=True)
+    user = models.ForeignKey(
         Authmodels.User,
         on_delete=models.CASCADE,
     )
-    support = models.OneToOneField(
+    support = models.ForeignKey(
         Authmodels.SupportProfile,
         on_delete=models.CASCADE,
-        primary_key=True,
-    )
-    chatfile = models.FileField(
-        _("Chat file"),
         blank=True,
         null=True,
-        upload_to=get_file_path,
+    )
+    chatfilepath = models.CharField(
+        _("Chat filepath"),
+        max_length=256,
+        blank=True,
+        null=True,
     )
     is_closed = models.BooleanField(_("Chat Closed"), default=False)
     is_handled = models.BooleanField(_("Chat handled"), default=False)
     created_on = models.DateField(_("Created on"), default=timezone.now)
+
+    def save(self, *args, **kwargs):
+        self.chatfilepath = get_chat_file_path(self)
+        super().save(*args, **kwargs)
+
+@receiver(post_save, sender=Chatroom)
+def create_Chat_file(sender, instance, **kwargs):
+    try:
+        with open(f'{instance.chatfilepath}', 'w') as file:
+            json.dump([], file)
+    except FileNotFoundError:
+        os.mkdir(f"{settings.CHATROOMFILES_DIR}")
+        with open(f'{instance.chatfilepath}', 'w') as file:
+            json.dump([], file)

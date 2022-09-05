@@ -7,6 +7,7 @@ import random
 from django.utils.translation import gettext as _
 from django.contrib import messages
 
+from datetime import timedelta
 import uuid
 
 # apps
@@ -282,11 +283,22 @@ class SupportChatroomView(AuthedOnlyAccessMixin, View):
     template_name = "manager/chatroom.html"
 
     def get(self, request):
-        room_name = str(uuid.uuid4()).replace("-", "")
+        if request.user.account_type.lower() in ["support", "admin"]:
+            return redirect(reverse("app_admin:home"))
+            
+        if not request.COOKIES.get('chatroom_roomname', None):
+            room_name = str(uuid.uuid4()).replace("-", "")
+            context_data = {"view_name": _("Support"),"room_name": room_name}
+            response = render(request, self.template_name, context=context_data)
+            response.set_cookie('chatroom_roomname', value=room_name, max_age=86400)
+        else:
+            room_name = request.COOKIES.get('chatroom_roomname', None)
+            context_data = {"view_name": _("Support"),"room_name": room_name}
+            response = render(request, self.template_name, context=context_data)
 
-        context_data = {"view_name": _("Support"),"room_name": room_name}
+        return response
 
-        return render(request, self.template_name, context=context_data)
+    
 
 
 class SupportDiscussionListView(View):

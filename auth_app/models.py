@@ -48,7 +48,7 @@ class User(AbstractUser):
         else:
             self.is_active = False
 
-        if not self.pk:
+        if not self.pk and not self.account_type:
             self.account_type = self.base_type
         super().save(*args, **kwargs)
 
@@ -143,7 +143,16 @@ class Buyer(User):
 
 class SupportProfile(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
-    responses = models.IntegerField(_("Responses to clients"))
+    responses = models.IntegerField(_("Responses to clients"), default=0)
+
+    def increase_responses_count(self):
+        current_response = self.responses
+        current_response += 1
+        self.responses = current_response
+        self.save()
+
+    def __str__(self):
+        return self.user.username
 
 
 class SupportManager(BaseUserManager):

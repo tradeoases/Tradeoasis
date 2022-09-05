@@ -270,7 +270,6 @@ Export - Import - Commercial Activities
 
 
 Pending Tasks in order of priority
-- Chatrooms (Mugisa) 1
 - Showroom detail page refractor (Either) 3
 - Membership Payments refractor (Both) To be discussed
 - Supplier - Buyer contracts (Mugisa) 5
@@ -285,3 +284,4 @@ Ongoing Tasks
 
 Complete Tasks
 - Social Authentication (Mugisa)
+- Chatrooms (Mugisa)

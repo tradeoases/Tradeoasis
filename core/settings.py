@@ -299,3 +299,7 @@ ACCOUNT_FORMS = {
 ACCOUNT_EMAIL_REQUIRED = True
 SOCIALACCOUNT_AUTO_SIGNUP = False
 ACCOUNT_SIGNUP_REDIRECT_URL = reverse_lazy("auth_app:business")
+
+
+# custom
+CHATROOMFILES_DIR = os.path.join(BASE_DIR, 'chatrooms')

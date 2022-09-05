@@ -24,34 +24,24 @@
                 <div class="inbox outlined br-sm cs-align-start cs-content-start cs-grid" style="--gap:.5rem;padding: 1rem 1rem;">
                     <div class="cs-flex cs-align-baseline cs-justify-between">
                         <h4 class="cs-text-normal cs-text-secondary" style="margin: 0;">Chatrooms</h4>
-                        <span class="cs-text-md cs-text-accent" >10 chatrooms</span>
+                        <span class="cs-text-md cs-text-accent" >{{ chatrooms.results|length }} chatrooms</span>
                     </div>
                     <hr style="border: 1px solid hsl(0, 0%, 95%);">
-                    <ul class="list cs-grid cs-content-start" style="--gap: .25rem">
-                        <li>
-                            <a href="{% url 'app_admin:discussion' %}" class="cs-grid" style="--gap:.25rem;">
-                                <p class="cs-flex cs-align-baseline cs-justify-between">
-                                    <span class="cs-grid cs-text-secondary cs-text-md">Nowela Mary</span>
-                                    <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">1 minute ago</span>
-                                </p>
-                                <p class="cs-flex cs-align-baseline cs-justify-start" style="--gap: .5rem;">             
-                                    <span class="cs-grid cs-text-secondary cs-text-sm">(Payments)</span>                       
-                                    <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, magnam!....</span>
-                                </p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'app_admin:discussion' %}" class="cs-grid" style="--gap:.25rem;">
-                                <p class="cs-flex cs-align-baseline cs-justify-between">
-                                    <span class="cs-grid cs-text-secondary cs-text-md">Nowela Mary</span>
-                                    <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">1 minute ago</span>
-                                </p>
-                                <p class="cs-flex cs-align-baseline cs-justify-start" style="--gap: .5rem;">             
-                                    <span class="cs-grid cs-text-secondary cs-text-sm">(Payments)</span>                       
-                                    <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, magnam!....</span>
-                                </p>
-                            </a>
-                        </li>
+                    <ul class="list cs-grid cs-content-start" style="--gap: .25rem" data-context="{{ chatrooms.context_name }}}}">
+                        {% for chatroom in chatrooms.results %}
+                            <li>
+                                <a href="{% url 'app_admin:discussion' chatroom.chatroom.roomname %}" class="cs-grid" style="--gap:.25rem;">
+                                    <p class="cs-flex cs-align-baseline cs-justify-between">
+                                        <span class="cs-grid cs-text-secondary cs-text-md">{{ chatroom.chatroom.user }}</span>
+                                        <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">{{ chatroom.chatroom.created_on }}</span>
+                                    </p>
+                                    <p class="cs-flex cs-align-baseline cs-justify-start" style="--gap: .5rem;">             
+                                        <!-- <span class="cs-grid cs-text-secondary cs-text-sm">(Payments)</span>                        -->
+                                        <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">{{ chatroom.last_message.message }}</span>
+                                    </p>
+                                </a>
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
                 <div class="chat outlined br-sm cs-align-start cs-content-start cs-hidden" style="--gap:1rem;padding: 1rem 1rem;">
