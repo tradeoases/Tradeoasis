@@ -120,7 +120,7 @@
                     </form>
                 </div>
                 <div class="cs-grid justify-end cs-grid-flow-col align-center" style="justify-content: flex-end;--gap: 1rem">
-                    <!-- <button class="notification-cta badge btn cs-bg-transparent">
+                    <button class="notification-cta badge btn cs-bg-transparent" style="visibility: hidden;">
                         <span class="count">4</span>
                         <i class="fa fa-bell"></i>
                         <div class="notification-list cs-hidden outlined cs-bg-white br-sm" style="--gap: 1rem;text-align: left;">
@@ -165,10 +165,10 @@
                                 </li>
                             </ul>
                         </div>
-                    </button> -->
+                    </button>
                     
                     <a href="{% url 'app_admin:profile' %}" class="cs-flex br-md" style="--gap: 1rem;padding: .5rem 1rem;background-color: hsla(213, 28%, 70%, 10%);align-content: center;align-items: center;">
-                        <div class="cs-grid" style="--gap: 0;justify-items: flex-end;align-content: center;">
+                        <div class="cs-grid" style="--gap: .25rem;justify-items: flex-end;align-content: center;">
                             <h4 class="cs-text-md cs-font-500" style="block-size: 14px;margin: 0;">{% trans request.user.username %}</h4>
                             <p class="cs-text-sm cs-font-500" style="color: hsl(0, 0%, 60%);">{% trans 'Support' %}</p>
                         </div>

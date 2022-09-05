@@ -6,6 +6,9 @@ from django.utils.translation import gettext as _
 from django.contrib import messages
 from django.http import HttpResponseNotFound, HttpResponse
 from django.contrib.auth import login
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
+from django.conf import settings
 
 import string
 import uuid
@@ -644,12 +647,33 @@ class ContactClient(SupportOnlyAccessMixin, View):
 
         return render(request, self.template_name, context=context_data)
 
-    def post(self, request):
+    def post(self, request, slug):
+        name = request.POST.get('client-name')
+        email = request.POST.get('client-email')
+        subject = request.POST.get('subject')
+        description = request.POST.get('description')
         # send email
 
-        # save a copy
+        email_body = render_to_string(
+            "email_message.html",
+            {
+                "name": name,
+                "email": email,
+                "description": description,
+            },
+        )
+        email = EmailMessage(
+            subject,
+            email_body,
+            settings.DEFAULT_FROM_EMAIL,
+            [
+                email,
+            ],
+        )
+        email.send(fail_silently=False)
 
-        pass
+        # save a copy
+        return redirect(reverse("app_admin:clients"))
 
 
 class ProfileView(SupportOnlyAccessMixin, View):
