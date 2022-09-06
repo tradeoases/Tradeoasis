@@ -633,7 +633,7 @@ footer a:hover {
     inset: 50% 5%;
     width: 120vw;
     aspect-ratio: 2/1;
-    background-color: hsla(38, 94%, 47%, 0.1);
+    background-color: hsla(38, 88%, 83%, 0.1);
     transform: translate(-15%, -50%) rotate(35deg);
     z-index: -1;
 }
@@ -643,7 +643,7 @@ footer a:hover {
 }
 
 .about-us-content .img-wrapper {
-    block-size: 90vh;
+    height: 60vh;
 }
 
 .about-us-content img {

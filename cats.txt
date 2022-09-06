@@ -272,11 +272,8 @@ Export - Import - Commercial Activities
 Pending Tasks in order of priority
 - Showroom detail page refractor (Either) 3
 - Membership Payments refractor (Both) To be discussed
-- dashboard charts - requests analysis (Mugisa) 2
 - dashboards final refractor (Mugisa) 4
 - Footer Links (Azizz)
-- About Us Page refracter (Azizz)
-- homepage advertising area (Azizz)
 
 Ongoing Tasks
 - Supplier Modal (Azizz)
@@ -284,4 +281,7 @@ Ongoing Tasks
 Complete Tasks
 - Social Authentication (Mugisa)
 - Chatrooms (Mugisa)
+- About Us Page refracter (Azizz)
+- homepage advertising area (Azizz)
 - Supplier - Buyer contracts (Mugisa) (90% payment not handled)
+- dashboard charts - requests analysis (90% requests charts not handled)

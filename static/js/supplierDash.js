@@ -271,7 +271,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${record.sub_category.name}</td>
                     <td>${record.currency} ${record.price}</td>
                     <td>${record.created_on}</td>
-                    <td>0</td>
+                    <td><i class="fa fa-info-circle"></i></td>
                 `;
                 tableBody.appendChild(tableRow);
                 tableRow.addEventListener('click', async () => {
@@ -330,7 +330,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${record.service.name}</td>
                     <td>${record.buyer.username}</td>
                     <td>${record.created_on}</td>
-                    <td style="display:grid; justify-content:center;align-items:center;"><a href="${BASE_URL}/suppliers/dashboard/contractsdetails/${record.id}"><i class="fa fa-info-circle"></i></a></td>
+                    <td><a style="display:grid; justify-items:center;align-items:center;" href="${BASE_URL}/suppliers/dashboard/contractsdetails/${record.id}"><i class="fa fa-info-circle"></i></a></td>
                 `;
                 tableBody.appendChild(tableRow);
             })
@@ -374,7 +374,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${record.description.slice(0, 150)} ...</td>
                     <td>${record.currency} ${record.price}</td>
                     <td>${record.created_on}</td>
-                    <td style="display:grid; justify-content:center;align-items:center;"><a href="${BASE_URL}/suppliers/dashboard/contractsdetails/${record.id}"><i class="fa fa-info-circle"></i></a></td>
                 `;
                 tableBody.appendChild(tableRow);
                 tableRow.addEventListener('click', async () => {
@@ -424,7 +423,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${record.service.name}</td>
                     <td>${record.supplier.username}</td>
                     <td>${record.created_on}</td>
-                    <td style="display:grid; justify-content:center;align-items:center;"><a href="${BASE_URL}/buyer/dashboard/contractsdetails/${record.id}"><i class="fa fa-info-circle"></i></a></td>
+                    <td style="display:grid; justify-content:center;align-items:center;text-center:"><a href="${BASE_URL}/buyer/dashboard/contractsdetails/${record.id}"><i class="fa fa-info-circle"></i></a></td>
                 `;
                 tableBody.appendChild(tableRow);
             })
