@@ -3,14 +3,14 @@
 {% load i18n %}
 {% block content %}
 
-    <div class="breadcrumb flex flex-wrap justify-start gap-2 w-full md:w-full mx-auto px-5 pt-8">
-        <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">{% trans 'Home' %}</a>
-        <a>/</a>
-        <a class="text-gray-600 hover:text-gray-900" href=''>{% trans 'Suppliers' %}</a>
-        <a>/</a>
-        <span class="text-lightBackgroundColor capitalize">{{object.business_name}}</span>
-    </div>
-    <section class="main w-12/12 py-6 pt-0" style="block-size: auto;">
+<section class="main w-12/12 py-6 pt-0" style="block-size: auto;">
+        <div class="breadcrumb flex flex-wrap justify-start gap-2 w-full md:w-full mx-auto px-5 pt-0">
+            <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">{% trans 'Home' %}</a>
+            <a>/</a>
+            <a class="text-gray-600 hover:text-gray-900" href=''>{% trans 'Suppliers' %}</a>
+            <a>/</a>
+            <span class="text-lightBackgroundColor capitalize">{{object.business_name}}</span>
+        </div>
         <div class="grid gap-6 md:gap-10 p-5 py-0 supplier-detail w-full md:w-full mx-auto">
             <div class="grid gap-4 justify-start content-start">
                 <div class="grid md:grid-flow-col justify-between gap-1">                        
@@ -80,7 +80,7 @@
                                 <p class="text-base text-slate-700 font-normal">
                                     {{service.description}}
                                 </p>
-                                <a href="./contract.html?service='customer-representation" class="flex place-items-center gap-2 px-2 text-base text-yellowColor duration-200 transition-all ease-in rounded-full  font-semibold justify-self-start">
+                                <a href="{% url 'supplier:supplier-contract' service.slug %}" class="flex place-items-center gap-2 px-2 text-base text-yellowColor duration-200 transition-all ease-in rounded-full  font-semibold justify-self-start">
                                     <span><i class="fa fa-address-book"></i></span>
                                     <span>Make Contract</span>
                                 </a>

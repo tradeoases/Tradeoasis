@@ -58,6 +58,13 @@ class ContractsListView(ListAPIView):
     def get_queryset(self):
         return PaymentModels.Contract.objects.filter(Q(buyer=self.request.user))
 
+class SupplierContractsListView(ListAPIView):
+    serializer_class = serializers.ContractsSerializer
+    pagination_class = CustomListPagination
+
+    def get_queryset(self):
+        return PaymentModels.Contract.objects.filter(Q(supplier=self.request.user))
+
 
 class ServicesListView(ListAPIView):
     serializer_class = serializers.ServiceSerializer

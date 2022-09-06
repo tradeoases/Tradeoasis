@@ -272,7 +272,6 @@ Export - Import - Commercial Activities
 Pending Tasks in order of priority
 - Showroom detail page refractor (Either) 3
 - Membership Payments refractor (Both) To be discussed
-- Supplier - Buyer contracts (Mugisa) 5
 - dashboard charts - requests analysis (Mugisa) 2
 - dashboards final refractor (Mugisa) 4
 - Footer Links (Azizz)
@@ -285,3 +284,4 @@ Ongoing Tasks
 Complete Tasks
 - Social Authentication (Mugisa)
 - Chatrooms (Mugisa)
+- Supplier - Buyer contracts (Mugisa) (90% payment not handled)

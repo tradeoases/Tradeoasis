@@ -12,6 +12,16 @@ urlpatterns = [
         views.SupplierDetailView.as_view(),
         name="supplier-detail",
     ),
+    path(
+        "supplier/<str:slug>/contact/",
+        views.SupplierContactView.as_view(),
+        name="supplier-contact",
+    ),
+    path(
+        "supplier/contract/<str:slug>/",
+        views.SupplierContractView.as_view(),
+        name="supplier-contract",
+    ),
     # products
     path("products/", views.ProductListView.as_view(), name="products"),
     path(
@@ -83,6 +93,16 @@ urlpatterns = [
         "dashboard/contractsdetails/<int:pk>",
         views.DashboardContractsDetailsView.as_view(),
         name="dashboard-contractsdetails",
+    ),
+    path(
+        "dashboard/contract/reject/<int:pk>",
+        views.DashboardContractRejectDetailsView.as_view(),
+        name="dashboard-contract-reject",
+    ),
+    path(
+        "dashboard/contract/accept/<int:pk>",
+        views.DashboardContractAcceptDetailsView.as_view(),
+        name="dashboard-contract-accept",
     ),
     path(
         "dashboard/services",

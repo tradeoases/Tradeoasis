@@ -173,19 +173,19 @@
     {% if new_arrivals.results %}
     <section class="main w-12/12">
         <div class="grid md:w-full mx-auto p-2 md:p-0 cf-1 gap-4">
-            <div class="section-body new_arrival grid gap-2 items-start card p-3 py-4 rounded-md">
+            <div class="section-body new_arrival grid gap-2 items-start card p-3 py-4 rounded-md" style="background-color: hsl(213, 28%, 19%);color: white">
                 <div class="flex justify-between items-baseline">
                     <!-- <div class="flex gap-5"> -->
                         <h1 class="text-lg md:text-2xl text-yellowColor font-bold">{% trans 'New Arrivals' %}</h1>
                         <!-- <h1 class="hidden md:flex gap-1 items-baseline text-lg text-slate-400 font-bold"><span
                                 class="text-lg text-xl text-slate-500">30%</span> OFF</h1> -->
                     <!-- </div> -->
-                    <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="{% url 'supplier:new-arivals' %}">{% trans "View All" %}</a>
+                    <a class="justify-self-end text-base text-white" href="{% url 'supplier:new-arivals' %}">{% trans "View All" %}</a>
                 </div>
-                <div class="grid gap-1 horizontal-scroll" data-context="{{new_arrivals.context_name}}">
+                <div class="grid gap-1 horizontal-scroll items-start" data-context="{{new_arrivals.context_name}}">
                     {% for new_arrival in new_arrivals.results %}
                         <div class="promotion-card grid"  data-new_arrival-index="{{forloop.counter}}">
-                            <a class="grid rounded-md" href="{% url 'supplier:product-detail' new_arrival.product.slug %}">
+                            <a class="grid rounded-md" href="{% url 'supplier:new-arivals' %}">
                                 <div class="grid p-2">
                                     <img loading="lazy" src="/media/{{new_arrival.main_image.image}}" alt="{{new_arrival.product.name}}" class="item-img rounded" style="width: 100%;aspect-ratio:1/.8;object-fit:cover;">
                                 </div>
@@ -207,6 +207,7 @@
     </section>
     {% endif %}
 
+    {% if showrooms.results %}
     <section class="main w-12/12 py-3">
         <div class="grid w-full mx-auto cf-1 gap-6">
             <div class="section-heading flex justify-between">
@@ -229,6 +230,7 @@
             </div>
         </div>
     </section>
+    {% endif %}
 
     {% if propular_products.results %}
     <section class="main w-12/12 pt-0" style="block-size: auto">

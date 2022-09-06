@@ -136,6 +136,7 @@ def record_transaction_count(sender, instance, **kwargs):
 
 
 class Contract(models.Model):
+    ref_no = models.CharField(_("Reference Number"), null=True, blank=True, unique=True, max_length=15)
     supplier = models.ForeignKey(
         to=Supplier, on_delete=models.CASCADE, related_name="supplier"
     )
@@ -146,10 +147,18 @@ class Contract(models.Model):
     )
 
     is_complete = models.BooleanField(_("Contract completed"), default=False)
-
     is_accepted = models.BooleanField(_("Contract accepted"), default=False)
+    payment_made = models.BooleanField(_("Contract payment made"), default=False)
 
+    start_date = models.DateField(_("start date"), null=True, blank=True)
+    end_date = models.DateField(_("end date"), null=True, blank=True)
     created_on = models.DateField(_("Created on"), default=timezone.now)
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.ref_no = str(uuid.uuid4())[:15].replace("-", "")
+
+        super().save(*args, **kwargs)
 
     def __str__(self) -> str:
         return f"Supplier: {self.supplier.username}, Buyer: {self.buyer.username}"

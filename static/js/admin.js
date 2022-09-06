@@ -472,9 +472,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td>${record.buyer.username}</td>
                     <td>${record.service.name}</td>
                     <td>${record.is_complete}</td>
+                    <td>${record.is_accepted}</td>
                     <td>${record.receipt.currency} ${record.receipt.amount_paid}</td>
                     <td>${record.created_on}</td>
-                    <td>0</td>
                 `;
                 tableBody.appendChild(tableRow);
                 tableRow.addEventListener('click', async () => {

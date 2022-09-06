@@ -18,17 +18,17 @@
                       </button>
                       <div class="slider" style="--slider-gap: .5rem">
                         {% for product in preview_products.results %}
-                            <div class="item">
+                            <a class="item" href="{% url 'supplier:product-detail' product.product.slug %}">
                                 <img src="/media/{{product.images.image}}" alt="{{product.name}}">
                                 <div class="item-content grid">
-                                    <h1 class="text-lg font-semibold text-lighterBackgroundColor" style="margin: 0">{{product.product.name}}</h1>
-                                    <h3 class="font-base text-slate-600">{{product.product.sub_category}}</h3>
+                                    <h1 class="text-base font-semibold text-lighterBackgroundColor" style="margin: 0">{{product.product.name}}</h1>
+                                    <h3 class="font-sm text-slate-600">{{product.product.sub_category}}</h3>
 
-                                    <a href="{% url 'supplier:product-detail' product.product.slug %}" class="grid grid-flow-col place-items-center gap-3 px-2 py-2 md:px-3 md:py-2 text-sm bg-lghterBackgroundColor hover:bg-lighterBackgroundColorHover duration-200 transition-all ease-in rounded text-white font-semibold">
+                                    <!-- <a href="{% url 'supplier:product-detail' product.product.slug %}" class="grid grid-flow-col place-items-center gap-3 px-2 py-2 md:px-3 md:py-2 text-sm bg-lghterBackgroundColor hover:bg-lighterBackgroundColorHover duration-200 transition-all ease-in rounded text-white font-semibold">
                                         <span>View Product</span>
-                                    </a>
+                                    </a> -->
                                 </div>
-                            </div>
+                            </a>
                         {% endfor %}
                       </div>
                       <button class="handle right-handle">
@@ -39,12 +39,12 @@
             </div>
             <div class="categories hidden md:grid py-1">
                 {% if categories_header %}
-                    <div class="grid ">
-                        <h4 class="text-lg font-bold text-slate-100">
+                    <div class="grid items-start content-start gap-0">
+                        <h4 class="text-lg font-bold text-slate-100" style="border: 1px solid rgb(236, 226, 226); margin: 0;padding: 0;">
                             {% trans "Categories for you" %}
                         </h4>
                         <ul class="text-slate-300 grid">
-                            {% for category in categories_header|slice:":4" %}
+                            {% for category in categories_header|slice:":3" %}
                                 <li
                                     class="text-slate-100 hover:text-white transition-colors transition-200 ease-in">
                                     <a class="flex items-center justify-start gap-2 py-2" href="{% url 'supplier:category-detail' category.slug  %}">

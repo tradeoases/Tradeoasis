@@ -9,6 +9,7 @@ from django.contrib.auth import login
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from django.conf import settings
+from django.db.models import Count
 
 import string
 import uuid
@@ -94,6 +95,8 @@ class AdminDashboardView(SupportOnlyAccessMixin, View):
                 },
             ],
         }
+
+        context_data["user_group"] = [obj for obj in AuthModels.User.objects.values('account_type').annotate(dcount=Count('account_type')).order_by()]
 
         context_data["top_suppliers"] = {
             "context_name": "top-suppliers",
@@ -665,7 +668,7 @@ class ContactClient(SupportOnlyAccessMixin, View):
         email = EmailMessage(
             subject,
             email_body,
-            settings.DEFAULT_FROM_EMAIL,
+            request.user.email,
             [
                 email,
             ],

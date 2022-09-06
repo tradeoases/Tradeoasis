@@ -1,3 +1,4 @@
+from crypt import methods
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
@@ -18,6 +19,12 @@ from auth_app import models as AuthModels
 from manager import models as ManagerModels
 from payment import models as PaymentModels
 from payment.mixins import AuthedOnlyAccessMixin
+
+from io import BytesIO
+from django.http import HttpResponse
+from django.template.loader import get_template
+
+from xhtml2pdf import pisa
 
 # payments
 import braintree
@@ -349,3 +356,37 @@ class InitSubscriptionView(View):
         }
 
         return render(request, self.template_name, context=context_data)
+
+
+class ContractPaymentView(View):
+    template_name = "payments/contract_payment.html"
+
+    def get(self, request, pk):
+        contract = PaymentModels.Contract.objects.filter(pk=pk).first()
+
+        context_data = dict()
+        context_data['view_name'] = "Contract Payment"
+        context_data['contract'] = contract
+
+        return render(request, self.template_name, context=context_data)
+
+def contract_receipt(request, pk):
+    if request.method == "GET":
+
+        contract = PaymentModels.Contract.objects.filter(pk=pk).first()
+        context_data = dict()
+        context_data['view_name'] = "Contract Payment"
+        context_data['contract'] = contract
+
+        return render(request, "payments/contract_ receipt.html", context=context_data)
+        # pdf = render_to_pdf('payments/contract_ receipt.html', context_data)
+        # return HttpResponse(pdf, content_type='application/pdf')
+
+def render_to_pdf(template_src, context_dict={}):
+    template = get_template(template_src)
+    html  = template.render(context_dict)
+    result = BytesIO()
+    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), content_type='application/pdf')
+    return None

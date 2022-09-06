@@ -1,3 +1,4 @@
+from ast import arg
 from re import template
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -7,6 +8,13 @@ from django.db.models import Q
 from django.core.paginator import Paginator
 from django.utils.translation import gettext as _
 from django.contrib import messages
+from django.db.models import Count
+
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
+from django.conf import settings
+
+from django.contrib.sites.shortcuts import get_current_site
 
 import random
 
@@ -60,6 +68,75 @@ class SupplierDetailView(DetailView):
         }
 
         return context
+
+
+class SupplierContactView(View):
+    pass
+
+class SupplierContractView(View):
+    template_name = "supplier/contract.html"
+
+    def get(self, request, slug):
+        context_data = dict()
+        if not request.user.is_authenticated:
+            return redirect(reverse("auth_app:login"))
+        elif request.user.is_authenticated and not request.user.account_type == "BUYER":
+            messages.add_message(request, messages.ERROR, _("Please create a buyer account to create a contract."))
+            context_data['is_buyer'] = False
+        else:
+            context_data['is_buyer'] = True
+
+        service = SupplierModels.Service.objects.filter(slug=slug).first()
+        context_data['view_name'] = "Contracts"
+        context_data['service'] = service
+        context_data['supplier'] = AuthModels.ClientProfile.objects.filter(user=service.supplier).first()
+
+        return render(request, self.template_name, context=context_data)
+
+    
+    def post(self, request, slug):
+
+        service = SupplierModels.Service.objects.filter(slug=slug).first()
+        if not request.user.is_authenticated:
+            return redirect(reverse("auth_app:login"))
+        elif request.user.is_authenticated and not request.user.account_type == "BUYER":
+            messages.add_message(request, messages.ERROR, _("Please create a buyer account to create a contract."))
+            return redirect(reverse('supplier:supplier-contract', args=[service.slug]))
+
+        contract_start_date = request.POST.get("contract-start-date")
+        contract_end_date = request.POST.get("contract-end-date")
+
+        supplier = AuthModels.Supplier.objects.filter(username=service.supplier.username).first()
+        buyer = AuthModels.Supplier.objects.filter(username=request.user.username).first()
+
+        PaymentModels.Contract.objects.create(
+            supplier = supplier,
+            buyer=buyer,
+            service=service,
+            start_date=contract_start_date,
+            end_date=contract_end_date,
+        )
+
+        # send email to supplier
+        email_body = render_to_string(
+            "email_message.html",
+            {
+                "name": supplier.username,
+                "email": supplier.email,
+                "description": f"A Contract application has been sumbited by {buyer.profile.business_name} on service {service.name}.\nPlease visit the dashboard to respond to the application.\nThank you."
+            },
+        )
+        email = EmailMessage(
+            _("Foroden Contract Created"),
+            email_body,
+            settings.DEFAULT_FROM_EMAIL,
+            [
+                supplier.email,
+            ],
+        )
+        email.send(fail_silently=False)
+
+        return redirect(reverse('buyer:contracts'))
 
 
 class ProductListView(View):
@@ -716,6 +793,8 @@ class DashboardView(SupplierOnlyAccessMixin, View):
             ],
         }
 
+        context_data["category_group"] = [obj for obj in SupplierModels.Product.objects.values('category__name').annotate(dcount=Count('category')).order_by()]
+
         context_data["top_products"] = {
             "context_name": "top-products",
             "results": SupplierModels.Product.objects.all()[
@@ -954,6 +1033,66 @@ class DashboardContractsDetailsView(SupplierOnlyAccessMixin, DetailView):
     def get_queryset(self):
         return self.model.objects.all()
 
+class DashboardContractRejectDetailsView(SupplierOnlyAccessMixin, View):
+    def post(self, request, pk):
+        contract = PaymentModels.Contract.objects.filter(pk=pk).first()
+        contract.is_accepted = False
+        contract.save()
+        messages.add_message(request, messages.ERROR, _("Contract has been rejected."))
+
+        email_body = render_to_string(
+            "email_message.html",
+            {
+                "name": contract.buyer.username,
+                "email": contract.buyer.email,
+                "description": f"Your contract application on service {contract.service.name} has been rejected.\nPlease contact the service for more information.\nThank you."
+            },
+        )
+        email = EmailMessage(
+            _("Foroden Contract Rejected."),
+            email_body,
+            settings.DEFAULT_FROM_EMAIL,
+            [
+                contract.buyer.email,
+            ],
+        )
+        email.send(fail_silently=False)
+
+        return redirect(reverse("supplier:dashboard-contractsdetails", args=[pk]))
+
+
+class DashboardContractAcceptDetailsView(SupplierOnlyAccessMixin, View):
+    def post(self, request, pk):
+        contract = PaymentModels.Contract.objects.filter(pk=pk).first()
+        contract.is_accepted = True
+        contract.save()
+
+        messages.add_message(request, messages.SUCCESS, _("Contract has been accepted."))
+
+
+        domain = get_current_site(request).domain
+        link = reverse("payment:contract-payment", kwargs={"pk": contract.pk})
+        payment_link = f"http://{domain}{link}"
+
+        email_body = render_to_string(
+            "email_message.html",
+            {
+                "name": contract.buyer.username,
+                "email": contract.buyer.email,
+                "description": f"Your contract application on service {contract.service.name} has been accepted.\nPlease visit the {payment_link} to complete the application process.\nThank you."
+            },
+        )
+        email = EmailMessage(
+            _("Foroden Contract Accepted"),
+            email_body,
+            settings.DEFAULT_FROM_EMAIL,
+            [
+                contract.buyer.email,
+            ],
+        )
+        email.send(fail_silently=False)
+
+        return redirect(reverse("supplier:dashboard-contractsdetails", args=[pk]))
 
 class DashboardServicesView(SupplierOnlyAccessMixin, View):
     template_name = "supplier/dashboard/services.html"

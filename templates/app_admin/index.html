@@ -90,7 +90,7 @@
                             </p>
                             <div class="cs-grid cs-content-start" style="--gap: 1rem;">
                                 {% for supplier in top_suppliers.results %}
-                                    <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;justify-self: stretch;">
+                                    <a href="{% url 'supplier:supplier-detail' supplier.profile.slug %}" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;justify-self: stretch;">
                                         <div class="avator br-full cs-overflow-hidden">
                                             <img src="/media/{{supplier.image}}" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
                                         </div>
@@ -131,8 +131,10 @@
 
     <!-- charts -->
 
+    {{ user_group|json_script:"user_group" }}
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const user_group = JSON.parse(document.getElementById('user_group').textContent);
 
             let mChart1 = createChart('Requests.',
                 'line',
@@ -143,8 +145,8 @@
 
             let mChart2 = createChart('Users',
                 'doughnut',
-                ['Admin', 'Suppliers', 'Buyers'],
-                [20, 200, 100],
+                user_group.map(obj => obj.account_type),
+                user_group.map(obj => obj.dcount),
                 'users'
             );
 

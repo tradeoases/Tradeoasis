@@ -302,7 +302,16 @@ document.addEventListener("DOMContentLoaded", () => {
             fetchState["contract_loaded"] = true;
         }
 
-        let response = await fetchData(url = 'api/contracts');
+        // which dashboard are we on
+        let url;
+        if (window.location.href.includes('/suppliers/')) {
+            url = "api/supplier/contracts";
+        }
+        else {
+            url = "api/contracts";
+        }
+
+        let response = await fetchData(url = url);
 
         const tableBody = document.querySelector('table#contracts tbody');
 

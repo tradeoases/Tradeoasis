@@ -62,8 +62,12 @@
 </div>
 
 <script src="{% static 'js/createChart.js' %}"></script>
+
+{{ category_group|json_script:"category_group" }}
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+
+        const category_group = JSON.parse(document.getElementById('category_group').textContent);
 
         let mChart1 = createChart('Requests.',
             'line',
@@ -74,8 +78,8 @@
 
         let mChart2 = createChart('Users',
             'doughnut',
-            ['Fashion', 'Electronics', 'Sports'],
-            [20, 200, 100],
+            category_group.map(obj => obj.category__name),
+            category_group.map(obj => obj.dcount),
             'users'
         );
 
