@@ -269,6 +269,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="{% static 'owl-carousel/owl.carousel.js' %}"></script>
     <script>
+
+        const toggleDropdownFoot = document.querySelector('#toggle-dropdown-foot');
+        const dropdownFoot = document.querySelector('.dropdown-foot');
+        toggleDropdownFoot.addEventListener('click', () => {
+            // It looks like tailwind is blocking this class
+            dropdownFoot.classList.toggle('hide');
+        });
+
         let collapsibleHeaders = document.getElementsByClassName('collapsible-header');
         let collapsibleSubHeaders = document.getElementsByClassName('collapsible-sub-header');
 
