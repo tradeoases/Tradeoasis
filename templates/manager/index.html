@@ -44,6 +44,124 @@
             }
         }
 
+        /* Advert */
+        .advert .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: .8rem 1.2rem;
+            /* background-color: #ecab08; */
+        }
+
+        .advert .section-heading .section-graphics {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .advert .section-heading .sec-svg {
+            block-size: 1.2rem;
+            inline-size: 1.2rem;
+            margin: 0 .4rem;
+        }
+
+        /* .advert .section-heading h2 {
+            font-size: 14px;
+            color: #fff;
+        } */
+
+        .advert .section-heading h2:first-child {
+            /* text-transform: uppercase; */
+        }
+
+        .advert .section-body {
+            
+        }
+
+        .advert .section-item-group {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1rem;
+        }
+
+        .advert .product {
+            /* height: 14rem; */
+            /* padding: .2rem .2rem .6rem .2rem; */
+            border: 1px solid #f3f3f3;
+            /* max-inline-size: 9.06rem; */
+            position: relative;
+            box-shadow: unset;
+        }
+
+        .advert .img {
+            border-radius: .2rem;
+        }
+
+        .advert .product:hover {
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .advert .product::after {
+            content: "-45%";
+            position: absolute;
+            top: .2rem;
+            right: .2rem;
+            border-radius: .2rem;
+            background-color: bisque;
+            padding: .2rem .4rem;
+            font-size: .8em;
+            display: none;
+        }
+
+        .advert .product .item-details {
+            block-size: 2.6rem;
+        }
+
+        .advert .product .title {
+            font-size: .88em;
+        }
+
+        .advert .product .price-new {
+            font-weight: 700;
+            font-size: 14px !important;
+        }
+        .status .bar {
+            position: relative;
+            top: 1.6rem;
+        }
+
+        .status .bar .content {
+            width: 100%;
+            height: 3px;
+            border-radius: 3px;
+            background-color: #b4b2b2;
+        }
+
+        .status .bar .content-before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 80%;
+            height: 3px;
+            border-radius: 3px;
+            background-color: #ecab08;
+        }
+
+        @media (max-width: 786px) {
+            .advert .section-item-group {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .section-heading h2:first-child,
+            .section-heading h2:last-child {
+                display: none;
+            }
+        }
+
     </style>
 
     <section class="main w-12/12 mt-5">
@@ -206,6 +324,45 @@
         </div>
     </section>
     {% endif %}
+
+
+    <section class="main w-12/12">
+        <div class="grid w-full mx-auto cf-1 advert card rounded-md pb-2">
+            <div class="section-heading rounded-t-md bg-yellowColor">
+                <div class="section-graphics flex gap-2">
+                    <!-- <img class="sec-svg" src="../static/assets/imgs/resources/price-tag.svg" alt="Price Tag"> -->
+                    <h2 class="text-lg md:text-xl font-bold text-white">Super Deals</h2>
+                </div>
+                <!-- <h2 class="text-base md:text-lg font-bold text-white"><span
+                        style="font-weight:100;">Time Left:</span> 01d : 05h : 42m
+                </h2> -->
+                <div class="section-graphics">
+                    <a href="{% url 'supplier:new-arivals' %}" class="text-base font-normal text-white">View All</a>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="section-item-group rounded-md p-4">
+                    {% for new_arrival in new_arrivals.results %}
+                    <div class="product card">
+                        <a class="grid gap-0.5" href="{% url 'supplier:new-arivals' %}">
+                            <img loading="lazy"
+                                src="/media/{{new_arrival.main_image.image}}"
+                                alt="{{new_arrival.product.name}}" class="item-img rounded"
+                                style="width: 100%;aspect-ratio:1/1;object-fit:cover;">
+                            <div class="item-details grid gap-0 justify-start text-left px-3">
+                                <h5 class="text-sm font-semibold leading-5">
+                                    <span class="title">{{new_arrival.product.name}}</span>
+                                </h5>
+                                <h6 class="text-gray-600 text-xs price-new">{{ new_arrival.supplier.profile.business_name }}</h6>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     {% if showrooms.results %}
     <section class="main w-12/12 py-3">

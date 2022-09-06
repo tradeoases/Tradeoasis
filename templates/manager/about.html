@@ -2,92 +2,221 @@
 {% load static %}
 {% load i18n %}
 {% block content %}
+<style>
+    body {
+        scroll-behavior: smooth;
+    }
+    .about-us {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 1.8rem;
+    }
 
-    <section class="main w-12/12 py-6 pt-0" style="background-color: #FFFFFF;">
-        <div class="grid gap-2 w-12/12 about-intro" style="background-color: rgb(242, 245, 248);">
+    .about-us h1 {
+        font-size: 24px;
+        font-weight: bolder;
+    }
+
+    .about-us-image {
+        inline-size: 100%;
+        block-size: 450px;
+    }
+
+    .about-us-image img {
+        inline-size: 100%;
+        block-size: 100%;
+    }
+
+    .statements {
+        margin: .8rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .our-history,
+    .our-statistics,
+    .our-mission {
+        padding: 0 .8rem;
+        border-right: 1px solid rgb(228, 225, 225);
+    }
+
+    .our-history,
+    .our-statistics,
+    .our-mission,
+    .our-vision {
+        font-size: 18px;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    .our-history:hover,
+    .our-statistics:hover,
+    .our-mission:hover,
+    .our-vision:hover {
+        text-decoration: underline;
+    }
+
+    .what-we-do {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        block-size: 250px;
+        inline-size: 100%;
+    }
+
+    .what-we-do-items {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .what-we-do-item {
+        inline-size: 100rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .what-we-do-item img {
+        block-size: 90px;
+        inline-size: 90px;
+    }
+
+    .what-we-do-item h3 {
+        text-align: center;
+    }
+</style>
+    <section class="main">
+        <div class="container" style="border-bottom:1px solid rgb(238, 233, 233);">
+            <div class="about-us gap-2">
+                <!-- <h1>About Us</h1> -->
+                <div class="statements text-slate-600 font-normal">
+                    <a href="#our-history">
+                        <h4 class="our-history">History</h4>
+                    </a>
+                    <a href="#our-statistics">
+                        <h4 class="our-statistics">Statistics</h4>
+                    </a>
+                    <a href="#our-mission">
+                        <h4 class="our-mission">Mission</h4>
+                    </a>
+                    <a href="#our-vision">
+                        <h4 class="our-vision" style="padding:0 .8rem;">Vision</h4>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="container about-us-image">
+            <img src="../static/assets/imgs/resources/02.jpg" alt="About Image">
+        </div> -->
+    </section>
+
+    <section class="main w-12/12 py-6 pt-0" style="background-color: #FFFFFF;" id="about-us">
+        <div class="what-we-do" style="background-color: rgb(242, 245, 248);padding-block:10.4rem;">
+            <div class="container what-we-do-items">
+                <div class="what-we-do-item">
+                    <img src="{% static 'assets/imgs/resources/03.png' %}" alt="intro">
+                    <h3 class="text-lighterBackgroundColor">We won 3</h3>
+                    <h3 class="text-lighterBackgroundColor">innovation</h3>
+                    <h3 class="text-lighterBackgroundColor">stores</h3>
+                </div>
+                <div class="what-we-do-item">
+                    <img src="{% static 'assets/imgs/resources/04.png' %}" alt="intro">
+                    <h3 class="text-lighterBackgroundColor">Dedicated team</h3>
+                    <h3 class="text-lighterBackgroundColor">to offer</h3>
+                    <h3 class="text-lighterBackgroundColor">24h support</h3>
+                </div>
+                <div class="what-we-do-item">
+                    <img src="{% static 'assets/imgs/resources/05.png' %}" alt="intro">
+                    <h3 class="text-lighterBackgroundColor">Providing a 100%</h3>
+                    <h3 class="text-lighterBackgroundColor">authentic</h3>
+                    <h3 class="text-lighterBackgroundColor">stores</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="main w-12/12 py-6 pt-0" style="background-color: #FFFFFF;" id="about-us">
+        <div id="our-history" class="grid gap-2 w-12/12 about-intro" style="background-color: rgb(242, 245, 248);">
             <div class="grid gap-2 justify-center">
-                <h4 class="text-xl md:text-2xl text-gray-600 font-bold">
-                    {% trans 'Who are we?' %}
+                <h4 class="text-xl md:text-2xl text-gray-600 font-bold" style="font-family: serif;">
+                    History
                 </h4>
             </div>
             <div class="grid gap-2">
-                <p class="text-lightBackgroundColor text-3xl md:text-4xl text-semi-bold w-full md:w-8/12 mx-auto text-center" style="font-family: serif;">
-                    {% trans 'We are empowering entrepreneurs around the world to chase their dreams.' %}
+                <p class="text-lightBackgroundColor text-3xl md:text-4xl text-semi-bold w-full md:w-8/12 mx-auto text-center"
+                    style="text-align: justify;font-size:18.8px;line-height: unset;">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, dolores a, optio incidunt iure ea
+                    et veritatis repudiandae quibusdam fugit, velit veniam unde voluptates est repellat laudantium
+                    obcaecati asperiores! Exercitationem libero accusamus rerum hic facilis placeat voluptatum
+                    cumque molestias cupiditate dolorum fugit excepturi similique dolorem, consequatur, culpa quis
+                    tempora modi!
                 </p>
             </div>
         </div>
     </section>
-    <section class="grid gap-10 about-us-content">
-        <div class="md:grid right md:grid-cols-2 gap-20 w-12/12 md:w-10/12 mx-auto overflow-hidden">
+    <section class="grid gap-10 about-us-content py-10">
+        <div id="our-mission"
+            class="md:grid right md:grid-cols-2 gap-20 w-12/12 md:w-10/12 mx-auto overflow-hidden">
             <div class="grid gap-4 content-center about-description">
-                <h2 class="text-xl md:text-2xl font-semibold text-lightBackgroundColor" style="font-family: serif">{% trans 'Vision Statement' %}</h2>
-                <p class="text-base md:text-lg text-slate-700">
-                    {% trans 'We represent a wide network of Digital Promoting and local and Traditional Marketing and Advertising  services  of products (in large scale) of various companies. Our offices and specialized and indigenous forces are operating in different countries. We have created a sustainable, learning and progressive system. We decide and act as a team. Our organization is an interconnected and learning system. Over time, we make the necessary adjustments to both maintain and increase our success.' %}
+                <h2 class="text-xl md:text-2xl font-semibold text-lightBackgroundColor" style="font-family: serif">
+                    Mission Statement</h2>
+                <p class="text-base md:text-lg text-slate-700" style="text-align: justify;">
+                    Now more than ever, consumers are choosing to support local shops over big-box chains. There are
+                    millions of thriving small businesses in North America and Europe alone, who collectively
+                    represent a $2T market. With our global community and the power of technology, Faire is helping
+                    fuel the growth of entrepreneurs everywhere.
                 </p>
-                <ul style="list-style: disc;list-style-position: inside;" class="text-base text-slate-700">
-                    <li>Accurate knowledge</li>
-                    <li>Informed and effective manpower</li>
-                    <li>Extensive and sustainable networking</li>
-                    <li>Commitment</li>
-                    <li>flexibility</li>
-                    <li>Efficient decision making</li>
-                </ul>
             </div>
             <div class="grid gap-2 img-wrapper">
-                <img src="https://images.unsplash.com/photo-1542744174-a35e40ade835?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fHNhbGVzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="">
+                <img src="https://images.unsplash.com/photo-1542744174-a35e40ade835?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fHNhbGVzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                    alt="">
             </div>
         </div>
-        <div class="md:grid left md:grid-cols-2 gap-20 w-12/12 md:w-10/12 mx-auto overflow-hidden">
+        <div id="our-vision" class="md:grid left md:grid-cols-2 gap-20 w-12/12 md:w-10/12 mx-auto overflow-hidden">
             <div class="grid gap-2 img-wrapper  hidden md:grid">
-                <img src="https://images.unsplash.com/photo-1467318339494-a32c2ada54d4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fG9mZmljZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60" alt="">
+                <img src="https://images.unsplash.com/photo-1467318339494-a32c2ada54d4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fG9mZmljZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+                    alt="">
             </div>
-            <div class="grid gap-4 md:gap-6 py-10 content-center about-description">
-                <div class="grid gap-2">
-                    <h2 class="text-lg md:text-xl font-semibold text-lightBackgroundColor" style="font-family: serif">{% trans 'Our Mission' %}</h2>
-                    <ul style="list-style: disc;list-style-position: inside;" class="text-base text-slate-700">
-                        <li>Accepting and obtaining representation of reputable companies</li>
-                        <li>Acting as if the parent company itself is operating in different countries</li>
-                        <li>Development of our offices in different countries</li>
-                        <li>Creating a network of specialized and indigenous forces in each country</li>
-                        <li>Creating a dynamic system from the source of production, transportation, customs, distribution, control, feedback and promotion </li>
-                    </ul>
-                </div>
-                <div class="grid gap-2">
-                    <h2 class="text-lg md:text-xl font-semibold text-lightBackgroundColor" style="font-family: serif">{% trans 'Our Vision' %}</h2>
-                    <ul style="list-style: disc;list-style-position: inside;" class="text-base text-slate-700">
-                        <li>Accepting and obtaining representation of more than 100 companies by 2026</li>
-                        <li>Development of operating offices in more than 14 countries by 2026</li>
-                        <li>Development of human resources to more than 2,000 people by 2026</li>
-                        <li>Activate more than 6 subsidiaries by 2026</li>
-                    </ul>
-                </div>
+            <div class="grid gap-2 md:gap-4 content-center about-description">
+                <h2 class="text-xl md:text-2xl font-semibold text-lightBackgroundColor" style="font-family: serif">
+                    Vision Statement</h2>
+                <p class="text-base md:text-lg text-slate-700" style="text-align: justify;">
+                    Now more than ever, consumers are choosing to support local shops over big-box chains. There are
+                    millions of thriving small businesses in North America and Europe alone, who collectively
+                    represent a $2T market. With our global community and the power of technology, Faire is helping
+                    fuel the growth of entrepreneurs everywhere.
+                </p>
             </div>
         </div>
     </section>
 
     <section class="grid bg-lghterBackgroundColor my-4">
-        <div class="stats grid gap-4 grid-cols-2 md:grid-cols-4 w-12/12 mx-auto justify-start">
+        <div id="our-statistics" class="stats grid gap-4 grid-cols-1 md:grid-cols-4 w-10/12 mx-auto justify-start">
             <div class="grid gap-1 stats-card">
                 <span class="num font-semibold text-white">50,000</span>
-                <span class="text-xl md:text-2xl text-white font-semibold">{% trans 'Suppliers' %}</span>
-                <span class="text-slate-300">{% trans 'All over the world.' %}</span>
+                <span class="text-xl md:text-2xl text-white font-semibold">Suppliers</span>
+                <span class="text-slate-300">All over the world.</span>
             </div>
             <div class="grid gap-1 stats-card">
-                <span class="num font-semibold text-white">5</span>
-                <span class="text-xl md:text-2xl text-white font-semibold">{% trans 'Showrooms' %}</span>
-                <span class="text-slate-300">{% trans 'All over the world.' %}</span>
+                <span class="num font-semibold text-white">50</span>
+                <span class="text-xl md:text-2xl text-white font-semibold">Showrooms</span>
+                <span class="text-slate-300">All over the world.</span>
             </div>
             <div class="grid gap-1 stats-card">
                 <span class="num font-semibold text-white">100</span>
-                <span class="text-xl md:text-2xl text-white font-semibold">{% trans 'Countries' %}</span>
-                <span class="text-slate-300">{% trans 'Using Foroden.' %}</span>
+                <span class="text-xl md:text-2xl text-white font-semibold">Countries</span>
+                <span class="text-slate-300">All over the world.</span>
             </div>
             <div class="grid gap-1 stats-card">
-                <span class="num font-semibold text-white">20,000</span>
-                <span class="text-xl md:text-2xl text-white font-semibold">{% trans 'Buyers' %}</span>
-                <span class="text-slate-300">{% trans 'Trading Everyday.' %}</span>
+                <span class="num font-semibold text-white">50,000</span>
+                <span class="text-xl md:text-2xl text-white font-semibold">Suppliers</span>
+                <span class="text-slate-300">All over the world.</span>
             </div>
         </div>
     </section>
-
 {% endblock %}
