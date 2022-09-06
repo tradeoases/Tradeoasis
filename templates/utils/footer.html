@@ -3,7 +3,6 @@
 {% load i18n %}
 
 <style>
-
     .flex-left-bottom a,
     footer li a {
         color: #717171;
@@ -98,7 +97,6 @@
     }
 </style>
 
-
     <footer class="mt-4 py-2 md:py-8">
         <div class="container-fluid foot mt-50" id="footer-large">
             <div class="container">
@@ -106,7 +104,7 @@
                     <div class="flex hoverables" style="width:100%;height:auto;">
                         <div class="cl cl1">
                             <h1 style="font-size:16px;font-weight:500;text-transform:unset;">Popular Features</h1>
-                            <ul>
+                            <ul class="py-2 md:py-0">
                                 <li><a href="#">Stores</a></li>
                                 <li><a href="#">Showrooms</a></li>
                                 <li><a href="#">Marketplace</a></li>
@@ -114,7 +112,7 @@
                         </div>
                         <div class="cl cl2">
                             <h1 style="font-size:16px;font-weight:500;text-transform:unset;">Payment Methods</h1>
-                            <ul>
+                            <ul class="py-2 md:py-0">
                                 <li><a href="#">Stripe</a></li>
                                 <li><a href="#">Square</a></li>
                                 <li><a href="#">PayPal</a></li>
@@ -125,7 +123,7 @@
                         </div>
                         <div class="cl cl2">
                             <h1 style="font-size:16px;font-weight:500;text-transform:unset;">FAQs</h1>
-                            <ul>
+                            <ul class="py-2 md:py-0">
                                 <li><a href="#">What is a store?</a></li>
                                 <li><a href="#">What is a showroom?</a></li>
                                 <li><a href="#">How do you create a store?</a></li>
@@ -133,7 +131,7 @@
                         </div>
                         <div class="cl cl4">
                             <h1 style="font-size:16px;font-weight:500;text-transform:unset;">Company</h1>
-                            <ul>
+                            <ul class="py-2 md:py-0">
                                 <li><a href="#">Careers</a></li>
                                 <li><a href="#">About Us</a></li>
                                 <li><a href="#">Contact Us</a></li>
@@ -191,7 +189,7 @@
                             <h1 style="font-size:16px;font-weight:500;text-transform:unset;">Popular Features</h1>
                         </div>
                         <div class="collapsible-content">
-                            <ul>
+                            <ul class="py-2 md:py-0">
                                 <li><a href="#">Stores</a></li>
                                 <li><a href="#">Showrooms</a></li>
                                 <li><a href="#">Marketplace</a></li>
@@ -203,7 +201,7 @@
                             <h1 style="font-size:16px;font-weight:500;text-transform:unset;">Payment Methods</h1>
                         </div>
                         <div class="collapsible-content">
-                            <ul>
+                            <ul class="py-2 md:py-0">
                                 <li><a href="#">Stripe</a></li>
                                 <li><a href="#">Square</a></li>
                                 <li><a href="#">PayPal</a></li>
@@ -218,7 +216,7 @@
                             <h1 style="font-size:16px;font-weight:500;text-transform:unset;">FAQs</h1>
                         </div>
                         <div class="collapsible-content">
-                            <ul>
+                            <ul class="py-2 md:py-0">
                                 <li><a href="#">What is a store?</a></li>
                                 <li><a href="#">What is a showroom?</a></li>
                                 <li><a href="#">How do you create a store?</a></li>
@@ -230,7 +228,7 @@
                             <h1 style="font-size:16px;font-weight:500;text-transform:unset;">Company</h1>
                         </div>
                         <div class="collapsible-content">
-                            <ul>
+                            <ul class="py-2 md:py-0">
                                 <li><a href="#">Careers</a></li>
                                 <li><a href="#">About Us</a></li>
                                 <li><a href="#">Contact Us</a></li>
@@ -270,12 +268,12 @@
     <script src="{% static 'owl-carousel/owl.carousel.js' %}"></script>
     <script>
 
-        const toggleDropdownFoot = document.querySelector('#toggle-dropdown-foot');
-        const dropdownFoot = document.querySelector('.dropdown-foot');
-        toggleDropdownFoot.addEventListener('click', () => {
-            // It looks like tailwind is blocking this class
-            dropdownFoot.classList.toggle('hide');
-        });
+        // const toggleDropdownFoot = document.querySelector('#toggle-dropdown-foot');
+        // const dropdownFoot = document.querySelector('.dropdown-foot');
+        // toggleDropdownFoot.addEventListener('click', () => {
+        //     // It looks like tailwind is blocking this class
+        //     dropdownFoot.classList.toggle('hide');
+        // });
 
         let collapsibleHeaders = document.getElementsByClassName('collapsible-header');
         let collapsibleSubHeaders = document.getElementsByClassName('collapsible-sub-header');
