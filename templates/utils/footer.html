@@ -1,128 +1,285 @@
 
 {% load static %}
 {% load i18n %}
-    <hr>
-    <footer class="mt-0 md:mt-10">
-        <div class="container-fluid foot mt-0 md:mt-50">
-            <div class="footer-md-hide container my-8">
-                <div class="cl cl1 w-3/12">
-                    <img loading="lazy" src="{% static 'assets/imgs/resources/logo_website-e1652772171833-1.png' %}" alt="footer-logo" style="inline-size: 5rem;">
-                </div>
-                <div class="fc gap-6 w-9/12 grid gap-4" style="block-size:80vh;margin:0">
-                    <div class="flex hoverables" style="width: 100%;gap: 2rem;">
-                        <div class="cl cl2">
-                            <h1>{% trans 'Let us help you' %}</h1>
+
+<style>
+
+    .flex-left-bottom a,
+    footer li a {
+        color: #717171;
+    }
+
+    .flex-left-bottom a {
+        padding-inline-end: .4rem;
+    }
+
+    .flex-left-bottom a:last-child {
+        border-inline-end: unset;
+    }
+
+    #footer-small {
+        display: none;
+    }
+
+    .accordion {
+        width: 100%;
+    }
+
+    .accordion-collapsible {
+        background: transparent;
+    }
+
+    .accordion-collapsible:not(:last-child) {
+        border-bottom: none;
+    }
+
+    .collapsible-header {
+        font-size: 1.25rem;
+        display: flex;
+        justify-content: space-between;
+        padding: .5rem 0;
+        cursor: pointer;
+    }
+
+    .collapsible-header::after {
+        content: '+';
+        position: relative;
+        right: .625rem;
+    }
+
+    .collapsible-content {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height .8s, opacity 1s;
+    }
+
+    .collapsible-open .collapsible-header::after {
+        content: '-';
+    }
+
+    .collapsible-open .collapsible-content {
+        max-height: fit-content;
+        opacity: 1;
+    }
+
+    .collapsible-content ul li {
+        margin: .1rem 0;
+    }
+
+    .collapsible-content ul li a {
+        font-size: 16px;
+        margin: .625rem;
+    }
+
+    .collapsible-content ul li a {
+        color: #828282;
+    }
+
+    @media (max-width: 786px) {
+        .advert .section-item-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .section-heading h2:first-child,
+        .section-heading h2:last-child {
+            display: none;
+        }
+
+        #footer-large {
+            display: none;
+        }
+
+        #footer-small {
+            display: block;
+        }
+    }
+</style>
+
+
+    <footer class="mt-4 py-2 md:py-8">
+        <div class="container-fluid foot mt-50" id="footer-large">
+            <div class="container">
+                <div class="fc flex">
+                    <div class="flex hoverables" style="width:100%;height:auto;">
+                        <div class="cl cl1">
+                            <h1 style="font-size:16px;font-weight:500;text-transform:unset;">Popular Features</h1>
                             <ul>
-                                <li><a href="#">{% trans 'Help Center' %}</a></li>
-                                <li><a href="#">{% trans 'Contact us' %}</a></li>
-                                <li><a href="#">{% trans 'Payment Methods' %}</a></li>
-                                <li><a href="#">{% trans 'Report a Product' %}</a></li>
+                                <li><a href="#">Stores</a></li>
+                                <li><a href="#">Showrooms</a></li>
+                                <li><a href="#">Marketplace</a></li>
                             </ul>
                         </div>
-                        <div class="cl cl3">
-                            <h1>{% trans 'About Foroden' %}</h1>
+                        <div class="cl cl2">
+                            <h1 style="font-size:16px;font-weight:500;text-transform:unset;">Payment Methods</h1>
                             <ul>
-                                <li><a href="./about.html">{% trans 'About us' %}</a></li>
-                                <li><a href="#">{% trans 'Terms and Conditions' %}</a></li>
-                                <li><a href="#">{% trans 'Dispute Resolution Policy' %}</a></li>
-                                <li><a href="#">{% trans 'Privacy Policy' %}</a></li>
-                                <li><a href="#">{% trans 'Cookie Notice' %}</a></li>
+                                <li><a href="#">Stripe</a></li>
+                                <li><a href="#">Square</a></li>
+                                <li><a href="#">PayPal</a></li>
+                                <li><a href="#">Secure Pay</a></li>
+                                <li><a href="#">Google Pay</a></li>
+                                <li><a href="#">Mastercard</a></li>
+                            </ul>
+                        </div>
+                        <div class="cl cl2">
+                            <h1 style="font-size:16px;font-weight:500;text-transform:unset;">FAQs</h1>
+                            <ul>
+                                <li><a href="#">What is a store?</a></li>
+                                <li><a href="#">What is a showroom?</a></li>
+                                <li><a href="#">How do you create a store?</a></li>
                             </ul>
                         </div>
                         <div class="cl cl4">
-                            <h1>{% trans 'Make money with us' %}</h1>
+                            <h1 style="font-size:16px;font-weight:500;text-transform:unset;">Company</h1>
                             <ul>
-                                <li><a href="#">{% trans 'Sell on Foroden' %}</a></li>
-                                <li><a href="#">{% trans 'Make Business Contracts' %}</a></li>
+                                <li><a href="#">Careers</a></li>
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                                <li><a href="#">Management Team</a></li>
                             </ul>
-                        </div>
-                    </div>
-                    <hr style="border-top: 1px solid #d5d5d5;width:100%;">
-                    <div class="flex justify-items-start items-start fc dropdown-foot hide gap-4" style="padding:0;block-size:fit-content;margin:0;align-items:flex-start;">
-                        <div class="grid gap-2 w-5/12">
-                            <h1>{% trans 'Payment Methods' %}</h1>
-                            <ul>
-                                <li><a href="#">PayPal</a></li>
-                                <li><a href="#">Stripe</a></li>
-                                <li><a href="#">Mastercard</a></li>
-                                <li><a href="#">ZeeMoney</a></li>
-                            </ul>
-                        </div>
-                        <div class="cl cl3" style="width: 100%">
-                            <h1>{% trans 'FAQs' %}</h1>
-                            <div class="cl cl3 flex" style="width: 100%;gap: 1rem;">
-                                <ul>
-                                    <li><a href="#">{% trans 'What is a showroom?' %} </a></li>
-                                    <li><a href="#">{% trans 'How to join a showroom' %}</a></li>
-                                    <li><a href="#">{% trans 'Get seen in the showroom' %}</a></li>
-                                </ul>
-                                <ul>
-                                    <li><a href="#">{% trans 'How to create a store?' %}</a></li>
-                                    <li><a href="#">{% trans 'How to create products' %}</a></li>
-                                    <li><a href="#">{% trans 'Manage your products' %}</a></li>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="container" style="margin-top: 25px;margin-bottom:25px;">
-                <div class="grid md:flex gap-4 items-end" style="justify-content:space-between;margin:.6rem 0;">
-                    <div class="grid flex-left gap-2">
-                        <!-- <div class="flex-left-top" style="margin-bottom:14px;">
-                            <a href="#" style="border:1px solid #ccc;border-radius:5px;padding:10px 15px;">United
+            <div class="container" style="margin-bottom:25px;">
+                <div class="flex" style="justify-content:space-between;margin:.6rem 0;">
+                    <div class="flex-left">
+                        <div class="flex-left-top" style="margin-bottom:14px;">
+                            <a href="#"
+                                style="border:1px solid #ccc;border-radius:5px;padding:10px 15px;text-decoration:none;">United
                                 States
                                 . English</a>
-                        </div> -->
-                        <div class="grid gap-1 md:gap-2 flex-left-bottom">
-                            <span class="hidden md:grid" style="color:#adacac;">© 2010-2022 Foroden</span>
-                            <div class="flex flex-wrap justify-center gap-2">
-                                <a href="{% url 'app_admin:home' %}">{% trans 'Admin' %}</a>
-                                <a href="#">{% trans 'Terms' %}</a>
-                                <a href="#">{% trans 'Privacy' %}</a>
-                                <a href="#">{% trans 'Legal' %}</a>
-                                <a href="#">{% trans 'Accessibility Statement' %}</a>
-                            </div>
+                        </div>
+                        <div class="flex-left-bottom flex">
+                            <span style="margin-inline-end:10px;color: #717171;">© 2010-2022
+                                Foroden</span>
+                            <a href="./admin/index.html"
+                                style="margin-inline-end:10px;margin-inline-start:20px;">Admin</a>
+                            <a href="#" style="margin-inline-end:10px;">Terms</a>
+                            <a href="#" style="margin-inline-end:10px;">Privacy</a>
+                            <a href="#" style="margin-inline-end:10px;">Legal</a>
+                            <a href="#" style="margin-inline-end:10px;">Accessibility Statement</a>
                         </div>
                     </div>
-                    <div class="flex-right flex md:grid gap-3 items-center justify-center">
-                        <div class="flex-left-top flex gap-4">
-                            <i class="ti-facebook"></i>
-                            <!-- <i class="ti-youtube"></i> -->
-                            <i class="ti-twitter"></i>
-                            <a href=""><i class="ti-instagram"></i></a>
-                            <a href=""><i class="ti-linkedin"></i></a>
-                            <!-- <i class="ti-microphone"></i> -->
+                    <div class="flex-right">
+                        <div class="flex-left-top">
+                            <i class="ti-facebook" style="margin-inline-end:10px;"></i>
+                            <i class="ti-youtube" style="margin-inline-end:10px;"></i>
+                            <i class="ti-twitter" style="margin-inline-end:10px;"></i>
+                            <i class="ti-instagram" style="margin-inline-end:10px;"></i>
+                            <i class="ti-linkedin" style="margin-inline-end:10px;"></i>
+                            <i class="ti-microphone" style="margin-inline-end:10px;"></i>
                         </div>
-                        <!-- <div class="flex-left-bottom flex" style="justify-content:flex-end;">
-                            <img src="{% static 'assets/imgs/resources/apple-logo.jpg' %}" alt=""
-                                style="width:80px;block-size:30px;">
-                        </div> -->
+                        <div class="flex-left-bottom flex" style="justify-content:flex-end;">
+                            <img src="../static/assets/imgs/resources/apple-logo.jpg" alt=""
+                                style="margin-inline-end:10px;width:80px;height:30px;">
+                        </div>
                     </div>
-                    <span class="justify-self-center grid md:hidden" style="color:#adacac;">© <script>document.write(new Date().getFullYear())</script> Foroden</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container-fluid foot mt-50" id="footer-small">
+            <div class="container" style="margin-block:1.2rem;">
+                <div class="accordion">
+                    <div class="accordion-collapsible">
+                        <div class="collapsible-header">
+                            <h1 style="font-size:16px;font-weight:500;text-transform:unset;">Popular Features</h1>
+                        </div>
+                        <div class="collapsible-content">
+                            <ul>
+                                <li><a href="#">Stores</a></li>
+                                <li><a href="#">Showrooms</a></li>
+                                <li><a href="#">Marketplace</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion-collapsible">
+                        <div class="collapsible-header">
+                            <h1 style="font-size:16px;font-weight:500;text-transform:unset;">Payment Methods</h1>
+                        </div>
+                        <div class="collapsible-content">
+                            <ul>
+                                <li><a href="#">Stripe</a></li>
+                                <li><a href="#">Square</a></li>
+                                <li><a href="#">PayPal</a></li>
+                                <li><a href="#">Secure Pay</a></li>
+                                <li><a href="#">Google Pay</a></li>
+                                <li><a href="#">Mastercard</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion-collapsible">
+                        <div class="collapsible-header">
+                            <h1 style="font-size:16px;font-weight:500;text-transform:unset;">FAQs</h1>
+                        </div>
+                        <div class="collapsible-content">
+                            <ul>
+                                <li><a href="#">What is a store?</a></li>
+                                <li><a href="#">What is a showroom?</a></li>
+                                <li><a href="#">How do you create a store?</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion-collapsible">
+                        <div class="collapsible-header">
+                            <h1 style="font-size:16px;font-weight:500;text-transform:unset;">Company</h1>
+                        </div>
+                        <div class="collapsible-content">
+                            <ul>
+                                <li><a href="#">Careers</a></li>
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                                <li><a href="#">Management Team</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container" style="margin-bottom:25px;">
+                <div class="flex" style="flex-direction:column;">
+                    <div class="flex" style="justify-content: center;">
+                        <a href="./admin/index.html" style="margin-inline-end:10px;">Admin</a>
+                        <a href="#" style="margin-inline-end:10px;">Terms</a>
+                        <a href="#" style="margin-inline-end:10px;">Privacy</a>
+                        <a href="#" style="margin-inline-end:10px;">Legal</a>
+                        <a href="#" style="margin-inline-end:10px;">Accessibility</a>
+                    </div>
+                    <div class="flex" style="justify-content: center;margin-block-start: .4rem;">
+                        <i class="ti-facebook" style="margin-inline-end:10px;"></i>
+                        <i class="ti-youtube" style="margin-inline-end:10px;"></i>
+                        <i class="ti-twitter" style="margin-inline-end:10px;"></i>
+                        <i class="ti-instagram" style="margin-inline-end:10px;"></i>
+                        <i class="ti-linkedin" style="margin-inline-end:10px;"></i>
+                        <i class="ti-microphone" style="margin-inline-end:10px;"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </footer>
+
 
     <script src="{% static 'js/scripts.js' %}"></script>
     
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="{% static 'owl-carousel/owl.carousel.js' %}"></script>
-
     <script>
-        // $(document).ready(function () {
-            // $("#banner").owlCarousel({
-            //     autoPlay: 5000, //Set AutoPlay to 3 seconds
-            //     responsiveClass:true,
-            //     items: 1,
-            //     // itemsDesktop: [1199, 3],
-            //     // itemsDesktopSmall: [979, 3],
-            // });
-        // });
+        let collapsibleHeaders = document.getElementsByClassName('collapsible-header');
+        let collapsibleSubHeaders = document.getElementsByClassName('collapsible-sub-header');
+
+        Array.from(collapsibleHeaders).forEach((header, i) => {
+            header.addEventListener('click', () => {
+                Array.from(collapsibleHeaders).forEach(header => {
+                    header.parentElement.classList.remove('collapsible-open');
+                });
+                header.parentElement.classList.toggle('collapsible-open');
+            });
+        });
     </script>
 
 </body>

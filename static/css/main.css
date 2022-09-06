@@ -561,7 +561,7 @@ nav.cs-fixed li:hover * {
 /* Start Footer */
 .fc {
     padding: 0 0;
-    block-size: 500px;
+    /* block-size: 500px; */
     overflow: hidden;
 }
 
