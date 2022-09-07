@@ -23,7 +23,7 @@
                             {% for sub_category in sub_categories.results %}                            
                                 <li class="side-menu-item text-slate-800 hover:text-black transition-colors transition-200 ease-in" data-sub-category-index="{{ forloop.counter }}">
                                     <a class="flex items-center justify-start gap-2 py-2" href='{% url "supplier:subcategory-detail" object.slug sub_category.slug %}'>
-                                        <i class="ti-folder"></i>
+                                        <!-- <i class="ti-folder"></i> -->
                                         <span>
                                             {{ sub_category.name }}</span>
                                     </a>

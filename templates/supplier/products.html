@@ -49,38 +49,7 @@
         </div>
     </div>
 
-    <section class="main w-12/12" style="block-size: auto">
-        <div class="grid w-full mx-auto cf-1 gap-4" style="grid-template-columns: 1fr;">
-            {% if products.results %}
-                <div class="section-body grid gap-2 md:gap-6 grid-cols-2 md:grid-cols-5 py-4"
-                data-context="{{products.context_name}}">
-                    {% for product in products.results %}
-                        <div class="single-image-product-card overflow-hidden rounded grid gap-0.5 card-outlined">
-                            <a class="grid gap-2 rounded overflow-hidden" href="{% url 'supplier:product-detail' product.product.slug %}">
-                                <img loading="lazy" src="/media/{{product.images.image}}" alt="{{product.name}}"
-                                    class="item-img rounded" style="width: 100%;object-fit:cover;">
-                                <div class="item-details grid gap-0 py-1 md:py-2 px-4 gap-2"
-                                    style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
-                                    <h5 class="text-sm font-bold leading-5 text-lightBackgroundColor">
-                                        {{product.product.name}}
-                                    </h5>
-                                    <p class="text-xs font-medium">
-                                        <span>{{product.product.currency}}</span>
-                                        <span>{{product.product.price}}</span>
-                                    </p>
-                                </div>
-                                <span class="grid items-center pb-2 px-4 font-semibold text-sm">By {{ product.supplier.profile.business_name }}</span>
-                            </a>
-                        </div>
-                    {% endfor %}
-                </div>
-            {% else %}
-                <div class="flex justify-between items-center px-6 pb-3 py-2 text-lighterBackgroundColor text-lg rounded-md font-semibold leading-5 justify-self-center">
-                    <p>{% trans 'No Products Found' %}</p>
-                </div>
-            {% endif %}
-        </div>
-    </section>
+    {% include '../utils/product_list.html' %}
 
     <div class="hidden pagination md:grid grid-flow-col gap-2 justify-center py-3 my-2 md:w-full mx-auto border-b border-t border-solid border-slate-200">
         {% if page_obj.has_previous %}
@@ -130,41 +99,7 @@
         </div>
     </div>
 
-    {% if discounts.results %}
-    <section class="main w-12/12">
-        <div class="grid md:w-full mx-auto p-2 md:p-0 cf-1 gap-4">
-            <div class="section-body grid gap-2 card p-3 py-6 rounded-md">
-                <div class="flex p-0 justify-between items-baseline">
-                    <div class="flex gap-5">
-                        <h1 class="text-xl md:text-2xl text-yellowColor font-bold">{% trans 'New Arrivals' %}</h1>
-                        <!-- <h1 class="hidden md:flex gap-1 items-baseline text-xl text-slate-400 font-bold"><span
-                                class="text-lg text-2xl text-slate-500">30%</span> OFF</h1> -->
-                    </div>
-                    <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="">{% trans 'View All' %}</a>
-                </div>
-                <div class="grid gap-2 grid-cols-2 md:grid-cols-6" data-context="{{discounts.context_name}}">
-                    {% for discount in discounts.results %}
-                        <div class="promotion-card grid"  data-discount-index="{{forloop.counter}}">
-                            <a class="grid gap-1 rounded-md" href="{% url 'supplier:product-detail' discount.product.slug %}">
-                                <div class="grid p-2">
-                                    <img loading="lazy" src="/media/{{discount.main_image.image}}" alt="{{discount.product.name}}" class="item-img rounded" style="width: 100%;aspect-ratio:1/.8;object-fit:cover;">
-                                </div>
-                                <div class="item-details grid gap-1 px-2">
-                                    <h5 class="text-sm font-normal leading-5">
-                                        {{discount.product.name}}
-                                    </h5>
-                                    <p class="text-base font-bold flex gap-2 items-baseline">
-                                        {{discount.product.currency}} <span>{{discount.product.price}}</span><s class="text-slate-400 font-normal text-sm">{{discount.product.price}}</s>
-                                    </p>
-                                </div>
-                            </a>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </section>
-    {% endif %}
+    {% include '../utils/new_arrivals.html' %}
 
     {% if related_subcategories.results %}
     <section class="main w-12/12 my-3">
@@ -173,7 +108,7 @@
                 <div class="grid gap-1">
                     <div class="flex py-2 pt-0 justify-between items-baseline">
                         <div class="flex gap-5">                            
-                            <h1 class="sec-title text-xl capitalize md:text-2xl font-bold text-yellowColor">{% trans 'Related Products' %}</h1>
+                            <h1 class="sec-title text-lg capitalize md:text-xl font-bold text-yellowColor">{% trans 'Related Products' %}</h1>
                         </div>
                     </div>
                     <div class="grid gap-3 grid-cols-2 rounded-md items-start justify-start" data-context="{{related_subcategories.context_name}}">
@@ -199,7 +134,7 @@
             <div class="grid gap-1">                     
                 <div class="flex py-2 pt-0 justify-between items-baseline" style="justify-content: space-between;">
                     <div class="flex gap-5">                            
-                        <h1 class="sec-title text-xl capitalize md:text-2xl font-bold text-yellowColor">{% trans 'Popular Stores' %}</h1>
+                        <h1 class="sec-title text-lg capitalize md:text-xl font-bold text-yellowColor">{% trans 'Popular Stores' %}</h1>
                     </div>
                     <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="">{% trans 'View All' %}</a>
                 </div>

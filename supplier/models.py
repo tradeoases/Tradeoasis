@@ -18,7 +18,7 @@ from auth_app.models import Supplier
 def get_file_path(instance, filename):
     ext = filename.split(".")[-1]
     # filename = "%s-%s.%s" % (instance.slug, uuid.uuid4(), ext)
-    filename = f'{instance.slug}-{uuid.uuid4()}'[:50] + f'.{ext}'
+    filename = f"{instance.slug}-{uuid.uuid4()}"[:50] + f".{ext}"
     return os.path.join(f"{instance.__class__.__name__}/images/", filename)
 
 

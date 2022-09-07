@@ -113,8 +113,8 @@ class HomeView(View):
                     )(list(Product.objects.all().order_by("-id")[:10]))
                 ],
             },
-            "discounts": {
-                "context_name": "discounts",
+            "advertised_products": {
+                "context_name": "advertised_products",
                 "results": [
                     {
                         "product": product,
@@ -126,8 +126,8 @@ class HomeView(View):
                     for product in Product.objects.all().order_by("-id")[:6]
                 ],
             },
-            "propular_products": {
-                "context_name": "propular-products",
+            "products": {
+                "context_name": "products",
                 "results": [
                     {
                         "product": product,
@@ -204,6 +204,17 @@ class ShowRoomDetailView(DetailView):
                         )
                     ][:20]
                 )
+            ],
+        }
+        context["advertised_products"] = {
+            "context_name": "advertised_products",
+            "results": [
+                {
+                    "product": product,
+                    "main_image": ProductImage.objects.filter(product=product).first(),
+                    "sub_images": ProductImage.objects.filter(product=product)[1:4],
+                }
+                for product in Product.objects.all().order_by("-id")[:6]
             ],
         }
 
@@ -285,20 +296,18 @@ class SupportChatroomView(AuthedOnlyAccessMixin, View):
     def get(self, request):
         if request.user.account_type.lower() in ["support", "admin"]:
             return redirect(reverse("app_admin:home"))
-            
-        if not request.COOKIES.get('chatroom_roomname', None):
+
+        if not request.COOKIES.get("chatroom_roomname", None):
             room_name = str(uuid.uuid4()).replace("-", "")
-            context_data = {"view_name": _("Support"),"room_name": room_name}
+            context_data = {"view_name": _("Support"), "room_name": room_name}
             response = render(request, self.template_name, context=context_data)
-            response.set_cookie('chatroom_roomname', value=room_name, max_age=86400)
+            response.set_cookie("chatroom_roomname", value=room_name, max_age=86400)
         else:
-            room_name = request.COOKIES.get('chatroom_roomname', None)
-            context_data = {"view_name": _("Support"),"room_name": room_name}
+            room_name = request.COOKIES.get("chatroom_roomname", None)
+            context_data = {"view_name": _("Support"), "room_name": room_name}
             response = render(request, self.template_name, context=context_data)
 
         return response
-
-    
 
 
 class SupportDiscussionListView(View):
@@ -334,7 +343,9 @@ class SupportCreateDiscussionView(AuthedOnlyAccessMixin, View):
         )
 
         if not discussion:
-            messages.add_message(request, messages.ERROR, _("Error occurred. Try Again"))
+            messages.add_message(
+                request, messages.ERROR, _("Error occurred. Try Again")
+            )
             return redirect(reverse("manager:create-discussion"))
 
         fields = ("subject", "description")
@@ -391,7 +402,9 @@ class SupportDiscussionView(View):
         )
 
         if not discussion_reply:
-            messages.add_message(request, messages.ERROR, _("Error occurred. Try Again"))
+            messages.add_message(
+                request, messages.ERROR, _("Error occurred. Try Again")
+            )
             return redirect(
                 reverse("manager:discussion", kwargs={"slug": discussion.slug})
             )
@@ -427,6 +440,5 @@ class SupportDiscussionView(View):
         return redirect(reverse("manager:discussion", kwargs={"slug": discussion.slug}))
 
 
-
 def blockDasboardAccess(request):
-    return render(request, 'utils/blockedAccess.html')
+    return render(request, "utils/blockedAccess.html")

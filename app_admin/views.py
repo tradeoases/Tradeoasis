@@ -96,7 +96,12 @@ class AdminDashboardView(SupportOnlyAccessMixin, View):
             ],
         }
 
-        context_data["user_group"] = [obj for obj in AuthModels.User.objects.values('account_type').annotate(dcount=Count('account_type')).order_by()]
+        context_data["user_group"] = [
+            obj
+            for obj in AuthModels.User.objects.values("account_type")
+            .annotate(dcount=Count("account_type"))
+            .order_by()
+        ]
 
         context_data["top_suppliers"] = {
             "context_name": "top-suppliers",
@@ -492,11 +497,11 @@ class SubCategoryCreateView(SupportOnlyAccessMixin, View):
         return redirect(reverse("app_admin:subcategory-create"))
 
 
-
-def get_last_chatroom_msg( chatroom):
+def get_last_chatroom_msg(chatroom):
     with open(chatroom.chatfilepath, "r") as file:
         current_data = json.load(file)
         return current_data[-1]
+
 
 class AdminDiscussionsView(SupportOnlyAccessMixin, View):
     template_name = "app_admin/support/index.html"
@@ -507,14 +512,12 @@ class AdminDiscussionsView(SupportOnlyAccessMixin, View):
         context_data["view_name"] = _("Admin Dashboard - Support")
         context_data["active_tab"] = "Support"
 
-        context_data['chatrooms'] = {
-            "context_name" : "chatrooms",
-            "results" : [
-                {
-                    "chatroom" : chatroom,
-                    "last_message" : get_last_chatroom_msg(chatroom)
-                } for chatroom in ManagerModels.Chatroom.objects.filter(is_handled=False)
-            ]
+        context_data["chatrooms"] = {
+            "context_name": "chatrooms",
+            "results": [
+                {"chatroom": chatroom, "last_message": get_last_chatroom_msg(chatroom)}
+                for chatroom in ManagerModels.Chatroom.objects.filter(is_handled=False)
+            ],
         }
 
         return context_data
@@ -529,25 +532,23 @@ class AdminChatView(SupportOnlyAccessMixin, View):
     def get(self, request, roomname):
         context_data = dict()
 
-        context_data['room_name'] = roomname
+        context_data["room_name"] = roomname
         context_data["view_name"] = _("Admin Dashboard - Support")
         context_data["active_tab"] = "Support"
 
-        context_data['chatrooms'] = {
-            "context_name" : "chatrooms",
-            "results" : [
-                {
-                    "chatroom" : chatroom,
-                    "last_message" : get_last_chatroom_msg(chatroom)
-                } for chatroom in ManagerModels.Chatroom.objects.filter(is_handled=False)
-            ]
+        context_data["chatrooms"] = {
+            "context_name": "chatrooms",
+            "results": [
+                {"chatroom": chatroom, "last_message": get_last_chatroom_msg(chatroom)}
+                for chatroom in ManagerModels.Chatroom.objects.filter(is_handled=False)
+            ],
         }
 
         selected_chatroom = ManagerModels.Chatroom.objects.filter(roomname=roomname)
         if not selected_chatroom:
             return redirect(reverse("app_admin:discussions"))
 
-        context_data['selected_chatroom'] = selected_chatroom.first()
+        context_data["selected_chatroom"] = selected_chatroom.first()
 
         return render(request, self.template_name, context=context_data)
 
@@ -651,10 +652,10 @@ class ContactClient(SupportOnlyAccessMixin, View):
         return render(request, self.template_name, context=context_data)
 
     def post(self, request, slug):
-        name = request.POST.get('client-name')
-        email = request.POST.get('client-email')
-        subject = request.POST.get('subject')
-        description = request.POST.get('description')
+        name = request.POST.get("client-name")
+        email = request.POST.get("client-email")
+        subject = request.POST.get("subject")
+        description = request.POST.get("description")
         # send email
 
         email_body = render_to_string(
@@ -763,7 +764,7 @@ class CreateSupportView(SupportOnlyAccessMixin, View):
             username=request.POST.get("username"),
             email=request.POST.get("email"),
             password=request.POST.get("password"),
-            account_type='SUPPORT'
+            account_type="SUPPORT",
         )
 
         AuthModels.SupportProfile.objects.create(user=user)
@@ -798,7 +799,9 @@ class CreateSupportView(SupportOnlyAccessMixin, View):
         messages.add_message(
             request,
             messages.SUCCESS,
-            _("Account Created Successfully.  A verification link was sent user's email."),
+            _(
+                "Account Created Successfully.  A verification link was sent user's email."
+            ),
         )
         return redirect(reverse("app_admin:profile"))
 
@@ -812,7 +815,7 @@ class VerficationView(View):
         if user and appTokenGenerator.check_token(user, token):
             user.is_email_activated = True
             user.save()
-            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            login(request, user, backend="django.contrib.auth.backends.ModelBackend")
             # to set password
             return redirect(reverse("app_admin:profile"))
         else:

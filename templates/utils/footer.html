@@ -36,7 +36,8 @@
         font-size: 1.25rem;
         display: flex;
         justify-content: space-between;
-        padding: .5rem 0;
+        align-items: center;
+        padding: .25rem 0;
         cursor: pointer;
     }
 
@@ -50,7 +51,7 @@
         max-height: 0;
         opacity: 0;
         overflow: hidden;
-        transition: max-height .8s, opacity 1s;
+        transition: max-height .3s, opacity 1s;
     }
 
     .collapsible-open .collapsible-header::after {
@@ -58,7 +59,7 @@
     }
 
     .collapsible-open .collapsible-content {
-        max-height: fit-content;
+        max-height: 100%;
         opacity: 1;
     }
 
@@ -72,7 +73,7 @@
     }
 
     .collapsible-content ul li a {
-        color: #828282;
+        color: #333232;
     }
 
     @media (max-width: 786px) {
@@ -103,7 +104,7 @@
                 <div class="fc flex">
                     <div class="flex hoverables" style="width:100%;height:auto;">
                         <div class="cl cl1">
-                            <h1 style="font-size:16px;font-weight:500;text-transform:unset;">Popular Features</h1>
+                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">Popular Features</h1>
                             <ul class="py-2 md:py-0">
                                 <li><a href="#">Stores</a></li>
                                 <li><a href="#">Showrooms</a></li>
@@ -111,7 +112,7 @@
                             </ul>
                         </div>
                         <div class="cl cl2">
-                            <h1 style="font-size:16px;font-weight:500;text-transform:unset;">Payment Methods</h1>
+                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">Payment Methods</h1>
                             <ul class="py-2 md:py-0">
                                 <li><a href="#">Stripe</a></li>
                                 <li><a href="#">Square</a></li>
@@ -122,7 +123,7 @@
                             </ul>
                         </div>
                         <div class="cl cl2">
-                            <h1 style="font-size:16px;font-weight:500;text-transform:unset;">FAQs</h1>
+                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">FAQs</h1>
                             <ul class="py-2 md:py-0">
                                 <li><a href="#">What is a store?</a></li>
                                 <li><a href="#">What is a showroom?</a></li>
@@ -130,7 +131,7 @@
                             </ul>
                         </div>
                         <div class="cl cl4">
-                            <h1 style="font-size:16px;font-weight:500;text-transform:unset;">Company</h1>
+                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">Company</h1>
                             <ul class="py-2 md:py-0">
                                 <li><a href="#">Careers</a></li>
                                 <li><a href="#">About Us</a></li>
@@ -186,7 +187,7 @@
                 <div class="accordion">
                     <div class="accordion-collapsible">
                         <div class="collapsible-header">
-                            <h1 style="font-size:16px;font-weight:500;text-transform:unset;">Popular Features</h1>
+                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">Popular Features</h1>
                         </div>
                         <div class="collapsible-content">
                             <ul class="py-2 md:py-0">
@@ -198,7 +199,7 @@
                     </div>
                     <div class="accordion-collapsible">
                         <div class="collapsible-header">
-                            <h1 style="font-size:16px;font-weight:500;text-transform:unset;">Payment Methods</h1>
+                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">Payment Methods</h1>
                         </div>
                         <div class="collapsible-content">
                             <ul class="py-2 md:py-0">
@@ -213,7 +214,7 @@
                     </div>
                     <div class="accordion-collapsible">
                         <div class="collapsible-header">
-                            <h1 style="font-size:16px;font-weight:500;text-transform:unset;">FAQs</h1>
+                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">FAQs</h1>
                         </div>
                         <div class="collapsible-content">
                             <ul class="py-2 md:py-0">
@@ -225,7 +226,7 @@
                     </div>
                     <div class="accordion-collapsible">
                         <div class="collapsible-header">
-                            <h1 style="font-size:16px;font-weight:500;text-transform:unset;">Company</h1>
+                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">Company</h1>
                         </div>
                         <div class="collapsible-content">
                             <ul class="py-2 md:py-0">
@@ -280,6 +281,10 @@
 
         Array.from(collapsibleHeaders).forEach((header, i) => {
             header.addEventListener('click', () => {
+                if (header.parentElement.classList.contains('collapsible-open')) {
+                    header.parentElement.classList.toggle('collapsible-open');
+                    return;
+                }
                 Array.from(collapsibleHeaders).forEach(header => {
                     header.parentElement.classList.remove('collapsible-open');
                 });

@@ -12,9 +12,9 @@ class SupportOnlyAccessMixin(AccessMixin):
             request.user.is_authenticated
             and (request.user.is_superuser or request.user.account_type == "SUPPORT")
         ):
-            # blocked dashboard access to mobile users 
+            # blocked dashboard access to mobile users
             return redirect(reverse("manager:home"))
-            
+
         if request.user_agent.is_mobile and request.user_agent.is_tablet:
             return redirect(reverse("manager:dashboard-blocked"))
 

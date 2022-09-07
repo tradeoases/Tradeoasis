@@ -4,73 +4,10 @@
 {% load isEqual %}
 {% block content %}
 
-    {% if preview_products.results %}
-    <section class="main w-full mx-auto my-6" style="block-size: auto">
-        <div class="promotion-page-starter grid bg-lghterBackgroundColor rounded-md p-2 md:p-5 gap-4">
-            <div class="products-preview">
-                <div class="coursel" style="block-size: 100%;inline-size: 100%;">
-                    <div class="header">
-                      <div class="progress-bar"></div>
-                    </div>
-                    <div class="slider-container">
-                      <button class="handle left-handle">
-                        <div class="text">&#8249;</div>
-                      </button>
-                      <div class="slider" style="--slider-gap: .5rem">
-                        {% for product in preview_products.results %}
-                            <a class="item" href="{% url 'supplier:product-detail' product.product.slug %}">
-                                <img src="/media/{{product.images.image}}" alt="{{product.name}}">
-                                <div class="item-content grid">
-                                    <h1 class="text-base font-semibold text-lighterBackgroundColor" style="margin: 0">{{product.product.name}}</h1>
-                                    <h3 class="font-sm text-slate-600">{{product.product.sub_category}}</h3>
+    <div class="grid gap-2 wide-banner-area">
+        <img class="wide-banner" src="{% static 'assets/imgs/resources/01.jpg' %}" alt="">
+    </div>
 
-                                    <!-- <a href="{% url 'supplier:product-detail' product.product.slug %}" class="grid grid-flow-col place-items-center gap-3 px-2 py-2 md:px-3 md:py-2 text-sm bg-lghterBackgroundColor hover:bg-lighterBackgroundColorHover duration-200 transition-all ease-in rounded text-white font-semibold">
-                                        <span>View Product</span>
-                                    </a> -->
-                                </div>
-                            </a>
-                        {% endfor %}
-                      </div>
-                      <button class="handle right-handle">
-                        <div class="text">&#8250;</div>
-                      </button>
-                    </div>
-                </div>
-            </div>
-            <div class="categories hidden md:grid py-1">
-                {% if categories_header %}
-                    <div class="grid items-start content-start gap-0">
-                        <h4 class="text-lg font-bold text-slate-100">
-                            {% trans "Categories for you" %}
-                        </h4>
-                        <ul class="text-slate-300 grid">
-                            {% for category in categories_header|slice:":3" %}
-                                <li
-                                    class="text-slate-100 hover:text-white transition-colors transition-200 ease-in">
-                                    <a class="flex items-center justify-start gap-2 py-2" href="{% url 'supplier:category-detail' category.slug  %}">
-                                        <span>{{ category.name }}</span>
-                                    </a>
-                                </li>
-                            {% endfor %}
-                            <li
-                                class="text-slate-100 hover:text-white transition-colors transition-200 ease-in">
-                                <a class="flex items-center justify-start gap-2 py-2" href="">
-                                    <span>Test Cateo</span>
-                                </a>
-                            </li>
-                            <li
-                                class="text-slate-100 hover:text-white transition-colors transition-200 ease-in">
-                                <a class="flex items-center justify-start gap-2 py-2" href="{% url 'supplier:category-list' %}">
-                                    <span>View All</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                {% endif %}
-            </div>
-        </div>
-    </section>
-    {% endif %}
 
     <section class="main w-12/12" style="block-size: auto">
         <div class="grid w-full mx-auto cf-1 gap-4" style="grid-template-columns: 1fr;">

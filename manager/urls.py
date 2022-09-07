@@ -36,7 +36,5 @@ urlpatterns = [
         views.SupportCreateDiscussionView.as_view(),
         name="create-discussion",
     ),
-    
-
-    path("blocked", views.blockDasboardAccess, name='dashboard-blocked')
+    path("blocked", views.blockDasboardAccess, name="dashboard-blocked"),
 ]

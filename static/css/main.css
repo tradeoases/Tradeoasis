@@ -812,3 +812,16 @@ form input.error {
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
 }
+
+.wide-banner-area {
+    max-block-size: 50vh;
+    inline-size: 100%;
+    overflow: hidden;
+    aspect-ratio: 3/1;
+}
+
+.wide-banner {
+    aspect-ratio: 3/1;
+    inline-size: 100%;
+    object-fit: cover;
+}

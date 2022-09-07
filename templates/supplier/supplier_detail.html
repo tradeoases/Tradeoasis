@@ -55,10 +55,6 @@
                         <span class="text-white"><i class="fa fa-address-book"></i></span>
                         <span>{% trans 'Contact Supplier' %}</span>
                     </a>
-                    <a href="./contract.html" class="flex place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-lghterBackgroundColor hover:bg-lighterBackgroundColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
-                        <span class="text-white"><i class="fa fa-file"></i></span>
-                        <span>{% trans 'Make Contract' %}</span>
-                    </a>
                 </div>
             </div>
         </div>
@@ -68,7 +64,7 @@
         <section class="main w-12/12 py-6 md:py-10" style="background-color: #FFFFFF;">
             <div class="grid w-full mx-auto cf-1 gap-4 md:gap-6 w-full md:w-full mx-auto">
                 <div class="section-heading  flex justify-between px-4 items-center">
-                    <h2 class="sec-title text-xl capitalize md:text-2xl font-bold text-lghterBackgroundColor capitalize">{{object.business_name}} {% trans 'Services' %}</h2>
+                    <h2 class="sec-title text-lg capitalize md:text-xl font-bold text-lghterBackgroundColor capitalize">{{object.business_name}} {% trans 'Services' %}</h2>
                 </div>
                 <div class="section-body grid gap-4 md:gap-3 grid-cols-1 md:grid-cols-4" data-content="{{supplier_service.context_name}}">
                     {% for service in supplier_service.results %}
@@ -106,11 +102,11 @@
             <div class="grid w-full mx-auto cf-1 gap-4" style="grid-template-columns: 1fr;">             
                 <div class="flex p-2 px-2 pt-0 justify-between items-baseline">
                     <div class="flex gap-5">
-                        <h1 class="capitalize sec-title text-xl capitalize md:text-2xl font-bold text-yellowColor">{{object.business_name}} Products</h1>
+                        <h1 class="capitalize sec-title text-lg capitalize md:text-xl font-bold text-yellowColor">{{object.business_name}} Products</h1>
                     </div>
                     <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="{% url 'supplier:products' %}?supplier={{object.business_name}}">View All</a>
                 </div>
-                <div class="section-body grid gap-2 md:gap-6 grid-cols-2 md:grid-cols-5 py-4"
+                <div class="section-body grid gap-2 md:gap-6 grid-cols-2 md:grid-cols-6 py-4"
                 data-context="{{products.context_name}}">
                     {% for product in products.results %}
                         <div class="single-image-product-card overflow-hidden rounded grid gap-0.5 card-outlined">
@@ -141,7 +137,7 @@
             <div class=" w-full md:w-full mx-auto grid">                    
                 <div class="flex p-2 px-2 pt-0 justify-between items-baseline">
                     <div class="flex gap-5">
-                        <h1 class="capitalize sec-title text-xl capitalize md:text-2xl font-bold text-yellowColor">{{object.business_name}} Stores</h1>
+                        <h1 class="capitalize sec-title text-lg capitalize md:text-xl font-bold text-yellowColor">{{object.business_name}} Stores</h1>
                     </div>
                     <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="{% url 'supplier:store-list' %}?supplier={{object.business_name}}">View All</a>
                 </div>

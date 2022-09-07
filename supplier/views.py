@@ -1,5 +1,3 @@
-from ast import arg
-from re import template
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
@@ -13,6 +11,8 @@ from django.db.models import Count
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from django.conf import settings
+from django.contrib.auth import authenticate
+from django.contrib.auth.hashers import make_password
 
 from django.contrib.sites.shortcuts import get_current_site
 
@@ -73,6 +73,7 @@ class SupplierDetailView(DetailView):
 class SupplierContactView(View):
     pass
 
+
 class SupplierContractView(View):
     template_name = "supplier/contract.html"
 
@@ -81,36 +82,49 @@ class SupplierContractView(View):
         if not request.user.is_authenticated:
             return redirect(reverse("auth_app:login"))
         elif request.user.is_authenticated and not request.user.account_type == "BUYER":
-            messages.add_message(request, messages.ERROR, _("Please create a buyer account to create a contract."))
-            context_data['is_buyer'] = False
+            messages.add_message(
+                request,
+                messages.ERROR,
+                _("Please create a buyer account to create a contract."),
+            )
+            context_data["is_buyer"] = False
         else:
-            context_data['is_buyer'] = True
+            context_data["is_buyer"] = True
 
         service = SupplierModels.Service.objects.filter(slug=slug).first()
-        context_data['view_name'] = "Contracts"
-        context_data['service'] = service
-        context_data['supplier'] = AuthModels.ClientProfile.objects.filter(user=service.supplier).first()
+        context_data["view_name"] = "Contracts"
+        context_data["service"] = service
+        context_data["supplier"] = AuthModels.ClientProfile.objects.filter(
+            user=service.supplier
+        ).first()
 
         return render(request, self.template_name, context=context_data)
 
-    
     def post(self, request, slug):
 
         service = SupplierModels.Service.objects.filter(slug=slug).first()
         if not request.user.is_authenticated:
             return redirect(reverse("auth_app:login"))
         elif request.user.is_authenticated and not request.user.account_type == "BUYER":
-            messages.add_message(request, messages.ERROR, _("Please create a buyer account to create a contract."))
-            return redirect(reverse('supplier:supplier-contract', args=[service.slug]))
+            messages.add_message(
+                request,
+                messages.ERROR,
+                _("Please create a buyer account to create a contract."),
+            )
+            return redirect(reverse("supplier:supplier-contract", args=[service.slug]))
 
         contract_start_date = request.POST.get("contract-start-date")
         contract_end_date = request.POST.get("contract-end-date")
 
-        supplier = AuthModels.Supplier.objects.filter(username=service.supplier.username).first()
-        buyer = AuthModels.Supplier.objects.filter(username=request.user.username).first()
+        supplier = AuthModels.Supplier.objects.filter(
+            username=service.supplier.username
+        ).first()
+        buyer = AuthModels.Supplier.objects.filter(
+            username=request.user.username
+        ).first()
 
         PaymentModels.Contract.objects.create(
-            supplier = supplier,
+            supplier=supplier,
             buyer=buyer,
             service=service,
             start_date=contract_start_date,
@@ -123,7 +137,7 @@ class SupplierContractView(View):
             {
                 "name": supplier.username,
                 "email": supplier.email,
-                "description": f"A Contract application has been sumbited by {buyer.profile.business_name} on service {service.name}.\nPlease visit the dashboard to respond to the application.\nThank you."
+                "description": f"A Contract application has been sumbited by {buyer.profile.business_name} on service {service.name}.\nPlease visit the dashboard to respond to the application.\nThank you.",
             },
         )
         email = EmailMessage(
@@ -136,7 +150,7 @@ class SupplierContractView(View):
         )
         email.send(fail_silently=False)
 
-        return redirect(reverse('buyer:contracts'))
+        return redirect(reverse("buyer:contracts"))
 
 
 class ProductListView(View):
@@ -296,7 +310,7 @@ class ProductDetailView(DetailView):
             "results": SupplierModels.ProductImage.objects.filter(product=product),
         }
         context["tags"] = SupplierModels.ProductTag.objects.filter(product=product)
-        context["related_products"] = {
+        context["products"] = {
             "context_name": "related-products",
             "results": [
                 {
@@ -323,14 +337,14 @@ class ProductDetailView(DetailView):
 
 
 class NewArrivalView(View):
-    template_name = 'supplier/promotions.html'
+    template_name = "supplier/promotions.html"
 
     def get(self, request):
 
         return render(request, self.template_name, context=self.get_context_data())
 
     def get_queryset(self):
-        return SupplierModels.Product.objects.all().order_by('-id')
+        return SupplierModels.Product.objects.all().order_by("-id")
 
     def get_products_paginator(self):
 
@@ -349,13 +363,13 @@ class NewArrivalView(View):
         products_paginator = self.get_products_paginator()
         context_data = dict()
 
-        context_data['view_name'] = 'Promotions'
+        context_data["view_name"] = "Promotions"
         context_data["page_obj"] = products_paginator
         context_data["product_count"] = self.subcategory_products.count()
         context_data["current_page_number"] = self.request.GET.get("page", 1)
 
-        context_data['products'] = {
-            "context_name" : "new_arrivals",
+        context_data["products"] = {
+            "context_name": "new_arrivals",
             "results": [
                 {
                     "product": product,
@@ -367,8 +381,8 @@ class NewArrivalView(View):
         }
 
         # preview_products only show for suppliers with highest plan
-        context_data['preview_products'] = {
-            "context_name" : "preview_products",
+        context_data["preview_products"] = {
+            "context_name": "preview_products",
             "results": [
                 {
                     "product": product,
@@ -380,6 +394,53 @@ class NewArrivalView(View):
         }
 
         return context_data
+
+# advertising
+class SuperDealsView(View):
+    template_name = "supplier/deals.html"
+
+    def get(self, request):
+
+        return render(request, self.template_name, context=self.get_context_data())
+
+    def get_queryset(self):
+        return SupplierModels.Product.objects.all().order_by("-id")
+
+    def get_products_paginator(self):
+
+        PER_PAGE_COUNT = 20
+
+        self.subcategory_products = self.get_queryset()
+
+        paginator = Paginator(self.subcategory_products.order_by("-id"), PER_PAGE_COUNT)
+
+        page_num = self.request.GET.get("page", 1)
+        return paginator.page(page_num)
+
+    def get_context_data(self, **kwargs):
+        context_data = dict()
+
+        products_paginator = self.get_products_paginator()
+        context_data = dict()
+
+        context_data["view_name"] = "Promotions"
+        context_data["page_obj"] = products_paginator
+        context_data["product_count"] = self.subcategory_products.count()
+        context_data["current_page_number"] = self.request.GET.get("page", 1)
+
+        context_data["products"] = {
+            "context_name": "new_arrivals",
+            "results": [
+                {
+                    "product": product,
+                    "supplier": product.store.all().first().supplier,
+                    "images": product.productimage_set.all().first(),
+                }
+                for product in products_paginator.object_list
+            ],
+        }
+        return context_data
+
 
 class CategoryListView(ListView):
     model = SupplierModels.ProductCategory
@@ -495,6 +556,7 @@ class SubCategoryDetailView(View):
         min_price = self.request.GET.get("min-price", 0)
         max_price = self.request.GET.get("max-price", None)
         supplier = self.request.GET.get("supplier", "All")
+        showroom = self.request.GET.get("showroom", None)
 
         if max_price and supplier != "All":
             return SupplierModels.Product.objects.filter(
@@ -516,6 +578,17 @@ class SubCategoryDetailView(View):
             )
 
         elif supplier != "All":
+            return SupplierModels.Product.objects.filter(
+                Q(sub_category=subcategory),
+                Q(price__gte=float(min_price) if min_price else float(0)),
+                Q(
+                    store__supplier=AuthModels.Supplier.supplier.filter(
+                        clientprofile__business_name=supplier
+                    ).first()
+                ),
+            )
+
+        elif showroom:
             return SupplierModels.Product.objects.filter(
                 Q(sub_category=subcategory),
                 Q(price__gte=float(min_price) if min_price else float(0)),
@@ -577,8 +650,8 @@ class SubCategoryDetailView(View):
             ],
         }
 
-        context_data["discounts"] = {
-            "context_name": "discounts",
+        context_data["new_arrivals"] = {
+            "context_name": "new_arrivals",
             "results": [
                 {
                     "product": product,
@@ -793,7 +866,12 @@ class DashboardView(SupplierOnlyAccessMixin, View):
             ],
         }
 
-        context_data["category_group"] = [obj for obj in SupplierModels.Product.objects.values('category__name').annotate(dcount=Count('category')).order_by()]
+        context_data["category_group"] = [
+            obj
+            for obj in SupplierModels.Product.objects.values("category__name")
+            .annotate(dcount=Count("category"))
+            .order_by()
+        ]
 
         context_data["top_products"] = {
             "context_name": "top-products",
@@ -804,7 +882,7 @@ class DashboardView(SupplierOnlyAccessMixin, View):
         return context_data
 
 
-class ProfileView(View):
+class ProfileView(SupplierOnlyAccessMixin, View):
     template_name = "supplier/dashboard/profile.html"
 
     def get(self, request):
@@ -814,6 +892,178 @@ class ProfileView(View):
             ).first()
         }
         return render(request, self.template_name, context=context_data)
+
+def password_reset(request):
+    if request.method == "GET":
+        return render(request, "supplier/dashboard/password_reset.html")
+    
+    if request.method == "POST":
+        if request.POST.get("new_password") != request.POST.get("confirm_new_password"):
+            messages.add_message(request, messages.ERROR, _("Password mismatch."))
+            return redirect(reverse('supplier:password-reset'))
+
+        # confirm current password
+        user = authenticate(
+            username=request.user.username, password=request.POST.get("current_password")
+        )
+        if not user:
+            messages.add_message(request, messages.ERROR, _("Wrong current password entered."))
+            return redirect(reverse('supplier:password-reset'))
+
+        if authenticate(username=request.user.username, password=request.POST.get("new_password")):
+            messages.add_message(request, messages.ERROR, _("No modification made."))
+            return redirect(reverse('supplier:password-reset'))
+
+        # make password
+        generated_password = make_password(request.POST.get("new_password"))
+        user = AuthModels.User.objects.filter(pk=request.user.pk).first()
+        user.save()
+        messages.add_message(request, messages.SUCCESS, _("Account password reset successfully"))
+        return redirect(reverse("supplier:profile"))
+
+
+
+class EditAccountsProfileView(SupplierOnlyAccessMixin, View):
+    template_name = "supplier/dashboard/account_edit.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+    def post(self, request):
+        if not (
+            request.POST.get("first_name")
+            and request.POST.get("last_name")
+            and request.POST.get("username")
+            and request.POST.get("email")
+        ):
+            messages.add_message(request, messages.ERROR, _("Please Fill all fields."))
+            return redirect(reverse('supplier:dashboard-editaccountsprofile'))
+
+        if request.POST.get("first_name") == request.user.first_name and request.POST.get("last_name") == request.user.last_name and request.POST.get("username") == request.user.username and request.POST.get("email") == request.user.email:
+            messages.add_message(request, messages.ERROR, _("No modification was made."))
+            return redirect(reverse('supplier:dashboard-editaccountsprofile'))
+
+        if AuthModels.User.objects.filter(username=request.POST.get("username")) and request.POST.get("username") != request.user.username:
+            messages.add_message(request, messages.ERROR, _("Username not available."))
+            return redirect(reverse('supplier:dashboard-editaccountsprofile'))
+
+        if AuthModels.User.objects.filter(email=request.POST.get("email")) and request.POST.get("email") != request.user.email:
+            messages.add_message(request, messages.ERROR, _("Email not available."))
+            return redirect(reverse('supplier:dashboard-editaccountsprofile'))
+
+        if request.POST.get("username") != request.user.username:
+            user = AuthModels.User.objects.update(
+                first_name=request.POST.get("first_name"),
+                last_name=request.POST.get("last_name"),
+                username=request.POST.get("username"),
+                email=request.POST.get("email")
+            )
+        else:
+            user = AuthModels.User.objects.update(
+                first_name=request.POST.get("first_name"),
+                last_name=request.POST.get("last_name"),
+                email=request.POST.get("email")
+            )
+
+        fields = ("first_name", "last_name")
+        instance = user
+        modal = AuthModels.User
+        for field in fields:
+            for language in settings.LANGUAGES:
+                try:
+                    if language[0] == get_language():
+                        # already set
+                        continue
+                    result = translator.translate(
+                        getattr(instance, field), dest=language[0]
+                    )
+                    for model_field in modal._meta.get_fields():
+                        if not model_field.name in f"{field}_{language[0]}":
+                            continue
+
+                        if model_field.name == f"{field}_{language[0]}":
+                            setattr(instance, model_field.name, result.text)
+                            instance.save()
+                except:
+                    setattr(
+                        instance, f"{field}_{language[0]}", getattr(instance, field)
+                    )
+                    instance.save()
+        messages.add_message(request, messages.SUCCESS, _("Account Details Editted Successfully"))
+        return redirect(reverse("supplier:profile"))
+
+class EditBusinessProfileView(SupplierOnlyAccessMixin, View):
+    template_name = "supplier/dashboard/business_edit.html"
+
+    def get(self, request, slug):
+        context_data = {
+            "profile": AuthModels.ClientProfile.objects.filter(slug=slug).first()
+        }
+        return render(request, self.template_name, context=context_data)
+
+
+    def post(self, request, slug):
+        required_fields = [request.POST.get("business_name", None), request.POST.get("business_description", None), request.POST.get("country", None), request.POST.get("city", None)]
+
+        if None in required_fields:
+            messages.add_message(request, messages.ERROR, "{}".format(_("Please Fill all reqiured fields.")))
+            return redirect(reverse("supplier:dashboard-editbusinessprofile", args=[slug]))
+
+        try:
+            profile = AuthModels.ClientProfile.objects.update(
+                business_name=request.POST.get("business_name"),
+                business_description=request.POST.get("business_description"),
+                country=request.POST.get("country"),
+                city=request.POST.get("city"),
+                country_code=request.POST.get("country_code"),
+                mobile_user=request.POST.get("mobile_user"),
+                vat_number=request.POST.get("vat_number", None),
+                legal_etity_identifier=request.POST.get("legal_etity_identifier", None),
+                website=request.POST.get("website", None),
+            )
+
+            fields = (
+                "business_name",
+                "business_description",
+                "country",
+                "country_code",
+                "city",
+                "mobile_user",
+            )
+            instance = profile
+            modal = AuthModels.ClientProfile
+            for field in fields:
+                for language in settings.LANGUAGES:
+                    try:
+                        if language[0] == get_language():
+                            # already set
+                            continue
+                        result = translator.translate(
+                            getattr(instance, field), dest=language[0]
+                        )
+                        for model_field in modal._meta.get_fields():
+                            if not model_field.name in f"{field}_{language[0]}":
+                                continue
+
+                            if model_field.name == f"{field}_{language[0]}":
+                                setattr(instance, model_field.name, result.text)
+                                instance.save()
+                    except:
+                        setattr(
+                            instance, f"{field}_{language[0]}", getattr(instance, field)
+                        )
+                        instance.save()
+
+            messages.add_message(
+                request, messages.SUCCESS, _("Business Details Editted Successfully.")
+            )
+            return redirect(reverse("supplier:profile"))
+        except Exception as e:
+            print(e)
+            messages.add_message(
+                request, messages.ERROR, _("An Error Occurred. Try Again.")
+            )
+            return redirect(reverse("supplier:dashboard-editbusinessprofile", args=[slug]))
 
 
 class DashboardProductsView(SupplierOnlyAccessMixin, View):
@@ -945,7 +1195,24 @@ class DashboardStoresView(SupplierOnlyAccessMixin, View):
     template_name = "supplier/dashboard/manage-store.html"
 
     def get(self, request):
-        return render(request, self.template_name)
+
+        context_data = dict()
+
+        context_data["showrooms"] = ManagerModels.Showroom.objects.all()
+        context_data["products"] = {
+            "context-name": "products",
+            "results": [
+                {
+                    "product": product,
+                    "supplier": product.store.all().first().supplier,
+                    "images": product.productimage_set.all().first(),
+                }
+                for product in SupplierModels.Product.objects.all()
+                if request.user in [store.supplier for store in product.store.all()]
+            ],
+        }
+
+        return render(request, self.template_name, context=context_data)
 
 
 class DashboardStoresCreateView(SupplierOnlyAccessMixin, View):
@@ -1009,6 +1276,51 @@ class DashboardStoresCreateView(SupplierOnlyAccessMixin, View):
             return redirect(reverse("supplier:dashboard-storescreate"))
 
 
+def assign_showroom(request, slug):
+    if request.method == "GET":
+        return redirect(reverse("supplier:dashboard-stores"))
+    if request.method == "POST":
+        showroom_name = request.POST.get("showroom")
+        try:
+            showroom = ManagerModels.Showroom.objects.filter(name=showroom_name).first()
+            store = SupplierModels.Store.objects.filter(slug=slug).first()
+            showroom.store.add(store)
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                f"Store: {store.name} added to Showroom: {showroom.name}",
+            )
+            return redirect(reverse("supplier:dashboard-stores"))
+        except:
+            messages.add_message(
+                request, messages.ERROR, _("An Error Occured. Please Try Again")
+            )
+            return redirect(reverse("supplier:dashboard-stores"))
+
+
+def add_product(request, slug):
+    if request.method == "GET":
+        return redirect(reverse("supplier:dashboard-stores"))
+    if request.method == "POST":
+        product_name = request.POST.get("product")
+        try:
+            product = SupplierModels.Product.objects.filter(name=product_name).first()
+            store = SupplierModels.Store.objects.filter(slug=slug).first()
+            store.store_product.add(product)
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                f"Product: {product.name} added to Store: {store.name}",
+            )
+            return redirect(reverse("supplier:dashboard-stores"))
+
+        except:
+            messages.add_message(
+                request, messages.ERROR, _("An Error Occured. Please Try Again")
+            )
+            return redirect(reverse("supplier:dashboard-stores"))
+
+
 class DashboardContractsView(SupplierOnlyAccessMixin, View):
     template_name = "supplier/dashboard/contracts.html"
 
@@ -1033,6 +1345,7 @@ class DashboardContractsDetailsView(SupplierOnlyAccessMixin, DetailView):
     def get_queryset(self):
         return self.model.objects.all()
 
+
 class DashboardContractRejectDetailsView(SupplierOnlyAccessMixin, View):
     def post(self, request, pk):
         contract = PaymentModels.Contract.objects.filter(pk=pk).first()
@@ -1045,7 +1358,7 @@ class DashboardContractRejectDetailsView(SupplierOnlyAccessMixin, View):
             {
                 "name": contract.buyer.username,
                 "email": contract.buyer.email,
-                "description": f"Your contract application on service {contract.service.name} has been rejected.\nPlease contact the service for more information.\nThank you."
+                "description": f"Your contract application on service {contract.service.name} has been rejected.\nPlease contact the service for more information.\nThank you.",
             },
         )
         email = EmailMessage(
@@ -1067,8 +1380,9 @@ class DashboardContractAcceptDetailsView(SupplierOnlyAccessMixin, View):
         contract.is_accepted = True
         contract.save()
 
-        messages.add_message(request, messages.SUCCESS, _("Contract has been accepted."))
-
+        messages.add_message(
+            request, messages.SUCCESS, _("Contract has been accepted.")
+        )
 
         domain = get_current_site(request).domain
         link = reverse("payment:contract-payment", kwargs={"pk": contract.pk})
@@ -1079,7 +1393,7 @@ class DashboardContractAcceptDetailsView(SupplierOnlyAccessMixin, View):
             {
                 "name": contract.buyer.username,
                 "email": contract.buyer.email,
-                "description": f"Your contract application on service {contract.service.name} has been accepted.\nPlease visit the {payment_link} to complete the application process.\nThank you."
+                "description": f"Your contract application on service {contract.service.name} has been accepted.\nPlease visit the {payment_link} to complete the application process.\nThank you.",
             },
         )
         email = EmailMessage(
@@ -1093,6 +1407,7 @@ class DashboardContractAcceptDetailsView(SupplierOnlyAccessMixin, View):
         email.send(fail_silently=False)
 
         return redirect(reverse("supplier:dashboard-contractsdetails", args=[pk]))
+
 
 class DashboardServicesView(SupplierOnlyAccessMixin, View):
     template_name = "supplier/dashboard/services.html"

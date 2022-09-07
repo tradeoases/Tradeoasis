@@ -25,10 +25,15 @@ urlpatterns = [
     # path("checkout/", views.checkout_page, name='checkout'),
     path("braintree/payments/<int:pk>", views.payment, name="braintree-payment"),
     path("gPayPayment/<int:pk>", views.gPayPayment, name="gPayPayment"),
-
-    path('contracts/payments/<int:pk>', views.ContractPaymentView.as_view(), name='contract-payment'),
-    path('contracts/receipt/<int:pk>', views.contract_receipt, name='contract-receipt'),
-
-    
-    path("initial/subscription/", views.InitSubscriptionView.as_view(), name="init-subscription"),
+    path(
+        "contracts/payments/<int:pk>",
+        views.ContractPaymentView.as_view(),
+        name="contract-payment",
+    ),
+    path("contracts/receipt/<int:pk>", views.contract_receipt, name="contract-receipt"),
+    path(
+        "initial/subscription/",
+        views.InitSubscriptionView.as_view(),
+        name="init-subscription",
+    ),
 ]

@@ -158,23 +158,25 @@ class DiscussionReply(models.Model):
 
 
 class UserRequest(models.Model):
-    country = models.CharField(_('Country'), max_length=256)
-    city = models.CharField(_('City'), max_length=256)
-    view = models.CharField(_('View'), max_length=256)
-    request_method = models.CharField(_('Request Method'), max_length=256)
-    device = models.CharField(_('Device'), max_length=256)
-    user_os = models.CharField(_('User Os'), max_length=256)
+    country = models.CharField(_("Country"), max_length=256)
+    city = models.CharField(_("City"), max_length=256)
+    view = models.CharField(_("View"), max_length=256)
+    request_method = models.CharField(_("Request Method"), max_length=256)
+    device = models.CharField(_("Device"), max_length=256)
+    user_os = models.CharField(_("User Os"), max_length=256)
     created_on = models.DateField(_("Created on"), default=timezone.now)
+
 
 # utility functions
 def get_chat_file_path(instance):
-    ext = '.json'
+    ext = ".json"
     filename = instance.roomname
     path = os.path.join(f"{settings.CHATROOMFILES_DIR}/{filename}{ext}")
     return path
 
+
 class Chatroom(models.Model):
-    roomname = models.CharField(_('Chatroom Name'), max_length=256, unique=True)
+    roomname = models.CharField(_("Chatroom Name"), max_length=256, unique=True)
     user = models.ForeignKey(
         Authmodels.User,
         on_delete=models.CASCADE,
@@ -199,12 +201,13 @@ class Chatroom(models.Model):
         self.chatfilepath = get_chat_file_path(self)
         super().save(*args, **kwargs)
 
+
 @receiver(post_save, sender=Chatroom)
 def create_Chat_file(sender, instance, **kwargs):
     try:
-        with open(f'{instance.chatfilepath}', 'w') as file:
+        with open(f"{instance.chatfilepath}", "w") as file:
             json.dump([], file)
     except FileNotFoundError:
         os.mkdir(f"{settings.CHATROOMFILES_DIR}")
-        with open(f'{instance.chatfilepath}', 'w') as file:
+        with open(f"{instance.chatfilepath}", "w") as file:
             json.dump([], file)

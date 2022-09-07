@@ -50,8 +50,8 @@
                         </div>
                     </div>
                     <div class="group cs-flex" style="--gap: .5rem;">
-                        <a class="btn br-sm" href="{% url 'app_admin:editprofile' %}">{% trans 'Edit Profile' %}</a>
-                        <a class="btn cs-bg-primary  cs-text-white br-sm br-sm" href="{% url 'app_admin:editprofile' %}">{% trans 'Reset Password' %}</a>
+                        <a class="btn br-sm" href="{% url 'supplier:dashboard-editaccountsprofile' %}">{% trans 'Edit Profile' %}</a>
+                        <a class="btn cs-bg-primary  cs-text-white br-sm br-sm" href="{% url 'supplier:password-reset' %}">{% trans 'Reset Password' %}</a>
                     </div>
                 </div>
                 <div class="cs-grid cs-content-start" style="--gap: 1rem;">
@@ -91,7 +91,7 @@
                         <p class="outlined br-sm" style="padding: .5rem 1.5rem;">{{profile.website}}</p>
                     </div>
                     <div class="group cs-flex" style="--gap: .5rem;">
-                        <a class="btn br-sm" href="{% url 'app_admin:editprofile' %}">{% trans 'Edit Bussiness Details' %}</a>
+                        <a class="btn br-sm" href="{% url 'supplier:dashboard-editbusinessprofile' profile.slug %}">{% trans 'Edit Bussiness Details' %}</a>
                     </div>
                 </div>
             </div>

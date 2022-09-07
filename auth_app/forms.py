@@ -17,18 +17,14 @@ class UserFormManager(ModelForm):
         model = AuthModels.User
         fields = "__all__"
 
- 
+
 class CustomSignupForm(SignupForm):
-    CHOICES=[
-        ("SUPPLIER", "Supplier"),
-        ("BUYER", "Buyer")
-    ]
+    CHOICES = [("SUPPLIER", "Supplier"), ("BUYER", "Buyer")]
     account_type = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect)
 
- 
     def save(self, request):
         user = super(CustomSignupForm, self).save(request)
-        user.account_type = self.cleaned_data['account_type']
+        user.account_type = self.cleaned_data["account_type"]
         user.active = True
         user.is_email_activated = True
         user.save()

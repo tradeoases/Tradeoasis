@@ -136,7 +136,9 @@ def record_transaction_count(sender, instance, **kwargs):
 
 
 class Contract(models.Model):
-    ref_no = models.CharField(_("Reference Number"), null=True, blank=True, unique=True, max_length=15)
+    ref_no = models.CharField(
+        _("Reference Number"), null=True, blank=True, unique=True, max_length=15
+    )
     supplier = models.ForeignKey(
         to=Supplier, on_delete=models.CASCADE, related_name="supplier"
     )

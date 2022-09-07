@@ -443,6 +443,7 @@ tbody tr td.delete {
     animation: modalEnter .5s ease-in;
     z-index: 1000;
 }
+
 .modal.sm {
     inset-block-start: 15%;
     inline-size: 25vw;

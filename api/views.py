@@ -29,7 +29,7 @@ class StoresListView(ListAPIView):
     pagination_class = CustomListPagination
 
     def get_queryset(self):
-        return SupplierModels.Store.objects.filter(supplier = self.request.user)
+        return SupplierModels.Store.objects.filter(supplier=self.request.user)
 
 
 class ProductsListView(ListAPIView):
@@ -38,7 +38,7 @@ class ProductsListView(ListAPIView):
 
     def get_queryset(self):
         return SupplierModels.Product.objects.filter(
-            store__in=SupplierModels.Store.objects.filter(supplier = self.request.user)
+            store__in=SupplierModels.Store.objects.filter(supplier=self.request.user)
         )
 
 
@@ -46,9 +46,8 @@ class LoadingProductsListView(ListAPIView):
     serializer_class = serializers.ProductsSerializer
     pagination_class = LargeCustomListPagination
 
-
     def get_queryset(self):
-        return SupplierModels.Product.objects.filter(supplier = self.request.user)
+        return SupplierModels.Product.objects.filter(supplier=self.request.user)
 
 
 class ContractsListView(ListAPIView):
@@ -57,6 +56,7 @@ class ContractsListView(ListAPIView):
 
     def get_queryset(self):
         return PaymentModels.Contract.objects.filter(Q(buyer=self.request.user))
+
 
 class SupplierContractsListView(ListAPIView):
     serializer_class = serializers.ContractsSerializer
@@ -71,4 +71,4 @@ class ServicesListView(ListAPIView):
     pagination_class = CustomListPagination
 
     def get_queryset(self):
-        return SupplierModels.Service.objects.filter(supplier = self.request.user)
+        return SupplierModels.Service.objects.filter(supplier=self.request.user)

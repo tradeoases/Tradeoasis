@@ -234,8 +234,6 @@ class BusinessProfileView(View):
             and request.POST.get("business_description")
             and request.POST.get("country")
             and request.POST.get("city")
-            and request.POST.get("country_code")
-            and request.POST.get("mobile_user")
         ):
             messages.add_message(
                 request, messages.ERROR, _("Please Fill all reqiured fields.")

@@ -28,6 +28,7 @@ urlpatterns = [
         "products/<str:slug>", views.ProductDetailView.as_view(), name="product-detail"
     ),
     path("new-arivals/", views.NewArrivalView.as_view(), name="new-arivals"),
+    path("superdeals/", views.SuperDealsView.as_view(), name="superdeals"),
     # categories
     path("categories/", views.CategoryListView.as_view(), name="category-list"),
     path(
@@ -65,7 +66,18 @@ urlpatterns = [
     ),
     # dashboard
     path("dashboard", views.DashboardView.as_view(), name="dashboard"),
-    path("profile", views.ProfileView.as_view(), name="profile"),
+    path("profile/", views.ProfileView.as_view(), name="profile"),
+    path("password-reset", views.password_reset, name="password-reset"),
+    path(
+        "editaccountsprofile/",
+        views.EditAccountsProfileView.as_view(),
+        name="dashboard-editaccountsprofile",
+    ),
+    path(
+        "editbusinessprofile/<str:slug>/",
+        views.EditBusinessProfileView.as_view(),
+        name="dashboard-editbusinessprofile",
+    ),
     path(
         "dashboard/products",
         views.DashboardProductsView.as_view(),
@@ -77,7 +89,19 @@ urlpatterns = [
         name="dashboard-productscreate",
     ),
     path(
-        "dashboard/stores", views.DashboardStoresView.as_view(), name="dashboard-stores"
+        "dashboard/stores/",
+        views.DashboardStoresView.as_view(),
+        name="dashboard-stores",
+    ),
+    path(
+        "dashboard/stores/<str:slug>/assign-showroom/",
+        views.assign_showroom,
+        name="dashboard-assign-showroom",
+    ),
+    path(
+        "dashboard/stores/<str:slug>/add-product/",
+        views.add_product,
+        name="dashboard-add-product",
     ),
     path(
         "dashboard/storescreate",

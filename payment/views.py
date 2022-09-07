@@ -322,8 +322,7 @@ def gPayPayment(request):
 
 
 class InitSubscriptionView(View):
-    template_name = 'payments/initsubscription.html'
-
+    template_name = "payments/initsubscription.html"
 
     def get(self, request):
         if not request.user.is_authenticated:
@@ -349,10 +348,9 @@ class InitSubscriptionView(View):
         except:
             braintree_client_token = braintree.ClientToken.generate({})
 
-
         context_data = {
             "view_name": _("Business Profile"),
-            "braintree_client_token" : braintree_client_token
+            "braintree_client_token": braintree_client_token,
         }
 
         return render(request, self.template_name, context=context_data)
@@ -365,28 +363,30 @@ class ContractPaymentView(View):
         contract = PaymentModels.Contract.objects.filter(pk=pk).first()
 
         context_data = dict()
-        context_data['view_name'] = "Contract Payment"
-        context_data['contract'] = contract
+        context_data["view_name"] = "Contract Payment"
+        context_data["contract"] = contract
 
         return render(request, self.template_name, context=context_data)
+
 
 def contract_receipt(request, pk):
     if request.method == "GET":
 
         contract = PaymentModels.Contract.objects.filter(pk=pk).first()
         context_data = dict()
-        context_data['view_name'] = "Contract Payment"
-        context_data['contract'] = contract
+        context_data["view_name"] = "Contract Payment"
+        context_data["contract"] = contract
 
         return render(request, "payments/contract_ receipt.html", context=context_data)
         # pdf = render_to_pdf('payments/contract_ receipt.html', context_data)
         # return HttpResponse(pdf, content_type='application/pdf')
 
+
 def render_to_pdf(template_src, context_dict={}):
     template = get_template(template_src)
-    html  = template.render(context_dict)
+    html = template.render(context_dict)
     result = BytesIO()
     pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
     if not pdf.err:
-        return HttpResponse(result.getvalue(), content_type='application/pdf')
+        return HttpResponse(result.getvalue(), content_type="application/pdf")
     return None

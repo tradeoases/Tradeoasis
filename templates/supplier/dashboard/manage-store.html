@@ -4,6 +4,21 @@
 {% block content %}
 
 <div class="main-content">
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                    <p>{{ message }}</p>
+                    <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                </div>
+            {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid rgb(37, 141, 2930);color: rgb(37, 141, 2930); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                    <p>{{ message }}</p>
+                    <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
     <div class="content-area">
         <h3 style="margin: .5rem 0;font-weight:600;">{% trans 'My Stores' %}</h3>
         <div class="alert card card-info" id="orders-help">
@@ -52,8 +67,57 @@
         </div>
     </div>
 </div>
-</div>
-</div>
+
+<div class="modal client" id="store-modal">
+    <div class="modal-head">
+        <h2>Store Details</h2>
+        <i class="ti-close" id="close-modal"></i>
+    </div>
+    <div class="modal-body cs-grid" style="--gap: 1rem;">
+        <form action="/" method="POST" id="showroom-form" class="cs-grid br-sm outlined" enctype="multipart/form-data" style="padding: 1rem;--gap: .5rem;">
+            <h2 style="margin: 0;font-size: .9rem;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
+                {% trans 'Add Store to Showroom' %} <span style="font-size: .9rem;color: rgb(139, 138, 138);">(Use down arrow to select showroom)</span>
+            </h2>
+            {% csrf_token %}
+            <div class="cs-flex" style="--gap: 1rem;">
+                <div class="form-group cs-grid" style="--gap: .5rem;inline-size: 100%;">
+                    <input type="text" class="cs-text-normal" name="showroom" id="showroom" required placeholder="Showroom" list="showrooms">
+                    <datalist id="showrooms">
+                        {% for showroom in showrooms %}
+                            <option value="{{showroom.name}}" label="{{showroom.name}}">{{showroom.name}}</option>
+                        {% endfor %}
+                    </datalist>
+                </div>
+                <div class="form-group cs-grid" style="--gap: .5rem;justify-content: flex-start;">
+                    <input class="btn cs-text-white" type="submit"
+                    value="Submit" style="padding: .7rem 1.5rem;font-size: 1rem;">
+                </div>
+            </div>
+        </form>
+        <form method="POST" id="product-form" class="cs-grid br-sm outlined" enctype="multipart/form-data" style="padding: 1rem;--gap: .5rem;">
+            <h2 style="margin: 0;font-size: .9rem;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
+                {% trans 'Add Product to Store' %} <span style="font-size: .9rem;color: rgb(139, 138, 138);">(Enter product name)</span>
+            </h2>
+            {% csrf_token %}
+            <div class="cs-flex" style="--gap: 1rem;">
+                <div class="form-group cs-grid" style="--gap: .5rem;inline-size: 100%;">
+                    <input type="text" class="cs-text-normal" name="product" id="product" required placeholder="Product Name" list="products">
+                    <datalist id="products">
+                        {% for product in products.results %}
+                            <option value="{{product.product.name}}" label="{{product.product.name}}">{{product.product.name}}</option>
+                        {% endfor %}
+                    </datalist>
+                </div>
+                <div class="form-group cs-grid" style="--gap: .5rem;justify-content: flex-start;">
+                    <input class="btn cs-text-white" type="submit"
+                    value="Submit" style="padding: .7rem 1.5rem;font-size: 1rem;">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-foot">
+
+    </div>
 </div>
 
 <script>

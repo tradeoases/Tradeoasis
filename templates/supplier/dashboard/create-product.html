@@ -36,7 +36,7 @@
                         <input type="text" class="cs-text-normal" name="store" id="store" required list="stores">
                         <datalist id="stores">
                             {% for store in stores %}
-                                <option value="{{store.name}}" />
+                                <option value="{{store.name}}">
                             {% endfor %}
                         </datalist>
                     </div>
@@ -245,8 +245,7 @@
                     <input type="file" name="images" id="images" multiple required>
                 </div>
                 <div class="form-group cs-grid" style="--gap: .5rem;justify-content: flex-start;">
-                    <input class="btn cs-text-white" type="submit" name="contract-start-date" id="contract-start-date"
-                    value="Create" style="padding: .7rem 1.5rem;font-size: 1rem;">
+                    <input class="btn cs-text-white" type="submit" value="Create" style="padding: .7rem 1.5rem;font-size: 1rem;">
                 </div>
             </form>
         </div>

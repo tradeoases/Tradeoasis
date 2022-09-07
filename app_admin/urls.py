@@ -22,7 +22,11 @@ urlpatterns = [
     ),
     # support
     path("discussions/", views.AdminDiscussionsView.as_view(), name="discussions"),
-    path("discussions/chat/<str:roomname>", views.AdminChatView.as_view(), name="discussion"),
+    path(
+        "discussions/chat/<str:roomname>",
+        views.AdminChatView.as_view(),
+        name="discussion",
+    ),
     path("community/", views.AdminCommunityView.as_view(), name="community"),
     path(
         "community/chat/<str:slug>",

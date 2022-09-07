@@ -917,14 +917,19 @@ h3 {
     box-shadow: -5px 5px 10px 4px rgba(0, 0, 0, .1);
     border-radius: 10px;
     background-color: #fff;
-    /* display: none; */
+    display: none;
+}
+
+.modal.client {
+    padding: 0rem 0rem;
+    max-block-size: auto;
 }
 
 .modal .modal-head {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     background-color: #ecab08;
-    padding: 2%;
+    padding: 1% 2%;
     text-transform: capitalize;
     display: flex;
     justify-content: space-between;
@@ -947,7 +952,7 @@ h3 {
 .modal .modal-head h2 {
     color: #fff;
     font-weight: bolder;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .modal .modal-head i {
