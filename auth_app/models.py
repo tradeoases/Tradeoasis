@@ -78,7 +78,9 @@ class ClientProfile(models.Model):
         _("Legal Entity Identifier"), max_length=256, blank=True, null=True
     )
     website = models.URLField(_("Website"), blank=True, null=True)
-    customer_id = models.CharField(_("Braintree customer id"), max_length=30, blank=True, null=True)
+    customer_id = models.CharField(
+        _("Braintree customer id"), max_length=30, blank=True, null=True
+    )
 
     def save(self, *args, **kwargs):
         if not self.business_name:

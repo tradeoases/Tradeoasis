@@ -23,7 +23,8 @@ from auth_app.forms import UserProfileFormManager
 from auth_app import tasks as AuthTask
 from auth_app.tokens import appTokenGenerator
 
-from payment.management.commands.braintree import gateway
+from payment.management.commands.run_braintree import gateway
+
 
 class LoginView(View):
     template_name = "auth_app/signin.html"
@@ -238,15 +239,16 @@ class BusinessProfileView(View):
             )
             AuthTask.make_business_translations.delay(fields, profile.pk)
 
-
             # create braintree customer
-            result = gateway.customer.create({
-                "first_name": profile.user.first_name,
-                "last_name": profile.user.last_name,
-                "company": profile.business_name,
-                "email": profile.user.email,
-                "phone": profile.mobile_user
-            })
+            result = gateway.customer.create(
+                {
+                    "first_name": profile.user.first_name,
+                    "last_name": profile.user.last_name,
+                    "company": profile.business_name,
+                    "email": profile.user.email,
+                    "phone": profile.mobile_user,
+                }
+            )
             if result.is_success:
                 profile.customer_id = result.customer.id
                 profile.save

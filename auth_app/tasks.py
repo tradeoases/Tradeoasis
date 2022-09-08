@@ -4,7 +4,7 @@ from celery.utils.log import get_task_logger
 from auth_app.email import send_account_activation_email
 
 from auth_app import models as AuthModels
-from payment.management.commands.braintree import gateway
+from payment.management.commands.run_braintree import gateway
 
 from django.utils.translation import get_language
 from googletrans import Translator
@@ -27,13 +27,15 @@ def create_braintree_customer(profile_id):
     logger.info("Creating braintree customer")
     try:
         profile = AuthModels.ClientProfile.objects.filter(pk=profile_id).first()
-        result = gateway.customer.create({
-            "first_name": profile.user.first_name,
-            "last_name": profile.user.last_name,
-            "company": profile.business_name,
-            "email": profile.user.email,
-            "phone": profile.mobile_user
-        })
+        result = gateway.customer.create(
+            {
+                "first_name": profile.user.first_name,
+                "last_name": profile.user.last_name,
+                "company": profile.business_name,
+                "email": profile.user.email,
+                "phone": profile.mobile_user,
+            }
+        )
 
         if result.is_success:
             profile.customer_id = result.customer.id
@@ -44,17 +46,20 @@ def create_braintree_customer(profile_id):
     except Exception as e:
         logger.info("Braintree Customer Creation Failed. Error {}".format(e))
 
+
 @task(name="make_business_translations")
 def make_business_translations(fields, instance_id):
     modal = AuthModels.ClientProfile
     instance = modal.objects.filter(id=instance_id).first()
     make_translations(fields, instance, modal)
 
+
 @task(name="make_user_translations")
 def make_user_translations(fields, instance_id):
     modal = AuthModels.User
     instance = modal.objects.filter(id=instance_id).first()
     make_translations(fields, instance, modal)
+
 
 def make_translations(fields, instance, modal):
     for field in fields:
@@ -74,7 +79,5 @@ def make_translations(fields, instance, modal):
                         setattr(instance, model_field.name, result.text)
                         instance.save()
             except:
-                setattr(
-                    instance, f"{field}_{language[0]}", getattr(instance, field)
-                )
+                setattr(instance, f"{field}_{language[0]}", getattr(instance, field))
                 instance.save()
