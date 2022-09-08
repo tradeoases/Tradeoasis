@@ -124,15 +124,15 @@ WSGI_APPLICATION = "core.wsgi.application"
 ASGI_APPLICATION = "core.routing.application"
 
 CHANNEL_LAYERS = {
-    # "default": {
-    #     "BACKEND": "channels_redis.core.RedisChannelLayer",
-    #     "CONFIG": {
-    #         "hosts": [("redis-server-name", 6379)],
-    #     },
-    # },
-    "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer",
-    },
+     "default": {
+         "BACKEND": "channels_redis.core.RedisChannelLayer",
+         "CONFIG": {
+             "hosts": [("redis-server-name", 6379)],
+         },
+     },
+    #"default": {
+    #    "BACKEND": "channels.layers.InMemoryChannelLayer",
+    #},
 }
 
 
@@ -140,18 +140,18 @@ CHANNEL_LAYERS = {
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    # "default": {
-    #     "ENGINE": "django.db.backends.postgresql_psycopg2",
-    #     "NAME": os.environ.get("DATABASE_PROJECT_NAME"),
-    #     "USER": os.environ.get("DATABASE_USER"),
-    #     "PASSWORD": os.environ.get("DATABASE_PASSWORD"),
-    #     "HOST": "localhost",
-    #     "PORT": "",
-    # }
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+     "default": {
+         "ENGINE": "django.db.backends.postgresql_psycopg2",
+         "NAME": "tradeoasis",
+         "USER": "tradeoasis",
+         "PASSWORD": "tradeoasis",
+         "HOST": "localhost",
+         "PORT": "",
+     }
+    #"default": {
+    #    "ENGINE": "django.db.backends.sqlite3",
+    #    "NAME": BASE_DIR / "db.sqlite3",
+    #}
 }
 
 
@@ -192,9 +192,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static"),
+# ]
+STATIC_ROOT = 'static'
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")

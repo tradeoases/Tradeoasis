@@ -23,7 +23,7 @@ from auth_app.forms import UserProfileFormManager
 from auth_app import tasks as AuthTask
 from auth_app.tokens import appTokenGenerator
 
-from payment.management.commands.braintree import gateway
+from payment.management.commands.run_braintree import gateway
 
 class LoginView(View):
     template_name = "auth_app/signin.html"

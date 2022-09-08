@@ -36,7 +36,7 @@ from paypalcheckoutsdk.orders import OrdersGetRequest
 from .paypal import PayPalClient
 import stripe
 
-from payment.management.commands.braintree import gateway
+from payment.management.commands.run_braintree import gateway
 
 
 class MembershipsView(View):
