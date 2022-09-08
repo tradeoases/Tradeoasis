@@ -825,3 +825,23 @@ form input.error {
     inline-size: 100%;
     object-fit: cover;
 }
+
+.guide-img {
+    height: 90vh;object-fit: 2/1;
+    inline-size: 100%;
+    overflow: hidden;
+}
+.guide-img img {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: contain;
+    padding: 10px;
+    border: 1px solid rgba(211, 211, 211, 0.479);
+    border-radius: 5px;
+}
+
+@media (max-width: 786px) {
+    .guide-img {
+        height: auto;
+    }
+}

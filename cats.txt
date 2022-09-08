@@ -273,18 +273,10 @@ Pending Tasks in order of priority
 - Membership Payments refractor (Both) To be discussed
 - Contract Payments (Both) To be discussed
 - dashboards final refractor (Mugisa) 4
-- Suport Pages (Guide Templates)
-- Account password resets
-    - Buyer
-        - Account Edit
-        - Business details Edit
-- contact supplier
 
 Ongoing Tasks
-- Supplier Modal (Azizz)
 - Supplier - Buyer contracts (Mugisa)
 - dashboard charts - requests analysis (90% requests charts not handled)
-- Footer Links Pages
 
 Complete Tasks
 - Social Authentication (Mugisa)
@@ -293,8 +285,9 @@ Complete Tasks
 - homepage advertising area (Azizz)
 - Showroom detail page refractor (Either)
 - Supplier - Buyer contracts (Mugisa)
+- Supplier Modal (Mugisa)
 - Footer Links (Azizz)
-- Account password resets
-    - Suplier
-        - Account Edit
-        - Business details Edit
+- Account and Business details edits
+- Footer Links Pages
+- Support Pages (Guide Templates)
+- contact supplier

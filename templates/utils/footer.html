@@ -1,4 +1,3 @@
-
 {% load static %}
 {% load i18n %}
 
@@ -99,58 +98,62 @@
 </style>
 
     <footer class="mt-4 py-2 md:py-8">
-        <div class="container-fluid foot mt-50" id="footer-large">
+        <div class="container-fluid foot mt-50 grid gap-6" id="footer-large">
             <div class="container">
                 <div class="fc flex">
                     <div class="flex hoverables" style="width:100%;height:auto;">
                         <div class="cl cl1">
-                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">Popular Features</h1>
+                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">{% trans 'Popular Features' %}</h1>
                             <ul class="py-2 md:py-0">
-                                <li><a href="#">Stores</a></li>
-                                <li><a href="#">Showrooms</a></li>
-                                <li><a href="#">Marketplace</a></li>
+                                <li><a href="{% url 'manager:guides-stores' %}">{% trans 'Stores' %}</a></li>
+                                <li><a href="{% url 'manager:guides-showrooms' %}">{% trans 'Showrooms' %}</a></li>
+                                <li><a href="{% url 'manager:guides-products' %}">{% trans 'Products' %}</a></li>
+                                <li><a href="{% url 'manager:guides-memberships' %}">{% trans 'Memberships' %}</a></li>
                             </ul>
                         </div>
                         <div class="cl cl2">
-                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">Payment Methods</h1>
+                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">{% trans 'Payment Methods' %}</h1>
                             <ul class="py-2 md:py-0">
-                                <li><a href="#">Stripe</a></li>
-                                <li><a href="#">Square</a></li>
-                                <li><a href="#">PayPal</a></li>
-                                <li><a href="#">Secure Pay</a></li>
-                                <li><a href="#">Google Pay</a></li>
-                                <li><a href="#">Mastercard</a></li>
+                                <li><a href="#">{% trans 'PayPal' %}</a></li>
+                                <li><a href="#">{% trans 'Apple Pay' %}</a></li>
+                                <li><a href="#">{% trans 'Google Pay' %}</a></li>
+                                <li><a href="#">{% trans 'Cards' %}</a></li>
                             </ul>
                         </div>
                         <div class="cl cl2">
-                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">FAQs</h1>
+                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">{% trans 'FAQs' %}</h1>
                             <ul class="py-2 md:py-0">
-                                <li><a href="#">What is a store?</a></li>
-                                <li><a href="#">What is a showroom?</a></li>
-                                <li><a href="#">How do you create a store?</a></li>
+                                <li class="text-slate-600 hover:text-slate-700"><a href="{% url 'manager:guides-stores' %}">{% trans 'What is a store?' %}</a></li>
+                                <li class="text-slate-600 hover:text-slate-700"><a href="{% url 'manager:guides-showrooms' %}">{% trans 'What is a showroom?' %}</a></li>
+                                <li class="text-slate-600 hover:text-slate-700"><a href="{% url 'manager:guides-services' %}">{% trans 'What is a Supplier service?' %}</a></li>
+                                <li class="text-slate-600 hover:text-slate-700"><a href="{% url 'manager:guides-memberships' %}">{% trans 'What are memberships?' %}</a></li>
                             </ul>
                         </div>
                         <div class="cl cl4">
-                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">Company</h1>
+                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">{% trans 'Company' %}</h1>
                             <ul class="py-2 md:py-0">
-                                <li><a href="#">Careers</a></li>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Contact Us</a></li>
-                                <li><a href="#">Management Team</a></li>
+                                <li><a href="{% url 'manager:services' %}">{% trans 'Services' %}</a></li>
+                                <li><a href="{% url 'manager:about-us' %}">{% trans 'About Us' %}</a></li>
+                                <li><a href="{% url 'manager:support' %}">{% trans 'Support' %}</a></li>
+                                <li><a href="{% url 'payments:memberships' %}">{% trans 'Memberships' %}</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="container" style="margin-bottom:25px;">
+            <div class="container" style="margin: 10px auto;">
                 <div class="flex" style="justify-content:space-between;margin:.6rem 0;">
                     <div class="flex-left">
                         <div class="flex-left-top" style="margin-bottom:14px;">
-                            <a href="#"
-                                style="border:1px solid #ccc;border-radius:5px;padding:10px 15px;text-decoration:none;">United
-                                States
-                                . English</a>
+                            {% get_current_language as LANGUAGE_CODE %}
+                            {% get_available_languages as LANGUAGES %}
+                            {% get_language_info_list for LANGUAGES as languages %}
+                            {% for language in languages %}
+                                {% if language.code == LANGUAGE_CODE  %}
+                                    <span style="border:1px solid #ccc;border-radius:5px;padding: 5px 15px;text-decoration:none;">{{ language.name_local }}</span>
+                                {% endif %}
+                            {% endfor %}
                         </div>
                         <div class="flex-left-bottom flex">
                             <span style="margin-inline-end:10px;color: #717171;">© 2010-2022
@@ -166,15 +169,8 @@
                     <div class="flex-right">
                         <div class="flex-left-top">
                             <i class="ti-facebook" style="margin-inline-end:10px;"></i>
-                            <i class="ti-youtube" style="margin-inline-end:10px;"></i>
                             <i class="ti-twitter" style="margin-inline-end:10px;"></i>
-                            <i class="ti-instagram" style="margin-inline-end:10px;"></i>
                             <i class="ti-linkedin" style="margin-inline-end:10px;"></i>
-                            <i class="ti-microphone" style="margin-inline-end:10px;"></i>
-                        </div>
-                        <div class="flex-left-bottom flex" style="justify-content:flex-end;">
-                            <img src="../static/assets/imgs/resources/apple-logo.jpg" alt=""
-                                style="margin-inline-end:10px;width:80px;height:30px;">
                         </div>
                     </div>
                 </div>
@@ -187,53 +183,53 @@
                 <div class="accordion">
                     <div class="accordion-collapsible">
                         <div class="collapsible-header">
-                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">Popular Features</h1>
+                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">{% trans 'Popular Features' %}</h1>
                         </div>
                         <div class="collapsible-content">
                             <ul class="py-2 md:py-0">
-                                <li><a href="#">Stores</a></li>
-                                <li><a href="#">Showrooms</a></li>
-                                <li><a href="#">Marketplace</a></li>
+                                <li><a href="{% url 'manager:guides-stores' %}">{% trans 'Stores' %}</a></li>
+                                <li><a href="{% url 'manager:guides-showrooms' %}">{% trans 'Showrooms' %}</a></li>
+                                <li><a href="{% url 'manager:guides-products' %}">{% trans 'Products' %}</a></li>
+                                <li><a href="{% url 'manager:guides-memberships' %}">{% trans 'Memberships' %}</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="accordion-collapsible">
                         <div class="collapsible-header">
-                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">Payment Methods</h1>
+                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">{% trans 'Payment Methods' %}</h1>
                         </div>
                         <div class="collapsible-content">
                             <ul class="py-2 md:py-0">
-                                <li><a href="#">Stripe</a></li>
-                                <li><a href="#">Square</a></li>
-                                <li><a href="#">PayPal</a></li>
-                                <li><a href="#">Secure Pay</a></li>
-                                <li><a href="#">Google Pay</a></li>
-                                <li><a href="#">Mastercard</a></li>
+                                <li><a href="#">{% trans 'PayPal' %}</a></li>
+                                <li><a href="#">{% trans 'Apple Pay' %}</a></li>
+                                <li><a href="#">{% trans 'Google Pay' %}</a></li>
+                                <li><a href="#">{% trans 'Cards' %}</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="accordion-collapsible">
                         <div class="collapsible-header">
-                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">FAQs</h1>
+                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">{% trans 'FAQs' %}</h1>
                         </div>
                         <div class="collapsible-content">
                             <ul class="py-2 md:py-0">
-                                <li><a href="#">What is a store?</a></li>
-                                <li><a href="#">What is a showroom?</a></li>
-                                <li><a href="#">How do you create a store?</a></li>
+                                <li class="text-slate-600 hover:text-slate-700"><a href="{% url 'manager:guides-stores' %}">{% trans 'What is a store?' %}</a></li>
+                                <li class="text-slate-600 hover:text-slate-700"><a href="{% url 'manager:guides-showrooms' %}">{% trans 'What is a showroom?' %}</a></li>
+                                <li class="text-slate-600 hover:text-slate-700"><a href="{% url 'manager:guides-services' %}">{% trans 'What is a Supplier service?' %}</a></li>
+                                <li class="text-slate-600 hover:text-slate-700"><a href="{% url 'manager:guides-memberships' %}">{% trans 'What are memberships?' %}</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="accordion-collapsible">
                         <div class="collapsible-header">
-                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">Company</h1>
+                            <h1 class="text-lighterBackgroundColor" style="font-size:16px;font-weight:500;text-transform:unset;">{% trans 'Company' %}</h1>
                         </div>
                         <div class="collapsible-content">
                             <ul class="py-2 md:py-0">
-                                <li><a href="#">Careers</a></li>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Contact Us</a></li>
-                                <li><a href="#">Management Team</a></li>
+                                <li><a href="{% url 'manager:services' %}">{% trans 'Services' %}</a></li>
+                                <li><a href="{% url 'manager:about-us' %}">{% trans 'About Us' %}</a></li>
+                                <li><a href="{% url 'manager:support' %}">{% trans 'Support' %}</a></li>
+                                <li><a href="{% url 'payments:memberships' %}">{% trans 'Memberships' %}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -242,7 +238,7 @@
             <div class="container" style="margin-bottom:25px;">
                 <div class="flex" style="flex-direction:column;">
                     <div class="flex" style="justify-content: center;">
-                        <a href="./admin/index.html" style="margin-inline-end:10px;">Admin</a>
+                        <a href="{% url 'app_admin:home' %}" style="margin-inline-end:10px;">Admin</a>
                         <a href="#" style="margin-inline-end:10px;">Terms</a>
                         <a href="#" style="margin-inline-end:10px;">Privacy</a>
                         <a href="#" style="margin-inline-end:10px;">Legal</a>
@@ -250,11 +246,8 @@
                     </div>
                     <div class="flex" style="justify-content: center;margin-block-start: .4rem;">
                         <i class="ti-facebook" style="margin-inline-end:10px;"></i>
-                        <i class="ti-youtube" style="margin-inline-end:10px;"></i>
                         <i class="ti-twitter" style="margin-inline-end:10px;"></i>
-                        <i class="ti-instagram" style="margin-inline-end:10px;"></i>
                         <i class="ti-linkedin" style="margin-inline-end:10px;"></i>
-                        <i class="ti-microphone" style="margin-inline-end:10px;"></i>
                     </div>
                 </div>
             </div>

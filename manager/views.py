@@ -442,3 +442,43 @@ class SupportDiscussionView(View):
 
 def blockDasboardAccess(request):
     return render(request, "utils/blockedAccess.html")
+
+
+
+def memberships(request):
+    context_data = { 
+        "view_name": _("Membership Guide")
+    }
+    return render(request, template_name='manager/guides/memberships.html', context=context_data)
+
+def showrooms(request):
+    context_data = { 
+        "view_name": _("Showrooms Guide"),
+        "showrooms": ManagerModels.Showroom.objects.all()
+    }
+    return render(request, template_name='manager/guides/showrooms.html', context=context_data)
+
+def stores(request):
+    context_data = { 
+        "view_name": _("Stores Guide"),
+    }
+    return render(request, template_name='manager/guides/stores.html', context=context_data)
+
+
+def services(request):
+    context_data = { 
+        "view_name": _("Supplier Services Guide"),
+    }
+    return render(request, template_name='manager/guides/services.html', context=context_data)
+
+def products(request):
+    context_data = { 
+        "view_name": _("Supplier Products Guide"),
+    }
+    return render(request, template_name='manager/guides/products.html', context=context_data)
+
+def accounts(request):
+    context_data = { 
+        "view_name": _("Account Creation Guide"),
+    }
+    return render(request, template_name='manager/guides/accounts.html', context=context_data)

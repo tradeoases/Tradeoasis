@@ -51,7 +51,7 @@
                     </p>
                 </div> -->
                 <div class="cta flex flex-wrap gap-3 my-3">
-                    <a href="./contact.html" class="flex place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-yellowColor hover:bg-yellowColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
+                    <a href="{% url 'supplier:supplier-contact' object.slug %}" class="flex place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-yellowColor hover:bg-yellowColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
                         <span class="text-white"><i class="fa fa-address-book"></i></span>
                         <span>{% trans 'Contact Supplier' %}</span>
                     </a>

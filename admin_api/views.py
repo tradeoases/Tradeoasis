@@ -5,12 +5,18 @@ from rest_framework.response import Response
 from rest_framework import status
 from admin_api import serializers
 
+from django.utils.translation import gettext as _
+
 from auth_app import models as AuthModels
 from supplier import models as SupplierModels
 from buyer import models as BuyerModels
 from manager import models as ManagerModels
 from payment import models as PaymentModels
-import supplier
+
+
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
+from django.conf import settings
 
 
 class CustomListPagination(PageNumberPagination):
@@ -220,6 +226,24 @@ class SuspendAccountView(APIView):
             user.save()
 
             # send mail
+            email_body = render_to_string(
+                "email_message.html",
+                {
+                    "name": user.username,
+                    "email": user.email,
+                    "description": _("Your Fodoren Account has been suspended. Contact Fodoren Support for more information")
+                },
+            )
+            email = EmailMessage(
+                _("Fodoren Account Suspended"),
+                email_body,
+                settings.DEFAULT_FROM_EMAIL,
+                [
+                    user.email,
+                ],
+            )
+            email.send(fail_silently=False)
+
             return Response(status=status.HTTP_204_NO_CONTENT)
         except:
             return Response(status=status.HTTP_400_BAD_REQUEST)

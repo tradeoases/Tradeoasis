@@ -1,3 +1,4 @@
+from re import sub
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
@@ -30,6 +31,8 @@ from googletrans import Translator
 from django.conf import settings
 
 translator = Translator()
+
+from auth_app import forms as AuthForms
 
 
 class SupplierDetailView(DetailView):
@@ -71,8 +74,57 @@ class SupplierDetailView(DetailView):
 
 
 class SupplierContactView(View):
-    pass
+    template_name = "supplier/contact_supplier.html"
 
+    def get(self, request, slug):
+        if not request.user.is_authenticated:
+            return redirect(reverse("auth_app:login"))
+
+        context_data = dict()
+        context_data["view_name"] = "Contact Supplier"
+        context_data["profile"] = AuthModels.ClientProfile.objects.filter(slug=slug).first()
+        context_data["user_profile"] = AuthModels.ClientProfile.objects.filter(user=request.user).first()
+
+        return render(request, self.template_name, context=context_data)
+
+    def post(self, request, slug):
+        subject = request.POST.get("subject")
+        message = request.POST.get("message")
+
+        user = AuthModels.ClientProfile.objects.filter(slug=slug).first().user
+
+        if not all([subject, message]):
+            messages.add_message(
+                request,
+                messages.ERROR,
+                _("Please fill all fields."),
+            )
+            return redirect(reverse('supplier:supplier-contact', args=[slug]))
+
+        email_body = render_to_string(
+            "email_message.html",
+            {
+                "name": user.username,
+                "email": user.email,
+                "description": f"{message}",
+            },
+        )
+        email = EmailMessage(
+            f"Foroden - {subject}",
+            email_body,
+            settings.DEFAULT_FROM_EMAIL,
+            [
+                user.email,
+            ],
+        )
+        email.send(fail_silently=False)
+
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            _("Submitted successfully."),
+        )
+        return redirect(reverse('supplier:supplier-contact', args=[slug]))
 
 class SupplierContractView(View):
     template_name = "supplier/contract.html"
@@ -394,6 +446,7 @@ class NewArrivalView(View):
         }
 
         return context_data
+
 
 # advertising
 class SuperDealsView(View):
@@ -893,34 +946,42 @@ class ProfileView(SupplierOnlyAccessMixin, View):
         }
         return render(request, self.template_name, context=context_data)
 
+
 def password_reset(request):
     if request.method == "GET":
         return render(request, "supplier/dashboard/password_reset.html")
-    
+
     if request.method == "POST":
         if request.POST.get("new_password") != request.POST.get("confirm_new_password"):
             messages.add_message(request, messages.ERROR, _("Password mismatch."))
-            return redirect(reverse('supplier:password-reset'))
+            return redirect(reverse("supplier:password-reset"))
 
         # confirm current password
         user = authenticate(
-            username=request.user.username, password=request.POST.get("current_password")
+            username=request.user.username,
+            password=request.POST.get("current_password"),
         )
         if not user:
-            messages.add_message(request, messages.ERROR, _("Wrong current password entered."))
-            return redirect(reverse('supplier:password-reset'))
+            messages.add_message(
+                request, messages.ERROR, _("Wrong current password entered.")
+            )
+            return redirect(reverse("supplier:password-reset"))
 
-        if authenticate(username=request.user.username, password=request.POST.get("new_password")):
+        if authenticate(
+            username=request.user.username, password=request.POST.get("new_password")
+        ):
             messages.add_message(request, messages.ERROR, _("No modification made."))
-            return redirect(reverse('supplier:password-reset'))
+            return redirect(reverse("supplier:password-reset"))
 
         # make password
         generated_password = make_password(request.POST.get("new_password"))
         user = AuthModels.User.objects.filter(pk=request.user.pk).first()
+        user.password = generated_password
         user.save()
-        messages.add_message(request, messages.SUCCESS, _("Account password reset successfully"))
+        messages.add_message(
+            request, messages.SUCCESS, _("Account password reset successfully")
+        )
         return redirect(reverse("supplier:profile"))
-
 
 
 class EditAccountsProfileView(SupplierOnlyAccessMixin, View):
@@ -937,36 +998,41 @@ class EditAccountsProfileView(SupplierOnlyAccessMixin, View):
             and request.POST.get("email")
         ):
             messages.add_message(request, messages.ERROR, _("Please Fill all fields."))
-            return redirect(reverse('supplier:dashboard-editaccountsprofile'))
+            return redirect(reverse("supplier:dashboard-editaccountsprofile"))
 
-        if request.POST.get("first_name") == request.user.first_name and request.POST.get("last_name") == request.user.last_name and request.POST.get("username") == request.user.username and request.POST.get("email") == request.user.email:
-            messages.add_message(request, messages.ERROR, _("No modification was made."))
-            return redirect(reverse('supplier:dashboard-editaccountsprofile'))
+        if (
+            request.POST.get("first_name") == request.user.first_name
+            and request.POST.get("last_name") == request.user.last_name
+            and request.POST.get("username") == request.user.username
+            and request.POST.get("email") == request.user.email
+        ):
+            messages.add_message(
+                request, messages.ERROR, _("No modification was made.")
+            )
+            return redirect(reverse("supplier:dashboard-editaccountsprofile"))
 
-        if AuthModels.User.objects.filter(username=request.POST.get("username")) and request.POST.get("username") != request.user.username:
+        if (
+            AuthModels.User.objects.filter(username=request.POST.get("username"))
+            and request.POST.get("username") != request.user.username
+        ):
             messages.add_message(request, messages.ERROR, _("Username not available."))
-            return redirect(reverse('supplier:dashboard-editaccountsprofile'))
+            return redirect(reverse("supplier:dashboard-editaccountsprofile"))
 
-        if AuthModels.User.objects.filter(email=request.POST.get("email")) and request.POST.get("email") != request.user.email:
+        if (
+            AuthModels.User.objects.filter(email=request.POST.get("email"))
+            and request.POST.get("email") != request.user.email
+        ):
             messages.add_message(request, messages.ERROR, _("Email not available."))
-            return redirect(reverse('supplier:dashboard-editaccountsprofile'))
+            return redirect(reverse("supplier:dashboard-editaccountsprofile"))
 
-        if request.POST.get("username") != request.user.username:
-            user = AuthModels.User.objects.update(
-                first_name=request.POST.get("first_name"),
-                last_name=request.POST.get("last_name"),
-                username=request.POST.get("username"),
-                email=request.POST.get("email")
-            )
-        else:
-            user = AuthModels.User.objects.update(
-                first_name=request.POST.get("first_name"),
-                last_name=request.POST.get("last_name"),
-                email=request.POST.get("email")
-            )
+        form = AuthForms.UserUpdateFormManager(data=request.POST, instance=request.user)
+        if not form.is_valid():
+            messages.add_message(request, messages.ERROR, _("Invalid data. Try again."))
+            return redirect(reverse('buyer:dashboard-editaccountsprofile'))
+        form.save()
 
         fields = ("first_name", "last_name")
-        instance = user
+        instance = request.user
         modal = AuthModels.User
         for field in fields:
             for language in settings.LANGUAGES:
@@ -989,8 +1055,11 @@ class EditAccountsProfileView(SupplierOnlyAccessMixin, View):
                         instance, f"{field}_{language[0]}", getattr(instance, field)
                     )
                     instance.save()
-        messages.add_message(request, messages.SUCCESS, _("Account Details Editted Successfully"))
+        messages.add_message(
+            request, messages.SUCCESS, _("Account Details Editted Successfully")
+        )
         return redirect(reverse("supplier:profile"))
+
 
 class EditBusinessProfileView(SupplierOnlyAccessMixin, View):
     template_name = "supplier/dashboard/business_edit.html"
@@ -1001,26 +1070,31 @@ class EditBusinessProfileView(SupplierOnlyAccessMixin, View):
         }
         return render(request, self.template_name, context=context_data)
 
-
     def post(self, request, slug):
-        required_fields = [request.POST.get("business_name", None), request.POST.get("business_description", None), request.POST.get("country", None), request.POST.get("city", None)]
+        profile = AuthModels.ClientProfile.objects.filter(slug=slug).first()
+        required_fields = [
+            request.POST.get("business_name", None),
+            request.POST.get("business_description", None),
+            request.POST.get("country", None),
+            request.POST.get("city", None),
+        ]
 
         if None in required_fields:
-            messages.add_message(request, messages.ERROR, "{}".format(_("Please Fill all reqiured fields.")))
-            return redirect(reverse("supplier:dashboard-editbusinessprofile", args=[slug]))
+            messages.add_message(
+                request,
+                messages.ERROR,
+                "{}".format(_("Please Fill all reqiured fields.")),
+            )
+            return redirect(
+                reverse("supplier:dashboard-editbusinessprofile", args=[slug])
+            )
 
         try:
-            profile = AuthModels.ClientProfile.objects.update(
-                business_name=request.POST.get("business_name"),
-                business_description=request.POST.get("business_description"),
-                country=request.POST.get("country"),
-                city=request.POST.get("city"),
-                country_code=request.POST.get("country_code"),
-                mobile_user=request.POST.get("mobile_user"),
-                vat_number=request.POST.get("vat_number", None),
-                legal_etity_identifier=request.POST.get("legal_etity_identifier", None),
-                website=request.POST.get("website", None),
-            )
+            form = AuthForms.UserProfileUpdateFormManager(data=request.POST, instance=profile)
+            if not form.is_valid():
+                messages.add_message(request, messages.ERROR, _("Invalid data. Try again."))
+                return redirect(reverse('buyer:dashboard-editaccountsprofile'))
+            form.save()
 
             fields = (
                 "business_name",
@@ -1063,7 +1137,9 @@ class EditBusinessProfileView(SupplierOnlyAccessMixin, View):
             messages.add_message(
                 request, messages.ERROR, _("An Error Occurred. Try Again.")
             )
-            return redirect(reverse("supplier:dashboard-editbusinessprofile", args=[slug]))
+            return redirect(
+                reverse("supplier:dashboard-editbusinessprofile", args=[slug])
+            )
 
 
 class DashboardProductsView(SupplierOnlyAccessMixin, View):

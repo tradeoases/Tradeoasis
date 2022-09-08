@@ -37,4 +37,12 @@ urlpatterns = [
         name="create-discussion",
     ),
     path("blocked", views.blockDasboardAccess, name="dashboard-blocked"),
+
+    # guides
+    path("guides/memberships", views.memberships, name="guides-memberships"),
+    path("guides/showrooms", views.showrooms, name="guides-showrooms"),
+    path("guides/stores", views.stores, name="guides-stores"),
+    path("guides/services", views.services, name="guides-services"),
+    path("guides/products", views.products, name="guides-products"),
+    path("guides/accounts", views.accounts, name="guides-accounts"),
 ]

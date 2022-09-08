@@ -72,48 +72,6 @@
                     </div>
                 </div>
             </div>
-            <div class="cs-grid" style="--gap: 1rem;align-content: flex-start;padding: .5rem;grid-template-columns: 1fr;">
-                {% if top_suppliers.results %}
-                    <div class="cs-grid br-md cs-justify-start" style="--gap: 1rem;padding: 0 0;align-content: flex-start;" data-context="{{top_suppliers.context_name}}">
-                        <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
-                            Top Suppliers
-                        </p>
-                        <div class="cs-grid cs-justify-start horizontal-scroll" style="--gap: 1rem;--row-size: 21%;">
-                            {% for supplier in top_suppliers.results %}
-                                <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;justify-self: stretch;">
-                                    <div class="avator br-full cs-overflow-hidden">
-                                        <img src="/media/{{supplier.image}}" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
-                                    </div>
-                                    <div class="cs-grid">
-                                        <h5 class="cs-text-secondary" style="margin: 0;">{{supplier.profile.business_name}}</h5>
-                                        <span class="cs-text-accent cs-text-sm">View Profile</span>
-                                    </div>
-                                </a>
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% endif %}
-                {% if top_buyers.results %}
-                    <div class="cs-grid br-md cs-justify-start" style="--gap: 1rem;padding: 0 0;align-content: flex-start;" data-context="{{top_buyers.context_name}}">
-                        <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
-                            Top Suppliers
-                        </p>
-                        <div class="cs-grid cs-justify-start horizontal-scroll" style="--gap: 1rem;--row-size: 21%;">
-                            {% for buyer in top_buyers.results %}
-                                <a href="" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;justify-self: stretch;">
-                                    <div class="avator br-full cs-overflow-hidden">
-                                        <img src="/media/{{buyer.image}}" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
-                                    </div>
-                                    <div class="cs-grid">
-                                        <h5 class="cs-text-secondary" style="margin: 0;">{{buyer.profile.business_name}}</h5>
-                                        <span class="cs-text-accent cs-text-sm">View Profile</span>
-                                    </div>
-                                </a>
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% endif %}
-            </div>
         </section>
 
         <section id="client-suppliers-section" class="content cs-hidden br-sm" style="--gap: 1rem;padding: .5rem 0;">

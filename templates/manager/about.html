@@ -94,7 +94,7 @@
         <div class="container" style="border-bottom:1px solid rgb(238, 233, 233);">
             <div class="about-us gap-2">
                 <!-- <h1>About Us</h1> -->
-                <div class="statements text-slate-600 font-normal">
+                <div class="statements text-base text-slate-600 font-normal">
                     <a href="#our-history">
                         <h4 class="our-history">History</h4>
                     </a>
@@ -120,21 +120,21 @@
             <div class="container what-we-do-items">
                 <div class="what-we-do-item">
                     <img src="{% static 'assets/imgs/resources/03.png' %}" alt="intro">
-                    <h3 class="text-lighterBackgroundColor">We won 3</h3>
-                    <h3 class="text-lighterBackgroundColor">innovation</h3>
-                    <h3 class="text-lighterBackgroundColor">stores</h3>
+                    <h3 class="text-lighterBackgroundColor capitalize">{% trans 'Secure ans' %}</h3>
+                    <h3 class="text-lighterBackgroundColor capitalize">{% trans 'Reliable' %}</h3>
+                    <h3 class="text-lighterBackgroundColor capitalize">{% trans 'Transactions' %}</h3>
                 </div>
                 <div class="what-we-do-item">
                     <img src="{% static 'assets/imgs/resources/04.png' %}" alt="intro">
-                    <h3 class="text-lighterBackgroundColor">Dedicated team</h3>
-                    <h3 class="text-lighterBackgroundColor">to offer</h3>
-                    <h3 class="text-lighterBackgroundColor">24h support</h3>
+                    <h3 class="text-lighterBackgroundColor capitalize">{% trans 'Dedicated team' %}</h3>
+                    <h3 class="text-lighterBackgroundColor capitalize">{% trans 'to offer' %}</h3>
+                    <h3 class="text-lighterBackgroundColor capitalize">{% trans '24hr support' %}</h3>
                 </div>
                 <div class="what-we-do-item">
                     <img src="{% static 'assets/imgs/resources/05.png' %}" alt="intro">
-                    <h3 class="text-lighterBackgroundColor">Providing a 100%</h3>
-                    <h3 class="text-lighterBackgroundColor">authentic</h3>
-                    <h3 class="text-lighterBackgroundColor">stores</h3>
+                    <h3 class="text-lighterBackgroundColor capitalize">{% trans 'Providing a 100%' %}</h3>
+                    <h3 class="text-lighterBackgroundColor capitalize">{% trans 'authentic' %}</h3>
+                    <h3 class="text-lighterBackgroundColor capitalize">{% trans 'stores' %}</h3>
                 </div>
             </div>
         </div>
@@ -143,19 +143,25 @@
     <section class="main w-12/12 py-6 pt-0" style="background-color: #FFFFFF;" id="about-us">
         <div id="our-history" class="grid gap-2 w-12/12 about-intro" style="background-color: rgb(242, 245, 248);">
             <div class="grid gap-2 justify-center">
-                <h4 class="text-xl md:text-2xl text-gray-600 font-bold" style="font-family: serif;">
-                    History
-                </h4>
+                <h2 class="text-lg md:text-xl font-bold text-lighterBackgroundColor">{% trans "About Foroden" %}</h2>
             </div>
-            <div class="grid gap-2">
-                <p class="text-lighterBackgroundColor text-3xl md:text-4xl text-semi-bold w-full md:w-8/12 mx-auto text-center"
-                    style="text-align: justify;font-size:18.8px;line-height: unset;">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, dolores a, optio incidunt iure ea
-                    et veritatis repudiandae quibusdam fugit, velit veniam unde voluptates est repellat laudantium
-                    obcaecati asperiores! Exercitationem libero accusamus rerum hic facilis placeat voluptatum
-                    cumque molestias cupiditate dolorum fugit excepturi similique dolorem, consequatur, culpa quis
-                    tempora modi!
+            <div class="grid gap-2 grid-flow-cols">
+                <p class="text-lighterBackgroundColor text-base md:text-lg text-semi-bold">
+                   {% trans 'We represent a wide network of Digital Promoting and local and Traditional Marketing and Advertising  services  of products (in large scale) of various companies. Our offices and specialized and indigenous forces are operating in different countries. We have created a sustainable, learning and progressive system.' %}
+                   {% trans 'We decide and act as a team. Our organization is an interconnected and learning system. Over time, we make the necessary adjustments to both maintain and increase our success.' %}
                 </p>
+                <div class="grid md:flex gap-4">
+                    <ul class="text-lighterBackgroundColor text-base md:text-lg text-semi-bold list-disc mx-4">
+                        <li>{% trans "Accurate knowledge" %}</li>
+                        <li>{% trans "Informed and effective manpower" %}</li>
+                        <li>{% trans "Extensive and sustainable networking" %}</li>
+                    </ul>
+                    <ul class="text-lighterBackgroundColor text-base md:text-lg text-semi-bold list-disc mx-4">
+                        <li>{% trans "Commitment" %}</li>
+                        <li>{% trans "flexibility" %}</li>
+                        <li>{% trans "Efficient decision making" %}</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
@@ -163,14 +169,14 @@
         <div id="our-mission"
             class="md:grid right md:grid-cols-2 gap-20 w-12/12 md:w-10/12 mx-auto overflow-hidden">
             <div class="grid gap-4 content-center about-description">
-                <h2 class="text-xl md:text-2xl font-semibold text-lighterBackgroundColor" style="font-family: serif">
-                    Mission Statement</h2>
-                <p class="text-base md:text-lg text-slate-700" style="text-align: justify;">
-                    Now more than ever, consumers are choosing to support local shops over big-box chains. There are
-                    millions of thriving small businesses in North America and Europe alone, who collectively
-                    represent a $2T market. With our global community and the power of technology, Faire is helping
-                    fuel the growth of entrepreneurs everywhere.
-                </p>
+                <h2 class="text-lg md:text-xl font-bold text-lighterBackgroundColor">{% trans 'Our Mission' %}</h2>
+                <ul class="text-lighterBackgroundColor text-base md:text-lg text-semi-bold list-disc mx-4">
+                    <li>{% trans "Accepting and obtaining representation of reputable companies" %}</li>
+                    <li>{% trans "Acting as if the parent company itself is operating in different countries" %}</li>
+                    <li>{% trans "Development of our offices in different countries" %}</li>
+                    <li>{% trans "Creating a network of specialized and indigenous forces in each country" %}</li>
+                    <li>{% trans "Creating a dynamic system from the source of production, transportation, customs, distribution, control, feedback and promotion" %}</li>
+                </ul>
             </div>
             <div class="grid gap-2 img-wrapper">
                 <img src="https://images.unsplash.com/photo-1542744174-a35e40ade835?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fHNhbGVzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
@@ -183,14 +189,13 @@
                     alt="">
             </div>
             <div class="grid gap-2 md:gap-4 content-center about-description">
-                <h2 class="text-xl md:text-2xl font-semibold text-lighterBackgroundColor" style="font-family: serif">
-                    Vision Statement</h2>
-                <p class="text-base md:text-lg text-slate-700" style="text-align: justify;">
-                    Now more than ever, consumers are choosing to support local shops over big-box chains. There are
-                    millions of thriving small businesses in North America and Europe alone, who collectively
-                    represent a $2T market. With our global community and the power of technology, Faire is helping
-                    fuel the growth of entrepreneurs everywhere.
-                </p>
+                <h2 class="text-lg md:text-xl font-bold text-lighterBackgroundColor">{% trans 'Our Vision' %}</h2>
+                <ul class="text-lighterBackgroundColor text-base md:text-lg text-semi-bold list-disc mx-4">
+                    <li>{% trans "Accepting and obtaining representation of more than 100 companies by 2026" %}</li>
+                    <li>{% trans "Development of operating offices in more than 14 countries by 2026" %}</li>
+                    <li>{% trans "Development of human resources to more than 2,000 people by 2026" %}</li>
+                    <li>{% trans "Activate more than 6 subsidiaries by 2026" %}</li>
+                </ul>
             </div>
         </div>
     </section>

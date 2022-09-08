@@ -25,7 +25,7 @@
     </div>
 
     <div class="grid gap-4 md:gap-10 grid-cols-2 md:grid-cols-3 w-10/12 mx-auto py-8 justify-center">
-        <a href="" class="grid px-5 py-5 bg-slate-200 rounded-md card justify-center content-start justify-items-center gap-2">
+        <a href="{% url 'manager:guides-accounts' %}" class="grid px-5 py-5 bg-slate-200 rounded-md card justify-center content-start justify-items-center gap-2">
             <i class="fa fa-user text-6xl md:text-8xl text-lghterBackgroundColor"></i>
             <div class="grid gap-1 justify-center text-center">
                 <h2 class="font-bold md:text-lg text-xl">{% trans 'Accounts' %}</h2>
@@ -39,28 +39,28 @@
                 <p class="text-slate-500">{% trans 'Get help on payment related issues.' %}</p>
             </div>
         </a>
-        <a href="" class="grid px-6 py-5 bg-slate-200 rounded-md card justify-center content-start justify-items-center gap-2">
-            <i class="fa fa-cog  text-6xl md:text-8xl text-lghterBackgroundColor"></i>
+        <a href="{% url 'manager:guides-stores' %}" class="grid px-6 py-5 bg-slate-200 rounded-md card justify-center content-start justify-items-center gap-2">
+            <i class="fa fa-home  text-6xl md:text-8xl text-lghterBackgroundColor"></i>
             <div class="grid gap-1 justify-center text-center">
-                <h2 class="font-bold md:text-lg text-xl">{% trans 'Configurations' %}</h2>
-                <p class="text-slate-500">{% trans 'Help on Configuration related issues.' %}</p>
+                <h2 class="font-bold md:text-lg text-xl">{% trans 'Stores' %}</h2>
+                <p class="text-slate-500">{% trans 'Help on Stores related issues.' %}</p>
             </div>
         </a>
-        <a href="" class="grid px-5 py-5 bg-slate-200 rounded-md card justify-center content-start justify-items-center gap-2">
+        <a href="{% url 'manager:guides-showrooms' %}" class="grid px-5 py-5 bg-slate-200 rounded-md card justify-center content-start justify-items-center gap-2">
             <i class="fa fa-shopping-cart  text-6xl md:text-8xl text-lghterBackgroundColor"></i>
             <div class="grid gap-1 justify-center text-center">
                 <h2 class="font-bold md:text-lg text-xl">{% trans 'Showrooms' %}</h2>
                 <p class="text-slate-500">{% trans 'Get help on showroom related issues.' %}</p>
             </div>
         </a>
-        <a href="" class="grid px-5 py-5 bg-slate-200 rounded-md card justify-center content-start justify-items-center gap-2">
+        <a href="{% url 'manager:guides-memberships' %}" class="grid px-5 py-5 bg-slate-200 rounded-md card justify-center content-start justify-items-center gap-2">
             <i class="fa fa-money  text-6xl md:text-8xl text-lghterBackgroundColor"></i>
             <div class="grid gap-1 justify-center text-center">
                 <h2 class="font-bold md:text-lg text-xl">{% trans 'Memberships' %}</h2>
                 <p class="text-slate-500">{% trans 'Get help on membership related issues.' %}</p>
             </div>
         </a>
-        <a href="" class="grid px-5 py-5 bg-slate-200 rounded-md card justify-center content-start justify-items-center gap-2">
+        <a href="{% url 'manager:guides-products' %}" class="grid px-5 py-5 bg-slate-200 rounded-md card justify-center content-start justify-items-center gap-2">
             <i class="fa fa-product-hunt  text-6xl md:text-8xl text-lghterBackgroundColor"></i>
             <div class="grid gap-1 justify-center text-center">
                 <h2 class="font-bold md:text-lg text-xl">{% trans 'Products' %}</h2>

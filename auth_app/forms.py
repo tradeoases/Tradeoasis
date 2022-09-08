@@ -11,12 +11,25 @@ class UserProfileFormManager(ModelForm):
         model = AuthModels.ClientProfile
         fields = "__all__"
 
+class UserProfileUpdateFormManager(ModelForm):
+    class Meta:
+        model = AuthModels.ClientProfile
+        exclude = ('user', 'slug')
 
 class UserFormManager(ModelForm):
     class Meta:
         model = AuthModels.User
         fields = "__all__"
 
+class UserUpdateFormManager(ModelForm):
+    class Meta:
+        model = AuthModels.User
+        fields = (
+            'email',
+            'first_name',
+            'last_name',
+            'username'
+        )
 
 class CustomSignupForm(SignupForm):
     CHOICES = [("SUPPLIER", "Supplier"), ("BUYER", "Buyer")]

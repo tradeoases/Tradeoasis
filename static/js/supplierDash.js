@@ -178,8 +178,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${record.sub_category.name}</td>
                     <td>${record.currency} ${record.price}</td>
                     <td>${record.created_on}</td>
-                    <td><i class="fa fa-info-circle"></i></td>
-                `;
+                    `;
+                    // <td><i class="fa fa-info-circle"></i></td>
                 tableBody.appendChild(tableRow);
                 tableRow.addEventListener('click', async () => {
                     if (!isClientModalOpen) {

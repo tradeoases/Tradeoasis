@@ -3,16 +3,16 @@
 {% load i18n %}
 {% block content %}
 
-    <div class="block bg-white px-5">
-        <div class="breadcrumb flex flex-wrap justify-start gap-2 md:w-full md:mx-auto py-6 justify-self-start">
-            <a class="text-gray-600 hover:text-gray-900" href="./index.html">{% trans 'Home' %}</a>
-            <a>/</a>
-            <span class="text-lightBackgroundColor">{% trans 'Services' %}</span>
-        </div>
-    </div>
 
-    <section class="main w-12/12 py-6 pt-0 px-3" style="background-color: #FFFFFF;">
-        <div class="grid w-full mx-auto cf-1 gap-4 md:gap-6 w-full md:w-full mx-auto">
+    <section class="main w-12/12 pb-10" style="background-color: #FFFFFF;">
+        <div class="block bg-white px-5">
+            <div class="breadcrumb flex flex-wrap justify-start gap-2 md:w-full md:mx-auto justify-self-start">
+                <a class="text-gray-600 hover:text-gray-900" href="./index.html">{% trans 'Home' %}</a>
+                <a>/</a>
+                <span class="text-lightBackgroundColor">{% trans 'Services' %}</span>
+            </div>
+        </div>
+        <div class="grid w-full mx-auto gap-4 md:gap-6 w-full md:w-full mx-auto">
             <div class="section-heading  flex justify-between items-center">
                 <h2 class="sec-title text-lg capitalize md:text-xl font-bold text-lghterBackgroundColor">{% trans 'Foroden Services' %}</h2>
             </div>
@@ -22,7 +22,7 @@
                         <h2 class="text-lg font-semibold text-lghterBackgroundColor" style="text-transform: capitalize;">{{service.name}}</h2>
                         <hr>
                         <div class="grid gap-2" style="text-align: left;">
-                            <pre style="white-space: pre-line;font-family: inherit;" class="text-base text-slate-700 font-normal">
+                            <pre style="white-space: pre-line;font-family: inherit;line-height: 26px;" class="text-base text-slate-700 font-normal">
                                 {{service.description}} 
                             </pre>
                         </div>
