@@ -138,5 +138,3 @@ test_files/*
 
 # node npm
 node_modules/
-
-migrations/

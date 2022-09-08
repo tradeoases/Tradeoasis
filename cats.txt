@@ -243,7 +243,7 @@ Textile Products
     - Fur
     - Leather
 
-Home Appliances
+Home Appliances *not posted*
     - Air Conditioning Appliances
     - Baby Appliances
     - Cleaning Appliances
@@ -270,7 +270,6 @@ Export - Import - Commercial Activities
 
 
 Pending Tasks in order of priority
-- Membership Payments refractor (Both) To be discussed
 - Contract Payments (Both) To be discussed
 - dashboards final refractor (Mugisa) 4
 
@@ -291,3 +290,4 @@ Complete Tasks
 - Footer Links Pages
 - Support Pages (Guide Templates)
 - contact supplier
+- Membership Payments refractor (Both) To be discussed

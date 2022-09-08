@@ -88,7 +88,7 @@ class ClientProfile(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.user.get_username()}"
+        return f"{self.business_name}"
 
 
 class SupplierManager(BaseUserManager):

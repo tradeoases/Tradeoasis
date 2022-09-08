@@ -36,11 +36,7 @@ from paypalcheckoutsdk.orders import OrdersGetRequest
 from .paypal import PayPalClient
 import stripe
 
-from django.utils.translation import get_language
-from googletrans import Translator
-from django.conf import settings
-
-translator = Translator()
+from payment.management.commands.braintree import gateway
 
 
 class MembershipsView(View):
@@ -341,9 +337,11 @@ class InitSubscriptionView(View):
             private_key=settings.BRAINTREE_PRIVATE_KEY,
         )
 
+        user_profile = AuthModels.ClientProfile.objects.filter(user = request.user).first()
+
         try:
             braintree_client_token = braintree.ClientToken.generate(
-                {"customer_id": self.request.user.id}
+                {"customer_id": user_profile.customer_id}
             )
         except:
             braintree_client_token = braintree.ClientToken.generate({})
@@ -354,6 +352,36 @@ class InitSubscriptionView(View):
         }
 
         return render(request, self.template_name, context=context_data)
+
+    def post(self, request):
+
+        # nonce_create = braintree.PaymentMethodNonce.create('A_PAYMENT_METHOD_TOKEN')
+        # nonce_from_the_client = nonce_create.payment_method_nonce.nonce
+
+        nonce_from_the_client = request.POST["paymentMethodNonce"]
+        method = request.POST["method"]
+        # plan_id = request.POST["plan_id"]
+        plan_id = 'one-virtual-showroom-monthly'
+
+        # handle cards
+        result = gateway.subscription.create({
+            "payment_method_nonce": nonce_from_the_client,
+            "plan_id": plan_id
+        })
+
+        print("*"*40)
+        print(result)
+        print("*"*40)
+        
+        if result.is_success:
+            PaymentModels.MembershipReceipt.objects.create(
+                method = method,
+                plan_id = plan_id,
+                client = request.user
+            )
+            return HttpResponse(status=200)
+        
+        return HttpResponse(status=401)
 
 
 class ContractPaymentView(View):

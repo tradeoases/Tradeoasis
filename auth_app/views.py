@@ -20,16 +20,10 @@ from auth_app import models as AuthModels
 
 from auth_app.forms import UserProfileFormManager
 
-from auth_app.tasks import send_account_activation_email_task
+from auth_app import tasks as AuthTask
 from auth_app.tokens import appTokenGenerator
 
-from django.utils.translation import get_language
-from googletrans import Translator
-
-translator = Translator()
-
 from payment.management.commands.braintree import gateway
-
 
 class LoginView(View):
     template_name = "auth_app/signin.html"
@@ -136,29 +130,7 @@ class SignUpView(View):
         )
 
         fields = ("first_name", "last_name")
-        instance = user
-        modal = UserModel
-        for field in fields:
-            for language in settings.LANGUAGES:
-                try:
-                    if language[0] == get_language():
-                        # already set
-                        continue
-                    result = translator.translate(
-                        getattr(instance, field), dest=language[0]
-                    )
-                    for model_field in modal._meta.get_fields():
-                        if not model_field.name in f"{field}_{language[0]}":
-                            continue
-
-                        if model_field.name == f"{field}_{language[0]}":
-                            setattr(instance, model_field.name, result.text)
-                            instance.save()
-                except:
-                    setattr(
-                        instance, f"{field}_{language[0]}", getattr(instance, field)
-                    )
-                    instance.save()
+        AuthTask.make_user_translations.delay(fields, user.pk)
 
         uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
         token = appTokenGenerator.make_token(user)
@@ -264,29 +236,7 @@ class BusinessProfileView(View):
                 "city",
                 "mobile_user",
             )
-            instance = profile
-            modal = AuthModels.ClientProfile
-            for field in fields:
-                for language in settings.LANGUAGES:
-                    try:
-                        if language[0] == get_language():
-                            # already set
-                            continue
-                        result = translator.translate(
-                            getattr(instance, field), dest=language[0]
-                        )
-                        for model_field in modal._meta.get_fields():
-                            if not model_field.name in f"{field}_{language[0]}":
-                                continue
-
-                            if model_field.name == f"{field}_{language[0]}":
-                                setattr(instance, model_field.name, result.text)
-                                instance.save()
-                    except:
-                        setattr(
-                            instance, f"{field}_{language[0]}", getattr(instance, field)
-                        )
-                        instance.save()
+            AuthTask.make_business_translations.delay(fields, profile.pk)
 
 
             # create braintree customer
@@ -295,14 +245,18 @@ class BusinessProfileView(View):
                 "last_name": profile.user.last_name,
                 "company": profile.business_name,
                 "email": profile.user.email,
-                "phone": profile.user.mobile_user
+                "phone": profile.mobile_user
             })
-
             if result.is_success:
                 profile.customer_id = result.customer.id
+                profile.save
+
+            if profile.user.account_type == "SUPPLIER":
+                return redirect(reverse("payment:init-subscription"))
 
             return redirect(reverse("supplier:dashboard"))
-        except:
+        except Exception as e:
+            profile.delete()
             messages.add_message(
                 request, messages.ERROR, _("An Error Occurred. Try Again.")
             )

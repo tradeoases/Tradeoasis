@@ -3,6 +3,29 @@
 {% load i18n %}
 {% block content %}
 
+<!-- Load the client component. -->
+<script src="https://js.braintreegateway.com/web/3.87.0/js/client.min.js"></script>
+
+<!-- Load the PayPal Checkout component. -->
+<script src="https://js.braintreegateway.com/web/3.87.0/js/paypal-checkout.min.js"></script>
+
+<!-- Load the PayPal JS SDK with your PayPal Client ID-->
+<script src="https://www.paypal.com/sdk/js?client-id=AelDAnOLlL0DWcERzycpVmzfGLGWivz0wVofzAvEnY_4UxzFXSNz157E3ITiZOxG6ZhD6ilj4GF_W-cj"></script>
+
+<!-- cards -->
+<script src="https://js.braintreegateway.com/web/dropin/1.18.0/js/dropin.min.js"></script>
+
+<!-- google pay -->
+<script src="https://pay.google.com/gp/p/js/pay.js"></script>
+<script src="https://js.braintreegateway.com/web/3.87.0/js/google-payment.min.js"></script>
+
+<!-- venmo -->
+<script src="https://js.braintreegateway.com/web/3.87.0/js/venmo.min.js"></script>
+<script src="https://js.braintreegateway.com/web/3.87.0/js/data-collector.min.js"></script>
+
+
+        
+<script src="https://www.paypal.com/sdk/js?client-id=AdoY6Euji9UokT-HMy3UBZnAenKPPGA3slyR4t46b0LoZ_7sh6UB429UkKNAfCt0K4Y8Hdh1oRlJYIli&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
 
 <style>
     .package {
@@ -14,6 +37,16 @@
         outline: 2px solid hsl(38 95% 47% / 1);
         transform: scale(1.1);
     }
+    .paypal-btn {
+        cursor: pointer;
+        background: #009cde;
+        color: #fff;
+        display: grid;
+        place-items: center;
+        padding: 0rem 2rem;
+        border-radius: 5px;
+    }
+
 </style>
 
     <section class="grid">
@@ -29,16 +62,16 @@
                             <hr class="border-t border-solid border-slate-300">
                             <div class="grid gap-2">
                                 <div class="flex gap-2">
-                                    <input type="radio" name="one-showroom" id="one-showroom-monthly">
-                                    <label class="text-base font-semibold" for="one-showroom-monthly">600 USD <span class="font-normal text-sm text-slate-600">{% trans "per month" %}</span></label>
+                                    <input type="radio" name="one-showroom" id="one-virtual-showroom-monthly-virtual-showrooms" data-price="60">
+                                    <label class="text-base font-semibold" for="one-virtual-showroom-monthly-virtual-showrooms">600 USD <span class="font-normal text-sm text-slate-600">{% trans "per month" %}</span></label>
                                 </div>
                                 <div class="flex gap-2">
-                                    <input type="radio" name="one-showroom" id="one-showroom-monthly-6" checked>
-                                    <label class="text-base font-semibold" for="one-showroom-monthly-6">300 USD <span class="font-normal text-sm text-slate-600">{% trans "per 6 months" %}</span></label>
+                                    <input type="radio" name="one-showroom" id="one-virtual-showroom-6-monthly-virtual-showrooms" data-price="300" checked>
+                                    <label class="text-base font-semibold" for="one-virtual-showroom-6-monthly-virtual-showrooms">300 USD <span class="font-normal text-sm text-slate-600">{% trans "per 6 months" %}</span></label>
                                 </div>
                                 <div class="flex gap-2">
-                                    <input type="radio" name="one-showroom" id="one-showroom-yearly">
-                                    <label class="text-base font-semibold" for="one-showroom-yearly">600 USD <span class="font-normal text-sm text-slate-600">{% trans "per year" %}</span></label>
+                                    <input type="radio" name="one-showroom" id="one-virtual-showroom-annual-virtual-showrooms" data-price="600">
+                                    <label class="text-base font-semibold" for="one-virtual-showroom-annual-virtual-showrooms">600 USD <span class="font-normal text-sm text-slate-600">{% trans "per year" %}</span></label>
                                 </div>
                             </div>
                         </div>
@@ -47,16 +80,16 @@
                             <hr class="border-t border-solid border-slate-300">
                             <div class="grid gap-2">
                                 <div class="flex gap-2">
-                                    <input type="radio" name="multiple-showroom" id="multiple-showroom-monthly">
-                                    <label class="text-base font-semibold" for="multiple-showroom-monthly">100 USD <span class="font-normal text-sm text-slate-600">{% trans "per month" %}</span></label>
+                                    <input type="radio" name="multiple-showroom" id="multiple-virtual-showroom-monthly-virtual-showrooms" data-price="100">
+                                    <label class="text-base font-semibold" for="multiple-virtual-showroom-monthly-virtual-showrooms">100 USD <span class="font-normal text-sm text-slate-600">{% trans "per month" %}</span></label>
                                 </div>
                                 <div class="flex gap-2">
-                                    <input type="radio" name="multiple-showroom" id="multiple-showroom-monthly-6" checked>
-                                    <label class="text-base font-semibold" for="multiple-showroom-monthly-6">400 USD <span class="font-normal text-sm text-slate-600">{% trans "per 6 months" %}</span></label>
+                                    <input type="radio" name="multiple-showroom" id="multiple-virtual-showroom-6-monthly-virtual-showrooms" data-price="400" checked>
+                                    <label class="text-base font-semibold" for="multiple-virtual-showroom-6-monthly-virtual-showrooms">400 USD <span class="font-normal text-sm text-slate-600">{% trans "per 6 months" %}</span></label>
                                 </div>
                                 <div class="flex gap-2">
-                                    <input type="radio" name="multiple-showroom" id="multiple-showroom-yearly">
-                                    <label class="text-base font-semibold" for="multiple-showroom-yearly">800 USD <span class="font-normal text-sm text-slate-600">{% trans "per year" %}</span></label>
+                                    <input type="radio" name="multiple-showroom" id="multiple-virtual-showroom-annual-virtual-showrooms" data-price="800">
+                                    <label class="text-base font-semibold" for="multiple-virtual-showroom-annual-virtual-showrooms">800 USD <span class="font-normal text-sm text-slate-600">{% trans "per year" %}</span></label>
                                 </div>
                             </div>
                         </div>
@@ -70,16 +103,16 @@
                             <hr class="border-t border-solid border-slate-300">
                             <div class="grid gap-2">
                                 <div class="flex gap-2">
-                                    <input type="radio" name="digital-one-showroom" id="digital-one-showroom-monthly">
-                                    <label class="text-base font-semibold" for="digital-one-showroom-monthly">50 USD <span class="font-normal text-sm text-slate-600">{% trans "per month" %}</span></label>
+                                    <input type="radio" name="digital-one-showroom" id="one-virtual-showroom-monthly-digital-marketing" data-price="50">
+                                    <label class="text-base font-semibold" for="one-virtual-showroom-monthly-digital-marketing">50 USD <span class="font-normal text-sm text-slate-600">{% trans "per month" %}</span></label>
                                 </div>
                                 <div class="flex gap-2">
-                                    <input type="radio" name="digital-one-showroom" id="digital-one-showroom-monthly-6" checked>
-                                    <label class="text-base font-semibold" for="digital-one-showroom-monthly-6">250 USD <span class="font-normal text-sm text-slate-600">{% trans "per 6 months" %}</span></label>
+                                    <input type="radio" name="digital-one-showroom" id="one-virtual-showroom-6-monthly-digital-marketing" data-price="250" checked>
+                                    <label class="text-base font-semibold" for="one-virtual-showroom-6-monthly-digital-marketing">250 USD <span class="font-normal text-sm text-slate-600">{% trans "per 6 months" %}</span></label>
                                 </div>
                                 <div class="flex gap-2">
-                                    <input type="radio" name="digital-one-showroom" id="digital-one-showroom-yearly">
-                                    <label class="text-base font-semibold" for="digital-one-showroom-yearly">500 USD <span class="font-normal text-sm text-slate-600">{% trans "per year" %}</span></label>
+                                    <input type="radio" name="digital-one-showroom" id="one-virtual-showroom-annual-digital-marketing" data-price="500">
+                                    <label class="text-base font-semibold" for="one-virtual-showroom-annual-digital-marketing">500 USD <span class="font-normal text-sm text-slate-600">{% trans "per year" %}</span></label>
                                 </div>
                             </div>
                         </div>
@@ -88,16 +121,16 @@
                             <hr class="border-t border-solid border-slate-300">
                             <div class="grid gap-2">
                                 <div class="flex gap-2">
-                                    <input type="radio" name="digital-multiple-showroom" id="digital-multiple-showroom-monthly">
-                                    <label class="text-base font-semibold" for="digital-multiple-showroom-monthly">100 USD <span class="font-normal text-sm text-slate-600">{% trans "per month" %}</span></label>
+                                    <input type="radio" name="digital-multiple-showroom" id="multiple-virtual-showroom-monthly-digital-marketing" data-price="100">
+                                    <label class="text-base font-semibold" for="multiple-virtual-showroom-monthly-digital-marketing">100 USD <span class="font-normal text-sm text-slate-600">{% trans "per month" %}</span></label>
                                 </div>
                                 <div class="flex gap-2">
-                                    <input type="radio" name="digital-multiple-showroom" id="digital-multiple-showroom-monthly-6" checked>
-                                    <label class="text-base font-semibold" for="digital-multiple-showroom-monthly-6">500 USD <span class="font-normal text-sm text-slate-600">{% trans "per 6 months" %}</span></label>
+                                    <input type="radio" name="digital-multiple-showroom" id="multiple-virtual-showroom-6-monthly-digital-marketing" data-price="500" checked>
+                                    <label class="text-base font-semibold" for="multiple-virtual-showroom-6-monthly-digital-marketing">500 USD <span class="font-normal text-sm text-slate-600">{% trans "per 6 months" %}</span></label>
                                 </div>
                                 <div class="flex gap-2">
-                                    <input type="radio" name="digital-multiple-showroom" id="digital-multiple-showroom-yearly">
-                                    <label class="text-base font-semibold" for="digital-multiple-showroom-yearly">1000 USD <span class="font-normal text-sm text-slate-600">{% trans "per year" %}</span></label>
+                                    <input type="radio" name="digital-multiple-showroom" id="multiple-virtual-showroom-annual-digital-marketing" data-price="1000">
+                                    <label class="text-base font-semibold" for="multiple-virtual-showroom-annual-digital-marketing">1000 USD <span class="font-normal text-sm text-slate-600">{% trans "per year" %}</span></label>
                                 </div>
                             </div>
                         </div>
@@ -111,16 +144,16 @@
                             <hr class="border-t border-solid border-slate-300">
                             <div class="grid gap-2">
                                 <div class="flex gap-2">
-                                    <input type="radio" name="one-showroom" id="one-showroom-monthly">
-                                    <label class="text-base font-semibold" for="one-showroom-monthly">500 USD <span class="font-normal text-sm text-slate-600">{% trans "per month" %}</span></label>
+                                    <input type="radio" name="local-marketing" id="local-marketing-monthly" data-price="500">
+                                    <label class="text-base font-semibold" for="local-marketing-monthly">500 USD <span class="font-normal text-sm text-slate-600">{% trans "per month" %}</span></label>
                                 </div>
                                 <div class="flex gap-2">
-                                    <input type="radio" name="one-showroom" id="one-showroom-monthly-6" checked>
-                                    <label class="text-base font-semibold" for="one-showroom-monthly-6">2500 USD <span class="font-normal text-sm text-slate-600">{% trans "per 6 months" %}</span></label>
+                                    <input type="radio" name="local-marketing" id="local-marketing-6-month" data-price="2500" checked>
+                                    <label class="text-base font-semibold" for="local-marketing-6-month">2500 USD <span class="font-normal text-sm text-slate-600">{% trans "per 6 months" %}</span></label>
                                 </div>
                                 <div class="flex gap-2">
-                                    <input type="radio" name="one-showroom" id="one-showroom-yearly">
-                                    <label class="text-base font-semibold" for="one-showroom-yearly">5000 USD <span class="font-normal text-sm text-slate-600">{% trans "per year" %}</span></label>
+                                    <input type="radio" name="local-marketing" id="local-marketing-annual" data-price="5000">
+                                    <label class="text-base font-semibold" for="local-marketing-annual">5000 USD <span class="font-normal text-sm text-slate-600">{% trans "per year" %}</span></label>
                                 </div>
                             </div>
                         </div>
@@ -131,9 +164,17 @@
                 <h1 class="text-xl md:text-2xl font-bold text-lighterBackgroundColor">2. Choose your Payment Method</h1>
                 <hr class="border-t border-solid border-slate-200">
                 <div class="grid gap-3 py-3">
-                    <div class="payment-methods grid gap-4 justify-start">
-                        <div class="flex gap-2">
+                    <div class="payment-methods grid items-start justify-start">
+                        <div class="flex gap-4 items-start content-start">
                             <div id="paypal-button"></div>
+                            <div class="google-container"style="block-size: 70px;cursor: pointer;">
+                                <span id="google-pay-button" style="block-size: 70px;">
+                                    <img src="{% static 'icons/GPay.png' %}" style="inline-size: auto;block-size: 70px;" alt="g-pay">
+                                </span>
+                            </div>
+                            <button class="paypal-btn" id="venmo-button">
+                                <img style="inline-size: auto;block-size: 60px;object-fit: contain;" src="{% static 'icons/venmo.svg' %}" alt="venmo">
+                            </button>
                         </div>
                         <form autocomplete="off">
                             {% if braintree_error %}
@@ -144,7 +185,7 @@
                             {% endif %}
                             <div class="braintree-notifications"></div>
                             <div id="braintree-dropin"></div>
-                            <input style="background-color: #0783ca;color: white;" id="braintree-submit-button" class="btn btn-success btn-lg btn-block" type="button" value="Pay now!" />
+                            <input style="background-color: #0783ca;color: white;" id="braintree-submit-button" class="btn btn-success btn-lg btn-block" type="button" value="Pay now!" style="cursor: pointer;" />
                         </form>
                     </div>
                 </div>
@@ -169,26 +210,287 @@
             })
 
             function getCookie(name) {
-                let cookieValue = null;
-                if (document.cookie && document.cookie !== '') {
-                    const cookies = document.cookie.split(';');
-                    for (let i = 0; i < cookies.length; i++) {
-                        const cookie = cookies[i].trim();
-                        // Does this cookie string begin with the name we want?
-                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                            break;
+                    let cookieValue = null;
+                    if (document.cookie && document.cookie !== '') {
+                        const cookies = document.cookie.split(';');
+                        for (let i = 0; i < cookies.length; i++) {
+                            const cookie = cookies[i].trim();
+                            // Does this cookie string begin with the name we want?
+                            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                break;
+                            }
                         }
                     }
+                    return cookieValue;
                 }
-                return cookieValue;
-            }
 
+
+            
+            var braintree_client_token = "{{ braintree_client_token }}";
+            var card_pay_button = document.querySelector('#braintree-submit-button');
+            
+            // CARDS
+            braintree.dropin.create({
+                authorization: braintree_client_token,
+                container: '#braintree-dropin',
+                card: {
+                    cardholderName: {
+                        required: false
+                    }
+                }
+            }, function (createErr, instance) {
+                card_pay_button.addEventListener('click', function () {
+
+                    let plan_id = document.querySelector(".package.active input[type='radio']:checked").id;
+
+                    instance.requestPaymentMethod(function (err, payload) {
+                        $.ajax({
+                            type: 'POST',
+                            url: '{% url "payment:init-subscription" %}',
+                            data: {'paymentMethodNonce': payload.nonce,
+                                    'csrfmiddlewaretoken': '{{ csrf_token }}', 'method': "braintree card", "plan_id": plan_id}
+                        }).done(function (result) {
+                            
+                            let domain = (new URL(window.location.href));
+                            window.location.href = `${domain.hostname}/profile`
+                        });
+                    });
+                });
+            });
         })
 
+        var g_pay_button = document.querySelector('#google-pay-button');
+    
+        if (!window.PaymentRequest) {
+            g_pay_button.parentNode.removeChild(g_pay_button);
+        }
+        else {
+            var paymentsClient = new google.payments.api.PaymentsClient({
+            environment: 'TEST' // Or 'PRODUCTION'
+            });
+            var braintree_client_token = "{{ braintree_client_token }}";
+        
+            braintree.client.create({
+                authorization: braintree_client_token
+                }, function (clientErr, clientInstance) {
+                braintree.googlePayment.create({
+                    client: clientInstance,
+                    googlePayVersion: 2,
+                    googleMerchantId: '3060-9705-7230' // Optional in sandbox; if set in sandbox, this value must be a valid production Google Merchant ID
+                }, function (googlePaymentErr, googlePaymentInstance) {
+                    paymentsClient.isReadyToPay({
+                    // see https://developers.google.com/pay/api/web/reference/object#IsReadyToPayRequest
+                    apiVersion: 2,
+                    apiVersionMinor: 0,
+                    allowedPaymentMethods: googlePaymentInstance.createPaymentDataRequest().allowedPaymentMethods,
+                    existingPaymentMethodRequired: true // Optional
+                    }).then(function(response) {
+                    if (response.result) {
 
+                        let plan_id = document.querySelector(".package.active input[type='radio']:checked").id;
+                        let plan_price = document.querySelector(".package.active input[type='radio']:checked").dataset['price']
+                        
+                        g_pay_button.addEventListener('click', function (event) {
+                            event.preventDefault();
+        
+                            var paymentDataRequest = googlePaymentInstance.createPaymentDataRequest({
+                                transactionInfo: {
+                                currencyCode: 'USD',
+                                totalPriceStatus: 'FINAL',
+                                totalPrice: plan_price // Your amount
+                                }
+                            });
+        
+                            var cardPaymentMethod = paymentDataRequest.allowedPaymentMethods[0];
+                            cardPaymentMethod.parameters.billingAddressRequired = true;
+                            cardPaymentMethod.parameters.billingAddressParameters = {
+                                format: 'FULL',
+                                phoneNumberRequired: true
+                            };
+        
+                            paymentsClient.loadPaymentData(paymentDataRequest).then(function(paymentData) {
+                                googlePaymentInstance.parseResponse(paymentData, function (err, result) {
+                                    if (err) {
+                                        // Handle parsing error
+                                        console.log(err)
+                                    }
+        
+                                    // Send result.nonce to your server
+                                    // result.type may be either "AndroidPayCard" or "PayPalAccount", and
+                                    // paymentData will contain the billingAddress for card payments
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: '{% url "payment:init-subscription" %}',
+                                        data: {'paymentMethodNonce': payload.nonce,
+                                    'csrfmiddlewaretoken': '{{ csrf_token }}', 'method': "braintree google pay", "plan_id": plan_id}
+                                    }).done(function (result) {
+                                        
+                                        let domain = (new URL(window.location.href));
+                                        window.location.href = `${domain.hostname}/profile`
+                                    });
+                                    console.log(result)
+                                });
+                            }).catch(function (err) {
+                                // Handle errors
+                                console.log(err)
+                            });
+                        });
+                    }
+                    }).catch(function (err) {
+                        // Handle errors
 
+                        console.log(err)
+                    });
+                });
+        
+                // Set up other Braintree components
+            });
+        
+        }
 
+        var venmoButton = document.getElementById('venmo-button');
+
+        // Create a client.
+        braintree.client.create({
+            authorization: braintree_client_token
+        }, function (clientErr, clientInstance) {
+            // Stop if there was a problem creating the client.
+            // This could happen if there is a network error or if the authorization
+            // is invalid.
+            if (clientErr) {
+                console.error('Error creating client:', clientErr);
+                return;
+            }
+
+            var venmoButton = document.getElementById('venmo-button');
+
+            braintree.venmo.create({
+                client: clientInstance,
+                allowDesktop: true,
+                allowDesktopWebLogin: true, // available in v3.86.0+
+                paymentMethodUsage: 'multi_use' // available in v3.77.0+
+                // Add allowNewBrowserTab: false if your checkout page does not support
+                // relaunching in a new tab when returning from the Venmo app. This can
+                // be omitted otherwise.
+                // allowNewBrowserTab: false
+            }, function (venmoErr, venmoInstance) {
+                if (venmoErr) {
+                    console.error('Error creating Venmo:', venmoErr);
+                    return;
+                }
+
+                // Verify browser support before proceeding.
+                if (!venmoInstance.isBrowserSupported()) {
+                    console.log('Browser does not support Venmo');
+                    return;
+                }
+
+                displayVenmoButton(venmoInstance);
+
+                // Check if tokenization results already exist. This occurs when your
+                // checkout page is relaunched in a new tab. This step can be omitted
+                // if allowNewBrowserTab is false.
+                if (venmoInstance.hasTokenizationResult()) {
+                    venmoInstance.tokenize(function (tokenizeErr, payload) {
+                    if (err) {
+                        handleVenmoError(tokenizeErr);
+                    } else {
+                        handleVenmoSuccess(payload);
+                    }
+                    });
+                    return;
+                }
+            });
+
+            function displayVenmoButton(venmoInstance) {
+                // Assumes that venmoButton is initially display: none.
+                venmoButton.style.display = 'block';
+
+                venmoButton.addEventListener('click', function () {
+                    venmoButton.disabled = true;
+
+                    venmoInstance.tokenize(function (tokenizeErr, payload) {
+                    venmoButton.removeAttribute('disabled');
+
+                        let plan_id = document.querySelector(".package.active input[type='radio']:checked").id;
+
+                        $.ajax({
+                            type: 'POST',
+                            url: '{% url "payment:init-subscription" %}',
+                            data: {'paymentMethodNonce': payload.nonce,
+                                    'csrfmiddlewaretoken': '{{ csrf_token }}', 'method': "braintree card", "plan_id": plan_id}
+                        }).done(function (result) {
+                            let domain = (new URL(window.location.href));
+                            window.location.href = `${domain.hostname}/profile`
+                        });
+                    });
+                });
+            }
+
+            function handleVenmoError(err) {
+            // ...
+            }
+
+            function handleVenmoSuccess(payload) {
+            // ...
+            }
+        });
+
+        // Create a client.
+        braintree.client.create({
+            authorization: braintree_client_token
+        }).then(function (clientInstance) {
+            // Create a PayPal Checkout component.
+            return braintree.paypalCheckout.create({
+                client: clientInstance
+            });
+        }).then(function (paypalCheckoutInstance) {
+            return paypalCheckoutInstance.loadPayPalSDK({
+                vault: true
+            });
+        }).then(function (paypalCheckoutInstance) {
+            return paypal.Buttons({
+                fundingSource: paypal.FUNDING.PAYPAL,
+
+                createBillingAgreement: function () {
+                    return paypalCheckoutInstance.createPayment({
+                        flow: 'vault', // Required
+                    });
+                },
+
+                onApprove: function (data, actions) {
+                    return paypalCheckoutInstance.tokenizePayment(data).then(function (payload) {
+
+                        let plan_id = document.querySelector(".package.active input[type='radio']:checked").id;
+
+                        $.ajax({
+                            type: 'POST',
+                            url: '{% url "payment:init-subscription" %}',
+                            data: {'paymentMethodNonce': payload.nonce,
+                                    'csrfmiddlewaretoken': '{{ csrf_token }}', 'method': "braintree card", "plan_id": plan_id}
+                        }).done(function (result) {
+                            let domain = (new URL(window.location.href));
+                            window.location.href = `${domain.hostname}/profile`
+                        });
+                    });
+                },
+
+                onCancel: function (data) {
+                    console.log('PayPal payment canceled', JSON.stringify(data, 0, 2));
+                },
+
+                onError: function (err) {
+                    console.error('PayPal error', err);
+                }
+            }).render('#paypal-button');
+        }).then(function () {
+        // The PayPal button will be rendered in an html element with the ID
+        // `paypal-button`. This function will be called when the PayPal button
+        // is set up and ready to be used
+        }).catch(function (err) {
+        // Handle component creation error
+        });
 
     </script>
 

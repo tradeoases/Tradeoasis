@@ -29,7 +29,7 @@ cryptography==37.0.4
 cssselect2==0.6.0
 daphne==3.0.2
 defusedxml==0.7.1
-Django==4.0.6
+Django==4.1.1
 django-allauth==0.51.0
 django-modeltranslation==0.18.4
 django-rosetta==0.9.8
@@ -75,6 +75,7 @@ pycparser==2.21
 pyHanko==0.13.2
 pyhanko-certvalidator==0.19.5
 PyJWT==2.4.0
+pymemcache==3.5.2
 pyOpenSSL==22.0.0
 PyPDF3==1.0.6
 PySocks==1.7.1
