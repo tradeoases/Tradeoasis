@@ -82,8 +82,12 @@ class SupplierContactView(View):
 
         context_data = dict()
         context_data["view_name"] = "Contact Supplier"
-        context_data["profile"] = AuthModels.ClientProfile.objects.filter(slug=slug).first()
-        context_data["user_profile"] = AuthModels.ClientProfile.objects.filter(user=request.user).first()
+        context_data["profile"] = AuthModels.ClientProfile.objects.filter(
+            slug=slug
+        ).first()
+        context_data["user_profile"] = AuthModels.ClientProfile.objects.filter(
+            user=request.user
+        ).first()
 
         return render(request, self.template_name, context=context_data)
 
@@ -99,7 +103,7 @@ class SupplierContactView(View):
                 messages.ERROR,
                 _("Please fill all fields."),
             )
-            return redirect(reverse('supplier:supplier-contact', args=[slug]))
+            return redirect(reverse("supplier:supplier-contact", args=[slug]))
 
         email_body = render_to_string(
             "email_message.html",
@@ -124,7 +128,8 @@ class SupplierContactView(View):
             messages.SUCCESS,
             _("Submitted successfully."),
         )
-        return redirect(reverse('supplier:supplier-contact', args=[slug]))
+        return redirect(reverse("supplier:supplier-contact", args=[slug]))
+
 
 class SupplierContractView(View):
     template_name = "supplier/contract.html"
@@ -1028,7 +1033,7 @@ class EditAccountsProfileView(SupplierOnlyAccessMixin, View):
         form = AuthForms.UserUpdateFormManager(data=request.POST, instance=request.user)
         if not form.is_valid():
             messages.add_message(request, messages.ERROR, _("Invalid data. Try again."))
-            return redirect(reverse('buyer:dashboard-editaccountsprofile'))
+            return redirect(reverse("buyer:dashboard-editaccountsprofile"))
         form.save()
 
         fields = ("first_name", "last_name")
@@ -1090,10 +1095,14 @@ class EditBusinessProfileView(SupplierOnlyAccessMixin, View):
             )
 
         try:
-            form = AuthForms.UserProfileUpdateFormManager(data=request.POST, instance=profile)
+            form = AuthForms.UserProfileUpdateFormManager(
+                data=request.POST, instance=profile
+            )
             if not form.is_valid():
-                messages.add_message(request, messages.ERROR, _("Invalid data. Try again."))
-                return redirect(reverse('buyer:dashboard-editaccountsprofile'))
+                messages.add_message(
+                    request, messages.ERROR, _("Invalid data. Try again.")
+                )
+                return redirect(reverse("buyer:dashboard-editaccountsprofile"))
             form.save()
 
             fields = (

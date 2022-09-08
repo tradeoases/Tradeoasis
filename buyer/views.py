@@ -20,6 +20,7 @@ translator = Translator()
 
 from auth_app import forms as AuthForms
 
+
 class ProfileView(BuyerOnlyAccessMixin, View):
     template_name = "buyer/dashboard/profile.html"
 
@@ -36,6 +37,7 @@ class ProfileView(BuyerOnlyAccessMixin, View):
 
         return context_data
 
+
 class EditAccountsProfileView(BuyerOnlyAccessMixin, View):
     template_name = "buyer/dashboard/account_edit.html"
 
@@ -50,24 +52,37 @@ class EditAccountsProfileView(BuyerOnlyAccessMixin, View):
             and request.POST.get("email")
         ):
             messages.add_message(request, messages.ERROR, _("Please Fill all fields."))
-            return redirect(reverse('buyer:dashboard-editaccountsprofile'))
+            return redirect(reverse("buyer:dashboard-editaccountsprofile"))
 
-        if request.POST.get("first_name") == request.user.first_name and request.POST.get("last_name") == request.user.last_name and request.POST.get("username") == request.user.username and request.POST.get("email") == request.user.email:
-            messages.add_message(request, messages.ERROR, _("No modification was made."))
-            return redirect(reverse('buyer:dashboard-editaccountsprofile'))
+        if (
+            request.POST.get("first_name") == request.user.first_name
+            and request.POST.get("last_name") == request.user.last_name
+            and request.POST.get("username") == request.user.username
+            and request.POST.get("email") == request.user.email
+        ):
+            messages.add_message(
+                request, messages.ERROR, _("No modification was made.")
+            )
+            return redirect(reverse("buyer:dashboard-editaccountsprofile"))
 
-        if AuthModels.User.objects.filter(username=request.POST.get("username")) and request.POST.get("username") != request.user.username:
+        if (
+            AuthModels.User.objects.filter(username=request.POST.get("username"))
+            and request.POST.get("username") != request.user.username
+        ):
             messages.add_message(request, messages.ERROR, _("Username not available."))
-            return redirect(reverse('buyer:dashboard-editaccountsprofile'))
+            return redirect(reverse("buyer:dashboard-editaccountsprofile"))
 
-        if AuthModels.User.objects.filter(email=request.POST.get("email")) and request.POST.get("email") != request.user.email:
+        if (
+            AuthModels.User.objects.filter(email=request.POST.get("email"))
+            and request.POST.get("email") != request.user.email
+        ):
             messages.add_message(request, messages.ERROR, _("Email not available."))
-            return redirect(reverse('buyer:dashboard-editaccountsprofile'))
+            return redirect(reverse("buyer:dashboard-editaccountsprofile"))
 
         form = AuthForms.UserUpdateFormManager(data=request.POST, instance=request.user)
         if not form.is_valid():
             messages.add_message(request, messages.ERROR, _("Invalid data. Try again."))
-            return redirect(reverse('buyer:dashboard-editaccountsprofile'))
+            return redirect(reverse("buyer:dashboard-editaccountsprofile"))
         form.save()
 
         fields = ("first_name", "last_name")
@@ -94,40 +109,47 @@ class EditAccountsProfileView(BuyerOnlyAccessMixin, View):
                         instance, f"{field}_{language[0]}", getattr(instance, field)
                     )
                     instance.save()
-        messages.add_message(request, messages.SUCCESS, _("Account Details Editted Successfully"))
+        messages.add_message(
+            request, messages.SUCCESS, _("Account Details Editted Successfully")
+        )
         return redirect(reverse("buyer:profile"))
-
 
 
 def password_reset(request):
     if request.method == "GET":
         return render(request, "buyer/dashboard/password_reset.html")
-    
+
     if request.method == "POST":
         if request.POST.get("new_password") != request.POST.get("confirm_new_password"):
             messages.add_message(request, messages.ERROR, _("Password mismatch."))
-            return redirect(reverse('buyer:password-reset'))
+            return redirect(reverse("buyer:password-reset"))
 
         # confirm current password
         user = authenticate(
-            username=request.user.username, password=request.POST.get("current_password")
+            username=request.user.username,
+            password=request.POST.get("current_password"),
         )
         if not user:
-            messages.add_message(request, messages.ERROR, _("Wrong current password entered."))
-            return redirect(reverse('buyer:password-reset'))
+            messages.add_message(
+                request, messages.ERROR, _("Wrong current password entered.")
+            )
+            return redirect(reverse("buyer:password-reset"))
 
-        if authenticate(username=request.user.username, password=request.POST.get("new_password")):
+        if authenticate(
+            username=request.user.username, password=request.POST.get("new_password")
+        ):
             messages.add_message(request, messages.ERROR, _("No modification made."))
-            return redirect(reverse('buyer:password-reset'))
+            return redirect(reverse("buyer:password-reset"))
 
         # make password
         generated_password = make_password(request.POST.get("new_password"))
         user = AuthModels.User.objects.filter(pk=request.user.pk).first()
         user.password = generated_password
         user.save()
-        messages.add_message(request, messages.SUCCESS, _("Account password reset successfully"))
+        messages.add_message(
+            request, messages.SUCCESS, _("Account password reset successfully")
+        )
         return redirect(reverse("buyer:profile"))
-
 
 
 class BusinessProfileView(BuyerOnlyAccessMixin, View):
@@ -156,20 +178,32 @@ class EditBusinessProfileView(BuyerOnlyAccessMixin, View):
         }
         return render(request, self.template_name, context=context_data)
 
-
     def post(self, request, slug):
         profile = AuthModels.ClientProfile.objects.filter(slug=slug).first()
-        required_fields = [request.POST.get("business_name", None), request.POST.get("business_description", None), request.POST.get("country", None), request.POST.get("city", None)]
+        required_fields = [
+            request.POST.get("business_name", None),
+            request.POST.get("business_description", None),
+            request.POST.get("country", None),
+            request.POST.get("city", None),
+        ]
 
         if None in required_fields:
-            messages.add_message(request, messages.ERROR, "{}".format(_("Please Fill all reqiured fields.")))
+            messages.add_message(
+                request,
+                messages.ERROR,
+                "{}".format(_("Please Fill all reqiured fields.")),
+            )
             return redirect(reverse("buyer:dashboard-editbusinessprofile", args=[slug]))
 
         try:
-            form = AuthForms.UserProfileUpdateFormManager(data=request.POST, instance=profile)
+            form = AuthForms.UserProfileUpdateFormManager(
+                data=request.POST, instance=profile
+            )
             if not form.is_valid():
-                messages.add_message(request, messages.ERROR, _("Invalid data. Try again."))
-                return redirect(reverse('buyer:dashboard-editaccountsprofile'))
+                messages.add_message(
+                    request, messages.ERROR, _("Invalid data. Try again.")
+                )
+                return redirect(reverse("buyer:dashboard-editaccountsprofile"))
             form.save()
 
             fields = (
@@ -214,8 +248,6 @@ class EditBusinessProfileView(BuyerOnlyAccessMixin, View):
                 request, messages.ERROR, _("An Error Occurred. Try Again.")
             )
             return redirect(reverse("buyer:dashboard-editbusinessprofile", args=[slug]))
-
-
 
 
 class ContractListView(BuyerOnlyAccessMixin, ListView):

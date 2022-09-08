@@ -231,7 +231,9 @@ class SuspendAccountView(APIView):
                 {
                     "name": user.username,
                     "email": user.email,
-                    "description": _("Your Fodoren Account has been suspended. Contact Fodoren Support for more information")
+                    "description": _(
+                        "Your Fodoren Account has been suspended. Contact Fodoren Support for more information"
+                    ),
                 },
             )
             email = EmailMessage(

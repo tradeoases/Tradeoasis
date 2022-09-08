@@ -3,20 +3,6 @@
 {% load i18n %}
 {% block content %}
 
-<!-- Load the PayPal JS SDK with your PayPal Client ID-->
-<script src="https://www.paypal.com/sdk/js?client-id=AVtfMXZd9wxW19asF-CH9XMsGdzbSBqop8qCgwgR9zWEMlMeX4KOxuuHHiyhv282-SH7xAtl7z3eEmag"></script>
-
-<!-- Load the client component. -->
-<script src="https://js.braintreegateway.com/web/3.86.0/js/client.min.js"></script>
-
-<!-- Load the PayPal Checkout component. -->
-<script src="https://js.braintreegateway.com/web/3.86.0/js/paypal-checkout.min.js"></script>
-
-<script src="https://js.braintreegateway.com/web/dropin/1.18.0/js/dropin.min.js"></script>
-<script src="https://pay.google.com/gp/p/js/pay.js"></script>
-<script src="https://js.braintreegateway.com/web/3.86.0/js/google-payment.min.js"></script>
-<script src="https://js.braintreegateway.com/web/3.86.0/js/data-collector.min.js"></script>
-
 
 <style>
     .package {
@@ -183,115 +169,21 @@
             })
 
             function getCookie(name) {
-                    let cookieValue = null;
-                    if (document.cookie && document.cookie !== '') {
-                        const cookies = document.cookie.split(';');
-                        for (let i = 0; i < cookies.length; i++) {
-                            const cookie = cookies[i].trim();
-                            // Does this cookie string begin with the name we want?
-                            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                                break;
-                            }
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
                         }
                     }
-                    return cookieValue;
                 }
+                return cookieValue;
+            }
 
-
-            
-            var braintree_client_token = "{{ braintree_client_token }}";
-            var card_pay_button = document.querySelector('#braintree-submit-button');
-            
-            // CARDS
-            braintree.dropin.create({
-                authorization: braintree_client_token,
-                container: '#braintree-dropin',
-                card: {
-                cardholderName: {
-                    required: false
-                }
-                }
-            }, function (createErr, instance) {
-                card_pay_button.addEventListener('click', function () {
-                    instance.requestPaymentMethod(function (err, payload) {
-                        $.ajax({
-                            type: 'POST',
-                            url: '{% url "payment:braintree-payment" 1 %}',
-                            data: {'paymentMethodNonce': payload.nonce,
-                                    'csrfmiddlewaretoken': '{{ csrf_token }}'}
-                        }).done(function (result) {
-                            //do accordingly
-                        });
-                    });
-                });
-            });
-
-            // PAYPAL
-            // Create a client.
-            braintree.client.create({
-                authorization: braintree_client_token
-            }, function (clientErr, clientInstance) {
-    
-                // Stop if there was a problem creating the client.
-                // This could happen if there is a network error or if the authorization
-                // is invalid.
-                if (clientErr) {
-                    console.error('Error creating client:', clientErr);
-                    return;
-                }
-    
-                // Create a PayPal Checkout component.
-                braintree.paypalCheckout.create({
-                    client: clientInstance
-                }, function (paypalCheckoutErr, paypalCheckoutInstance) {
-                    // Stop if there was a problem creating PayPal Checkout.
-                    // This could happen if there was a network error or if it's incorrectly
-                    // configured.
-                    if (paypalCheckoutErr) {
-                        console.error('Error creating PayPal Checkout:', paypalCheckoutErr);
-                        return;
-                    }
-    
-                    // Load the PayPal JS SDK (see Load the PayPal JS SDK section)
-                    paypalCheckoutInstance.loadPayPalSDK({
-                        
-                    }, function (loadSDKErr) {
-                    // The PayPal script is now loaded on the page and
-                    // window.paypal.Buttons is now available to use
-            
-                    // render the PayPal button (see Render the PayPal Button section)
-                        // return paypal.Buttons({
-                        //     createOrder: function () {
-                        //         return paypalCheckoutInstance.createPayment({
-                        //         flow: 'checkout',
-                        //         currency: 'USD',
-                        //         amount: '10.00',
-                        //         intent: 'capture' // this value must either be `capture` or match the intent passed into the PayPal SDK intent query parameter
-                        //         // your other createPayment options here
-                        //         });
-                        //     },
-            
-                        //     onApprove: function (data, actions) {
-                        //         // some logic here before tokenization happens below
-                        //         return paypalCheckoutInstance.tokenizePayment(data).then(function (payload) {
-                        //         // Submit payload.nonce to your server
-                        //         });
-                        //     },
-            
-                        //     onCancel: function () {
-                        //         // handle case where user cancels
-                        //     },
-            
-                        //     onError: function (err) {
-                        //         // handle case where error occurs
-                        //     }
-                        // }).render('#paypal-button');
-                        
-                    });
-                });
-    
-            });
         })
 
 

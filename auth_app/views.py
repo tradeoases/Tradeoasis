@@ -28,6 +28,8 @@ from googletrans import Translator
 
 translator = Translator()
 
+from payment.management.commands.braintree import gateway
+
 
 class LoginView(View):
     template_name = "auth_app/signin.html"
@@ -285,6 +287,19 @@ class BusinessProfileView(View):
                             instance, f"{field}_{language[0]}", getattr(instance, field)
                         )
                         instance.save()
+
+
+            # create braintree customer
+            result = gateway.customer.create({
+                "first_name": profile.user.first_name,
+                "last_name": profile.user.last_name,
+                "company": profile.business_name,
+                "email": profile.user.email,
+                "phone": profile.user.mobile_user
+            })
+
+            if result.is_success:
+                profile.customer_id = result.customer.id
 
             return redirect(reverse("supplier:dashboard"))
         except:

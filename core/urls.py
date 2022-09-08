@@ -10,6 +10,7 @@ from manager import views
 from django.core.signals import request_finished
 from django.dispatch import receiver
 
+
 @receiver(request_finished)
 def my_callback(sender, **kwargs):
     print("Request finished!")
@@ -26,7 +27,6 @@ def my_callback(sender, **kwargs):
 #     #     user_device = "bot"
 #     # else:
 #     #     user_device = "pc"
-
 
 
 #     print("*"*50)
