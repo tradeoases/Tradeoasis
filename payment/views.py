@@ -377,9 +377,9 @@ def contract_receipt(request, pk):
         context_data["view_name"] = "Contract Payment"
         context_data["contract"] = contract
 
-        return render(request, "payments/contract_ receipt.html", context=context_data)
-        # pdf = render_to_pdf('payments/contract_ receipt.html', context_data)
-        # return HttpResponse(pdf, content_type='application/pdf')
+        # return render(request, "payments/contract_receipt.html", context=context_data)
+        pdf = render_to_pdf('payments/contract_receipt.html', context_data)
+        return HttpResponse(pdf, content_type='application/pdf')
 
 
 def render_to_pdf(template_src, context_dict={}):
