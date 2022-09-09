@@ -196,6 +196,9 @@ nav.cs-fixed li:hover * {
     grid-template-columns: .8fr 2fr .7fr;
 }
 
+.page-starter.product {
+    grid-template-columns: .8fr 2fr;
+}
 
 @media (max-width: 786px) {
     .page-starter {
@@ -203,9 +206,6 @@ nav.cs-fixed li:hover * {
     }
 }
 
-.page-starter.product {
-    grid-template-columns: .8fr 2fr;
-}
 
 
 /* 
