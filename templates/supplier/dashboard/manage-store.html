@@ -104,7 +104,7 @@
                     <input type="text" class="cs-text-normal" name="product" id="product" required placeholder="Product Name" list="products">
                     <datalist id="products">
                         {% for product in products.results %}
-                            <option value="{{product.product.name}}" label="{{product.product.name}}">{{product.product.name}}</option>
+                            <option value="{{product.product.name|slice:":40"}}.." label="{{product.product.name|slice:":40"}}..">{{product.product.name|slice:":40"}}..</option>
                         {% endfor %}
                     </datalist>
                 </div>

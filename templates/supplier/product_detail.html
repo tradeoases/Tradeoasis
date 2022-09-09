@@ -3,6 +3,14 @@
 {% load i18n %}
 {% block content %}
 
+<style>
+    @media (max-width: 786px) {
+        .horizontal-scroll {
+            grid-auto-columns: var(--sm-row-size)
+        }
+    }
+</style>
+
     <section class="main w-12/12 gap-2">
         <div class="breadcrumb flex flex-wrap justify-start gap-2 md:w-full mx-auto px-5 ">
             <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">{% trans 'Home' %}</a>
@@ -13,7 +21,7 @@
             <span>/</span>
             <span>{{object.name}}</span>
         </div>
-        <div class="page-starter product grid w-full mx-auto cf-1 gap-4 overflow-hidden">
+        <div class="page-starter product grid w-full mx-auto cf-1 gap-2 overflow-hidden">
             <div class="hidden md:grid side-bar gap-3 content-start product-categories w-12/12 ">
                 <div class="grid p-0 side-menu card rounded-none rounded-t-md overflow-hidden">
                     <h2 class="text-xl font-bold px-5 py-3 text-lighterBackgroundColor" style="background-color: hsla(213, 28%, 90%, .8);">
@@ -36,59 +44,157 @@
                     <span>{% trans "All Categories" %}</span>
                 </a>
             </div>
-            <div class="grid gap-2 md:gap-10 px-5 product-detail">
-                <div class="product-images grid gap-2 items-start content-start" data-context="{{product_images.context_name}}">
-                    <div class="img-magnifier img-wrapper overflow-hidden" >
-                        <img  style="object-fit: cover;" src="" alt="{{object.name}}">
+            <div class="grid gap-4 justify-start content-start">
+                <div class="grid gap-5 px-5 product-detail justify-start content-start">
+                    <div class="product-images grid gap-2 items-start content-start" data-context="{{product_images.context_name}}">
+                        <div class="img-magnifier img-wrapper overflow-hidden" >
+                            <img  style="object-fit: cover;" src="" alt="{{object.name}}">
+                        </div>
+                        <hr>
+                        <div class="product-images-list grid gap-2 grid-cols-4">
+                            {% for image in product_images.results %}
+                                <img style="aspect-ratio: 1;object-fit: cover;cursor: pointer;" src="/media/{{image.image}}" alt="">
+                            {% endfor %}
+                        </div>
                     </div>
-                    <hr>
-                    <div class="product-images-list grid gap-2" style="grid-template-columns: repeat(5, 1fr);">
-                        {% for image in product_images.results %}
-                            <img style="aspect-ratio: 1;object-fit: cover;cursor: pointer;" src="/media/{{image.image}}" alt="">
-                        {% endfor %}
+                    <div class="grid gap-2 md:gap-4 justify-start content-start">
+                        <div class="grid md:grid-flow-col justify-between gap-1">              
+                            <h3 class="text-lg md:text-xl font-bold text-lghterBackgroundColor" style="margin: 0;">{{ object.name }}</h3>
+                            <p class="text-bold justify-start text-lghterBackgroundColor" style="display:grid;grid-auto-flow: column; align-items: baseline;gap: .25rem;">
+                                <span class="text-base md:text-lg">{{ object.currency }}</span>
+                                <span class="text-lg md:text-xl font-bold">{{ object.price }}</span>
+                            </p>
+                        </div>
+                        <div class="grid md:gap-1 py-2 justify-items-start" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
+                            <p class="text-base font-normal text-slate-800">{{object.description}}</p>
+                        </div>
+                        <div class="cta grid justify-start md:grid-flow-col gap-3">
+                            <a href="{% url 'supplier:supplier-detail' product_supplier.results.profile.slug %}" class="grid grid-flow-col place-items-center gap-3 px-3 md:px-5 py-2 text-base md:py-2 bg-yellowColor hover:bg-yellowColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
+                                <span class="text-white"><i class="fa fa-address-book"></i></span>
+                                <span>{% trans 'Contact Supplier' %}</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div class="grid gap-4 justify-start content-start">
-                    <div class="grid md:grid-flow-col justify-between gap-1">                        
-                        <h3 class="text-xl md:text-2xl font-bold text-lghterBackgroundColor">{{ object.name }}</h3>
-                        <p class="text-bold justify-start text-lghterBackgroundColor" style="display:grid;grid-auto-flow: column; align-items: baseline;gap: .25rem;">
-                            <span class="text-base md:text-lg">{{ object.currency }}</span>
-                            <span class="text-xl md:text-2xl font-bold">{{ object.price }}</span>
-                        </p>
-                    </div>
-                    <div class="grid md:gap-1 py-2 justify-items-start" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
-                        <p class="text-base font-normal text-slate-800">{{object.description}}</p>
-                    </div>
-                    <div class="grid gap-2 justify-start">
-                        <p class="text-slate-700 grid grid-flow-col flex-wrap gap-3 justify-start items-center" data-context="{{product_stores.context_name}}">
+                <div class="flex flex-wrap gap-2 px-5">
+                    <div class="flex flex-wrap gap-2 justify-start">
+                        <p class="text-slate-700 grid grid-flow-col flex-wrap gap-2 justify-start items-center" data-context="{{product_stores.context_name}}">
                             <span>{% trans 'Stores' %}: </span>
     
                             {% for store in product_stores.results %}
-                                <a href="{% url 'supplier:store-detail' store.slug %}" class="grid px-4 py-1 bg-slate-200 rounded-full text-backgroundColor">{{ store }}</a>
+                                <a href="{% url 'supplier:store-detail' store.slug %}" class="grid px-4 py-1 text-base bg-blue-200 rounded-full text-lighterBackgroundColor">{{ store }}</a>
                             {% endfor %}
                         </p>
-                        <p class="text-slate-700 grid grid-flow-col flex-wrap gap-3 justify-start items-center" data-context="{{product_stores.context_name}}">
+                        <p class="text-slate-700 grid grid-flow-col flex-wrap gap-2 justify-start items-center" data-context="{{product_stores.context_name}}">
+                            <span>{% trans 'Tags' %}: </span>
                             {% for tag in tags %}
-                                <a href="" class="grid px-4 py-1 bg-slate-200 rounded-full text-backgroundColor">{{ tag.name }}</a>
+                                <a href="" class="grid px-4 py-1 text-base bg-blue-200 rounded-full text-lighterBackgroundColor">{{ tag.name }}</a>
                             {% endfor %}
                         </p>
                     </div>
-                    <div class="cta grid md:grid-flow-col gap-3">
-                        <a href="{% url 'supplier:supplier-detail' product_supplier.results.profile.slug %}" class="grid grid-flow-col place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-yellowColor hover:bg-yellowColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
-                            <span class="text-white"><i class="fa fa-address-book"></i></span>
-                            <span>{% trans 'Contact Supplier' %}</span>
-                        </a>
-                        <!-- <a href="" class="grid grid-flow-col place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-backgroundColor hover:bg-backgroundColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
-                            <span class="text-white"><i class="fa fa-shopping-cart"></i></span>
-                            <span>{% trans 'Show Interest' %}</span>
-                        </a> -->
+                </div>
+            </div>
+            <div class="hidden md:grid gap-4 content-start">
+                <a href="{% url 'auth_app:signup' %}?Supplier=1" class="grid gap-2 items-start p-4 rounded-md" style="background-image: linear-gradient(to right top,hsl(350, 100%, 95%),hsl(350, 100%, 90%),hsl(350, 100%, 91%),hsl(350, 100%, 93%),hsl(350, 100%, 95%));">
+                    <div class="grid">
+                        <h4 class="font-semibold text-lighterBackgroundColor">{% trans "Hot Deals" %}</h4>
+                        <p class="text-lighterBackgroundColor text-base">{% trans '$10 Off New Suppliers' %}</p>
                     </div>
+                    <button class="bg-black py-2 px-4 text-base justify-self-end rounded-full text-white font-semibold">View More</button>
+                </a>
+                <!-- <div class="advert-banner-small">
+                    <img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image">
+                </div> -->
+                {% if user_categories.results %}
+                <div class="grid gap-2">
+                    <div class="bg-yellowColor px-4 py-2 rounded-t-md">
+                        <h2 class="text-white font-semibold text-lg">{% trans "Visited Categories" %}</h2>
+                    </div>
+                    <ul class="grid gap-0.5 px-5" data-context='{{ user_categories.context_name }}'>
+                        {% for category in user_categories.results %}  
+                            <li
+                                class="side-menu-item text-slate-800 hover:text-black transition-colors transition-200 ease-in" data-category-index="{{ forloop.counter }}">
+                                <a class="flex items-center justify-start gap-2 py-1" href='{% url "supplier:category-detail" category.slug %}'>
+                                    <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="/media/{{ category.image }}" alt="{{ category.name }}">
+                                    <span>{{ category.name|slice:":20" }}</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    
+    <section class="grid md:grid-cols-2">
+        <div class="grid md:w-full mx-auto p-2 md:p-0 cf-1 gap-4">
+            <div class="section-body new_arrival grid gap-2 items-start card p-3 py-4 rounded-md" style="background-color: white;color: hsl(213, 28%, 19%)">
+                <div class="flex justify-between items-baseline px-3">
+                    <!-- <div class="flex gap-5"> -->
+                        <h1 class="text-lg md:text-xl text-yellowColor font-bold">{% trans 'New Arrivals' %}</h1>
+                        <!-- <h1 class="hidden md:flex gap-1 items-baseline text-lg text-slate-400 font-bold"><span
+                                class="text-lg text-xl text-slate-500">30%</span> OFF</h1> -->
+                    <!-- </div> -->
+                </div>
+                <div class="grid gap-1 horizontal-scroll items-start" style="--row-size: 29%;--sm-row-size:33%" data-context="{{new_arrivals.context_name}}">
+                    {% for new_arrival in new_arrivals.results %}
+                        <div class="promotion-card grid"  data-new_arrival-index="{{forloop.counter}}">
+                            <a class="grid rounded-md" href="{% url 'supplier:new-arivals' %}">
+                                <div class="grid p-2">
+                                    <img loading="lazy" src="/media/{{new_arrival.main_image.image}}" alt="{{new_arrival.product.name}}" class="item-img rounded" style="width: 100%;aspect-ratio:1/.8;object-fit:cover;">
+                                </div>
+                                <div class="item-details grid gap-0 px-2 items-start content-start">
+                                    <h5 class="text-base font-semibold leading-5">
+                                        {{new_arrival.product.name|slice:":20"}}..
+                                    </h5>
+                                    <!-- <p class="text-base font-bold flex gap-2 items-baseline">
+                                        {{new_arrival.product.currency}} <span>{{new_arrival.product.price}}</span>
+                                        <s class="text-slate-400 font-normal text-sm">{{new_arrival.product.price}}</s>
+                                    </p> -->
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="grid md:w-full mx-auto p-2 md:p-0 cf-1 gap-4">
+            <div class="section-body new_arrival grid gap-2 items-start card p-3 py-4 rounded-md" style="background-color: white;color: hsl(213, 28%, 19%)">
+                <div class="flex justify-between items-baseline px-3">
+                    <!-- <div class="flex gap-5"> -->
+                        <h1 class="text-lg md:text-xl text-yellowColor font-bold">{% trans 'Trending Products' %}</h1>
+                        <!-- <h1 class="hidden md:flex gap-1 items-baseline text-lg text-slate-400 font-bold"><span
+                                class="text-lg text-xl text-slate-500">30%</span> OFF</h1> -->
+                    <!-- </div> -->
+                </div>
+                <div class="grid gap-1 horizontal-scroll items-start" style="--row-size: 29%;--sm-row-size:33%" data-context="{{advertised_products.context_name}}">
+                    {% for advertised_product in advertised_products.results %}
+                        <div class="promotion-card grid"  data-advertised_product-index="{{forloop.counter}}">
+                            <a class="grid rounded-md" href="{% url 'supplier:new-arivals' %}">
+                                <div class="grid p-2">
+                                    <img loading="lazy" src="/media/{{advertised_product.main_image.image}}" alt="{{advertised_product.product.name}}" class="item-img rounded" style="width: 100%;aspect-ratio:1/.8;object-fit:cover;">
+                                </div>
+                                <div class="item-details grid gap-0 px-2 items-start content-start">
+                                    <h5 class="text-base font-semibold leading-5">
+                                        {{advertised_product.product.name|slice:":20"}}..
+                                    </h5>
+                                    <!-- <p class="text-base font-bold flex gap-2 items-baseline">
+                                        {{advertised_product.product.currency}} <span>{{advertised_product.product.price}}</span>
+                                        <s class="text-slate-400 font-normal text-sm">{{advertised_product.product.price}}</s>
+                                    </p> -->
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </section>
 
-
     {% include '../utils/product_list.html' %}
 
+
+    {% include '../utils/category_group.html' %}
+    
 {% endblock %}

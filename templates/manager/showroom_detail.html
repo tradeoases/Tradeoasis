@@ -213,25 +213,35 @@
                     <!-- Owl carousel -->
                 </div>
             </div>
-            <div class="hidden md:grid side-bar gap-3 content-start product-categories w-12/12">
-                <div class="grid p-0 side-menu card rounded-none rounded-t-md overflow-hidden">
-                    <h2 class="text-xl font-bold px-5 py-3 text-lighterBackgroundColor" style="background-color: hsla(213, 28%, 90%, .8);">{% trans 'Showrooms' %}</h2>
-                    <ul class="grid gap-0.5 px-5 py-2" data-context='{{ product_categories.context_name }}'>
-                        {% for showroom in showroows_headers %}
+            <div class="hidden md:grid gap-4 content-start">
+                <a href="{% url 'auth_app:signup' %}?Supplier=1" class="grid gap-2 items-start p-4 rounded-md" style="background-image: linear-gradient(to right top,hsl(350, 100%, 95%),hsl(350, 100%, 90%),hsl(350, 100%, 91%),hsl(350, 100%, 93%),hsl(350, 100%, 95%));">
+                    <div class="grid">
+                        <h4 class="font-semibold text-lighterBackgroundColor">{% trans "Hot Deals" %}</h4>
+                        <p class="text-lighterBackgroundColor text-base">{% trans '$10 Off New Suppliers' %}</p>
+                    </div>
+                    <button class="bg-black py-2 px-4 text-base justify-self-end rounded-full text-white font-semibold">View More</button>
+                </a>
+                <!-- <div class="advert-banner-small">
+                    <img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image">
+                </div> -->
+                {% if user_categories.results %}
+                <div class="grid gap-2">
+                    <div class="bg-yellowColor px-4 py-2 rounded-t-md">
+                        <h2 class="text-white font-semibold text-lg">{% trans "Visited Categories" %}</h2>
+                    </div>
+                    <ul class="grid gap-0.5 px-5" data-context='{{ user_categories.context_name }}'>
+                        {% for category in user_categories.results %}  
                             <li
-                                class="side-menu-item text-slate-800 hover:text-black transition-colors transition-200 ease-in">
-                                <a class="flex items-center justify-start gap-2 py-2" href="{% url 'manager:showroom-detail' showroom.slug %}"  data-showroom-index="{{forloop.counter}}">
-                                    <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="/media/{{ showroom.image }}" alt="{{ showroom.name }}">
-                                    <span>{{ showroom.name }}</span>
+                                class="side-menu-item text-slate-800 hover:text-black transition-colors transition-200 ease-in" data-category-index="{{ forloop.counter }}">
+                                <a class="flex items-center justify-start gap-2 py-1" href='{% url "supplier:category-detail" category.slug %}'>
+                                    <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="/media/{{ category.image }}" alt="{{ category.name }}">
+                                    <span>{{ category.name|slice:":20" }}</span>
                                 </a>
                             </li>
                         {% endfor %}
                     </ul>
                 </div>
-                <a class="side-menu-footer bg-yellowColor flex gap-1 px-6 items-center py-3 text-white rounded-b-md" href="{% url 'manager:showrooms' %}">
-                    <i class="ti-menu"></i>
-                    <span>{% trans 'All Showrooms' %}</span>
-                </a>
+                {% endif %}
             </div>
         </div>
     </section>
@@ -267,6 +277,7 @@
     </section>
     {% endif %}
 
+    {% include '../utils/category_group.html' %}
 
     <script>
 

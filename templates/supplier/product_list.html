@@ -91,7 +91,7 @@
                                     <div class="item-details grid gap-0 py-1 md:py-2 px-4 gap-2"
                                         style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
                                         <h5 class="text-sm font-bold leading-5 text-lightBackgroundColor">
-                                            {{product.product.name}}
+                                            {{product.product.name|slice:":40"}}..
                                         </h5>
                                         <p class="text-xs font-medium">
                                             <span>{{product.product.currency}}</span>

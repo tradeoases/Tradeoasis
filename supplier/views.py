@@ -343,9 +343,34 @@ class ProductListView(View):
 class ProductDetailView(DetailView):
     model = SupplierModels.Product
 
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        context = self.get_context_data(object=self.object)
+        response = render(request, self.get_template_names(), context=context)
+
+        if request.COOKIES.get("user_categories", None):
+            user_categories = str(self.object.category.id) + "," + request.COOKIES.get("user_categories")
+        else:
+            user_categories = str(self.object.category.id)
+            
+
+        response.set_cookie("user_categories", value=user_categories)
+
+        return response
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         product = self.get_object()
+
+        if self.request.COOKIES.get("user_categories", None):
+            user_categories = [ int(id) for id in self.request.COOKIES.get("user_categories").split(',')]
+        else:
+            user_categories = []
+
+        context["user_categories"] = {
+            "context_name": "user categories",
+            "results": SupplierModels.ProductCategory.objects.filter(id__in=user_categories)[:4]
+        }
 
         context["view_name"] = product.name
         context["product_supplier"] = {
@@ -356,15 +381,9 @@ class ProductDetailView(DetailView):
             "context_name": "product-stores",
             "results": product.store.all(),
         }
-        context["product_categories"] = {
-            "context_name": "product-categories",
-            "results": SupplierModels.ProductCategory.objects.all().order_by(
-                "-created_on"
-            ),
-        }
         context["product_images"] = {
             "context_name": "product-images",
-            "results": SupplierModels.ProductImage.objects.filter(product=product),
+            "results": SupplierModels.ProductImage.objects.filter(product=product)
         }
         context["tags"] = SupplierModels.ProductTag.objects.filter(product=product)
         context["products"] = {
@@ -390,8 +409,57 @@ class ProductDetailView(DetailView):
                 )
             ],
         }
-        return context
 
+        context["new_arrivals"] = {
+            "context_name": "new-arrivals",
+            "results": [
+                {
+                    "product": product,
+                    "main_image": SupplierModels.ProductImage.objects.filter(
+                        product=product
+                    ).first(),
+                }
+                for product in (
+                    lambda products: random.sample(products, len(products))
+                )(list(SupplierModels.Product.objects.all().order_by("-id")[:10]))
+            ],
+        }
+        context["advertised_products"] = {
+            "context_name": "advertised_products",
+            "results": [
+                {
+                    "product": product,
+                    "main_image": SupplierModels.ProductImage.objects.filter(
+                        product=product
+                    ).first(),
+                    "sub_images": SupplierModels.ProductImage.objects.filter(product=product)[1:4],
+                }
+                for product in SupplierModels.Product.objects.all().order_by("-id")[:6]
+            ],
+        }
+        
+
+        context["category_group"] = {
+            "context_name": "product-category-group",
+            "category": product.category,
+            "results": [
+                {
+                    "subcategory": subcategory,
+                    "results" :
+                        [
+                            {
+                                "product": product,
+                                "main_image": SupplierModels.ProductImage.objects.filter(
+                                    product=product
+                                ).first(),
+                            }
+                            for product in subcategory.product_set.all()[:2]
+                        ]                                               
+                }
+                for subcategory in SupplierModels.ProductSubCategory.objects.filter(category=product.category) if subcategory.product_set.count() > 1
+            ]
+        }
+        return context
 
 class NewArrivalView(View):
     template_name = "supplier/promotions.html"
@@ -739,7 +807,7 @@ class SubCategoryDetailView(View):
                 for subcategory in self.model.objects.filter(
                     Q(category=self.subcategory.category), ~Q(id=self.subcategory.id)
                 )
-                if subcategory.product_set.count() > 0
+                if subcategory.product_set.count() > 3
             ],
         }
 

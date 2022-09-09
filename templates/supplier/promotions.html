@@ -21,7 +21,7 @@
                             <a class="item" href="{% url 'supplier:product-detail' product.product.slug %}">
                                 <img src="/media/{{product.images.image}}" alt="{{product.name}}">
                                 <div class="item-content grid">
-                                    <h1 class="text-base font-semibold text-lighterBackgroundColor" style="margin: 0">{{product.product.name}}</h1>
+                                    <h1 class="text-base font-semibold text-lighterBackgroundColor" style="margin: 0">{{product.product.name|slice:":40"}}..</h1>
                                     <h3 class="font-sm text-slate-600">{{product.product.sub_category}}</h3>
 
                                     <!-- <a href="{% url 'supplier:product-detail' product.product.slug %}" class="grid grid-flow-col place-items-center gap-3 px-2 py-2 md:px-3 md:py-2 text-sm bg-lghterBackgroundColor hover:bg-lighterBackgroundColorHover duration-200 transition-all ease-in rounded text-white font-semibold">
@@ -86,7 +86,7 @@
                                 <div class="item-details grid gap-0 py-1 md:py-2 px-4 gap-2"
                                     style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
                                     <h5 class="text-sm font-bold leading-5 text-lightBackgroundColor">
-                                        {{product.product.name}}
+                                        {{product.product.name|slice:":40"}}..
                                     </h5>
                                     <p class="text-xs font-medium">
                                         <span>{{product.product.currency}}</span>
