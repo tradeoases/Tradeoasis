@@ -16,12 +16,8 @@ BASE_DIR = os.path.join(
     "../",  # videoproj
 )
 
-PRODUCT_CONF_PATH = os.path.join(
-    BASE_DIR, "braintree", "product.yml"
-)
-PLAN_CONF_PATH = os.path.join(
-    BASE_DIR, "braintree", "plan.json"
-)
+PRODUCT_CONF_PATH = os.path.join(BASE_DIR, "braintree", "product.yml")
+PLAN_CONF_PATH = os.path.join(BASE_DIR, "braintree", "plan.json")
 
 if settings.BRAINTREE_PRODUCTION:
     braintree_env = braintree.Environment.Production
@@ -29,13 +25,14 @@ else:
     braintree_env = braintree.Environment.Sandbox
 
 gateway = braintree.BraintreeGateway(
-  braintree.Configuration(
-    environment=braintree_env,
-    merchant_id=os.environ.get("BRAINTREE_MERCHANT_ID"),
-    public_key=os.environ.get("BRAINTREE_PUBLIC_KEY"),
-    private_key=os.environ.get("BRAINTREE_PRIVATE_KEY")
-  )
+    braintree.Configuration(
+        environment=braintree_env,
+        merchant_id=os.environ.get("BRAINTREE_MERCHANT_ID"),
+        public_key=os.environ.get("BRAINTREE_PUBLIC_KEY"),
+        private_key=os.environ.get("BRAINTREE_PRIVATE_KEY"),
+    )
 )
+
 
 class Command(BaseCommand):
 
@@ -45,16 +42,13 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument(
-            "--create",
-            "-c",
-            choices=[PRODUCT, PLAN],
-            help="Creates braintree plan"
+            "--create", "-c", choices=[PRODUCT, PLAN], help="Creates braintree plan"
         )
         parser.add_argument(
             "--list",
             "-l",
             choices=[PRODUCT, PLAN],
-            help="List braintree products or plans"
+            help="List braintree products or plans",
         )
 
     def create_plan(self):

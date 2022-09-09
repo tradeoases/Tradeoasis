@@ -153,7 +153,7 @@ class ProductImage(models.Model):
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(f"{self.product.name}-{uuid.uuid4()}")[:50]
+        self.slug = slugify(f"{self.product.name[:10]}-{uuid.uuid4()}")[:50]
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:

@@ -66,13 +66,12 @@ INSTALLED_APPS = [
 
 # django_user_agents
 
-CACHES = {
-    "default": {
-         'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
-        'LOCATION': '127.0.0.1:11211'
-    }
-}
-
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+#         'LOCATION': '127.0.0.1:11211',
+#     }
+# }
 
 USER_AGENTS_CACHE = "default"
 
@@ -124,12 +123,13 @@ WSGI_APPLICATION = "core.wsgi.application"
 ASGI_APPLICATION = "core.routing.application"
 
 CHANNEL_LAYERS = {
-     "default": {
-         "BACKEND": "channels_redis.core.RedisChannelLayer",
-         "CONFIG": {
-             "hosts": [("redis-server-name", 6379)],
-         },
-     },
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+        "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+    # "ROUTING": "core.routing.channel_routing",
     #"default": {
     #    "BACKEND": "channels.layers.InMemoryChannelLayer",
     #},

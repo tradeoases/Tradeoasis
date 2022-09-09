@@ -3,67 +3,91 @@
 {% load i18n %}
 {% block content %}
 
-    <div class="breadcrumb flex flex-wrap justify-start gap-2 md:w-full mx-auto px-5 ">
-        <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">{% trans 'Home' %}</a>
-        <span>/</span>
-        <a class="text-gray-600 hover:text-gray-900" href='{% url "supplier:category-detail" object.sub_category.category.slug %}'>{{object.sub_category.category}}</a>
-        <span>/</span>
-        <a class="text-gray-600 hover:text-gray-900" href='{% url "supplier:subcategory-detail" object.sub_category.category.slug object.sub_category.slug %}'>{{object.sub_category}}</a>
-        <span>/</span>
-        <span>{{object.name}}</span>
-    </div>
 
-    <section class="main w-12/12 py-6 pt-0" style="block-size: auto;">
-        <div class="grid gap-6 md:gap-10 p-5 product-detail w-full md:w-full mx-auto">
-            <div class="product-images grid gap-2" data-context="{{product_images.context_name}}">
-                <div class="img-magnifier img-wrapper overflow-hidden" >
-                    <img  style="object-fit: cover;" src="" alt="{{object.name}}">
+<section class="main w-12/12" style="display: grid;gap: 1rem;">
+        <div class="breadcrumb flex flex-wrap justify-start gap-2 md:w-full mx-auto px-5 ">
+            <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">{% trans 'Home' %}</a>
+            <span>/</span>
+            <a class="text-gray-600 hover:text-gray-900" href='{% url "supplier:category-detail" object.sub_category.category.slug %}'>{{object.sub_category.category}}</a>
+            <span>/</span>
+            <a class="text-gray-600 hover:text-gray-900" href='{% url "supplier:subcategory-detail" object.sub_category.category.slug object.sub_category.slug %}'>{{object.sub_category}}</a>
+            <span>/</span>
+            <span>{{object.name}}</span>
+        </div>
+        <div class="page-starter product grid w-full mx-auto cf-1 gap-4 overflow-hidden">
+            <div class="hidden md:grid side-bar gap-3 content-start product-categories w-12/12 ">
+                <div class="grid p-0 side-menu card rounded-none rounded-t-md overflow-hidden">
+                    <h2 class="text-xl font-bold px-5 py-3 text-lighterBackgroundColor" style="background-color: hsla(213, 28%, 90%, .8);">
+                        {% trans "Product Categories" %}</h2>
+                    <ul class="grid gap-0.5 px-5 py-2" data-context='{{ product_categories.context_name }}'>
+                        
+                        {% for category in categories_header %}  
+                            <li
+                                class="side-menu-item text-slate-800 hover:text-black transition-colors transition-200 ease-in" data-category-index="{{ forloop.counter }}">
+                                <a class="flex items-center justify-start gap-2 py-2" href='{% url "supplier:category-detail" category.slug %}'>
+                                    <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="/media/{{ category.image }}" alt="{{ category.name }}">
+                                    <span>{{ category.name }}</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </div>
-                <hr>
-                <div class="product-images-list grid gap-2" style="grid-template-columns: repeat(5, 1fr);">
-                    {% for image in product_images.results %}
-                        <img style="aspect-ratio: 1;object-fit: cover;cursor: pointer;" src="/media/{{image.image}}" alt="">
-                    {% endfor %}
-                </div>
+                <a class="side-menu-footer bg-yellowColor flex gap-1 px-6 items-center py-3 text-white rounded-b-md" href="{% url 'supplier:category-list' %}">
+                    <i class="ti-menu"></i>
+                    <span>{% trans "All Categories" %}</span>
+                </a>
             </div>
-            <div class="grid gap-4 justify-start content-start">
-                <div class="grid md:grid-flow-col justify-between gap-1">                        
-                    <h3 class="text-xl md:text-2xl font-bold text-lghterBackgroundColor">{{ object.name }}</h3>
-                    <p class="text-bold justify-start text-lghterBackgroundColor" style="display:grid;grid-auto-flow: column; align-items: baseline;gap: .25rem;">
-                        <span class="text-base md:text-lg">{{ object.currency }}</span>
-                        <span class="text-xl md:text-2xl font-bold">{{ object.price }}</span>
-                    </p>
-                </div>
-                <div class="grid md:gap-1 py-2 justify-items-start" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
-                    <p class="text-base font-normal text-slate-800">{{object.description}}</p>
-                </div>
-                <div class="grid gap-2 justify-start">
-                    <p class="text-slate-700 grid grid-flow-col flex-wrap gap-3 justify-start items-center" data-context="{{product_supplier.context_name}}">
-                        <span class="justify-self-start">{% trans 'Supplier' %}: </span>
-                        <a href="{% url 'supplier:supplier-detail' product_supplier.results.profile.slug %}" class="grid px-4 py-1 bg-slate-200 place-items-center rounded-full text-backgroundColor">{{product_supplier.results.profile.business_name}}</a>
-                    </p>
-                    <p class="text-slate-700 grid grid-flow-col flex-wrap gap-3 justify-start items-center" data-context="{{product_stores.context_name}}">
-                        <span>{% trans 'Stores' %}: </span>
-
-                        {% for store in product_stores.results %}
-                            <a href="{% url 'supplier:store-detail' store.slug %}" class="grid px-4 py-1 bg-slate-200 rounded-full text-backgroundColor">{{ store }}</a>
+            <div class="grid gap-6 md:gap-10 px-5 product-detail">
+                <div class="product-images grid gap-2" data-context="{{product_images.context_name}}">
+                    <div class="img-magnifier img-wrapper overflow-hidden" >
+                        <img  style="object-fit: cover;" src="" alt="{{object.name}}">
+                    </div>
+                    <hr>
+                    <div class="product-images-list grid gap-2" style="grid-template-columns: repeat(5, 1fr);">
+                        {% for image in product_images.results %}
+                            <img style="aspect-ratio: 1;object-fit: cover;cursor: pointer;" src="/media/{{image.image}}" alt="">
                         {% endfor %}
-                    </p>
-                    <p class="text-slate-700 grid grid-flow-col flex-wrap gap-3 justify-start items-center" data-context="{{product_stores.context_name}}">
-                        {% for tag in tags %}
-                            <a href="" class="grid px-4 py-1 bg-slate-200 rounded-full text-backgroundColor">{{ tag.name }}</a>
-                        {% endfor %}
-                    </p>
+                    </div>
                 </div>
-                <div class="cta grid md:grid-flow-col gap-3">
-                    <a href="{% url 'supplier:supplier-detail' product_supplier.results.profile.slug %}" class="grid grid-flow-col place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-yellowColor hover:bg-yellowColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
-                        <span class="text-white"><i class="fa fa-address-book"></i></span>
-                        <span>{% trans 'Contact Supplier' %}</span>
-                    </a>
-                    <!-- <a href="" class="grid grid-flow-col place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-backgroundColor hover:bg-backgroundColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
-                        <span class="text-white"><i class="fa fa-shopping-cart"></i></span>
-                        <span>{% trans 'Show Interest' %}</span>
-                    </a> -->
+                <div class="grid gap-4 justify-start content-start">
+                    <div class="grid md:grid-flow-col justify-between gap-1">                        
+                        <h3 class="text-xl md:text-2xl font-bold text-lghterBackgroundColor">{{ object.name }}</h3>
+                        <p class="text-bold justify-start text-lghterBackgroundColor" style="display:grid;grid-auto-flow: column; align-items: baseline;gap: .25rem;">
+                            <span class="text-base md:text-lg">{{ object.currency }}</span>
+                            <span class="text-xl md:text-2xl font-bold">{{ object.price }}</span>
+                        </p>
+                    </div>
+                    <div class="grid md:gap-1 py-2 justify-items-start" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
+                        <p class="text-base font-normal text-slate-800">{{object.description}}</p>
+                    </div>
+                    <div class="grid gap-2 justify-start">
+                        <p class="text-slate-700 grid grid-flow-col flex-wrap gap-3 justify-start items-center" data-context="{{product_supplier.context_name}}">
+                            <span class="justify-self-start">{% trans 'Supplier' %}: </span>
+                            <a href="{% url 'supplier:supplier-detail' product_supplier.results.profile.slug %}" class="grid px-4 py-1 bg-slate-200 place-items-center rounded-full text-backgroundColor">{{product_supplier.results.profile.business_name}}</a>
+                        </p>
+                        <p class="text-slate-700 grid grid-flow-col flex-wrap gap-3 justify-start items-center" data-context="{{product_stores.context_name}}">
+                            <span>{% trans 'Stores' %}: </span>
+    
+                            {% for store in product_stores.results %}
+                                <a href="{% url 'supplier:store-detail' store.slug %}" class="grid px-4 py-1 bg-slate-200 rounded-full text-backgroundColor">{{ store }}</a>
+                            {% endfor %}
+                        </p>
+                        <p class="text-slate-700 grid grid-flow-col flex-wrap gap-3 justify-start items-center" data-context="{{product_stores.context_name}}">
+                            {% for tag in tags %}
+                                <a href="" class="grid px-4 py-1 bg-slate-200 rounded-full text-backgroundColor">{{ tag.name }}</a>
+                            {% endfor %}
+                        </p>
+                    </div>
+                    <div class="cta grid md:grid-flow-col gap-3">
+                        <a href="{% url 'supplier:supplier-detail' product_supplier.results.profile.slug %}" class="grid grid-flow-col place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-yellowColor hover:bg-yellowColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
+                            <span class="text-white"><i class="fa fa-address-book"></i></span>
+                            <span>{% trans 'Contact Supplier' %}</span>
+                        </a>
+                        <!-- <a href="" class="grid grid-flow-col place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-backgroundColor hover:bg-backgroundColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
+                            <span class="text-white"><i class="fa fa-shopping-cart"></i></span>
+                            <span>{% trans 'Show Interest' %}</span>
+                        </a> -->
+                    </div>
                 </div>
             </div>
         </div>

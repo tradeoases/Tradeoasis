@@ -238,15 +238,16 @@ class BusinessProfileView(View):
             )
             AuthTask.make_business_translations.delay(fields, profile.pk)
 
-
             # create braintree customer
-            result = gateway.customer.create({
-                "first_name": profile.user.first_name,
-                "last_name": profile.user.last_name,
-                "company": profile.business_name,
-                "email": profile.user.email,
-                "phone": profile.mobile_user
-            })
+            result = gateway.customer.create(
+                {
+                    "first_name": profile.user.first_name,
+                    "last_name": profile.user.last_name,
+                    "company": profile.business_name,
+                    "email": profile.user.email,
+                    "phone": profile.mobile_user,
+                }
+            )
             if result.is_success:
                 profile.customer_id = result.customer.id
                 profile.save
@@ -256,7 +257,7 @@ class BusinessProfileView(View):
 
             return redirect(reverse("supplier:dashboard"))
         except Exception as e:
-            profile.delete()
+            print("Error:", e)
             messages.add_message(
                 request, messages.ERROR, _("An Error Occurred. Try Again.")
             )

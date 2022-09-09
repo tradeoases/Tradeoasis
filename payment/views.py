@@ -337,7 +337,9 @@ class InitSubscriptionView(View):
             private_key=settings.BRAINTREE_PRIVATE_KEY,
         )
 
-        user_profile = AuthModels.ClientProfile.objects.filter(user = request.user).first()
+        user_profile = AuthModels.ClientProfile.objects.filter(
+            user=request.user
+        ).first()
 
         try:
             braintree_client_token = braintree.ClientToken.generate(
@@ -361,26 +363,23 @@ class InitSubscriptionView(View):
         nonce_from_the_client = request.POST["paymentMethodNonce"]
         method = request.POST["method"]
         # plan_id = request.POST["plan_id"]
-        plan_id = 'one-virtual-showroom-monthly'
+        plan_id = "one-virtual-showroom-monthly"
 
         # handle cards
-        result = gateway.subscription.create({
-            "payment_method_nonce": nonce_from_the_client,
-            "plan_id": plan_id
-        })
+        result = gateway.subscription.create(
+            {"payment_method_nonce": nonce_from_the_client, "plan_id": plan_id}
+        )
 
-        print("*"*40)
+        print("*" * 40)
         print(result)
-        print("*"*40)
-        
+        print("*" * 40)
+
         if result.is_success:
             PaymentModels.MembershipReceipt.objects.create(
-                method = method,
-                plan_id = plan_id,
-                client = request.user
+                method=method, plan_id=plan_id, client=request.user
             )
             return HttpResponse(status=200)
-        
+
         return HttpResponse(status=401)
 
 
