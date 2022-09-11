@@ -1068,4 +1068,8 @@ form input.error {
     .category-card .body {
         grid-template-columns: 1fr;
     }
+    .category-card .sub-category .img-wrapper {
+        block-size: 20vh;
+        aspect-ratio: 1;
+    }
 }
