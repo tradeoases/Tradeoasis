@@ -108,9 +108,7 @@ class HomeView(View):
                             product=product
                         ).first(),
                     }
-                    for product in (
-                        lambda products: random.sample(products, len(products))
-                    )(list(Product.objects.all().order_by("-id")[:10]))
+                    for product in Product.objects.all().order_by("-id")[:12]
                 ],
             },
             "advertised_products": {
@@ -134,7 +132,9 @@ class HomeView(View):
                         "supplier": product.store.all().first().supplier,
                         "images": ProductImage.objects.filter(product=product).first(),
                     }
-                    for product in Product.objects.all().order_by("-id")[:12]
+                    for product in (
+                        lambda products: random.sample(products, len(products))
+                    )(list(Product.objects.all().order_by("-id")[:12]))
                 ],
             },
         }
