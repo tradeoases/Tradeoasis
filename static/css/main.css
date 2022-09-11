@@ -1035,6 +1035,7 @@ form input.error {
 .category-card .body {
     grid-template-columns: .8fr 3fr;
 }
+
 .category-card .img-wrapper {
     inline-size: 100%;
 }
@@ -1061,4 +1062,14 @@ form input.error {
     block-size: 18vh !important;
     aspect-ratio: 1;
     object-fit: contain;
+}
+
+@media (max-width: 786px) {
+    .category-card .body {
+        grid-template-columns: 1fr;
+    }
+    .category-card .sub-categories {
+        justify-content: center;
+        grid-template-rows: 1fr;
+    }
 }
