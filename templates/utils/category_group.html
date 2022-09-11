@@ -12,7 +12,7 @@
                 <img src="/media/{{ category_group.category.image }}" alt="{{ category_group.category.name }}">
                 <button class="bg-black py-2 px-4 text-base justify-self-end rounded-full text-white font-semibold">View All</button>
             </a>
-            <div class="grid gap-2 grid-cols-4 sub-categories">
+            <div class="grid gap-2 grid-cols-1 md:grid-cols-4 sub-categories">
                 {% for subcategory in category_group.results %}
                 <a href='{% url "supplier:subcategory-detail" category_group.category.slug subcategory.subcategory.slug %}' class="sub-category border border-solid border-slate-200 rounded-md grid gap-2 p-3 py-2">
                     <h4 class="text-base font-semibold text-lighterBackgroundColor">{{ subcategory.subcategory.name }}</h4>
