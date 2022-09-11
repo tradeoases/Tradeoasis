@@ -1068,8 +1068,4 @@ form input.error {
     .category-card .body {
         grid-template-columns: 1fr;
     }
-    .category-card .sub-categories {
-        justify-content: center;
-        grid-template-rows: 1fr;
-    }
 }
