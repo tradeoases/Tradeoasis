@@ -10,112 +10,408 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('auth_app', '0001_initial'),
-        ('supplier', '0001_initial'),
+        ("auth_app", "0001_initial"),
+        ("supplier", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Contract',
+            name="Contract",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('ref_no', models.CharField(blank=True, max_length=15, null=True, unique=True, verbose_name='Reference Number')),
-                ('is_complete', models.BooleanField(default=False, verbose_name='Contract completed')),
-                ('is_accepted', models.BooleanField(default=False, verbose_name='Contract accepted')),
-                ('payment_made', models.BooleanField(default=False, verbose_name='Contract payment made')),
-                ('start_date', models.DateField(blank=True, null=True, verbose_name='start date')),
-                ('end_date', models.DateField(blank=True, null=True, verbose_name='end date')),
-                ('created_on', models.DateField(default=django.utils.timezone.now, verbose_name='Created on')),
-                ('buyer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='buyer', to='auth_app.buyer')),
-                ('service', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='supplier_service', to='supplier.service')),
-                ('supplier', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='supplier', to='auth_app.supplier')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "ref_no",
+                    models.CharField(
+                        blank=True,
+                        max_length=15,
+                        null=True,
+                        unique=True,
+                        verbose_name="Reference Number",
+                    ),
+                ),
+                (
+                    "is_complete",
+                    models.BooleanField(
+                        default=False, verbose_name="Contract completed"
+                    ),
+                ),
+                (
+                    "is_accepted",
+                    models.BooleanField(
+                        default=False, verbose_name="Contract accepted"
+                    ),
+                ),
+                (
+                    "payment_made",
+                    models.BooleanField(
+                        default=False, verbose_name="Contract payment made"
+                    ),
+                ),
+                (
+                    "start_date",
+                    models.DateField(blank=True, null=True, verbose_name="start date"),
+                ),
+                (
+                    "end_date",
+                    models.DateField(blank=True, null=True, verbose_name="end date"),
+                ),
+                (
+                    "created_on",
+                    models.DateField(
+                        default=django.utils.timezone.now, verbose_name="Created on"
+                    ),
+                ),
+                (
+                    "buyer",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="buyer",
+                        to="auth_app.buyer",
+                    ),
+                ),
+                (
+                    "service",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="supplier_service",
+                        to="supplier.service",
+                    ),
+                ),
+                (
+                    "supplier",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="supplier",
+                        to="auth_app.supplier",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='MembershipPlan',
+            name="MembershipPlan",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=256, verbose_name='Name')),
-                ('name_ar', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_fr', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_de', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_en', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('description', models.TextField(verbose_name='Description')),
-                ('description_ar', models.TextField(null=True, verbose_name='Description')),
-                ('description_fr', models.TextField(null=True, verbose_name='Description')),
-                ('description_de', models.TextField(null=True, verbose_name='Description')),
-                ('description_en', models.TextField(null=True, verbose_name='Description')),
-                ('price', models.DecimalField(decimal_places=2, max_digits=6, verbose_name='Price')),
-                ('price_ar', models.DecimalField(decimal_places=2, max_digits=6, null=True, verbose_name='Price')),
-                ('price_fr', models.DecimalField(decimal_places=2, max_digits=6, null=True, verbose_name='Price')),
-                ('price_de', models.DecimalField(decimal_places=2, max_digits=6, null=True, verbose_name='Price')),
-                ('price_en', models.DecimalField(decimal_places=2, max_digits=6, null=True, verbose_name='Price')),
-                ('currency', models.CharField(max_length=6, verbose_name='Currency')),
-                ('currency_ar', models.CharField(max_length=6, null=True, verbose_name='Currency')),
-                ('currency_fr', models.CharField(max_length=6, null=True, verbose_name='Currency')),
-                ('currency_de', models.CharField(max_length=6, null=True, verbose_name='Currency')),
-                ('currency_en', models.CharField(max_length=6, null=True, verbose_name='Currency')),
-                ('slug', models.SlugField(blank=True, null=True, unique=True, verbose_name='Safe Url')),
-                ('created_on', models.DateField(default=django.utils.timezone.now, verbose_name='Created on')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=256, verbose_name="Name")),
+                (
+                    "name_ar",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_fr",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_de",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_en",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                ("description", models.TextField(verbose_name="Description")),
+                (
+                    "description_ar",
+                    models.TextField(null=True, verbose_name="Description"),
+                ),
+                (
+                    "description_fr",
+                    models.TextField(null=True, verbose_name="Description"),
+                ),
+                (
+                    "description_de",
+                    models.TextField(null=True, verbose_name="Description"),
+                ),
+                (
+                    "description_en",
+                    models.TextField(null=True, verbose_name="Description"),
+                ),
+                (
+                    "price",
+                    models.DecimalField(
+                        decimal_places=2, max_digits=6, verbose_name="Price"
+                    ),
+                ),
+                (
+                    "price_ar",
+                    models.DecimalField(
+                        decimal_places=2, max_digits=6, null=True, verbose_name="Price"
+                    ),
+                ),
+                (
+                    "price_fr",
+                    models.DecimalField(
+                        decimal_places=2, max_digits=6, null=True, verbose_name="Price"
+                    ),
+                ),
+                (
+                    "price_de",
+                    models.DecimalField(
+                        decimal_places=2, max_digits=6, null=True, verbose_name="Price"
+                    ),
+                ),
+                (
+                    "price_en",
+                    models.DecimalField(
+                        decimal_places=2, max_digits=6, null=True, verbose_name="Price"
+                    ),
+                ),
+                ("currency", models.CharField(max_length=6, verbose_name="Currency")),
+                (
+                    "currency_ar",
+                    models.CharField(max_length=6, null=True, verbose_name="Currency"),
+                ),
+                (
+                    "currency_fr",
+                    models.CharField(max_length=6, null=True, verbose_name="Currency"),
+                ),
+                (
+                    "currency_de",
+                    models.CharField(max_length=6, null=True, verbose_name="Currency"),
+                ),
+                (
+                    "currency_en",
+                    models.CharField(max_length=6, null=True, verbose_name="Currency"),
+                ),
+                (
+                    "slug",
+                    models.SlugField(
+                        blank=True, null=True, unique=True, verbose_name="Safe Url"
+                    ),
+                ),
+                (
+                    "created_on",
+                    models.DateField(
+                        default=django.utils.timezone.now, verbose_name="Created on"
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='ModeOfPayment',
+            name="ModeOfPayment",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=256, verbose_name='Name')),
-                ('name_ar', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_fr', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_de', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_en', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('transaction_count', models.IntegerField(default=0, verbose_name='Number of transactions')),
-                ('slug', models.SlugField(blank=True, null=True, unique=True, verbose_name='Safe Url')),
-                ('created_on', models.DateField(default=django.utils.timezone.now, verbose_name='Created on')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=256, verbose_name="Name")),
+                (
+                    "name_ar",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_fr",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_de",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_en",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "transaction_count",
+                    models.IntegerField(
+                        default=0, verbose_name="Number of transactions"
+                    ),
+                ),
+                (
+                    "slug",
+                    models.SlugField(
+                        blank=True, null=True, unique=True, verbose_name="Safe Url"
+                    ),
+                ),
+                (
+                    "created_on",
+                    models.DateField(
+                        default=django.utils.timezone.now, verbose_name="Created on"
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='MembershipReceipt',
+            name="MembershipReceipt",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('method', models.CharField(max_length=20, verbose_name='Payment Method')),
-                ('plan_id', models.CharField(max_length=30, verbose_name='Plan Id')),
-                ('created_on', models.DateField(default=django.utils.timezone.now, verbose_name='Created on')),
-                ('client', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='auth_app.supplier')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "method",
+                    models.CharField(max_length=20, verbose_name="Payment Method"),
+                ),
+                ("plan_id", models.CharField(max_length=30, verbose_name="Plan Id")),
+                (
+                    "created_on",
+                    models.DateField(
+                        default=django.utils.timezone.now, verbose_name="Created on"
+                    ),
+                ),
+                (
+                    "client",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="auth_app.supplier",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Membership',
+            name="Membership",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('expiry_date', models.DateField(blank=True, null=True, verbose_name='Plan expiry date')),
-                ('duration', models.CharField(choices=[('Monthly', 'Monthly'), ('Quarterly', 'Quarterly'), ('Annually', 'Annually')], max_length=256, verbose_name='Duration')),
-                ('created_on', models.DateField(default=django.utils.timezone.now, verbose_name='Created on')),
-                ('plan', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='payment.membershipplan')),
-                ('supplier', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='auth_app.supplier')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "expiry_date",
+                    models.DateField(
+                        blank=True, null=True, verbose_name="Plan expiry date"
+                    ),
+                ),
+                (
+                    "duration",
+                    models.CharField(
+                        choices=[
+                            ("Monthly", "Monthly"),
+                            ("Quarterly", "Quarterly"),
+                            ("Annually", "Annually"),
+                        ],
+                        max_length=256,
+                        verbose_name="Duration",
+                    ),
+                ),
+                (
+                    "created_on",
+                    models.DateField(
+                        default=django.utils.timezone.now, verbose_name="Created on"
+                    ),
+                ),
+                (
+                    "plan",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="payment.membershipplan",
+                    ),
+                ),
+                (
+                    "supplier",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="auth_app.supplier",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Features',
+            name="Features",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=256, verbose_name='Name')),
-                ('name_ar', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_fr', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_de', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_en', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('membership', models.ManyToManyField(related_name='features', to='payment.MembershipPlan')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=256, verbose_name="Name")),
+                (
+                    "name_ar",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_fr",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_de",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_en",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "membership",
+                    models.ManyToManyField(
+                        related_name="features", to="payment.MembershipPlan"
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='ContractReceipt',
+            name="ContractReceipt",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('address', models.CharField(max_length=256, verbose_name='Address')),
-                ('payment_id', models.CharField(max_length=256, verbose_name='Payment Id')),
-                ('amount_paid', models.DecimalField(decimal_places=2, max_digits=12, verbose_name='Total Amount Paid')),
-                ('currency', models.CharField(max_length=6, verbose_name='Currency')),
-                ('contract', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='payment.contract')),
-                ('model_of_payment', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='payment.modeofpayment')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("address", models.CharField(max_length=256, verbose_name="Address")),
+                (
+                    "payment_id",
+                    models.CharField(max_length=256, verbose_name="Payment Id"),
+                ),
+                (
+                    "amount_paid",
+                    models.DecimalField(
+                        decimal_places=2,
+                        max_digits=12,
+                        verbose_name="Total Amount Paid",
+                    ),
+                ),
+                ("currency", models.CharField(max_length=6, verbose_name="Currency")),
+                (
+                    "contract",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="payment.contract",
+                    ),
+                ),
+                (
+                    "model_of_payment",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="payment.modeofpayment",
+                    ),
+                ),
             ],
         ),
     ]

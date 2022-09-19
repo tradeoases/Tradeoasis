@@ -218,12 +218,11 @@ class ShowRoomDetailView(DetailView):
             ],
         }
 
-
         products = Product.objects.all()
 
-        product = (lambda products: random.sample(products, len(products))
-                    )(list(Product.objects.all().order_by("-id")[:10]))[0]
-        
+        product = (lambda products: random.sample(products, len(products)))(
+            list(Product.objects.all().order_by("-id")[:10])
+        )[0]
 
         context["category_group"] = {
             "context_name": "product-category-group",
@@ -231,33 +230,34 @@ class ShowRoomDetailView(DetailView):
             "results": [
                 {
                     "subcategory": subcategory,
-                    "results" :
-                        [
-                            {
-                                "product": product,
-                                "main_image": ProductImage.objects.filter(
-                                    product=product
-                                ).first(),
-                            }
-                            for product in subcategory.product_set.all()[:2]
-                        ]                                               
+                    "results": [
+                        {
+                            "product": product,
+                            "main_image": ProductImage.objects.filter(
+                                product=product
+                            ).first(),
+                        }
+                        for product in subcategory.product_set.all()[:2]
+                    ],
                 }
-                for subcategory in ProductSubCategory.objects.filter(category=product.category) if subcategory.product_set.count() > 1
-            ]
+                for subcategory in ProductSubCategory.objects.filter(
+                    category=product.category
+                )
+                if subcategory.product_set.count() > 1
+            ],
         }
 
-
         if self.request.COOKIES.get("user_categories", None):
-            user_categories = [ int(id) for id in self.request.COOKIES.get("user_categories").split(',')]
+            user_categories = [
+                int(id) for id in self.request.COOKIES.get("user_categories").split(",")
+            ]
         else:
             user_categories = []
 
         context["user_categories"] = {
             "context_name": "user categories",
-            "results": ProductCategory.objects.filter(id__in=user_categories)[:4]
+            "results": ProductCategory.objects.filter(id__in=user_categories)[:4],
         }
-
-
 
         return context
 

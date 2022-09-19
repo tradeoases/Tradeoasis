@@ -349,10 +349,13 @@ class ProductDetailView(DetailView):
         response = render(request, self.get_template_names(), context=context)
 
         if request.COOKIES.get("user_categories", None):
-            user_categories = str(self.object.category.id) + "," + request.COOKIES.get("user_categories")
+            user_categories = (
+                str(self.object.category.id)
+                + ","
+                + request.COOKIES.get("user_categories")
+            )
         else:
             user_categories = str(self.object.category.id)
-            
 
         response.set_cookie("user_categories", value=user_categories)
 
@@ -363,13 +366,17 @@ class ProductDetailView(DetailView):
         product = self.get_object()
 
         if self.request.COOKIES.get("user_categories", None):
-            user_categories = [ int(id) for id in self.request.COOKIES.get("user_categories").split(',')]
+            user_categories = [
+                int(id) for id in self.request.COOKIES.get("user_categories").split(",")
+            ]
         else:
             user_categories = []
 
         context["user_categories"] = {
             "context_name": "user categories",
-            "results": SupplierModels.ProductCategory.objects.filter(id__in=user_categories)[:4]
+            "results": SupplierModels.ProductCategory.objects.filter(
+                id__in=user_categories
+            )[:4],
         }
 
         context["view_name"] = product.name
@@ -383,7 +390,7 @@ class ProductDetailView(DetailView):
         }
         context["product_images"] = {
             "context_name": "product-images",
-            "results": SupplierModels.ProductImage.objects.filter(product=product)
+            "results": SupplierModels.ProductImage.objects.filter(product=product),
         }
         context["tags"] = SupplierModels.ProductTag.objects.filter(product=product)
         context["products"] = {
@@ -432,12 +439,13 @@ class ProductDetailView(DetailView):
                     "main_image": SupplierModels.ProductImage.objects.filter(
                         product=product
                     ).first(),
-                    "sub_images": SupplierModels.ProductImage.objects.filter(product=product)[1:4],
+                    "sub_images": SupplierModels.ProductImage.objects.filter(
+                        product=product
+                    )[1:4],
                 }
                 for product in SupplierModels.Product.objects.all().order_by("-id")[:6]
             ],
         }
-        
 
         context["category_group"] = {
             "context_name": "product-category-group",
@@ -445,21 +453,24 @@ class ProductDetailView(DetailView):
             "results": [
                 {
                     "subcategory": subcategory,
-                    "results" :
-                        [
-                            {
-                                "product": product,
-                                "main_image": SupplierModels.ProductImage.objects.filter(
-                                    product=product
-                                ).first(),
-                            }
-                            for product in subcategory.product_set.all()[:2]
-                        ]                                               
+                    "results": [
+                        {
+                            "product": product,
+                            "main_image": SupplierModels.ProductImage.objects.filter(
+                                product=product
+                            ).first(),
+                        }
+                        for product in subcategory.product_set.all()[:2]
+                    ],
                 }
-                for subcategory in SupplierModels.ProductSubCategory.objects.filter(category=product.category) if subcategory.product_set.count() > 1
-            ]
+                for subcategory in SupplierModels.ProductSubCategory.objects.filter(
+                    category=product.category
+                )
+                if subcategory.product_set.count() > 1
+            ],
         }
         return context
+
 
 class NewArrivalView(View):
     template_name = "supplier/promotions.html"

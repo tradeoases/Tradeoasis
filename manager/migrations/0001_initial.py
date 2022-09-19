@@ -12,126 +12,419 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('auth_app', '0001_initial'),
-        ('supplier', '0001_initial'),
+        ("auth_app", "0001_initial"),
+        ("supplier", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Discussion',
+            name="Discussion",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('subject', models.CharField(max_length=256, verbose_name='Subject')),
-                ('subject_ar', models.CharField(max_length=256, null=True, verbose_name='Subject')),
-                ('subject_fr', models.CharField(max_length=256, null=True, verbose_name='Subject')),
-                ('subject_de', models.CharField(max_length=256, null=True, verbose_name='Subject')),
-                ('subject_en', models.CharField(max_length=256, null=True, verbose_name='Subject')),
-                ('description', models.TextField(verbose_name='Description')),
-                ('description_ar', models.TextField(null=True, verbose_name='Description')),
-                ('description_fr', models.TextField(null=True, verbose_name='Description')),
-                ('description_de', models.TextField(null=True, verbose_name='Description')),
-                ('description_en', models.TextField(null=True, verbose_name='Description')),
-                ('slug', models.SlugField(blank=True, null=True, unique=True, verbose_name='Safe Url')),
-                ('created_on', models.DateField(default=django.utils.timezone.now, verbose_name='Created on')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("subject", models.CharField(max_length=256, verbose_name="Subject")),
+                (
+                    "subject_ar",
+                    models.CharField(max_length=256, null=True, verbose_name="Subject"),
+                ),
+                (
+                    "subject_fr",
+                    models.CharField(max_length=256, null=True, verbose_name="Subject"),
+                ),
+                (
+                    "subject_de",
+                    models.CharField(max_length=256, null=True, verbose_name="Subject"),
+                ),
+                (
+                    "subject_en",
+                    models.CharField(max_length=256, null=True, verbose_name="Subject"),
+                ),
+                ("description", models.TextField(verbose_name="Description")),
+                (
+                    "description_ar",
+                    models.TextField(null=True, verbose_name="Description"),
+                ),
+                (
+                    "description_fr",
+                    models.TextField(null=True, verbose_name="Description"),
+                ),
+                (
+                    "description_de",
+                    models.TextField(null=True, verbose_name="Description"),
+                ),
+                (
+                    "description_en",
+                    models.TextField(null=True, verbose_name="Description"),
+                ),
+                (
+                    "slug",
+                    models.SlugField(
+                        blank=True, null=True, unique=True, verbose_name="Safe Url"
+                    ),
+                ),
+                (
+                    "created_on",
+                    models.DateField(
+                        default=django.utils.timezone.now, verbose_name="Created on"
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'ordering': ['-id'],
+                "ordering": ["-id"],
             },
         ),
         migrations.CreateModel(
-            name='Location',
+            name="Location",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=256, verbose_name='Country or City')),
-                ('created_on', models.DateField(default=django.utils.timezone.now, verbose_name='Created on')),
-                ('slug', models.SlugField(blank=True, null=True, unique=True, verbose_name='Safe Url')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(max_length=256, verbose_name="Country or City"),
+                ),
+                (
+                    "created_on",
+                    models.DateField(
+                        default=django.utils.timezone.now, verbose_name="Created on"
+                    ),
+                ),
+                (
+                    "slug",
+                    models.SlugField(
+                        blank=True, null=True, unique=True, verbose_name="Safe Url"
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Service',
+            name="Service",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=256, verbose_name='Name')),
-                ('name_ar', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_fr', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_de', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_en', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('description', models.TextField(verbose_name='Description')),
-                ('description_ar', models.TextField(null=True, verbose_name='Description')),
-                ('description_fr', models.TextField(null=True, verbose_name='Description')),
-                ('description_de', models.TextField(null=True, verbose_name='Description')),
-                ('description_en', models.TextField(null=True, verbose_name='Description')),
-                ('slug', models.SlugField(blank=True, null=True, unique=True, verbose_name='Safe Url')),
-                ('created_on', models.DateField(default=django.utils.timezone.now, verbose_name='Created on')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=256, verbose_name="Name")),
+                (
+                    "name_ar",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_fr",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_de",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_en",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                ("description", models.TextField(verbose_name="Description")),
+                (
+                    "description_ar",
+                    models.TextField(null=True, verbose_name="Description"),
+                ),
+                (
+                    "description_fr",
+                    models.TextField(null=True, verbose_name="Description"),
+                ),
+                (
+                    "description_de",
+                    models.TextField(null=True, verbose_name="Description"),
+                ),
+                (
+                    "description_en",
+                    models.TextField(null=True, verbose_name="Description"),
+                ),
+                (
+                    "slug",
+                    models.SlugField(
+                        blank=True, null=True, unique=True, verbose_name="Safe Url"
+                    ),
+                ),
+                (
+                    "created_on",
+                    models.DateField(
+                        default=django.utils.timezone.now, verbose_name="Created on"
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='UserRequest',
+            name="UserRequest",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('country', models.CharField(max_length=256, verbose_name='Country')),
-                ('city', models.CharField(max_length=256, verbose_name='City')),
-                ('view', models.CharField(max_length=256, verbose_name='View')),
-                ('request_method', models.CharField(max_length=256, verbose_name='Request Method')),
-                ('device', models.CharField(max_length=256, verbose_name='Device')),
-                ('user_os', models.CharField(max_length=256, verbose_name='User Os')),
-                ('created_on', models.DateField(default=django.utils.timezone.now, verbose_name='Created on')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("country", models.CharField(max_length=256, verbose_name="Country")),
+                ("city", models.CharField(max_length=256, verbose_name="City")),
+                ("view", models.CharField(max_length=256, verbose_name="View")),
+                (
+                    "request_method",
+                    models.CharField(max_length=256, verbose_name="Request Method"),
+                ),
+                ("device", models.CharField(max_length=256, verbose_name="Device")),
+                ("user_os", models.CharField(max_length=256, verbose_name="User Os")),
+                (
+                    "created_on",
+                    models.DateField(
+                        default=django.utils.timezone.now, verbose_name="Created on"
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Showroom',
+            name="Showroom",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=256, verbose_name='Name')),
-                ('name_ar', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_fr', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_de', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_en', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('image', models.ImageField(default='test/django.png', upload_to=manager.models.get_file_path, verbose_name='Image')),
-                ('visits', models.IntegerField(default=0, verbose_name='Number of visits')),
-                ('slug', models.SlugField(blank=True, null=True, unique=True, verbose_name='Safe Url')),
-                ('created_on', models.DateField(default=django.utils.timezone.now, verbose_name='Created on')),
-                ('location', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='manager.location')),
-                ('store', models.ManyToManyField(default=None, related_name='store', to='supplier.Store')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=256, verbose_name="Name")),
+                (
+                    "name_ar",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_fr",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_de",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_en",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "image",
+                    models.ImageField(
+                        default="test/django.png",
+                        upload_to=manager.models.get_file_path,
+                        verbose_name="Image",
+                    ),
+                ),
+                (
+                    "visits",
+                    models.IntegerField(default=0, verbose_name="Number of visits"),
+                ),
+                (
+                    "slug",
+                    models.SlugField(
+                        blank=True, null=True, unique=True, verbose_name="Safe Url"
+                    ),
+                ),
+                (
+                    "created_on",
+                    models.DateField(
+                        default=django.utils.timezone.now, verbose_name="Created on"
+                    ),
+                ),
+                (
+                    "location",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="manager.location",
+                    ),
+                ),
+                (
+                    "store",
+                    models.ManyToManyField(
+                        default=None, related_name="store", to="supplier.Store"
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='ServiceImage',
+            name="ServiceImage",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.ImageField(upload_to=manager.models.get_file_path, verbose_name='Service Image')),
-                ('slug', models.SlugField(blank=True, null=True, unique=True, verbose_name='Safe Url')),
-                ('created_on', models.DateField(default=django.utils.timezone.now, verbose_name='Created on')),
-                ('service', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='manager.service')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "image",
+                    models.ImageField(
+                        upload_to=manager.models.get_file_path,
+                        verbose_name="Service Image",
+                    ),
+                ),
+                (
+                    "slug",
+                    models.SlugField(
+                        blank=True, null=True, unique=True, verbose_name="Safe Url"
+                    ),
+                ),
+                (
+                    "created_on",
+                    models.DateField(
+                        default=django.utils.timezone.now, verbose_name="Created on"
+                    ),
+                ),
+                (
+                    "service",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="manager.service",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='DiscussionReply',
+            name="DiscussionReply",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('description', models.TextField(verbose_name='Description')),
-                ('description_ar', models.TextField(null=True, verbose_name='Description')),
-                ('description_fr', models.TextField(null=True, verbose_name='Description')),
-                ('description_de', models.TextField(null=True, verbose_name='Description')),
-                ('description_en', models.TextField(null=True, verbose_name='Description')),
-                ('created_on', models.DateField(default=django.utils.timezone.now, verbose_name='Created on')),
-                ('discussion', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='manager.discussion')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("description", models.TextField(verbose_name="Description")),
+                (
+                    "description_ar",
+                    models.TextField(null=True, verbose_name="Description"),
+                ),
+                (
+                    "description_fr",
+                    models.TextField(null=True, verbose_name="Description"),
+                ),
+                (
+                    "description_de",
+                    models.TextField(null=True, verbose_name="Description"),
+                ),
+                (
+                    "description_en",
+                    models.TextField(null=True, verbose_name="Description"),
+                ),
+                (
+                    "created_on",
+                    models.DateField(
+                        default=django.utils.timezone.now, verbose_name="Created on"
+                    ),
+                ),
+                (
+                    "discussion",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="manager.discussion",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Chatroom',
+            name="Chatroom",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('roomname', models.CharField(max_length=256, unique=True, verbose_name='Chatroom Name')),
-                ('chatfilepath', models.CharField(blank=True, max_length=256, null=True, verbose_name='Chat filepath')),
-                ('is_closed', models.BooleanField(default=False, verbose_name='Chat Closed')),
-                ('is_handled', models.BooleanField(default=False, verbose_name='Chat handled')),
-                ('created_on', models.DateField(default=django.utils.timezone.now, verbose_name='Created on')),
-                ('support', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='auth_app.supportprofile')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "roomname",
+                    models.CharField(
+                        max_length=256, unique=True, verbose_name="Chatroom Name"
+                    ),
+                ),
+                (
+                    "chatfilepath",
+                    models.CharField(
+                        blank=True,
+                        max_length=256,
+                        null=True,
+                        verbose_name="Chat filepath",
+                    ),
+                ),
+                (
+                    "is_closed",
+                    models.BooleanField(default=False, verbose_name="Chat Closed"),
+                ),
+                (
+                    "is_handled",
+                    models.BooleanField(default=False, verbose_name="Chat handled"),
+                ),
+                (
+                    "created_on",
+                    models.DateField(
+                        default=django.utils.timezone.now, verbose_name="Created on"
+                    ),
+                ),
+                (
+                    "support",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="auth_app.supportprofile",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

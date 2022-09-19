@@ -11,152 +11,555 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('auth_app', '0001_initial'),
+        ("auth_app", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Product',
+            name="Product",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=256, verbose_name='Name')),
-                ('name_ar', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_fr', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_de', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_en', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('description', models.TextField(verbose_name='Description')),
-                ('description_ar', models.TextField(null=True, verbose_name='Description')),
-                ('description_fr', models.TextField(null=True, verbose_name='Description')),
-                ('description_de', models.TextField(null=True, verbose_name='Description')),
-                ('description_en', models.TextField(null=True, verbose_name='Description')),
-                ('price', models.DecimalField(decimal_places=2, max_digits=12, verbose_name='Price')),
-                ('price_ar', models.DecimalField(decimal_places=2, max_digits=12, null=True, verbose_name='Price')),
-                ('price_fr', models.DecimalField(decimal_places=2, max_digits=12, null=True, verbose_name='Price')),
-                ('price_de', models.DecimalField(decimal_places=2, max_digits=12, null=True, verbose_name='Price')),
-                ('price_en', models.DecimalField(decimal_places=2, max_digits=12, null=True, verbose_name='Price')),
-                ('currency', models.CharField(max_length=6, verbose_name='Currency')),
-                ('currency_ar', models.CharField(max_length=6, null=True, verbose_name='Currency')),
-                ('currency_fr', models.CharField(max_length=6, null=True, verbose_name='Currency')),
-                ('currency_de', models.CharField(max_length=6, null=True, verbose_name='Currency')),
-                ('currency_en', models.CharField(max_length=6, null=True, verbose_name='Currency')),
-                ('slug', models.SlugField(blank=True, max_length=200, null=True, unique=True, verbose_name='Safe Url')),
-                ('created_on', models.DateField(default=django.utils.timezone.now, verbose_name='Created on')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=256, verbose_name="Name")),
+                (
+                    "name_ar",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_fr",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_de",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_en",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                ("description", models.TextField(verbose_name="Description")),
+                (
+                    "description_ar",
+                    models.TextField(null=True, verbose_name="Description"),
+                ),
+                (
+                    "description_fr",
+                    models.TextField(null=True, verbose_name="Description"),
+                ),
+                (
+                    "description_de",
+                    models.TextField(null=True, verbose_name="Description"),
+                ),
+                (
+                    "description_en",
+                    models.TextField(null=True, verbose_name="Description"),
+                ),
+                (
+                    "price",
+                    models.DecimalField(
+                        decimal_places=2, max_digits=12, verbose_name="Price"
+                    ),
+                ),
+                (
+                    "price_ar",
+                    models.DecimalField(
+                        decimal_places=2, max_digits=12, null=True, verbose_name="Price"
+                    ),
+                ),
+                (
+                    "price_fr",
+                    models.DecimalField(
+                        decimal_places=2, max_digits=12, null=True, verbose_name="Price"
+                    ),
+                ),
+                (
+                    "price_de",
+                    models.DecimalField(
+                        decimal_places=2, max_digits=12, null=True, verbose_name="Price"
+                    ),
+                ),
+                (
+                    "price_en",
+                    models.DecimalField(
+                        decimal_places=2, max_digits=12, null=True, verbose_name="Price"
+                    ),
+                ),
+                ("currency", models.CharField(max_length=6, verbose_name="Currency")),
+                (
+                    "currency_ar",
+                    models.CharField(max_length=6, null=True, verbose_name="Currency"),
+                ),
+                (
+                    "currency_fr",
+                    models.CharField(max_length=6, null=True, verbose_name="Currency"),
+                ),
+                (
+                    "currency_de",
+                    models.CharField(max_length=6, null=True, verbose_name="Currency"),
+                ),
+                (
+                    "currency_en",
+                    models.CharField(max_length=6, null=True, verbose_name="Currency"),
+                ),
+                (
+                    "slug",
+                    models.SlugField(
+                        blank=True,
+                        max_length=200,
+                        null=True,
+                        unique=True,
+                        verbose_name="Safe Url",
+                    ),
+                ),
+                (
+                    "created_on",
+                    models.DateField(
+                        default=django.utils.timezone.now, verbose_name="Created on"
+                    ),
+                ),
             ],
             options={
-                'ordering': ['-id'],
+                "ordering": ["-id"],
             },
         ),
         migrations.CreateModel(
-            name='ProductCategory',
+            name="ProductCategory",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=256, verbose_name='Name')),
-                ('name_ar', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_fr', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_de', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_en', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('product_count', models.IntegerField(default=0, verbose_name='Number of products')),
-                ('image', models.FileField(default='test/django.png', upload_to=supplier.models.get_file_path, verbose_name='Image')),
-                ('slug', models.SlugField(blank=True, max_length=200, null=True, unique=True, verbose_name='Safe Url')),
-                ('created_on', models.DateField(default=django.utils.timezone.now, verbose_name='Created on')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=256, verbose_name="Name")),
+                (
+                    "name_ar",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_fr",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_de",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_en",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "product_count",
+                    models.IntegerField(default=0, verbose_name="Number of products"),
+                ),
+                (
+                    "image",
+                    models.FileField(
+                        default="test/django.png",
+                        upload_to=supplier.models.get_file_path,
+                        verbose_name="Image",
+                    ),
+                ),
+                (
+                    "slug",
+                    models.SlugField(
+                        blank=True,
+                        max_length=200,
+                        null=True,
+                        unique=True,
+                        verbose_name="Safe Url",
+                    ),
+                ),
+                (
+                    "created_on",
+                    models.DateField(
+                        default=django.utils.timezone.now, verbose_name="Created on"
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Store',
+            name="Store",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=256, verbose_name='Store Name')),
-                ('name_ar', models.CharField(max_length=256, null=True, verbose_name='Store Name')),
-                ('name_fr', models.CharField(max_length=256, null=True, verbose_name='Store Name')),
-                ('name_de', models.CharField(max_length=256, null=True, verbose_name='Store Name')),
-                ('name_en', models.CharField(max_length=256, null=True, verbose_name='Store Name')),
-                ('slug', models.SlugField(blank=True, max_length=200, null=True, unique=True, verbose_name='Safe Url')),
-                ('image', models.FileField(default='test/django.png', upload_to=supplier.models.get_file_path, verbose_name='Service Image')),
-                ('created_on', models.DateField(default=django.utils.timezone.now, verbose_name='Created on')),
-                ('supplier', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='auth_app.supplier')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=256, verbose_name="Store Name")),
+                (
+                    "name_ar",
+                    models.CharField(
+                        max_length=256, null=True, verbose_name="Store Name"
+                    ),
+                ),
+                (
+                    "name_fr",
+                    models.CharField(
+                        max_length=256, null=True, verbose_name="Store Name"
+                    ),
+                ),
+                (
+                    "name_de",
+                    models.CharField(
+                        max_length=256, null=True, verbose_name="Store Name"
+                    ),
+                ),
+                (
+                    "name_en",
+                    models.CharField(
+                        max_length=256, null=True, verbose_name="Store Name"
+                    ),
+                ),
+                (
+                    "slug",
+                    models.SlugField(
+                        blank=True,
+                        max_length=200,
+                        null=True,
+                        unique=True,
+                        verbose_name="Safe Url",
+                    ),
+                ),
+                (
+                    "image",
+                    models.FileField(
+                        default="test/django.png",
+                        upload_to=supplier.models.get_file_path,
+                        verbose_name="Service Image",
+                    ),
+                ),
+                (
+                    "created_on",
+                    models.DateField(
+                        default=django.utils.timezone.now, verbose_name="Created on"
+                    ),
+                ),
+                (
+                    "supplier",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="auth_app.supplier",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Service',
+            name="Service",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=256, verbose_name='Name')),
-                ('name_ar', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_fr', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_de', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_en', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('description', models.TextField(verbose_name='Description')),
-                ('description_ar', models.TextField(null=True, verbose_name='Description')),
-                ('description_fr', models.TextField(null=True, verbose_name='Description')),
-                ('description_de', models.TextField(null=True, verbose_name='Description')),
-                ('description_en', models.TextField(null=True, verbose_name='Description')),
-                ('price', models.DecimalField(decimal_places=2, max_digits=122, verbose_name='Price')),
-                ('price_ar', models.DecimalField(decimal_places=2, max_digits=122, null=True, verbose_name='Price')),
-                ('price_fr', models.DecimalField(decimal_places=2, max_digits=122, null=True, verbose_name='Price')),
-                ('price_de', models.DecimalField(decimal_places=2, max_digits=122, null=True, verbose_name='Price')),
-                ('price_en', models.DecimalField(decimal_places=2, max_digits=122, null=True, verbose_name='Price')),
-                ('currency', models.CharField(max_length=6, verbose_name='Currency')),
-                ('currency_ar', models.CharField(max_length=6, null=True, verbose_name='Currency')),
-                ('currency_fr', models.CharField(max_length=6, null=True, verbose_name='Currency')),
-                ('currency_de', models.CharField(max_length=6, null=True, verbose_name='Currency')),
-                ('currency_en', models.CharField(max_length=6, null=True, verbose_name='Currency')),
-                ('contract_count', models.IntegerField(default=0, verbose_name='Number of contracts')),
-                ('slug', models.SlugField(blank=True, null=True, unique=True, verbose_name='Safe Url')),
-                ('created_on', models.DateField(default=django.utils.timezone.now, verbose_name='Created on')),
-                ('supplier', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='auth_app.supplier')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=256, verbose_name="Name")),
+                (
+                    "name_ar",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_fr",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_de",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_en",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                ("description", models.TextField(verbose_name="Description")),
+                (
+                    "description_ar",
+                    models.TextField(null=True, verbose_name="Description"),
+                ),
+                (
+                    "description_fr",
+                    models.TextField(null=True, verbose_name="Description"),
+                ),
+                (
+                    "description_de",
+                    models.TextField(null=True, verbose_name="Description"),
+                ),
+                (
+                    "description_en",
+                    models.TextField(null=True, verbose_name="Description"),
+                ),
+                (
+                    "price",
+                    models.DecimalField(
+                        decimal_places=2, max_digits=122, verbose_name="Price"
+                    ),
+                ),
+                (
+                    "price_ar",
+                    models.DecimalField(
+                        decimal_places=2,
+                        max_digits=122,
+                        null=True,
+                        verbose_name="Price",
+                    ),
+                ),
+                (
+                    "price_fr",
+                    models.DecimalField(
+                        decimal_places=2,
+                        max_digits=122,
+                        null=True,
+                        verbose_name="Price",
+                    ),
+                ),
+                (
+                    "price_de",
+                    models.DecimalField(
+                        decimal_places=2,
+                        max_digits=122,
+                        null=True,
+                        verbose_name="Price",
+                    ),
+                ),
+                (
+                    "price_en",
+                    models.DecimalField(
+                        decimal_places=2,
+                        max_digits=122,
+                        null=True,
+                        verbose_name="Price",
+                    ),
+                ),
+                ("currency", models.CharField(max_length=6, verbose_name="Currency")),
+                (
+                    "currency_ar",
+                    models.CharField(max_length=6, null=True, verbose_name="Currency"),
+                ),
+                (
+                    "currency_fr",
+                    models.CharField(max_length=6, null=True, verbose_name="Currency"),
+                ),
+                (
+                    "currency_de",
+                    models.CharField(max_length=6, null=True, verbose_name="Currency"),
+                ),
+                (
+                    "currency_en",
+                    models.CharField(max_length=6, null=True, verbose_name="Currency"),
+                ),
+                (
+                    "contract_count",
+                    models.IntegerField(default=0, verbose_name="Number of contracts"),
+                ),
+                (
+                    "slug",
+                    models.SlugField(
+                        blank=True, null=True, unique=True, verbose_name="Safe Url"
+                    ),
+                ),
+                (
+                    "created_on",
+                    models.DateField(
+                        default=django.utils.timezone.now, verbose_name="Created on"
+                    ),
+                ),
+                (
+                    "supplier",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="auth_app.supplier",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='ProductTag',
+            name="ProductTag",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=256, verbose_name='Name')),
-                ('name_ar', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_fr', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_de', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_en', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('slug', models.SlugField(blank=True, null=True, unique=True, verbose_name='Safe Url')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='supplier.product')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=256, verbose_name="Name")),
+                (
+                    "name_ar",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_fr",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_de",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_en",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "slug",
+                    models.SlugField(
+                        blank=True, null=True, unique=True, verbose_name="Safe Url"
+                    ),
+                ),
+                (
+                    "product",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="supplier.product",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='ProductSubCategory',
+            name="ProductSubCategory",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=256, verbose_name='Name')),
-                ('name_ar', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_fr', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_de', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('name_en', models.CharField(max_length=256, null=True, verbose_name='Name')),
-                ('image', models.FileField(default='test/django.png', upload_to=supplier.models.get_file_path, verbose_name='Image')),
-                ('slug', models.SlugField(blank=True, max_length=200, null=True, unique=True, verbose_name='Safe Url')),
-                ('created_on', models.DateField(default=django.utils.timezone.now, verbose_name='Created on')),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='supplier.productcategory')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=256, verbose_name="Name")),
+                (
+                    "name_ar",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_fr",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_de",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "name_en",
+                    models.CharField(max_length=256, null=True, verbose_name="Name"),
+                ),
+                (
+                    "image",
+                    models.FileField(
+                        default="test/django.png",
+                        upload_to=supplier.models.get_file_path,
+                        verbose_name="Image",
+                    ),
+                ),
+                (
+                    "slug",
+                    models.SlugField(
+                        blank=True,
+                        max_length=200,
+                        null=True,
+                        unique=True,
+                        verbose_name="Safe Url",
+                    ),
+                ),
+                (
+                    "created_on",
+                    models.DateField(
+                        default=django.utils.timezone.now, verbose_name="Created on"
+                    ),
+                ),
+                (
+                    "category",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="supplier.productcategory",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='ProductImage',
+            name="ProductImage",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.FileField(upload_to=supplier.models.get_file_path, verbose_name='Image')),
-                ('slug', models.SlugField(blank=True, max_length=100, null=True, unique=True, verbose_name='Safe Url')),
-                ('created_on', models.DateField(default=django.utils.timezone.now, verbose_name='Created on')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='supplier.product')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "image",
+                    models.FileField(
+                        upload_to=supplier.models.get_file_path, verbose_name="Image"
+                    ),
+                ),
+                (
+                    "slug",
+                    models.SlugField(
+                        blank=True,
+                        max_length=100,
+                        null=True,
+                        unique=True,
+                        verbose_name="Safe Url",
+                    ),
+                ),
+                (
+                    "created_on",
+                    models.DateField(
+                        default=django.utils.timezone.now, verbose_name="Created on"
+                    ),
+                ),
+                (
+                    "product",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="supplier.product",
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='product',
-            name='category',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='supplier.productcategory'),
+            model_name="product",
+            name="category",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="supplier.productcategory",
+            ),
         ),
         migrations.AddField(
-            model_name='product',
-            name='store',
-            field=models.ManyToManyField(related_name='store_product', to='supplier.Store'),
+            model_name="product",
+            name="store",
+            field=models.ManyToManyField(
+                related_name="store_product", to="supplier.Store"
+            ),
         ),
         migrations.AddField(
-            model_name='product',
-            name='sub_category',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='supplier.productsubcategory'),
+            model_name="product",
+            name="sub_category",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="supplier.productsubcategory",
+            ),
         ),
     ]

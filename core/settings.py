@@ -126,13 +126,13 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-        "hosts": [("127.0.0.1", 6379)],
+            "hosts": [("127.0.0.1", 6379)],
         },
     },
     # "ROUTING": "core.routing.channel_routing",
-    #"default": {
+    # "default": {
     #    "BACKEND": "channels.layers.InMemoryChannelLayer",
-    #},
+    # },
 }
 
 
@@ -140,18 +140,18 @@ CHANNEL_LAYERS = {
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-     "default": {
-         "ENGINE": "django.db.backends.postgresql_psycopg2",
-         "NAME": "tradeoasis",
-         "USER": "tradeoasis",
-         "PASSWORD": "tradeoasis",
-         "HOST": "localhost",
-         "PORT": "",
-     }
-    #"default": {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "tradeoasis",
+        "USER": "tradeoasis",
+        "PASSWORD": "tradeoasis",
+        "HOST": "localhost",
+        "PORT": "",
+    }
+    # "default": {
     #    "ENGINE": "django.db.backends.sqlite3",
     #    "NAME": BASE_DIR / "db.sqlite3",
-    #}
+    # }
 }
 
 

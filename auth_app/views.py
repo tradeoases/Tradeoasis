@@ -25,6 +25,7 @@ from auth_app.tokens import appTokenGenerator
 
 from payment.management.commands.run_braintree import gateway
 
+
 class LoginView(View):
     template_name = "auth_app/signin.html"
 

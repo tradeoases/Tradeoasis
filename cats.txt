@@ -291,3 +291,9 @@ Complete Tasks
 - Support Pages (Guide Templates)
 - contact supplier
 - Membership Payments refractor (Both) To be discussed
+
+
+
+Pending Tasks
+ 
+ - add (category, subcategory and location) product features
