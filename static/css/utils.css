@@ -358,6 +358,10 @@ form input[type='submit']:hover {
         --row-size: 51%;
         grid-auto-columns: var(--row-size);
     }
+    .horizontal-scroll.lg {
+        --row-size: 66%;
+        grid-auto-columns: var(--row-size);
+    }
     
     .horizontal-scroll.showrooms {
         grid-auto-columns: 33%;

@@ -36,10 +36,10 @@
                 <!-- The temporary navbar -->
                 <div class="temp-nav py-3 grid content-center w-12/12 gap-1">
                     <div class="header-left grid items-center">
-                        <div class="logo-wrapper">
+                        <a class="logo-wrapper" href="{% url 'manager:home' %}">
                             <img src="{% static '/assets/imgs/resources/logo_trans.png' %}" alt="Logo" class="logo"
                                 style="object-fit: cover;">
-                        </div>
+                        </a>
                     </div>
                     <form action="{% url 'supplier:products' %}" method="GET" class="search-form grid w-12/12 gap-0 justify-items-stretch">
                         <input type="search" name="search" id="search-bar"
@@ -145,9 +145,9 @@
                 <button class="text-white rounded-md py-0 px-2" id="mobile-menu-activator">
                     <i class="fa fa-bars"></i>
                 </button>
-                <div class="logo-wrapper">
+                <a class="logo-wrapper" href="{% url 'manager:home' %}">
                     <img src="{% static 'assets/imgs/resources/logo_trans.png' %}" alt="Logo" class="logo" style="object-fit: cover;">
-                </div>
+                </a>
             </div>
             <div class="flex items-center gap-2 justify-end">
                 <button id="mobile-searchbar-activator"  class="text-white border py-0 px-2 outline-none border-none px-4 py-2">

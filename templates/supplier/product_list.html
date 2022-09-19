@@ -26,6 +26,18 @@
                         </div>
                         <input type="submit" hidden />
                     </form>
+                    <form id="category-filter-form" class="filter-group flex gap-2 items-center justify-start" method="GET" action="" data-context="{{categories.context_name}}">
+                        <p class="font-medium text-slate-800">{% trans 'Category' %}: </p>
+                        <div class="filter-form-group flex gap-3 items-center">
+                            <select name="category" id="category-filter" class="px-2 py-1 rounded text-sm text-slate-700 focus:outline-none" onchange="(function(){document.querySelector('#category-filter-form').submit()})()">
+                                <option value="all">{% trans 'All' %}</option>
+                                {% for category in categories.results %}
+                                    <option value="{{category.name}}">{{category.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <input type="submit" hidden />
+                    </form>
                     <form id="supplier-filter-form" class="filter-group flex gap-2 items-center justify-start" method="GET" action="" data-context="{{suppliers.context_name}}">
                         <p class="font-medium text-slate-800">Supplier: </p>
                         <div class="filter-form-group flex gap-3 items-center">
@@ -38,45 +50,23 @@
                         </div>
                         <input type="submit" hidden />
                     </form>
+                    <form id="country-filter-form" class="filter-group flex gap-2 items-center justify-start" method="GET" action="" data-context="{{countries.context_name}}">
+                        <p class="font-medium text-slate-800">{% trans 'Country' %}: </p>
+                        <div class="filter-form-group flex gap-3 items-center">
+                            <select name="country" id="country-filter" class="px-2 py-1 rounded text-sm text-slate-700 focus:outline-none" onchange="(function(){document.querySelector('#country-filter-form').submit()})()">
+                                <option value="all">{% trans 'All' %}</option>
+                                {% for country in countries.results %}
+                                    <option value="{{country.country}}">{{country.country}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <input type="submit" hidden />
+                    </form>
                 </div>
             </div>
         </div>
 
-        {% if new_arrivals.results %}
-        <section class="main w-12/12">
-            <div class="grid md:w-full mx-auto p-2 md:p-0 cf-1 gap-4">
-                <div class="section-body grid card p-3 py-6 rounded-md">
-                    <div class="flex p-2 pt-0 justify-between items-baseline">
-                        <div class="flex gap-5">
-                            <h1 class="text-xl md:text-2xl text-yellowColor font-bold">New Arrivals</h1>
-                            <h1 class="hidden md:flex gap-1 items-baseline text-xl text-slate-400 font-bold">
-                        </div>
-                        <!-- <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="">View All</a> -->
-                    </div>
-                    <div class="grid gap-2 horizontal-scroll" data-context="{{new_arrivals.context_name}}">
-                        {% for discount in new_arrivals.results %}
-                            <div class="promotion-card grid"  data-discount-index="{{forloop.counter}}">
-                                <a class="grid gap-1 rounded-md" href="{% url 'supplier:product-detail' discount.product.slug %}">
-                                    <div class="grid p-2">
-                                        <img loading="lazy" src="/media/{{discount.main_image.image}}" alt="{{discount.product.name}}" class="item-img rounded" style="width: 100%;aspect-ratio:1/.8;object-fit:cover;">
-                                    </div>
-                                    <div class="item-details grid gap-1 px-2">
-                                        <h5 class="text-sm font-normal leading-5">
-                                            {{discount.product.name}}
-                                        </h5>
-                                        <p class="text-base font-bold flex gap-2 items-baseline">
-                                            {{discount.product.currency}} <span>{{discount.product.price}}</span>
-                                            <!-- <s class="text-slate-400 font-normal text-sm">{{discount.product.price}}</s> -->
-                                        </p>
-                                    </div>
-                                </a>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </section>
-        {% endif %}
+        {% include '../utils/new_arrivals.html' %}
 
         <section class="main w-12/12" style="block-size: auto">
             <div class="grid w-full mx-auto cf-1 gap-4" style="grid-template-columns: 1fr;">
@@ -239,6 +229,24 @@
         // loadProducts(currentPage, limit);
 
     })();
+
+
+    document.querySelectorAll("option").forEach(elem => {
+        let filterValue;
+        if (window.location.href.includes("=")) {
+            filterValue = window.location.href.split("=")[1]
+
+            if (filterValue.includes("+")) {
+                filterValue = filterValue.split("+").join(" ")
+            }
+
+            elem.textContent = `${elem.textContent.slice(0,20)}...`
+            
+            if(elem.value == filterValue) {
+                elem.selected = true;
+            }
+        }
+    })
 </script>
 
 </html>

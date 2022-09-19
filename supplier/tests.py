@@ -293,7 +293,7 @@ class TestAppRequests(TestCase):
             "showrooms",
             "products",
             "product_count",
-            "related_stores",
+            "stores",
         ]
 
         for context_name in view_context:

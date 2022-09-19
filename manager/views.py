@@ -137,6 +137,10 @@ class HomeView(View):
                     )(list(Product.objects.all().order_by("-id")[:12]))
                 ],
             },
+            "stores": {
+                "context_name": "stores",
+                "results": Store.objects.all().distinct("supplier")[:6],
+            },
         }
         return render(request, self.template_name, context=context_data)
 

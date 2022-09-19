@@ -117,8 +117,8 @@
                 </div>
                 <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="./stores.html?supplier=jeocme">{% trans 'View All' %}</a>
             </div>
-            <div class="grid gap-3 md:grid-cols-5 rounded-md py-3" data-content="{{related_stores.context_name}}">
-                {% for related_store in related_stores.results %}
+            <div class="grid gap-3 md:grid-cols-5 rounded-md py-3" data-content="{{stores.context_name}}">
+                {% for related_store in stores.results %}
                     <div class="store-card grid items-start rounded-md card gap-4">
                         <a class="grid gap-1 rounded-md overflow-hidden" href="{% url 'supplier:store-detail' related_store.slug %}">
                             <img loading="lazy" src="/media/{{related_store.image}}" alt="{{related_store.name}}" class="img-wrapper rounded-md">

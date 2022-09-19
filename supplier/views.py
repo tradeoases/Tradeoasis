@@ -1,4 +1,5 @@
 from re import sub
+from unicodedata import category
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
@@ -226,7 +227,9 @@ class ProductListView(View):
         # get query parameters
         min_price = self.request.GET.get("min-price", 0)
         max_price = self.request.GET.get("max-price", None)
-        supplier = self.request.GET.get("supplier", "All")
+        supplier = self.request.GET.get("supplier", "all")
+        country = self.request.GET.get("country", "all")
+        category = self.request.GET.get("category", "all")
         search = self.request.GET.get("search", None)
 
         if max_price and supplier != "All":
@@ -246,7 +249,7 @@ class ProductListView(View):
                 Q(price__lte=float(max_price)),
             )
 
-        elif supplier != "All":
+        elif supplier != "all":
             return SupplierModels.Product.objects.filter(
                 Q(price__gte=float(min_price) if min_price else float(0)),
                 Q(
@@ -254,6 +257,22 @@ class ProductListView(View):
                         clientprofile__business_name=supplier
                     ).first()
                 ),
+            )
+
+        elif country != "all":
+            return SupplierModels.Product.objects.filter(
+                Q(price__gte=float(min_price) if min_price else float(0)),
+                Q(
+                    store__supplier=AuthModels.Supplier.supplier.filter(
+                        clientprofile__country=country
+                    ).first()
+                ),
+            )
+
+        elif category != "all":
+            return SupplierModels.Product.objects.filter(
+                Q(price__gte=float(min_price) if min_price else float(0)),
+                Q(category__name=category),
             )
 
         elif search:
@@ -323,6 +342,14 @@ class ProductListView(View):
             "context_name": "suppliers",
             "results": AuthModels.Supplier.supplier.all(),
         }
+        context_data["countries"] = {
+            "context_name": "countries",
+            "results": AuthModels.ClientProfile.objects.all().only("country")
+        }
+        context_data["categories"] = {
+            "context_name": "categories",
+            "results": SupplierModels.ProductCategory.objects.all().only("name")
+        }
 
         context_data["price_limits"] = {
             "context_name": "price-limits",
@@ -332,10 +359,15 @@ class ProductListView(View):
             },
         }
 
-        context_data["supplier_filter"] = {
-            "context_name": "supplier-filter",
-            "results": self.request.GET.get("supplier", 0),
-        }
+        # context_data["supplier_filter"] = {
+        #     "context_name": "supplier-filter",
+        #     "results": self.request.GET.get("supplier", 0),
+        # }
+
+        # context_data["location_filter"] = {
+        #     "context_name": "location-filter",
+        #     "results": self.request.GET.get("location", 0),
+        # }
 
         return context_data
 
@@ -692,7 +724,8 @@ class SubCategoryDetailView(View):
         # get query parameters
         min_price = self.request.GET.get("min-price", 0)
         max_price = self.request.GET.get("max-price", None)
-        supplier = self.request.GET.get("supplier", "All")
+        supplier = self.request.GET.get("supplier", "all")
+        country = self.request.GET.get("country", "all")
         showroom = self.request.GET.get("showroom", None)
 
         if max_price and supplier != "All":
@@ -714,13 +747,24 @@ class SubCategoryDetailView(View):
                 Q(price__lte=float(max_price)),
             )
 
-        elif supplier != "All":
+        elif supplier != "all":
             return SupplierModels.Product.objects.filter(
                 Q(sub_category=subcategory),
                 Q(price__gte=float(min_price) if min_price else float(0)),
                 Q(
                     store__supplier=AuthModels.Supplier.supplier.filter(
                         clientprofile__business_name=supplier
+                    ).first()
+                ),
+            )
+
+        elif country != "all":
+            return SupplierModels.Product.objects.filter(
+                Q(sub_category=subcategory),
+                Q(price__gte=float(min_price) if min_price else float(0)),
+                Q(
+                    store__supplier=AuthModels.Supplier.supplier.filter(
+                        clientprofile__country=country
                     ).first()
                 ),
             )
@@ -846,6 +890,10 @@ class SubCategoryDetailView(View):
         context_data["suppliers"] = {
             "context_name": "suppliers",
             "results": AuthModels.Supplier.supplier.all(),
+        }
+        context_data["countries"] = {
+            "context_name": "countries",
+            "results": AuthModels.ClientProfile.objects.all().only("country")
         }
 
         context_data["price_limits"] = {

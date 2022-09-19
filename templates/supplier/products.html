@@ -45,6 +45,18 @@
                     </div>
                     <input type="submit" hidden />
                 </form>
+                <form id="country-filter-form" class="filter-group flex gap-2 items-center justify-start" method="GET" action="" data-context="{{countries.context_name}}">
+                    <p class="font-medium text-slate-800">{% trans 'Country' %}: </p>
+                    <div class="filter-form-group flex gap-3 items-center">
+                        <select name="country" id="country-filter" class="px-2 py-1 rounded text-sm text-slate-700 focus:outline-none" onchange="(function(){document.querySelector('#country-filter-form').submit()})()">
+                            <option value="all">{% trans 'All' %}</option>
+                            {% for country in countries.results %}
+                                <option value="{{country.country}}">{{country.country}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <input type="submit" hidden />
+                </form>
             </div>
         </div>
     </div>
@@ -149,7 +161,7 @@
                             <div class="grid grid-cols-3 justify-evenly gap-2 products justify-self-start" >
                                 {% for product in store.products %}
                                     <a class="product grid gap-1 rounded-md justify-self-start" href="{% url 'supplier:store-detail' store.store.slug %}">
-                                        <img loading="lazy" src="/media/{{product.main_image.image}}" alt="{{product.product.name|slice:":40"}}.." class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;max-block-size: 15vh;inline-size: 100%;">
+                                        <img loading="lazy" src="/media/{{product.main_image.image}}" alt="{{product.product.name|slice:':40'}}.." class="item-img rounded" style="width: 100%;aspect-ratio:1/1;object-fit:cover;max-block-size: 15vh;inline-size: 100%;">
                                     </a>
                                 {% endfor %}
                             </div>
@@ -160,5 +172,17 @@
         </div>
     </section>
     {% endif %}
+
+<script>
+    document.querySelectorAll("option").forEach(elem => {
+        let filterValue;
+        if (window.location.href.includes("=")) {
+            filterValue = window.location.href.split("=")[1]
+            if(elem.value == filterValue) {
+                elem.selected = true;
+            }
+        }
+    })
+</script>
 
 {% endblock %}
