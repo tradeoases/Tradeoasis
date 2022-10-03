@@ -140,23 +140,10 @@ class SignUpView(View):
 
         activate_url = f"http://{domain}{link}"
 
-        email_body = render_to_string(
-            "email_message.html",
-            {
-                "name": user.username,
-                "email": user.email,
-                "review": "{} \n {}".format(_("Your activation link is"), activate_url),
-            },
-        )
-        email = EmailMessage(
-            _("Activate Foroden Activation"),
-            email_body,
-            settings.DEFAULT_FROM_EMAIL,
-            [
-                user.email,
-            ],
-        )
-        email.send(fail_silently=False)
+        subject = _("Activate Foroden Activation")
+        description = "{}\n{}\n{}".format(_("Follow this link to activate you foroden account."), _("Your activation link is"), activate_url)
+
+        AuthTask.send_account_activation_email_task.delay(user.username, user.email, subject, description)
 
         messages.add_message(
             request,
@@ -177,7 +164,7 @@ class VerficationView(View):
         if user and appTokenGenerator.check_token(user, token):
             user.is_email_activated = True
             user.save()
-            login(request, user)
+            login(request, user, backend="django.contrib.auth.backends.ModelBackend")
             # to dashboard
             return redirect(reverse("auth_app:business"))
         else:

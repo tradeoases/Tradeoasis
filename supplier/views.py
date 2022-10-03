@@ -236,11 +236,11 @@ class ProductListView(View):
             return SupplierModels.Product.objects.filter(
                 Q(price__gte=float(min_price) if min_price else float(0)),
                 Q(price__lte=float(max_price)),
-                Q(
-                    store__supplier=AuthModels.Supplier.supplier.filter(
-                        clientprofile__business_name=supplier
-                    ).first()
-                ),
+                # Q(
+                #     store__supplier=AuthModels.Supplier.supplier.filter(
+                #         clientprofile__business_name=supplier
+                #     ).first()
+                # ),
             )
 
         elif max_price:
@@ -733,11 +733,11 @@ class SubCategoryDetailView(View):
                 Q(sub_category=subcategory),
                 Q(price__gte=float(min_price) if min_price else float(0)),
                 Q(price__lte=float(max_price)),
-                Q(
-                    store__supplier=AuthModels.Supplier.supplier.filter(
-                        clientprofile__business_name=supplier
-                    ).first()
-                ),
+                # Q(
+                #     store__supplier=AuthModels.Supplier.supplier.filter(
+                #         clientprofile__business_name=supplier
+                #     ).first()
+                # ),
             )
 
         elif max_price:

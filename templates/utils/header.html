@@ -34,7 +34,7 @@
         <div class="w-12/12 bg-backgroundColor">
             <div class="w-full mx-auto">
                 <!-- The temporary navbar -->
-                <div class="temp-nav py-3 grid content-center w-12/12 gap-1">
+                <div class="temp-nav py-2 grid content-center w-12/12 gap-1">
                     <div class="header-left grid items-center">
                         <a class="logo-wrapper" href="{% url 'manager:home' %}">
                             <img src="{% static '/assets/imgs/resources/logo_trans.png' %}" alt="Logo" class="logo"
@@ -43,7 +43,7 @@
                     </div>
                     <form action="{% url 'supplier:products' %}" method="GET" class="search-form grid w-12/12 gap-0 justify-items-stretch">
                         <input type="search" name="search" id="search-bar"
-                            class="py-3 px-6 focus:outline-none text-lghterBackgroundColor"
+                            class="py-1 px-4 focus:outline-none text-lghterBackgroundColor"
                             placeholder="{% trans 'Search' %}" style="border-start-start-radius: 5px; border-end-start-radius: 5px">
 
                         <button type="submit"

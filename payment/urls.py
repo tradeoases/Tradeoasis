@@ -5,7 +5,8 @@ app_name = "payment"
 from payment import views
 
 urlpatterns = [
-    path("memberships/", views.MembershipsView.as_view(), name="memberships"),
+    path("memberships/", 
+        views.InitSubscriptionView.as_view(), name="memberships"),
     path(
         "memberships/<str:slug>",
         views.MembershipsDetailsView.as_view(),

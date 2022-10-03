@@ -4,10 +4,10 @@ from django.core.mail import EmailMessage
 from django.conf import settings
 
 
-def send_account_activation_email(name, email, subject):
-    context = {"name": name, "email": email, "review": subject}
+def send_account_activation_email(name, email, subject, description):
+    context = {"name": name, "email": email, "description": description}
     email_subject = subject
-    email_body = render_to_string("/emails/email_message.html", context)
+    email_body = render_to_string("email_message.html", context)
 
     email = EmailMessage(
         email_subject,

@@ -3,14 +3,14 @@
 {% if new_arrivals.results %}
 <section class="main w-12/12">
     <div class="grid md:w-full mx-auto p-2 md:p-0 cf-1 gap-4">
-        <div class="section-body new_arrival grid gap-2 items-start card p-3 py-4 rounded-md" style="background-color: hsl(213, 28%, 19%);color: white">
+        <div class="section-body new_arrival grid gap-2 items-start card p-3 py-4 rounded-md bg-white text-lighterBackgroundColor">
             <div class="flex justify-between items-baseline px-3">
                 <!-- <div class="flex gap-5"> -->
                     <h1 class="text-lg md:text-xl text-yellowColor font-bold">{% trans 'New Arrivals' %}</h1>
                     <!-- <h1 class="hidden md:flex gap-1 items-baseline text-lg text-slate-400 font-bold"><span
                             class="text-lg text-xl text-slate-500">30%</span> OFF</h1> -->
                 <!-- </div> -->
-                <a class="justify-self-end text-base text-white" href="{% url 'supplier:new-arivals' %}">{% trans "View All" %}</a>
+                <a class="justify-self-end text-base text-yellowColor" href="{% url 'supplier:new-arivals' %}">{% trans "View All" %}</a>
             </div>
             <div class="grid gap-1 horizontal-scroll items-start" data-context="{{new_arrivals.context_name}}">
                 {% for new_arrival in new_arrivals.results %}

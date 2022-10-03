@@ -102,6 +102,7 @@ body.menuOpen::after {
 .logo {
     width: 100%;
     aspect-ratio: 10/2;
+    block-size: 8vh;
 }
 
 .search-wrapper {
@@ -620,14 +621,52 @@ footer a:hover {
     }
 } */
 
-.showrooms img {
+/* .showrooms img {
     max-block-size: 20vh;
-}
+} */
 
-@media (max-width: 786px) {    
+/* @media (max-width: 786px) {    
     .showrooms img {
         max-block-size: 15vh;
     }
+} */
+
+.showroom-card .body {
+    display: grid;
+    grid-template-columns: 2.8fr 1fr;
+    gap: .5rem;
+}
+
+.showroom-card .body .product,
+.showroom-card .body .product img {
+    block-size: 12.5vh;
+    overflow: hidden;
+}
+
+.showroom-card .body .product img {
+    object-fit: cover;
+}
+
+.showroom-card .body aside {
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.showroom-card .showroom-detail {
+    justify-content: flex-start;
+    align-items: center;
+    inline-size: 100%;
+}
+
+.showroom-card .showroom-detail .img-wrapper{
+    block-size: 2.5rem;
+    aspect-ratio: 1;
+}
+
+.showroom-card .showroom-detail img{
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
 }
 
 .about-intro {
@@ -1019,7 +1058,7 @@ form input.error {
     }
 }
 
-.category-card .banner {
+.category-card:not(.showroom) .banner {
     text-transform: capitalize;
     /* background-image: linear-gradient(to right top,hsl(178, 54%, 60%),hsl(178, 54%, 50%),hsl(178, 54%, 60%)); */
     background-color: hsl(178, 54%, 60%);
@@ -1034,6 +1073,10 @@ form input.error {
 
 .category-card .body {
     grid-template-columns: .8fr 3fr;
+}
+
+.category-card.showroom .body {
+    grid-template-columns: 1fr 2fr;
 }
 
 .category-card .img-wrapper {

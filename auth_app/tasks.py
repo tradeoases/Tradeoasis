@@ -17,9 +17,9 @@ logger = get_task_logger(__name__)
 
 
 @task(name="send_account_activation_email_task")
-def send_account_activation_email_task(name, email, subject):
+def send_account_activation_email_task(name, email, subject, description):
     logger.info("Sent Activation email")
-    return send_account_activation_email(name, email, subject)
+    return send_account_activation_email(name, email, subject, description)
 
 
 @task(name="create_braintree_customer")

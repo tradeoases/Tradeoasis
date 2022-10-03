@@ -153,15 +153,48 @@ class ShowRoomListView(ListView):
         context = super().get_context_data(**kwargs)
 
         context["view_name"] = _("Showrooms")
-        context["object_list"] = {
+        context["showrooms_with_products"] = {
+            "context_name": "showrooms",
+            "results": [
+                {
+                    "showroom": showroom,
+                    "store_count": showroom.store.count(),
+                    "store" : (
+                            lambda products: random.sample(products, len(showroom.store.all()))
+                        )(list(showroom.store.all()))[:1],
+                    "products": [
+                        {
+                            "product": product,
+                            "images": product.productimage_set.all().first(),
+                        }
+                        for product in (
+                            lambda products: random.sample(products, len(products))
+                        )(
+                            [
+                                product
+                                for product in Product.objects.filter(
+                                    store__in=showroom.store.all()
+                                )
+                            ][:3]
+                        )
+                    ],
+                }
+                for showroom in (
+                    lambda showrooms: random.sample(showrooms, len(showrooms))
+                )(list(ManagerModels.Showroom.objects.filter(store__gte=1)))
+            ],
+        }
+        
+        context["showrooms_without_products"] = {
             "context_name": "showrooms",
             "results": [
                 {"showroom": showroom, "store_count": showroom.store.count()}
                 for showroom in (
                     lambda showrooms: random.sample(showrooms, len(showrooms))
-                )(list(ManagerModels.Showroom.objects.all()[:20]))
+                )([showroom for showroom in ManagerModels.Showroom.objects.all() if showroom.store.all().count() < 1])
             ],
         }
+
         context["stores"] = {
             "context_name": "stores",
             "results": (lambda stores: random.sample(stores, len(stores)))(

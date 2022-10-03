@@ -56,7 +56,7 @@
                 <hr class="border-t border-solid border-slate-200">
                 <div class="grid gap-4 px-4">
                     <h1 class="text-lg md:text-xl font-semibold text-lighterBackgroundColor">i. {% trans "Virtual Showrooms" %}</h1>
-                    <div class="grid md:flex gap-8 justify-center md:justify-start py-4 md:px-6">
+                    <div class="grid md:flex gap-8 justify-center md:justify-start py-4 md:px-6 plan-group" id="VirtualShowroomsPlans">
                         <div class="package active grid gap-3 p-6 md:p-8 rounded-md">
                             <h2 class="text-lg md:text-xl font-bold text-lighterBackgroundColor">{% trans 'One Virtual Showroom' %}</h2>
                             <hr class="border-t border-solid border-slate-300">
@@ -97,7 +97,7 @@
                 </div>
                 <div class="grid gap-4 px-4">
                     <h1 class="text-lg md:text-xl font-semibold text-lighterBackgroundColor">ii. {% trans "Digital Marketing" %}</h1>
-                    <div class="grid md:flex gap-8 justify-center md:justify-start py-4 md:px-6">
+                    <div class="grid md:flex gap-8 justify-center md:justify-start py-4 md:px-6 plan-group" id="DigitalMarketingPlans">
                         <div class="package grid gap-3 p-6 md:p-8 rounded-md">
                             <h2 class="text-lg md:text-xl font-bold text-lighterBackgroundColor">{% trans 'One Virtual Showroom' %}</h2>
                             <hr class="border-t border-solid border-slate-300">
@@ -138,7 +138,7 @@
                 </div>
                 <div class="grid gap-4 px-4">
                     <h1 class="text-lg md:text-xl font-semibold text-lighterBackgroundColor">ii. {% trans "Local Marketing" %}</h1>
-                    <div class="grid md:flex gap-8 justify-center md:justify-start py-4 md:px-6">
+                    <div class="grid md:flex gap-8 justify-center md:justify-start py-4 md:px-6 plan-group" id="LocalMarketingPlans">
                         <div class="package grid gap-3 p-6 md:p-8 rounded-md">
                             <h2 class="text-lg md:text-xl font-bold text-lighterBackgroundColor">{% trans 'In Every Country' %}</h2>
                             <hr class="border-t border-solid border-slate-300">
@@ -195,17 +195,27 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            let selectedPlanids = new Array();
             const packages = document.querySelectorAll(".package");
             packages.forEach(package => {
                 package.addEventListener('click', (e) => {
-                    packages.forEach(_package => {
-                        if (_package.classList.contains('active')) _package.classList.remove('active');
-                    })
-                    if (e.target.classList.contains('package')) {
-                        e.target.classList.add('active');
+                    let selectedPlan = e.target.classList.contains('package') ? e.target : e.target.closest('.package');
+                    const selectedPlanGroup = selectedPlan.closest(".plan-group");
+                    let selectedPlanGroupPlans = selectedPlanGroup.querySelectorAll(".package");
+                    
+                    if (selectedPlan.classList.contains('active')) {
+                        selectedPlan.classList.remove('active');
                     } else {
-                        e.target.closest('.package').classList.add('active');
+                        selectedPlanGroupPlans.forEach(_plan => {
+                            if (_plan.classList.contains('active')) _plan.classList.remove('active');
+                        })
+                        selectedPlan.classList.add('active');
                     }
+
+                    selectedPlanids = [];
+                    document.querySelectorAll(".package.active input[type='radio']:checked").forEach(
+                        pricing => selectedPlanids.push(pricing.id)
+                    )
                 })
             })
 
