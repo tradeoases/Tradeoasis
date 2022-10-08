@@ -2,7 +2,135 @@
 {% load static %}
 {% load i18n %}
 {% block content %}
-    <section class="main w-12/12 mt-5">
+
+<style>
+
+    .promotion-banner,
+    .promotion-area,
+    .promotion-banner * {
+        /* border: 1px solid #000; */
+    }
+
+    .promotion-banner {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 300px 150px;
+        gap: .5rem;
+    }
+    .promotion-banner .upper {
+        overflow: hidden;
+        border-radius: 5px;
+    }
+    .promotion-banner .lower {
+        display: grid;
+        grid-template-columns: 1fr 2.5fr;
+        gap: .5rem;
+        background-color: hsl(38, 95%, 47%);
+        align-items: center;
+        padding-inline: 1rem;
+        border-radius: 5px;
+        animation: banner-emph 1.5s infinite linear;
+    }
+
+    @keyframes banner-emph {
+        0% {background-color: hsl(38, 95%, 40%);}
+        50% {background-color: hsl(38, 95%, 47%);}
+        100% {background-color: hsl(38, 95%, 40%);}
+    }
+
+    .lower .products {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: .5rem;
+    }
+    #banner-1 #banner .item {
+        margin: 0;
+        block-size: 320px;
+    }
+    
+    #banner-1 .handle {
+        inset-block-start: 40%;
+        transform: translateY(-40%);
+    }
+    #banner-1 #banner .item img {
+        aspect-ratio: 1/5;
+    }
+    #banner-1 .product-card {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        border-radius: 5px;
+    }
+    #banner-1 .product-card .img-wrapper {
+        inline-size: 100%;
+        block-size: 130px;
+        overflow: hidden;
+    }
+    #banner-1 .product-card .img-wrapper img {
+        block-size: 100%;
+        object-fit: cover;
+    }
+    .product-card::after {
+        content: "";
+        position: absolute;
+        inset: 0 0;
+        inline-size: 100%;
+        block-size: 100%;
+        background-color: rgba(26, 35, 46, 0);
+        z-index: 0;
+        transition: all .3s ease-in;
+    }
+    .product-card:hover::after {
+        background-color: rgba(26, 35, 46, .4);
+    }
+    .product-card .content {
+        position: absolute;
+        inset-block-end: 10px;
+        inset-inline-start: 10px;
+        color: white;
+        z-index: 10;
+    }
+    .product-card .content .content-group {
+        display: flex;
+        align-items: center;
+        gap: .35rem;
+        padding: 0 .25rem;
+        font-size: 1rem;
+        color: hsla(0, 0%, 80%, 1);
+        font-weight: 500;
+        transition: all .3s ease-in;
+        text-transform: capitalize;
+    }
+    .product-card:hover .content-group {
+        color: hsla(0, 0%, 90%, 1);
+    }
+    .product-card .content-group .symbol {
+        inline-size: 5px;
+        aspect-ratio: 1;
+        border-radius: 100%;
+        background-color: hsla(0, 0%, 100%, 0.69);     
+    }
+    @media (max-width: 789px) {
+        .promotion-banner .lower {
+            grid-template-columns: 1fr;
+            padding-block: 1rem;
+        }
+        
+        .promotion-banner {
+            grid-template-rows: 300px auto;
+        }
+        #banner-1 .product-card .img-wrapper {
+            block-size: 100px;
+        }
+        .product-card .content .content-group {
+            gap: .25rem;
+            padding: 0 0;
+        }
+    }
+
+</style>
+
+    <section class="main w-12/12 mt-2">
         <div class="grid py-2 w-full mx-auto justify-end">
             {% if messages %}
                 {% for message in messages %}
@@ -44,42 +172,84 @@
                 </a>
             </div>
             <div class="promotion-area w-12/12 md:grid gap-3">
-                <div class="upper gap-3 rounded-md overflow-hidden">
-                    <!-- Owl carousel -->
-                    <div id="banner" style="block-size:100%;">
-                        <div class="coursel" style="block-size: 100%;inline-size: 100%;">
-                            <div class="header">
-                              <div class="progress-bar"></div>
-                            </div>
-                            <div class="slider-container">
-                              <button class="handle left-handle">
-                                <div class="text">&#8249;</div>
-                              </button>
-                              <div class="slider">
-                                <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                              </div>
-                              <button class="handle right-handle">
-                                <div class="text">&#8250;</div>
-                              </button>
+                <div id="banner-1" class="promotion-banner">
+                    <div class="upper">
+                        <div id="banner" style="block-size:100%;">
+                            <div class="coursel" style="block-size: 100%;inline-size: 100%;">
+                                <div class="header">
+                                  <div class="progress-bar"></div>
+                                </div>
+                                <div class="slider-container">
+                                  <button class="handle left-handle">
+                                    <div class="text">&#8249;</div>
+                                  </button>
+                                  <div class="slider">
+                                    <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
+                                    <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
+                                    <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
+                                    <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
+                                    <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
+                                    <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
+                                    <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
+                                    <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
+                                    <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
+                                    <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
+                                    <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
+                                    <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
+                                    <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
+                                    <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
+                                    <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
+                                    <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
+                                  </div>
+                                  <button class="handle right-handle">
+                                    <div class="text">&#8250;</div>
+                                  </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Owl carousel -->
+                    <div class="lower" style="gap: .5rem;">
+                        <div class="product-promotion-content" style="display:grid; align-content: center;gap: .25rem">
+                            <h2 class="head text-xl font-bold text-white">Verified Suppliers</h2>
+                            <p class="desc text-normal text-slate-100" style="line-height: 20px;">Get items up to 70% off or get a coupon!</p>
+                        </div>
+                        <div class="products">
+
+                            <a href="" class="product-card">
+                                <div class="img-wrapper">
+                                    <img src="http://localhost:8000/media/ProductImage/images/fashion-ha-aa2fcbf9-b715-4f31-b5fd-e0e2f1e87001-dd.jpeg" alt="">
+                                </div>
+                                <div class="content">
+                                    <div class="content-group">
+                                        <span class="symbol"></span>
+                                        <span class="label">supplier Name</span>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="" class="product-card">
+                                <div class="img-wrapper">
+                                    <img src="http://localhost:8000/media/ProductImage/images/case-strap-358405e3-ad8d-43c4-abd1-bc8ad2123018-49.jpeg" alt="">
+                                </div>
+                                <div class="content">
+                                    <div class="content-group">
+                                        <span class="symbol"></span>
+                                        <span class="label">supplier Name</span>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="" class="product-card">
+                                <div class="img-wrapper">
+                                    <img src="http://localhost:8000/media/ProductImage/images/magnetic-w-2424898b-d1b3-42af-854c-e4402a61b8bd-8e.jpeg" alt="">
+                                </div>
+                                <div class="content">
+                                    <div class="content-group">
+                                        <span class="symbol"></span>
+                                        <span class="label">supplier Name</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="hidden md:grid side-bar gap-3 content-start product-categories w-12/12">

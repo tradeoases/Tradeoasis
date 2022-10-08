@@ -907,25 +907,9 @@ form input.error {
     --gap: 0 1rem; */
     display: grid;
 }
-#banner .item {
-    margin: 0;
-    inline-size: 100%;
-    block-size: 100%;
-    block-size: 450px;
-}
-
-#banner .item img {
-    display: block;
-    aspect-ratio: 1;
-    block-size: 420px;
-    object-fit: cover;
-}
-.promotion-area .upper {
-    block-size: 450px;
-}
 
 @media (max-width: 786px) {    
-    .promotion-area .upper,
+    /* .promotion-area .upper,
     .promotion-area .coursel,
     .promotion-area .slider-container {
         block-size: 40vh;
@@ -937,7 +921,7 @@ form input.error {
     #banner .item img {
         block-size: 20vh;
     }
-    
+     */
 }
 
 /* Advert */

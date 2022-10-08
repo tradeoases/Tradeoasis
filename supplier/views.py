@@ -64,8 +64,8 @@ class SupplierDetailView(DetailView):
                 if supplier.user in [store.supplier for store in product.store.all()]
             ],
         }
-        context["related_stores"] = {
-            "context_name": "related-stores",
+        context["stores"] = {
+            "context_name": "stores",
             "results": SupplierModels.Store.objects.filter(Q(supplier=supplier.user))[
                 :10
             ],
@@ -951,8 +951,8 @@ class StoreDetailView(DetailView):
             "context_name": "product-count",
             "results": store.store_product.count(),
         }
-        context["related_stores"] = {
-            "context_name": "related-stores",
+        context["stores"] = {
+            "context_name": "stores",
             "results": SupplierModels.Store.objects.filter(
                 Q(supplier=store.supplier), ~Q(id=store.id)
             ).order_by("-id")[:5],
