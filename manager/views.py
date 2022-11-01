@@ -6,6 +6,7 @@ from django.db.models import Q
 import random
 from django.utils.translation import gettext as _
 from django.contrib import messages
+from django.utils import timezone
 
 from datetime import timedelta
 import uuid
@@ -17,8 +18,10 @@ from supplier.models import (
     Store,
     ProductImage,
     ProductSubCategory,
+    Advert
 )
 from manager import models as ManagerModels
+from payment import models as PaymentModels
 
 
 from payment.mixins import AuthedOnlyAccessMixin
@@ -35,33 +38,6 @@ class HomeView(View):
     template_name = "manager/index.html"
 
     def get(self, request):
-
-        if request.user.is_authenticated:
-            # request.user.
-            pass
-
-        # generating products context
-        # sub_categories = ProductSubCategory.objects.all()[:10]
-        # product_object_list = []
-        # for sub_category in sub_categories:
-        #     if not sub_category.product_set.count() < 1:
-        #         sub_category_group = {
-        #             "sub_category": sub_category.name,
-        #             "category": sub_category.category.name,
-        #             "count": sub_category.category.product_count,
-        #             "results": {
-        #                 "products": [
-        #                     {
-        #                         "product": product,
-        #                         "image": ProductImage.objects.filter(
-        #                             product=product
-        #                         ).first(),
-        #                     }
-        #                     for product in sub_category.product_set.all()
-        #                 ]
-        #             },
-        #         }
-        #         product_object_list.append(sub_category_group)
 
         context_data = {
             "view_name": _("Home"),
@@ -87,18 +63,12 @@ class HomeView(View):
                     for category in (
                         lambda categories: random.sample(categories, len(categories))
                     )(list(ProductCategory.objects.all().order_by("-id")))[:6]
-                    # if category.product_count > 0
-                    # and category.productsubcategory_set.count()
                 ],
             },
             "showrooms": {
                 "context_name": "showrooms",
                 "results": ManagerModels.Showroom.objects.all().order_by("-id")[:6],
             },
-            # "catogory_product_group": {
-            #     "context_name": "catogory-product-group",
-            #     "results": product_object_list,
-            # },
             "new_arrivals": {
                 "context_name": "new-arrivals",
                 "results": [
@@ -109,19 +79,6 @@ class HomeView(View):
                         ).first(),
                     }
                     for product in Product.objects.all().order_by("-id")[:12]
-                ],
-            },
-            "advertised_products": {
-                "context_name": "advertised_products",
-                "results": [
-                    {
-                        "product": product,
-                        "main_image": ProductImage.objects.filter(
-                            product=product
-                        ).first(),
-                        "sub_images": ProductImage.objects.filter(product=product)[1:4],
-                    }
-                    for product in Product.objects.all().order_by("id")[:6]
                 ],
             },
             "products": {
@@ -141,7 +98,24 @@ class HomeView(View):
                 "context_name": "stores",
                 "results": Store.objects.all().distinct("supplier")[:6],
             },
+            "banners": {
+                "context_name": "banners",
+                "results": ManagerModels.Promotion.objects.filter(has_image=True).order_by("-id")[:6]
+            }
         }
+
+        context_data["adverts"]  = {
+            "context_name" : "adverts",
+            "results": [
+                {
+                    "product": advert.product,
+                    "supplier": advert.product.store.all().first().supplier,
+                    "main_image": ProductImage.objects.filter(product=advert.product).first(),
+                }
+                for advert in (lambda adverts: random.sample(adverts, len(adverts)))(list(Advert.active.all())[:3])
+            ],
+        }
+
         return render(request, self.template_name, context=context_data)
 
 
@@ -181,7 +155,7 @@ class ShowRoomListView(ListView):
                 }
                 for showroom in (
                     lambda showrooms: random.sample(showrooms, len(showrooms))
-                )(list(ManagerModels.Showroom.objects.filter(store__gte=1)))
+                )(list(ManagerModels.Showroom.objects.filter(store__gte=1).distinct("id")))
             ],
         }
         
@@ -212,6 +186,10 @@ class ShowRoomDetailView(DetailView):
 
         showroom = self.get_object()
 
+        showroom_products = [
+            product for product in Product.objects.filter(store__in=showroom.store.all())
+        ]
+
         context["view_name"] = showroom.name
         context["stores"] = {"context_name": "stores", "results": showroom.store.all()}
         context["other_showroom"] = {
@@ -234,28 +212,22 @@ class ShowRoomDetailView(DetailView):
                 for product in (
                     lambda products: random.sample(products, len(products))
                 )(
-                    [
-                        product
-                        for product in Product.objects.filter(
-                            store__in=showroom.store.all()
-                        )
-                    ][:20]
+                    showroom_products[:20]
                 )
             ],
         }
-        context["advertised_products"] = {
-            "context_name": "advertised_products",
-            "results": [
-                {
-                    "product": product,
-                    "main_image": ProductImage.objects.filter(product=product).first(),
-                    "sub_images": ProductImage.objects.filter(product=product)[1:4],
-                }
-                for product in Product.objects.all().order_by("-id")[:6]
-            ],
+
+        context["banners"] = {
+            "context_name": "banners",
+            "results": ManagerModels.Promotion.objects.filter(has_image=True, showroom=showroom).order_by("-id")[:6]
         }
 
-        products = Product.objects.all()
+        context["text_promotion"] = {
+            "context_name": "text_promotion",
+            "results": (
+                    lambda ads: random.sample(ads, len(ads))
+                )(list(ManagerModels.Promotion.objects.filter(has_image=False).order_by("-id")[:5]))[1]
+        }
 
         product = (lambda products: random.sample(products, len(products)))(
             list(Product.objects.all().order_by("-id")[:10])
@@ -283,17 +255,17 @@ class ShowRoomDetailView(DetailView):
                 if subcategory.product_set.count() > 1
             ],
         }
-
-        if self.request.COOKIES.get("user_categories", None):
-            user_categories = [
-                int(id) for id in self.request.COOKIES.get("user_categories").split(",")
-            ]
-        else:
-            user_categories = []
-
-        context["user_categories"] = {
-            "context_name": "user categories",
-            "results": ProductCategory.objects.filter(id__in=user_categories)[:4],
+        # advertized products
+        context["adverts"]  = {
+            "context_name" : "adverts",
+            "results": [
+                {
+                    "product": advert.product,
+                    "supplier": advert.product.store.all().first().supplier,
+                    "main_image": ProductImage.objects.filter(product=advert.product).first(),
+                }
+                for advert in (lambda adverts: random.sample(adverts, len(adverts)))(list(Advert.active.filter(product__in = showroom_products))[:3])
+            ],
         }
 
         return context

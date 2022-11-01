@@ -1,7 +1,10 @@
+from email.policy import default
 from pyexpat import model
+from random import choices
 from re import T
 from statistics import mode
 import string
+from weakref import proxy
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -13,9 +16,10 @@ from django.conf import settings
 import os
 import uuid
 import json
+import buyer
 
 # from apps
-from supplier.models import Store
+from supplier.models import Store, Product
 from auth_app import models as Authmodels
 
 
@@ -211,3 +215,50 @@ def create_Chat_file(sender, instance, **kwargs):
         os.mkdir(f"{settings.CHATROOMFILES_DIR}")
         with open(f"{instance.chatfilepath}", "w") as file:
             json.dump([], file)
+
+class Promotion(models.Model):
+    promotion_types = (
+        ("BANNER", "BANNER"),
+        ("PRODUCTS", "PRODUCTS"),
+        ("SUPPLIERS", "SUPPLIERS"),
+        ("BUYERS", "BUYERS"),
+        ("SHOWROOWS", "SHOWROOWS"),
+    )
+
+    name = models.CharField(_("Name"), max_length=256)
+    description = models.CharField(_("Description"), max_length=256, blank=True, null=True)
+    image = models.ImageField(
+        verbose_name=_("Image"),
+        upload_to=get_file_path,
+        blank=True,
+        null=True
+    )
+    type = models.CharField(_("Type"), max_length=256, choices=promotion_types)
+    created_on = models.DateField(_("Created on"), default=timezone.now)
+
+    showroom = models.ForeignKey(to=Showroom, on_delete=models.CASCADE, blank=True, null=True)
+
+    slug = models.SlugField(
+        _("Safe Url"),
+        unique=True,
+        blank=True,
+        null=True,
+    )
+
+    has_image = models.BooleanField(_("Has Banner Image"), default=False)
+    
+    def save(self, *args, **kwargs):
+        self.slug = f"{slugify(self.name)}-{uuid.uuid4()}"[:50]
+
+        self.name = self.name
+
+        if self.image:
+            self.has_image = True
+
+        super().save(*args, **kwargs)
+
+
+class PlatformPrice(models.Model):
+    advertising_price = models.DecimalField(
+        _("Advertising Price"), decimal_places=2, max_digits=12, default=0.0
+    )

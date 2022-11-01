@@ -96,7 +96,7 @@ class ClientProfile(models.Model):
 class SupplierManager(BaseUserManager):
     def get_queryset(self, *args, **kwargs):
         results = super().get_queryset(*args, **kwargs)
-        return results.filter(account_type=User.Role.SUPPLIER)
+        return results.filter(account_type=User.Role.SUPPLIER).order_by("-id")
 
 
 class Supplier(User):

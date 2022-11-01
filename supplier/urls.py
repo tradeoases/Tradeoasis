@@ -67,6 +67,7 @@ urlpatterns = [
     # dashboard
     path("dashboard", views.DashboardView.as_view(), name="dashboard"),
     path("profile/", views.ProfileView.as_view(), name="profile"),
+    path("business/profile/", views.BusinessProfileView.as_view(), name="business_profile"),
     path("password-reset", views.password_reset, name="password-reset"),
     path(
         "editaccountsprofile/",
@@ -137,5 +138,26 @@ urlpatterns = [
         "dashboard/servicescreate",
         views.DashboardServicesCreateView.as_view(),
         name="dashboard-servicescreate",
+    ),
+
+    path(
+        "dashboard/advertise",
+        views.DashboardAdvertiseView.as_view(),
+        name="dashboard-advertise",
+    ),
+    path(
+        "dashboard/advertise/payment/<str:slug>",
+        views.DashboardAdvertisePaymentView.as_view(),
+        name="dashboard-advertise-payment",
+    ),
+    path(
+        "dashboard/payments",
+        views.DashboardPaymentsView.as_view(),
+        name="dashboard-payments",
+    ),
+    path(
+        "dashboard/payments/advert",
+        views.DashboardAdvertsPaymentsView.as_view(),
+        name="dashboard-advert-payments",
     ),
 ]

@@ -88,20 +88,24 @@
                         <p class="text-slate-700 grid grid-flow-col flex-wrap gap-2 justify-start items-center" data-context="{{product_stores.context_name}}">
                             <span>{% trans 'Tags' %}: </span>
                             {% for tag in tags %}
-                                <a href="" class="grid px-4 py-1 text-base bg-blue-200 rounded-full text-lighterBackgroundColor">{{ tag.name }}</a>
+                                <a href="{% url 'supplier:products' %}?search={{ tag.name }}" class="grid px-4 py-1 text-base bg-blue-200 rounded-full text-lighterBackgroundColor">{{ tag.name }}</a>
                             {% endfor %}
                         </p>
                     </div>
                 </div>
             </div>
             <div class="hidden md:grid gap-4 content-start">
-                <a href="{% url 'auth_app:signup' %}?Supplier=1" class="grid gap-2 items-start p-4 rounded-md" style="background-image: linear-gradient(to right top,hsl(350, 100%, 95%),hsl(350, 100%, 90%),hsl(350, 100%, 91%),hsl(350, 100%, 93%),hsl(350, 100%, 95%));">
+                {% if text_promotion.results %}
+                <a 
+                    href="{% if text_promotion.results.type == 'SUPPLIERS' %} {% url 'auth_app:signup' %}?Supplier=1 {% elif text_promotion.results.type == 'BUYERS' %} {% url 'auth_app:signup' %}?Buyer=1 {% elif text_promotion.results.type == 'SHOWROOWS' %} {% url 'manager:showrooms' %} {% elif text_promotion.results.type == 'PRODUCTS' %} {% url 'supplier:products' %} {% endif %}" 
+                    class="grid gap-2 items-start p-4 rounded-md" style="background-image: linear-gradient(to right top,hsl(350, 100%, 95%),hsl(350, 100%, 90%),hsl(350, 100%, 91%),hsl(350, 100%, 93%),hsl(350, 100%, 95%));">
                     <div class="grid">
-                        <h4 class="font-semibold text-lighterBackgroundColor">{% trans "Hot Deals" %}</h4>
-                        <p class="text-lighterBackgroundColor text-base">{% trans '$10 Off New Suppliers' %}</p>
+                        <h4 class="font-semibold text-lighterBackgroundColor">{{text_promotion.results.name}}</h4>
+                        <p class="text-lighterBackgroundColor text-base">{{text_promotion.results.description}}</p>
                     </div>
                     <button class="bg-black py-2 px-4 text-base justify-self-end rounded-full text-white font-semibold">View More</button>
                 </a>
+                {% endif %}
                 <!-- <div class="advert-banner-small">
                     <img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image">
                 </div> -->
@@ -116,7 +120,7 @@
                                 class="side-menu-item text-slate-800 hover:text-black transition-colors transition-200 ease-in" data-category-index="{{ forloop.counter }}">
                                 <a class="flex items-center justify-start gap-2 py-1" href='{% url "supplier:category-detail" category.slug %}'>
                                     <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="/media/{{ category.image }}" alt="{{ category.name }}">
-                                    <span>{{ category.name|slice:":20" }}</span>
+                                    <span>{{ category.name|slice:":15" }}</span>
                                 </a>
                             </li>
                         {% endfor %}
@@ -140,13 +144,13 @@
                 <div class="grid gap-1 horizontal-scroll items-start" style="--row-size: 29%;--sm-row-size:33%" data-context="{{new_arrivals.context_name}}">
                     {% for new_arrival in new_arrivals.results %}
                         <div class="promotion-card grid"  data-new_arrival-index="{{forloop.counter}}">
-                            <a class="grid rounded-md" href="{% url 'supplier:new-arivals' %}">
+                            <a class="grid rounded-md " href="{% url 'supplier:new-arivals' %}" style="background-color: rgba(239, 246, 247, 0.438);padding: .25rem;">
                                 <div class="grid p-2">
                                     <img loading="lazy" src="/media/{{new_arrival.main_image.image}}" alt="{{new_arrival.product.name}}" class="item-img rounded" style="width: 100%;aspect-ratio:1/.8;object-fit:cover;">
                                 </div>
                                 <div class="item-details grid gap-0 px-2 items-start content-start">
                                     <h5 class="text-base font-semibold leading-5">
-                                        {{new_arrival.product.name|slice:":20"}}..
+                                        {{new_arrival.product.name|slice:":15"}}..
                                     </h5>
                                     <!-- <p class="text-base font-bold flex gap-2 items-baseline">
                                         {{new_arrival.product.currency}} <span>{{new_arrival.product.price}}</span>
@@ -171,13 +175,13 @@
                 <div class="grid gap-1 horizontal-scroll items-start" style="--row-size: 29%;--sm-row-size:33%" data-context="{{advertised_products.context_name}}">
                     {% for advertised_product in advertised_products.results %}
                         <div class="promotion-card grid"  data-advertised_product-index="{{forloop.counter}}">
-                            <a class="grid rounded-md" href="{% url 'supplier:new-arivals' %}">
+                            <a class="grid rounded-md" href="{% url 'supplier:product-detail' advertised_product.product.slug %}" style="background-color: rgba(239, 246, 247, 0.438);padding: .25rem;">
                                 <div class="grid p-2">
                                     <img loading="lazy" src="/media/{{advertised_product.main_image.image}}" alt="{{advertised_product.product.name}}" class="item-img rounded" style="width: 100%;aspect-ratio:1/.8;object-fit:cover;">
                                 </div>
                                 <div class="item-details grid gap-0 px-2 items-start content-start">
                                     <h5 class="text-base font-semibold leading-5">
-                                        {{advertised_product.product.name|slice:":20"}}..
+                                        {{advertised_product.product.name|slice:":15"}}..
                                     </h5>
                                     <!-- <p class="text-base font-bold flex gap-2 items-baseline">
                                         {{advertised_product.product.currency}} <span>{{advertised_product.product.price}}</span>

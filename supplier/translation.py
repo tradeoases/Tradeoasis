@@ -30,3 +30,7 @@ class ProductTagTranslationOptions(TranslationOptions):
 @register(models.Service)
 class ServiceTranslationOptions(TranslationOptions):
     fields = ("name", "description", "price", "currency")
+
+@register(models.ServiceTag)
+class ServiceTagTranslationOptions(TranslationOptions):
+    fields = ("name",)

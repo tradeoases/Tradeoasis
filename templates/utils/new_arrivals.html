@@ -15,13 +15,13 @@
             <div class="grid gap-1 horizontal-scroll items-start" data-context="{{new_arrivals.context_name}}">
                 {% for new_arrival in new_arrivals.results %}
                     <div class="promotion-card grid"  data-new_arrival-index="{{forloop.counter}}">
-                        <a class="grid rounded-md" href="{% url 'supplier:new-arivals' %}">
+                        <a class="grid rounded-md" href="{% url 'supplier:new-arivals' %}" style="background-color: rgba(239, 246, 247, 0.438);padding: .25rem;">
                             <div class="grid p-2">
                                 <img loading="lazy" src="/media/{{new_arrival.main_image.image}}" alt="{{new_arrival.product.name}}" class="item-img rounded" style="width: 100%;aspect-ratio:1/.8;object-fit:cover;">
                             </div>
                             <div class="item-details grid gap-0 px-2 items-start content-start">
                                 <h5 class="text-base font-semibold leading-5">
-                                    {{new_arrival.product.name|slice:":40"}}
+                                    {{new_arrival.product.name|slice:":15"}}
                                 </h5>
                                 <!-- <p class="text-base font-bold flex gap-2 items-baseline">
                                     {{new_arrival.product.currency}} <span>{{new_arrival.product.price}}</span>

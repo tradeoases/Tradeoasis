@@ -54,46 +54,6 @@
                         <a class="btn cs-bg-primary  cs-text-white br-sm br-sm" href="{% url 'supplier:password-reset' %}">{% trans 'Reset Password' %}</a>
                     </div>
                 </div>
-                <div class="cs-grid cs-content-start" style="--gap: 1rem;">
-                    <h2>{% trans 'Business Details' %}</h2>
-                    <div class="group cs-grid" style="--gap: .75rem;">
-                        <p class="">{% trans 'Business Name' %}:</p>
-                        <p class="outlined br-sm" style="padding: .5rem 1.5rem;">{{profile.business_name}}</p>
-                    </div>
-                    <div class="group cs-grid" style="--gap: .75rem;">
-                        <p class="">{% trans 'Description' %}:</p>
-                        <p class="outlined br-sm" style="padding: .5rem 1.5rem; line-height: 1.6rem;">{{profile.business_description}}</p>
-                    </div>
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <div class="group cs-grid" style="--gap: .75rem;">
-                            <p class="">{% trans 'Country' %}:</p>
-                            <p class="outlined br-sm" style="padding: .5rem 1.5rem;">{{profile.country}}</p>
-                        </div>
-                        <div class="group cs-grid" style="--gap: .75rem;">
-                            <p class="">{% trans 'City' %}:</p>
-                            <p class="outlined br-sm" style="padding: .5rem 1.5rem;">{{profile.city}}</p>
-                        </div>
-                    </div>
-                    <div class="group cs-grid" style="--gap: .75rem;">
-                        <p class="">{% trans 'Business Line' %}:</p>
-                        <p class="outlined br-sm" style="padding: .5rem 1.5rem;">+ ({{profile.country_code}}) {{profile.mobile_user}}</p>
-                    </div>
-                    <div class="group cs-grid" style="--gap: .75rem;">
-                        <p class="">{% trans 'VAT Number' %}:</p>
-                        <p class="outlined br-sm" style="padding: .5rem 1.5rem;">{{profile.vat_number}}</p>
-                    </div>
-                    <div class="group cs-grid" style="--gap: .75rem;">
-                        <p class="">{% trans 'Legal Entity Identifier' %}:</p>
-                        <p class="outlined br-sm" style="padding: .5rem 1.5rem;">{{profile.legal_etity_identifier}}</p>
-                    </div>
-                    <div class="group cs-grid" style="--gap: .75rem;">
-                        <p class="">{% trans 'Website' %}:</p>
-                        <p class="outlined br-sm" style="padding: .5rem 1.5rem;">{{profile.website}}</p>
-                    </div>
-                    <div class="group cs-flex" style="--gap: .5rem;">
-                        <a class="btn br-sm" href="{% url 'supplier:dashboard-editbusinessprofile' profile.slug %}">{% trans 'Edit Bussiness Details' %}</a>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

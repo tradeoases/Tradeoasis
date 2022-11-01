@@ -456,7 +456,7 @@ h3 {
     grid-template-columns: 1fr .3fr;
 }
 .content-area {
-    overflow-y: scroll;
+    overflow-y: auto;
     scrollbar-width: none;
     /* block-size: ; */
 }

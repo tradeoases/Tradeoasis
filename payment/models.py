@@ -14,7 +14,7 @@ import uuid
 
 # apps
 from auth_app.models import Buyer, Supplier
-from supplier.models import Service
+from supplier.models import Service, Advert
 
 
 class MembershipPlan(models.Model):
@@ -108,36 +108,13 @@ class ModeOfPayment(models.Model):
 
 
 class MembershipReceipt(models.Model):
-    # membership = models.ForeignKey(to=Membership, on_delete=models.CASCADE)
-    # model_of_payment = models.ForeignKey(to=ModeOfPayment, on_delete=models.CASCADE)
-    # address = models.CharField(_("Address"), max_length=256)
-    # payment_id = models.CharField(_("Payment Id"), max_length=256)
-    # amount_paid = models.DecimalField(
-    #     _("Total Amount Paid"), decimal_places=2, max_digits=12
-    # )
-    # currency = models.CharField(_("Currency"), max_length=6)
-    # reference_id = models.CharField(
-    #     _("reference_id"), max_length=20, blank=True, null=True
-    # )
-    # authorizations_id = models.CharField(_("authorizations_id"), max_length=20)
-    # status = models.CharField(_("status"), max_length=20, default="NOT APPROVED")
-
     method = models.CharField(_("Payment Method"), max_length=20)
     plan_id = models.CharField(_("Plan Id"), max_length=30)
-    client = models.OneToOneField(to=Supplier, on_delete=models.CASCADE)
+    client = models.ForeignKey(to=Supplier, on_delete=models.CASCADE)
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def __str__(self) -> str:
         return f"User: {self.payment_id}"
-
-
-# set expiry date
-# @receiver(post_save, sender=MembershipReceipt)
-# def record_transaction_count(sender, instance, **kwargs):
-#     mode_of_payment = instance.model_of_payment
-#     # category product count increases
-#     mode_of_payment.transaction_count = int(mode_of_payment.transaction_count) + 1
-#     mode_of_payment.save()
 
 
 class Contract(models.Model):
@@ -176,7 +153,23 @@ class ContractReceipt(models.Model):
         to=Contract,
         on_delete=models.CASCADE,
     )
-    model_of_payment = models.ForeignKey(to=ModeOfPayment, on_delete=models.CASCADE)
+    mode_of_payment = models.ForeignKey(to=ModeOfPayment, on_delete=models.CASCADE)
+    address = models.CharField(_("Address"), max_length=256)
+    payment_id = models.CharField(_("Payment Id"), max_length=256)
+    amount_paid = models.DecimalField(
+        _("Total Amount Paid"), decimal_places=2, max_digits=12
+    )
+    currency = models.CharField(_("Currency"), max_length=6)
+
+    def __str__(self) -> str:
+        return f"User: {self.payment_id}"
+
+class AdvertPaymentReceipt:
+    advert_payment = models.ForeignKey(
+        to=Advert,
+        on_delete=models.CASCADE,
+    )
+    mode_of_payment = models.ForeignKey(to=ModeOfPayment, on_delete=models.CASCADE)
     address = models.CharField(_("Address"), max_length=256)
     payment_id = models.CharField(_("Payment Id"), max_length=256)
     amount_paid = models.DecimalField(
