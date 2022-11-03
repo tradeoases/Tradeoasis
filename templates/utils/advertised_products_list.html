@@ -19,7 +19,7 @@
             <div class="section-item-group rounded-md p-4">
                 {% for advertised_product in advertised_products.results %}
                 <div class="product card">
-                    <a class="grid gap-0.5" href="{% url 'supplier:superdeals' %}">
+                    <a class="grid gap-0.5" href="{% url 'supplier:superdeals' %}" style="background-color: rgba(228, 245, 247, 0.438);padding: .25rem;">
                         <img loading="lazy"
                             src="/media/{{advertised_product.main_image.image}}"
                             alt="{{advertised_product.product.name}}" class="item-img rounded"

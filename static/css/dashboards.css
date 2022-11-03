@@ -322,8 +322,9 @@ body.admin-body {
 .admin-content-area {
     padding: .25rem .5rem;
     align-content: flex-start;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
+
 
 .content-area-header {
     grid-template-columns: .6fr 1fr .6fr;
@@ -387,6 +388,36 @@ body.admin-body {
     inline-size: 100%;
     max-inline-size: 50vw;
 }
+.content .stats-summary-card.w-img {
+    padding: .25rem;
+}
+.content .stats-summary-card.w-img .description {
+    padding: .5rem .75rem;
+}
+.stats-summary-card .img-wrapper {
+    inline-size: 100%;
+    aspect-ratio: 2/1;
+    border-radius: .25rem;
+    overflow: hidden;
+}
+
+.stats-summary-card .img-wrapper img {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+}
+
+.content-area.w-desciption {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 1rem;
+}
+
+.content-area.w-desciption .description {
+    padding: 1rem;
+    gap: .5rem;
+}
+
 
 /* lists */
 table {
@@ -560,3 +591,15 @@ tbody tr td.delete {
 }
 
 /* components */
+.main-content-tabs a {
+    background: rgba(235, 233, 233, 0.644);
+    border-radius: .5rem;
+    padding: .5rem 1rem;
+}
+.main-content-tabs a.active {
+    font-weight: bold;
+}
+
+.main-content-tabs a:hover {
+    font-weight: bold;
+}

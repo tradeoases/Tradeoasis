@@ -1,5 +1,4 @@
-from re import sub
-from unicodedata import category
+from datetime import datetime
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
@@ -24,6 +23,7 @@ from supplier import models as SupplierModels
 from auth_app import models as AuthModels
 from manager import models as ManagerModels
 from payment import models as PaymentModels
+import supplier
 
 from supplier.mixins import SupplierOnlyAccessMixin
 
@@ -276,12 +276,13 @@ class ProductListView(View):
             )
 
         elif search:
-            # we are searching for products based on name, sub category, category
+            # we are searching for products based on name, sub category, category, tag
             return SupplierModels.Product.objects.filter(
                 Q(name__icontains=search)
                 | Q(sub_category__name__icontains=search)
                 | Q(category__name__icontains=search)
-            )
+                | Q(producttag__name__icontains=search)
+            ).distinct("id")
 
         return SupplierModels.Product.objects.filter(
             price__gte=float(min_price) if min_price else float(0)
@@ -358,17 +359,6 @@ class ProductListView(View):
                 "max_price": self.request.GET.get("max-price", None),
             },
         }
-
-        # context_data["supplier_filter"] = {
-        #     "context_name": "supplier-filter",
-        #     "results": self.request.GET.get("supplier", 0),
-        # }
-
-        # context_data["location_filter"] = {
-        #     "context_name": "location-filter",
-        #     "results": self.request.GET.get("location", 0),
-        # }
-
         return context_data
 
 
@@ -449,6 +439,14 @@ class ProductDetailView(DetailView):
             ],
         }
 
+
+        context["text_promotion"] = {
+            "context_name": "text_promotion",
+            "results": (
+                    lambda ads: random.sample(ads, len(ads))
+                )(list(ManagerModels.Promotion.objects.filter(has_image=False).order_by("-id")[:5]))[1]
+        }
+
         context["new_arrivals"] = {
             "context_name": "new-arrivals",
             "results": [
@@ -463,19 +461,15 @@ class ProductDetailView(DetailView):
                 )(list(SupplierModels.Product.objects.all().order_by("-id")[:10]))
             ],
         }
+
         context["advertised_products"] = {
             "context_name": "advertised_products",
             "results": [
                 {
-                    "product": product,
-                    "main_image": SupplierModels.ProductImage.objects.filter(
-                        product=product
-                    ).first(),
-                    "sub_images": SupplierModels.ProductImage.objects.filter(
-                        product=product
-                    )[1:4],
+                    "product": advert.product,
+                    "main_image": SupplierModels.ProductImage.objects.filter(product=advert.product).first(),
                 }
-                for product in SupplierModels.Product.objects.all().order_by("-id")[:6]
+                for advert in (lambda adverts: random.sample(adverts, len(adverts)))(list(SupplierModels.Advert.active.all())[:3])
             ],
         }
 
@@ -1053,22 +1047,31 @@ class DashboardView(SupplierOnlyAccessMixin, View):
 
         context_data["category_group"] = [
             obj
-            for obj in SupplierModels.Product.objects.values("category__name")
+            for obj in SupplierModels.Product.objects.filter(store__supplier=self.request.user).values("category__name")
             .annotate(dcount=Count("category"))
             .order_by()
         ]
 
-        context_data["top_products"] = {
-            "context_name": "top-products",
-            "results": SupplierModels.Product.objects.all()[
-                :4
-            ],  # should base on products request table
+        context_data["latest_products"] = {
+            "context_name": "latest-products",
+            "results": SupplierModels.Product.objects.filter(store__supplier=self.request.user).order_by("-id")[:4],
         }
         return context_data
 
 
 class ProfileView(SupplierOnlyAccessMixin, View):
     template_name = "supplier/dashboard/profile.html"
+
+    def get(self, request):
+        context_data = {
+            "profile": AuthModels.ClientProfile.objects.filter(
+                user=request.user
+            ).first()
+        }
+        return render(request, self.template_name, context=context_data)
+
+class BusinessProfileView(SupplierOnlyAccessMixin, View):
+    template_name = "supplier/dashboard/business_profile.html"
 
     def get(self, request):
         context_data = {
@@ -1290,6 +1293,7 @@ class DashboardProductsCreateView(SupplierOnlyAccessMixin, View):
 
     def get(self, request):
         context_data = {
+            "supplier_profile" : AuthModels.ClientProfile.objects.filter(user=request.user).first(),
             "stores": SupplierModels.Store.objects.filter(supplier=request.user),
             "subcategories": SupplierModels.ProductSubCategory.objects.all(),
         }
@@ -1632,7 +1636,10 @@ class DashboardServicesCreateView(SupplierOnlyAccessMixin, View):
     template_name = "supplier/dashboard/create-service.html"
 
     def get(self, request):
-        return render(request, self.template_name)
+        context_data = {
+            "supplier_profile" : AuthModels.ClientProfile.objects.filter(user=request.user).first()
+        }
+        return render(request, self.template_name, context=context_data)
 
     def post(self, request, *args, **kwargs):
         if not (
@@ -1692,9 +1699,137 @@ class DashboardServicesCreateView(SupplierOnlyAccessMixin, View):
                         )
                         instance.save()
 
+            # add tags
+            for i in range(1, 6):
+                tag = request.POST.get(f"tag_{i}", None)
+                if not tag:
+                    continue
+
+                tag = SupplierModels.ServiceTag.objects.create(
+                    name=tag, service=service
+                )
+                fields = ("name",)
+                instance = tag
+                modal = SupplierModels.ServiceTag
+                for field in fields:
+                    for language in settings.LANGUAGES:
+                        try:
+                            if language[0] == get_language():
+                                # already set
+                                continue
+                            result = translator.translate(
+                                getattr(instance, field), dest=language[0]
+                            )
+                            for model_field in modal._meta.get_fields():
+                                if not model_field.name in f"{field}_{language[0]}":
+                                    continue
+
+                                if model_field.name == f"{field}_{language[0]}":
+                                    setattr(instance, model_field.name, result.text)
+                                    instance.save()
+                        except:
+                            setattr(
+                                instance,
+                                f"{field}_{language[0]}",
+                                getattr(instance, field),
+                            )
+                            instance.save()
+
             return redirect(reverse("supplier:dashboard-servicescreate"))
         except:
             messages.add_message(
                 request, messages.ERROR, _("Sorry, an error occurred. Please Try Again")
             )
             return redirect(reverse("supplier:dashboard-servicescreate"))
+
+
+class DashboardAdvertiseView(View):
+    template_name = 'supplier/dashboard/advertise.html'
+
+    def get(self, request):
+        context_data = {
+            "products" : SupplierModels.Product.objects.filter(store__supplier=self.request.user).order_by("-id"),
+            "advertising_price" : ManagerModels.PlatformPrice.objects.all().first().advertising_price
+        }
+        return render(request, self.template_name, context=context_data)
+
+    def post(self, request):
+        product = request.POST.get("product")
+        start_date = request.POST.get("start_date")
+        end_date = request.POST.get("end_date")
+
+        if not all([product, start_date, end_date]):
+            messages.add_message(request, messages.ERROR, _("Please Fill all fields."))
+            return redirect(reverse("supplier:dashboard-advertise"))
+
+        product = SupplierModels.Product.objects.filter(name=product)
+        if not product:
+            messages.add_message(request, messages.ERROR, _("Product not found."))
+            return redirect(reverse("supplier:dashboard-advertise"))
+
+        date_format = "%m/%d/%Y"
+        try:
+            datetime.strptime(start_date, date_format)
+        except:
+            date_format = "%Y-%m-%d"
+
+        duration = datetime.strptime(end_date, date_format) - datetime.strptime(start_date, date_format)
+        price = duration.days * ManagerModels.PlatformPrice.objects.all().first().advertising_price
+
+        print("*"*20)
+        print("duration:", duration)
+        print("price:", price)
+        print("*"*20)
+
+        advert = SupplierModels.Advert.objects.create(
+            product = product.first(),
+            start_date = start_date,
+            end_date = end_date,
+            amount = price
+        )
+
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            _("Submitted successfully."),
+        )
+        return redirect(reverse("supplier:dashboard-advertise-payment", args=[advert.slug]))
+
+class DashboardAdvertisePaymentView(View):
+    template_name = 'supplier/dashboard/advertise_payment.html'
+
+    def get(self, request, slug):
+
+        advert = SupplierModels.Advert.objects.filter(slug=slug).first()
+        context_data = {
+            "advert" : advert
+        }
+        return render(request, self.template_name, context=context_data)
+
+
+class DashboardPaymentsView(View):
+    template_name = 'supplier/dashboard/payment_list.html'
+
+    def get(self, request):
+
+        membershipPayments = PaymentModels.Membership.objects.filter(supplier = request.user)
+
+
+        context_data = {
+            "memberships" : membershipPayments
+        }
+        return render(request, self.template_name, context=context_data)
+
+
+class DashboardAdvertsPaymentsView(View):
+    template_name = 'supplier/dashboard/advert_payment_list.html'
+
+    def get(self, request):
+        supplier_products = SupplierModels.Product.objects.filter(
+            store__in=SupplierModels.Store.objects.filter(supplier=self.request.user)
+        )
+
+        context_data = {
+            "adverts" : SupplierModels.Advert.objects.filter(product__in = supplier_products)
+        }
+        return render(request, self.template_name, context=context_data)

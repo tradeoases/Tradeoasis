@@ -4,12 +4,12 @@
 {% block content %}
 
     <div class="main-content">
-        <div class="content-area">
+        <div class="cs-grid content-area w-desciption cs-align-start">
             <form action="{% url 'supplier:dashboard-servicescreate' %}" method="POST" id="category-form" class="cs-grid br-sm outlined" enctype="multipart/form-data" style="padding: 2rem;--gap:1rem;">
                 <h2 style="margin: 0;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
                     {% trans 'Fill in form to create service' %}
                 </h2>
-                <p class="text-base text-slate-600">* {% trans 'Represents required fields' %}.</p>
+                <p class="cs-text-base text-slate-600">* {% trans 'Represents required fields' %}.</p>
                 {% if messages %}
                     {% for message in messages %}
                         {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
@@ -210,11 +210,30 @@
                     <label for="description" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Description' %} *</label>
                     <textarea style="padding: .5rem;" name="description" id="description" cols="30" rows="10" required></textarea>
                 </div>
+                <div class="form-group cs-grid" style="--gap: .5rem;">
+                    <label for="images" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Service Tags' %} *</label>
+                    <div class="cs-flex" style="--gap:1rem;">
+                        <input type="text" name="tag_1" id="tag_1" value="{{ supplier_profile.country }}" required placeholder="Tag 1" readonly>
+                        <input type="text" name="tag_2" id="tag_2" placeholder="Tag 2">
+                        <input type="text" name="tag_3" id="tag_3" placeholder="Tag 3">
+                        <input type="text" name="tag_4" id="tag_4" placeholder="Tag 4">
+                        <input type="text" name="tag_5" id="tag_5" placeholder="Tag 5">
+                    </div>
+                </div>
                 <div class="form-group cs-grid" style="--gap: .5rem;justify-content: flex-start;">
                     <input class="btn cs-text-white" type="submit" name="contract-start-date" id="contract-start-date"
-                    value="Create" style="padding: .7rem 1.5rem;font-size: 1rem;">
+                    value="{% trans 'Create' %}" style="padding: .7rem 1.5rem;font-size: 1rem;">
                 </div>
             </form>
+
+            <div class="description cs-grid br-sm outlined cs-content-start">
+                <h3 class="cs-font-bold cs-text-secondary cs-text-body">Guidelines</h3>
+                <ul class="cs-font-normal cs-text-normal cs-grid" style="--gap: .5rem;list-style-type:lower-alpha;list-style-position: inside;">
+                    <li>{% trans 'Provide a name that is easily understood.' %}</li>
+                    <li>{% trans 'Provide a currency that suites you best e.g EUR, USD.' %}</li>
+                    <li>{% trans 'Service tags help buyers to find your service easily.' %}</li>
+                </ul>
+            </div>
         </div>
     </div>
 

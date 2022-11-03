@@ -39,28 +39,22 @@
             </div>
             <div class="categories hidden md:grid py-1">
                 {% if categories_header %}
-                    <div class="grid items-start content-start gap-0">
+                    <div class="grid items-start content-start gap-0" style="border: 1px solid rgba(211, 211, 211, 0.288); padding: .25rem .5rem;border-radius: .5rem;">
                         <h4 class="text-lg font-bold text-slate-100">
                             {% trans "Categories for you" %}
                         </h4>
-                        <ul class="text-slate-300 grid">
-                            {% for category in categories_header|slice:":3" %}
+                        <ul class="text-slate-300 grid p-2">
+                            {% for category in categories_header|slice:":5" %}
                                 <li
                                     class="text-slate-100 hover:text-white transition-colors transition-200 ease-in">
-                                    <a class="flex items-center justify-start gap-2 py-2" href="{% url 'supplier:category-detail' category.slug  %}">
+                                    <a class="flex items-center justify-start gap-2 py-1" href="{% url 'supplier:category-detail' category.slug  %}">
                                         <span>{{ category.name }}</span>
                                     </a>
                                 </li>
                             {% endfor %}
                             <li
                                 class="text-slate-100 hover:text-white transition-colors transition-200 ease-in">
-                                <a class="flex items-center justify-start gap-2 py-2" href="">
-                                    <span>Test Cateo</span>
-                                </a>
-                            </li>
-                            <li
-                                class="text-slate-100 hover:text-white transition-colors transition-200 ease-in">
-                                <a class="flex items-center justify-start gap-2 py-2" href="{% url 'supplier:category-list' %}">
+                                <a class="flex items-center justify-start gap-2 py-2 font-bold" href="{% url 'supplier:category-list' %}">
                                     <span>View All</span>
                                 </a>
                             </li>

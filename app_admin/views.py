@@ -5,6 +5,7 @@ from django.views.generic import CreateView
 from django.utils.translation import gettext as _
 from django.contrib import messages
 from django.http import HttpResponseNotFound, HttpResponse
+from django.db.models import Q
 from django.contrib.auth import login
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
@@ -820,3 +821,69 @@ class VerficationView(View):
             return redirect(reverse("app_admin:profile"))
         else:
             return HttpResponseNotFound(_("Bad Request"))
+
+
+# promotion
+class AdminPromotionsView(View):
+    template_name = "app_admin/promotion_list.html"
+
+    def get(self, request):
+        context_data = {
+            "view_name": "Admin Dashboard",
+            "active_tab": "Promotions",
+            "text_promotions" : ManagerModels.Promotion.objects.filter(has_image=False),
+            "banner_promotions" : ManagerModels.Promotion.objects.filter(has_image=True),
+        }
+
+        return render(request, self.template_name, context=context_data)
+
+class AdminPromotionsCreateView(View):
+    template_name = "app_admin/promotion_create.html"
+
+    def get(self, request):
+        context_data = {
+            "view_name": "Admin Dashboard",
+            "active_tab": "Promotions",
+            "showrooms" : ManagerModels.Showroom.objects.all(),
+            "choices" : ["BANNER", "PRODUCTS", "SUPPLIERS", "BUYERS", "SHOWROOWS"]
+        }
+
+        return render(request, self.template_name, context=context_data)
+
+    def post(self, request):
+        name = request.POST.get("name")
+        promotion_types = request.POST.get("promotion_types")
+        showrooms = request.POST.get("showrooms")
+        description = request.POST.get("description")
+        image = request.FILES.get("image")
+        
+        if not image and not description:
+            messages.add_message(request, messages.ERROR, _("Offer description for text promotions"))
+            return redirect(reverse("app_admin:promotions-create"))
+        elif promotion_types != "SHOWROOWS":
+
+            promotion = ManagerModels.Promotion.objects.create(
+                name = name,
+                type = promotion_types,
+                description = description,
+                image = image if image else None,
+            )
+            if not promotion:
+                messages.add_message(request, messages.ERROR, _("An Error occured. Try Again."))
+                return redirect(reverse("app_admin:promotions-create"))
+
+        elif promotion_types == "SHOWROOWS":
+
+            promotion = ManagerModels.Promotion.objects.create(
+                name = name,
+                type = promotion_types,
+                description = description,
+                image = image if image else None,
+                showroom = ManagerModels.Showroom.objects.filter(slug=showrooms).first()
+            )
+            if not promotion:
+                messages.add_message(request, messages.ERROR, _("An Error occured. Try Again."))
+                return redirect(reverse("app_admin:promotions-create"))
+
+        messages.add_message(request, messages.SUCCESS, _("Promotion Created Successfully."))
+        return redirect(reverse("app_admin:promotions-create"))

@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from django.utils.text import slugify
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
+from django.db.models import Q
 
 # python
 import os
@@ -208,6 +209,82 @@ class Service(models.Model):
 
     def __str__(self) -> str:
         return f"{self.name}"
+
+class ServiceImage(models.Model):
+    service = models.ForeignKey(to=Service, on_delete=models.CASCADE)
+    image = models.ImageField(
+        verbose_name=_("Service Image"),
+        upload_to=get_file_path,
+    )
+    slug = models.SlugField(
+        _("Safe Url"),
+        unique=True,
+        blank=True,
+        null=True,
+    )
+    created_on = models.DateField(_("Created on"), default=timezone.now)
+
+    def save(self, *args, **kwargs):
+        self.slug = f"{slugify(self.service.name)}-{uuid.uuid4()}"
+        super().save(*args, **kwargs)
+
+    def __str__(self) -> str:
+        return f"{self.service.name}"
+
+
+class ServiceTag(models.Model):
+    name = models.CharField(_("Name"), max_length=256)
+    service = models.ForeignKey(to=Service, on_delete=models.CASCADE)
+    slug = models.SlugField(
+        _("Safe Url"),
+        unique=True,
+        blank=True,
+        null=True,
+    )
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(f"{self.name}{uuid.uuid4()}")[:50]
+
+        super().save(*args, **kwargs)
+
+    def __str__(self) -> str:
+        return f"{self.service.name}"
+
+class AdvertManager(models.Manager):
+    def get_queryset(self, *args, **kwargs):
+        results = super().get_queryset(*args, **kwargs)
+        return results.filter(~Q(end_date = timezone.now()))
+
+class Advert(models.Model):
+    objects = models.Manager()
+    active = AdvertManager()
+    
+    class Meta:
+        default_manager_name = "objects"
+
+    product = models.ForeignKey(to=Product, on_delete=models.CASCADE, blank=True, null=True)
+    start_date = models.DateField(_("start date"), blank=True, null=True)
+    end_date = models.DateField(_("end date"), blank=True, null=True)
+    amount = models.DecimalField(
+        _("Total Amount"), decimal_places=2, max_digits=12, default="0.0"
+    )
+    payment_made = models.BooleanField(_("Contract payment made"), default=False)
+    expired = models.BooleanField(_("Advert Expired"), default=False)
+    created_on = models.DateField(_("Created on"), default=timezone.now)
+    slug = models.SlugField(
+        _("Safe Url"),
+        unique=True,
+        blank=True,
+        null=True,
+    )
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(f"{self.product.name}{uuid.uuid4()}")[:50]
+
+        super().save(*args, **kwargs)
+
+    def __str__(self) -> str:
+        return f"Product: {self.product}"
 
 
 # SIGNALS

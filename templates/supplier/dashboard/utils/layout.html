@@ -17,7 +17,7 @@
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
 
 
     <title>Golden - {% trans 'Supplier Dashboard' %}</title>
@@ -28,7 +28,7 @@
         <div class="app-content">
             <div class="sidebar card cs-grid" style="--gap: 1rem; align-content: space-between;">
                 <div class="upper cs-grid" style="gap: 1rem;">
-                    <div class="sidebar-header">
+                    <div class="sidebar-header cs-text-accent">
                         <div class="app-logo">
                             <i class="ti-layout-grid2"></i>
                             <span>{%  trans "Supplier's Portal" %}</span>
@@ -95,6 +95,28 @@
                                     </span>
                                 </a>
                             </li>
+                            <li class="link">
+                                <a href="{% url 'supplier:dashboard-payments' %}">
+                                    <span class="flex">
+                                        <span>
+                                            <i class="icon ti-money"></i>
+                                            <span
+                                                class="text">{%  trans 'Payments' %}</span>
+                                            </span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="link">
+                                <a href="{% url 'supplier:dashboard-advertise' %}">
+                                    <span class="flex">
+                                        <span>
+                                            <i class="icon ti-layout-accordion-list"></i>
+                                            <span
+                                                class="text">{%  trans 'Advertise' %}</span>
+                                            </span>
+                                    </span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -103,15 +125,15 @@
                 </div>
             </div>
             <div class="main">
-                <div class="navbar card">
-                    <div class="logo">
+                <div class="navbar card" style="display: flex;justify-content: flex-end;">
+                    <!-- <div class="logo"> -->
                         <!-- <form class="search-form" action="">
                             <div class="form-control">
                                 <input type="search" name="" id="" placeholder="Search for product">
                                 <button type="submit"><i class="ti-search"></i></button>
                             </div>
                         </form> -->
-                    </div>
+                    <!-- </div> -->
                     <nav>
                         <ul class="nav-links flex">
                             <!-- <li class="link bell">
@@ -120,13 +142,20 @@
                             <li class="link settings">
                                 <i class="ti-settings"></i>
                             </li> -->
-                            <li class="link customer-display">
+                            <li class="link customer-display cs-text-accent">
                                 <a href="{% url 'manager:home' %}">
-                                    <i class="fa fa-desktop"></i>
+                                    <!-- <i class="fa fa-desktop"></i> -->
+                                    Visit Site
+                                </a>
+                            </li>
+                            <li class="link customer-display cs-text-accent">
+                                <a href="{% url 'supplier:business_profile' %}">
+                                    <!-- <i class="fa fa-desktop"></i> -->
+                                    Business Profile
                                 </a>
                             </li>
 
-                            <div class="dropdown">
+                            <div class="dropdown cs-text-accent">
                                 <a href="{% url 'supplier:profile' %}" class="flex" style="margin-inline-start: 1rem;">
                                     <h4>{{request.user.username}}</h4>
                                     <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="user_image"

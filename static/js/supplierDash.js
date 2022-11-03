@@ -8,8 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "services_loaded": false,
     }
 
-    const BASE_API_URL = 'https://foroden.com';
-    const BASE_URL = 'https://foroden.com';
+    const BASE_API_URL = 'http://localhost:8000';
+    const BASE_URL = 'http://localhost:8000';
 
     const fetchData = async (url, has_page_num = true) => {
         let response;

@@ -78,8 +78,8 @@ body.rtl {
   align-self: center;
   padding-block-end: .35rem;
   position: absolute;
-  inset-block-start: 50%;
-  transform: translateY(-50%);
+  inset-block-start: 40%;
+  transform: translateY(-40%);
   --form-side: 10px;
 }
 

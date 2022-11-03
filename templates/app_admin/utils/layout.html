@@ -75,6 +75,12 @@
                                 <h5 class="item-label cs-font-500 cs-text-md cs-text-cs-bg-secondary">{% trans "Support" %}</h5>
                             </a>
                         </li>
+                        <li>
+                            <a href="{% url 'app_admin:promotions' %}" class="{%if active_tab == 'Promotions'%} active {% endif %} side-tab br-sm cs-flex justify-start cs-align-center" style="--gap: .5rem;">
+                                <i class="fa fa-home cs-text-normal-md cs-text-primary"></i>
+                                <h5 class="item-label cs-font-500 cs-text-md cs-text-cs-bg-secondary">{% trans "Promotions" %}</h5>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -297,3 +297,6 @@ Complete Tasks
 Pending Tasks
  
  - add (category, subcategory and location) product features
+
+
+./manage.py dumpdata --exclude auth.permission --exclude contenttypes > db.json

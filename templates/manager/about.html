@@ -7,11 +7,7 @@
         scroll-behavior: smooth;
     }
     .about-us {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        margin-top: 1.8rem;
+        margin: 2rem 0;
     }
 
     .about-us h1 {
@@ -34,12 +30,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        gap: 1rem;
     }
 
     .our-history,
     .our-statistics,
     .our-mission {
-        padding: 0 .8rem;
         border-right: 1px solid rgb(228, 225, 225);
     }
 
@@ -47,6 +43,7 @@
     .our-statistics,
     .our-mission,
     .our-vision {
+        padding: 0 .5rem;
         font-size: 18px;
         font-weight: 500;
         cursor: pointer;
@@ -61,20 +58,18 @@
 
     .what-we-do {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        block-size: 250px;
         inline-size: 100%;
+        padding: 0;
+        padding-block: 2.5rem;
     }
 
     .what-we-do-items {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem 0;
     }
 
     .what-we-do-item {
-        inline-size: 100rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -88,6 +83,21 @@
 
     .what-we-do-item h3 {
         text-align: center;
+    }
+
+    @media (max-width: 786px) {
+        .about-us {
+            display: grid;
+        }
+        .what-we-do-items {
+            grid-template-columns: 1fr;
+        }
+
+
+        .statements {
+            margin: 0rem;
+            gap: 0rem;
+        }
     }
 </style>
     <section class="main">
@@ -116,7 +126,7 @@
     </section>
 
     <section class="main w-12/12 py-6 pt-0" style="background-color: #FFFFFF;" id="about-us">
-        <div class="what-we-do" style="background-color: rgb(242, 245, 248);padding-block:10.4rem;">
+        <div class="what-we-do" style="background-color: rgb(242, 245, 248);">
             <div class="container what-we-do-items">
                 <div class="what-we-do-item">
                     <img src="{% static 'assets/imgs/resources/03.png' %}" alt="intro">

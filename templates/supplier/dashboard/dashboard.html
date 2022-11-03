@@ -45,17 +45,16 @@
     </div>
     <div class="right">
         <div class="right-card card">
-            <h2>{% trans 'Top Viewed Products' %}</h2>
+            <h2>{% trans 'Latest Products' %}</h2>
             <div class="body">
+                {% for product in latest_products.results %}
                 <div class="top-selling-product-details">
-                    <h4>Cosmetic & Jewellery</h4>
+                    <h4>{{ product.name }}</h4>
                 </div>
-                <div class="top-selling-product-details">
-                    <h4>Fashion</h4>
-                </div>
-                <div class="top-selling-product-details">
-                    <h4>Home furniture</h4>
-                </div>
+                {% endfor %}
+                {% if not latest_products.results %}
+                    <h3 class="cs-font-500 cs-text-md">No Products Found.</h3>
+                {% endif %}
             </div>
         </div>
     </div> 

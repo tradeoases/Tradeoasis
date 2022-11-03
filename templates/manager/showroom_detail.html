@@ -3,153 +3,6 @@
 {% load i18n %}
 {% block content %}
 
-
-    <style>
-        #banner {
-            /* display: grid;
-            grid-auto-flow: column;
-            grid-auto-columns: 100%;
-            --gap: 0 1rem; */
-            block-size: 400px;
-            display: grid;
-        }
-        #banner .item {
-            margin: 0;
-            inline-size: 100%;
-            block-size: 100%;
-        }
-
-        #banner .item img {
-            display: block;
-            aspect-ratio: 1;
-            block-size: 400px;
-            object-fit: cover;
-        }
-        .promotion-area .upper {
-            block-size: 450px;
-        }
-
-        @media (max-width: 786px) {    
-            .promotion-area .upper,
-            .promotion-area .coursel,
-            .promotion-area .slider-container {
-                block-size: 40vh;
-            }
-            #banner .item {
-                block-size: 38vh;
-            }
-            #banner,
-            #banner .item img {
-                block-size: 20vh;
-            }
-        }
-
-        /* Advert */
-        .advert .section-heading {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: .8rem 1.2rem;
-            /* background-color: #ecab08; */
-        }
-
-        .advert .section-heading .section-graphics {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-        }
-
-        .advert .section-heading .sec-svg {
-            block-size: 1.2rem;
-            inline-size: 1.2rem;
-            margin: 0 .4rem;
-        }
-        .advert .section-item-group {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 1rem;
-        }
-
-        .advert .product {
-            /* height: 14rem; */
-            /* padding: .2rem .2rem .6rem .2rem; */
-            border: 1px solid #f3f3f3;
-            /* max-inline-size: 9.06rem; */
-            position: relative;
-            box-shadow: unset;
-        }
-
-        .advert .img {
-            border-radius: .2rem;
-        }
-
-        .advert .product:hover {
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .advert .product::after {
-            content: "-45%";
-            position: absolute;
-            top: .2rem;
-            right: .2rem;
-            border-radius: .2rem;
-            background-color: bisque;
-            padding: .2rem .4rem;
-            font-size: .8em;
-            display: none;
-        }
-
-        .advert .product .item-details {
-            block-size: 2.6rem;
-        }
-
-        .advert .product .title {
-            font-size: .88em;
-        }
-
-        .advert .product .price-new {
-            font-weight: 700;
-            font-size: 14px !important;
-        }
-        .status .bar {
-            position: relative;
-            top: 1.6rem;
-        }
-
-        .status .bar .content {
-            width: 100%;
-            height: 3px;
-            border-radius: 3px;
-            background-color: #b4b2b2;
-        }
-
-        .status .bar .content-before {
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            width: 80%;
-            height: 3px;
-            border-radius: 3px;
-            background-color: #ecab08;
-        }
-
-        @media (max-width: 786px) {
-            .advert .section-item-group {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
-            }
-
-            .section-heading h2:first-child,
-            .section-heading h2:last-child {
-                display: none;
-            }
-        }
-
-    </style>
-
     <section class="main w-12/12 mt-5">
         <div class="page-starter grid w-full mx-auto cf-1 gap-4 overflow-hidden">
             <div class="hidden md:grid side-bar gap-3 content-start product-categories w-12/12 ">
@@ -175,73 +28,98 @@
                 </a>
             </div>
             <div class="promotion-area w-12/12 md:grid gap-3">
-                <div class="upper gap-3 rounded-md overflow-hidden">
-                    <!-- Owl carousel -->
-                    <div id="banner" style="block-size:100%;">
-                        <div class="coursel" style="block-size: 100%;inline-size: 100%;">
-                            <div class="header">
-                              <div class="progress-bar"></div>
-                            </div>
-                            <div class="slider-container">
-                              <button class="handle left-handle">
-                                <div class="text">&#8249;</div>
-                              </button>
-                              <div class="slider">
-                                <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image"></div>
-                                <div class="item"><img src="{% static 'assets/imgs/resources/011.jpg' %}" alt="Owl Image"></div>
-                              </div>
-                              <button class="handle right-handle">
-                                <div class="text">&#8250;</div>
-                              </button>
+                <div id="banner-1" class="promotion-banner">
+                    <div class="upper">
+                        <div id="banner" style="block-size:100%;">
+                            <div class="coursel" style="block-size: 100%;inline-size: 100%;">
+                                <div class="header">
+                                  <div class="progress-bar"></div>
+                                </div>
+                                <div class="slider-container">
+                                  <button class="handle left-handle">
+                                    <div class="text">&#8249;</div>
+                                  </button>
+                                  <div class="slider">
+                                    {% for banner in banners.results %}
+                                        <div class="item"><img src="/media/{{banner.image}}" alt="Owl Image"></div>
+                                    {% endfor %}
+                                  </div>
+                                  <button class="handle right-handle">
+                                    <div class="text">&#8250;</div>
+                                  </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Owl carousel -->
+                    <div class="lower" style="gap: .5rem;">
+                        <div class="product-promotion-content" style="display:grid; align-content: center;gap: .25rem">
+                            <h2 class="head text-xl font-bold text-white">{% trans "Top" %} {{ view_name }} {% trans "Suppliers" %}</h2>
+                            <p class="desc text-normal text-slate-100" style="line-height: 20px;">Get quality products from our top suppliers!</p>
+                        </div>
+                        <div class="products">
+                            {% for advert in adverts.results %}
+                            <a href="{% url 'supplier:product-detail' advert.product.slug %}" class="product-card">
+                                <div class="img-wrapper">
+                                    <img src="/media/{{advert.main_image.image}}" alt="{{ advert.product.name }}">
+                                </div>
+                                <div class="content">
+                                    <div class="content-group">
+                                        <span class="symbol"></span>
+                                        <span class="label">{{ advert.supplier.profile.business_name }}</span>
+                                    </div>
+                                </div>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="hidden md:grid gap-4 content-start">
-                <a href="{% url 'auth_app:signup' %}?Supplier=1" class="grid gap-2 items-start p-4 rounded-md" style="background-image: linear-gradient(to right top,hsl(350, 100%, 95%),hsl(350, 100%, 90%),hsl(350, 100%, 91%),hsl(350, 100%, 93%),hsl(350, 100%, 95%));">
+            <div class="hidden md:grid gap-2 content-start">
+                {% if text_promotion.results %}
+                <a 
+                    href="{% if text_promotion.results.type == 'SUPPLIERS' %} {% url 'auth_app:signup' %}?Supplier=1 {% elif text_promotion.results.type == 'BUYERS' %} {% url 'auth_app:signup' %}?Buyer=1 {% elif text_promotion.results.type == 'SHOWROOWS' %} {% url 'manager:showrooms' %} {% elif text_promotion.results.type == 'PRODUCTS' %} {% url 'supplier:products' %} {% endif %}" 
+                    class="grid gap-2 items-start p-4 rounded-md" style="background-image: linear-gradient(to right top,hsl(350, 100%, 95%),hsl(350, 100%, 90%),hsl(350, 100%, 91%),hsl(350, 100%, 93%),hsl(350, 100%, 95%));">
                     <div class="grid">
-                        <h4 class="font-semibold text-lighterBackgroundColor">{% trans "Hot Deals" %}</h4>
-                        <p class="text-lighterBackgroundColor text-base">{% trans '$10 Off New Suppliers' %}</p>
+                        <h4 class="font-semibold text-lighterBackgroundColor">{{text_promotion.results.name}}</h4>
+                        <p class="text-lighterBackgroundColor text-base">{{text_promotion.results.description}}</p>
                     </div>
                     <button class="bg-black py-2 px-4 text-base justify-self-end rounded-full text-white font-semibold">View More</button>
                 </a>
+                {% endif %}
+                <div class="advertised-products-small grid gap-2 p-2 rounded-md" style="background-color: #F9D5B6;">
+                    <div class="area-heading">
+                        <h3 class="text-lg font-semibold text-lighterBackgroundColor">Popular Products</h3>
+                    </div>
+                    <div href="" class="grid grid-cols-3 body gap-2">
+                        <a href="" class="item grid">
+                            <img src="http://localhost:8000/media/ProductImage/images/fashion-ha-aa2fcbf9-b715-4f31-b5fd-e0e2f1e87001-dd.jpeg" alt="">
+                        </a>
+                        <a href="" class="item grid">
+                            <img src="http://localhost:8000/media/ProductImage/images/military-b-e8c66e83-0b8b-4819-91dd-dcb68ced700f-a6.jpeg" alt="">
+                        </a>
+                        <a href="" class="item grid">
+                            <img src="http://localhost:8000/media/ProductImage/images/magnetic-w-2424898b-d1b3-42af-854c-e4402a61b8bd-8e.jpeg " alt="">
+                        </a>
+                        <a href="" class="item grid">
+                            <img src="http://localhost:8000/media/ProductImage/images/150mm-elec-c45b7643-9d09-4f8f-8c77-f37a53508235-ea.jpeg" alt="">
+                        </a>
+                        <a href="" class="item grid">
+                            <img src="http://localhost:8000/media/ProductImage/images/fashion-ha-aa2fcbf9-b715-4f31-b5fd-e0e2f1e87001-dd.jpeg" alt="">
+                        </a>
+                        <a href="" class="item grid">
+                            <img src="http://localhost:8000/media/ProductImage/images/military-b-e8c66e83-0b8b-4819-91dd-dcb68ced700f-a6.jpeg" alt="">
+                        </a>
+                        <a href="" class="item grid">
+                            <img src="http://localhost:8000/media/ProductImage/images/magnetic-w-2424898b-d1b3-42af-854c-e4402a61b8bd-8e.jpeg " alt="">
+                        </a>
+                        <a href="" class="item grid">
+                            <img src="http://localhost:8000/media/ProductImage/images/150mm-elec-c45b7643-9d09-4f8f-8c77-f37a53508235-ea.jpeg" alt="">
+                        </a>
+                    </div>
+                </div>
                 <!-- <div class="advert-banner-small">
                     <img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image">
                 </div> -->
-                {% if user_categories.results %}
-                <div class="grid gap-2">
-                    <div class="bg-yellowColor px-4 py-2 rounded-t-md">
-                        <h2 class="text-white font-semibold text-lg">{% trans "Visited Categories" %}</h2>
-                    </div>
-                    <ul class="grid gap-0.5 px-5" data-context='{{ user_categories.context_name }}'>
-                        {% for category in user_categories.results %}  
-                            <li
-                                class="side-menu-item text-slate-800 hover:text-black transition-colors transition-200 ease-in" data-category-index="{{ forloop.counter }}">
-                                <a class="flex items-center justify-start gap-2 py-1" href='{% url "supplier:category-detail" category.slug %}'>
-                                    <img style="inline-size: 1.8rem;aspect-ratio: 1;object-fit: cover;" src="/media/{{ category.image }}" alt="{{ category.name }}">
-                                    <span>{{ category.name|slice:":20" }}</span>
-                                </a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                {% endif %}
             </div>
         </div>
     </section>

@@ -138,7 +138,7 @@ class SignUpView(View):
         domain = get_current_site(request).domain
         link = reverse("auth_app:activate", kwargs={"uidb64": uidb64, "token": token})
 
-        activate_url = f"http://{domain}{link}"
+        activate_url = f"{domain}{link}"
 
         subject = _("Activate Foroden Activation")
         description = "{}\n{}\n{}".format(_("Follow this link to activate you foroden account."), _("Your activation link is"), activate_url)

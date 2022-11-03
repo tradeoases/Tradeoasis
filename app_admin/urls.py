@@ -42,4 +42,7 @@ urlpatterns = [
     path(
         "activate/<uidb64>/<token>/", views.VerficationView.as_view(), name="activate"
     ),
+
+    path("promotions/", views.AdminPromotionsView.as_view(), name="promotions"),
+    path("promotions/create/", views.AdminPromotionsCreateView.as_view(), name="promotions-create"),
 ]

@@ -158,7 +158,7 @@
                         <div class="flex-left-bottom flex">
                             <span style="margin-inline-end:10px;color: #717171;">© 2010-2022
                                 Foroden</span>
-                            <a href="{% url 'app_admin:home' %}"
+                            <a href="{% url 'manager:dashboard' %}{% if not request.user.is_authenticated %}?next=dashboard{% endif %}"
                                 style="margin-inline-end:10px;margin-inline-start:20px;">Admin</a>
                             <a href="#" style="margin-inline-end:10px;">Terms</a>
                             <a href="#" style="margin-inline-end:10px;">Privacy</a>
