@@ -6,6 +6,16 @@ body {
     scroll-behavior: smooth;
     direction: ltr;
 }
+
+@media (min-width: 1400px) {
+    
+    main {
+        width: 80% !important;
+        margin: 0 auto;
+        display: none;
+    }
+}
+
 body.rtl {
     direction: rtl;
 }
@@ -862,14 +872,15 @@ form input.error {
 
 
 .promotion-banner {
+    --banner-height: 50vh;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 350px 150px;
+    grid-template-rows: var(--banner-height) 150px;
     gap: .5rem;
 }
 @media (min-width: 600px) {
     .promotion-banner .upper img {
-        block-size: 350px !important;
+        block-size: var(--banner-height) !important;
     }
 }
 .promotion-banner .upper {
@@ -900,7 +911,7 @@ form input.error {
 }
 #banner-1 #banner .item {
     margin: 0;
-    block-size: 320px;
+    block-size: var(--banner-height);
 }
 
 #banner-1 .handle {
