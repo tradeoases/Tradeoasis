@@ -20,3 +20,8 @@ class DiscussionTranslationOptions(TranslationOptions):
 @register(models.DiscussionReply)
 class DiscussionReplyTranslationOptions(TranslationOptions):
     fields = ("description",)
+
+
+@register(models.Promotion)
+class DiscussionReplyTranslationOptions(TranslationOptions):
+    fields = ("name", "description")

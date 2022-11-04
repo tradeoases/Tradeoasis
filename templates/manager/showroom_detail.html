@@ -76,50 +76,18 @@
             </div>
             <div class="hidden md:grid gap-2 content-start">
                 {% if text_promotion.results %}
+                {% for text_promotion in text_promotion.results %}
                 <a 
-                    href="{% if text_promotion.results.type == 'SUPPLIERS' %} {% url 'auth_app:signup' %}?Supplier=1 {% elif text_promotion.results.type == 'BUYERS' %} {% url 'auth_app:signup' %}?Buyer=1 {% elif text_promotion.results.type == 'SHOWROOWS' %} {% url 'manager:showrooms' %} {% elif text_promotion.results.type == 'PRODUCTS' %} {% url 'supplier:products' %} {% endif %}" 
+                    href="{% if text_promotion.type == 'SUPPLIERS' %} {% url 'auth_app:signup' %}?Supplier=1 {% elif text_promotion.type == 'BUYERS' %} {% url 'auth_app:signup' %}?Buyer=1 {% elif text_promotion.type == 'SHOWROOWS' %} {% url 'manager:showrooms' %} {% elif text_promotion.type == 'PRODUCTS' %} {% url 'supplier:products' %} {% endif %}" 
                     class="grid gap-2 items-start p-4 rounded-md" style="background-image: linear-gradient(to right top,hsl(350, 100%, 95%),hsl(350, 100%, 90%),hsl(350, 100%, 91%),hsl(350, 100%, 93%),hsl(350, 100%, 95%));">
                     <div class="grid">
-                        <h4 class="font-semibold text-lighterBackgroundColor">{{text_promotion.results.name}}</h4>
-                        <p class="text-lighterBackgroundColor text-base">{{text_promotion.results.description}}</p>
+                        <h4 class="font-semibold text-lighterBackgroundColor">{{text_promotion.name}}</h4>
+                        <p class="text-lighterBackgroundColor text-base">{{text_promotion.description}}</p>
                     </div>
-                    <button class="bg-black py-2 px-4 text-base justify-self-end rounded-full text-white font-semibold">View More</button>
+                    <button class="bg-black py-2 px-4 text-base justify-self-end rounded-full text-white font-semibold">{% trans "View More" %}</button>
                 </a>
+                {% endfor %}
                 {% endif %}
-                <div class="advertised-products-small grid gap-2 p-2 rounded-md" style="background-color: #F9D5B6;">
-                    <div class="area-heading">
-                        <h3 class="text-lg font-semibold text-lighterBackgroundColor">Popular Products</h3>
-                    </div>
-                    <div href="" class="grid grid-cols-3 body gap-2">
-                        <a href="" class="item grid">
-                            <img src="http://localhost:8000/media/ProductImage/images/fashion-ha-aa2fcbf9-b715-4f31-b5fd-e0e2f1e87001-dd.jpeg" alt="">
-                        </a>
-                        <a href="" class="item grid">
-                            <img src="http://localhost:8000/media/ProductImage/images/military-b-e8c66e83-0b8b-4819-91dd-dcb68ced700f-a6.jpeg" alt="">
-                        </a>
-                        <a href="" class="item grid">
-                            <img src="http://localhost:8000/media/ProductImage/images/magnetic-w-2424898b-d1b3-42af-854c-e4402a61b8bd-8e.jpeg " alt="">
-                        </a>
-                        <a href="" class="item grid">
-                            <img src="http://localhost:8000/media/ProductImage/images/150mm-elec-c45b7643-9d09-4f8f-8c77-f37a53508235-ea.jpeg" alt="">
-                        </a>
-                        <a href="" class="item grid">
-                            <img src="http://localhost:8000/media/ProductImage/images/fashion-ha-aa2fcbf9-b715-4f31-b5fd-e0e2f1e87001-dd.jpeg" alt="">
-                        </a>
-                        <a href="" class="item grid">
-                            <img src="http://localhost:8000/media/ProductImage/images/military-b-e8c66e83-0b8b-4819-91dd-dcb68ced700f-a6.jpeg" alt="">
-                        </a>
-                        <a href="" class="item grid">
-                            <img src="http://localhost:8000/media/ProductImage/images/magnetic-w-2424898b-d1b3-42af-854c-e4402a61b8bd-8e.jpeg " alt="">
-                        </a>
-                        <a href="" class="item grid">
-                            <img src="http://localhost:8000/media/ProductImage/images/150mm-elec-c45b7643-9d09-4f8f-8c77-f37a53508235-ea.jpeg" alt="">
-                        </a>
-                    </div>
-                </div>
-                <!-- <div class="advert-banner-small">
-                    <img src="{% static 'assets/imgs/resources/01.jpg' %}" alt="Owl Image">
-                </div> -->
             </div>
         </div>
     </section>

@@ -11,7 +11,8 @@ from django.conf import settings
 
 @task(name="make_model_translations")
 def make_model_translations(fields, instance_id, modal_name):
-    
+
+
     if modal_name == "Service":
         modal = ManagerModels.Service
     elif modal_name == "Showroom":
@@ -22,8 +23,8 @@ def make_model_translations(fields, instance_id, modal_name):
         modal = ManagerModels.ProductSubCategory
     elif modal_name == "DiscussionReply":
         modal = ManagerModels.DiscussionReply
-    elif modal_name == "DiscussionReply":
-        modal = ManagerModels.DiscussionReply
+    elif modal_name == "Promotion":
+        modal = ManagerModels.Promotion
 
 
     instance = modal.objects.filter(id=instance_id).first()

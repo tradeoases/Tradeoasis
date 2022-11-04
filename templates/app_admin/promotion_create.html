@@ -35,7 +35,7 @@
                     <div class="form-group cs-flex" style="--gap: 1rem;">
                         {% for choice in choices %}
                         <div class="sub-group cs-grid" style="gap: .25rem;font-size: 1rem;grid-template-columns: .5fr 1fr;">
-                            <input type="radio" class="promotion_type_selector" name="promotion_types" id="{{choice}}" value="{{choice}}">
+                            <input type="radio" class="promotion_type_selector" name="promotion_types" id="{{choice}}" value="{{choice}}" required>
                             <label for="{{choice}}" class="cs-font-500 cs-text-secondary" style="font-size: .8rem;text-transform: capitalize;">{{choice}}</label>
                         </div>
                         {% endfor %}
