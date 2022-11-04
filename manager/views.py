@@ -222,11 +222,22 @@ class ShowRoomDetailView(DetailView):
             "results": ManagerModels.Promotion.objects.filter(has_image=True, showroom=showroom).order_by("-id")[:6]
         }
 
+        try:
+            ads = (
+                        lambda ads: random.sample(ads, len(ads))
+                    )(list(ManagerModels.Promotion.text_objects.filter(
+                        ~Q(type="SHOWROOWS") | Q(showroom__pk = showroom.pk)
+                    ).order_by("-id")[:10]))
+        except:
+            ads = (
+                        lambda ads: random.sample(ads, len(ads))
+                    )(list(ManagerModels.Promotion.text_objects.filter(
+                        ~Q(type="SHOWROOWS") | Q(showroom__pk = showroom.pk)
+                    ).order_by("-id")[:10]))
+
         context["text_promotion"] = {
             "context_name": "text_promotion",
-            "results": (
-                    lambda ads: random.sample(ads, len(ads))
-                )(list(ManagerModels.Promotion.objects.filter(has_image=False).order_by("-id")[:5]))[1]
+            "results": ads[:3] if len(ads) > 0 else ads
         }
 
         product = (lambda products: random.sample(products, len(products)))(

@@ -12,6 +12,7 @@ from django.utils.text import slugify
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.conf import settings
+from django.db.models import Q
 
 import os
 import uuid
@@ -216,7 +217,16 @@ def create_Chat_file(sender, instance, **kwargs):
         with open(f"{instance.chatfilepath}", "w") as file:
             json.dump([], file)
 
+
+class TextPromotionManager(models.Manager):
+    def get_queryset(self, *args, **kwargs):
+        results = super().get_queryset(*args, **kwargs)
+        return results.filter(has_image = False)
+
+
 class Promotion(models.Model):
+    objects = models.Manager()
+    text_objects = TextPromotionManager()
     promotion_types = (
         ("BANNER", "BANNER"),
         ("PRODUCTS", "PRODUCTS"),
