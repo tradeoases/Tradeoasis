@@ -34,9 +34,15 @@
                     <input type="text" name="name" id="service-name" required>
                 </div>
                 <div class="form-group cs-grid" style="--gap: .5rem;">
-                    <label for="service-name" class="cs-text-normal" style="color: var(--text-color);">Description</label>
-                    <textarea name="description" class="cs-bg-transparent" id="service-name" cols="30" rows="5" required></textarea>
+                    <label for="service-description" class="cs-text-normal" style="color: var(--text-color);">Description</label>
+                    <textarea name="description" class="cs-bg-transparent" id="service-description" cols="30" rows="5" required></textarea>
                 </div>
+
+                <div class="form-group cs-grid" style="--gap: .5rem;">
+                    <label for="image" class="cs-text-normal" style="color: var(--text-color);">Image</label>
+                    <input type="file" name="image" id="image" required>
+                </div>
+
                 <div class="form-group cs-grid" style="--gap: .5rem;">
                     <input class="cs-text-white cs-bg-secondary" type="submit" name="contract-start-date" id="contract-start-date"
                     value="Create Service">

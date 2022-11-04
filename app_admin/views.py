@@ -25,6 +25,10 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.sites.shortcuts import get_current_site
 
 
+from supplier import tasks as SupplierTask
+from auth_app import tasks as AuthTask
+from manager import tasks as ManagerTask
+
 from auth_app.tokens import appTokenGenerator
 
 from auth_app import models as AuthModels
@@ -215,39 +219,23 @@ class ServiceCreateView(SupportOnlyAccessMixin, CreateView):
             messages.add_message(request, messages.ERROR, _("Please Fill all fields."))
             return redirect(reverse("app_admin:service-create"))
 
-        # form = ManagerForms.ServiceFormManager(request.POST)
-        # if not form.is_valid():
         service = ManagerModels.Service.objects.create(
             name=request.POST.get("name"), description=request.POST.get("description")
         )
+
+        service_image = ManagerModels.ServiceImage.objects.create(
+            service = service,
+            image = request.FILES.get("image")
+        )
+
         if not service:
             messages.add_message(request, messages.ERROR, _("Invalid Data Entered."))
             return redirect(reverse("app_admin:service-create"))
 
         fields = ("name", "description")
         instance = service
-        modal = ManagerModels.Service
-        for field in fields:
-            for language in settings.LANGUAGES:
-                try:
-                    if language[0] == get_language():
-                        # already set
-                        continue
-                    result = translator.translate(
-                        getattr(instance, field), dest=language[0]
-                    )
-                    for model_field in modal._meta.get_fields():
-                        if not model_field.name in f"{field}_{language[0]}":
-                            continue
 
-                        if model_field.name == f"{field}_{language[0]}":
-                            setattr(instance, model_field.name, result.text)
-                            instance.save()
-                except:
-                    setattr(
-                        instance, f"{field}_{language[0]}", getattr(instance, field)
-                    )
-                    instance.save()
+        ManagerTask.make_model_translations.delay(fields, instance.pk, instance.__class__.__name__)
 
         messages.add_message(
             request, messages.SUCCESS, _(f"Service ({name}) created successfully.")
@@ -279,28 +267,8 @@ class ShowroomCreateView(SupportOnlyAccessMixin, CreateView):
 
         fields = ("name",)
         instance = showroom
-        modal = ManagerModels.Showroom
-        for field in fields:
-            for language in settings.LANGUAGES:
-                try:
-                    if language[0] == get_language():
-                        # already set
-                        continue
-                    result = translator.translate(
-                        getattr(instance, field), dest=language[0]
-                    )
-                    for model_field in modal._meta.get_fields():
-                        if not model_field.name in f"{field}_{language[0]}":
-                            continue
 
-                        if model_field.name == f"{field}_{language[0]}":
-                            setattr(instance, model_field.name, result.text)
-                            instance.save()
-                except:
-                    setattr(
-                        instance, f"{field}_{language[0]}", getattr(instance, field)
-                    )
-                    instance.save()
+        ManagerTask.make_model_translations.delay(fields, instance.pk, instance.__class__.__name__)
 
         if not showroom:
             messages.add_message(
@@ -349,28 +317,8 @@ class CategoryCreateView(SupportOnlyAccessMixin, View):
         category = SupplierModels.ProductCategory.objects.create(name=name, image=image)
         fields = ("name",)
         instance = category
-        modal = SupplierModels.ProductCategory
-        for field in fields:
-            for language in settings.LANGUAGES:
-                try:
-                    if language[0] == get_language():
-                        # already set
-                        continue
-                    result = translator.translate(
-                        getattr(instance, field), dest=language[0]
-                    )
-                    for model_field in modal._meta.get_fields():
-                        if not model_field.name in f"{field}_{language[0]}":
-                            continue
-
-                        if model_field.name == f"{field}_{language[0]}":
-                            setattr(instance, model_field.name, result.text)
-                            instance.save()
-                except:
-                    setattr(
-                        instance, f"{field}_{language[0]}", getattr(instance, field)
-                    )
-                    instance.save()
+        
+        ManagerTask.make_model_translations.delay(fields, instance.pk, instance.__class__.__name__)
 
         # create sub categories if any
         sub_category_len = len(request.FILES) - 1
@@ -394,28 +342,9 @@ class CategoryCreateView(SupportOnlyAccessMixin, View):
 
             fields = ("name",)
             instance = sub_categgory
-            modal = SupplierModels.ProductSubCategory
-            for field in fields:
-                for language in settings.LANGUAGES:
-                    try:
-                        if language[0] == get_language():
-                            # already set
-                            continue
-                        result = translator.translate(
-                            getattr(instance, field), dest=language[0]
-                        )
-                        for model_field in modal._meta.get_fields():
-                            if not model_field.name in f"{field}_{language[0]}":
-                                continue
+            
+            ManagerTask.make_model_translations.delay(fields, instance.pk, instance.__class__.__name__)
 
-                            if model_field.name == f"{field}_{language[0]}":
-                                setattr(instance, model_field.name, result.text)
-                                instance.save()
-                    except:
-                        setattr(
-                            instance, f"{field}_{language[0]}", getattr(instance, field)
-                        )
-                        instance.save()
 
         messages.add_message(
             request,
@@ -467,28 +396,8 @@ class SubCategoryCreateView(SupportOnlyAccessMixin, View):
 
             fields = ("name",)
             instance = sub_categgory
-            modal = SupplierModels.ProductSubCategory
-            for field in fields:
-                for language in settings.LANGUAGES:
-                    try:
-                        if language[0] == get_language():
-                            # already set
-                            continue
-                        result = translator.translate(
-                            getattr(instance, field), dest=language[0]
-                        )
-                        for model_field in modal._meta.get_fields():
-                            if not model_field.name in f"{field}_{language[0]}":
-                                continue
 
-                            if model_field.name == f"{field}_{language[0]}":
-                                setattr(instance, model_field.name, result.text)
-                                instance.save()
-                    except:
-                        setattr(
-                            instance, f"{field}_{language[0]}", getattr(instance, field)
-                        )
-                        instance.save()
+            ManagerTask.make_model_translations.delay(fields, instance.pk, instance.__class__.__name__)
 
         messages.add_message(
             request,
@@ -606,28 +515,8 @@ class AdminCommunityChatView(SupportOnlyAccessMixin, View):
 
         fields = ("description",)
         instance = discussion_reply
-        modal = ManagerModels.DiscussionReply
-        for field in fields:
-            for language in settings.LANGUAGES:
-                try:
-                    if language[0] == get_language():
-                        # already set
-                        continue
-                    result = translator.translate(
-                        getattr(instance, field), dest=language[0]
-                    )
-                    for model_field in modal._meta.get_fields():
-                        if not model_field.name in f"{field}_{language[0]}":
-                            continue
 
-                        if model_field.name == f"{field}_{language[0]}":
-                            setattr(instance, model_field.name, result.text)
-                            instance.save()
-                except:
-                    setattr(
-                        instance, f"{field}_{language[0]}", getattr(instance, field)
-                    )
-                    instance.save()
+        ManagerTask.make_model_translations.delay(fields, instance.pk, instance.__class__.__name__)
 
         return redirect(
             reverse("app_admin:community-chat", kwargs={"slug": discussion.slug})
@@ -884,6 +773,12 @@ class AdminPromotionsCreateView(View):
             if not promotion:
                 messages.add_message(request, messages.ERROR, _("An Error occured. Try Again."))
                 return redirect(reverse("app_admin:promotions-create"))
+
+        
+        fields = ("name", "description",)
+        instance = promotion
+
+        ManagerTask.make_model_translations.delay(fields, instance.pk, instance.__class__.__name__)
 
         messages.add_message(request, messages.SUCCESS, _("Promotion Created Successfully."))
         return redirect(reverse("app_admin:promotions-create"))
