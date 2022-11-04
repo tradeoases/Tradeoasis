@@ -1554,43 +1554,43 @@ class DashboardServicesCreateView(SupplierOnlyAccessMixin, View):
             )
             return redirect(reverse("supplier:dashboard-servicescreate"))
 
-        # try:
-        service = SupplierModels.Service.objects.create(
-            name=name,
-            description=description,
-            currency=currency,
-            price=price,
-            supplier=request.user,
-        )
-
-        fields = ("name", "description", "price", "currency")
-        instance = service
-        SupplierTask.make_model_translations.delay(fields, instance.pk, instance.__class__.__name__)
-
-        # add tags
-        for i in range(1, 6):
-            tag = request.POST.get(f"tag_{i}", None)
-            if not tag:
-                continue
-
-            tag = SupplierModels.ServiceTag.objects.create(
-                name=tag, service=service
+        try:
+            service = SupplierModels.Service.objects.create(
+                name=name,
+                description=description,
+                currency=currency,
+                price=price,
+                supplier=request.user,
             )
-            fields = ("name",)
-            instance = tag
+
+            fields = ("name", "description", "price", "currency")
+            instance = service
             SupplierTask.make_model_translations.delay(fields, instance.pk, instance.__class__.__name__)
 
+            # add tags
+            for i in range(1, 6):
+                tag = request.POST.get(f"tag_{i}", None)
+                if not tag:
+                    continue
 
-        messages.add_message(
-            request, messages.SUCCESS, _("Service created successfully.")
-        )
+                tag = SupplierModels.ServiceTag.objects.create(
+                    name=tag, service=service
+                )
+                fields = ("name",)
+                instance = tag
+                SupplierTask.make_model_translations.delay(fields, instance.pk, instance.__class__.__name__)
 
-        return redirect(reverse("supplier:dashboard-servicescreate"))
-        # except:
-        #     messages.add_message(
-        #         request, messages.ERROR, _("Sorry, an error occurred. Please Try Again")
-        #     )
-        #     return redirect(reverse("supplier:dashboard-servicescreate"))
+
+            messages.add_message(
+                request, messages.SUCCESS, _("Service created successfully.")
+            )
+
+            return redirect(reverse("supplier:dashboard-servicescreate"))
+        except:
+            messages.add_message(
+                request, messages.ERROR, _("Sorry, an error occurred. Please Try Again")
+            )
+            return redirect(reverse("supplier:dashboard-servicescreate"))
 
 
 class DashboardAdvertiseView(View):
