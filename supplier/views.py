@@ -35,6 +35,9 @@ translator = Translator()
 
 from auth_app import forms as AuthForms
 
+from supplier import tasks as SupplierTask
+from auth_app import tasks as AuthTask
+
 
 class SupplierDetailView(DetailView):
     model = AuthModels.ClientProfile
@@ -49,7 +52,13 @@ class SupplierDetailView(DetailView):
 
         context["supplier_service"] = {
             "context_name": "supplier-service",
-            "results": SupplierModels.Service.objects.filter(supplier=supplier.user),
+            "results": [
+                {
+                    "service" : service,
+                    "tags" : SupplierModels.ServiceTag.objects.filter(service=service)
+                }
+                for service in SupplierModels.Service.objects.filter(supplier=supplier.user)
+            ]
         }
 
         context["products"] = {
@@ -1168,28 +1177,8 @@ class EditAccountsProfileView(SupplierOnlyAccessMixin, View):
 
         fields = ("first_name", "last_name")
         instance = request.user
-        modal = AuthModels.User
-        for field in fields:
-            for language in settings.LANGUAGES:
-                try:
-                    if language[0] == get_language():
-                        # already set
-                        continue
-                    result = translator.translate(
-                        getattr(instance, field), dest=language[0]
-                    )
-                    for model_field in modal._meta.get_fields():
-                        if not model_field.name in f"{field}_{language[0]}":
-                            continue
+        AuthTask.make_user_translations.delay(fields, instance.pk)
 
-                        if model_field.name == f"{field}_{language[0]}":
-                            setattr(instance, model_field.name, result.text)
-                            instance.save()
-                except:
-                    setattr(
-                        instance, f"{field}_{language[0]}", getattr(instance, field)
-                    )
-                    instance.save()
         messages.add_message(
             request, messages.SUCCESS, _("Account Details Editted Successfully")
         )
@@ -1244,28 +1233,7 @@ class EditBusinessProfileView(SupplierOnlyAccessMixin, View):
                 "mobile_user",
             )
             instance = profile
-            modal = AuthModels.ClientProfile
-            for field in fields:
-                for language in settings.LANGUAGES:
-                    try:
-                        if language[0] == get_language():
-                            # already set
-                            continue
-                        result = translator.translate(
-                            getattr(instance, field), dest=language[0]
-                        )
-                        for model_field in modal._meta.get_fields():
-                            if not model_field.name in f"{field}_{language[0]}":
-                                continue
-
-                            if model_field.name == f"{field}_{language[0]}":
-                                setattr(instance, model_field.name, result.text)
-                                instance.save()
-                    except:
-                        setattr(
-                            instance, f"{field}_{language[0]}", getattr(instance, field)
-                        )
-                        instance.save()
+            AuthTask.make_business_translations.delay(fields, instance.pk)
 
             messages.add_message(
                 request, messages.SUCCESS, _("Business Details Editted Successfully.")
@@ -1334,65 +1302,8 @@ class DashboardProductsCreateView(SupplierOnlyAccessMixin, View):
                 fields = ("name", "description", "price", "currency")
                 instance = product
                 modal = SupplierModels.Product
-                for field in fields:
-                    for language in settings.LANGUAGES:
-                        try:
-                            if language[0] == get_language():
-                                # already set
-                                continue
-                            result = translator.translate(
-                                getattr(instance, field), dest=language[0]
-                            )
-                            for model_field in modal._meta.get_fields():
-                                if not model_field.name in f"{field}_{language[0]}":
-                                    continue
-
-                                if model_field.name == f"{field}_{language[0]}":
-                                    setattr(instance, model_field.name, result.text)
-                                    instance.save()
-                        except:
-                            setattr(
-                                instance,
-                                f"{field}_{language[0]}",
-                                getattr(instance, field),
-                            )
-                            instance.save()
-
-                # add tags
-                for i in range(1, 6):
-                    tag = request.POST.get(f"tag_{i}", None)
-                    if not tag:
-                        continue
-
-                    tag = SupplierModels.ProductTag.objects.create(
-                        name=tag, product=product
-                    )
-                    fields = ("name",)
-                    instance = tag
-                    modal = SupplierModels.ProductTag
-                    for field in fields:
-                        for language in settings.LANGUAGES:
-                            try:
-                                if language[0] == get_language():
-                                    # already set
-                                    continue
-                                result = translator.translate(
-                                    getattr(instance, field), dest=language[0]
-                                )
-                                for model_field in modal._meta.get_fields():
-                                    if not model_field.name in f"{field}_{language[0]}":
-                                        continue
-
-                                    if model_field.name == f"{field}_{language[0]}":
-                                        setattr(instance, model_field.name, result.text)
-                                        instance.save()
-                            except:
-                                setattr(
-                                    instance,
-                                    f"{field}_{language[0]}",
-                                    getattr(instance, field),
-                                )
-                                instance.save()
+                
+                SupplierTask.make_model_translations.delay(fields, instance.pk, instance.__class__.__name__)
 
             messages.add_message(
                 request, messages.SUCCESS, _("Product created successfully.")
@@ -1462,27 +1373,8 @@ class DashboardStoresCreateView(SupplierOnlyAccessMixin, View):
             fields = ("name",)
             instance = store
             modal = SupplierModels.Store
-            for field in fields:
-                for language in settings.LANGUAGES:
-                    try:
-                        if language[0] == get_language():
-                            # already set
-                            continue
-                        result = translator.translate(
-                            getattr(instance, field), dest=language[0]
-                        )
-                        for model_field in modal._meta.get_fields():
-                            if not model_field.name in f"{field}_{language[0]}":
-                                continue
-
-                            if model_field.name == f"{field}_{language[0]}":
-                                setattr(instance, model_field.name, result.text)
-                                instance.save()
-                    except:
-                        setattr(
-                            instance, f"{field}_{language[0]}", getattr(instance, field)
-                        )
-                        instance.save()
+            
+            SupplierTask.make_model_translations.delay(fields, instance.pk, instance.__class__.__name__)
 
             return redirect(reverse("supplier:dashboard-storescreate"))
         except:
@@ -1662,85 +1554,43 @@ class DashboardServicesCreateView(SupplierOnlyAccessMixin, View):
             )
             return redirect(reverse("supplier:dashboard-servicescreate"))
 
-        try:
-            service = SupplierModels.Service.objects.create(
-                name=name,
-                description=description,
-                currency=currency,
-                price=price,
-                supplier=request.user,
+        # try:
+        service = SupplierModels.Service.objects.create(
+            name=name,
+            description=description,
+            currency=currency,
+            price=price,
+            supplier=request.user,
+        )
+
+        fields = ("name", "description", "price", "currency")
+        instance = service
+        SupplierTask.make_model_translations.delay(fields, instance.pk, instance.__class__.__name__)
+
+        # add tags
+        for i in range(1, 6):
+            tag = request.POST.get(f"tag_{i}", None)
+            if not tag:
+                continue
+
+            tag = SupplierModels.ServiceTag.objects.create(
+                name=tag, service=service
             )
-            messages.add_message(
-                request, messages.SUCCESS, _("Service created successfully.")
-            )
+            fields = ("name",)
+            instance = tag
+            SupplierTask.make_model_translations.delay(fields, instance.pk, instance.__class__.__name__)
 
-            fields = ("name", "description", "price", "currency")
-            instance = service
-            modal = SupplierModels.Service
-            for field in fields:
-                for language in settings.LANGUAGES:
-                    try:
-                        if language[0] == get_language():
-                            # already set
-                            continue
-                        result = translator.translate(
-                            getattr(instance, field), dest=language[0]
-                        )
-                        for model_field in modal._meta.get_fields():
-                            if not model_field.name in f"{field}_{language[0]}":
-                                continue
 
-                            if model_field.name == f"{field}_{language[0]}":
-                                setattr(instance, model_field.name, result.text)
-                                instance.save()
-                    except:
-                        setattr(
-                            instance, f"{field}_{language[0]}", getattr(instance, field)
-                        )
-                        instance.save()
+        messages.add_message(
+            request, messages.SUCCESS, _("Service created successfully.")
+        )
 
-            # add tags
-            for i in range(1, 6):
-                tag = request.POST.get(f"tag_{i}", None)
-                if not tag:
-                    continue
-
-                tag = SupplierModels.ServiceTag.objects.create(
-                    name=tag, service=service
-                )
-                fields = ("name",)
-                instance = tag
-                modal = SupplierModels.ServiceTag
-                for field in fields:
-                    for language in settings.LANGUAGES:
-                        try:
-                            if language[0] == get_language():
-                                # already set
-                                continue
-                            result = translator.translate(
-                                getattr(instance, field), dest=language[0]
-                            )
-                            for model_field in modal._meta.get_fields():
-                                if not model_field.name in f"{field}_{language[0]}":
-                                    continue
-
-                                if model_field.name == f"{field}_{language[0]}":
-                                    setattr(instance, model_field.name, result.text)
-                                    instance.save()
-                        except:
-                            setattr(
-                                instance,
-                                f"{field}_{language[0]}",
-                                getattr(instance, field),
-                            )
-                            instance.save()
-
-            return redirect(reverse("supplier:dashboard-servicescreate"))
-        except:
-            messages.add_message(
-                request, messages.ERROR, _("Sorry, an error occurred. Please Try Again")
-            )
-            return redirect(reverse("supplier:dashboard-servicescreate"))
+        return redirect(reverse("supplier:dashboard-servicescreate"))
+        # except:
+        #     messages.add_message(
+        #         request, messages.ERROR, _("Sorry, an error occurred. Please Try Again")
+        #     )
+        #     return redirect(reverse("supplier:dashboard-servicescreate"))
 
 
 class DashboardAdvertiseView(View):

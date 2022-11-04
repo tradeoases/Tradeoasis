@@ -1,4 +1,3 @@
-from statistics import mode
 from celery.decorators import task
 from celery.utils.log import get_task_logger
 from auth_app.email import send_account_activation_email

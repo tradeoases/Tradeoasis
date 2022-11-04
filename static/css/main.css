@@ -875,17 +875,15 @@ form input.error {
     --banner-height: 50vh;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: var(--banner-height) 150px;
+    grid-template-rows: var(--banner-height) auto;
     gap: .5rem;
-}
-@media (min-width: 600px) {
-    .promotion-banner .upper img {
-        block-size: var(--banner-height) !important;
-    }
 }
 .promotion-banner .upper {
     overflow: hidden;
     border-radius: 5px;
+}
+.promotion-banner .upper img {
+    block-size: var(--banner-height);
 }
 .promotion-banner .lower {
     display: grid;
@@ -896,6 +894,7 @@ form input.error {
     padding-inline: 1rem;
     border-radius: 5px;
     animation: banner-emph 1.5s infinite linear;
+    padding-block: .5rem;
 }
 
 @keyframes banner-emph {
@@ -915,9 +914,10 @@ form input.error {
 }
 
 #banner-1 .handle {
-    inset-block-start: 40%;
-    transform: translateY(-40%);
+    inset-block-start: calc(var(--banner-height) / 2);
+    transform: translateY(-calc(var(--banner-height) / 2));
 }
+
 #banner-1 #banner .item img {
     aspect-ratio: 1/5;
 }
@@ -985,7 +985,10 @@ form input.error {
     }
     
     .promotion-banner {
-        grid-template-rows: 250px auto;
+        --banner-height: 30vh;
+    }
+    .promotion-banner .upper img {
+        /* block-size: 100vw; */
     }
     #banner-1 .product-card .img-wrapper {
         block-size: 100px;

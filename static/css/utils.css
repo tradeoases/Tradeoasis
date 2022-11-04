@@ -355,7 +355,7 @@ form input[type='submit']:hover {
 
 @media (max-width: 786px) {
     .horizontal-scroll {
-        --row-size: 51%;
+        --row-size: 37%;
         grid-auto-columns: var(--row-size);
     }
     .horizontal-scroll.lg {
