@@ -69,24 +69,31 @@
                 <div class="section-body grid gap-4 md:gap-3 grid-cols-1 md:grid-cols-4" data-content="{{supplier_service.context_name}}">
                     {% for service in supplier_service.results %}
                         <div class="service grid gap-3 p-4 card-outlined rounded content-start">
-                            <h2 class="text-lg font-semibold text-lghterBackgroundColor">{{service.name}}</h2>
-                            <hr>
+                            <h2 class="text-lg font-semibold text-lghterBackgroundColor">{{service.service.name}}</h2>
+                            <hr/>
 
                             <div class="grid gap-2">
                                 <p class="text-base text-slate-700 font-normal">
-                                    {{service.description}}
+                                    {{service.service.description}}
                                 </p>
-                                <a href="{% url 'supplier:supplier-contract' service.slug %}" class="flex place-items-center gap-2 px-2 text-base text-yellowColor duration-200 transition-all ease-in rounded-full  font-semibold justify-self-start">
-                                    <span><i class="fa fa-address-book"></i></span>
+
+                                <div class="flex gap-1 flex-wrap">
+                                    {% for tag in service.tags %}
+                                        <span style="color: hsla(189, 96%, 30%, 0.836);">{{tag.name}}, </span>
+                                    {% endfor %}
+                                </div>
+
+                                <a href="{% url 'supplier:supplier-contract' service.service.slug %}" class="flex place-items-center gap-2 px-2 text-base text-yellowColor duration-200 transition-all ease-in rounded-full  font-semibold justify-self-start">
+                                    <span><i class="fa fa-money"></i></span>
                                     <span>Make Contract</span>
                                 </a>
                             </div>
 
-                            {% if service.contract_count %}
+                            {% if service.service.contract_count %}
                                 <hr>
                                 <p class="text-base text-slate-500 font-normal">
                                     <span class="font-semibold">
-                                        {{service.contract_count}}</span>
+                                        {{service.service.contract_count}}</span>
                                     <span>Contracted Customers</span>
                                 </p>
                             {% endif %}
