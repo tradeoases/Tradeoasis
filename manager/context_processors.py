@@ -1,5 +1,3 @@
-from dis import dis
-from django.contrib.auth.models import User
 from supplier import models as SupplierModels
 from manager import models as ManagerModels
 
