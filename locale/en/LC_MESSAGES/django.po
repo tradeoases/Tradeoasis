@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-05 12:32+0000\n"
+"POT-Creation-Date: 2022-11-05 15:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1998,8 +1998,8 @@ msgstr ""
 #, python-format
 msgid ""
 "You decided to cancel logging in to our site using one of your existing "
-"accounts. If this was a mistake, please proceed to <a "
-"href=\"%(login_url)s\">sign in</a>."
+"accounts. If this was a mistake, please proceed to <a href=\"%(login_url)s"
+"\">sign in</a>."
 msgstr ""
 
 #: templates/socialaccount/signup.html:9
@@ -2477,6 +2477,26 @@ msgstr ""
 
 #: templates/utils/footer.html:204
 msgid "Venmo"
+msgstr ""
+
+#: templates/utils/footer.html:241
+msgid "Admin"
+msgstr ""
+
+#: templates/utils/footer.html:242
+msgid "Terms"
+msgstr ""
+
+#: templates/utils/footer.html:243
+msgid "Privacy"
+msgstr ""
+
+#: templates/utils/footer.html:244
+msgid "Legal"
+msgstr ""
+
+#: templates/utils/footer.html:245
+msgid "Accessibility"
 msgstr ""
 
 #: templates/utils/header.html:47 templates/utils/header.html:172
