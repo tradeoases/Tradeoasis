@@ -87,7 +87,7 @@ class ServiceImage(models.Model):
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
-        self.slug = f"{slugify(self.service.name)}-{uuid.uuid4()}"
+        self.slug = f"{slugify(self.service.name)}-{uuid.uuid4()}"[:50]
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
