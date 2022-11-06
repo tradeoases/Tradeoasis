@@ -66,7 +66,7 @@ class AdminDashboardView(SupportOnlyAccessMixin, View):
                 {
                     "name": _("Total Suppliers"),
                     "description": _("Total Supplier Count"),
-                    "count": AuthModels.Supplier.supplier.all().count(),
+                    "count": AuthModels.Supplier.supplier.all(is_email_activated = True).count(),
                 },
                 {
                     "name": _("Total Buyers"),
@@ -110,7 +110,7 @@ class AdminDashboardView(SupportOnlyAccessMixin, View):
 
         context_data["top_suppliers"] = {
             "context_name": "top-suppliers",
-            "results": AuthModels.Supplier.supplier.all()[:4],
+            "results": AuthModels.Supplier.supplier.all(is_email_activated = True)[:4],
         }
         context_data["recent_payments"] = {
             "context_name": "recent-payments",
