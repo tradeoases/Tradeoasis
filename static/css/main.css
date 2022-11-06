@@ -141,7 +141,7 @@ body.menuOpen::after {
 .dropdown-list {
     opacity: 0;
     position: absolute;
-    top: 41px;
+    top: 30px;
     right: 0;
     z-index: 1000;
     display: none;
