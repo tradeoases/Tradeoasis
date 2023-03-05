@@ -16,6 +16,11 @@ from django.utils.translation import gettext_lazy as _
 
 from django.urls import reverse_lazy
 
+from dotenv import load_dotenv
+
+# Load .env file
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,13 +29,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-g$r%p8=*y8i9vaj2y395i435!rymb3t##8snyqz-q7e_fk8&li"
+SECRET_KEY = os.environ.get("DJANGO_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+PRODUCTION = False
 
 ALLOWED_HOSTS = ["*"]
-
 
 # Application definition
 
@@ -139,20 +144,29 @@ CHANNEL_LAYERS = {
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# if PRODUCTION:
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "tradeoasis",
-        "USER": "tradeoasis",
-        "PASSWORD": "tradeoasis",
+        "NAME": os.environ.get("DATABASE_NAME"),
+        "USER": os.environ.get("DATABASE_USER"),
+        "PASSWORD": os.environ.get("DATABASE_PASSWORD"),
         "HOST": "localhost",
-        "PORT": "",
+        "PORT": "5432",
     }
-    # "default": {
-    #    "ENGINE": "django.db.backends.sqlite3",
-    #    "NAME": BASE_DIR / "db.sqlite3",
-    # }
 }
+
+# else:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.mysql',
+#             "NAME": os.environ.get("DATABASE_NAME"),
+#             "USER": "root",
+#             "PASSWORD": "",
+#             'HOST': 'localhost',
+#             'PORT': '3306',
+#         }
+#     }
 
 
 # Password validation
@@ -192,10 +206,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = "static/"
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "static"),
-# ]
-STATIC_ROOT = 'static'
+
+if PRODUCTION:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+else:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, "static"),
+    ]
+
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
@@ -216,11 +234,11 @@ INTERNAL_IPS = [
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_USER = "phillipmugisa4@gmail.com"
-EMAIL_HOST_PASSWORD = "xkeagmjrhlcwlanb"
+EMAIL_HOST_USER = os.environ.get("RESPONSE_EMAIL", None)
+EMAIL_HOST_PASSWORD = os.environ.get("RESPONSE_EMAIL_PASSWORD", None)
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = "phillipmugisa4@gmail.com"
+DEFAULT_FROM_EMAIL = os.environ.get("RESPONSE_EMAIL", None)
 
 LOGIN_REDIRECT = "/auth/login/"
 LOGIN_URL = "/auth/login/"
@@ -254,9 +272,9 @@ MODELTRANSLATION_LANGUAGES = ("ar", "fr", "de", "en")
 #     BRAINTREE_PRODUCTION = False
 # else:
 BRAINTREE_PRODUCTION = False
-BRAINTREE_MERCHANT_ID = "zq9jqbg246n5zjt6"
-BRAINTREE_PUBLIC_KEY = "4spv6wdb3xqwbvv4"
-BRAINTREE_PRIVATE_KEY = "4fa06482b576443eaaba4021d89cb9c0"
+BRAINTREE_MERCHANT_ID = os.environ.get("BRAINTREE_MERCHANT_ID")
+BRAINTREE_PUBLIC_KEY = os.environ.get("BRAINTREE_PUBLIC_KEY")
+BRAINTREE_PRIVATE_KEY = os.environ.get("BRAINTREE_PRIVATE_KEY")
 
 
 # allauth

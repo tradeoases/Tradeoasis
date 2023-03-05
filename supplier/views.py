@@ -449,11 +449,13 @@ class ProductDetailView(DetailView):
         }
 
 
+        text_promotion = ManagerModels.Promotion.objects.filter(has_image=False)
+
         context["text_promotion"] = {
             "context_name": "text_promotion",
             "results": (
                     lambda ads: random.sample(ads, len(ads))
-                )(list(ManagerModels.Promotion.objects.filter(has_image=False).order_by("-id")[:5]))[1]
+                )(list(text_promotion.order_by("-id")[:5]))[1] if text_promotion else None
         }
 
         context["new_arrivals"] = {
@@ -514,14 +516,16 @@ class NewArrivalView(View):
 
         return render(request, self.template_name, context=self.get_context_data())
 
-    def get_queryset(self):
+    def get_queryset(self, showroom=None):
+        if showroom:
+            return SupplierModels.Product.objects.filter(store__in=showroom.store.all())
         return SupplierModels.Product.objects.all().order_by("-id")
 
-    def get_products_paginator(self):
+    def get_products_paginator(self, showroom=None):
 
         PER_PAGE_COUNT = 20
 
-        self.subcategory_products = self.get_queryset()
+        self.subcategory_products = self.get_queryset(showroom)
 
         paginator = Paginator(self.subcategory_products.order_by("-id"), PER_PAGE_COUNT)
 
@@ -529,9 +533,14 @@ class NewArrivalView(View):
         return paginator.page(page_num)
 
     def get_context_data(self, **kwargs):
+
+        showroom = self.request.GET.get("showroom", None)
+        if showroom:
+            showroom = ManagerModels.Showroom.objects.filter(slug=showroom).first()
+            
         context_data = dict()
 
-        products_paginator = self.get_products_paginator()
+        products_paginator = self.get_products_paginator(showroom=showroom)
         context_data = dict()
 
         context_data["view_name"] = "Promotions"
@@ -551,17 +560,32 @@ class NewArrivalView(View):
             ],
         }
 
-        # preview_products only show for suppliers with highest plan
+        # preview_products only shows Advertised products
         context_data["preview_products"] = {
             "context_name": "preview_products",
             "results": [
                 {
-                    "product": product,
-                    "supplier": product.store.all().first().supplier,
-                    "images": product.productimage_set.all().first(),
+                    "product": advert.product,
+                    "supplier": advert.product.store.all().first().supplier,
+                    "main_image": SupplierModels.ProductImage.objects.filter(product=advert.product).first(),
                 }
-                for product in products_paginator.object_list
+                for advert in (lambda adverts: random.sample(adverts, len(adverts)))(list(SupplierModels.Advert.active.filter(product__in = SupplierModels.Product.objects.filter(store__in=showroom.store.all())))[:12])
+            ]
+            if showroom else
+            [
+                {
+                    "product": advert.product,
+                    "supplier": advert.product.store.all().first().supplier,
+                    "main_image": SupplierModels.ProductImage.objects.filter(product=advert.product).first(),
+                }
+                for advert in (lambda adverts: random.sample(adverts, len(adverts)))(list(SupplierModels.Advert.active.all())[:12])
             ],
+        }
+
+        
+        context_data["stores"] = {
+            "context_name": "stores",
+            "results": showroom.store.all() if showroom else SupplierModels.Store.objects.all().order_by("-id")[:6]
         }
 
         return context_data
@@ -954,11 +978,18 @@ class StoreDetailView(DetailView):
             "context_name": "product-count",
             "results": store.store_product.count(),
         }
-        context["stores"] = {
-            "context_name": "stores",
+        context["suppiler_stores"] = {
+            "context_name": "suppiler_stores",
             "results": SupplierModels.Store.objects.filter(
                 Q(supplier=store.supplier), ~Q(id=store.id)
-            ).order_by("-id")[:5],
+            ).order_by("-id")[:6],
+        }
+        context["showroom_stores"] = {
+            "context_name": "showroom_stores",
+            "results": [
+                showroom.store.all()
+                for showroom in ManagerModels.Showroom.objects.filter(store=store)
+            ]
         }
         return context
 

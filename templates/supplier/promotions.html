@@ -19,7 +19,7 @@
                       <div class="slider" style="--slider-gap: .5rem">
                         {% for product in preview_products.results %}
                             <a class="item" href="{% url 'supplier:product-detail' product.product.slug %}">
-                                <img src="/media/{{product.images.image}}" alt="{{product.name}}">
+                                <img src="/media/{{product.main_image.image}}" alt="{{product.name}}">
                                 <div class="item-content grid">
                                     <h1 class="text-base font-semibold text-lighterBackgroundColor" style="margin: 0">{{product.product.name|slice:":40"}}..</h1>
                                     <h3 class="font-sm text-slate-600">{{product.product.sub_category}}</h3>
@@ -66,8 +66,12 @@
     </section>
     {% endif %}
 
-    <section class="main w-12/12" style="block-size: auto">
-        <div class="grid w-full mx-auto cf-1 gap-4" style="grid-template-columns: 1fr;">
+
+    <div class="grid w-full mx-auto cf-1 gap-2 md:gap-6">
+        <div class="section-heading">
+            <h2 class="sec-title text-lg capitalize md:text-xl font-bold text-yellowColor">{% trans 'New Arrivals' %}</h2>
+        </div>
+        <div class="grid gap-4" style="grid-template-columns: 1fr;">
             {% if products.results %}
                 <div class="section-body grid gap-2 md:gap-6 grid-cols-2 md:grid-cols-5 py-4"
                 data-context="{{products.context_name}}">
@@ -98,7 +102,7 @@
                 </div>
             {% endif %}
         </div>
-    </section>
+    </div>
 
     <div class="hidden pagination md:grid grid-flow-col gap-2 justify-center py-3 my-2 md:w-full mx-auto border-b border-t border-solid border-slate-200">
         {% if page_obj.has_previous %}
@@ -147,6 +151,8 @@
             {% endif %}
         </div>
     </div>
+    
+    {% include '../utils/stores_list.html' with title="New Stores" %}
 
     <script>
 

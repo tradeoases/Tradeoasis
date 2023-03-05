@@ -279,6 +279,19 @@ class ShowRoomDetailView(DetailView):
             ],
         }
 
+        context["new_arrivals"] = {
+            "context_name": "new-arrivals",
+            "results": [
+                {
+                    "product": product,
+                    "main_image": ProductImage.objects.filter(
+                        product=product
+                    ).first(),
+                }
+                for product in Product.objects.filter(store__in=showroom.store.all()).order_by("-id")[:12]
+            ],
+        }
+
         return context
 
 

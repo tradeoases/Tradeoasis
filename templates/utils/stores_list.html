@@ -5,7 +5,11 @@
     <div class=" w-full md:w-full mx-auto grid">                    
         <div class="flex p-2 px-2 pt-0 justify-between items-baseline">
             <div class="flex gap-5">
-                <h1 class="capitalize sec-title text-lg capitalize md:text-xl font-bold text-yellowColor">Foroden {% trans "Stores" %}</h1>
+                {% if title %}
+                    <h1 class="capitalize sec-title text-lg capitalize md:text-xl font-bold text-yellowColor">{{ title }}</h1>
+                {% else %}
+                    <h1 class="capitalize sec-title text-lg capitalize md:text-xl font-bold text-yellowColor">Foroden {% trans "Stores" %}</h1>
+                {% endif %}
             </div>
             <a class="justify-self-end text-base text-slate-500 hover:text-slate-700" href="{% url 'supplier:store-list' %}">View All</a>
         </div>

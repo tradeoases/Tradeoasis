@@ -10,12 +10,12 @@
                     <!-- <h1 class="hidden md:flex gap-1 items-baseline text-lg text-slate-400 font-bold"><span
                             class="text-lg text-xl text-slate-500">30%</span> OFF</h1> -->
                 <!-- </div> -->
-                <a class="justify-self-end text-base text-yellowColor" href="{% url 'supplier:new-arivals' %}">{% trans "View All" %}</a>
+                <a class="justify-self-end text-base text-yellowColor" href="{% if showroom %}{% url 'supplier:new-arivals' %}?showroom={{showroom}}{% else %}{% url 'supplier:new-arivals' %}{% endif %}">{% trans "View All" %}</a>
             </div>
             <div class="grid gap-1 horizontal-scroll items-start" data-context="{{new_arrivals.context_name}}">
                 {% for new_arrival in new_arrivals.results %}
                     <div class="promotion-card grid"  data-new_arrival-index="{{forloop.counter}}">
-                        <a class="grid rounded-md" href="{% url 'supplier:new-arivals' %}" style="background-color: rgba(239, 246, 247, 0.438);padding: .25rem;">
+                        <a class="grid rounded-md" href="{% if showroom %}{% url 'supplier:new-arivals' %}?showroom={{showroom}}{% else %}{% url 'supplier:new-arivals' %}{% endif %}" style="background-color: rgba(239, 246, 247, 0.438);padding: .25rem;">
                             <div class="grid p-2">
                                 <img loading="lazy" src="/media/{{new_arrival.main_image.image}}" alt="{{new_arrival.product.name}}" class="item-img rounded" style="width: 100%;aspect-ratio:1/.8;object-fit:cover;">
                             </div>

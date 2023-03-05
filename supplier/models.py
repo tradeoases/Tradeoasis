@@ -24,6 +24,7 @@ def get_file_path(instance, filename):
 
 
 class Store(models.Model):
+
     name = models.CharField(_("Store Name"), max_length=256)
     supplier = models.ForeignKey(
         to=Supplier,
@@ -189,8 +190,8 @@ class Service(models.Model):
     description = models.TextField(
         _("Description"),
     )
-    price = models.DecimalField(_("Price"), decimal_places=2, max_digits=122)
-    currency = models.CharField(_("Currency"), max_length=6)
+    price = models.DecimalField(_("Price"), decimal_places=2, max_digits=13)
+    currency = models.CharField(_("Currency"), max_length=7)
     contract_count = models.IntegerField(_("Number of contracts"), default=0)
     slug = models.SlugField(
         _("Safe Url"),
