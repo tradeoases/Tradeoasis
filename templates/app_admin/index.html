@@ -90,6 +90,7 @@
                             </p>
                             <div class="cs-grid cs-content-start" style="--gap: 1rem;">
                                 {% for supplier in top_suppliers.results %}
+                                    {% if supplier.profile %}
                                     <a href="{% url 'supplier:supplier-detail' supplier.profile.slug %}" class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;justify-self: stretch;">
                                         <div class="avator br-full cs-overflow-hidden">
                                             <img src="/media/{{supplier.image}}" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
@@ -99,6 +100,17 @@
                                             <span class="cs-text-accent cs-text-sm">View Profile</span>
                                         </div>
                                     </a>
+                                    {% else %}
+                                    <div class="cs-flex cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="padding: .5rem 1rem;--gap:.5rem;justify-self: stretch;">
+                                        <div class="avator br-full cs-overflow-hidden">
+                                            <img src="/media/{{supplier.image}}" style="object-fit: cover;inline-size: 100%;block-size: 100%;" alt="">
+                                        </div>
+                                        <div class="cs-grid">
+                                            <h5 class="cs-text-secondary" style="margin: 0;">{{supplier.profile.business_name}}</h5>
+                                            <span class="cs-text-accent cs-text-sm">View Profile</span>
+                                        </div>
+                                    </div>
+                                    {% endif %}
                                 {% endfor %}
                             </div>
                         </div>

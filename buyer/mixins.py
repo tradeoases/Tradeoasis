@@ -2,6 +2,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib.auth.mixins import AccessMixin
 
+from auth_app import models as AuthModels
 
 class BuyerOnlyAccessMixin(AccessMixin):
     def dispatch(self, request, *args, **kwargs):
@@ -12,5 +13,8 @@ class BuyerOnlyAccessMixin(AccessMixin):
 
         if request.user_agent.is_mobile and request.user_agent.is_tablet:
             return redirect(reverse("manager:dashboard-blocked"))
+        
+        if not AuthModels.ClientProfile.objects.filter(user=request.user):
+            return redirect(reverse("manager:profile-notfound"))
 
         return super().dispatch(request, *args, **kwargs)

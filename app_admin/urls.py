@@ -45,4 +45,5 @@ urlpatterns = [
 
     path("promotions/", views.AdminPromotionsView.as_view(), name="promotions"),
     path("promotions/create/", views.AdminPromotionsCreateView.as_view(), name="promotions-create"),
+    path("promotions/edit/<str:slug>", views.AdminPromotionsEditView.as_view(), name="promotions-edit"),
 ]

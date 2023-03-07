@@ -1,3 +1,4 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,60 +31,60 @@
 <body>
         <table>
             <tr>
-                <td style="border: none;"><h1 style="color: #165983;border: none;">Foroden Contract Payment Receipt</h1></td>
-                <td style="border: none;"><h2 style="border: none;">Ref No: #CNTR11414</h2></td>
+                <td style="border: none;"><h1 style="color: #165983;border: none;">{% trans "Foroden Contract Payment Receipt" %}</h1></td>
+                <td style="border: none;"><h2 style="border: none;">{% trans "Ref No:" %} {{ contract.ref_no }}</h2></td>
             </tr>
         </table>
-        <h4 style="border: none;">Buyer information</h4>
+        <h4 style="border: none;">{% trans "Buyer information" %}</h4>
         <table class="receipt-table">
             <thead>
                 <tr>
-                    <th>Business Name</th>
-                    <th>Full Name</th>
-                    <th>Location</th>
+                    <th>{% trans "Business Name" %}</th>
+                    <th>{% trans "Full Name" %}</th>
+                    <th>{% trans "Location" %}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><span class="">FutuTech</span></td>
-                    <td><span class="">Phillip Mugisa</span></td>
-                    <td><span class="">Uganda</span></td>
+                    <td><span class="">{{ contract.buyer.profile }}</span></td>
+                    <td><span class="">{{ contract.buyer }}</span></td>
+                    <td><span class="">{{ contract.buyer.profile.country }}</span></td>
                 </tr>
             </tbody>
         </table>
-        <h4 style="border: none;">Supplier information</h4>
+        <h4 style="border: none;">{% trans "Supplier information" %}</h4>
         <table class="receipt-table">
             <thead>
                 <tr>
-                    <th>Business Name</th>
-                    <th>Full Name</th>
-                    <th>Location</th>
+                    <th>{% trans "Business Name" %}</th>
+                    <th>{% trans "Full Name" %}</th>
+                    <th>{% trans "Location" %}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><span class="">FutuTech</span></td>
-                    <td><span class="">Phillip Mugisa</span></td>
-                    <td><span class="">Uganda</span></td>
+                    <td><span class="">{{ contract.supplier.profile }}</span></td>
+                    <td><span class="">{{ contract.supplier }}</span></td>
+                    <td><span class="">{{ contract.supplier.profile.country }}</span></td>
                 </tr>
             </tbody>
         </table>
-        <h4 style="border: none;">Receipt info</h4>
+        <h4 style="border: none;">{% trans "Receipt info" %}</h4>
         <table class="receipt-table">
             <thead>
                 <tr>
-                    <th>Service</th>
-                    <th>Price</th>
-                    <th>Status</th>
-                    <th>Created On</th>
+                    <th>{% trans "Service" %}</th>
+                    <th>{% trans "Price" %}</th>
+                    <th>{% trans "Status" %}</th>
+                    <th>{% trans "Created On" %}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><span class="">Product Deliveries</span></td>
-                    <td><span class="">USD 1000.00</span></td>
-                    <td><span class="">Not Complete</span></td>
-                    <td><span class="">Sept. 5, 2022</span></td>
+                    <td><span class="">{{ contract.service.name }}</span></td>
+                    <td><span class="">{{ contract.service.currency }} {{ contract.service.price }}</span></td>
+                    <td><span class="">{% if contract.is_complete %} Complete {% else %} Not Complete {% endif %}</span></td>
+                    <td><span class="">{{ contract.created_on }}</span></td>
                 </tr>
             </tbody>
         </table>

@@ -1,6 +1,7 @@
 asgiref
-channels
-Django
+channels==3.0.4
+channels_redis
+Django==4.0.0
 django_allauth
 django-rosetta
 djangorestframework

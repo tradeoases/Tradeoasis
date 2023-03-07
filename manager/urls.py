@@ -37,6 +37,7 @@ urlpatterns = [
         name="create-discussion",
     ),
     path("blocked", views.blockDasboardAccess, name="dashboard-blocked"),
+    path("profile404", views.ProfileNotFound, name="profile-notfound"),
     # guides
     path("guides/memberships", views.memberships, name="guides-memberships"),
     path("guides/showrooms", views.showrooms, name="guides-showrooms"),

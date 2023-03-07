@@ -25,7 +25,7 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
             self.room_group_name,
             {
                 "type": "initial_message",
-                "message": "Hello. What can i help you with?",
+                "message": "Hello. What can I help you with?",
                 "user": "support",
             },
         )
@@ -40,10 +40,14 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
             settings.CHATROOMFILES_DIR,
             f"{self.scope['url_route']['kwargs']['room_name']}.json",
         )
-        with open(file_path, "r") as file:
-            current_data = json.load(file)
-            for i in range(len(current_data)):
-                await self.send(text_data=json.dumps(current_data[i]))
+
+        try:
+            with open(file_path, "r") as file:
+                current_data = json.load(file)
+                for i in range(len(current_data)):
+                    await self.send(text_data=json.dumps(current_data[i]))
+        except FileNotFoundError:
+            pass
 
     async def disconnect(self, code):
         await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
@@ -104,9 +108,11 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
                 user_profile = AuthModels.SupportProfile.objects.filter(
                     user=user
                 ).first()
+
                 chatroom.support = user_profile
                 chatroom.is_handled = True
                 chatroom.save()
+
                 user_profile.increase_responses_count()
 
     @sync_to_async

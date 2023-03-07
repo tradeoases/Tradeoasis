@@ -517,6 +517,9 @@ class SupportDiscussionView(View):
 def blockDasboardAccess(request):
     return render(request, "utils/blockedAccess.html")
 
+def ProfileNotFound(request):
+    return render(request, "utils/profile404.html")
+
 
 def memberships(request):
     context_data = {"view_name": _("Membership Guide")}

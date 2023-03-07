@@ -62,6 +62,17 @@
                                     </span>
                                 </a>
                             </li>
+                            <li class="link">
+                                <a href="{% url 'manager:support' %}">
+                                    <span class="flex">
+                                        <span>
+                                            <i class="icon ti-headphone-alt"></i>
+                                            <span
+                                                class="text">{%  trans 'Support' %}</span>
+                                            </span>
+                                    </span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -87,9 +98,10 @@
                             <li class="link settings">
                                 <i class="ti-settings"></i>
                             </li> -->
-                            <li class="link customer-display">
+                            <li class="link customer-display cs-text-accent">
                                 <a href="{% url 'manager:home' %}">
-                                    <i class="fa fa-desktop"></i>
+                                    <!-- <i class="fa fa-desktop"></i> -->
+                                    Visit Site
                                 </a>
                             </li>
 

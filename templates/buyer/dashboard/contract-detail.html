@@ -52,8 +52,13 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="mt-5 flex" style="margin-top:.8rem;justify-content:flex-start;gap:.4rem;">
-                            <a href="{% url 'payment:contract-receipt' contract.pk %}" style="padding: .5rem 1rem;border-radius: 5px;" class="cs-bg-accent cs-text-white">Print</a>
+                        <div class="mt-5 flex" style="margin-top:.8rem;justify-content:flex-start;gap:.4rem;">    
+                            <form action="{% url 'payments:contract-payment' contract.pk %}" method="POST">
+                                {% csrf_token %}
+                                <div class="form-control">
+                                    <input type="submit" value="{% trans 'Print' %}" name="print" class="btn">
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

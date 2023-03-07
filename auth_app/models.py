@@ -6,6 +6,9 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils.translation import gettext_lazy as _
 from django.utils.text import slugify
 
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 # python
 import os
 import uuid
@@ -182,3 +185,10 @@ class Support(User):
         if not self.pk:
             self.account_type = self.base_type
             super().save(*args, **kwargs)
+
+@receiver(post_save, sender=Support)
+def create_support_profile(sender, instance, *args, **kwargs):
+    if instance:
+        profile = SupportProfile.objects.create(
+            user=instance
+        )

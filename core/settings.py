@@ -33,7 +33,7 @@ SECRET_KEY = os.environ.get("DJANGO_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-PRODUCTION = True
+PRODUCTION = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -60,13 +60,15 @@ INSTALLED_APPS = [
     # third party
     "rest_framework",
     "channels",
+    "channels_redis",
     "rosetta",
     "django_user_agents",
-    "allauth",
-    "allauth.account",
-    "allauth.socialaccount",
-    "allauth.socialaccount.providers.google",
-    "allauth.socialaccount.providers.linkedin",
+    
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
 ]
 
 # django_user_agents
@@ -128,16 +130,16 @@ WSGI_APPLICATION = "core.wsgi.application"
 ASGI_APPLICATION = "core.routing.application"
 
 CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
-        },
-    },
-    # "ROUTING": "core.routing.channel_routing",
     # "default": {
-    #    "BACKEND": "channels.layers.InMemoryChannelLayer",
+    #     "BACKEND": "channels_redis.core.RedisChannelLayer",
+    #     "CONFIG": {
+    #         "hosts": [("localhost", 6379)],
+    #     },
     # },
+    "ROUTING": "core.routing.channel_routing",
+    "default": {
+       "BACKEND": "channels.layers.InMemoryChannelLayer",
+    },
 }
 
 
@@ -280,8 +282,6 @@ BRAINTREE_PRIVATE_KEY = os.environ.get("BRAINTREE_PRIVATE_KEY")
 # allauth
 SITE_ID = 1
 # Provider specific settings
-SITE_ID = 1
-
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
         "SCOPE": [
@@ -292,18 +292,30 @@ SOCIALACCOUNT_PROVIDERS = {
             "access_type": "online",
         },
     },
-    "linkedin": {
-        "SCOPE": ["r_basicprofile", "r_emailaddress"],
-        "PROFILE_FIELDS": [
-            "id",
-            "first-name",
-            "last-name",
-            "email-address",
-            "picture-url",
-            "public-profile-url",
+    'facebook': {
+        'METHOD': 'oauth2',
+        'SDK_URL': '//connect.facebook.net/{locale}/sdk.js',
+        'SCOPE': ['email', 'public_profile'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'INIT_PARAMS': {'cookie': True},
+        'FIELDS': [
+            'id',
+            'first_name',
+            'last_name',
+            'middle_name',
+            'name',
+            'name_format',
+            'picture',
+            'short_name'
         ],
-    },
+        'EXCHANGE_TOKEN': True,
+        'LOCALE_FUNC': lambda request: 'en_US',
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v13.0',
+        'GRAPH_API_URL': 'https://graph.facebook.com/v13.0',
+    }
 }
+
 
 # ACCOUNT_SIGNUP_FORM_CLASS = 'auth_app.forms.CustomSignupForm'
 ACCOUNT_FORMS = {

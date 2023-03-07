@@ -393,10 +393,21 @@ class ContractPaymentView(View):
         context_data["contract"] = contract
 
         return render(request, self.template_name, context=context_data)
+    
+    def post(self, request, pk):
+
+        contract = PaymentModels.Contract.objects.filter(pk=pk).first()
+        context_data = dict()
+        context_data["view_name"] = "Contract Payment"
+        context_data["contract"] = contract
+
+        # return render(request, "payments/contract_receipt.html", context=context_data)
+        pdf = render_to_pdf("payments/contract_receipt.html", context_data)
+        return HttpResponse(pdf, content_type="application/pdf")
 
 
 def contract_receipt(request, pk):
-    if request.method == "GET":
+    if request.method == "POST":
 
         contract = PaymentModels.Contract.objects.filter(pk=pk).first()
         context_data = dict()

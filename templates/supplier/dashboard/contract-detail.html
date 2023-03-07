@@ -90,10 +90,10 @@
                             </div>
                         </form>
                         {% endif %}
-                        <form action="" method="POST">
+                        <form action="{% url 'payments:contract-payment' contract.pk %}" method="POST">
                             {% csrf_token %}
                             <div class="form-control">
-                                <input type="button" value="{% trans 'Print' %}" name="print" class="btn">
+                                <input type="submit" value="{% trans 'Print' %}" name="print" class="btn">
                             </div>
                         </form>
                     </div>

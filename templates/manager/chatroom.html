@@ -90,7 +90,7 @@
     const roomName = JSON.parse(document.getElementById('room_name').textContent);
     const username = JSON.parse(document.getElementById('username').textContent);
     const chatSocket = new WebSocket(
-        "wss://" + window.location.host + "/ws/chat/" + roomName + "/"
+        "ws://" + window.location.host + "/ws/chat/" + roomName + "/"
     );
 
     chatSocket.onmessage = function (e) {
@@ -111,13 +111,15 @@
     chatForm.addEventListener('submit', (e) => {
         e.preventDefault();
         let messageField = chatForm.querySelector("#message");
+        if (messageField.value != "") {
+            chatSocket.send(JSON.stringify({
+                "message": messageField.value,
+                "username": username,
+                "user": "client"
+            }))
+            chatForm.reset();
+        }
 
-        chatSocket.send(JSON.stringify({
-            "message": messageField.value,
-            "username": username,
-            "user": "client"
-        }))
-        chatForm.reset();
     })
 
 

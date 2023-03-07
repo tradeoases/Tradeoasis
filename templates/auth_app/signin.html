@@ -45,13 +45,13 @@
                 <span>Or</span>
             </div>
             <div class="sign-in-with grid gap-2">
-                <a href="{% provider_login_url 'google' %}{% if userType %}?request_user=extension{% endif %}" class="flex justify-center gap-4 md:gap-10 border border-solid border-slate-400  hover:border-slate-600 px-3 text-base md:px-6 py-3 items-center rounded color text-lghterBackgroundColor">
+                <a href="{% provider_login_url 'google' %}{% if userType %}?request_user=extension{% endif %}" class="flex justify-center gap-5 md:gap-10 items-center bg-white shadow-md font-semibold md:px-6 py-3 items-center" style="border: thin solid rgba(136, 136, 136, 0.192);color: #444;white-space: nowrap;">
                     <i class="fa fa-google"></i>
                     <span>{% trans 'Continue With Google' %}</span>
                 </a>
-                <a href="{% provider_login_url 'linkedin' %}{% if userType %}?request_user=extension{% endif %}" class="flex justify-center gap-4 md:gap-10 border border-solid border-slate-400  hover:border-slate-600 px-3 text-base md:px-6 py-3 items-center rounded color text-lghterBackgroundColor">
-                    <i class="fa fa-linkedin"></i>
-                    <span>{% trans 'Continue With LinkedIn' %}</span>
+                <a href='{% provider_login_url "facebook" method="oauth2" %}' class="flex justify-center gap-5 md:gap-10 px-6 py-3 items-center rounded bg-white shadow-md font-semibold text-white" style="white-space: nowrap;background-color: #3A63BE;">
+                    <i class="text-xl fa fa-facebook"></i>
+                    <span class="text-base">Login With Facebook</span>
                 </a>
             </div>
         </div>

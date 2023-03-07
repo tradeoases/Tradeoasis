@@ -11,7 +11,7 @@
                     <li class="cs-text-md cs-font-500 active">
                         <a href="">General Promotions</a>
                     </li>
-                    </div>
+                </div>
                 <ul class="nav-emph-cta" style="justify-self: flex-end;align-self: center;margin-inline-end: .5rem;">
                     <li id="nav-emph-cta" class="cs-flex cs-text-md cs-bg-secondary cs-font-500 br-sm emph">
                         <a href="{% url 'app_admin:promotions-create' %}" class="cs-flex cs-text-white" style="--text-color: #fff;--gap: .5rem;align-items: center;">
@@ -32,7 +32,7 @@
                 </p>
                 <div class="cs-grid" style="gap: 1rem; grid-template-columns: repeat(4, 1fr);">
                     {% for promotion in text_promotions %}
-                        <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .5rem;">
+                        <a href="{% url 'app_admin:promotions-edit' promotion.slug %}" class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .5rem;">
                             <h4 class="cs-text-normal cs-font-700" style="margin: 0;color: var(--text-color);">
                                 {{ promotion.name }}
                             </h4>
@@ -44,7 +44,7 @@
                                     <span class="cs-text-secondary cs-text-sm cs-font-700">{{ promotion.type }}</span>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     {% endfor %}
                 </div>
             </div>
@@ -57,7 +57,7 @@
                 </p>
                 <div class="cs-grid" style="gap: 1rem; grid-template-columns: repeat(4, 1fr);">
                     {% for promotion in banner_promotions %}
-                    <div class="stats-summary-card w-img cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: 0rem;">
+                    <a href="{% url 'app_admin:promotions-edit' promotion.slug %}" class="stats-summary-card w-img cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: 0rem;">
                         <div class="img-wrapper">
                             <img src="/media/{{promotion.image}}" alt="">
                         </div>
@@ -74,7 +74,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                     {% endfor %}
                 </div>
             </div>

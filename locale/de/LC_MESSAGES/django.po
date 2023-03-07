@@ -978,7 +978,7 @@ msgid "Continue With Google"
 msgstr "Weiter mit Google"
 
 #: templates/auth_app/signin.html:54 templates/auth_app/signup.html:79
-msgid "Continue With LinkedIn"
+msgid "Continue With Facebook"
 msgstr "Weiter mit LinkedIn"
 
 #: templates/auth_app/signin.html:60 templates/auth_app/signup.html:10

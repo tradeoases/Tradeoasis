@@ -1532,7 +1532,7 @@ class DashboardContractAcceptDetailsView(SupplierOnlyAccessMixin, View):
             {
                 "name": contract.buyer.username,
                 "email": contract.buyer.email,
-                "description": f"Your contract application on service {contract.service.name} has been accepted.\nPlease visit the {payment_link} to complete the application process.\nThank you.",
+                "description": _("Your contract application on service") + "{contract.service.name}" + _("has been accepted.\nPlease visit the") + "{payment_link}" + _("to complete the application process.\nThank you.",)
             },
         )
         email = EmailMessage(

@@ -71,7 +71,7 @@ class AdminDashboardView(SupportOnlyAccessMixin, View):
                 {
                     "name": _("Total Buyers"),
                     "description": _("Total Buyer Count"),
-                    "count": AuthModels.Buyer.buyer.all().count(),
+                    "count": AuthModels.Buyer.buyer.filter(is_email_activated = True).count(),
                 },
                 {
                     "name": _("Total Product"),
@@ -426,7 +426,7 @@ class AdminDiscussionsView(SupportOnlyAccessMixin, View):
             "context_name": "chatrooms",
             "results": [
                 {"chatroom": chatroom, "last_message": get_last_chatroom_msg(chatroom)}
-                for chatroom in ManagerModels.Chatroom.objects.filter(is_handled=False)
+                for chatroom in ManagerModels.Chatroom.objects.filter(Q(is_handled=False), ~Q(support__user=self.request.user))
             ],
         }
 
@@ -781,4 +781,72 @@ class AdminPromotionsCreateView(View):
         ManagerTask.make_model_translations.delay(fields, instance.pk, instance.__class__.__name__)
 
         messages.add_message(request, messages.SUCCESS, _("Promotion Created Successfully."))
-        return redirect(reverse("app_admin:promotions-create"))
+        return redirect(reverse("app_admin:promotions"))
+
+class AdminPromotionsEditView(View):
+    template_name = "app_admin/promotion_edit.html"
+
+    def get(self, request, slug):
+        context_data = {
+            "view_name": "Admin Dashboard",
+            "active_tab": "Promotions",
+            "showrooms" : ManagerModels.Showroom.objects.all(),
+            "choices" : ["BANNER", "PRODUCTS", "SUPPLIERS", "BUYERS", "SHOWROOWS"],
+            "promotion" : ManagerModels.Promotion.objects.filter(slug=slug).first()
+        }
+
+        return render(request, self.template_name, context=context_data)
+
+    def post(self, request, slug):
+        name = request.POST.get("name")
+        promotion_types = request.POST.get("promotion_types")
+        showrooms = request.POST.get("showrooms")
+        description = request.POST.get("description")
+        image = request.FILES.get("image")
+
+        if ManagerModels.Promotion.objects.filter(slug=slug):
+            promotion = ManagerModels.Promotion.objects.filter(slug=slug).first()
+        else:
+            messages.add_message(request, messages.ERROR, _("Recond not found."))
+            return redirect(reverse("app_admin:promotions"))
+
+        if not image and not description:
+            messages.add_message(request, messages.ERROR, _("Offer description for text promotions"))
+            return redirect(reverse("app_admin:promotions-create"))
+        elif promotion_types != "SHOWROOWS":
+
+            promotion.name = name
+            promotion.type = promotion_types
+            promotion.description = description
+            promotion.image = image if image else None
+            promotion.save()
+
+            if not promotion:
+                messages.add_message(request, messages.ERROR, _("An Error occured. Try Again."))
+                return redirect(reverse("app_admin:promotions-create"))
+
+        elif promotion_types == "SHOWROOWS":
+
+            promotion.name = name
+            promotion.type = promotion_types
+            promotion.description = description
+            promotion.image = image if image else None
+            promotion.showroom = ManagerModels.Showroom.objects.filter(slug=showrooms).first()
+
+            print(promotion)
+
+            promotion.save()
+
+            if not promotion:
+                messages.add_message(request, messages.ERROR, _("An Error occured. Try Again."))
+                return redirect(reverse("app_admin:promotions-create"))
+
+        
+        fields = ("name", "description",)
+        
+        instance = promotion
+
+        ManagerTask.make_model_translations.delay(fields, instance.pk, instance.__class__.__name__)
+
+        messages.add_message(request, messages.SUCCESS, _("Promotion Edited Successfully."))
+        return redirect(reverse("app_admin:promotions"))
