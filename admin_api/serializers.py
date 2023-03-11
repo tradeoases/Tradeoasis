@@ -48,7 +48,7 @@ class StoreSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation["products"] = (
-            SupplierModels.Store.objects.filter(id=instance.id)
+            SupplierModels.Store.admin_list.filter(id=instance.id)
             .first()
             .store_product.all()
             .count()
@@ -68,7 +68,7 @@ class SuppliersSerializer(serializers.ModelSerializer):
         representation["membership"] = PaymentModels.Membership.objects.filter(
             supplier=instance.user
         ).first()
-        representation["stores"] = SupplierModels.Store.objects.filter(
+        representation["stores"] = SupplierModels.Store.admin_list.filter(
             supplier=instance.user
         ).count()
         return representation
@@ -91,7 +91,7 @@ class _StoreSerializer(serializers.RelatedField, StoreSerializer):
 
 
 class ProductsSerializer(serializers.ModelSerializer):
-    store = _StoreSerializer(queryset=SupplierModels.Store.objects.all(), many=True)
+    store = _StoreSerializer(queryset=SupplierModels.Store.admin_list.all(), many=True)
     sub_category = ProductSubCategorySerializer()
 
     class Meta:
@@ -100,12 +100,14 @@ class ProductsSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        representation["supplier"] = SuppliersSerializer(
-            instance.store.all().first().supplier.profile
-        ).data.get("business_name")
-        representation["supplier_slug"] = SuppliersSerializer(
-            instance.store.all().first().supplier.profile
-        ).data.get("slug")
+
+        if instance.store:
+            supplier_data = SuppliersSerializer(
+                instance.store.all().first().supplier.profile
+            ).data
+            representation["supplier"] = supplier_data.get("business_name")
+            representation["supplier_slug"] = supplier_data.get("slug")
+
         representation["image"] = ProductImagesSerializer(
             SupplierModels.ProductImage.objects.filter(product=instance).first()
         ).data.get("image")
@@ -161,7 +163,7 @@ class ManagerServicesSerializer(serializers.ModelSerializer):
 
 class ShowroomsSerializer(serializers.ModelSerializer):
     location = LocationsSerializer()
-    store = _StoreSerializer(queryset=SupplierModels.Store.objects.all(), many=True)
+    store = _StoreSerializer(queryset=SupplierModels.Store.admin_list.all(), many=True)
 
     class Meta:
         model = ManagerModels.Showroom

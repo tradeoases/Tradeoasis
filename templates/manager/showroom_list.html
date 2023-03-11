@@ -21,11 +21,9 @@
                     <a href="{% url 'manager:showroom-detail' showroom.showroom.slug %}" class="grid showroom-card card p-2 rounded-md">
                         <div class="body">
                             <div class="grid">
-                                {% for store in showroom.store %}
-                                    <div class="grid store gap-1">
-                                        <img src="/media/{{store.image}}" style="object-fit: cover;block-size: 100%" alt="{{store.name}}">
-                                    </div>
-                                {% endfor %}
+                                <div class="grid store gap-1">
+                                    <img src="/media/{{showroom.banner.image}}" style="object-fit: cover;block-size: 100%" alt="{{store.name}}">
+                                </div>
                             </div>
                             <aside class="grid gap-1">
                                 {% for product in showroom.products %}

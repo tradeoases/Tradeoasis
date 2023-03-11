@@ -83,14 +83,23 @@
                 <label for="advert_platform" class="cs-text-normal" style="color: var(--text-color);">
                     {% trans 'Advert Location' %} *
                 </label>
-                <select name="advert_platform" id="advert_platform" class="cs-text-normal" required>
-                    <option></option>
-                    {% for platform in advertising %}
-                    <option value="{{platform.id}}">{{platform.advert_area}} ({% trans 'USD' %}
-                        {{platform.advertising_price}})
-                    </option>
+
+                <input type="hidden" id="advertising_location" name="advertising_location" required>
+                <div class="cs-price-listing cs-grid cs-text-normal cs-grid" style="--gap: .5rem">
+                    {% for location in advertising_locations %}
+                        {% if location.showroom %}
+                            <div class="cs-price-listing-item cs-grid cs-grid-flow-col" style="grid-template-columns: repeat(2, 1fr);" data-price="{{location.id}}">
+                                <span class="name">{{ location.showroom.name }}</span>
+                                <span class="price">$ {{ location.price }}</span>
+                            </div>
+                        {% else %}
+                            <div class="cs-price-listing-item cs-grid cs-grid-flow-col" style="grid-template-columns: repeat(2, 1fr);" data-price="{{location.id}}">
+                                <span class="name">{{ location.name }}</span>
+                                <span class="price">$ {{ location.price }}</span>
+                            </div>
+                        {% endif %}
                     {% endfor %}
-                </select>
+                </div>
             </div>
             <div class="form-group cs-grid cs-grid-flow-row" style="--gap: .5rem;">
                 <div class="form-group cs-grid cs-grid-flow-col" style="--gap: .5rem;border-radius: .25rem;"
@@ -107,11 +116,10 @@
                     </div>
                 </div>
                 <div class="cs-flex cs-justify-between" style="padding: 0.5rem 0;flex-wrap: wrap;">
-                    <p class="cs-font-normal cs-text-md">{% trans "Advertising Period:" %} <span
-                            class="cs-text-accent cs-font-bold" id="duration">
-                            <span class="count"></span> {% trans "Days" %}</span>
+                    <p class="cs-font-normal cs-text-md">{% trans "Advertising Period:" %}</p>
+                        <span class="cs-text-accent cs-font-bold" id="duration">
+                        <span class="count"></span> {% trans "Days" %}</span>
                     </p>
-                    <!-- <p class="cs-font-700 cs-text-accent" style="justify-self: flex-end;">{% trans "1 day = " %} {{ advertising_price.advertising_price|first }} {% trans "dollars" %}</p> -->
                 </div>
             </div>
             <div class="form-group cs-grid" style="--gap: .5rem;justify-content: flex-start;">
@@ -126,6 +134,7 @@
                 style="--gap: .5rem;list-style-type:lower-alpha;list-style-position: inside;">
                 <li>{% trans 'Select the desired product by entering the product name.' %}</li>
                 <li>{% trans 'To advertise a new product, you must first create the product.' %}</li>
+                <li>{% trans 'Select where you want your advert to appear.' %}</li>
                 <li>{% trans 'Specify the advertising period by selecting the start date and end date.' %}</li>
                 <li>{% trans 'Please take note of the advertising cost' %}</li>
             </ul>
@@ -179,78 +188,41 @@
             var milli_secs = date2.getTime() - date1.getTime();
 
             var days = milli_secs / (1000 * 3600 * 24);
-            $("#duration .count").text(days + 1);
-        }
-    })
-
-    const startDate = document.querySelector('#start_date');
-    const endDate = document.querySelector('#end_date');
-
-    document.querySelector("#advert-form").addEventListener("submit", (e) => {
-
-        if ((startDate.value !== null && startDate.value !== undefined) && (endDate.value !== null && endDate.value !== undefined)) {
-            // let numOfDates = datediff(parseDate(startDate.value), parseDate(endDate.value));
-            date1 = new Date($('#start_date').val());
-            date2 = new Date($('#end_date').val());
-            let numOfDates = date2.getTime() - date1.getTime();
-            if (numOfDates < 1) {
-                e.preventDefault();
-                document.querySelector("#date_selection").style.border = "1px solid red";
-                return;
-            }
-        }
-    })
-
-    const setDuration = () => {
-        const duration = document.querySelector('#duration .count');
-
-        if ((startDate.value !== null && startDate.value !== undefined) && (endDate.value !== null && endDate.value !== undefined)) {
-            // let numOfDates = datediff(parseDate(startDate.value), parseDate(endDate.value));
-            let numOfDates = date2.getTime() - date1.getTime();
-            if (numOfDates < 1) {
-                document.querySelector("#date_selection").style.border = "2px solid red";
-                document.querySelector("#date_selection").style.padding = ".5rem";
+            if (!isNaN(days)) {
+                $("#duration .count").text(days);
             }
             else {
-                document.querySelector("#date_selection").style.border = "none";
-                document.querySelector("#date_selection").style.padding = "0";
+                $("#duration .count").text(0);
             }
-            duration.textContent = numOfDates;
         }
-    }
+    })
 
-    function parseDate(str) {
-        var mdy = str.split('-');
-        return new Date(mdy[0], mdy[1], mdy[2]);
-    }
+    document.addEventListener("DOMContentLoaded", () => {
 
-    function datediff(first, second) {
-        // Take the difference between the dates and divide by milliseconds per day.
-        // Round to nearest whole number to deal with DST.
-        return Math.round((second - first) / (1000 * 60 * 60 * 24));
-    }
+        var advertising_location = document.querySelector("input#advertising_location")
+        var price_listing = document.querySelector(".cs-price-listing")
+        document.querySelectorAll(".cs-price-listing-item").forEach(
+            elem => elem.addEventListener("click", () => {
+                let selected = document.querySelector(".cs-price-listing-item.selected");
+                if (selected) selected.classList.remove("selected");
+                elem.classList.add("selected");
 
-    const setDefaultDate = () => {
+                advertising_location.value = elem.dataset.price;
+            })
+        )
 
-        // const startDate = document.querySelector('#startDate');
-        // const endDate = document.querySelector('#endDate');
+        document.querySelector("form").addEventListener("submit", (e) => {
+            if (advertising_location.value == "undefined" || advertising_location.value == "") {
+                e.preventDefault();
+                price_listing.classList.add("error")
 
-        var date = new Date();
+                setTimeout(() => {
+                    price_listing.classList.remove("error")
+                }, 3000);
+            }
+        })
+    })
 
-        var day = date.getDate();
-        var month = date.getMonth() + 1;
-        var year = date.getFullYear();
-
-        if (month < 10) month = "0" + month;
-        if (day < 10) day = "0" + day;
-
-        var today = year + "-" + month + "-" + day;
-
-        startDate.value = today;
-        endDate.value = today;
-    }
-
-    // setDefaultDate();
 
 </script>
 

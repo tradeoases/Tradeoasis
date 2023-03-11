@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "contracts_was_loaded": false,
         "showrooms_was_loaded" : false,
         "services_was_loaded" : false,
+        "stores_was_loaded" : false,
         "memberships_was_loaded" : false,
     }
 
@@ -161,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (isClientModalOpen) {
-            clientModal.querySelector('#suspend-btn').addEventListener('click', (e) => openOperationConfirmModal(msg='Are you sure you want to suspend client account.', postUrl= `suspend-account/${response.slug}`, data={"id": e.target.dataset['userid']}))
+            clientModal.querySelector('#suspend-btn').addEventListener('click', (e) => openOperationConfirmModal(msg='Are you sure you want to suspend client account.', postUrl= `suspend-account/${response.slug}`, data={"id": response.id}))
         }
     }
 
@@ -199,6 +200,18 @@ document.addEventListener('DOMContentLoaded', () => {
         // contact user
         productModal.querySelector('#contact-user-cta').href = `${BASE_URL}support/admin/contact/${response.supplier_slug}`
 
+        if (response.is_verified == true) {
+            document.querySelector("#product-modal #verify-btn").classList.remove("cs-grid");
+            document.querySelector("#product-modal #verify-btn").classList.add("cs-hidden");
+            document.querySelector("#product-modal #suspend-btn").classList.add("cs-grid");
+            document.querySelector("#product-modal #suspend-btn").classList.remove("cs-hidden");
+        } else {
+            document.querySelector("#product-modal #suspend-btn").classList.remove("cs-grid");
+            document.querySelector("#product-modal #suspend-btn").classList.add("cs-hidden");
+            document.querySelector("#product-modal #verify-btn").classList.add("cs-grid");
+            document.querySelector("#product-modal #verify-btn").classList.remove("cs-hidden");
+        }
+
 
         let storesElem = document.querySelector('#product-images');
             while (storesElem.firstChild) {
@@ -221,7 +234,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         if (isProductModalOpen) {
-            productModal.querySelector('#suspend-btn').addEventListener('click', (e) => openOperationConfirmModal(msg='Are you sure you want to suspend product.', postUrl=`product/delete/${response.slug}`, data={"id": e.target.dataset['productid']}))
+            productModal.querySelector('#suspend-btn').addEventListener('click', (e) => openOperationConfirmModal(msg='Are you sure you want to suspend product.', postUrl=`product/delete/${response.slug}`, renderProducts))
+            
+            productModal.querySelector('#verify-btn').addEventListener('click', (e) => openOperationConfirmModal(msg='Are you sure you want to verify this Product.', postUrl=`product/verify/${response.slug}`, renderProducts))
         }
     }
 
@@ -256,7 +271,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // contractModal.querySelector('#view-product-page').href = `${BASE_URL}suppliers/products/${response.slug}`
 
         if (isContractModalOpen) {
-            contractModal.querySelector('#suspend-btn').addEventListener('click', (e) => openOperationConfirmModal(msg='Are you sure you want to suspend contract.', postUrl='test/', data={"id": e.target.dataset['contractid']}))
+            return
+            contractModal.querySelector('#suspend-btn').addEventListener('click', (e) => openOperationConfirmModal(msg='Are you sure you want to suspend contract.', postUrl='test/', data={"id": response.id}))
         }
     }
 
@@ -425,8 +441,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td>${record.supplier}</td>
                     <td>${record.sub_category.category.name}</td>
                     <td>${record.sub_category.name}</td>
-                    <td>0</td>
                 `;
+                if (!record.is_verified) {
+                    tableRow.classList.add("alert")
+                }
                 tableBody.appendChild(tableRow);
                 tableRow.addEventListener('click', async () => {
                     if (!isClientModalOpen) {
@@ -490,13 +508,117 @@ document.addEventListener('DOMContentLoaded', () => {
 
         paginate(response, invoker = renderContracts)
     }
+
+    const renderStores = async () => {
+        if (!fetchState["stores_was_loaded"]) {
+            // if it is the first time we are loading suppliers, we set pageNum to 1
+            pageNum = 1;
+            fetchState["stores_was_loaded"] = true;
+        }
+        let response = await fetchData(url='stores');
+
+        const tableBody = document.querySelector('#client-stores-section table tbody');
+
+        if (tableBody.childNodes.length > 0) {
+            while (tableBody.firstChild) {
+                tableBody.removeChild(tableBody.firstChild);
+            }
+
+            document.querySelector('#table-item-count').textContent = response.count;
+    
+            response.results.forEach((record, i) => {
+                let tableRow = document.createElement('tr')
+                tableRow.classList = 'cs-text-md cs-font-500 client-item';
+                tableRow.setAttribute('data-slug', record.slug);
+                tableRow.setAttribute('data-id', record.id);
+                tableRow.setAttribute('data-account-type', record.account_type);
+
+                if (!record.is_verified) {
+                    tableRow.classList.add("alert")
+                    tableRow.innerHTML = `
+                        <td>${i + 1}</td>
+                        <td>${record.name}</td>
+                        <td>${record.supplier}</td>
+                        <td>${record.products}</td>
+                        <td><button class="btn cs-grid cs-justify-center cs-align-center cs-bg-success cs-text-white cs-text-md br-sm" id="verify-store" style="padding: .5rem;inline-size: 10vw">Verify</button></td>
+                    `;
+
+                    tableRow.querySelector("#verify-store").addEventListener("click", () => {
+                        fetch(`${BASE_API_URL}/stores/verify/${record.slug}`, {
+                            method: "POST",
+                            headers: {'X-CSRFToken': getCookie('csrftoken')},
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                               renderStores()
+                            }
+                            else {
+                                const err = document.createElement('p');
+                                err.className = 'cs-text-md';
+                                err.style.color = 'red';
+                                err.textContent = "An Error Occurred! Reload Page."
+                                operationConfirmModal.querySelector('#msg').appendChild(err);
+                            }
+                        })
+                    })
+                }
+                else {
+                    tableRow.innerHTML = `
+                        <td>${i + 1}</td>
+                        <td class="store-name">${record.name}</td>
+                        <td>${record.supplier}</td>
+                        <td>${record.products}</td>
+                        <td><button class="btn cs-grid cs-justify-center cs-align-center cs-bg-danger cs-text-white cs-text-md br-sm" id="suspend-store" style="padding: .5rem;inline-size: 10vw">Suspend</button></td>
+                    `;
+
+                    tableRow.querySelector("#suspend-store").addEventListener("click", () => {
+                        fetch(`${BASE_API_URL}/stores/delete/${record.slug}`, {
+                            method: "POST",
+                            headers: {'X-CSRFToken': getCookie('csrftoken')},
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                               renderStores()
+                            }
+                            else {
+                                const err = document.createElement('p');
+                                err.className = 'cs-text-md';
+                                err.style.color = 'red';
+                                err.textContent = "An Error Occurred! Reload Page."
+                                operationConfirmModal.querySelector('#msg').appendChild(err);
+                            }
+                        })
+                    })
+                    tableRow.querySelector(".store-name").addEventListener('click', () => {
+                        window.open(`${BASE_URL}suppliers/store/${record.slug}`, '_blank');
+                    })
+                }
+                tableBody.appendChild(tableRow);
+
+                // tableRow.addEventListener("mouseover", () => {
+                //     const _iframe = document.createElement("iframe")
+                //     _iframe.style.position = "fixed"
+                //     _iframe.style.inset = "0 0"
+                //     _iframe.style.width = "50vw"
+                //     _iframe.style.height = "50vh"
+                //     _iframe.src = `${BASE_URL}suppliers/store/${record.slug}`
+                //     document.body.appendChild(_iframe)
+                // })
+
+            })
+        }
+
+        // change page number
+        paginate(response, invoker = renderStores)
+
+    }
     
     // detect page
     const nav = document.querySelector('nav[data-page]');
     
     // client page
     // if (nav && nav.dataset['page'] === 'client') {
-        const clientRoutes = ["client-overview", "client-suppliers","client-buyers", "client-contracts","client-products","client-buyers-overview","client-products-overview", "client-contracts-overview","client-suppliers-overview"];
+        const clientRoutes = ["client-overview", "client-suppliers","client-buyers","client-stores", "client-contracts","client-products","client-buyers-overview","client-stores-overview","client-products-overview", "client-contracts-overview","client-suppliers-overview"];
         
         // SWITCHING TABS
         activeTab = clientRoutes[0];
@@ -543,6 +665,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         else if (activeTab.includes('contracts')) {
                             renderContracts();
                         }
+                        else if (activeTab.includes('stores')) {
+                            renderStores();
+                        }
 
                     }
                 });
@@ -582,8 +707,9 @@ document.addEventListener('DOMContentLoaded', () => {
         serviceModal.querySelector('#modal-service-description').textContent = response.description
         
         if (isServiceModalOpen) {
+            return
             serviceModal.querySelector('#suspend-btn').addEventListener('click', (e) => {
-                openOperationConfirmModal(msg='Are you sure you want to delete this service.', postUrl='test/', data={"id": e.target.dataset['serviceid']})
+                openOperationConfirmModal(msg='Are you sure you want to delete this service.', postUrl='test/', data={"id": response.id})
             })
         }
     }
@@ -777,8 +903,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // manager page
 
 
+    function closeAllModals() {
+        document.querySelectorAll(".modal").forEach(
+            modal => {
+                document.body.classList.remove('modal-open');
+                modal.classList.add("cs-hidden")
+                modal.classList.remove("cs-grid")
+            }
+        )
+    }
+
+
     // CONFIRM MODAL
-    const openOperationConfirmModal = (msg, postUrl, data) => {
+    const openOperationConfirmModal = (msg, postUrl, renderFunc) => {
         operationConfirmModal.querySelector('#confirm-msg').textContent = msg;
         operationConfirmModal.querySelector('form').action = `${BASE_API_URL}/${postUrl}`;
 
@@ -803,7 +940,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
                 .then(response => {
                     if (response.ok) {
-                        window.location.reload()
+                        // window.location.reload()
+                        // close all modals
+                        closeAllModals()
+                        renderFunc()
                     }
                     else {
                         const err = document.createElement('p');

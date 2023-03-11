@@ -14,7 +14,8 @@ import uuid
 
 # apps
 from auth_app.models import Buyer, Supplier
-from supplier.models import Service, Advert
+from supplier.models import Service
+from manager.models import Advert
 
 
 class MembershipPlan(models.Model):

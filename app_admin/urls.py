@@ -33,6 +33,11 @@ urlpatterns = [
         views.AdminCommunityChatView.as_view(),
         name="community-chat",
     ),
+    path(
+        "community/delete/<str:slug>",
+        views.AdminDiscussionDeleteView.as_view(),
+        name="community-chat-delete",
+    ),
     # contact
     path("contact/<str:slug>", views.ContactClient.as_view(), name="contact"),
     # profile

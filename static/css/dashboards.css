@@ -201,6 +201,12 @@ body.modal-open::after {
 .outlined {
     border: 1px solid hsla(213, 28%, 80%, 70%);
 }
+.btn.cs-grid {
+    display: grid;
+}
+.btn.cs-hidden {
+    display: none;
+}
 .icon-btn {
     cursor: pointer;
     padding: .7rem 1rem;
@@ -279,7 +285,21 @@ form input:focus-within,
 form textarea:focus,
 form textarea:focus-within {
     border: 1px solid hsla(213, 28%, 30%, 90%);
-    outline: none;
+    outline: transparent;
+}
+
+input[type="submit"]:focus,
+input[type="submit"]:focus-within {
+    border: none
+}
+
+form select {
+    padding: .5rem 1rem;
+}
+
+form input,
+form select {
+    border: 1px solid lightgray;
 }
 
 /* sidebar */
@@ -418,6 +438,25 @@ body.admin-body {
     gap: .5rem;
 }
 
+.cs-price-listing.error {
+    border: 2px solid var(--danger-color);
+    padding: .25rem;
+}
+
+.cs-price-listing-item {
+    border: 1px solid lightgray;
+    border-radius: 2px;
+    padding: .25rem;
+    cursor: pointer;
+    background-color: transparent;
+    transition: all .2s ease-out;
+}
+.cs-price-listing-item:hover,
+.cs-price-listing-item.selected {
+    border-color: hsla(213, 28%, 30%, 90%);
+    background-color: hsla(213, 28%, 30%, 90%);
+    color: white;
+}
 
 /* lists */
 table {
@@ -433,6 +472,7 @@ table tbody tr:hover {
     background-color: hsla(213, 28%, 70%, 10%);
     border-inline: 3px solid var(--secondary-color);
 }
+
 tr th,
 tr td {
     padding: .5rem 1rem;
@@ -458,6 +498,16 @@ tbody tr td.delete {
     display: grid;
     place-items: center;
 }
+
+table tbody tr.alert {
+    background-color: hsl(195, 53%, 85%);
+}
+table tbody tr.alert:hover {
+    background-color: hsl(195, 53%, 80%);
+}
+table tbody tr.alert td {
+    background-color: inherit;
+}
 /* lists */
 
 .modal {
@@ -471,7 +521,7 @@ tbody tr td.delete {
     overflow: hidden;
     background-color: var(--white-color);
     padding: 1.5rem 2rem;
-    animation: modalEnter .5s ease-in;
+    animation: modalEnter .2s linear;
     z-index: 1000;
 }
 
@@ -575,6 +625,26 @@ tbody tr td.delete {
 }
 .chat form input {
     align-self: flex-end;
+}
+
+.inbox-area .list-body {
+    grid-template-columns: 1fr;
+    transition: .5s ease-in-out;
+    gap: 1rem;
+    border-radius: 5px;
+}
+.inbox-area .list-body.alert > a {
+    background-color: lightblue;
+}
+.inbox-area .list-body form {
+    display: none;
+}
+
+.inbox-area .list-body:hover {
+    grid-template-columns: 2fr auto;
+}
+.inbox-area .list-body:hover form {
+    display: grid;
 }
 
 

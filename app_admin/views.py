@@ -76,7 +76,7 @@ class AdminDashboardView(SupportOnlyAccessMixin, View):
                 {
                     "name": _("Total Product"),
                     "description": _("Total Product Count"),
-                    "count": SupplierModels.Product.objects.all().count(),
+                    "count": SupplierModels.Product.admin_list.all().count(),
                 },
                 {
                     "name": _("Total Showrooms"),
@@ -86,7 +86,7 @@ class AdminDashboardView(SupportOnlyAccessMixin, View):
                 {
                     "name": _("Total Stores"),
                     "description": _("Total Store Count"),
-                    "count": ManagerModels.Store.objects.all().count(),
+                    "count": ManagerModels.Store.admin_list.all().count(),
                 },
                 {
                     "name": _("Total Memberships"),
@@ -144,9 +144,14 @@ class AdminClientsView(SupportOnlyAccessMixin, View):
                     "count": AuthModels.Buyer.buyer.all().count(),
                 },
                 {
-                    "name": _("Total Product"),
+                    "name": _("Total Products"),
                     "description": _("Total Product Count"),
-                    "count": SupplierModels.Product.objects.all().count(),
+                    "count": SupplierModels.Product.admin_list.all().count(),
+                },
+                {
+                    "name": _("Total Stores"),
+                    "description": _("Total Store Count"),
+                    "count": ManagerModels.Store.admin_list.all().count(),
                 },
                 {
                     "name": _("Total Contracts"),
@@ -185,11 +190,6 @@ class AdminManagersView(SupportOnlyAccessMixin, View):
                     "name": _("Total Showrooms"),
                     "description": _("Showroom Count"),
                     "count": ManagerModels.Showroom.objects.all().count(),
-                },
-                {
-                    "name": _("Total Stores"),
-                    "description": _("Total Store Count"),
-                    "count": ManagerModels.Store.objects.all().count(),
                 },
                 {
                     "name": _("Total Memberships"),
@@ -472,7 +472,7 @@ class AdminCommunityView(SupportOnlyAccessMixin, View):
         context_data["view_name"] = _("Admin Dashboard - Support")
         context_data["active_tab"] = "Support"
 
-        context_data["discussions"] = ManagerModels.Discussion.objects.all().order_by(
+        context_data["discussions"] = ManagerModels.Discussion.admin_list.all().order_by(
             "-id"
         )
 
@@ -490,11 +490,11 @@ class AdminCommunityChatView(SupportOnlyAccessMixin, View):
 
         context_data["view_name"] = _("Admin Dashboard - Support")
         context_data["active_tab"] = "Support"
-        context_data["discussions"] = ManagerModels.Discussion.objects.all().order_by(
+        context_data["discussions"] = ManagerModels.Discussion.admin_list.all().order_by(
             "-id"
         )
 
-        discussion = ManagerModels.Discussion.objects.filter(slug=slug).first()
+        discussion = ManagerModels.Discussion.admin_list.filter(slug=slug).first()
         context_data["discussion"] = discussion
         context_data["replies"] = ManagerModels.DiscussionReply.objects.filter(
             discussion=discussion
@@ -507,11 +507,13 @@ class AdminCommunityChatView(SupportOnlyAccessMixin, View):
 
     def post(self, request, slug):
         description = request.POST.get("description")
-        discussion = ManagerModels.Discussion.objects.filter(slug=slug).first()
+        discussion = ManagerModels.Discussion.admin_list.filter(slug=slug).first()
+        discussion.is_verified=True
 
         discussion_reply = ManagerModels.DiscussionReply.objects.create(
             description=description, user=request.user, discussion=discussion
         )
+        discussion.save()
 
         fields = ("description",)
         instance = discussion_reply
@@ -522,6 +524,15 @@ class AdminCommunityChatView(SupportOnlyAccessMixin, View):
             reverse("app_admin:community-chat", kwargs={"slug": discussion.slug})
         )
 
+class AdminDiscussionDeleteView(SupportOnlyAccessMixin, View):
+    def get(self, request, slug):
+        return redirect(reverse("app_admin:community"))
+
+    def post(self, request, slug):
+        discussion = ManagerModels.Discussion.admin_list.filter(slug=slug).first()
+        discussion.delete()
+        
+        return redirect(reverse("app_admin:community"))
 
 class ContactClient(SupportOnlyAccessMixin, View):
     template_name = "app_admin/create_mail.html"
@@ -546,25 +557,15 @@ class ContactClient(SupportOnlyAccessMixin, View):
         email = request.POST.get("client-email")
         subject = request.POST.get("subject")
         description = request.POST.get("description")
+
         # send email
 
-        email_body = render_to_string(
-            "email_message.html",
-            {
-                "name": name,
-                "email": email,
-                "description": description,
-            },
+        ManagerTasks.send_mail.delay(
+            subject = subject,
+            content = f'Hello, {name}, \n {description}',
+            _to = [f"{email}"],
+            _reply_to = [f"{settings.SUPPORT_EMAIL}"]
         )
-        email = EmailMessage(
-            subject,
-            email_body,
-            request.user.email,
-            [
-                email,
-            ],
-        )
-        email.send(fail_silently=False)
 
         # save a copy
         return redirect(reverse("app_admin:clients"))
@@ -666,25 +667,12 @@ class CreateSupportView(SupportOnlyAccessMixin, View):
 
         activate_url = f"http://{domain}{link}"
 
-        email_body = render_to_string(
-            "email_message.html",
-            {
-                "name": user.username,
-                "email": user.email,
-                "review": "{} \n {} \n Please edit your account details and set a desired password after activating your account.".format(
-                    _("Your activation link is"), activate_url
-                ),
-            },
+        ManagerTasks.send_mail.delay(
+            subject = _("Fodoren Support Team invite."),
+            content = '{0} \n {1} \n {2} \n {3} \n {4}'.format(_("Hello"), user.username, _("Your have been added a Fodoren Support Team Member, Please edit your account details and set a desired password after activating your account."), _("Your activation link is"), activate_url),
+            _to = [f"{user.email}"],
+            _reply_to = [f"{settings.SUPPORT_EMAIL}"]
         )
-        email = EmailMessage(
-            _("Activate Foroden Activation"),
-            email_body,
-            settings.DEFAULT_FROM_EMAIL,
-            [
-                user.email,
-            ],
-        )
-        email.send(fail_silently=False)
 
         messages.add_message(
             request,
@@ -798,11 +786,6 @@ class AdminPromotionsEditView(View):
         return render(request, self.template_name, context=context_data)
 
     def post(self, request, slug):
-        name = request.POST.get("name")
-        promotion_types = request.POST.get("promotion_types")
-        showrooms = request.POST.get("showrooms")
-        description = request.POST.get("description")
-        image = request.FILES.get("image")
 
         if ManagerModels.Promotion.objects.filter(slug=slug):
             promotion = ManagerModels.Promotion.objects.filter(slug=slug).first()
@@ -810,7 +793,19 @@ class AdminPromotionsEditView(View):
             messages.add_message(request, messages.ERROR, _("Recond not found."))
             return redirect(reverse("app_admin:promotions"))
 
-        if not image and not description:
+
+        if request.POST.get('delete') == 'Delete Promotion':
+            promotion.delete()
+            return redirect(reverse("app_admin:promotions"))
+
+
+        name = request.POST.get("name")
+        promotion_types = request.POST.get("promotion_types")
+        showrooms = request.POST.get("showrooms")
+        description = request.POST.get("description")
+        image = request.FILES.get("image")
+
+        if not image and not description and not promotion.image:
             messages.add_message(request, messages.ERROR, _("Offer description for text promotions"))
             return redirect(reverse("app_admin:promotions-create"))
         elif promotion_types != "SHOWROOWS":

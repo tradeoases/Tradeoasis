@@ -23,8 +23,11 @@ def make_model_translations(fields, instance_id, modal_name):
     elif modal_name == "ServiceTag":
         modal = SupplierModels.ServiceTag
 
+    if modal_name in ["Product", "Store"]:
+        instance = modal.admin_list.filter(id=instance_id).first()
+    else:
+        instance = modal.objects.filter(id=instance_id).first()
 
-    instance = modal.objects.filter(id=instance_id).first()
     make_translations(fields, instance, modal)
 
 def make_translations(fields, instance, modal):

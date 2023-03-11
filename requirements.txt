@@ -18,3 +18,4 @@ stripe
 webdriver_manager
 xhtml2pdf
 psycopg2
+pyyaml

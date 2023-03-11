@@ -11,6 +11,7 @@
                     <li id="client-suppliers-activator" class="cs-text-md cs-font-500">Suppliers</li>
                     <li id="client-buyers-activator"class="cs-text-md cs-font-500">Buyers</li>
                     <li id="client-products-activator"class="cs-text-md cs-font-500">Products</li>
+                    <li id="client-stores-activator"class="cs-text-md cs-font-500">Stores</li>
                     <li id="client-contracts-activator"class="cs-text-md cs-font-500">Contracts</li>
                 </div>
             </ul>
@@ -35,7 +36,7 @@
                                 <span class="cs-text-sm" style="color: var(--text-color);">
                                     {{statistic.description}}</span>
                             </div>
-                            <a id="{% if 'Total Buyers' == statistic.name %}client-buyers-overview-activator{% elif 'Total Product' == statistic.name %}client-products-overview-activator{% elif 'Total Contracts' == statistic.name %}client-contracts-overview-activator{% else %}client-suppliers-overview-activator{% endif %}" class="cs-text-sm cs-text-accent cs-font-500" style="align-self: flex-end">View All</a>
+                            <a id="{% if 'Total Buyers' == statistic.name %}client-buyers-overview-activator{% elif 'Total Products' == statistic.name %}client-products-overview-activator{% elif 'Total Contracts' == statistic.name %}client-contracts-overview-activator{% elif 'Total Stores' == statistic.name %}client-stores-overview-activator{% else %}client-suppliers-overview-activator{% endif %}" class="cs-text-sm cs-text-accent cs-font-500" style="align-self: flex-end;cursor: pointer">View All</a>
                         </div>
                     </div>
                 {% endfor %}
@@ -211,7 +212,6 @@
                         <th>Supplier</th>
                         <th>Category</th>
                         <th>Sub Subcategory</th>
-                        <th>Views</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -223,7 +223,6 @@
                         <th>Supplier</th>
                         <th>Category</th>
                         <th>Sub Subcategory</th>
-                        <th>Views</th>
                     </tr>
                 </tfoot>
             </table>
@@ -239,6 +238,40 @@
             </div>
         </section>
 
+        <section id="client-stores-section" class="content cs-hidden br-sm" style="--gap: 1rem;padding: .5rem 0;">
+            <table>
+                <thead>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>Name</th>
+                        <th>Supplier</th>
+                        <th>Products</th>
+                        <th>Verify/Suspend</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>Name</th>
+                        <th>Supplier</th>
+                        <th>Products</th>
+                        <th>Verify/Suspend</th>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
+                <div class="cs-grid cs-align-center">
+                    <p class="cs-text-md" style="color: var(--text-color);">Showing Page <span id="current-page-0"></span> of <span id="max-page"></span>. (<span id="table-item-count"></span> Entries)</p>
+                </div>
+                <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
+                    <button id="previous-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
+                    <span id="current-page" class="cs-text-md"></span>
+                    <button id="next-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
+                </div>
+            </div>
+        </section>
 
         <!-- modals -->
         <div id="client-modal" class="modal cs-hidden elevated outlined cs-align-start" style="align-content: flex-start;--gap: .5rem;">
@@ -366,8 +399,11 @@
                     <a id="contact-user-cta" class="btn cs-grid cs-justify-center cs-align-center cs-bg-secondary cs-text-white cs-text-md br-sm">
                         Contact Client
                     </a>
-                    <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-danger cs-text-white cs-text-md br-sm" data-productId="1" id="suspend-btn">
+                    <button class="btn cs-justify-center cs-align-center cs-bg-danger cs-text-white cs-text-md br-sm" data-productId="1" id="suspend-btn">
                         Suspend Product
+                    </button>
+                    <button class="btn cs-justify-center cs-align-center cs-bg-success cs-text-white cs-text-md br-sm" data-productId="1" id="verify-btn">
+                        Verify Product
                     </button>
                 </div>
             </div>

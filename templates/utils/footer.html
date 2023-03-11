@@ -159,11 +159,11 @@
                             <span style="margin-inline-end:10px;color: #717171;">© 2010-2022
                                 Foroden</span>
                             <a href="{% url 'manager:dashboard' %}{% if not request.user.is_authenticated %}?next=dashboard{% endif %}"
-                                style="margin-inline-end:10px;margin-inline-start:20px;">Admin</a>
-                            <a href="#" style="margin-inline-end:10px;">Terms</a>
-                            <a href="#" style="margin-inline-end:10px;">Privacy</a>
-                            <a href="#" style="margin-inline-end:10px;">Legal</a>
-                            <a href="#" style="margin-inline-end:10px;">Accessibility Statement</a>
+                                style="margin-inline-end:10px;margin-inline-start:20px;">{% trans "Admin" %}</a>
+                            <a href="#" style="margin-inline-end:10px;">{% trans "Terms" %}</a>
+                            <a href="#" style="margin-inline-end:10px;">{% trans "Privacy" %}</a>
+                            <a href="#" style="margin-inline-end:10px;">{% trans "Legal" %}</a>
+                            <a href="#" style="margin-inline-end:10px;">{% trans "Accessibility Statement" %}</a>
                         </div>
                     </div>
                     <div class="flex-right">

@@ -25,6 +25,8 @@ from manager import models as ManagerModels
 from payment import models as PaymentModels
 import supplier
 
+from manager import tasks as ManagerTasks
+
 from supplier.mixins import SupplierOnlyAccessMixin
 
 from django.utils.translation import get_language
@@ -115,23 +117,12 @@ class SupplierContactView(View):
             )
             return redirect(reverse("supplier:supplier-contact", args=[slug]))
 
-        email_body = render_to_string(
-            "email_message.html",
-            {
-                "name": user.username,
-                "email": user.email,
-                "description": f"{message}",
-            },
+        ManagerTasks.send_mail.delay(
+            subject = subject,
+            content = f'Hello, {user.username}, \n {message}',
+            _to = [f"{user.email}"],
+            _reply_to = [f"{settings.SUPPORT_EMAIL}"]
         )
-        email = EmailMessage(
-            f"Foroden - {subject}",
-            email_body,
-            settings.DEFAULT_FROM_EMAIL,
-            [
-                user.email,
-            ],
-        )
-        email.send(fail_silently=False)
 
         messages.add_message(
             request,
@@ -199,21 +190,12 @@ class SupplierContractView(View):
         )
 
         # send email to supplier
-        email_body = render_to_string(
-            "email_message.html",
-            {
-                "name": supplier.username,
-                "email": supplier.email,
-                "description": f"A Contract application has been sumbited by {buyer.profile.business_name} on service {service.name}.\nPlease visit the dashboard to respond to the application.\nThank you.",
-            },
-        )
-        email = EmailMessage(
-            _("Foroden Contract Created"),
-            email_body,
-            settings.DEFAULT_FROM_EMAIL,
-            [
-                supplier.email,
-            ],
+
+        ManagerTasks.send_mail.delay(
+            subject = _("Foroden Contract Created"),
+            content = _(f"Hello, {supplier.username}.\n A Contract application has been sumbited by {buyer.profile.business_name} on service {service.name}.\nPlease visit the dashboard to respond to the application.\nThank you."),
+            _to = [f"{supplier.email}"],
+            _reply_to = [f"{settings.SUPPORT_EMAIL}"]
         )
         email.send(fail_silently=False)
 
@@ -480,7 +462,7 @@ class ProductDetailView(DetailView):
                     "product": advert.product,
                     "main_image": SupplierModels.ProductImage.objects.filter(product=advert.product).first(),
                 }
-                for advert in (lambda adverts: random.sample(adverts, len(adverts)))(list(SupplierModels.Advert.active.all())[:3])
+                for advert in (lambda adverts: random.sample(adverts, len(adverts)))(list(ManagerModels.Advert.active.all())[:3])
             ],
         }
 
@@ -569,7 +551,7 @@ class NewArrivalView(View):
                     "supplier": advert.product.store.all().first().supplier,
                     "main_image": SupplierModels.ProductImage.objects.filter(product=advert.product).first(),
                 }
-                for advert in (lambda adverts: random.sample(adverts, len(adverts)))(list(SupplierModels.Advert.active.filter(product__in = SupplierModels.Product.objects.filter(store__in=showroom.store.all())))[:12])
+                for advert in (lambda adverts: random.sample(adverts, len(adverts)))(list(ManagerModels.Advert.active.filter(product__in = SupplierModels.Product.objects.filter(store__in=showroom.store.all())))[:12])
             ]
             if showroom else
             [
@@ -578,7 +560,7 @@ class NewArrivalView(View):
                     "supplier": advert.product.store.all().first().supplier,
                     "main_image": SupplierModels.ProductImage.objects.filter(product=advert.product).first(),
                 }
-                for advert in (lambda adverts: random.sample(adverts, len(adverts)))(list(SupplierModels.Advert.active.all())[:12])
+                for advert in (lambda adverts: random.sample(adverts, len(adverts)))(list(ManagerModels.Advert.active.all())[:12])
             ],
         }
 
@@ -1492,23 +1474,12 @@ class DashboardContractRejectDetailsView(SupplierOnlyAccessMixin, View):
         contract.save()
         messages.add_message(request, messages.ERROR, _("Contract has been rejected."))
 
-        email_body = render_to_string(
-            "email_message.html",
-            {
-                "name": contract.buyer.username,
-                "email": contract.buyer.email,
-                "description": f"Your contract application on service {contract.service.name} has been rejected.\nPlease contact the service for more information.\nThank you.",
-            },
+        ManagerTasks.send_mail.delay(
+            subject = _("Foroden Contract Rejected."),
+            content = _(f"Hello, {contract.buyer.username}.\n Your contract application on service {contract.service.name} has been rejected.\nPlease contact the supplier for more information.\nThank you."),
+            _to = [f"{contract.buyer.email}"],
+            _reply_to = [f"{settings.SUPPORT_EMAIL}"]
         )
-        email = EmailMessage(
-            _("Foroden Contract Rejected."),
-            email_body,
-            settings.DEFAULT_FROM_EMAIL,
-            [
-                contract.buyer.email,
-            ],
-        )
-        email.send(fail_silently=False)
 
         return redirect(reverse("supplier:dashboard-contractsdetails", args=[pk]))
 
@@ -1527,23 +1498,12 @@ class DashboardContractAcceptDetailsView(SupplierOnlyAccessMixin, View):
         link = reverse("payment:contract-payment", kwargs={"pk": contract.pk})
         payment_link = f"http://{domain}{link}"
 
-        email_body = render_to_string(
-            "email_message.html",
-            {
-                "name": contract.buyer.username,
-                "email": contract.buyer.email,
-                "description": _("Your contract application on service") + "{contract.service.name}" + _("has been accepted.\nPlease visit the") + "{payment_link}" + _("to complete the application process.\nThank you.",)
-            },
+        ManagerTasks.send_mail.delay(
+            subject = _("Foroden Contract Accepted"),
+            content = _(f"Hello, {contract.buyer.username}.\n Your contract application on service") + "{contract.service.name}" + _("has been accepted.\nPlease visit the") + "{payment_link}" + _("to complete the application process.\nThank you."),
+            _to = [f"{contract.buyer.email}"],
+            _reply_to = [f"{settings.SUPPORT_EMAIL}"]
         )
-        email = EmailMessage(
-            _("Foroden Contract Accepted"),
-            email_body,
-            settings.DEFAULT_FROM_EMAIL,
-            [
-                contract.buyer.email,
-            ],
-        )
-        email.send(fail_silently=False)
 
         return redirect(reverse("supplier:dashboard-contractsdetails", args=[pk]))
 
@@ -1630,7 +1590,7 @@ class DashboardAdvertiseView(View):
     def get(self, request):
         context_data = {
             "products" : SupplierModels.Product.objects.filter(store__supplier=self.request.user).order_by("-id"),
-            "advertising_price" : ManagerModels.PlatformPrice.objects.all().first().advertising_price
+            "advertising_locations" : ManagerModels.AdvertisingLocation.objects.all()
         }
         return render(request, self.template_name, context=context_data)
 
@@ -1638,8 +1598,9 @@ class DashboardAdvertiseView(View):
         product = request.POST.get("product")
         start_date = request.POST.get("start_date")
         end_date = request.POST.get("end_date")
+        advertising_location = request.POST.get("advertising_location")
 
-        if not all([product, start_date, end_date]):
+        if not all([product, start_date, end_date, advertising_location]):
             messages.add_message(request, messages.ERROR, _("Please Fill all fields."))
             return redirect(reverse("supplier:dashboard-advertise"))
 
@@ -1654,16 +1615,13 @@ class DashboardAdvertiseView(View):
         except:
             date_format = "%Y-%m-%d"
 
+        location = ManagerModels.AdvertisingLocation.objects.filter(id=advertising_location).first()
         duration = datetime.strptime(end_date, date_format) - datetime.strptime(start_date, date_format)
-        price = duration.days * ManagerModels.PlatformPrice.objects.all().first().advertising_price
+        price = duration.days * location.price
 
-        print("*"*20)
-        print("duration:", duration)
-        print("price:", price)
-        print("*"*20)
-
-        advert = SupplierModels.Advert.objects.create(
+        advert = ManagerModels.Advert.objects.create(
             product = product.first(),
+            location = location,
             start_date = start_date,
             end_date = end_date,
             amount = price
@@ -1672,7 +1630,7 @@ class DashboardAdvertiseView(View):
         messages.add_message(
             request,
             messages.SUCCESS,
-            _("Submitted successfully."),
+            _("Submitted successfully. Please make your payment."),
         )
         return redirect(reverse("supplier:dashboard-advertise-payment", args=[advert.slug]))
 
@@ -1681,7 +1639,7 @@ class DashboardAdvertisePaymentView(View):
 
     def get(self, request, slug):
 
-        advert = SupplierModels.Advert.objects.filter(slug=slug).first()
+        advert = ManagerModels.Advert.objects.filter(slug=slug).first()
         context_data = {
             "advert" : advert
         }
@@ -1709,8 +1667,9 @@ class DashboardAdvertsPaymentsView(View):
         supplier_products = SupplierModels.Product.objects.filter(
             store__in=SupplierModels.Store.objects.filter(supplier=self.request.user)
         )
-
+        print("*"*20)
+        print(ManagerModels.Advert.active.all())
         context_data = {
-            "adverts" : SupplierModels.Advert.objects.filter(product__in = supplier_products)
+            "adverts" : ManagerModels.Advert.active.filter(product__in = supplier_products)
         }
         return render(request, self.template_name, context=context_data)

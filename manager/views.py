@@ -18,10 +18,11 @@ from supplier.models import (
     Store,
     ProductImage,
     ProductSubCategory,
-    Advert
 )
 from manager import models as ManagerModels
 from payment import models as PaymentModels
+
+from manager import tasks as ManagerTasks
 
 
 from payment.mixins import AuthedOnlyAccessMixin
@@ -78,7 +79,7 @@ class HomeView(View):
                             product=product
                         ).first(),
                     }
-                    for product in Product.objects.all().order_by("-id")[:12]
+                    for product in Product.admin_list.all().order_by("-id")[:12]
                 ],
             },
             "products": {
@@ -91,7 +92,7 @@ class HomeView(View):
                     }
                     for product in (
                         lambda products: random.sample(products, len(products))
-                    )(list(Product.objects.all().order_by("-id")[:12]))
+                    )(list(Product.admin_list.all().order_by("-id")[:12]))
                 ],
             },
             "stores": {
@@ -112,7 +113,7 @@ class HomeView(View):
                     "supplier": advert.product.store.all().first().supplier,
                     "main_image": ProductImage.objects.filter(product=advert.product).first(),
                 }
-                for advert in (lambda adverts: random.sample(adverts, len(adverts)))(list(Advert.active.all())[:3])
+                for advert in (lambda adverts: random.sample(adverts, len(adverts)))(list(ManagerModels.Advert.active.all())[:3])
             ],
         }
 
@@ -133,9 +134,7 @@ class ShowRoomListView(ListView):
                 {
                     "showroom": showroom,
                     "store_count": showroom.store.count(),
-                    "store" : (
-                            lambda products: random.sample(products, len(showroom.store.all()))
-                        )(list(showroom.store.all()))[:1],
+                    "banner" : ManagerModels.Promotion.objects.filter(showroom=showroom).order_by("-id").first(),
                     "products": [
                         {
                             "product": product,
@@ -146,7 +145,7 @@ class ShowRoomListView(ListView):
                         )(
                             [
                                 product
-                                for product in Product.objects.filter(
+                                for product in Product.admin_list.filter(
                                     store__in=showroom.store.all()
                                 )
                             ][:3]
@@ -187,7 +186,7 @@ class ShowRoomDetailView(DetailView):
         showroom = self.get_object()
 
         showroom_products = [
-            product for product in Product.objects.filter(store__in=showroom.store.all())
+            product for product in Product.admin_list.filter(store__in=showroom.store.all())
         ]
 
         context["view_name"] = showroom.name
@@ -241,7 +240,7 @@ class ShowRoomDetailView(DetailView):
         }
 
         product = (lambda products: random.sample(products, len(products)))(
-            list(Product.objects.all().order_by("-id")[:10])
+            list(Product.admin_list.all().order_by("-id")[:10])
         )[0]
 
         context["category_group"] = {
@@ -275,7 +274,7 @@ class ShowRoomDetailView(DetailView):
                     "supplier": advert.product.store.all().first().supplier,
                     "main_image": ProductImage.objects.filter(product=advert.product).first(),
                 }
-                for advert in (lambda adverts: random.sample(adverts, len(adverts)))(list(Advert.active.filter(product__in = showroom_products))[:3])
+                for advert in (lambda adverts: random.sample(adverts, len(adverts)))(list(ManagerModels.Advert.active.filter(product__in = showroom_products))[:3])
             ],
         }
 
@@ -288,7 +287,7 @@ class ShowRoomDetailView(DetailView):
                         product=product
                     ).first(),
                 }
-                for product in Product.objects.filter(store__in=showroom.store.all()).order_by("-id")[:12]
+                for product in Product.admin_list.filter(store__in=showroom.store.all()).order_by("-id")[:12]
             ],
         }
 
@@ -425,27 +424,8 @@ class SupportCreateDiscussionView(AuthedOnlyAccessMixin, View):
         fields = ("subject", "description")
         instance = discussion
         modal = ManagerModels.Discussion
-        for field in fields:
-            for language in settings.LANGUAGES:
-                try:
-                    if language[0] == get_language():
-                        # already set
-                        continue
-                    result = translator.translate(
-                        getattr(instance, field), dest=language[0]
-                    )
-                    for model_field in modal._meta.get_fields():
-                        if not model_field.name in f"{field}_{language[0]}":
-                            continue
 
-                        if model_field.name == f"{field}_{language[0]}":
-                            setattr(instance, model_field.name, result.text)
-                            instance.save()
-                except:
-                    setattr(
-                        instance, f"{field}_{language[0]}", getattr(instance, field)
-                    )
-                    instance.save()
+        ManagerTasks.make_model_translations.delay(fields, instance.pk, instance.__class__.__name__)
 
         messages.add_message(
             request, messages.SUCCESS, _("Discussion created successfully.")
@@ -486,27 +466,8 @@ class SupportDiscussionView(View):
         fields = ("description",)
         instance = discussion_reply
         modal = ManagerModels.DiscussionReply
-        for field in fields:
-            for language in settings.LANGUAGES:
-                try:
-                    if language[0] == get_language():
-                        # already set
-                        continue
-                    result = translator.translate(
-                        getattr(instance, field), dest=language[0]
-                    )
-                    for model_field in modal._meta.get_fields():
-                        if not model_field.name in f"{field}_{language[0]}":
-                            continue
 
-                        if model_field.name == f"{field}_{language[0]}":
-                            setattr(instance, model_field.name, result.text)
-                            instance.save()
-                except:
-                    setattr(
-                        instance, f"{field}_{language[0]}", getattr(instance, field)
-                    )
-                    instance.save()
+        ManagerTasks.make_model_translations.delay(fields, instance.pk, instance.__class__.__name__)
 
         messages.add_message(
             request, messages.SUCCESS, _("Reply submitted successfully.")

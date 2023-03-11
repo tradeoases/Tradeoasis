@@ -23,6 +23,17 @@ import buyer
 from supplier.models import Store, Product
 from auth_app import models as Authmodels
 
+class VerifiedManager(models.Manager):
+    def get_queryset(self):
+        # Override the default queryset to exclude inactive items
+        return super().get_queryset().filter(is_verified=True)
+
+
+class AdminListManager(models.Manager):
+    def get_queryset(self):
+        # Override the default queryset to exclude inactive items
+        return super().get_queryset().all()
+
 
 def get_file_path(instance, filename):
     ext = filename.split(".")[-1]
@@ -126,6 +137,9 @@ class Showroom(models.Model):
 
 
 class Discussion(models.Model):
+    objects = VerifiedManager()
+    admin_list = AdminListManager()
+
     class Meta:
         ordering = ["-id"]
 
@@ -138,6 +152,7 @@ class Discussion(models.Model):
         blank=True,
         null=True,
     )
+    is_verified = models.BooleanField(_("Verified by Admin"), default=False)
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
@@ -267,8 +282,64 @@ class Promotion(models.Model):
 
         super().save(*args, **kwargs)
 
-
-class PlatformPrice(models.Model):
-    advertising_price = models.DecimalField(
+class AdvertisingLocation(models.Model):
+    name = models.CharField(_("Name"), max_length=256, blank=True, null=True)
+    price = models.DecimalField(
         _("Advertising Price"), decimal_places=2, max_digits=12, default=0.0
     )
+    showroom = models.ForeignKey(to = Showroom, on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self) -> str:
+        if self.showroom:
+            return f"{self.showroom.name} - {self.price}"
+        else:
+            return f"{self.name} - {self.price}"
+
+    
+
+class AdvertManager(models.Manager):
+    def get_queryset(self, *args, **kwargs):
+        results = super().get_queryset(*args, **kwargs)
+        return results.filter(~Q(end_date = timezone.now()), Q(payment_made=True))
+
+
+class Advert(models.Model):
+    objects = models.Manager()
+    active = AdvertManager()
+    
+    class Meta:
+        default_manager_name = "objects"
+
+    product = models.ForeignKey(to=Product, on_delete=models.CASCADE, blank=True, null=True)
+    location = models.ForeignKey(to=AdvertisingLocation, on_delete=models.CASCADE, blank=True, null=True)
+    start_date = models.DateField(_("start date"), blank=True, null=True)
+    end_date = models.DateField(_("end date"), blank=True, null=True)
+    amount = models.DecimalField(
+        _("Total Amount"), decimal_places=2, max_digits=12, default="0.0"
+    )
+    payment_made = models.BooleanField(_("Contract payment made"), default=False)
+    expired = models.BooleanField(_("Advert Expired"), default=False)
+    created_on = models.DateField(_("Created on"), default=timezone.now)
+    slug = models.SlugField(
+        _("Safe Url"),
+        unique=True,
+        blank=True,
+        null=True,
+    )
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(f"{self.product.name}{uuid.uuid4()}")[:50]
+
+        super().save(*args, **kwargs)
+
+    def __str__(self) -> str:
+        return f"Product: {self.product}, Location: {self.location}"
+
+
+class SentEmail(models.Model):
+    recipient = models.CharField(_("recipient"), max_length=256, blank=True, null=True)
+    subject = models.CharField(_("subject"), max_length=256, blank=True, null=True)
+    sending_email = models.CharField(_("sending email"), max_length=256, blank=True, null=True)
+    content = models.TextField(_("content"), blank=True, null=True)
+    reply_to = models.CharField(_("reply_to"), max_length=256, blank=True, null=True)
+    created_on = models.DateField(_("Created on"), default=timezone.now)

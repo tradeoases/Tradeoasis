@@ -22,6 +22,11 @@ urlpatterns = [
         name="product-delete",
     ),
     path(
+        "product/verify/<str:slug>",
+        views.ProductVerifyView.as_view(),
+        name="product-verify",
+    ),
+    path(
         "products/supplier/<str:slug>",
         views.SupplierProductsListView.as_view(),
         name="supplier-product",
@@ -53,6 +58,18 @@ urlpatterns = [
         views.SupplierStoresListView.as_view(),
         name="supplier-store-list",
     ),
+    path(
+        "stores/delete/<str:slug>",
+        views.StoreDeleteView.as_view(),
+        name="stores-delete",
+    ),
+    path(
+        "stores/verify/<str:slug>",
+        views.StoreVerifyView.as_view(),
+        name="stores-verify",
+    ),
+
+
     path("services/", views.ServicesListView.as_view(), name="services-list"),
     path("service/<str:slug>", views.ServiceRetrieveView.as_view(), name="service"),
     path(

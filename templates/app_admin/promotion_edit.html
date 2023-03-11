@@ -71,9 +71,12 @@
                     <label for="showroom-location" class="cs-text-normal" style="color: var(--text-color);">Image</label>
                     <input type="file" name="image" id="showroom-image">
                 </div>
-                <div class="form-group cs-grid" style="--gap: .5rem;">
-                    <input class="cs-text-white cs-bg-secondary" type="submit"
+                <div class="form-group cs-grid cs-grid-flow-col" style="--gap: 1rem;">
+                    <input class="cs-text-white cs-bg-secondary" type="submit" name="edit"
                     value="Create Promotion">
+                    <input class="cs-text-white cs-bg-danger" type="submit" name="delete"
+                    value="Delete Promotion">
+                    <a href="{% url 'app_admin:promotions' %}" class="btn cs-text-white outlined cs-text-secondary cs-font-600 cs-grid cs-justify-center">Cancel</a>
                 </div>
             </form>
 

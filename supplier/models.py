@@ -22,8 +22,22 @@ def get_file_path(instance, filename):
     filename = f"{instance.slug}-{uuid.uuid4()}"[:50] + f".{ext}"
     return os.path.join(f"{instance.__class__.__name__}/images/", filename)
 
+# global model managers
+
+class VerifiedManager(models.Manager):
+    def get_queryset(self):
+        # Override the default queryset to exclude inactive items
+        return super().get_queryset().filter(is_verified=True)
+
+
+class AdminListManager(models.Manager):
+    def get_queryset(self):
+        # Override the default queryset to exclude inactive items
+        return super().get_queryset().all()
 
 class Store(models.Model):
+    objects = VerifiedManager()
+    admin_list = AdminListManager()
 
     name = models.CharField(_("Store Name"), max_length=256)
     supplier = models.ForeignKey(
@@ -44,6 +58,7 @@ class Store(models.Model):
         upload_to=get_file_path,
         default="test/django.png",
     )
+    is_verified = models.BooleanField(_("Verified by Admin"), default=False)
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
@@ -104,8 +119,9 @@ class ProductSubCategory(models.Model):
     def __str__(self) -> str:
         return f"{self.name}"
 
-
 class Product(models.Model):
+    objects = VerifiedManager()
+    admin_list = AdminListManager()
     class Meta:
         ordering = ["-id"]
 
@@ -127,6 +143,7 @@ class Product(models.Model):
     slug = models.SlugField(
         _("Safe Url"), unique=True, blank=True, null=True, max_length=200
     )
+    is_verified = models.BooleanField(_("Verified by Admin"), default=False)
     created_on = models.DateField(_("Created on"), default=timezone.now)
 
     def save(self, *args, **kwargs):
@@ -251,43 +268,7 @@ class ServiceTag(models.Model):
     def __str__(self) -> str:
         return f"{self.service.name}"
 
-class AdvertManager(models.Manager):
-    def get_queryset(self, *args, **kwargs):
-        results = super().get_queryset(*args, **kwargs)
-        return results.filter(~Q(end_date = timezone.now()))
-
-class Advert(models.Model):
-    objects = models.Manager()
-    active = AdvertManager()
-    
-    class Meta:
-        default_manager_name = "objects"
-
-    product = models.ForeignKey(to=Product, on_delete=models.CASCADE, blank=True, null=True)
-    start_date = models.DateField(_("start date"), blank=True, null=True)
-    end_date = models.DateField(_("end date"), blank=True, null=True)
-    amount = models.DecimalField(
-        _("Total Amount"), decimal_places=2, max_digits=12, default="0.0"
-    )
-    payment_made = models.BooleanField(_("Contract payment made"), default=False)
-    expired = models.BooleanField(_("Advert Expired"), default=False)
-    created_on = models.DateField(_("Created on"), default=timezone.now)
-    slug = models.SlugField(
-        _("Safe Url"),
-        unique=True,
-        blank=True,
-        null=True,
-    )
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(f"{self.product.name}{uuid.uuid4()}")[:50]
-
-        super().save(*args, **kwargs)
-
-    def __str__(self) -> str:
-        return f"Product: {self.product}"
-
-
+        
 # SIGNALS
 @receiver(post_save, sender=Product)
 def on_product_save(sender, instance, **kwargs):

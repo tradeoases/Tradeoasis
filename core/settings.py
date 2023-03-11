@@ -93,7 +93,13 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django_user_agents.middleware.UserAgentMiddleware",
+    # 'django_xframe_options.middleware.XFrameOptionsMiddleware',
 ]
+
+# X_FRAME_OPTIONS = 'DENY'
+# X_FRAME_OPTIONS_ALLOWED_HOSTS = [
+#     'localhost',
+# ]
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -330,3 +336,4 @@ ACCOUNT_SIGNUP_REDIRECT_URL = reverse_lazy("auth_app:business")
 
 # custom
 CHATROOMFILES_DIR = os.path.join(BASE_DIR, "chatrooms")
+SUPPORT_EMAIL = os.environ.get("SUPPORT_EMAIL")

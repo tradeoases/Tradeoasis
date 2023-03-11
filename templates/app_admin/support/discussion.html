@@ -30,7 +30,7 @@
                     <hr style="border: 1px solid hsl(0, 0%, 95%);">
                     <ul class="list cs-grid cs-content-start" style="--gap: .25rem">
                         {% for discussion in discussions %}
-                            <li>
+                            <li class="list-body cs-grid cs-justify-between cs-align-center">
                                 <a href="{% url 'app_admin:community-chat' discussion.slug %}" class="cs-grid" style="--gap:.25rem;">
                                     <p class="cs-flex cs-align-baseline cs-justify-between">
                                         <span class="cs-grid cs-text-secondary cs-text-md">{{discussion.subject}}</span>
@@ -39,6 +39,10 @@
                                         <span class="cs-grid cs-text-secondary cs-text-sm" style="color: var(--text-color)">{{discussion.created_on|format_date}}</span>
                                     </p>
                                 </a>
+                                <form action="{% url 'app_admin:community-chat-delete' discussion.slug %}" method="POST">
+                                    {% csrf_token %}
+                                    <input class="btn cs-text-white cs-bg-danger" style="padding: .25rem .5rem; font-size: .8rem;border: none" type="submit" value="Delete">
+                                </form>
                             </li>
                         {% endfor %}
                     </ul>
@@ -46,6 +50,7 @@
                 <div class="chat outlined br-sm cs-align-start cs-content-start cs-grid" style="--gap:1rem;padding: 1rem 1rem;">
                     <div class="cs-flex cs-align-baseline cs-justify-between">
                         <h4 class="cs-text-normal cs-text-secondary" style="margin: 0;">{{discussion}}</h4>
+                        <span class="cs-text-accent cs-text-sm">By replying, you Verify this discussion!</span>
                     </div>
                     <hr style="border: 1px solid hsl(0, 0%, 95%);">
                     <ul class="list cs-grid cs-content-start" style="--gap: .25rem">
