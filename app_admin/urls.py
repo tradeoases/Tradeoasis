@@ -51,4 +51,9 @@ urlpatterns = [
     path("promotions/", views.AdminPromotionsView.as_view(), name="promotions"),
     path("promotions/create/", views.AdminPromotionsCreateView.as_view(), name="promotions-create"),
     path("promotions/edit/<str:slug>", views.AdminPromotionsEditView.as_view(), name="promotions-edit"),
+    
+    path("promotions/emails/", views.AdminEmailPromotionsView.as_view(), name="email-promotions"),
+    path("promotions/emails/create/", views.AdminEmailPromotionsCreateView.as_view(), name="email-promotions-create"),
+    path("promotions/emails/edit/<str:slug>", views.AdminEmailPromotionsEditView.as_view(), name="email-promotions-edit"),
+    path("promotions/emails/send/<str:slug>", views.AdminEmailPromotionsSendView.as_view(), name="email-promotions-send"),
 ]

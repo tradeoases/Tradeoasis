@@ -9,7 +9,10 @@
             <ul class="cs-grid section-nav list-none list-outside" style="--gap: .25rem;">
                 <div class="cs-flex">
                     <li class="cs-text-md cs-font-500 active">
-                        <a href="">General Promotions</a>
+                        <a href="{% url 'app_admin:promotions' %}">General Promotions</a>
+                    </li>
+                    <li class="cs-text-md cs-font-500">
+                        <a href="{% url 'app_admin:email-promotions' %}">Email Promotions</a>
                     </li>
                 </div>
                 <ul class="nav-emph-cta" style="justify-self: flex-end;align-self: center;margin-inline-end: .5rem;">
@@ -25,6 +28,11 @@
         <!-- section selectors -->
 
         <section class="content cs-grid br-sm outlined" style="--gap: 1rem;padding: 1rem;">
+            {% if not text_promotions and not banner_promotions %}
+                <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
+                    {% trans "No Email Promotions Found" %}
+                </p>
+            {% endif %}
             {% if text_promotions %}
             <div class="cs-grid" style="gap: .5rem;">
                 <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">

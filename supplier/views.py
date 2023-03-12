@@ -119,7 +119,7 @@ class SupplierContactView(View):
 
         ManagerTasks.send_mail.delay(
             subject = subject,
-            content = f'Hello, {user.username}, \n {message}',
+            content = f'Hello, {user.username}, \n{message}',
             _to = [f"{user.email}"],
             _reply_to = [f"{settings.SUPPORT_EMAIL}"]
         )
@@ -193,7 +193,7 @@ class SupplierContractView(View):
 
         ManagerTasks.send_mail.delay(
             subject = _("Foroden Contract Created"),
-            content = _(f"Hello, {supplier.username}.\n A Contract application has been sumbited by {buyer.profile.business_name} on service {service.name}.\nPlease visit the dashboard to respond to the application.\nThank you."),
+            content = _(f"Hello, {supplier.username}.\nA Contract application has been sumbited by {buyer.profile.business_name} on service {service.name}.\nPlease visit the dashboard to respond to the application.\nThank you."),
             _to = [f"{supplier.email}"],
             _reply_to = [f"{settings.SUPPORT_EMAIL}"]
         )
@@ -1476,7 +1476,7 @@ class DashboardContractRejectDetailsView(SupplierOnlyAccessMixin, View):
 
         ManagerTasks.send_mail.delay(
             subject = _("Foroden Contract Rejected."),
-            content = _(f"Hello, {contract.buyer.username}.\n Your contract application on service {contract.service.name} has been rejected.\nPlease contact the supplier for more information.\nThank you."),
+            content = _(f"Hello, {contract.buyer.username}.\nYour contract application on service {contract.service.name} has been rejected.\nPlease contact the supplier for more information.\nThank you."),
             _to = [f"{contract.buyer.email}"],
             _reply_to = [f"{settings.SUPPORT_EMAIL}"]
         )
@@ -1500,7 +1500,7 @@ class DashboardContractAcceptDetailsView(SupplierOnlyAccessMixin, View):
 
         ManagerTasks.send_mail.delay(
             subject = _("Foroden Contract Accepted"),
-            content = _(f"Hello, {contract.buyer.username}.\n Your contract application on service") + "{contract.service.name}" + _("has been accepted.\nPlease visit the") + "{payment_link}" + _("to complete the application process.\nThank you."),
+            content = _(f"Hello, {contract.buyer.username}.\nYour contract application on service") + "{contract.service.name}" + _("has been accepted.\nPlease visit the") + "{payment_link}" + _("to complete the application process.\nThank you."),
             _to = [f"{contract.buyer.email}"],
             _reply_to = [f"{settings.SUPPORT_EMAIL}"]
         )

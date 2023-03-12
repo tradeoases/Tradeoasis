@@ -9,7 +9,7 @@
                 <h2 style="margin: 0;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
                     {% trans 'Fill in form to create service' %}
                 </h2>
-                <p class="cs-text-base text-slate-600">* {% trans 'Represents required fields' %}.</p>
+                <p class="cs-text-base text-slate-600"><b>*</b> {% trans 'Represents required fields' %}.</p>
                 {% if messages %}
                     {% for message in messages %}
                         {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 

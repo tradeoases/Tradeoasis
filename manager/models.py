@@ -282,6 +282,47 @@ class Promotion(models.Model):
 
         super().save(*args, **kwargs)
 
+class EmailPromotion(models.Model):
+    promotion_types = (
+        ("ALL USERS", "ALL USERS"),
+        ("SUPPLIERS", "SUPPLIERS"),
+        ("BUYERS", "BUYERS"),
+        ("SHOWROOWS", "SHOWROOWS"),
+    )
+
+    subject = models.CharField(_("subject"), max_length=256)
+    description = models.CharField(_("Description"), max_length=256, blank=True, null=True)
+    image = models.ImageField(
+        verbose_name=_("Image"),
+        upload_to=get_file_path,
+        blank=True,
+        null=True
+    )
+    target = models.CharField(_("Type"), max_length=256, choices=promotion_types)
+    created_on = models.DateField(_("Created on"), default=timezone.now)
+
+    showroom = models.ForeignKey(to=Showroom, on_delete=models.CASCADE, blank=True, null=True)
+
+    slug = models.SlugField(
+        _("Safe Url"),
+        unique=True,
+        blank=True,
+        null=True,
+    )
+
+    has_image = models.BooleanField(_("Has Banner Image"), default=False)
+    
+    def save(self, *args, **kwargs):
+        self.slug = f"{slugify(self.subject)}-{uuid.uuid4()}"[:50]
+
+        self.subject = self.subject
+
+        if self.image:
+            self.has_image = True
+
+        super().save(*args, **kwargs)
+
+
 class AdvertisingLocation(models.Model):
     name = models.CharField(_("Name"), max_length=256, blank=True, null=True)
     price = models.DecimalField(

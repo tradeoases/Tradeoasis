@@ -562,7 +562,7 @@ class ContactClient(SupportOnlyAccessMixin, View):
 
         ManagerTasks.send_mail.delay(
             subject = subject,
-            content = f'Hello, {name}, \n {description}',
+            content = f'Hello, {name}, \n{description}',
             _to = [f"{email}"],
             _reply_to = [f"{settings.SUPPORT_EMAIL}"]
         )
@@ -669,7 +669,7 @@ class CreateSupportView(SupportOnlyAccessMixin, View):
 
         ManagerTasks.send_mail.delay(
             subject = _("Fodoren Support Team invite."),
-            content = '{0} \n {1} \n {2} \n {3} \n {4}'.format(_("Hello"), user.username, _("Your have been added a Fodoren Support Team Member, Please edit your account details and set a desired password after activating your account."), _("Your activation link is"), activate_url),
+            content = '{0} \n{1} \n{2} \n{3} \n{4}'.format(_("Hello"), user.username, _("Your have been added a Fodoren Support Team Member, Please edit your account details and set a desired password after activating your account."), _("Your activation link is"), activate_url),
             _to = [f"{user.email}"],
             _reply_to = [f"{settings.SUPPORT_EMAIL}"]
         )
@@ -808,6 +808,7 @@ class AdminPromotionsEditView(View):
         if not image and not description and not promotion.image:
             messages.add_message(request, messages.ERROR, _("Offer description for text promotions"))
             return redirect(reverse("app_admin:promotions-create"))
+            
         elif promotion_types != "SHOWROOWS":
 
             promotion.name = name
@@ -816,10 +817,6 @@ class AdminPromotionsEditView(View):
             promotion.image = image if image else None
             promotion.save()
 
-            if not promotion:
-                messages.add_message(request, messages.ERROR, _("An Error occured. Try Again."))
-                return redirect(reverse("app_admin:promotions-create"))
-
         elif promotion_types == "SHOWROOWS":
 
             promotion.name = name
@@ -827,14 +824,7 @@ class AdminPromotionsEditView(View):
             promotion.description = description
             promotion.image = image if image else None
             promotion.showroom = ManagerModels.Showroom.objects.filter(slug=showrooms).first()
-
-            print(promotion)
-
             promotion.save()
-
-            if not promotion:
-                messages.add_message(request, messages.ERROR, _("An Error occured. Try Again."))
-                return redirect(reverse("app_admin:promotions-create"))
 
         
         fields = ("name", "description",)
@@ -845,3 +835,186 @@ class AdminPromotionsEditView(View):
 
         messages.add_message(request, messages.SUCCESS, _("Promotion Edited Successfully."))
         return redirect(reverse("app_admin:promotions"))
+
+
+class AdminEmailPromotionsView(View):
+    template_name = "app_admin/email_promotions.html"
+
+    def get(self, request):
+        context_data = {
+            "view_name": "Admin Dashboard",
+            "active_tab": "Promotions",
+            "text_promotions" : ManagerModels.EmailPromotion.objects.filter(has_image=False),
+            "banner_promotions" : ManagerModels.EmailPromotion.objects.filter(has_image=True),
+        }
+
+        return render(request, self.template_name, context=context_data)
+
+class AdminEmailPromotionsCreateView(View):
+    template_name = "app_admin/email_promotions_create.html"
+
+    def get(self, request):
+        context_data = {
+            "view_name": "Admin Dashboard",
+            "active_tab": "Promotions",
+            "choices" : ["ALL USERS", "SUPPLIERS", "BUYERS", "SHOWROOWS"],
+            "showrooms" : ManagerModels.Showroom.objects.all(),
+        }
+
+        return render(request, self.template_name, context=context_data)
+
+    def post(self, request):
+        subject = request.POST.get("subject")
+        promotion_types = request.POST.get("promotion_types")
+        showrooms = request.POST.get("showrooms")
+        description = request.POST.get("description")
+        image = request.FILES.get("image")
+        
+        if not image and not description:
+            messages.add_message(request, messages.ERROR, _("Offer description for text promotions"))
+            return redirect(reverse("app_admin:email-promotions-create"))
+        elif promotion_types != "SHOWROOWS":
+
+            promotion = ManagerModels.EmailPromotion.objects.create(
+                subject = subject,
+                target = promotion_types,
+                description = description,
+                image = image if image else None,
+            )
+            if not promotion:
+                messages.add_message(request, messages.ERROR, _("An Error occured. Try Again."))
+                return redirect(reverse("app_admin:email-promotions-create"))
+
+        elif promotion_types == "SHOWROOWS":
+
+            promotion = ManagerModels.EmailPromotion.objects.create(
+                subject = subject,
+                target = promotion_types,
+                description = description,
+                image = image if image else None,
+                showroom = ManagerModels.Showroom.objects.filter(slug=showrooms).first()
+            )
+            if not promotion:
+                messages.add_message(request, messages.ERROR, _("An Error occured. Try Again."))
+                return redirect(reverse("app_admin:email-promotions-create"))
+
+        
+        fields = ("subject", "description",)
+        instance = promotion
+
+        ManagerTask.make_model_translations.delay(fields, instance.pk, instance.__class__.__name__)
+
+        messages.add_message(request, messages.SUCCESS, _("Promotion Created Successfully."))
+        return redirect(reverse("app_admin:email-promotions"))
+
+class AdminEmailPromotionsEditView(View):
+    template_name = "app_admin/email_promotions_edit.html"
+
+    def get(self, request, slug):
+        context_data = {
+            "view_name": "Admin Dashboard",
+            "active_tab": "Promotions",
+            "choices" : ["ALL USERS", "SUPPLIERS", "BUYERS", "SHOWROOWS"],
+            "showrooms" : ManagerModels.Showroom.objects.all(),
+            "promotion" : ManagerModels.EmailPromotion.objects.filter(slug=slug).first()
+        }
+
+        return render(request, self.template_name, context=context_data)
+
+    def post(self, request, slug):
+
+        if ManagerModels.EmailPromotion.objects.filter(slug=slug):
+            promotion = ManagerModels.EmailPromotion.objects.filter(slug=slug).first()
+        else:
+            messages.add_message(request, messages.ERROR, _("Recond not found."))
+            return redirect(reverse("app_admin:email-promotions"))
+
+
+        if request.POST.get('delete') == 'Delete Promotion':
+            promotion.delete()
+            return redirect(reverse("app_admin:email-promotions"))
+
+        subject = request.POST.get("subject")
+        promotion_types = request.POST.get("promotion_types")
+        showrooms = request.POST.get("showrooms")
+        description = request.POST.get("description")
+        image = request.FILES.get("image")
+              
+        if not image and not description and not promotion.image:
+            messages.add_message(request, messages.ERROR, _("Offer description for text promotions"))
+            return redirect(reverse("app_admin:email-promotions-create"))
+
+        elif promotion_types != "SHOWROOWS":
+
+            promotion.subject = subject
+            promotion.target = promotion_types
+            promotion.description = description
+            if image:
+                promotion.image = image
+            promotion.save()
+
+        elif promotion_types == "SHOWROOWS":
+            promotion.subject = subject
+            promotion.target = promotion_types
+            promotion.description = description
+            if image:
+                promotion.image = image
+            promotion.showroom = ManagerModels.Showroom.objects.filter(slug=showrooms).first()
+            promotion.save()
+
+        
+        fields = ("subject", "description",)
+        instance = promotion
+
+        ManagerTask.make_model_translations.delay(fields, instance.pk, instance.__class__.__name__)
+
+        messages.add_message(request, messages.SUCCESS, _("Promotion Edited Successfully."))
+        return redirect(reverse("app_admin:email-promotions"))
+
+class AdminEmailPromotionsSendView(View):
+    def get(self, request, *args, **kwargs):
+        return redirect(reverse("app_admin:email-promotions"))
+        
+    def post(self, request, slug):
+
+        promotion = ManagerModels.EmailPromotion.objects.filter(slug=slug).first()
+
+        if request.POST.get('delete') == 'delete':
+            promotion.delete()
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                _("Promotion Deleted successfully."),
+            )
+            return redirect(reverse("app_admin:email-promotions"))
+
+
+        recepient_list = []
+        if promotion.target == "SUPPLIERS":
+            recepient_list = [client.email for client in AuthModels.Supplier.supplier.filter(is_email_activated = True)]
+        elif promotion.target == "BUYERS":
+            recepient_list = [client.email for client in AuthModels.Buyer.buyer.filter(is_email_activated = True)]
+        elif promotion.target == "SHOWROOWS":
+            stores = promotion.showroom.store.all()
+            for store in stores:
+                supplier_email = store.supplier.email
+                if supplier_email not in recepient_list:
+                    recepient_list.append(supplier_email)
+        else:
+            # to all users
+            recepient_list = [client.user.email for client in AuthModels.ClientProfile.objects.all()]
+             
+        ManagerTask.send_mail.delay(
+            subject = promotion.subject,
+            content = f'Hello, \n{promotion.description}',
+            image_url = promotion.image.path if promotion.has_image else None,
+            _to = recepient_list,
+            _reply_to = [f"{settings.SUPPORT_EMAIL}"]
+        )
+
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            _("Promotion Sent successfully."),
+        )
+        return redirect(reverse("app_admin:email-promotions"))

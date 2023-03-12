@@ -32,6 +32,8 @@ def make_model_translations(fields, instance_id, modal_name):
         modal = ManagerModels.Discussion
     elif modal_name == "Promotion":
         modal = ManagerModels.Promotion
+    elif modal_name == "EmailPromotion":
+        modal = ManagerModels.EmailPromotion
 
     if modal_name == "Discussion":
         instance = modal.admin_list.filter(id=instance_id).first()
@@ -65,12 +67,13 @@ def make_translations(fields, instance, modal):
 
 
 @task(name="send_email")
-def send_mail(subject: str, content : str, _to: List[str] = [], _reply_to: List[str] = [], _from=settings.DEFAULT_FROM_EMAIL):
+def send_mail(subject: str, content : str, _to: List[str] = [], _reply_to: List[str] = [], _from=settings.DEFAULT_FROM_EMAIL, image_url=None):
 
     email_body = render_to_string(
         "email_message.html",
         {
             "content": "{}".format(content),
+            "image_url": None
         },
     )
     email = EmailMessage(
@@ -81,13 +84,16 @@ def send_mail(subject: str, content : str, _to: List[str] = [], _reply_to: List[
         reply_to = _reply_to
     )
     email.content_subtype = 'html'
+    if image_url:
+        email.attach_file('image_url')
+
     email.send(fail_silently=False)
 
     # save email
     ManagerModels.SentEmail.objects.create(
         recipient = ", ".join(_to),
         subject = subject,
-        sending_email = from_email,
+        sending_email = _from,
         content = content,
         reply_to = ", ".join(_reply_to) if _reply_to else None
     )

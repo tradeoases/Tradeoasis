@@ -673,3 +673,24 @@ table tbody tr.alert td {
 .main-content-tabs a:hover {
     font-weight: bold;
 }
+
+
+.promotion-card {
+    position: relative;
+}
+
+.promotion-card form.send-promotion {
+    position: absolute;
+    inset-block-end: -12.5px;
+    inset-inline-end: -12.5px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+}
+
+.promotion-card form.send-promotion button{
+    border-radius: 50%;
+    padding: 8px 10px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.267);
+    font-size: .8rem;
+}
