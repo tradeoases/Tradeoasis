@@ -1,38 +1,10 @@
-import os
 import yaml
 import json
-import braintree
-from django.conf import settings
 
 from django.core.management.base import BaseCommand
+from payment import models as ManagerModels
 
-PRODUCT = "product"
-PLAN = "plan"
-
-BASE_DIR = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)),  # commands
-    "../",  # management
-    "../",  # land
-    "../",  # videoproj
-)
-
-PRODUCT_CONF_PATH = os.path.join(BASE_DIR, "braintree", "product.yml")
-PLAN_CONF_PATH = os.path.join(BASE_DIR, "braintree", "plan.json")
-
-if settings.BRAINTREE_PRODUCTION:
-    braintree_env = braintree.Environment.Production
-else:
-    braintree_env = braintree.Environment.Sandbox
-
-gateway = braintree.BraintreeGateway(
-    braintree.Configuration(
-        environment=braintree_env,
-        merchant_id=os.environ.get("BRAINTREE_MERCHANT_ID"),
-        public_key=os.environ.get("BRAINTREE_PUBLIC_KEY"),
-        private_key=os.environ.get("BRAINTREE_PRIVATE_KEY"),
-    )
-)
-
+from payment.management.commands import mode as braintree_config
 
 class Command(BaseCommand):
 
@@ -42,35 +14,44 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument(
-            "--create", "-c", choices=[PRODUCT, PLAN], help="Creates braintree plan"
+            "--create", "-c", choices=[braintree_config.PLAN], help="Creates braintree plan"
         )
         parser.add_argument(
             "--list",
             "-l",
-            choices=[PRODUCT, PLAN],
+            choices=[braintree_config.PLAN],
             help="List braintree products or plans",
         )
 
     def create_plan(self):
-        with open(PLAN_CONF_PATH, "r") as f:
+        with open(braintree_config.PLAN_CONF_PATH, "r") as f:
             data = json.load(f)
             for plan in data:
-                result = gateway.plan.create(plan)
+                if not ManagerModels.Feature.objects.filter(custom_id=plan.get("id")):
+                    result = braintree_config.get_braintree_gateway().plan.create(plan)
+                    if result.is_success:
+                        feature = ManagerModels.Feature.objects.create(
+                            custom_id = plan.get("id"),
+                            name = plan.get("name"),
+                            price = plan.get("price"),
+                            description = plan.get("description"),
+                            billing_frequency = plan.get("billing_frequency"),
+                            currency_iso_code = plan.get("currency_iso_code")
+                        )
+                        if feature:
+                            # log data
+                            print(feature)
+                    else:
+                        print(result)
 
     def list_plan(self):
-        ret = gateway.plan.all()
+        ret = braintree_config.gateway.plan.all()
         print(ret)
 
     def create(self, what):
-        if what == PRODUCT:
-            self.create_product()
-        else:
             self.create_plan()
 
     def list(self, what):
-        if what == PRODUCT:
-            self.list_product()
-        else:
             self.list_plan()
 
     def handle(self, *args, **options):

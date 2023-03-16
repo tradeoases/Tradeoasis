@@ -505,9 +505,18 @@ table tbody tr.alert {
 table tbody tr.alert:hover {
     background-color: hsl(195, 53%, 80%);
 }
-table tbody tr.alert td {
+table tbody tr.alert td,
+table tbody tr.active td {
     background-color: inherit;
 }
+
+
+table tbody tr.active {
+    background-color: hsl(145, 61%, 64%);
+}
+/* table tbody tr.active:hover {
+    background-color: hsl(145, 61%, 50%);
+} */
 /* lists */
 
 .modal {

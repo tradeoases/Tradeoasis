@@ -75,4 +75,6 @@ urlpatterns = [
     path(
         "suspend-account/<str:slug>", views.SuspendAccountView.as_view(), name="suspend"
     ),
+
+    path("adverts/", views.AdvertsListView.as_view(), name="adverts-list"),
 ]

@@ -93,10 +93,15 @@ class AdminDashboardView(SupportOnlyAccessMixin, View):
                     "description": _("Memberships"),
                     "count": PaymentModels.Membership.objects.all().count(),
                 },
+                # {
+                #     "name": _("Total Contracts"),
+                #     "description": _("Contracts Created"),
+                #     "count": PaymentModels.Contract.objects.all().count(),
+                # },
                 {
-                    "name": _("Total Contracts"),
-                    "description": _("Contract Created"),
-                    "count": PaymentModels.Contract.objects.all().count(),
+                    "name": _("Total Adverts"),
+                    "description": _("Active Adverts"),
+                    "count": ManagerModels.Advert.active.all().count(),
                 },
             ],
         }
@@ -153,10 +158,15 @@ class AdminClientsView(SupportOnlyAccessMixin, View):
                     "description": _("Total Store Count"),
                     "count": ManagerModels.Store.admin_list.all().count(),
                 },
+                # {
+                #     "name": _("Total Contracts"),
+                #     "description": _("Contract Created"),
+                #     "count": PaymentModels.Contract.objects.all().count(),
+                # },
                 {
-                    "name": _("Total Contracts"),
-                    "description": _("Contract Created"),
-                    "count": PaymentModels.Contract.objects.all().count(),
+                    "name": _("Total Adverts"),
+                    "description": _("Active Adverts"),
+                    "count": ManagerModels.Advert.active.all().count(),
                 },
             ],
         }

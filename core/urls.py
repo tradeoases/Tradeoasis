@@ -6,6 +6,7 @@ from django.conf.urls.i18n import i18n_patterns
 from django.utils.translation import gettext as _
 
 from manager import views
+from payment.views import InitSubscriptionView
 
 from django.core.signals import request_finished
 from django.dispatch import receiver
@@ -60,6 +61,7 @@ urlpatterns = i18n_patterns(
     path(_("admin/"), admin.site.urls),
 )
 urlpatterns += [
+    path("accounts/inactive/", InitSubscriptionView.as_view()),
     path("accounts/profile/", views.HomeView.as_view()),
     path("accounts/", include("allauth.urls")),
 ]

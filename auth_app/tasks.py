@@ -3,7 +3,7 @@ from celery.utils.log import get_task_logger
 from auth_app.email import send_account_activation_email
 
 from auth_app import models as AuthModels
-from payment.management.commands.run_braintree import gateway
+from payment.management.commands import mode as braintree_config
 
 from django.utils.translation import get_language
 from googletrans import Translator
@@ -26,7 +26,7 @@ def create_braintree_customer(profile_id):
     logger.info("Creating braintree customer")
     try:
         profile = AuthModels.ClientProfile.objects.filter(pk=profile_id).first()
-        result = gateway.customer.create(
+        result = braintree_config.get_braintree_gateway().customer.create(
             {
                 "first_name": profile.user.first_name,
                 "last_name": profile.user.last_name,

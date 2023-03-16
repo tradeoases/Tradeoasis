@@ -199,3 +199,20 @@ class MembershipSerializer(serializers.ModelSerializer):
             PaymentModels.MembershipReceipt.objects.filter(membership=instance).first()
         ).data
         return representation
+
+class AdvertsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ManagerModels.Advert
+        fields = "__all__"
+        
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+
+        product = SupplierModels.Product.admin_list.filter(id = representation["product"]).first()
+        supplier_data = SuppliersSerializer(
+            product.store.all().first().supplier.profile
+        ).data
+        representation["product"] = product.name
+        representation["supplier"] = supplier_data.get("business_name")
+        
+        return representation

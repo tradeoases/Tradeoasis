@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "services_was_loaded" : false,
         "stores_was_loaded" : false,
         "memberships_was_loaded" : false,
+        "adverts_was_loaded" : false,
     }
 
     const BASE_API_URL = 'http://localhost:8000/en/admin-api';
@@ -613,12 +614,63 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
     
+    const renderAdverts = async () => {
+        if (!fetchState["adverts_was_loaded"]) {
+            // if it is the first time we are loading suppliers, we set pageNum to 1
+            pageNum = 1;
+            fetchState["adverts_was_loaded"] = true;
+        }
+        let response = await fetchData(url='adverts');
+
+        const tableBody = document.querySelector('#client-adverts-section table tbody');
+
+        if (tableBody.childNodes.length > 0) {
+            while (tableBody.firstChild) {
+                tableBody.removeChild(tableBody.firstChild);
+            }
+
+            document.querySelector('#table-item-count').textContent = response.count;
+    
+            response.results.forEach((record, i) => {
+                let tableRow = document.createElement('tr')
+                tableRow.classList = 'cs-text-md cs-font-500 client-item';
+                tableRow.setAttribute('data-slug', record.slug);
+                tableRow.setAttribute('data-id', record.id);
+                tableRow.setAttribute('data-account-type', record.account_type);
+                tableRow.innerHTML = `
+                    <td>${i + 1}</td>
+                    <td>${record.product.slice(0,50)}</td>
+                    <td>${record.supplier}</td>
+                    <td>${record.amount}</td>
+                    <td>${record.start_date}</td>
+                    <td>${record.end_date}</td>
+                `;
+                
+                if ((new Date(record.end_date) > new Date()) && record.is_active == true) {
+                    tableRow.classList.add("active")
+                }
+                tableBody.appendChild(tableRow);
+                // tableRow.addEventListener('click', async () => {
+                //     if (!isClientModalOpen) {
+                //         // fetch client data
+                //         // open modal
+                //         fetchData(`product/${record.slug}`, has_page_num=false)
+                //         .then(response => openProductModal(response));                        
+                //     }
+                // })
+            })
+        }
+
+        // change page number
+        paginate(response, invoker = renderProducts)
+    }
+    
     // detect page
     const nav = document.querySelector('nav[data-page]');
     
     // client page
     // if (nav && nav.dataset['page'] === 'client') {
-        const clientRoutes = ["client-overview", "client-suppliers","client-buyers","client-stores", "client-contracts","client-products","client-buyers-overview","client-stores-overview","client-products-overview", "client-contracts-overview","client-suppliers-overview"];
+        const clientRoutes = ["client-overview", "client-suppliers", "client-adverts", "client-buyers","client-stores", "client-contracts","client-products","client-buyers-overview","client-stores-overview","client-products-overview", "client-contracts-overview","client-suppliers-overview","client-adverts-overview"];
         
         // SWITCHING TABS
         activeTab = clientRoutes[0];
@@ -667,6 +719,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                         else if (activeTab.includes('stores')) {
                             renderStores();
+                        }
+                        else if (activeTab.includes('adverts')) {
+                            renderAdverts();
                         }
 
                     }

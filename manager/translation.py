@@ -25,3 +25,13 @@ class DiscussionReplyTranslationOptions(TranslationOptions):
 @register(models.Promotion)
 class DiscussionReplyTranslationOptions(TranslationOptions):
     fields = ("name", "description")
+
+@register(models.EmailPromotion)
+class EmailPromotionTranslationOptions(TranslationOptions):
+    fields = ("subject", "description")
+
+
+@register(models.AdvertisingLocation)
+class AdvertisingLocationTranslationOptions(TranslationOptions):
+    fields = ("name",)
+

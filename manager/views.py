@@ -79,7 +79,7 @@ class HomeView(View):
                             product=product
                         ).first(),
                     }
-                    for product in Product.admin_list.all().order_by("-id")[:12]
+                    for product in Product.objects.all().order_by("-id")[:12]
                 ],
             },
             "products": {
@@ -92,7 +92,7 @@ class HomeView(View):
                     }
                     for product in (
                         lambda products: random.sample(products, len(products))
-                    )(list(Product.admin_list.all().order_by("-id")[:12]))
+                    )(list(Product.objects.all().order_by("-id")[:12]))
                 ],
             },
             "stores": {
@@ -145,7 +145,7 @@ class ShowRoomListView(ListView):
                         )(
                             [
                                 product
-                                for product in Product.admin_list.filter(
+                                for product in Product.objects.filter(
                                     store__in=showroom.store.all()
                                 )
                             ][:3]
@@ -186,7 +186,7 @@ class ShowRoomDetailView(DetailView):
         showroom = self.get_object()
 
         showroom_products = [
-            product for product in Product.admin_list.filter(store__in=showroom.store.all())
+            product for product in Product.objects.filter(store__in=showroom.store.all())
         ]
 
         context["view_name"] = showroom.name
@@ -240,7 +240,7 @@ class ShowRoomDetailView(DetailView):
         }
 
         product = (lambda products: random.sample(products, len(products)))(
-            list(Product.admin_list.all().order_by("-id")[:10])
+            list(Product.objects.all().order_by("-id")[:10])
         )[0]
 
         context["category_group"] = {
@@ -287,7 +287,7 @@ class ShowRoomDetailView(DetailView):
                         product=product
                     ).first(),
                 }
-                for product in Product.admin_list.filter(store__in=showroom.store.all()).order_by("-id")[:12]
+                for product in Product.objects.filter(store__in=showroom.store.all()).order_by("-id")[:12]
             ],
         }
 
@@ -425,7 +425,7 @@ class SupportCreateDiscussionView(AuthedOnlyAccessMixin, View):
         instance = discussion
         modal = ManagerModels.Discussion
 
-        ManagerTasks.make_model_translations.delay(fields, instance.pk, instance.__class__.__name__)
+        ManagerTasks.make_manager_model_translations.delay(fields, instance.pk, instance.__class__.__name__)
 
         messages.add_message(
             request, messages.SUCCESS, _("Discussion created successfully.")
@@ -467,7 +467,7 @@ class SupportDiscussionView(View):
         instance = discussion_reply
         modal = ManagerModels.DiscussionReply
 
-        ManagerTasks.make_model_translations.delay(fields, instance.pk, instance.__class__.__name__)
+        ManagerTasks.make_manager_model_translations.delay(fields, instance.pk, instance.__class__.__name__)
 
         messages.add_message(
             request, messages.SUCCESS, _("Reply submitted successfully.")

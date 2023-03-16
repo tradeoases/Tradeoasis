@@ -121,7 +121,7 @@ class ProductVerifyView(APIView):
 
             # send mail
             ManagerTasks.send_mail.delay(
-                subject = _("Suspension of Product On Fodoren"),
+                subject = _("Verification of Product On Fodoren"),
                 content = f"""
                     Dear {supplier.profile},
 
@@ -316,7 +316,7 @@ class StoreVerifyView(APIView):
 
             # send mail
             ManagerTasks.send_mail.delay(
-                subject = _("Suspension of Store On Fodoren"),
+                subject = _("Verification of Store On Fodoren"),
                 content = f"""
                     Dear {supplier.profile},
 
@@ -393,3 +393,9 @@ class SuspendAccountView(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
         except:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class AdvertsListView(ListAPIView):
+    queryset = ManagerModels.Advert.objects.all().order_by("-id")
+    serializer_class = serializers.AdvertsSerializer
+    pagination_class = CustomListPagination

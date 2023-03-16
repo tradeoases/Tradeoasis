@@ -35,11 +35,11 @@ from paypalcheckoutsdk.orders import OrdersGetRequest
 from .paypal import PayPalClient
 import stripe
 
-from payment.management.commands.run_braintree import gateway
+from payment.management.commands import mode as braintree_config
 
 
 class MembershipsView(View):
-    model = PaymentModels.MembershipPlan
+    # model = PaymentModels.MembershipPlan
     template_name = "payments/memberships.html"
 
     def get(self, request):
@@ -50,271 +50,277 @@ class MembershipsView(View):
 
         context["view_name"] = _("Memberships")
 
-        context["memberships"] = {
-            "context_name": "memberships",
-            "results": [
-                {"plan": plan, "features": plan.features.all()}
-                for plan in PaymentModels.MembershipPlan.objects.all()
-            ],
-        }
+        # context["memberships"] = {
+        #     "context_name": "memberships",
+        #     "results": [
+        #         {"plan": plan, "features": plan.features.all()}
+        #         for plan in PaymentModels.MembershipPlan.objects.all()
+        #     ],
+        # }
         return context
 
 
 class MembershipsDetailsView(AuthedOnlyAccessMixin, DetailView):
-    model = PaymentModels.MembershipPlan
-    template_name = "payments/membership_detail.html"
+    # model = PaymentModels.MembershipPlan
+    # template_name = "payments/membership_detail.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
 
-        plan = self.get_object()
+    #     plan = self.get_object()
 
-        context["view_name"] = _("Memberships")
+    #     context["view_name"] = _("Memberships")
 
-        context["features"] = {
-            "context_name": "features",
-            "results": plan.features.all(),
-        }
-        context["STRIPE_PUBLIC_KEY"] = os.environ.get("STRIPE_PUBLIC_KEY")
+    #     context["features"] = {
+    #         "context_name": "features",
+    #         "results": plan.features.all(),
+    #     }
+    #     context["STRIPE_PUBLIC_KEY"] = os.environ.get("STRIPE_PUBLIC_KEY")
 
-        # braintree
+    #     # braintree
 
-        if settings.BRAINTREE_PRODUCTION:
-            braintree_env = braintree.Environment.Production
-        else:
-            braintree_env = braintree.Environment.Sandbox
+    #     if settings.BRAINTREE_PRODUCTION:
+    #         braintree_env = braintree.Environment.Production
+    #     else:
+    #         braintree_env = braintree.Environment.Sandbox
 
-        # Configure Braintree
-        braintree.Configuration.configure(
-            braintree_env,
-            merchant_id=settings.BRAINTREE_MERCHANT_ID,
-            public_key=settings.BRAINTREE_PUBLIC_KEY,
-            private_key=settings.BRAINTREE_PRIVATE_KEY,
-        )
+    #     # Configure Braintree
+    #     braintree.Configuration.configure(
+    #         braintree_env,
+    #         merchant_id=settings.BRAINTREE_MERCHANT_ID,
+    #         public_key=settings.BRAINTREE_PUBLIC_KEY,
+    #         private_key=settings.BRAINTREE_PRIVATE_KEY,
+    #     )
 
-        try:
-            braintree_client_token = braintree.ClientToken.generate(
-                {"customer_id": self.request.user.id}
-            )
-        except:
-            braintree_client_token = braintree.ClientToken.generate({})
+    #     try:
+    #         braintree_client_token = braintree.ClientToken.generate(
+    #             {"customer_id": self.request.user.id}
+    #         )
+    #     except:
+    #         braintree_client_token = braintree.ClientToken.generate({})
 
-        context["braintree_client_token"] = braintree_client_token
+    #     context["braintree_client_token"] = braintree_client_token
 
-        return context
+    #     return context
 
-
+    pass
 class CompletePaypalPaymentView(AuthedOnlyAccessMixin, View):
-    def post(self, request):
-        PPClient = PayPalClient()
+    # def post(self, request):
+    #     PPClient = PayPalClient()
 
-        body = json.loads(request.body)
+    #     body = json.loads(request.body)
 
-        orderID = body["orderID"]
-        payerID = body["payerID"]
-        paymentID = body["paymentID"]
-        paymentSource = body["paymentSource"]
-        plan_id = body["plan"]
+    #     orderID = body["orderID"]
+    #     payerID = body["payerID"]
+    #     paymentID = body["paymentID"]
+    #     paymentSource = body["paymentSource"]
+    #     plan_id = body["plan"]
 
-        # get payment for paypal that matched the orderID
-        requestorder = OrdersGetRequest(orderID)
-        response = PPClient.client.execute(requestorder)
+    #     # get payment for paypal that matched the orderID
+    #     requestorder = OrdersGetRequest(orderID)
+    #     response = PPClient.client.execute(requestorder)
 
-        # CREATED, SAVED, APPROVED, VOIDED, COMPLETED, PAYER_ACTION_REQUIRED
-        if response.result.status in ("APPROVED", "CREATED"):
-            if request.user.account_type == "SUPPLIER":
-                membership = PaymentModels.Membership(
-                    supplier=request.user,
-                    plan=PaymentModels.MembershipPlan.objects.filter(
-                        id=plan_id
-                    ).first(),
-                    duration="Monthly",
-                )
-                membership.save()
+    #     # CREATED, SAVED, APPROVED, VOIDED, COMPLETED, PAYER_ACTION_REQUIRED
+    #     if response.result.status in ("APPROVED", "CREATED"):
+    #         if request.user.account_type == "SUPPLIER":
+    #             membership = PaymentModels.Membership(
+    #                 supplier=request.user,
+    #                 plan=PaymentModels.MembershipPlan.objects.filter(
+    #                     id=plan_id
+    #                 ).first(),
+    #                 duration="Monthly",
+    #             )
+    #             membership.save()
 
-                # 'amount', 'dict', 'payee', 'reference_id', 'shipping'
+    #             # 'amount', 'dict', 'payee', 'reference_id', 'shipping'
 
-                if membership:
-                    receipt = PaymentModels.MembershipReceipt(
-                        membership=membership,
-                        model_of_payment=PaymentModels.ModeOfPayment.objects.filter(
-                            name="Paypal"
-                        ).first(),
-                        address=response.result.purchase_units[
-                            0
-                        ].shipping.address.address_line_1,
-                        payment_id=orderID,
-                        amount_paid=float(
-                            response.result.purchase_units[0].amount.value
-                        ),
-                        currency=response.result.purchase_units[0].amount.currency_code,
-                        reference_id=response.result.purchase_units[0].reference_id,
-                        status=response.result.status,
-                    )
-                    receipt.save()
-            if membership and receipt:
+    #             if membership:
+    #                 receipt = PaymentModels.MembershipReceipt(
+    #                     membership=membership,
+    #                     model_of_payment=PaymentModels.ModeOfPayment.objects.filter(
+    #                         name="Paypal"
+    #                     ).first(),
+    #                     address=response.result.purchase_units[
+    #                         0
+    #                     ].shipping.address.address_line_1,
+    #                     payment_id=orderID,
+    #                     amount_paid=float(
+    #                         response.result.purchase_units[0].amount.value
+    #                     ),
+    #                     currency=response.result.purchase_units[0].amount.currency_code,
+    #                     reference_id=response.result.purchase_units[0].reference_id,
+    #                     status=response.result.status,
+    #                 )
+    #                 receipt.save()
+    #         if membership and receipt:
 
-                # send email
+    #             # send email
 
-                return HttpResponse(status=204)
-            else:
-                return HttpResponseNotFound()
-        else:
-            return HttpResponseNotFound()
+    #             return HttpResponse(status=204)
+    #         else:
+    #             return HttpResponseNotFound()
+    #     else:
+    #         return HttpResponseNotFound()
 
 
+    pass
 class StripeCreateCheckoutSessionView(View):
-    def post(self, request, pk):
+    # def post(self, request, pk):
 
-        stripe.api_key = os.environ.get("STRIPE_SECRET_KEY")
-        plan = PaymentModels.MembershipPlan.objects.filter(id=pk).first()
+    #     stripe.api_key = os.environ.get("STRIPE_SECRET_KEY")
+    #     # plan = PaymentModels.MembershipPlan.objects.filter(id=pk).first()
+    #     plan = None
 
-        if plan.name == "Gold":
-            price_id = "price_1LZejtF6gkT4kB8Uf2hdHR8b"
-        if plan.name == "Silver":
-            price_id = "price_1LZejjF6gkT4kB8UtRdTnERG"
-        if plan.name == "Bronze":
-            price_id = "price_1LZejVF6gkT4kB8UhPcFJ1MI"
+    #     if plan.name == "Gold":
+    #         price_id = "price_1LZejtF6gkT4kB8Uf2hdHR8b"
+    #     if plan.name == "Silver":
+    #         price_id = "price_1LZejjF6gkT4kB8UtRdTnERG"
+    #     if plan.name == "Bronze":
+    #         price_id = "price_1LZejVF6gkT4kB8UhPcFJ1MI"
 
-        checkout_session = stripe.checkout.Session.create(
-            payment_method_types=["card"],
-            line_items=[
-                {
-                    # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-                    "price": price_id,
-                    "quantity": 1,
-                },
-            ],
-            mode="payment",
-            success_url=request.build_absolute_uri(reverse("manager:home")),
-            cancel_url=request.build_absolute_uri(reverse("payments:memberships")),
-        )
-        return JsonResponse({"id": checkout_session.id})
+    #     checkout_session = stripe.checkout.Session.create(
+    #         payment_method_types=["card"],
+    #         line_items=[
+    #             {
+    #                 # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+    #                 "price": price_id,
+    #                 "quantity": 1,
+    #             },
+    #         ],
+    #         mode="payment",
+    #         success_url=request.build_absolute_uri(reverse("manager:home")),
+    #         cancel_url=request.build_absolute_uri(reverse("payments:memberships")),
+    #     )
+    #     return JsonResponse({"id": checkout_session.id})
 
+    pass
 
 @login_required
 def payment(request, pk):
-    plan = PaymentModels.MembershipPlan.objects.filter(id=pk).first()
-    if plan:
-        nonce_from_the_client = request.POST["paymentMethodNonce"]
-        customer_kwargs = {
-            "first_name": request.user.first_name,
-            "last_name": request.user.last_name,
-            "email": request.user.email,
-        }
-        customer_create = braintree.Customer.create(customer_kwargs)
-        customer_id = customer_create.customer.id
-        result = braintree.Transaction.sale(
-            {
-                "amount": plan.price,
-                "payment_method_nonce": nonce_from_the_client,
-                "options": {"submit_for_settlement": True},
-            }
-        )
+    # plan = PaymentModels.MembershipPlan.objects.filter(id=pk).first()
+    # plan = None
+    # if plan:
+    #     nonce_from_the_client = request.POST["paymentMethodNonce"]
+    #     customer_kwargs = {
+    #         "first_name": request.user.first_name,
+    #         "last_name": request.user.last_name,
+    #         "email": request.user.email,
+    #     }
+    #     customer_create = braintree.Customer.create(customer_kwargs)
+    #     customer_id = customer_create.customer.id
+    #     result = braintree.Transaction.sale(
+    #         {
+    #             "amount": plan.price,
+    #             "payment_method_nonce": nonce_from_the_client,
+    #             "options": {"submit_for_settlement": True},
+    #         }
+    #     )
 
-        # timestamp, status, amount, user
-        if result.status in ("submitted_for_settlement"):
-            if request.user.account_type == "SUPPLIER":
+    #     # timestamp, status, amount, user
+    #     if result.status in ("submitted_for_settlement"):
+    #         if request.user.account_type == "SUPPLIER":
 
-                plan = PaymentModels.Membership.objects.filter(
-                    supplier=request.user,
-                    plan=PaymentModels.MembershipPlan.objects.filter(id=pk).first(),
-                )
-                if plan:
-                    messages.add_message(
-                        request, messages.ERROR, _("Membership already exists.")
-                    )
-                    return redirect(
-                        reverse(
-                            "payments:memberships-details", kwargs={"slug": plan.slug}
-                        )
-                    )
+    #             plan = PaymentModels.Membership.objects.filter(
+    #                 supplier=request.user,
+    #                 plan=PaymentModels.MembershipPlan.objects.filter(id=pk).first(),
+    #             )
+    #             if plan:
+    #                 messages.add_message(
+    #                     request, messages.ERROR, _("Membership already exists.")
+    #                 )
+    #                 return redirect(
+    #                     reverse(
+    #                         "payments:memberships-details", kwargs={"slug": plan.slug}
+    #                     )
+    #                 )
 
-                membership = PaymentModels.Membership(
-                    supplier=request.user,
-                    plan=PaymentModels.MembershipPlan.objects.filter(id=pk).first(),
-                    duration="Monthly",
-                )
-                membership.save()
+    #             membership = PaymentModels.Membership(
+    #                 supplier=request.user,
+    #                 plan=PaymentModels.MembershipPlan.objects.filter(id=pk).first(),
+    #                 duration="Monthly",
+    #             )
+    #             membership.save()
 
-                if membership:
-                    receipt = PaymentModels.MembershipReceipt(
-                        membership=membership,
-                        model_of_payment=PaymentModels.ModeOfPayment.objects.filter(
-                            name="Braintree"
-                        ).first(),
-                        address=result.transaction.id,
-                        payment_id=result.transaction.id,
-                        amount_paid=float(result.transaction.amount),
-                        currency=result.transation.currency_iso_code,
-                        reference_id=result.transation.retrieval_reference_number,
-                        status=result.transation.status,
-                    )
-                    receipt.save()
+    #             if membership:
+    #                 receipt = PaymentModels.MembershipReceipt(
+    #                     membership=membership,
+    #                     model_of_payment=PaymentModels.ModeOfPayment.objects.filter(
+    #                         name="Braintree"
+    #                     ).first(),
+    #                     address=result.transaction.id,
+    #                     payment_id=result.transaction.id,
+    #                     amount_paid=float(result.transaction.amount),
+    #                     currency=result.transation.currency_iso_code,
+    #                     reference_id=result.transation.retrieval_reference_number,
+    #                     status=result.transation.status,
+    #                 )
+    #                 receipt.save()
 
-                if membership and receipt:
-                    # send email
+    #             if membership and receipt:
+    #                 # send email
 
-                    return HttpResponse(status=204)
-                else:
-                    return HttpResponseNotFound()
-        else:
-            return HttpResponseNotFound()
+    #                 return HttpResponse(status=204)
+    #             else:
+    #                 return HttpResponseNotFound()
+    #     else:
+    #         return HttpResponseNotFound()
 
+    pass
 
 def gPayPayment(request):
-    plan = PaymentModels.MembershipPlan.objects.filter(id=pk).first()
-    if plan:
-        nonce_from_the_client = request.POST["paymentMethodNonce"]
-        type = request.POST["type"]
-        paymentData = request.POST["paymentData"]
+    # plan = PaymentModels.MembershipPlan.objects.filter(id=pk).first()
+    # if plan:
+    #     nonce_from_the_client = request.POST["paymentMethodNonce"]
+    #     type = request.POST["type"]
+    #     paymentData = request.POST["paymentData"]
 
-        customer_kwargs = {
-            "first_name": request.user.first_name,
-            "last_name": request.user.last_name,
-            "email": request.user.email,
-        }
+    #     customer_kwargs = {
+    #         "first_name": request.user.first_name,
+    #         "last_name": request.user.last_name,
+    #         "email": request.user.email,
+    #     }
 
-        customer_create = braintree.Customer.create(customer_kwargs)
-        customer_id = customer_create.customer.id
+    #     customer_create = braintree.Customer.create(customer_kwargs)
+    #     customer_id = customer_create.customer.id
 
-        if type == "AndroidPayCard":
-            result = braintree.transaction.sale(
-                {
-                    "amount": "{}".format(plan.amount),
-                    "payment_method_nonce": nonce_from_the_client,
-                    "device_data": paymentData.get("deviceData"),
-                    "options": {"submit_for_settlement": True},
-                    "billing": {
-                        "postal_code": paymentData.get("postalCode"),
-                    },
-                }
-            )
+    #     if type == "AndroidPayCard":
+    #         result = braintree.transaction.sale(
+    #             {
+    #                 "amount": "{}".format(plan.amount),
+    #                 "payment_method_nonce": nonce_from_the_client,
+    #                 "device_data": paymentData.get("deviceData"),
+    #                 "options": {"submit_for_settlement": True},
+    #                 "billing": {
+    #                     "postal_code": paymentData.get("postalCode"),
+    #                 },
+    #             }
+    #         )
 
-        if type == "PayPalAccount":
-            result = braintree.transaction.sale(
-                {
-                    "amount": "{}".format(plan.amount),
-                    "payment_method_nonce": paymentData.get("payment_method_nonce"),
-                    "device_data": paymentData.get("device_data"),
-                    "order_id": "Mapped to PayPal Invoice Number",
-                    "options": {
-                        "submit_for_settlement": True,
-                        "paypal": {
-                            "custom_field": "PayPal custom field",
-                            "description": "Description for PayPal email receipt",
-                        },
-                    },
-                }
-            )
-            if result.is_success:
-                "Success ID: ".format(result.transaction.id)
-            else:
-                format(result.message)
+    #     if type == "PayPalAccount":
+    #         result = braintree.transaction.sale(
+    #             {
+    #                 "amount": "{}".format(plan.amount),
+    #                 "payment_method_nonce": paymentData.get("payment_method_nonce"),
+    #                 "device_data": paymentData.get("device_data"),
+    #                 "order_id": "Mapped to PayPal Invoice Number",
+    #                 "options": {
+    #                     "submit_for_settlement": True,
+    #                     "paypal": {
+    #                         "custom_field": "PayPal custom field",
+    #                         "description": "Description for PayPal email receipt",
+    #                     },
+    #                 },
+    #             }
+    #         )
+    #         if result.is_success:
+    #             "Success ID: ".format(result.transaction.id)
+    #         else:
+    #             format(result.message)
 
-    else:
-        return HttpResponseNotFound()
+    # else:
+    #     return HttpResponseNotFound()
 
+    pass
 
 class InitSubscriptionView(View):
     template_name = "payments/initsubscription.html"
@@ -322,23 +328,15 @@ class InitSubscriptionView(View):
     def get(self, request):
         if not request.user.is_authenticated:
             return redirect(reverse("auth_app:login"))
-
-        if settings.BRAINTREE_PRODUCTION:
-            braintree_env = braintree.Environment.Production
-        else:
-            braintree_env = braintree.Environment.Sandbox
-
-        # Configure Braintree
-        braintree.Configuration.configure(
-            braintree_env,
-            merchant_id=settings.BRAINTREE_MERCHANT_ID,
-            public_key=settings.BRAINTREE_PUBLIC_KEY,
-            private_key=settings.BRAINTREE_PRIVATE_KEY,
-        )
-
+            
         user_profile = AuthModels.ClientProfile.objects.filter(
             user=request.user
         ).first()
+        
+
+        print("*" * 40)
+        print(braintree_config.get_braintree_gateway().customer.find(user_profile.customer_id))
+        print("*" * 40)
 
         try:
             braintree_client_token = braintree.ClientToken.generate(
@@ -350,22 +348,28 @@ class InitSubscriptionView(View):
         context_data = {
             "view_name": _("Business Profile"),
             "braintree_client_token": braintree_client_token,
+            "membership_groups": [
+                {
+                    "group" : group,
+                    "plans" : [
+                        {
+                            "plan": plan,
+                            "features": plan.features.all()
+                        } for plan in group.membershipplan_set.all()
+                    ]
+                } for group in PaymentModels.MembershipGroup.objects.all()
+            ]
         }
 
         return render(request, self.template_name, context=context_data)
 
     def post(self, request):
-
-        # nonce_create = braintree.PaymentMethodNonce.create('A_PAYMENT_METHOD_TOKEN')
-        # nonce_from_the_client = nonce_create.payment_method_nonce.nonce
-
         nonce_from_the_client = request.POST["paymentMethodNonce"]
         method = request.POST["method"]
-        # plan_id = request.POST["plan_id"]
-        plan_id = "one-virtual-showroom-monthly"
-
+        plan_id = request.POST["plan_id"]
+        
         # handle cards
-        result = gateway.subscription.create(
+        result = braintree_config.get_braintree_gateway().subscription.create(
             {"payment_method_nonce": nonce_from_the_client, "plan_id": plan_id}
         )
 
@@ -381,49 +385,51 @@ class InitSubscriptionView(View):
 
         return HttpResponse(status=401)
 
-
 class ContractPaymentView(View):
-    template_name = "payments/contract_payment.html"
+    # template_name = "payments/contract_payment.html"
 
-    def get(self, request, pk):
-        contract = PaymentModels.Contract.objects.filter(pk=pk).first()
+    # def get(self, request, pk):
+    #     contract = PaymentModels.Contract.objects.filter(pk=pk).first()
 
-        context_data = dict()
-        context_data["view_name"] = "Contract Payment"
-        context_data["contract"] = contract
+    #     context_data = dict()
+    #     context_data["view_name"] = "Contract Payment"
+    #     context_data["contract"] = contract
 
-        return render(request, self.template_name, context=context_data)
+    #     return render(request, self.template_name, context=context_data)
     
-    def post(self, request, pk):
+    # def post(self, request, pk):
 
-        contract = PaymentModels.Contract.objects.filter(pk=pk).first()
-        context_data = dict()
-        context_data["view_name"] = "Contract Payment"
-        context_data["contract"] = contract
+    #     contract = PaymentModels.Contract.objects.filter(pk=pk).first()
+    #     context_data = dict()
+    #     context_data["view_name"] = "Contract Payment"
+    #     context_data["contract"] = contract
 
-        # return render(request, "payments/contract_receipt.html", context=context_data)
-        pdf = render_to_pdf("payments/contract_receipt.html", context_data)
-        return HttpResponse(pdf, content_type="application/pdf")
-
+    #     # return render(request, "payments/contract_receipt.html", context=context_data)
+    #     pdf = render_to_pdf("payments/contract_receipt.html", context_data)
+    #     return HttpResponse(pdf, content_type="application/pdf")
+    pass
 
 def contract_receipt(request, pk):
-    if request.method == "POST":
+    # if request.method == "POST":
 
-        contract = PaymentModels.Contract.objects.filter(pk=pk).first()
-        context_data = dict()
-        context_data["view_name"] = "Contract Payment"
-        context_data["contract"] = contract
+    #     contract = PaymentModels.Contract.objects.filter(pk=pk).first()
+    #     context_data = dict()
+    #     context_data["view_name"] = "Contract Payment"
+    #     context_data["contract"] = contract
 
-        # return render(request, "payments/contract_receipt.html", context=context_data)
-        pdf = render_to_pdf("payments/contract_receipt.html", context_data)
-        return HttpResponse(pdf, content_type="application/pdf")
+    #     # return render(request, "payments/contract_receipt.html", context=context_data)
+    #     pdf = render_to_pdf("payments/contract_receipt.html", context_data)
+    #     return HttpResponse(pdf, content_type="application/pdf")
 
+    pass
 
 def render_to_pdf(template_src, context_dict={}):
-    template = get_template(template_src)
-    html = template.render(context_dict)
-    result = BytesIO()
-    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
-    if not pdf.err:
-        return HttpResponse(result.getvalue(), content_type="application/pdf")
-    return None
+    # template = get_template(template_src)
+    # html = template.render(context_dict)
+    # result = BytesIO()
+    # pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    # if not pdf.err:
+    #     return HttpResponse(result.getvalue(), content_type="application/pdf")
+    # return None
+
+    pass

@@ -336,13 +336,10 @@ class AdvertisingLocation(models.Model):
         else:
             return f"{self.name} - {self.price}"
 
-    
-
 class AdvertManager(models.Manager):
     def get_queryset(self, *args, **kwargs):
         results = super().get_queryset(*args, **kwargs)
-        return results.filter(~Q(end_date = timezone.now()), Q(payment_made=True))
-
+        return results.filter(~Q(end_date__lte = timezone.now()), Q(payment_made=True), Q(is_active=True))
 
 class Advert(models.Model):
     objects = models.Manager()
@@ -367,14 +364,15 @@ class Advert(models.Model):
         blank=True,
         null=True,
     )
+    is_active = models.BooleanField(_("Is Active"), default=True)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(f"{self.product.name}{uuid.uuid4()}")[:50]
+        self.slug = slugify(f"{self.product.name[:10]}{uuid.uuid4()}")[:50]
 
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
-        return f"Product: {self.product}, Location: {self.location}"
+        return f"Product: {self.product}, Active: {self.is_active}"
 
 
 class SentEmail(models.Model):

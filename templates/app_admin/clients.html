@@ -12,7 +12,8 @@
                     <li id="client-buyers-activator"class="cs-text-md cs-font-500">Buyers</li>
                     <li id="client-products-activator"class="cs-text-md cs-font-500">Products</li>
                     <li id="client-stores-activator"class="cs-text-md cs-font-500">Stores</li>
-                    <li id="client-contracts-activator"class="cs-text-md cs-font-500">Contracts</li>
+                    <!-- <li id="client-contracts-activator"class="cs-text-md cs-font-500">Contracts</li> -->
+                    <li id="client-adverts-activator"class="cs-text-md cs-font-500">Adverts</li>
                 </div>
             </ul>
         </nav>
@@ -22,7 +23,7 @@
             <!-- when not in display -> cs-hidden -->
 
         <section id="client-overview-section" class="cs-hidden content br-sm" style="--gap: 1rem;">
-            <div class="cs-grid horizontal-scroll" style="padding: .1rem 0;--gap: 1rem;--row-size: 21%;" data-context="{{statistics.name}}">
+            <div class="cs-grid" style="padding: .1rem 0;--gap: 1rem;--row-size: 21%;grid-template-columns: repeat(4, 1fr);" data-context="{{statistics.name}}">
                 {% for statistic in statistics.results %}
                     <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
                         <h4 class="cs-text-md cs-font-500" style="margin: 0;color: var(--text-color);">
@@ -36,42 +37,10 @@
                                 <span class="cs-text-sm" style="color: var(--text-color);">
                                     {{statistic.description}}</span>
                             </div>
-                            <a id="{% if 'Total Buyers' == statistic.name %}client-buyers-overview-activator{% elif 'Total Products' == statistic.name %}client-products-overview-activator{% elif 'Total Contracts' == statistic.name %}client-contracts-overview-activator{% elif 'Total Stores' == statistic.name %}client-stores-overview-activator{% else %}client-suppliers-overview-activator{% endif %}" class="cs-text-sm cs-text-accent cs-font-500" style="align-self: flex-end;cursor: pointer">View All</a>
+                            <a id="{% if 'Total Buyers' == statistic.name %}client-buyers-overview-activator{% elif 'Total Products' == statistic.name %}client-products-overview-activator{% elif 'Total Contracts' == statistic.name %}client-contracts-overview-activator{% elif 'Total Adverts' == statistic.name %}client-adverts-overview-activator{% elif 'Total Stores' == statistic.name %}client-stores-overview-activator{% else %}client-suppliers-overview-activator{% endif %}" class="cs-text-sm cs-text-accent cs-font-500" style="align-self: flex-end;cursor: pointer">View All</a>
                         </div>
                     </div>
                 {% endfor %}
-            </div>
-            <div class="cs-grid" style="padding: .1rem 0;--gap: 1rem;--row-size: 21%;grid-template-columns: repeat(2, 1fr);">
-                <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
-                    <div class="cs-grid cs-justify-between" style="--gap: 1rem;grid-template-columns: 1fr 1fr;">
-                        <div class="cs-grid">
-                            <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
-                                Requests
-                            </p>
-                            <span class="cs-text-sm" style="color: var(--text-color);">Requests Statistics</span>
-                        </div>
-                        <div id="request-selectors" class="selectors cs-flex cs-align-start" style="--gap: .5rem;">
-                            <button style="padding: 0.25rem .75rem;" class="active btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="day">Day</button>
-                            <button style="padding: 0.25rem .75rem;" class="btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="week">Week</button>
-                            <button style="padding: 0.25rem .75rem;" class="btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="month">Month</button>
-                            <button style="padding: 0.25rem .75rem;" class="btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="year">Year</button>
-                        </div>
-                    </div>
-                    <div>
-                        <canvas id="requests"></canvas>
-                    </div>
-                </div>
-                <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
-                    <div class="cs-grid">
-                        <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
-                            Users
-                        </p>
-                        <span class="cs-text-sm" style="color: var(--text-color);">Users Statistics</span>
-                    </div>
-                    <div>
-                        <canvas id="users" style="max-block-size: 266px;"></canvas>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -130,14 +99,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="cs-text-md cs-font-500 client-item">
+                    <!-- <tr class="cs-text-md cs-font-500 client-item">
                         <td>1</td>
                         <td>Alex Fashions</td>
                         <td>France</td>
                         <td>192047239</td>
                         <td>39N23J23MF</td>
                         <td>12/03/2020</td>
-                    </tr>
+                    </tr> -->
                 </tbody>
                 <tfoot>
                     <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
@@ -223,6 +192,44 @@
                         <th>Supplier</th>
                         <th>Category</th>
                         <th>Sub Subcategory</th>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
+                <div class="cs-grid cs-align-center">
+                    <p class="cs-text-md" style="color: var(--text-color);">Showing Page <span id="current-page-0"></span> of <span id="max-page"></span>. (<span id="table-item-count"></span> Entries)</p>
+                </div>
+                <div class="table-pagination cs-flex cs-justify-end cs-align-center" style="--gap: 1rem;">
+                    <button id="previous-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Previous</button>
+                    <span id="current-page" class="cs-text-md"></span>
+                    <button id="next-page" class="btn outlined cs-text-md cs-bg-hover-cover br-sm">Next</button>
+                </div>
+            </div>
+        </section>
+        
+
+        <section id="client-adverts-section" class="content cs-hidden br-sm" style="--gap: 1rem;padding: .5rem 0;">
+            <table>
+                <thead>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>Product</th>
+                        <th>Supplier</th>
+                        <th>Amount</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                    <tr class="cs-bg-hover-color cs-text-md cs-text-secondary cs-font-600">
+                        <th>No.</th>
+                        <th>Product</th>
+                        <th>Supplier</th>
+                        <th>Amount</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
                     </tr>
                 </tfoot>
             </table>
@@ -486,85 +493,5 @@
 
     <!-- section area -->
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-
-            let mChart1 = createChart('Requests.',
-                'line',
-                ['10/08/2000', '10/08/2000', '10/08/2000','10/08/2000'],
-                [80, 100, 46, 70],
-                'requests'
-            );
-
-            let mChart2 = createChart('Users',
-                'doughnut',
-                ['Admin', 'Suppliers', 'Buyers'],
-                [20, 200, 100],
-                'users'
-            );
-
-            let mChart3 = createChart('Requests by location',
-                'bar',
-                ['Africa', 'Europe', 'Asia'],
-                [20, 200, 100],
-                'requests-by-location'
-            );
-
-
-            const actionBtns = document.querySelectorAll('.selectors button');
-            for (let i = 0; i < actionBtns.length; i++) {
-                actionBtns[i].addEventListener('click', e => {
-                    actionBtns.forEach(btn => {
-                        if (btn.classList.contains('active')) btn.classList.remove('active');
-                    });
-
-                    actionBtns[i].classList.add('active');
-
-                    if (actionBtns[i].getAttribute('id') === "day") {
-
-                        mChart1.destroy();
-                        mChart1 = createChart('Revenue per day.',
-                            'line',
-                            ['10/08/2000', '10/08/2000', '10/08/2000','10/08/2000'],
-                            [80, 100, 46, 70],
-                            'requests'
-                        );
-
-                    } else if (actionBtns[i].getAttribute('id') === "week") {
-
-                        mChart1.destroy();
-                        mChart1 = createChart('Revenue per week.',
-                            'line',
-                            ['week 1', 'week 1', 'week 1','week 1'],
-                            [80, 100, 46, 70],
-                            'requests'
-                        );
-
-                    } else if (actionBtns[i].getAttribute('id') === "month") {
-
-                        mChart1.destroy();
-                        mChart1 = createChart('Revenue per month.',
-                            'line',
-                            ['08/2000', '08/2000', '08/2000','08/2000'],
-                            [80, 100, 46, 70],
-                            'requests'
-                        );
-
-                    } else if (actionBtns[i].getAttribute('id') === "year") {
-
-                        mChart1.destroy();
-                        mChart1 = createChart('Revenue per year.',
-                            'line',
-                            ['2000', '2000', '2000','2000'],
-                            [40, 50, 46, 70],
-                            'requests'
-                        );
-                    } else {
-                        // console.log("");
-                    }
-                });
-            }
-        });
-    </script>
 
 {% endblock %}

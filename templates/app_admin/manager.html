@@ -73,38 +73,6 @@
                     </div>
                 {% endfor %}
             </div>
-            <div class="cs-grid" style="padding: .1rem 0;--gap: 1rem;--row-size: 21%;grid-template-columns: repeat(2, 1fr);">
-                <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
-                    <div class="cs-grid cs-justify-between" style="--gap: 1rem;grid-template-columns: 1fr 1fr;">
-                        <div class="cs-grid">
-                            <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
-                                Requests
-                            </p>
-                            <span class="cs-text-sm" style="color: var(--text-color);">Requests Statistics</span>
-                        </div>
-                        <div id="request-selectors" class="selectors cs-flex cs-align-start" style="--gap: .5rem;">
-                            <button style="padding: 0.25rem .75rem;" class="active btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="day">Day</button>
-                            <button style="padding: 0.25rem .75rem;" class="btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="week">Week</button>
-                            <button style="padding: 0.25rem .75rem;" class="btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="month">Month</button>
-                            <button style="padding: 0.25rem .75rem;" class="btn br-sm outlined cs-text-md cs-text-secondary cs-bg-transparent cd-grid " id="year">Year</button>
-                        </div>
-                    </div>
-                    <div>
-                        <canvas id="requests"></canvas>
-                    </div>
-                </div>
-                <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;">
-                    <div class="cs-grid">
-                        <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
-                            Users
-                        </p>
-                        <span class="cs-text-sm" style="color: var(--text-color);">Users Statistics</span>
-                    </div>
-                    <div>
-                        <canvas id="users" style="max-block-size: 266px;"></canvas>
-                    </div>
-                </div>
-            </div>
         </section>
 
         <section id="manager-showroom-section" class="content cs-hidden br-sm" style="--gap: 1rem;padding: .5rem 0;">

@@ -9,19 +9,30 @@ from googletrans import Translator
 translator = Translator()
 from django.conf import settings
 
-@task(name="make_model_translations")
-def make_model_translations(fields, instance_id, modal_name):
+from django.apps import apps
+
+@task(name="make_supplier_model_translations")
+def make_supplier_model_translations(fields, instance_id, modal_name):
+
+    # Register your models here.
+    for _model in apps.get_app_config("supplier").get_models():
+        try:
+            if model.__name__ == modal_name:
+                modal = model
+                break
+        except:
+            pass
     
-    if modal_name == "Service":
-        modal = SupplierModels.Service
-    elif modal_name == "ServiceTag":
-        modal = SupplierModels.ServiceTag
-    elif modal_name == "Product":
-        modal = SupplierModels.Product
-    elif modal_name == "Store":
-        modal = SupplierModels.Store
-    elif modal_name == "ServiceTag":
-        modal = SupplierModels.ServiceTag
+    # if modal_name == "Service":
+    #     modal = SupplierModels.Service
+    # elif modal_name == "ServiceTag":
+    #     modal = SupplierModels.ServiceTag
+    # elif modal_name == "Product":
+    #     modal = SupplierModels.Product
+    # elif modal_name == "Store":
+    #     modal = SupplierModels.Store
+    # elif modal_name == "ServiceTag":
+    #     modal = SupplierModels.ServiceTag
 
     if modal_name in ["Product", "Store"]:
         instance = modal.admin_list.filter(id=instance_id).first()
