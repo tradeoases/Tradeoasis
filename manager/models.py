@@ -227,13 +227,8 @@ def create_Chat_file(sender, instance, **kwargs):
         with open(f"{instance.chatfilepath}", "w") as file:
             json.dump([], file)
     except FileNotFoundError:
-        try:
-            os.mkdir(f"{settings.CHATROOMFILES_DIR}")
-            with open(f"{instance.chatfilepath}", "w") as file:
-                json.dump([], file)
-        except FileExistsError:
-            with open(f"{instance.chatfilepath}", "w") as file:
-                json.dump([], file)
+        instance.chatfilepath = None
+        instance.save()
 
 
 class TextPromotionManager(models.Manager):
