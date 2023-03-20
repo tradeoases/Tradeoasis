@@ -221,16 +221,19 @@ class Chatroom(models.Model):
         self.chatfilepath = get_chat_file_path(self)
         super().save(*args, **kwargs)
 
-
 @receiver(post_save, sender=Chatroom)
 def create_Chat_file(sender, instance, **kwargs):
     try:
         with open(f"{instance.chatfilepath}", "w") as file:
             json.dump([], file)
     except FileNotFoundError:
-        os.mkdir(f"{settings.CHATROOMFILES_DIR}")
-        with open(f"{instance.chatfilepath}", "w") as file:
-            json.dump([], file)
+        try:
+            os.mkdir(f"{settings.CHATROOMFILES_DIR}")
+            with open(f"{instance.chatfilepath}", "w") as file:
+                json.dump([], file)
+        except FileExistsError:
+            with open(f"{instance.chatfilepath}", "w") as file:
+                json.dump([], file)
 
 
 class TextPromotionManager(models.Manager):

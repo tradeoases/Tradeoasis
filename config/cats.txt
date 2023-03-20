@@ -300,6 +300,7 @@ Pending Tasks
 
 
 python -Xutf8 manage.py dumpdata --exclude auth.permission --exclude contenttypes > db.json
+python -Xutf8 manage.py loaddata db.json
 
 
 CREATE DATABASE tradeoasis;
