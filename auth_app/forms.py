@@ -1,9 +1,21 @@
+from django import forms
+from allauth.account.forms import SignupForm
+
 from django.forms import ModelForm
 
 from auth_app import models as AuthModels
 
-from allauth.socialaccount.forms import SignupForm
-from django import forms
+class CustomSignupForm(SignupForm):
+    CHOICES = [("SUPPLIER", "Supplier"), ("BUYER", "Buyer")]
+    account_type = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect)
+
+    def save(self, request):
+        user = super(CustomSignupForm, self).save(request)
+        user.account_type = self.cleaned_data["account_type"]
+        user.active = True
+        user.is_email_activated = True
+        user.save()
+        return user
 
 
 class UserProfileFormManager(ModelForm):
@@ -28,16 +40,3 @@ class UserUpdateFormManager(ModelForm):
     class Meta:
         model = AuthModels.User
         fields = ("email", "first_name", "last_name", "username")
-
-
-class CustomSignupForm(SignupForm):
-    CHOICES = [("SUPPLIER", "Supplier"), ("BUYER", "Buyer")]
-    account_type = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect)
-
-    def save(self, request):
-        user = super(CustomSignupForm, self).save(request)
-        user.account_type = self.cleaned_data["account_type"]
-        user.active = True
-        user.is_email_activated = True
-        user.save()
-        return user

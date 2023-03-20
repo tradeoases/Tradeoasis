@@ -73,6 +73,20 @@
                     </div>
                 {% endfor %}
             </div>
+
+            <div class="cs-grid" style="padding: .1rem 0;--gap: 1rem;--row-size: 21%;grid-template-columns: repeat(2, 1fr);">
+                <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;min-block-size: 290px;justify-items: stretch;">
+                    <div class="cs-grid">
+                        <p class="cs-text-normal cs-font-bold cs-text-secondary" style="margin: 0;">
+                            Memberships By Location
+                        </p>
+                        <span class="cs-text-sm" style="color: var(--text-color);">Memberships Stats By Location</span>
+                    </div>
+                    <div>
+                        <canvas id="requests-by-location" style="max-block-size: 266px;"></canvas>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <section id="manager-showroom-section" class="content cs-hidden br-sm" style="--gap: 1rem;padding: .5rem 0;">
@@ -240,85 +254,17 @@
         <!-- modals -->
 
     <!-- section area -->
-
+    {{ membership_group|json_script:"membership_group" }}
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-
-            let mChart1 = createChart('Requests.',
-                'line',
-                ['10/08/2000', '10/08/2000', '10/08/2000','10/08/2000'],
-                [80, 100, 46, 70],
-                'requests'
-            );
+            const membership_group = JSON.parse(document.getElementById('membership_group').textContent);
 
             let mChart2 = createChart('Users',
                 'doughnut',
-                ['Admin', 'Suppliers', 'Buyers'],
-                [20, 200, 100],
-                'users'
-            );
-
-            let mChart3 = createChart('Requests by location',
-                'bar',
-                ['Africa', 'Europe', 'Asia'],
-                [20, 200, 100],
+                membership_group.map(obj => obj.feature),
+                membership_group.map(obj => obj.count),
                 'requests-by-location'
             );
-
-
-            const actionBtns = document.querySelectorAll('.selectors button');
-            for (let i = 0; i < actionBtns.length; i++) {
-                actionBtns[i].addEventListener('click', e => {
-                    actionBtns.forEach(btn => {
-                        if (btn.classList.contains('active')) btn.classList.remove('active');
-                    });
-
-                    actionBtns[i].classList.add('active');
-
-                    if (actionBtns[i].getAttribute('id') === "day") {
-
-                        mChart1.destroy();
-                        mChart1 = createChart('Revenue per day.',
-                            'line',
-                            ['10/08/2000', '10/08/2000', '10/08/2000','10/08/2000'],
-                            [80, 100, 46, 70],
-                            'requests'
-                        );
-
-                    } else if (actionBtns[i].getAttribute('id') === "week") {
-
-                        mChart1.destroy();
-                        mChart1 = createChart('Revenue per week.',
-                            'line',
-                            ['week 1', 'week 1', 'week 1','week 1'],
-                            [80, 100, 46, 70],
-                            'requests'
-                        );
-
-                    } else if (actionBtns[i].getAttribute('id') === "month") {
-
-                        mChart1.destroy();
-                        mChart1 = createChart('Revenue per month.',
-                            'line',
-                            ['08/2000', '08/2000', '08/2000','08/2000'],
-                            [80, 100, 46, 70],
-                            'requests'
-                        );
-
-                    } else if (actionBtns[i].getAttribute('id') === "year") {
-
-                        mChart1.destroy();
-                        mChart1 = createChart('Revenue per year.',
-                            'line',
-                            ['2000', '2000', '2000','2000'],
-                            [40, 50, 46, 70],
-                            'requests'
-                        );
-                    } else {
-                        // console.log("");
-                    }
-                });
-            }
         });
     </script>
 

@@ -213,6 +213,15 @@ class AdminManagersView(SupportOnlyAccessMixin, View):
                 },
             ],
         }
+        context_data["membership_group"] = [
+            {
+                "count" : obj.get("dcount"),
+                "feature" : PaymentModels.Feature.objects.filter(pk=obj.get("feature")).first().name
+            }
+            for obj in PaymentModels.Membership.active.values("feature")
+            .annotate(dcount=Count("feature"))
+            .order_by()
+        ]
         return context_data
 
 
@@ -678,8 +687,8 @@ class CreateSupportView(SupportOnlyAccessMixin, View):
         activate_url = f"http://{domain}{link}"
 
         ManagerTasks.send_mail.delay(
-            subject = _("Fodoren Support Team invite."),
-            content = '{0} \n{1} \n{2} \n{3} \n{4}'.format(_("Hello"), user.username, _("Your have been added a Fodoren Support Team Member, Please edit your account details and set a desired password after activating your account."), _("Your activation link is"), activate_url),
+            subject = _("Foroden Support Team invite."),
+            content = '{0} \n{1} \n{2} \n{3} \n{4}'.format(_("Hello"), user.username, _("Your have been added a Foroden Support Team Member, Please edit your account details and set a desired password after activating your account."), _("Your activation link is"), activate_url),
             _to = [f"{user.email}"],
             _reply_to = [f"{settings.SUPPORT_EMAIL}"]
         )
@@ -800,7 +809,7 @@ class AdminPromotionsEditView(View):
         if ManagerModels.Promotion.objects.filter(slug=slug):
             promotion = ManagerModels.Promotion.objects.filter(slug=slug).first()
         else:
-            messages.add_message(request, messages.ERROR, _("Recond not found."))
+            messages.add_message(request, messages.ERROR, _("Record not found."))
             return redirect(reverse("app_admin:promotions"))
 
 
@@ -936,7 +945,7 @@ class AdminEmailPromotionsEditView(View):
         if ManagerModels.EmailPromotion.objects.filter(slug=slug):
             promotion = ManagerModels.EmailPromotion.objects.filter(slug=slug).first()
         else:
-            messages.add_message(request, messages.ERROR, _("Recond not found."))
+            messages.add_message(request, messages.ERROR, _("Record not found."))
             return redirect(reverse("app_admin:email-promotions"))
 
 

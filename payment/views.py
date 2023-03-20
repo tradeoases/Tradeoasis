@@ -7,17 +7,20 @@ from django.core.paginator import Paginator
 from django.utils.translation import gettext as _
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
+from django.http import HttpResponse, HttpResponseNotFound, JsonResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 from django.contrib import messages
 
 import json, os
+from django.utils import timezone
 
 from supplier import models as SupplierModels
 from auth_app import models as AuthModels
 from manager import models as ManagerModels
 from payment import models as PaymentModels
 from payment.mixins import AuthedOnlyAccessMixin
+from manager import tasks as ManagerTasks
 
 from io import BytesIO
 from django.http import HttpResponse
@@ -25,302 +28,60 @@ from django.template.loader import get_template
 
 from xhtml2pdf import pisa
 
+from paypalrestsdk.notifications import WebhookEvent
+
 # payments
 import braintree
 from django.conf import settings
 
-# from . import forms
+from django.utils.decorators import method_decorator
 
-from paypalcheckoutsdk.orders import OrdersGetRequest
-from .paypal import PayPalClient
-import stripe
+from payment.management.commands.utils.braintree import braintree_config
+from payment.management.commands.utils.paypal import paypal as paypal_config
 
-from payment.management.commands import mode as braintree_config
+braintree.Configuration.configure(
+    braintree.Environment.Sandbox,
+    merchant_id=os.environ.get("BRAINTREE_MERCHANT_ID"),
+    public_key=os.environ.get("BRAINTREE_PUBLIC_KEY"),
+    private_key=os.environ.get("BRAINTREE_PRIVATE_KEY")
+)
 
+def deactivate(feature, request):
+    membership_group = feature.features_list.first().group
+    active_memberships = PaymentModels.Membership.active.filter(client = request.user)
+    for membership in active_memberships:
+        if membership.feature.features_list.first().group.group_type == membership_group.group_type:
+            if membership.membership_type == "PAYPAL":
+                subscription = PaymentModels.PaypalSubscription.objects.filter(membership=membership).first()
 
-class MembershipsView(View):
-    # model = PaymentModels.MembershipPlan
-    template_name = "payments/memberships.html"
+                ret = paypal_config.paypal_api.post(f"v1/billing/subscriptions/{subscription.order_key}/suspend")
+                print(ret)
+                if ret.get("error"):
+                    ret = modpaypal_confige.paypal_api.post(f"v1/billing/subscriptions/{subscription.order_key}/cancel")
+                    print(ret)
 
-    def get(self, request):
-        return render(request, self.template_name, context=self.get_context_data())
+                membership.status = False
+                membership.save()
+            else:
+                subscription = PaymentModels.BraintreeSubscription.objects.filter(membership=membership).first()
 
-    def get_context_data(self, **kwargs):
-        context = dict()
+                result = braintree.Subscription.cancel(subscription.subscription_id)
+                if result.is_success and result.subscription.status == "Canceled":
+                    membership.status = False
+                    membership.save()
 
-        context["view_name"] = _("Memberships")
+@method_decorator(csrf_exempt, name='dispatch')
+class webhooksView(View):
+    def post(self, request, *args, **kwargs):
+        
+        # notification = braintree_config.get_braintree_gateway().webhook_notification.parse(request.body.decode('utf-8'))
 
-        # context["memberships"] = {
-        #     "context_name": "memberships",
-        #     "results": [
-        #         {"plan": plan, "features": plan.features.all()}
-        #         for plan in PaymentModels.MembershipPlan.objects.all()
-        #     ],
-        # }
-        return context
-
-
-class MembershipsDetailsView(AuthedOnlyAccessMixin, DetailView):
-    # model = PaymentModels.MembershipPlan
-    # template_name = "payments/membership_detail.html"
-
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-
-    #     plan = self.get_object()
-
-    #     context["view_name"] = _("Memberships")
-
-    #     context["features"] = {
-    #         "context_name": "features",
-    #         "results": plan.features.all(),
-    #     }
-    #     context["STRIPE_PUBLIC_KEY"] = os.environ.get("STRIPE_PUBLIC_KEY")
-
-    #     # braintree
-
-    #     if settings.BRAINTREE_PRODUCTION:
-    #         braintree_env = braintree.Environment.Production
-    #     else:
-    #         braintree_env = braintree.Environment.Sandbox
-
-    #     # Configure Braintree
-    #     braintree.Configuration.configure(
-    #         braintree_env,
-    #         merchant_id=settings.BRAINTREE_MERCHANT_ID,
-    #         public_key=settings.BRAINTREE_PUBLIC_KEY,
-    #         private_key=settings.BRAINTREE_PRIVATE_KEY,
-    #     )
-
-    #     try:
-    #         braintree_client_token = braintree.ClientToken.generate(
-    #             {"customer_id": self.request.user.id}
-    #         )
-    #     except:
-    #         braintree_client_token = braintree.ClientToken.generate({})
-
-    #     context["braintree_client_token"] = braintree_client_token
-
-    #     return context
-
-    pass
-class CompletePaypalPaymentView(AuthedOnlyAccessMixin, View):
-    # def post(self, request):
-    #     PPClient = PayPalClient()
-
-    #     body = json.loads(request.body)
-
-    #     orderID = body["orderID"]
-    #     payerID = body["payerID"]
-    #     paymentID = body["paymentID"]
-    #     paymentSource = body["paymentSource"]
-    #     plan_id = body["plan"]
-
-    #     # get payment for paypal that matched the orderID
-    #     requestorder = OrdersGetRequest(orderID)
-    #     response = PPClient.client.execute(requestorder)
-
-    #     # CREATED, SAVED, APPROVED, VOIDED, COMPLETED, PAYER_ACTION_REQUIRED
-    #     if response.result.status in ("APPROVED", "CREATED"):
-    #         if request.user.account_type == "SUPPLIER":
-    #             membership = PaymentModels.Membership(
-    #                 supplier=request.user,
-    #                 plan=PaymentModels.MembershipPlan.objects.filter(
-    #                     id=plan_id
-    #                 ).first(),
-    #                 duration="Monthly",
-    #             )
-    #             membership.save()
-
-    #             # 'amount', 'dict', 'payee', 'reference_id', 'shipping'
-
-    #             if membership:
-    #                 receipt = PaymentModels.MembershipReceipt(
-    #                     membership=membership,
-    #                     model_of_payment=PaymentModels.ModeOfPayment.objects.filter(
-    #                         name="Paypal"
-    #                     ).first(),
-    #                     address=response.result.purchase_units[
-    #                         0
-    #                     ].shipping.address.address_line_1,
-    #                     payment_id=orderID,
-    #                     amount_paid=float(
-    #                         response.result.purchase_units[0].amount.value
-    #                     ),
-    #                     currency=response.result.purchase_units[0].amount.currency_code,
-    #                     reference_id=response.result.purchase_units[0].reference_id,
-    #                     status=response.result.status,
-    #                 )
-    #                 receipt.save()
-    #         if membership and receipt:
-
-    #             # send email
-
-    #             return HttpResponse(status=204)
-    #         else:
-    #             return HttpResponseNotFound()
-    #     else:
-    #         return HttpResponseNotFound()
-
-
-    pass
-class StripeCreateCheckoutSessionView(View):
-    # def post(self, request, pk):
-
-    #     stripe.api_key = os.environ.get("STRIPE_SECRET_KEY")
-    #     # plan = PaymentModels.MembershipPlan.objects.filter(id=pk).first()
-    #     plan = None
-
-    #     if plan.name == "Gold":
-    #         price_id = "price_1LZejtF6gkT4kB8Uf2hdHR8b"
-    #     if plan.name == "Silver":
-    #         price_id = "price_1LZejjF6gkT4kB8UtRdTnERG"
-    #     if plan.name == "Bronze":
-    #         price_id = "price_1LZejVF6gkT4kB8UhPcFJ1MI"
-
-    #     checkout_session = stripe.checkout.Session.create(
-    #         payment_method_types=["card"],
-    #         line_items=[
-    #             {
-    #                 # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-    #                 "price": price_id,
-    #                 "quantity": 1,
-    #             },
-    #         ],
-    #         mode="payment",
-    #         success_url=request.build_absolute_uri(reverse("manager:home")),
-    #         cancel_url=request.build_absolute_uri(reverse("payments:memberships")),
-    #     )
-    #     return JsonResponse({"id": checkout_session.id})
-
-    pass
-
-@login_required
-def payment(request, pk):
-    # plan = PaymentModels.MembershipPlan.objects.filter(id=pk).first()
-    # plan = None
-    # if plan:
-    #     nonce_from_the_client = request.POST["paymentMethodNonce"]
-    #     customer_kwargs = {
-    #         "first_name": request.user.first_name,
-    #         "last_name": request.user.last_name,
-    #         "email": request.user.email,
-    #     }
-    #     customer_create = braintree.Customer.create(customer_kwargs)
-    #     customer_id = customer_create.customer.id
-    #     result = braintree.Transaction.sale(
-    #         {
-    #             "amount": plan.price,
-    #             "payment_method_nonce": nonce_from_the_client,
-    #             "options": {"submit_for_settlement": True},
-    #         }
-    #     )
-
-    #     # timestamp, status, amount, user
-    #     if result.status in ("submitted_for_settlement"):
-    #         if request.user.account_type == "SUPPLIER":
-
-    #             plan = PaymentModels.Membership.objects.filter(
-    #                 supplier=request.user,
-    #                 plan=PaymentModels.MembershipPlan.objects.filter(id=pk).first(),
-    #             )
-    #             if plan:
-    #                 messages.add_message(
-    #                     request, messages.ERROR, _("Membership already exists.")
-    #                 )
-    #                 return redirect(
-    #                     reverse(
-    #                         "payments:memberships-details", kwargs={"slug": plan.slug}
-    #                     )
-    #                 )
-
-    #             membership = PaymentModels.Membership(
-    #                 supplier=request.user,
-    #                 plan=PaymentModels.MembershipPlan.objects.filter(id=pk).first(),
-    #                 duration="Monthly",
-    #             )
-    #             membership.save()
-
-    #             if membership:
-    #                 receipt = PaymentModels.MembershipReceipt(
-    #                     membership=membership,
-    #                     model_of_payment=PaymentModels.ModeOfPayment.objects.filter(
-    #                         name="Braintree"
-    #                     ).first(),
-    #                     address=result.transaction.id,
-    #                     payment_id=result.transaction.id,
-    #                     amount_paid=float(result.transaction.amount),
-    #                     currency=result.transation.currency_iso_code,
-    #                     reference_id=result.transation.retrieval_reference_number,
-    #                     status=result.transation.status,
-    #                 )
-    #                 receipt.save()
-
-    #             if membership and receipt:
-    #                 # send email
-
-    #                 return HttpResponse(status=204)
-    #             else:
-    #                 return HttpResponseNotFound()
-    #     else:
-    #         return HttpResponseNotFound()
-
-    pass
-
-def gPayPayment(request):
-    # plan = PaymentModels.MembershipPlan.objects.filter(id=pk).first()
-    # if plan:
-    #     nonce_from_the_client = request.POST["paymentMethodNonce"]
-    #     type = request.POST["type"]
-    #     paymentData = request.POST["paymentData"]
-
-    #     customer_kwargs = {
-    #         "first_name": request.user.first_name,
-    #         "last_name": request.user.last_name,
-    #         "email": request.user.email,
-    #     }
-
-    #     customer_create = braintree.Customer.create(customer_kwargs)
-    #     customer_id = customer_create.customer.id
-
-    #     if type == "AndroidPayCard":
-    #         result = braintree.transaction.sale(
-    #             {
-    #                 "amount": "{}".format(plan.amount),
-    #                 "payment_method_nonce": nonce_from_the_client,
-    #                 "device_data": paymentData.get("deviceData"),
-    #                 "options": {"submit_for_settlement": True},
-    #                 "billing": {
-    #                     "postal_code": paymentData.get("postalCode"),
-    #                 },
-    #             }
-    #         )
-
-    #     if type == "PayPalAccount":
-    #         result = braintree.transaction.sale(
-    #             {
-    #                 "amount": "{}".format(plan.amount),
-    #                 "payment_method_nonce": paymentData.get("payment_method_nonce"),
-    #                 "device_data": paymentData.get("device_data"),
-    #                 "order_id": "Mapped to PayPal Invoice Number",
-    #                 "options": {
-    #                     "submit_for_settlement": True,
-    #                     "paypal": {
-    #                         "custom_field": "PayPal custom field",
-    #                         "description": "Description for PayPal email receipt",
-    #                     },
-    #                 },
-    #             }
-    #         )
-    #         if result.is_success:
-    #             "Success ID: ".format(result.transaction.id)
-    #         else:
-    #             format(result.message)
-
-    # else:
-    #     return HttpResponseNotFound()
-
-    pass
+        if webhook_notification.kind == braintree.WebhookNotification.Kind.SubscriptionChargedSuccessfully:
+            # Handle subscription charged successfully event
+            pass
+        elif webhook_notification.kind == braintree.WebhookNotification.Kind.SubscriptionCanceled:
+            # Handle subscription canceled event
+            pass
 
 class InitSubscriptionView(View):
     template_name = "payments/initsubscription.html"
@@ -333,10 +94,21 @@ class InitSubscriptionView(View):
             user=request.user
         ).first()
         
+        if not user_profile.customer_id:
+            # create braintree customer
 
-        print("*" * 40)
-        print(braintree_config.get_braintree_gateway().customer.find(user_profile.customer_id))
-        print("*" * 40)
+            result = braintree.Customer.create(
+                {
+                    "first_name": user_profile.user.first_name,
+                    "last_name": user_profile.user.last_name,
+                    "company": user_profile.business_name,
+                    "email": user_profile.user.email,
+                    "phone": user_profile.mobile_user,
+                }
+            )
+            if result.is_success:
+                user_profile.customer_id = result.customer.id
+                user_profile.save()
 
         try:
             braintree_client_token = braintree.ClientToken.generate(
@@ -367,69 +139,274 @@ class InitSubscriptionView(View):
         nonce_from_the_client = request.POST["paymentMethodNonce"]
         method = request.POST["method"]
         plan_id = request.POST["plan_id"]
+
         
+        user_profile = AuthModels.ClientProfile.objects.filter(
+            user=request.user
+        ).first()
+
+        
+        feature = PaymentModels.Feature.objects.filter(custom_id=plan_id).first()
+
+        # has a running subscription
+        deactivate(feature, request)
+
         # handle cards
-        result = braintree_config.get_braintree_gateway().subscription.create(
+        result = braintree.Subscription.create(
             {"payment_method_nonce": nonce_from_the_client, "plan_id": plan_id}
         )
 
-        print("*" * 40)
-        print(result)
-        print("*" * 40)
-
         if result.is_success:
-            PaymentModels.MembershipReceipt.objects.create(
-                method=method, plan_id=plan_id, client=request.user
+            membership = PaymentModels.Membership.objects.create(
+                membership_type = "BRAINTREE CARD",
+                client = user_profile.user,
+                feature = feature,
+                previous_feature = None,
+                upgrading_to = feature,
+                start_date = result.subscription.billing_period_end_date,
+                expiry_date = result.subscription.billing_period_start_date,
+                status = True,
+                payment_completed = True,
             )
-            return HttpResponse(status=200)
 
-        return HttpResponse(status=401)
+
+            subscription = PaymentModels.BraintreeSubscription.objects.create(
+                membership = membership,
+                subscription_id = result.subscription.id,
+                payment_method = method,
+                current_billing_cycle = result.subscription.current_billing_cycle,
+                days_past_due = result.subscription.days_past_due,
+                next_billing_date = result.subscription.next_billing_date,
+                payment_method_token = result.subscription.payment_method_token,
+            )
+
+            if method == "CARD":
+                PaymentModels.CardPayment.objects.create(
+                    subscription = subscription,
+                    card_token = result.subscription.transactions[0].credit_card_details.token,
+                    card_last_4 = result.subscription.transactions[0].credit_card_details.last_4,
+                    card_type = result.subscription.transactions[0].credit_card_details.card_type,
+                    card_expiration_month = result.subscription.transactions[0].credit_card_details.expiration_month,
+                    card_expiration_year = result.subscription.transactions[0].credit_card_details.expiration_year,
+                    card_customer_location = result.subscription.transactions[0].credit_card_details.customer_location,
+                    card_issuing_bank = result.subscription.transactions[0].credit_card_details.issuing_bank,
+                )
+
+            # send mail
+            return HttpResponse("SUCCESSFUL", status=200)
+
+        print(result)
+        return HttpResponse(_("Already subcribed to this plan"), status=401)
+
+def deactivateSubcription(request):
+    if request.method == "POST":
+        plan_id = request.POST.get("plan_id")
+        feature = PaymentModels.Feature.objects.filter(custom_id=plan_id).first()
+        deactivate(feature, request)
+        return redirect(reverse("supplier:profile"))
+    else:
+        return redirect(reverse("supplier:profile"))
+
+
+
+class CreatePaypalSubscription(View):
+
+    def post(self, request, *args, **kwargs):
+        method = request.POST["method"]
+        plan_id = request.POST["plan_id"]
+
+        user_profile = AuthModels.ClientProfile.objects.filter(
+            user=request.user
+        ).first()
+
+        feature = PaymentModels.Feature.objects.filter(custom_id=plan_id).first()
+
+        # has a running subscription
+        deactivate(feature, request)
+
+        try:
+            data = {
+                "plan_id": feature.paypal_id
+            }
+
+            ret = paypal_config.paypal_api.post("v1/billing/subscriptions", data)
+            if ret.get("error"):
+                return HttpResponse(_("Unable to update your subscription."), status=401)
+
+            if ret.get('status') == 'APPROVAL_PENDING':
+
+                membership = PaymentModels.Membership.objects.create(
+                    membership_type = "PAYPAL",
+                    client = user_profile.user,
+                    feature = feature,
+                    previous_feature = None,
+                    upgrading_to = feature,
+                    status = False,
+                    payment_completed = False,
+                )
+
+                subcription = PaymentModels.PaypalSubscription.objects.create(
+                    membership = membership,
+                    order_key = ret['id']
+                )
+
+                redirect_url = paypal_config.get_url_from(ret['links'], 'approve')
+
+                return JsonResponse({"status" : "SUCCESSFUL", "url":  redirect_url}, status=200)
+        except Exception as e:
+            print("Err:", e)
+            return HttpResponse(status=401)
+
+
+
+@require_POST
+@csrf_exempt
+def paypal_webhooks(request):
+    transmission_id = request.headers['Paypal-Transmission-Id']
+    timestamp = request.headers['Paypal-Transmission-Time']
+    webhook_id = os.environ.get("PAYPAL_WEBHOOK_ID")
+    event_body = request.body.decode('utf-8')
+    cert_url = request.headers['Paypal-Cert-Url']
+    auth_algo = request.headers['Paypal-Auth-Algo']
+    actual_signature = request.headers['Paypal-Transmission-Sig']
+
+    response = WebhookEvent.verify(
+        transmission_id,
+        timestamp,
+        webhook_id,
+        event_body,
+        cert_url,
+        actual_signature,
+        auth_algo
+    )
+    if response:
+        obj = json.loads(request.body)
+        event_type = obj.get('event_type')
+        resource = obj.get('resource')
+
+    try:
+
+        if resource.get("status", None) == 'APPROVAL_PENDING':
+            billing_agreement_id = resource['id']
+            subscription = PaymentModels.PaypalSubscription.objects.filter(order_key=billing_agreement_id).first()
+            user = AuthModels.Supplier.objects.filter(id=subscription.membership.client.id).first()
+
+            subject = _("Foroden Subscription")
+            message = _("Your payment as been initialized. Please wait for confirmation email.")
+
+            ManagerTasks.send_mail.delay(
+                subject = subject,
+                content = f'Hello, {user.profile().business_name}, \n{message}',
+                _to = [f"{user.email}"],
+                _reply_to = [f"{settings.SUPPORT_EMAIL}"]
+            )
+
+        elif resource.get("status", None) == 'ACTIVE':
+            
+            billing_agreement_id = resource['id']
+            subscription = PaymentModels.PaypalSubscription.objects.filter(order_key=billing_agreement_id).first()
+            user = AuthModels.Supplier.objects.filter(id=subscription.membership.client.id).first()
+
+            subject = _("Foroden Subscription")
+            message = _("Your payment was successfull.")
+
+            ManagerTasks.send_mail.delay(
+                subject = subject,
+                content = f'Hello, {user.profile().business_name}, \n{message}',
+                _to = [f"{user.email}"],
+                _reply_to = [f"{settings.SUPPORT_EMAIL}"]
+            )
+
+            subscription.membership.status = True
+            subscription.membership.payment_completed = True
+            subscription.membership.save()
+
+        elif resource.get("status", None) == "SUSPENDED":
+            billing_agreement_id = resource['id']
+            subscription = PaymentModels.PaypalSubscription.objects.filter(order_key=billing_agreement_id).first()
+            ret = mode.myapi.post(f"v1/billing/subscriptions/{subscription.order_key}/cancel")
+            
+            if not ret.get("error"):
+                user = AuthModels.Supplier.objects.filter(id=subscription.membership.client.id).first() 
+                subject = _("Foroden Subscription")
+                message = _("Your subscription was deactivated successfully.")
+
+                ManagerTasks.send_mail.delay(
+                    subject = subject,
+                    content = f'Hello, {user.profile().business_name}, \n{message}',
+                    _to = [f"{user.email}"],
+                    _reply_to = [f"{settings.SUPPORT_EMAIL}"]
+                )
+
+                subscription.membership.status = False
+                subscription.membership.payment_completed = True
+                subscription.membership.save()
+
+        elif event_type == "BILLING.SUBSCRIPTION.CANCELLED":
+            billing_agreement_id = resource['id']
+            subscription = PaymentModels.PaypalSubscription.objects.filter(order_key=billing_agreement_id).first()
+            
+            if not ret.get("error"):
+                user = AuthModels.Supplier.objects.filter(id=subscription.membership.client.id).first()
+                subject = _("Foroden Subscription")
+                message = _("Your subscription was deactivated successfully.")
+
+                ManagerTasks.send_mail.delay(
+                    subject = subject,
+                    content = f'Hello, {user.profile().business_name}, \n{message}',
+                    _to = [f"{user.email}"],
+                    _reply_to = [f"{settings.SUPPORT_EMAIL}"]
+                )
+
+                subscription.membership.status = False
+                subscription.membership.payment_completed = True
+                subscription.membership.save()
+
+        return HttpResponse(status=200)
+    except:
+        pass
+
 
 class ContractPaymentView(View):
-    # template_name = "payments/contract_payment.html"
+    template_name = "payments/contract_payment.html"
 
-    # def get(self, request, pk):
-    #     contract = PaymentModels.Contract.objects.filter(pk=pk).first()
+    def get(self, request, pk):
+        contract = PaymentModels.Contract.objects.filter(pk=pk).first()
 
-    #     context_data = dict()
-    #     context_data["view_name"] = "Contract Payment"
-    #     context_data["contract"] = contract
+        context_data = dict()
+        context_data["view_name"] = "Contract Payment"
+        context_data["contract"] = contract
 
-    #     return render(request, self.template_name, context=context_data)
+        return render(request, self.template_name, context=context_data)
     
-    # def post(self, request, pk):
+    def post(self, request, pk):
 
-    #     contract = PaymentModels.Contract.objects.filter(pk=pk).first()
-    #     context_data = dict()
-    #     context_data["view_name"] = "Contract Payment"
-    #     context_data["contract"] = contract
+        contract = PaymentModels.Contract.objects.filter(pk=pk).first()
+        context_data = dict()
+        context_data["view_name"] = "Contract Payment"
+        context_data["contract"] = contract
 
-    #     # return render(request, "payments/contract_receipt.html", context=context_data)
-    #     pdf = render_to_pdf("payments/contract_receipt.html", context_data)
-    #     return HttpResponse(pdf, content_type="application/pdf")
-    pass
+        # return render(request, "payments/contract_receipt.html", context=context_data)
+        pdf = render_to_pdf("payments/contract_receipt.html", context_data)
+        return HttpResponse(pdf, content_type="application/pdf")
 
 def contract_receipt(request, pk):
-    # if request.method == "POST":
+    if request.method == "POST":
 
-    #     contract = PaymentModels.Contract.objects.filter(pk=pk).first()
-    #     context_data = dict()
-    #     context_data["view_name"] = "Contract Payment"
-    #     context_data["contract"] = contract
+        contract = PaymentModels.Contract.objects.filter(pk=pk).first()
+        context_data = dict()
+        context_data["view_name"] = "Contract Payment"
+        context_data["contract"] = contract
 
-    #     # return render(request, "payments/contract_receipt.html", context=context_data)
-    #     pdf = render_to_pdf("payments/contract_receipt.html", context_data)
-    #     return HttpResponse(pdf, content_type="application/pdf")
-
-    pass
+        # return render(request, "payments/contract_receipt.html", context=context_data)
+        pdf = render_to_pdf("payments/contract_receipt.html", context_data)
+        return HttpResponse(pdf, content_type="application/pdf")
 
 def render_to_pdf(template_src, context_dict={}):
-    # template = get_template(template_src)
-    # html = template.render(context_dict)
-    # result = BytesIO()
-    # pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
-    # if not pdf.err:
-    #     return HttpResponse(result.getvalue(), content_type="application/pdf")
-    # return None
-
-    pass
+    template = get_template(template_src)
+    html = template.render(context_dict)
+    result = BytesIO()
+    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), content_type="application/pdf")
+    return None

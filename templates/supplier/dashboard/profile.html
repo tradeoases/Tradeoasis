@@ -44,10 +44,21 @@
                     </div>
                     <div class="group cs-grid" style="--gap: .5rem;">
                         <span class="cs-text-normal" style="color: var(--text-color);">{% trans 'Membership' %}:</span>
-                        <div class="cs-grid" style="--gap: .75rem;grid-template-columns: 1fr .1fr;">
-                            <span class="cs-text-normal cs-text-secondary outlined br-sm" style="padding: .5rem .5rem">Basic</span>
+                        {% if not memberships %}
+                            <a class="btn cs-bg-success br-sm" style="justify-self: flex-start;" href="{% url 'payment:init-subscription' %}">{% trans 'Subscribe' %}</a>
+                        {% endif %}
+
+                        {% for membership in memberships %}
+                        <div class="cs-grid" style="--gap: .75rem;grid-template-columns: 1fr .1fr .1fr;">
+                            <span class="cs-text-normal cs-text-secondary outlined br-sm" style="padding: .5rem .5rem">{{ membership.plan_group }} - {{ membership.membership.feature.name }}</span>
+                            <form action="{% url 'payment:subscription-deactivate' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="plan_id" value="{{ membership.membership.feature.custom_id}}">
+                                <input type="submit" class="btn cs-bg-danger br-sm" style="font-size: 1.1rem;" value="Deactivate">
+                            </form>
                             <a class="btn cs-bg-secondary br-sm" href="{% url 'payment:init-subscription' %}">{% trans 'Upgrade' %}</a>
                         </div>
+                        {% endfor %}
                     </div>
                     <div class="group cs-flex" style="--gap: .5rem;">
                         <a class="btn br-sm" href="{% url 'supplier:dashboard-editaccountsprofile' %}">{% trans 'Edit Profile' %}</a>

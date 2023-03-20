@@ -3,7 +3,8 @@ from celery.utils.log import get_task_logger
 from auth_app.email import send_account_activation_email
 
 from auth_app import models as AuthModels
-from payment.management.commands import mode as braintree_config
+
+from payment.management.commands.utils.braintree import braintree_config
 
 from django.utils.translation import get_language
 from googletrans import Translator

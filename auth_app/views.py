@@ -23,7 +23,7 @@ from auth_app.forms import UserProfileFormManager
 from auth_app import tasks as AuthTask
 from auth_app.tokens import appTokenGenerator
 
-from payment.management.commands import mode as braintree_config
+from payment.management.commands.utils.braintree import braintree_config
 
 
 class LoginView(View):
@@ -238,7 +238,7 @@ class BusinessProfileView(View):
             )
             if result.is_success:
                 profile.customer_id = result.customer.id
-                profile.save
+                profile.save()
 
             if profile.user.account_type == "SUPPLIER":
                 return redirect(reverse("payment:init-subscription"))

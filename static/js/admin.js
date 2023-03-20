@@ -557,7 +557,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 const err = document.createElement('p');
                                 err.className = 'cs-text-md';
                                 err.style.color = 'red';
-                                err.textContent = "An Error Occurred! Reload Page."
+                                // err.textContent = "An Error Occurred! Reload Page."
                                 operationConfirmModal.querySelector('#msg').appendChild(err);
                             }
                         })
@@ -762,7 +762,6 @@ document.addEventListener('DOMContentLoaded', () => {
         serviceModal.querySelector('#modal-service-description').textContent = response.description
         
         if (isServiceModalOpen) {
-            return
             serviceModal.querySelector('#suspend-btn').addEventListener('click', (e) => {
                 openOperationConfirmModal(msg='Are you sure you want to delete this service.', postUrl='test/', data={"id": response.id})
             })
@@ -874,26 +873,29 @@ document.addEventListener('DOMContentLoaded', () => {
             response.results.forEach((record, i) => {
                 let tableRow = document.createElement('tr')
                 tableRow.classList = 'cs-text-md cs-font-500 client-item';
+                if (record.status) {
+                    tableRow.classList.add("active")
+                }
                 tableRow.setAttribute('data-slug', record.slug);
                 tableRow.setAttribute('data-id', record.id);
                 tableRow.setAttribute('data-account-type', record.account_type);
                 tableRow.innerHTML = `
                     <td>${i + 1}</td>
-                    <td>${record.supplier.username}</td>
-                    <td>${record.plan.name}</td>
+                    <td>${record.profile}</td>
+                    <td>${record.feature.name}</td>
                     <td>${record.created_on}</td>
-                    <td>${record.expiry_date}</td>
+                    <td>${record.billing_period_end_date}</td>
                 `;
                 tableBody.appendChild(tableRow);
 
-                tableRow.addEventListener('click', async () => {
-                    if (!isClientModalOpen) {
-                        // fetch client data
-                        // open modal
-                        fetchData(`service/${record.slug}`, has_page_num=false)
-                        .then(response => openServiceModel(response));                        
-                    }
-                })
+                // tableRow.addEventListener('click', async () => {
+                //     if (!isClientModalOpen) {
+                //         // fetch client data
+                //         // open modal
+                //         fetchData(`service/${record.slug}`, has_page_num=false)
+                //         .then(response => openServiceModel(response));                        
+                //     }
+                // })
             })
 
 

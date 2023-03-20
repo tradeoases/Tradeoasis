@@ -66,8 +66,8 @@ class SuppliersSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation["membership"] = PaymentModels.Membership.objects.filter(
-            supplier=instance.user
-        ).first()
+            client=instance.user
+        ).first().feature.name
         representation["stores"] = SupplierModels.Store.admin_list.filter(
             supplier=instance.user
         ).count()
@@ -186,7 +186,7 @@ class MembershipReciptSerializer(serializers.ModelSerializer):
 
 
 class MembershipSerializer(serializers.ModelSerializer):
-    supplier = UserSerializer()
+    client = UserSerializer()
 
     class Meta:
         model = PaymentModels.Membership
@@ -195,9 +195,7 @@ class MembershipSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        representation["receipt"] = MembershipReciptSerializer(
-            PaymentModels.MembershipReceipt.objects.filter(membership=instance).first()
-        ).data
+        representation["profile"] = instance.client.profile.business_name
         return representation
 
 class AdvertsSerializer(serializers.ModelSerializer):

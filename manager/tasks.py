@@ -35,24 +35,24 @@ def make_manager_model_translations(fields, instance_id, modal_name, app_name="m
 def make_translations(fields, instance, modal):
     for field in fields:
         for language in settings.LANGUAGES:
-        # try:
-            if language[0] == get_language():
-                # already set
-                continue
-            result = translator.translate(
-                getattr(instance, field), dest=language[0]
-            )
-            for model_field in modal._meta.get_fields():
-                if not model_field.name in f"{field}_{language[0]}":
+            try:
+                if language[0] == get_language():
+                    # already set
                     continue
+                result = translator.translate(
+                    getattr(instance, field), dest=language[0]
+                )
+                for model_field in modal._meta.get_fields():
+                    if not model_field.name in f"{field}_{language[0]}":
+                        continue
 
-                if model_field.name == f"{field}_{language[0]}":
-                    setattr(instance, model_field.name, result.text)
-                    instance.save()
-        # except Exception as Err:
-        #     print(Err)
-        #     setattr(instance, f"{field}_{language[0]}", getattr(instance, field))
-        #     instance.save()
+                    if model_field.name == f"{field}_{language[0]}":
+                        setattr(instance, model_field.name, result.text)
+                        instance.save()
+            except Exception as Err:
+                print("Error On: ", instance)
+                setattr(instance, f"{field}_{language[0]}", getattr(instance, field))
+                instance.save()
 
 
 @task(name="send_email")

@@ -156,8 +156,7 @@
                             {% endfor %}
                         </div>
                         <div class="flex-left-bottom flex">
-                            <span style="margin-inline-end:10px;color: #717171;">© 2010-2022
-                                Foroden</span>
+                            <span style="margin-inline-end:10px;color: #717171;">© Foroden <script>document.write(new Date().getFullYear())</script></span>
                             <a href="{% url 'manager:dashboard' %}{% if not request.user.is_authenticated %}?next=dashboard{% endif %}"
                                 style="margin-inline-end:10px;margin-inline-start:20px;">{% trans "Admin" %}</a>
                             <a href="#" style="margin-inline-end:10px;">{% trans "Terms" %}</a>

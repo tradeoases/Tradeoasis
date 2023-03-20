@@ -81,7 +81,11 @@
             {% csrf_token %}
             <div class="cs-flex" style="--gap: 1rem;">
                 <div class="form-group cs-grid" style="--gap: .5rem;inline-size: 100%;">
-                    <input type="text" class="cs-text-normal" name="showroom" id="showroom" required placeholder="Showroom" list="showrooms">
+                    {% if not showrooms %}
+                    <input type="text" class="cs-text-normal" name="showroom" id="showroom" required placeholder="Showroom" list="showrooms" autocomplete="off" disabled="true">
+                    {% else %}
+                    <input type="text" class="cs-text-normal" name="showroom" id="showroom" required placeholder="Showroom" list="showrooms" autocomplete="off">
+                    {% endif %}
                     <datalist id="showrooms">
                         {% for showroom in showrooms %}
                             <option value="{{showroom.name}}" label="{{showroom.name}}">{{showroom.name}}</option>
@@ -101,7 +105,12 @@
             {% csrf_token %}
             <div class="cs-flex" style="--gap: 1rem;">
                 <div class="form-group cs-grid" style="--gap: .5rem;inline-size: 100%;">
+
+                    {% if not showrooms %}
+                    <input type="text" class="cs-text-normal" name="product" id="product" required placeholder="Product Name" list="products" disabled="true">
+                    {% else %}
                     <input type="text" class="cs-text-normal" name="product" id="product" required placeholder="Product Name" list="products">
+                    {% endif %}
                     <datalist id="products">
                         {% for product in products.results %}
                             <option value="{{product.product.name|slice:":40"}}.." label="{{product.product.name|slice:":40"}}..">{{product.product.name|slice:":40"}}..</option>
@@ -115,8 +124,10 @@
             </div>
         </form>
     </div>
-    <div class="modal-foot">
-
+    <div class="modal-foot cs-grid" style="justify-items: flex-end;">
+        {% if not showrooms %}
+            <a class="btn cs-bg-success br-sm" style="justify-self: flex-end;" href="{% url 'payment:init-subscription' %}">{% trans 'Subscribe To Access This Feature' %}</a>
+        {% endif %}
     </div>
 </div>
 

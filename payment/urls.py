@@ -5,27 +5,7 @@ app_name = "payment"
 from payment import views
 
 urlpatterns = [
-    path("memberships/", 
-        views.InitSubscriptionView.as_view(), name="memberships"),
-    path(
-        "memberships/<str:slug>",
-        views.MembershipsDetailsView.as_view(),
-        name="memberships-details",
-    ),
-    path(
-        "completePaypalPayment/",
-        views.CompletePaypalPaymentView.as_view(),
-        name="completePaypalPayment",
-    ),
-    path(
-        "stripeCreateCheckoutSession/<int:pk>",
-        views.StripeCreateCheckoutSessionView.as_view(),
-        name="stripeCreateCheckoutSession",
-    ),
-    # path('stripe_webhook/', views.stripe_webhook, name='stripe_webhook'),
-    # path("checkout/", views.checkout_page, name='checkout'),
-    path("braintree/payments/<int:pk>", views.payment, name="braintree-payment"),
-    path("gPayPayment/<int:pk>", views.gPayPayment, name="gPayPayment"),
+    path("memberships/", views.InitSubscriptionView.as_view(), name="memberships"),
     path(
         "contracts/payments/<int:pk>",
         views.ContractPaymentView.as_view(),
@@ -37,4 +17,19 @@ urlpatterns = [
         views.InitSubscriptionView.as_view(),
         name="init-subscription",
     ),
+    path(
+        "subscription/deactivate",
+        views.deactivateSubcription,
+        name="subscription-deactivate",
+    ),
+
+    path(
+        "paypal/subscription/",
+        views.CreatePaypalSubscription.as_view(),
+        name="paypal-subscription",
+    ),
+
+    # webhooks
+    path("webhooks/", views.webhooksView.as_view(), name="webhooks"),
+    path('paypal-webhook/', views.paypal_webhooks, name='paypal_webhook'),
 ]

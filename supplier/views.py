@@ -1088,7 +1088,13 @@ class ProfileView(SupplierOnlyAccessMixin, View):
         context_data = {
             "profile": AuthModels.ClientProfile.objects.filter(
                 user=request.user
-            ).first()
+            ).first(),
+            "memberships": [
+                {
+                    "membership": membership,
+                    "plan_group": membership.feature.features_list.first().group,
+                } for membership in PaymentModels.Membership.active.filter(client=request.user).order_by("-id")
+            ]
         }
         return render(request, self.template_name, context=context_data)
 
@@ -1338,7 +1344,21 @@ class DashboardStoresView(SupplierOnlyAccessMixin, View):
 
         context_data = dict()
 
-        context_data["showrooms"] = ManagerModels.Showroom.objects.all()
+        membership = PaymentModels.Membership.active.filter(client=request.user).first()
+        if not membership:
+            context_data["showrooms"] = None
+
+        elif "One" in membership.feature.name:
+            supplier_stores = SupplierModels.Store.objects.filter(supplier=request.user)
+            for store in supplier_stores:
+                if len(store.store.all()) > 0:
+                    context_data["showrooms"] = store.store.all()
+                else:
+                    context_data["showrooms"] = ManagerModels.Showroom.objects.all()
+            
+        elif "Showroom" in membership.feature.name:
+            context_data["showrooms"] = ManagerModels.Showroom.objects.all()
+
         context_data["products"] = {
             "context-name": "products",
             "results": [

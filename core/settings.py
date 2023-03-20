@@ -48,15 +48,6 @@ INSTALLED_APPS = [
     "modeltranslation",
     "django.contrib.admin",
     "django.contrib.sites",
-    # custom apps
-    "manager.apps.ManagerConfig",
-    "supplier.apps.SupplierConfig",
-    "buyer.apps.BuyerConfig",
-    "payment.apps.PaymentConfig",
-    "auth_app.apps.AuthAppConfig",
-    "app_admin.apps.AppAdminConfig",
-    "admin_api.apps.AdminApiConfig",
-    "api.apps.ApiConfig",
     # third party
     "rest_framework",
     "channels",
@@ -70,6 +61,19 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
 ]
+
+CUSTOM_APPS = [
+    "manager.apps.ManagerConfig",
+    "supplier.apps.SupplierConfig",
+    "buyer.apps.BuyerConfig",
+    "payment.apps.PaymentConfig",
+    "auth_app.apps.AuthAppConfig",
+    "app_admin.apps.AppAdminConfig",
+    "admin_api.apps.AdminApiConfig",
+    "api.apps.ApiConfig",
+]
+
+INSTALLED_APPS = INSTALLED_APPS + CUSTOM_APPS
 
 # django_user_agents
 
@@ -323,11 +327,11 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 
-# ACCOUNT_SIGNUP_FORM_CLASS = 'auth_app.forms.CustomSignupForm'
-ACCOUNT_FORMS = {
+# ACCOUNT_SIGNUP_FORM_CLASS = "auth_app.forms.CustomSignupForm"
+# ACCOUNT_FORMS = {
     # "signup": "allauth.account.forms.SignupForm",
     # 'signup': 'auth_app.forms.CustomSignupForm',
-}
+# }
 
 ACCOUNT_EMAIL_REQUIRED = True
 SOCIALACCOUNT_AUTO_SIGNUP = False

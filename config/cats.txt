@@ -299,7 +299,7 @@ Pending Tasks
  - add (category, subcategory and location) product features
 
 
-./manage.py dumpdata --exclude auth.permission --exclude contenttypes > db.json
+python -Xutf8 manage.py dumpdata --exclude auth.permission --exclude contenttypes > db.json
 
 
 CREATE DATABASE tradeoasis;
@@ -312,3 +312,20 @@ ALTER ROLE tradeoasis SET timezone TO 'UTC';
 GRANT ALL PRIVILEGES ON DATABASE tradeoasis TO tradeoasis;
 
 ALTER DATABASE tradeoasis OWNER TO tradeoasis;
+
+
+IN venv\Lib\site-packages\allauth\socialaccount\views.py
+
+from auth_app.forms import CustomSignupForm
+
+class SignupView(
+    RedirectAuthenticatedUserMixin,
+    CloseableSignupMixin,
+    AjaxCapableProcessFormViewMixin,
+    FormView,
+):
+    form_class = CustomSignupForm
+
+
+python manage.py makemessages --all --exclude=venv
+python manage.py compilemessages --ignore=venv/* --all

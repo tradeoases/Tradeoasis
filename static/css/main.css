@@ -1008,3 +1008,60 @@ form input.error {
     padding: 0rem 2rem;
     border-radius: 5px;
 }
+
+body.modal-open::before {
+    content: "";
+    position: fixed;
+    inset: 0 0;
+    inline-size: 100vw;
+    block-size: 100vh;
+    background-color: rgba(0, 0, 0, 0.685);
+    z-index: 999;
+}
+body.modal-open {
+    overflow: hidden;
+}
+
+.payment-modal {
+    display: none;
+    position: fixed;
+    inset-inline-start: 50%;
+    inset-block-start: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.281);
+    padding: 1rem 1.5rem;
+    border-radius: 5px;
+    z-index: 1000;
+}
+.payment-modal.in-view {
+    display: grid;
+}
+.payment-item {
+    display: grid;
+    grid-template-columns: .2fr 1fr;
+    align-items: center;
+}
+
+.payment-modal .loading {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 4px solid #ccc;
+    border-top-color: hsl(38, 95%, 47%);
+    animation: spin 1s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0); }
+    100% { transform: rotate(360deg); }
+}
+
+.payment-modal .loading,
+.payment-modal .status-check {
+    display: none;
+}
+.payment-modal .loading.inView,
+.payment-modal .status-check.inView {
+    display: grid;
+}
