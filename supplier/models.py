@@ -157,7 +157,8 @@ class Product(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
-        return f"{self.name}"
+        return f"{self.pk} {self.name}"
+
 
 
 class ProductImage(models.Model):
