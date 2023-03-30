@@ -45,7 +45,7 @@ apps = [
         "models" : [
             {"model": PaymentModels.MembershipGroup, "fields" : ("name", "description")},
             {"model": PaymentModels.MembershipPlan, "fields" : ("name", "description")},
-            {"model": PaymentModels.Feature, "fields" : ("name",)},
+            {"model": PaymentModels.Feature, "fields" : ("name", "price", "currency_iso_code")},
         ]
     },
     {

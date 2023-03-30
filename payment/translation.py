@@ -13,7 +13,7 @@ class MembershipPlanTranslationOptions(TranslationOptions):
 
 @register(models.Feature)
 class FeaturesTranslationOptions(TranslationOptions):
-    fields = ("name",)
+    fields = ("name", "price", "currency_iso_code")
 
 
 # @register(models.ModeOfPayment)

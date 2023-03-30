@@ -6,6 +6,7 @@
         <section class="w-11/12 py-6 mx-auto grid grid-flow-dense md:flex md:gap-8" style="height: auto">
 
             {% include './faqs.html' %}
+            {% get_current_language as LANGUAGE_CODE %}
 
             <div class="section-body card py-6 px-2 md:px-6 grid gap-4 text-lighterBackgroundColor" style="box-shadow:unset;">
                 <div class="grid gap-2">
@@ -23,7 +24,10 @@
                             <span>{% trans 'Access your supplier dashboard' %}</span>
                         </h3>
                         <div class="guide-img">
-                            <img loading="lazy" src="{% static 'images/guides/supplier_dash.png' %}" alt="access-dashboard">
+                            {% with "images/guides/"|add:request.LANGUAGE_CODE|add:"/supplier_dash.png" as url %}
+                                {{url}}
+                                <img loading="lazy" src="{% static url %}" alt="access-dashboard">
+                            {% endwith %}
                         </div>
                     </div>
                     <div class="grid gap-2 px-2 md:px-4">
@@ -35,7 +39,10 @@
                             {% trans 'This Redirects you to a form, with which you can create a new service.' %}
                         </p>
                         <div class="guide-img">
-                            <img loading="lazy" src="{% static 'images/guides/create_service.png' %}" alt="access-dashboard">
+                            {% with "images/guides/"|add:request.LANGUAGE_CODE|add:"/create_service.png" as url %}
+                                {{url}}
+                                <img loading="lazy" src="{% static url %}" alt="access-dashboard">
+                            {% endwith %}
                         </div>
                     </div>
                 </div>

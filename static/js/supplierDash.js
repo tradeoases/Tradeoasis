@@ -8,8 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "services_loaded": false,
     }
 
-    const BASE_API_URL = 'http://localhost:8000';
-    const BASE_URL = 'http://localhost:8000';
+    const BASE_API_URL = 'https://foroden.com';
+    const BASE_URL = 'https://foroden.com';
 
     const fetchData = async (url, has_page_num = true) => {
         let response;
@@ -348,9 +348,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-if (window.innerWidth < 800) {
-    if (window.location.href.includes('/admin/') || window.location.href.includes('dashboard')) {
-        let domain = full = location.protocol + '//' + location.host
-        window.location.replace(`${domain}/blocked`);
-    }
-}
+// if (window.innerWidth < 800) {
+//     if (window.location.href.includes('/admin/') || window.location.href.includes('dashboard')) {
+//         let domain = full = location.protocol + '//' + location.host
+//         window.location.replace(`${domain}/blocked`);
+//     }
+// }

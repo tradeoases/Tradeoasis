@@ -45,7 +45,7 @@
                     <div class="group cs-grid" style="--gap: .5rem;">
                         <span class="cs-text-normal" style="color: var(--text-color);">{% trans 'Membership' %}:</span>
                         {% if not memberships %}
-                            <a class="btn cs-bg-success br-sm" style="justify-self: flex-start;" href="{% url 'payment:init-subscription' %}">{% trans 'Subscribe' %}</a>
+                            <a class="btn cs-bg-success br-sm" style="justify-self: flex-start;" href="{% url 'payment:memberships' %}">{% trans 'Subscribe' %}</a>
                         {% endif %}
 
                         {% for membership in memberships %}
@@ -56,7 +56,7 @@
                                 <input type="hidden" name="plan_id" value="{{ membership.membership.feature.custom_id}}">
                                 <input type="submit" class="btn cs-bg-danger br-sm" style="font-size: 1.1rem;" value="Deactivate">
                             </form>
-                            <a class="btn cs-bg-secondary br-sm" href="{% url 'payment:init-subscription' %}">{% trans 'Upgrade' %}</a>
+                            <a class="btn cs-bg-secondary br-sm" href="{% url 'payment:memberships' %}">{% trans 'Upgrade' %}</a>
                         </div>
                         {% endfor %}
                     </div>

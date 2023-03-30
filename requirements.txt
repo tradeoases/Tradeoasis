@@ -20,3 +20,5 @@ xhtml2pdf
 psycopg2
 pyyaml
 paypalrestsdk
+daphne
+gunicorn

@@ -241,7 +241,7 @@ class BusinessProfileView(View):
                 profile.save()
 
             if profile.user.account_type == "SUPPLIER":
-                return redirect(reverse("payment:init-subscription"))
+                return redirect(reverse("payment:memberships"))
 
             return redirect(reverse("supplier:dashboard"))
         except Exception as e:

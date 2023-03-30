@@ -5,14 +5,14 @@
 {% block content %}
 
 <section class="main w-12/12 py-6 pt-0 gap-10" style="block-size: auto;">
-    <div class="grid justify-center justify-center content-center justify-items-center cont2nt-center text-center gap-4 capitalize h-80 md:h-96" style="background-color: #0F172A;">
+    <div class="grid justify-center justify-center content-center justify-items-center content-center text-center gap-4 capitalize h-80 md:h-96" style="background-color: #0F172A;">
         <div class="grid gap-2 w-10/12">
             <h3 class="md:text-4xl text-2xl text-white font-bold">{% trans 'Support and Discussions' %}</h3>
             <p class="text-base text-slate-300 font-normal">{% trans 'Find help  and workarounds for the most common account-related issues.' %} </p>
         </div>
 
         <form action="{% url 'manager:discussions' %}" method="GET" class="flex bg-white rounded-full overflow-hidden w-10/12">
-            <input type="text" style="width: 100%;padding: .7rem 2rem;font-size: 1rem;" name="search" placeholder="Search for help...">
+            <input type="text" style="width: 100%;padding: .7rem 2rem;font-size: 1rem;" name="search" placeholder="{% trans 'Search for help...' %}">
             <button type="submit" class="bg-yellowColor" style="border: none;padding: 1rem 2rem;">
                 <i class="fa fa-search"></i>
             </button>

@@ -37,12 +37,12 @@
                         <input class="py-4" style="width: 100%;" type="password" id="password" name="password" required>
                     </div>
                     <div class="form-group">
-                        <input class="bg-backgroundColor hover:bg-backgroundColorHover text-white" style="width: 100%;" type="submit" value="Login">
+                        <input class="bg-backgroundColor hover:bg-backgroundColorHover text-white" style="width: 100%;" type="submit" value="{% trans 'Login' %}">
                     </div>
                 </form>
             </div>
             <div class="separator">
-                <span>Or</span>
+                <span>{% trans "Or" %}</span>
             </div>
             <div class="sign-in-with grid gap-2">
                 <a href="{% provider_login_url 'google' %}{% if userType %}?request_user=extension{% endif %}" class="flex justify-center gap-5 md:gap-10 items-center bg-white shadow-md font-semibold md:px-6 py-3 items-center" style="border: thin solid rgba(136, 136, 136, 0.192);color: #444;white-space: nowrap;">
@@ -51,7 +51,7 @@
                 </a>
                 <a href='{% provider_login_url "facebook" method="oauth2" %}' class="flex justify-center gap-5 md:gap-10 px-6 py-3 items-center rounded bg-white shadow-md font-semibold text-white" style="white-space: nowrap;background-color: #3A63BE;">
                     <i class="text-xl fa fa-facebook"></i>
-                    <span class="text-base">Login With Facebook</span>
+                    <span class="text-base">{% trans "Continue With Facebook"  %}</span>
                 </a>
             </div>
         </div>

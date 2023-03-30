@@ -3,6 +3,10 @@
     --success-color: green;
 }
 
+body.rtl {
+    direction: rtl;
+}
+
 body.modal-open {
     overflow: hidden;
     inline-size: 100vw;
@@ -522,7 +526,6 @@ table tbody tr.active {
 .modal {
     position: fixed;
     inset-block-start: 10%;
-    inset-inline-start: 50%;
     transform: translateX(-50%);
     inline-size: 60vw;
     max-block-size: 80vh;
@@ -532,6 +535,10 @@ table tbody tr.active {
     padding: 1.5rem 2rem;
     animation: modalEnter .2s linear;
     z-index: 1000;
+}
+
+body:not(.rtl) .modal {
+    inset-inline-start: 50%;
 }
 
 .modal.sm {

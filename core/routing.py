@@ -5,13 +5,13 @@ from channels.auth import (
 
 # also used to identify the logged in user
 from channels.routing import ProtocolTypeRouter, URLRouter
-import manager.routing
+from manager.routing import websocket_urlpatterns
 
 # similar to urlpatterns
 application = ProtocolTypeRouter(
     {
         "websocket": AuthMiddlewareStack(
-            URLRouter(manager.routing.websocket_urlpatterns)
+            URLRouter(websocket_urlpatterns)
         ),
     }
 )

@@ -138,26 +138,26 @@
                         <ul class="nav-links flex">
                             <!-- <li class="link bell">
                                 <i class="ti-bell"></i>
-                            </li>
+                                </li>
                             <li class="link settings">
                                 <i class="ti-settings"></i>
                             </li> -->
                             <li class="link customer-display cs-text-accent">
                                 <a href="{% url 'manager:home' %}">
                                     <!-- <i class="fa fa-desktop"></i> -->
-                                    Visit Site
+                                    {% trans "Visit Site" %}
                                 </a>
                             </li>
                             <li class="link customer-display cs-text-accent">
                                 <a href="{% url 'supplier:business_profile' %}">
                                     <!-- <i class="fa fa-desktop"></i> -->
-                                    Business Profile
+                                    {% trans "Business Profile" %}
                                 </a>
                             </li>
 
                             <div class="dropdown cs-text-accent">
                                 <a href="{% url 'supplier:profile' %}" class="flex" style="margin-inline-start: 1rem;">
-                                    <h4>{{request.user.username}}</h4>
+                                    <h4>testUser</h4>
                                     <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="user_image"
                                         class="avatar" id="toggle-dropdown" >
                                 </a>
@@ -181,10 +181,16 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.location.href.includes('/ar/')) {
+                document.body.classList.add('rtl');
+            }
+        })
+    </script>    
 
     <script src="{% static 'js/sidebar.js' %}"></script>
     <script src="{% static 'js/supplierDash.js' %}"></script>
-    
 
 </body>
 

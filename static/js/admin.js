@@ -33,8 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "adverts_was_loaded" : false,
     }
 
-    const BASE_API_URL = 'http://localhost:8000/en/admin-api';
-    const BASE_URL = 'http://localhost:8000/';
+    const BASE_API_URL = 'https://foroden.com/en/admin-api';
+    const BASE_URL = 'https://foroden.com/';
 
 
     function getCookie(name) {

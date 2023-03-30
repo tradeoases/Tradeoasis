@@ -6,6 +6,7 @@
         <section class="w-11/12 py-6 mx-auto grid grid-flow-dense md:flex md:gap-8" style="height: auto">
 
             {% include './faqs.html' %}
+            {% get_current_language as LANGUAGE_CODE %}
 
             <div class="section-body card py-6 px-2 md:px-6 grid gap-4 text-lighterBackgroundColor" style="box-shadow:unset;">
                 <div class="grid gap-2">
@@ -24,7 +25,10 @@
                             <span>{% trans 'Access your supplier dashboard' %}</span>
                         </h3>
                         <div class="guide-img">
-                            <img loading="lazy" src="{% static 'images/guides/supplier_dash.png' %}" alt="access-dashboard">
+                            {% with "images/guides/"|add:LANGUAGE_CODE|add:"/supplier_dash.png" as url %}
+                                {{url}}
+                                <img loading="lazy" src="{% static url %}" alt="access-dashboard">
+                            {% endwith %}
                         </div>
                     </div>
                     <div class="grid gap-2 px-2 md:px-4">
@@ -36,7 +40,10 @@
                             {% trans 'This Redirects you to a form, with which you can create a new store.' %}
                         </p>
                         <div class="guide-img">
-                            <img loading="lazy" src="{% static 'images/guides/create_store.png' %}" alt="access-dashboard">
+                            {% with "images/guides/"|add:request.LANGUAGE_CODE|add:"/create_store.png" as url %}
+                                {{url}}
+                                <img loading="lazy" src="{% static url %}" alt="access-dashboard">
+                            {% endwith %}
                         </div>
                     </div>
                 </div>
@@ -54,7 +61,10 @@
                             <span>{% trans 'Select Manage Store in the Sidebar' %}</span>
                         </h3>
                         <div class="guide-img">
-                            <img loading="lazy" src="{% static 'images/guides/manage_stores.png' %}" alt="access-dashboard">
+                            {% with "images/guides/"|add:request.LANGUAGE_CODE|add:"/manage_stores.png" as url %}
+                                {{url}}
+                                <img loading="lazy" src="{% static url %}" alt="access-dashboard">
+                            {% endwith %}
                         </div>
                     </div>
                     <div class="grid gap-2 px-2 md:px-4">
@@ -63,10 +73,13 @@
                             <span>{% trans 'Select Store from the stores list' %}</span>
                         </h3>
                         <p class="font-normal text-slate-600 text-base md:text-lg">
-                            This opens up a store modal with 2 forms. Use form 1 to select a showroom to which you want to add the selected store. Use form 2 to add a specific product to the selected store.
+                            {% trans "This opens up a store modal with 2 forms. Use form 1 to select a showroom to which you want to add the selected store. Use form 2 to add a specific product to the selected store. Note that you can only add a product to a showroom if you have a valid subscription." %}
                         </p>
                         <div class="guide-img">
-                            <img loading="lazy" src="{% static 'images/guides/supplier_model.png' %}" alt="access-dashboard">
+                            {% with "images/guides/"|add:request.LANGUAGE_CODE|add:"/supplier_model.png" as url %}
+                                {{url}}
+                                <img loading="lazy" src="{% static url %}" alt="access-dashboard">
+                            {% endwith %}
                         </div>
                     </div>
                 </div>

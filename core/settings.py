@@ -35,7 +35,7 @@ SECRET_KEY = os.environ.get("DJANGO_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-PRODUCTION = False
+PRODUCTION = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -148,7 +148,7 @@ CHANNEL_LAYERS = {
     #         "hosts": [("localhost", 6379)],
     #     },
     # },
-    "ROUTING": "core.routing.channel_routing",
+    # "ROUTING": "core.routing.channel_routing",
     "default": {
        "BACKEND": "channels.layers.InMemoryChannelLayer",
     },
@@ -343,3 +343,19 @@ ACCOUNT_SIGNUP_REDIRECT_URL = reverse_lazy("auth_app:business")
 # custom
 CHATROOMFILES_DIR = os.path.join(BASE_DIR, "chatrooms")
 SUPPORT_EMAIL = os.environ.get("SUPPORT_EMAIL")
+
+
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'file': {
+#             'class': 'logging.FileHandler',
+#             'filename': os.path.join(BASE_DIR, 'logs/logs.log'),
+#         },
+#     },
+#     'root': {
+#         'handlers': ['file'],
+#         'level': 'INFO',
+#     }
+# }

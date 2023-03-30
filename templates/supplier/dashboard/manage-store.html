@@ -70,21 +70,21 @@
 
 <div class="modal client" id="store-modal">
     <div class="modal-head">
-        <h2>Store Details</h2>
+        <h2>{% trans "Store" %}</h2>
         <i class="ti-close" id="close-modal"></i>
     </div>
     <div class="modal-body cs-grid" style="--gap: 1rem;">
         <form action="/" method="POST" id="showroom-form" class="cs-grid br-sm outlined" enctype="multipart/form-data" style="padding: 1rem;--gap: .5rem;">
             <h2 style="margin: 0;font-size: .9rem;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
-                {% trans 'Add Store to Showroom' %} <span style="font-size: .9rem;color: rgb(139, 138, 138);">(Use down arrow to select showroom)</span>
+                {% trans 'Add Store to Showroom' %} <span style="font-size: .9rem;color: rgb(139, 138, 138);">({% trans "Use down arrow to select showroom" %})</span>
             </h2>
             {% csrf_token %}
             <div class="cs-flex" style="--gap: 1rem;">
                 <div class="form-group cs-grid" style="--gap: .5rem;inline-size: 100%;">
                     {% if not showrooms %}
-                    <input type="text" class="cs-text-normal" name="showroom" id="showroom" required placeholder="Showroom" list="showrooms" autocomplete="off" disabled="true">
+                    <input type="text" class="cs-text-normal" name="showroom" id="showroom" required placeholder="{% trans 'Showroom' %}" list="showrooms" autocomplete="off" disabled="true">
                     {% else %}
-                    <input type="text" class="cs-text-normal" name="showroom" id="showroom" required placeholder="Showroom" list="showrooms" autocomplete="off">
+                    <input type="text" class="cs-text-normal" name="showroom" id="showroom" required placeholder="{% trans 'Showroom' %}" list="showrooms" autocomplete="off">
                     {% endif %}
                     <datalist id="showrooms">
                         {% for showroom in showrooms %}
@@ -94,22 +94,22 @@
                 </div>
                 <div class="form-group cs-grid" style="--gap: .5rem;justify-content: flex-start;">
                     <input class="btn cs-text-white" type="submit"
-                    value="Submit" style="padding: .7rem 1.5rem;font-size: 1rem;">
+                    value="{% trans 'Submit' %}" style="padding: .7rem 1.5rem;font-size: 1rem;">
                 </div>
             </div>
         </form>
         <form method="POST" id="product-form" class="cs-grid br-sm outlined" enctype="multipart/form-data" style="padding: 1rem;--gap: .5rem;">
             <h2 style="margin: 0;font-size: .9rem;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
-                {% trans 'Add Product to Store' %} <span style="font-size: .9rem;color: rgb(139, 138, 138);">(Enter product name)</span>
+                {% trans 'Add Product to Store' %} <span style="font-size: .9rem;color: rgb(139, 138, 138);">({% trans "Enter product name" %})</span>
             </h2>
             {% csrf_token %}
             <div class="cs-flex" style="--gap: 1rem;">
                 <div class="form-group cs-grid" style="--gap: .5rem;inline-size: 100%;">
 
                     {% if not showrooms %}
-                    <input type="text" class="cs-text-normal" name="product" id="product" required placeholder="Product Name" list="products" disabled="true">
+                    <input type="text" class="cs-text-normal" name="product" id="product" required placeholder="{% trans 'Product Name' %}" list="products" disabled="true">
                     {% else %}
-                    <input type="text" class="cs-text-normal" name="product" id="product" required placeholder="Product Name" list="products">
+                    <input type="text" class="cs-text-normal" name="product" id="product" required placeholder="{% trans 'Product Name' %}" list="products">
                     {% endif %}
                     <datalist id="products">
                         {% for product in products.results %}
@@ -119,14 +119,14 @@
                 </div>
                 <div class="form-group cs-grid" style="--gap: .5rem;justify-content: flex-start;">
                     <input class="btn cs-text-white" type="submit"
-                    value="Submit" style="padding: .7rem 1.5rem;font-size: 1rem;">
+                    value="{% trans 'Submit' %}" style="padding: .7rem 1.5rem;font-size: 1rem;">
                 </div>
             </div>
         </form>
     </div>
     <div class="modal-foot cs-grid" style="justify-items: flex-end;">
         {% if not showrooms %}
-            <a class="btn cs-bg-success br-sm" style="justify-self: flex-end;" href="{% url 'payment:init-subscription' %}">{% trans 'Subscribe To Access This Feature' %}</a>
+            <a class="btn cs-bg-success br-sm" style="justify-self: flex-end;" href="{% url 'payment:memberships' %}">{% trans 'Subscribe To Access This Feature' %}</a>
         {% endif %}
     </div>
 </div>

@@ -299,8 +299,11 @@ Pending Tasks
  - add (category, subcategory and location) product features
 
 
+python manage.py dumpdata --exclude auth.permission --exclude contenttypes --exclude _django_curs_140299234242688_sync_43 > db.json
+python manage.py dumpdata --exclude auth.permission --exclude contenttypes > db.json
 python -Xutf8 manage.py dumpdata --exclude auth.permission --exclude contenttypes > db.json
 python -Xutf8 manage.py loaddata db.json
+python manage.py translate_db
 
 
 CREATE DATABASE tradeoasis;
@@ -328,5 +331,9 @@ class SignupView(
     form_class = CustomSignupForm
 
 
-python manage.py makemessages --all --exclude=venv
-python manage.py compilemessages --ignore=venv/* --all
+python manage.py makemessages --all -i "venv*"
+python manage.py compilemessages -i "venv*"
+
+
+sudo systemctl daemon-reload
+sudo systemctl restart gunicorn

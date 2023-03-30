@@ -39,6 +39,11 @@ from django.utils.decorators import method_decorator
 from payment.management.commands.utils.braintree import braintree_config
 from payment.management.commands.utils.paypal import paypal as paypal_config
 
+import logging
+
+logger = logging.getLogger(__name__)
+
+
 braintree.Configuration.configure(
     braintree.Environment.Sandbox,
     merchant_id=os.environ.get("BRAINTREE_MERCHANT_ID"),
@@ -46,29 +51,32 @@ braintree.Configuration.configure(
     private_key=os.environ.get("BRAINTREE_PRIVATE_KEY")
 )
 
+def deactivate_feature_subscription(membership):
+    if membership.membership_type == "PAYPAL":
+        subscription = PaymentModels.PaypalSubscription.objects.filter(membership=membership).first()
+
+        ret = paypal_config.paypal_api.post(f"v1/billing/subscriptions/{subscription.order_key}/suspend")
+        # logger.error('PayPal Deactivation Error: %s', ret)
+        if ret.get("error"):
+            ret = paypal_config.paypal_api.post(f"v1/billing/subscriptions/{subscription.order_key}/cancel")
+            # logger.error('PayPal Deactivation Result: %s', ret)
+
+        membership.status = False
+        membership.save()
+    else:
+        subscription = PaymentModels.BraintreeSubscription.objects.filter(membership=membership).first()
+
+        result = braintree.Subscription.cancel(subscription.subscription_id)
+        if result.is_success and result.subscription.status == "Canceled":
+            membership.status = False
+            membership.save()
+
 def deactivate(feature, request):
-    membership_group = feature.features_list.first().group
+    membership_group = feature.features_list.first().group.group_type
     active_memberships = PaymentModels.Membership.active.filter(client = request.user)
     for membership in active_memberships:
-        if membership.feature.features_list.first().group.group_type == membership_group.group_type:
-            if membership.membership_type == "PAYPAL":
-                subscription = PaymentModels.PaypalSubscription.objects.filter(membership=membership).first()
-
-                ret = paypal_config.paypal_api.post(f"v1/billing/subscriptions/{subscription.order_key}/suspend")
-                print(ret)
-                if ret.get("error"):
-                    ret = modpaypal_confige.paypal_api.post(f"v1/billing/subscriptions/{subscription.order_key}/cancel")
-                    print(ret)
-
-                membership.status = False
-                membership.save()
-            else:
-                subscription = PaymentModels.BraintreeSubscription.objects.filter(membership=membership).first()
-
-                result = braintree.Subscription.cancel(subscription.subscription_id)
-                if result.is_success and result.subscription.status == "Canceled":
-                    membership.status = False
-                    membership.save()
+        if membership.feature.features_list.first().group.group_type == membership_group:
+            deactivate_feature_subscription(membership)
 
 @method_decorator(csrf_exempt, name='dispatch')
 class webhooksView(View):
@@ -93,33 +101,9 @@ class InitSubscriptionView(View):
         user_profile = AuthModels.ClientProfile.objects.filter(
             user=request.user
         ).first()
-        
-        if not user_profile.customer_id:
-            # create braintree customer
-
-            result = braintree.Customer.create(
-                {
-                    "first_name": user_profile.user.first_name,
-                    "last_name": user_profile.user.last_name,
-                    "company": user_profile.business_name,
-                    "email": user_profile.user.email,
-                    "phone": user_profile.mobile_user,
-                }
-            )
-            if result.is_success:
-                user_profile.customer_id = result.customer.id
-                user_profile.save()
-
-        try:
-            braintree_client_token = braintree.ClientToken.generate(
-                {"customer_id": user_profile.customer_id}
-            )
-        except:
-            braintree_client_token = braintree.ClientToken.generate({})
 
         context_data = {
             "view_name": _("Business Profile"),
-            "braintree_client_token": braintree_client_token,
             "membership_groups": [
                 {
                     "group" : group,
@@ -132,6 +116,33 @@ class InitSubscriptionView(View):
                 } for group in PaymentModels.MembershipGroup.objects.all()
             ]
         }
+        
+        
+        if user_profile and user_profile.user.account_type == "SUPPLIER":
+            if not user_profile.customer_id:
+                # create braintree customer
+                result = braintree.Customer.create(
+                    {
+                        "first_name": user_profile.user.first_name,
+                        "last_name": user_profile.user.last_name,
+                        "company": user_profile.business_name,
+                        "email": user_profile.user.email,
+                        "phone": user_profile.mobile_user,
+                    }
+                )
+                if result.is_success:
+                    user_profile.customer_id = result.customer.id
+                    user_profile.save()
+
+            try:
+                braintree_client_token = braintree.ClientToken.generate(
+                    {"customer_id": user_profile.customer_id}
+                )
+            except:
+                braintree_client_token = braintree.ClientToken.generate({})
+
+            context_data["braintree_client_token"] = braintree_client_token
+
 
         return render(request, self.template_name, context=context_data)
 
@@ -202,7 +213,8 @@ def deactivateSubcription(request):
     if request.method == "POST":
         plan_id = request.POST.get("plan_id")
         feature = PaymentModels.Feature.objects.filter(custom_id=plan_id).first()
-        deactivate(feature, request)
+        membership = PaymentModels.Membership.active.filter(client = request.user, feature=feature).first()
+        deactivate_feature_subscription(membership)
         return redirect(reverse("supplier:profile"))
     else:
         return redirect(reverse("supplier:profile"))

@@ -290,11 +290,11 @@
                         <label for="business_line" class="text-lghterBackgroundColor font-semibold text-base">{% trans 'Business Line' %} </label>
                         <div class="grid gap-3" style="grid-template-columns: .3fr 1fr;">
                             {% if request.user.account_type == "SUPPLIER" %}
-                                <input class="py-4" style="width: 100%;" type="text" id="country_code" name="country_code" list="tel-codes" placeholder="Country Code" required>
+                                <input class="py-4" style="width: 100%;" type="text" id="country_code" name="country_code" list="tel-codes" placeholder="{% trans 'Country Code' %}" required>
 
                                 <input class="py-4" style="width: 100%;" type="text" id="mobile_user" name="mobile_user" required>
                             {% else %}
-                                <input class="py-4" style="width: 100%;" type="text" id="country_code" name="country_code" list="tel-codes" placeholder="Country Code">
+                                <input class="py-4" style="width: 100%;" type="text" id="country_code" name="country_code" list="tel-codes" placeholder="{% trans 'Country Code' %}">
 
                                 <input class="py-4" style="width: 100%;" type="text" id="mobile_user" name="mobile_user">
                             {% endif %}
@@ -540,7 +540,7 @@
                         <input class="py-4" style="width: 100%;" type="url" id="website"  name="website">
                     </div>
                     <div class="form-group">
-                        <input class="bg-backgroundColor hover:bg-backgroundColorHover text-white" style="width: 100%;" type="submit" value="Submit">
+                        <input class="bg-backgroundColor hover:bg-backgroundColorHover text-white" style="width: 100%;" type="submit" value="{% trans 'Submit' %}">
                     </div>
                 </form>
             </div>

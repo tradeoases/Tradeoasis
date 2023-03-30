@@ -75,15 +75,11 @@
                 <hr class="border-t border-solid border-slate-200">
                 <div class="plan-group grid gap-6">
                     {% for group in membership_groups %}
-                    {% if group.group.group_type == "SHOWROOMS" %}
-                    <div class="grid gap-4 px-4 showroom-group">
-                    {% else %}
                     <div class="grid gap-4 px-4">
-                    {% endif %}
                         <h1 class="text-lg md:text-xl font-semibold text-lighterBackgroundColor">{{forloop.counter}}. {{ group.group.name }}</h1>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 justify-center md:justify-start py-4 md:px-6" id="VirtualShowroomsPlans">
+                        <div class="grid plan_group grid-cols-1 md:grid-cols-3 gap-8 justify-center md:justify-start py-4 md:px-6" id="VirtualShowroomsPlans">
                             {% for plan in group.plans %}
-                                <div class="package grid gap-3 p-6 md:p-8 rounded-md">
+                                <div class="package grid gap-3 p-6 md:p-8 rounded-md" data-group="{{ group.group.name }}">
                                     <h2 class="text-lg md:text-xl font-bold text-lighterBackgroundColor">{{plan.plan.name}}</h2>
                                     <hr class="border-t border-solid border-slate-300">
                                     <div class="grid gap-2">
@@ -101,8 +97,10 @@
                     {% endfor %}
                 </div>
             </div>
+
+            {% if braintree_client_token %}
             <div class="grid gap-4">
-                <h1 class="text-xl md:text-2xl font-bold text-lighterBackgroundColor">2. Choose your Payment Method</h1>
+                <h1 class="text-xl md:text-2xl font-bold text-lighterBackgroundColor">{% trans "2. Choose your Payment Method" %}</h1>
                 <hr class="border-t border-solid border-slate-200">
                 <div class="grid gap-3 py-3">
                     <div class="payment-methods grid items-start justify-start gap-2">
@@ -135,6 +133,7 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
         </div>
     </section>
 
@@ -151,28 +150,34 @@
             var selectedPlanids = [];
             var braintree_client_token = "{{ braintree_client_token }}";
             var card_pay_button = document.querySelector('#braintree-submit-button');
-            card_pay_button.style.display = "none";
-            card_pay_button.disabled = true;
+            if (card_pay_button) {
+                card_pay_button.style.display = "none";
+                card_pay_button.disabled = true;
+            }
 
             const packages = document.querySelectorAll(".package");
             packages.forEach(package => {
                 package.addEventListener('click', (e) => {
                     let selectedPlan = e.target.classList.contains('package') ? e.target : e.target.closest('.package');
 
-                    let showroom_plans = document.querySelectorAll(".showroom-group .package")
-                    if (showroom_plans && selectedPlan.closest(".showroom-group")) {
-                        showroom_plans.forEach(_plan => {
-                            if (_plan.classList.contains('active')) _plan.classList.remove('active');
-                        })
-                    }
+                    document.querySelectorAll(".package.active").forEach(
+                        package => {
+                            if (package.dataset.group == selectedPlan.dataset.group) {
+                                package.classList.remove('active');
+                            }
+                        }
+                    )
+                    
                     selectedPlan.classList.add('active');
                     
                     let inputs = document.querySelectorAll(".package.active input[type='radio']:checked")
-                    if (inputs.length <= 0) {
-                        card_pay_button.disabled = true;
-                    }
-                    else {
-                        card_pay_button.disabled = false;
+                    if (card_pay_button) {
+                        if (inputs.length <= 0) {
+                            card_pay_button.disabled = true;
+                        }
+                        else {
+                            card_pay_button.disabled = false;
+                        }
                     }
                 })
             })
@@ -234,7 +239,7 @@
             function makeRequest (payload, plan_id) {
                 return $.ajax({
                     type: 'POST',
-                    url: '{% url "payment:init-subscription" %}',
+                    url: '{% url "payment:memberships" %}',
                     data: {'paymentMethodNonce': payload.nonce,
                             'csrfmiddlewaretoken': '{{ csrf_token }}', 'method': "CARD", "plan_id": plan_id}
                 })
@@ -367,9 +372,11 @@
                 }
             
             }
-            document.querySelector("#paypal-btn").addEventListener("click", () => handlePaypalPayments())
+            if (card_pay_button) {
+                document.querySelector("#paypal-btn").addEventListener("click", () => handlePaypalPayments())
+                handleCardPayments();
+            }
 
-            handleCardPayments();
         })
 
     </script>

@@ -44,16 +44,16 @@ class ModelWithNameBasedSlug(models.Model):
 
 class MembershipGroup(ModelWithNameBasedSlug):
     
-    group_types = (
-        ("SHOWROOMS", "SHOWROOMS"),
-        ("LOCAL", "LOCAL"),
-    )
+    # group_types = (
+    #     ("SHOWROOMS", "SHOWROOMS"),
+    #     ("LOCAL", "LOCAL"),
+    # )
     description = models.TextField(
         _("Description"),
         blank=True,
         null=True
     )
-    group_type = models.CharField(_("Type"), choices=group_types, max_length=256, blank=True, null=True)
+    # group_type = models.CharField(_("Type"), choices=group_types, max_length=256, blank=True, null=True)
 
 class MembershipPlan(ModelWithNameBasedSlug):
     group = models.ForeignKey(to=MembershipGroup, on_delete=models.CASCADE)
@@ -80,15 +80,15 @@ class Feature(models.Model):
     has_trial = models.BooleanField("Has Trial Period", default=False)
     trial_period = models.CharField(_("Trial Period"), max_length=256, blank=True, null=True)
     trial_period_count = models.CharField(_("Trial Period Count"), max_length=256, blank=True, null=True)
-    paypal_id = models.CharField(_("Trial Period"), max_length=256, blank=True, null=True)
+    paypal_id = models.CharField(_("paypal_id"), max_length=256, blank=True, null=True)
 
     def get_duration(self):
         if self.billing_frequency == "1":
-            return "Per Month"
+            return _("Per Month")
         elif self.billing_frequency == "6":
-            return "Per 6 Months"
+            return _("Per 6 Months")
         elif self.billing_frequency == "12":
-            return "Per Year"
+            return _("Per Year")
 
     def save(self, *args, **kwargs):
         self.duration = self.get_duration()
