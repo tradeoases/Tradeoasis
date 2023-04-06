@@ -5,30 +5,31 @@
 
     <div class="main-content">
         <div class="cs-flex cs-justify-start outlined main-content-tabs" style="padding: 0.15rem;border-radius: .5rem;gap: .5rem;">
-            <a href="{% url 'supplier:dashboard-payments' %}" class="active">{% trans "Membership Payments" %}</a>
+            <a href="{% url 'supplier:dashboard-payments' %}" class="active cs-text-accent">{% trans "Membership Payments" %}</a>
             <a href="{% url 'supplier:dashboard-advert-payments' %}">{% trans "Advertising Payments" %}</a>
         </div>
         <div class="content-area">
-            <h3 style="margin: .5rem 0 .4rem 0;font-weight:600;">{% trans 'Membership Payments' %}</h3>
             <div class="card data-table products-table">
-                <table class="display" style="width:100%;margin-top:.5rem;">
+                <table class="display" style="width:100%;">
                     <thead>
                         <tr>
                             <th>{% trans 'No' %}</th>
                             <th>{% trans 'Paid For' %}</th>
                             <th>{% trans 'Plan' %}</th>
-                            <th>{% trans 'Expiry Date' %}</th>
-                            <th>{% trans 'Paid On' %}</th>
+                            <th>{% trans 'Pice' %}</th>
+                            <th>{% trans 'Frequency' %}</th>
+                            <th>{% trans 'Status' %}</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for payment in memberships %}
                         <tr>
-                            <td>{% trans 'No' %}</td>
+                            <td>{{ forloop.counter }}</td>
                             <td>{% trans 'Membership' %}</td>
-                            <td>{{ payment.plan.name }}</td>
-                            <td>{{ payment.expiry_date }}</td>
-                            <td>{{ payment.created_on }}</td>
+                            <td>{{ payment.feature.name }}</td>
+                            <td>{{ payment.feature.price }}</td>
+                            <td>{{ payment.feature.get_duration }}</td>
+                            <td>{% if payment.status %} {% trans 'Active' %} {% else %}  {% trans 'Not Active' %} {% endif %}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -37,8 +38,9 @@
                             <th>{% trans 'No' %}</th>
                             <th>{% trans 'Paid For' %}</th>
                             <th>{% trans 'Plan' %}</th>
-                            <th>{% trans 'Expiry Date' %}</th>
-                            <th>{% trans 'Paid On' %}</th>
+                            <th>{% trans 'Pice' %}</th>
+                            <th>{% trans 'Frequency' %}</th>
+                            <th>{% trans 'Status' %}</th>
                         </tr>
                     </tfoot>
                 </table>

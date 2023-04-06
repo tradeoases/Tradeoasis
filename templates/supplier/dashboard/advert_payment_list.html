@@ -6,12 +6,11 @@
     <div class="main-content">
         <div class="cs-flex cs-justify-start outlined main-content-tabs" style="padding: 0.15rem;border-radius: .5rem;gap: .5rem;">
             <a href="{% url 'supplier:dashboard-payments' %}">{% trans "Membership Payments" %}</a>
-            <a href="{% url 'supplier:dashboard-advert-payments' %}" class="active">{% trans "Advertising Payments" %}</a>
+            <a href="{% url 'supplier:dashboard-advert-payments' %}" class="active cs-text-accent">{% trans "Advertising Payments" %}</a>
         </div>
         <div class="content-area">
-            <h3 style="margin: .5rem 0 .4rem 0;font-weight:600;">{% trans 'Advertising Payments' %}</h3>
             <div class="card data-table products-table">
-                <table class="display" style="width:100%;margin-top:.5rem;">
+                <table class="display" style="width:100%;">
                     <thead>
                         <tr>
                             <th>{% trans 'No' %}</th>

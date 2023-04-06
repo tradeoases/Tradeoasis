@@ -50,6 +50,20 @@ INSTALLED_APPS = [
     "modeltranslation",
     "django.contrib.admin",
     "django.contrib.sites",
+]
+
+CUSTOM_APPS = [
+    "manager.apps.ManagerConfig",
+    "supplier.apps.SupplierConfig",
+    "buyer.apps.BuyerConfig",
+    "payment.apps.PaymentConfig",
+    "auth_app.apps.AuthAppConfig",
+    "app_admin.apps.AppAdminConfig",
+    "admin_api.apps.AdminApiConfig",
+    "api.apps.ApiConfig",
+]
+
+THIRD_PARTY_APPS = [    
     # third party
     "rest_framework",
     "channels",
@@ -64,18 +78,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 ]
 
-CUSTOM_APPS = [
-    "manager.apps.ManagerConfig",
-    "supplier.apps.SupplierConfig",
-    "buyer.apps.BuyerConfig",
-    "payment.apps.PaymentConfig",
-    "auth_app.apps.AuthAppConfig",
-    "app_admin.apps.AppAdminConfig",
-    "admin_api.apps.AdminApiConfig",
-    "api.apps.ApiConfig",
-]
-
-INSTALLED_APPS = INSTALLED_APPS + CUSTOM_APPS
+INSTALLED_APPS = INSTALLED_APPS + CUSTOM_APPS + THIRD_PARTY_APPS
 
 # django_user_agents
 
@@ -290,6 +293,11 @@ BRAINTREE_MERCHANT_ID = os.environ.get("BRAINTREE_MERCHANT_ID")
 BRAINTREE_PUBLIC_KEY = os.environ.get("BRAINTREE_PUBLIC_KEY")
 BRAINTREE_PRIVATE_KEY = os.environ.get("BRAINTREE_PRIVATE_KEY")
 
+SOCIALACCOUNT_SIGNUP_FORM_CLASS = 'auth_app.forms.CustomSocialSignupForm'
+
+ACCOUNT_EMAIL_REQUIRED = True
+SOCIALACCOUNT_AUTO_SIGNUP = False
+ACCOUNT_SIGNUP_REDIRECT_URL = reverse_lazy("auth_app:business")
 
 # allauth
 SITE_ID = 1
@@ -327,17 +335,6 @@ SOCIALACCOUNT_PROVIDERS = {
         'GRAPH_API_URL': 'https://graph.facebook.com/v13.0',
     }
 }
-
-
-# ACCOUNT_SIGNUP_FORM_CLASS = "auth_app.forms.CustomSignupForm"
-# ACCOUNT_FORMS = {
-    # "signup": "allauth.account.forms.SignupForm",
-    # 'signup': 'auth_app.forms.CustomSignupForm',
-# }
-
-ACCOUNT_EMAIL_REQUIRED = True
-SOCIALACCOUNT_AUTO_SIGNUP = False
-ACCOUNT_SIGNUP_REDIRECT_URL = reverse_lazy("auth_app:business")
 
 
 # custom

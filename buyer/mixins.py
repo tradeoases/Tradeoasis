@@ -11,8 +11,8 @@ class BuyerOnlyAccessMixin(AccessMixin):
         if not (request.user.is_authenticated and request.user.account_type == "BUYER"):
             return redirect(reverse("manager:home"))
 
-        if request.user_agent.is_mobile and request.user_agent.is_tablet:
-            return redirect(reverse("manager:dashboard-blocked"))
+        # if request.user_agent.is_mobile and request.user_agent.is_tablet:
+        #     return redirect(reverse("manager:dashboard-blocked"))
         
         if not AuthModels.ClientProfile.objects.filter(user=request.user):
             return redirect(reverse("manager:profile-notfound"))

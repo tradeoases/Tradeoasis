@@ -8,6 +8,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon/favicon.ico' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'favicon/apple-touch-icon.png' %}">
     <link rel="stylesheet" href="{% static 'css/_main.css' %}">
     <link rel="stylesheet" href="{% static 'css/dashboards.css' %}">
     <link rel="stylesheet" href="{% static 'icons/themify-icons.css' %}">
@@ -125,7 +129,7 @@
                 </div>
             </div>
             <div class="main">
-                <div class="navbar card" style="display: flex;justify-content: flex-end;">
+                <div class="navbar card cs-grid cs-justify-between cs-align-center" style="grid-template-columns: .1fr auto;">
                     <!-- <div class="logo"> -->
                         <!-- <form class="search-form" action="">
                             <div class="form-control">
@@ -134,8 +138,14 @@
                             </div>
                         </form> -->
                     <!-- </div> -->
-                    <nav>
-                        <ul class="nav-links flex">
+                    <div class="link customer-display cs-text-accent" style="justify-self: flex-start; align-self: center;padding: .5rem 1rem;font-weight: bold;">
+                        <div class="lg-hidden md-show" id="show_sidebar">
+                            <!-- <i class="fa fa-desktop"></i> -->
+                            <i class="ti-layout-grid2"></i>
+                        </div>
+                    </div>
+                    <nav style="justify-self: flex-end;">
+                        <ul class="nav-links cs-flex cs-align-center" style="--gap: 1rem;justify-self: flex-end;">
                             <!-- <li class="link bell">
                                 <i class="ti-bell"></i>
                                 </li>
@@ -157,7 +167,7 @@
 
                             <div class="dropdown cs-text-accent">
                                 <a href="{% url 'supplier:profile' %}" class="flex" style="margin-inline-start: 1rem;">
-                                    <h4>testUser</h4>
+                                    <h4 class="md-hidden">{{ request.user.username }}</h4>
                                     <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="user_image"
                                         class="avatar" id="toggle-dropdown" >
                                 </a>
@@ -186,6 +196,10 @@
             if (window.location.href.includes('/ar/')) {
                 document.body.classList.add('rtl');
             }
+        })
+
+        document.querySelector("#show_sidebar").addEventListener("click", () => {
+            document.querySelector(".sidebar").classList.toggle("inview")
         })
     </script>    
 

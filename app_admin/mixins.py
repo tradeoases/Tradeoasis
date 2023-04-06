@@ -15,7 +15,7 @@ class SupportOnlyAccessMixin(AccessMixin):
             # blocked dashboard access to mobile users
             return redirect(reverse("manager:home"))
 
-        if request.user_agent.is_mobile and request.user_agent.is_tablet:
-            return redirect(reverse("manager:dashboard-blocked"))
+        # if request.user_agent.is_mobile and request.user_agent.is_tablet:
+        #     return redirect(reverse("manager:dashboard-blocked"))
 
         return super().dispatch(request, *args, **kwargs)

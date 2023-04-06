@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-30 11:14+0000\n"
-"PO-Revision-Date: 2023-03-30 11:04+0000\n"
+"POT-Creation-Date: 2023-03-30 12:30+0000\n"
+"PO-Revision-Date: 2023-03-30 12:34+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -191,8 +191,8 @@ msgstr "Hallo"
 
 #: app_admin/views.py:691
 msgid ""
-"Your have been added a Foroden Support Team Member, Please edit your account "
-"details and set a desired password after activating your account."
+"Your have been added a Foroden Support Team Member, Please edit your account"
+" details and set a desired password after activating your account."
 msgstr ""
 "Sie wurden als Mitglied des Foroden Support-Teams hinzugefügt. Bitte "
 "bearbeiten Sie Ihre Kontodaten und legen Sie ein gewünschtes Passwort fest, "
@@ -383,7 +383,8 @@ msgstr "Folgen Sie diesem Link, um Ihr Foroden-Konto zu aktivieren."
 
 #: auth_app/views.py:152
 msgid ""
-"Account Created Successfully. Please check your email for a verfication link."
+"Account Created Successfully. Please check your email for a verfication "
+"link."
 msgstr ""
 "Konto erfolgreich erstellt. Bitte überprüfen Sie Ihre E-Mail auf einen "
 "Bestätigungslink."
@@ -994,14 +995,12 @@ msgstr "Foroden-Vertrag erstellt"
 #, python-brace-format
 msgid ""
 "Hello, {supplier.username}.\n"
-"A Contract application has been sumbited by {buyer.profile.business_name} on "
-"service {service.name}.\n"
+"A Contract application has been sumbited by {buyer.profile.business_name} on service {service.name}.\n"
 "Please visit the dashboard to respond to the application.\n"
 "Thank you."
 msgstr ""
 "Hallo, {supplier.username}.\n"
-"Ein Vertragsantrag wurde von {buyer.profile.business_name} für den Dienst "
-"{service.name} eingereicht.\n"
+"Ein Vertragsantrag wurde von {buyer.profile.business_name} für den Dienst {service.name} eingereicht.\n"
 "Bitte besuchen Sie das Dashboard, um auf die Bewerbung zu antworten.\n"
 "Danke schön."
 
@@ -1076,8 +1075,7 @@ msgstr "Foroden-Vertrag abgelehnt."
 #, python-brace-format
 msgid ""
 "Hello, {contract.buyer.username}.\n"
-"Your contract application on service {contract.service.name} has been "
-"rejected.\n"
+"Your contract application on service {contract.service.name} has been rejected.\n"
 "Please contact the supplier for more information.\n"
 "Thank you."
 msgstr ""
@@ -1201,6 +1199,16 @@ msgstr "Zielgruppe"
 #: templates/app_admin/promotion_edit.html:49
 msgid "Select Showroom"
 msgstr "Showroom auswählen"
+
+#: templates/app_admin/email_promotions_create.html:71
+#: templates/app_admin/email_promotions_edit.html:84
+#: templates/app_admin/promotion_create.html:71
+#: templates/app_admin/promotion_edit.html:84
+#: templates/supplier/dashboard/advertise.html:132
+#: templates/supplier/dashboard/create-product.html:253
+#: templates/supplier/dashboard/create-service.html:230
+msgid "Guidelines"
+msgstr "Richtlinien"
 
 #: templates/app_admin/email_promotions_create.html:73
 #: templates/app_admin/email_promotions_edit.html:86
@@ -1664,8 +1672,8 @@ msgstr "Über Foroden"
 #: templates/manager/about.html:160
 msgid ""
 "We represent a wide network of Digital Promoting and local and Traditional "
-"Marketing and Advertising  services  of products (in large scale) of various "
-"companies. Our offices and specialized and indigenous forces are operating "
+"Marketing and Advertising  services  of products (in large scale) of various"
+" companies. Our offices and specialized and indigenous forces are operating "
 "in different countries. We have created a sustainable, learning and "
 "progressive system."
 msgstr ""
@@ -1681,8 +1689,8 @@ msgid ""
 "learning system. Over time, we make the necessary adjustments to both "
 "maintain and increase our success."
 msgstr ""
-"Wir entscheiden und handeln als Team. Unsere Organisation ist ein vernetztes "
-"und lernendes System. Im Laufe der Zeit nehmen wir die notwendigen "
+"Wir entscheiden und handeln als Team. Unsere Organisation ist ein vernetztes"
+" und lernendes System. Im Laufe der Zeit nehmen wir die notwendigen "
 "Anpassungen vor, um unseren Erfolg sowohl zu erhalten als auch zu steigern."
 
 #: templates/manager/about.html:165
@@ -1729,10 +1737,11 @@ msgid "Development of our offices in different countries"
 msgstr "Entwicklung unserer Büros in verschiedenen Ländern"
 
 #: templates/manager/about.html:187
-msgid "Creating a network of specialized and indigenous forces in each country"
+msgid ""
+"Creating a network of specialized and indigenous forces in each country"
 msgstr ""
-"Schaffung eines Netzwerks von spezialisierten und indigenen Kräften in jedem "
-"Land"
+"Schaffung eines Netzwerks von spezialisierten und indigenen Kräften in jedem"
+" Land"
 
 #: templates/manager/about.html:188
 msgid ""
@@ -1813,30 +1822,30 @@ msgstr "Senden Sie eine Antwort"
 msgid "Discussions"
 msgstr "Diskussionen"
 
-#: templates/manager/guides/accounts.html:12
+#: templates/manager/guides/accounts.html:13
 msgid "Foroden Account Creation"
 msgstr "Foroden-Kontoerstellung"
 
-#: templates/manager/guides/accounts.html:13
+#: templates/manager/guides/accounts.html:14
 msgid "Foroden offers 2 types of client accounts, that is:"
 msgstr "Foroden bietet 2 Arten von Kundenkonten an, nämlich:"
 
-#: templates/manager/guides/accounts.html:16
-#: templates/manager/guides/accounts.html:49
-#: templates/manager/guides/accounts.html:82
-#: templates/manager/guides/products.html:22
-#: templates/manager/guides/services.html:22
-#: templates/manager/guides/showrooms.html:30
-#: templates/manager/guides/stores.html:23
-#: templates/manager/guides/stores.html:54
+#: templates/manager/guides/accounts.html:17
+#: templates/manager/guides/accounts.html:50
+#: templates/manager/guides/accounts.html:89
+#: templates/manager/guides/products.html:23
+#: templates/manager/guides/services.html:23
+#: templates/manager/guides/showrooms.html:31
+#: templates/manager/guides/stores.html:24
+#: templates/manager/guides/stores.html:60
 msgid "1"
 msgstr "1."
 
-#: templates/manager/guides/accounts.html:17
+#: templates/manager/guides/accounts.html:18
 msgid "Supplier Account"
 msgstr "Lieferantenkonto"
 
-#: templates/manager/guides/accounts.html:20
+#: templates/manager/guides/accounts.html:21
 msgid ""
 "Foroden Suppliers are users who indent to promote their businesses and "
 "products. These have access to the following features:"
@@ -1844,37 +1853,37 @@ msgstr ""
 "Foroden-Lieferanten sind Benutzer, die ihre Geschäfte und Produkte bewerben "
 "möchten. Diese haben Zugriff auf die folgenden Funktionen:"
 
-#: templates/manager/guides/accounts.html:22
+#: templates/manager/guides/accounts.html:23
 msgid "Product Advertising"
 msgstr "Lieferantenkonto"
 
-#: templates/manager/guides/accounts.html:23
+#: templates/manager/guides/accounts.html:24
 msgid "Business Advertising"
 msgstr "Werbung für Unternehmen"
 
-#: templates/manager/guides/accounts.html:24
+#: templates/manager/guides/accounts.html:25
 msgid "Service Trading"
 msgstr "Dienstleistungshandel"
 
-#: templates/manager/guides/accounts.html:25
-#: templates/manager/guides/accounts.html:37
+#: templates/manager/guides/accounts.html:26
+#: templates/manager/guides/accounts.html:38
 msgid "Contract Creation"
 msgstr "Vertragserstellung"
 
-#: templates/manager/guides/accounts.html:31
-#: templates/manager/guides/products.html:31
-#: templates/manager/guides/services.html:31
-#: templates/manager/guides/showrooms.html:39
-#: templates/manager/guides/stores.html:33
-#: templates/manager/guides/stores.html:63
+#: templates/manager/guides/accounts.html:32
+#: templates/manager/guides/products.html:35
+#: templates/manager/guides/services.html:35
+#: templates/manager/guides/showrooms.html:43
+#: templates/manager/guides/stores.html:36
+#: templates/manager/guides/stores.html:72
 msgid "2"
 msgstr "2."
 
-#: templates/manager/guides/accounts.html:32
+#: templates/manager/guides/accounts.html:33
 msgid "Buyer Account"
 msgstr "Käuferkonto"
 
-#: templates/manager/guides/accounts.html:35
+#: templates/manager/guides/accounts.html:36
 msgid ""
 "Foroden Buyers are users who seek different services or products from "
 "Foroden Suppliers: These have access to the following features:"
@@ -1883,43 +1892,43 @@ msgstr ""
 "Produkte von Foroden-Lieferanten suchen: Diese haben Zugriff auf die "
 "folgenden Funktionen:"
 
-#: templates/manager/guides/accounts.html:45
+#: templates/manager/guides/accounts.html:46
 msgid "How to create a client account."
 msgstr "So erstellen Sie ein Kundenkonto."
 
-#: templates/manager/guides/accounts.html:50
+#: templates/manager/guides/accounts.html:51
 msgid "Choose your desire account creation method"
 msgstr "Wählen Sie die gewünschte Kontoerstellungsmethode"
 
-#: templates/manager/guides/accounts.html:53
+#: templates/manager/guides/accounts.html:54
 msgid ""
 "Foroden offers both custom account creation and social account creation "
 "using Google and LinkedIn "
 msgstr ""
-"Foroden bietet sowohl die Erstellung benutzerdefinierter Konten als auch die "
-"Erstellung sozialer Konten mit Google und LinkedIn an"
+"Foroden bietet sowohl die Erstellung benutzerdefinierter Konten als auch die"
+" Erstellung sozialer Konten mit Google und LinkedIn an"
 
-#: templates/manager/guides/accounts.html:61
+#: templates/manager/guides/accounts.html:65
 msgid "a"
 msgstr "a"
 
-#: templates/manager/guides/accounts.html:62
+#: templates/manager/guides/accounts.html:66
 msgid "Using custom account creation"
 msgstr "Verwenden der benutzerdefinierten Kontoerstellung"
 
-#: templates/manager/guides/accounts.html:70
+#: templates/manager/guides/accounts.html:77
 msgid "b"
 msgstr "b"
 
-#: templates/manager/guides/accounts.html:71
+#: templates/manager/guides/accounts.html:78
 msgid "Using social authentication"
 msgstr "Verwenden der sozialen Authentifizierung"
 
-#: templates/manager/guides/accounts.html:74
+#: templates/manager/guides/accounts.html:81
 msgid "You are prompted to selected your desired account type."
 msgstr "Sie werden aufgefordert, den gewünschten Kontotyp auszuwählen."
 
-#: templates/manager/guides/accounts.html:83
+#: templates/manager/guides/accounts.html:90
 msgid "Enter your business details"
 msgstr "Geben Sie Ihre Geschäftsdaten ein"
 
@@ -2017,12 +2026,12 @@ msgstr ""
 #: templates/manager/guides/memberships.html:29
 msgid ""
 "This membership plan allows store owners to sell their products to any "
-"buyers on the platform but does not allow them to have their products listed "
-"under the adverts."
+"buyers on the platform but does not allow them to have their products listed"
+" under the adverts."
 msgstr ""
 "Dieser Mitgliedschaftsplan ermöglicht es Ladenbesitzern, ihre Produkte an "
-"alle Käufer auf der Plattform zu verkaufen, erlaubt ihnen jedoch nicht, ihre "
-"Produkte unter den Anzeigen auflisten zu lassen."
+"alle Käufer auf der Plattform zu verkaufen, erlaubt ihnen jedoch nicht, ihre"
+" Produkte unter den Anzeigen auflisten zu lassen."
 
 #: templates/manager/guides/memberships.html:30
 #: templates/manager/guides/memberships.html:36
@@ -2032,8 +2041,8 @@ msgid ""
 "costs "
 msgstr ""
 "Produkte aus dem Geschäft können jedoch von allen Käufern innerhalb des "
-"Geschäfts des Standorts und im Ausland aufgerufen und gekauft werden. Dieser "
-"Mitgliedschaftsplan kostet"
+"Geschäfts des Standorts und im Ausland aufgerufen und gekauft werden. Dieser"
+" Mitgliedschaftsplan kostet"
 
 #: templates/manager/guides/memberships.html:35
 msgid ""
@@ -2047,47 +2056,47 @@ msgstr ""
 "Verkäufe vom selben Standort beschränkt, aber nicht davon entfernt oder in "
 "Übersee. Das Bronze-Paket ist kostenlos."
 
-#: templates/manager/guides/products.html:12
+#: templates/manager/guides/products.html:13
 msgid "Foroden Supplier Products"
 msgstr "Bronze-Mitgliedschaftsplan"
 
-#: templates/manager/guides/products.html:13
+#: templates/manager/guides/products.html:14
 msgid ""
 "Foroden Suppliers able able to advertise their product using our different "
 "advertising method based on the supplier's membership plan. Foroden doesnot "
 "handle selling of products, this is handled by the suppliers."
 msgstr ""
 "Foroden-Lieferanten sind in der Lage, ihr Produkt mit unseren "
-"unterschiedlichen Werbemethoden zu bewerben, die auf dem Mitgliedschaftsplan "
-"des Lieferanten basieren. Foroden kümmert sich nicht um den Verkauf von "
+"unterschiedlichen Werbemethoden zu bewerben, die auf dem Mitgliedschaftsplan"
+" des Lieferanten basieren. Foroden kümmert sich nicht um den Verkauf von "
 "Produkten, dies wird von den Lieferanten gehandhabt."
 
-#: templates/manager/guides/products.html:18
+#: templates/manager/guides/products.html:19
 msgid "How to create a supplier product."
 msgstr "So erstellen Sie ein Lieferantenprodukt."
 
-#: templates/manager/guides/products.html:23
-#: templates/manager/guides/services.html:23
-#: templates/manager/guides/showrooms.html:31
-#: templates/manager/guides/stores.html:24
+#: templates/manager/guides/products.html:24
+#: templates/manager/guides/services.html:24
+#: templates/manager/guides/showrooms.html:32
+#: templates/manager/guides/stores.html:25
 msgid "Access your supplier dashboard"
 msgstr "Greifen Sie auf Ihr Lieferanten-Dashboard zu"
 
-#: templates/manager/guides/products.html:32
+#: templates/manager/guides/products.html:36
 msgid "Select create product in the Sidebar"
 msgstr "Wählen Sie in der Seitenleiste Produkt erstellen aus"
 
-#: templates/manager/guides/products.html:35
+#: templates/manager/guides/products.html:39
 msgid "This Redirects you to a form, with which you can create a new product."
 msgstr ""
 "Dieser leitet Sie zu einem Formular weiter, mit dem Sie ein neues Produkt "
 "erstellen können."
 
-#: templates/manager/guides/services.html:12
+#: templates/manager/guides/services.html:13
 msgid "Foroden Supplier Services"
 msgstr "Foroden-Lieferantendienste"
 
-#: templates/manager/guides/services.html:13
+#: templates/manager/guides/services.html:14
 msgid ""
 "Foroden Supplier Services make it easy for suppliers to sell their business "
 "as a service to different Foroden buyers. A verified Foroden Buyer is able "
@@ -2098,46 +2107,79 @@ msgstr ""
 "verifizierter Foroden-Käufer kann einen Vertrag erstellen, um eine oder "
 "mehrere Lieferantendienstleistungen zu kaufen."
 
-#: templates/manager/guides/services.html:18
+#: templates/manager/guides/services.html:19
 msgid "How to create a supplier service."
 msgstr "So erstellen Sie einen Lieferantendienst."
 
-#: templates/manager/guides/services.html:32
+#: templates/manager/guides/services.html:36
 msgid "Select create service in the Sidebar"
 msgstr "Wählen Sie in der Seitenleiste Dienst erstellen aus"
 
-#: templates/manager/guides/services.html:35
+#: templates/manager/guides/services.html:39
 msgid "This Redirects you to a form, with which you can create a new service."
 msgstr ""
 "Dieser leitet Sie zu einem Formular weiter, mit dem Sie einen neuen Service "
 "erstellen können."
 
-#: templates/manager/guides/showrooms.html:11
+#: templates/manager/guides/showrooms.html:12
 msgid "Foroden Showrooms"
 msgstr "Foroden-Ausstellungsräume"
 
-#: templates/manager/guides/showrooms.html:27
+#: templates/manager/guides/showrooms.html:13
+msgid ""
+"Foroden provides a showrooms feature where stores from different locations "
+"are displayed and made accessible to the buyers."
+msgstr ""
+"Foramen bietet eine Showroom-Funktion, in der Geschäfte von verschiedenen "
+"Standorten ausgestellt und den Käufern zugänglich gemacht werden."
+
+#: templates/manager/guides/showrooms.html:14
+msgid ""
+"The stores are displayed on the showrooms basing on their membership "
+"packages. Those with Gold membership are made accessible to all buyers all "
+"over the world."
+msgstr ""
+"Die Geschäfte werden in den Showrooms basierend auf ihren "
+"Mitgliedschaftspaketen angezeigt. Diejenigen mit Gold-Mitgliedschaft werden "
+"allen Käufern auf der ganzen Welt zugänglich gemacht."
+
+#: templates/manager/guides/showrooms.html:15
+msgid ""
+"The showrooms organize the stores in a way that our algorithms can make the "
+"best suggestions for our buyers hence simplifying the entire process of "
+"buying from our virtual stores."
+msgstr ""
+"Die Showrooms organisieren die Geschäfte so, dass unsere Algorithmen unseren"
+" Käufern die besten Vorschläge machen können, wodurch der gesamte "
+"Kaufprozess in unseren virtuellen Geschäften vereinfacht wird."
+
+#: templates/manager/guides/showrooms.html:16
+#| msgid "Foroden offers the following three membership plans"
+msgid "Foroden offers the following showrooms:"
+msgstr "Foroden bietet folgende Showrooms an:"
+
+#: templates/manager/guides/showrooms.html:28
 msgid "How to add a store to a showroom."
 msgstr "So fügen Sie einem Showroom ein Geschäft hinzu."
 
-#: templates/manager/guides/showrooms.html:40
-#: templates/manager/guides/stores.html:55
+#: templates/manager/guides/showrooms.html:44
+#: templates/manager/guides/stores.html:61
 msgid "Select Manage Store in the Sidebar"
 msgstr "Wählen Sie Store verwalten in der Seitenleiste aus"
 
-#: templates/manager/guides/showrooms.html:48
+#: templates/manager/guides/showrooms.html:55
 msgid "3"
 msgstr "3"
 
-#: templates/manager/guides/showrooms.html:49
-#: templates/manager/guides/stores.html:64
+#: templates/manager/guides/showrooms.html:56
+#: templates/manager/guides/stores.html:73
 msgid "Select Store from the stores list"
 msgstr "Wählen Sie Store aus der Store-Liste aus"
 
-#: templates/manager/guides/showrooms.html:52
+#: templates/manager/guides/showrooms.html:59
 msgid ""
-"This opens up a store modal with 2 forms. Use form 1 to select a showroom to "
-"which you want to add the selected store. Use form 2 to add a specific "
+"This opens up a store modal with 2 forms. Use form 1 to select a showroom to"
+" which you want to add the selected store. Use form 2 to add a specific "
 "product to the selected store."
 msgstr ""
 "Dies öffnet ein Shop-Modal mit 2 Formularen. Verwenden Sie Formular 1, um "
@@ -2145,12 +2187,12 @@ msgstr ""
 "möchten. Verwenden Sie Formular 2, um dem ausgewählten Geschäft ein "
 "bestimmtes Produkt hinzuzufügen."
 
-#: templates/manager/guides/stores.html:12
+#: templates/manager/guides/stores.html:13
 #: templates/manager/showroom_list.html:77
 msgid "Foroden Stores"
 msgstr "Wählen Sie Store aus der Store-Liste aus"
 
-#: templates/manager/guides/stores.html:13
+#: templates/manager/guides/stores.html:14
 msgid ""
 "This is an online (virtual) shop that sell different products. Foroden also "
 "has stores that provide services such as online virtual assistance for "
@@ -2161,7 +2203,7 @@ msgstr ""
 "für Menschen anbieten, die nach Teams suchen, die ihnen helfen, ihre "
 "Geschäfte aus der Ferne zu verwalten."
 
-#: templates/manager/guides/stores.html:14
+#: templates/manager/guides/stores.html:15
 msgid ""
 "Well, think of a store as a shop you visit to purchase some products you "
 "need. However, this store has all products listed on Foroden but not "
@@ -2172,32 +2214,49 @@ msgstr ""
 "alle Produkte, die auf Foroden gelistet sind, aber nicht physisch mit ihnen "
 "vorhanden sind."
 
-#: templates/manager/guides/stores.html:19
+#: templates/manager/guides/stores.html:20
 msgid "How to create a store."
 msgstr "So erstellen Sie einen Shop."
 
-#: templates/manager/guides/stores.html:34
+#: templates/manager/guides/stores.html:37
 msgid "Select Create Store in the Sidebar"
 msgstr "Wählen Sie Store erstellen in der Seitenleiste aus"
 
-#: templates/manager/guides/stores.html:37
+#: templates/manager/guides/stores.html:40
 msgid "This Redirects you to a form, with which you can create a new store."
 msgstr ""
 "Dieser leitet Sie zu einem Formular weiter, mit dem Sie einen neuen Shop "
 "erstellen können."
 
-#: templates/manager/guides/stores.html:47
+#: templates/manager/guides/stores.html:53
 msgid "How to manage a store."
 msgstr "So erstellen Sie einen Shop."
 
-#: templates/manager/guides/stores.html:49
+#: templates/manager/guides/stores.html:55
 msgid ""
-"The Supplier dashboard gives you the ability to to add a store to a showroom "
-"and also add products to a store."
+"The Supplier dashboard gives you the ability to to add a store to a showroom"
+" and also add products to a store."
 msgstr ""
 "Das Lieferanten-Dashboard gibt Ihnen die Möglichkeit, ein Geschäft zu einem "
 "Ausstellungsraum hinzuzufügen und auch Produkte zu einem Geschäft "
 "hinzuzufügen."
+
+#: templates/manager/guides/stores.html:76
+#| msgid ""
+#| "This opens up a store modal with 2 forms. Use form 1 to select a showroom to"
+#| " which you want to add the selected store. Use form 2 to add a specific "
+#| "product to the selected store."
+msgid ""
+"This opens up a store modal with 2 forms. Use form 1 to select a showroom to"
+" which you want to add the selected store. Use form 2 to add a specific "
+"product to the selected store. Note that you can only add a product to a "
+"showroom if you have a valid subscription."
+msgstr ""
+"Dies öffnet ein Shop-Modal mit 2 Formularen. Verwenden Sie Formular 1, um "
+"einen Showroom auszuwählen, dem Sie das ausgewählte Geschäft hinzufügen "
+"möchten. Verwenden Sie Formular 2, um dem ausgewählten Geschäft ein "
+"bestimmtes Produkt hinzuzufügen. Beachten Sie, dass Sie einem Showroom nur "
+"dann ein Produkt hinzufügen können, wenn Sie ein gültiges Abonnement haben."
 
 #: templates/manager/index.html:28 templates/manager/showroom_detail.html:11
 #: templates/supplier/product_detail.html:28
@@ -2497,7 +2556,8 @@ msgstr "Melden Sie sich über %(provider)s an"
 
 #: templates/socialaccount/login.html:18
 #, python-format
-msgid "You are about to sign in using a third party account from %(provider)s."
+msgid ""
+"You are about to sign in using a third party account from %(provider)s."
 msgstr ""
 "Sie sind dabei, sich mit einem Drittanbieterkonto von %(provider)s "
 "anzumelden."
@@ -2515,8 +2575,8 @@ msgstr "Anmeldung abgebrochen"
 #, python-format
 msgid ""
 "You decided to cancel logging in to our site using one of your existing "
-"accounts. If this was a mistake, please proceed to <a href=\"%(login_url)s"
-"\">sign in</a>."
+"accounts. If this was a mistake, please proceed to <a "
+"href=\"%(login_url)s\">sign in</a>."
 msgstr ""
 "Sie haben sich entschieden, die Anmeldung auf unserer Website mit einem "
 "Ihrer bestehenden Konten abzubrechen. Wenn dies ein Fehler war, fahren Sie "
@@ -2533,8 +2593,7 @@ msgid ""
 "    %(site_name)s. As a final step, please complete the following form:"
 msgstr ""
 "Sie sind dabei, sich mit Ihrem %(provider_name)s-Konto anzumelden\n"
-"%(site_name)s. Als letzten Schritt füllen Sie bitte das folgende Formular "
-"aus:"
+"%(site_name)s. Als letzten Schritt füllen Sie bitte das folgende Formular aus:"
 
 #: templates/supplier/contact_supplier.html:9
 msgid "Contact"
@@ -2712,10 +2771,6 @@ msgstr "Füllen Sie das Formular aus, um den Dienst zu erstellen"
 msgid "Service Tags"
 msgstr "Service-Tags"
 
-#: templates/supplier/dashboard/create-service.html:230
-msgid "Guidelines"
-msgstr "Richtlinien"
-
 #: templates/supplier/dashboard/create-service.html:234
 msgid "Service tags help buyers to find your service easily."
 msgstr "Service-Tags helfen Käufern, Ihren Service leicht zu finden."
@@ -2806,7 +2861,8 @@ msgstr "Bitte wählen Sie einen Shop aus der Tabelle aus"
 #: templates/supplier/dashboard/manage-store.html:30
 msgid "To add products to it or add store to showroom."
 msgstr ""
-"Um Produkte hinzuzufügen oder ein Geschäft zum Ausstellungsraum hinzuzufügen."
+"Um Produkte hinzuzufügen oder ein Geschäft zum Ausstellungsraum "
+"hinzuzufügen."
 
 #: templates/supplier/dashboard/manage-store.html:37
 #: templates/supplier/dashboard/manage-store.html:47
@@ -3105,8 +3161,8 @@ msgstr "Profil erstellen"
 #~ "Your Foroden Account has been suspended. Contact Foroden Support for more "
 #~ "information"
 #~ msgstr ""
-#~ "Ihr Foroden-Konto wurde gesperrt. Wenden Sie sich für weitere "
-#~ "Informationen an den Foroden-Support"
+#~ "Ihr Foroden-Konto wurde gesperrt. Wenden Sie sich für weitere Informationen "
+#~ "an den Foroden-Support"
 
 #~ msgid "Foroden Account Suspended"
 #~ msgstr "Foroden-Konto gesperrt"
@@ -3144,8 +3200,7 @@ msgstr "Profil erstellen"
 #~ msgid ""
 #~ "We are empowering entrepreneurs around the world to chase their dreams."
 #~ msgstr ""
-#~ "Wir befähigen Unternehmer auf der ganzen Welt, ihre Träume zu "
-#~ "verwirklichen."
+#~ "Wir befähigen Unternehmer auf der ganzen Welt, ihre Träume zu verwirklichen."
 
 #~ msgid "Other Showrooms"
 #~ msgstr "Andere Ausstellungsräume"

@@ -23,10 +23,10 @@ def get_file_path(instance, filename):
 
 class User(AbstractUser):
     class Role(models.TextChoices):
-        ADMIN = "ADMIN", "Admin"
-        SUPPORT = "SUPPORT", "Support"
-        SUPPLIER = "SUPPLIER", "Supplier"
-        BUYER = "BUYER", "Buyer"
+        ADMIN = _("ADMIN"), _("Admin")
+        SUPPORT = _("SUPPORT"), _("Support")
+        SUPPLIER = _("SUPPLIER"), _("Supplier")
+        BUYER = _("BUYER"), _("Buyer")
 
     base_type = Role.SUPPLIER
 

@@ -1671,8 +1671,7 @@ class DashboardPaymentsView(View):
 
     def get(self, request):
 
-        membershipPayments = PaymentModels.Membership.objects.filter(supplier = request.user)
-
+        membershipPayments = PaymentModels.Membership.objects.filter(client = request.user)
 
         context_data = {
             "memberships" : membershipPayments
@@ -1687,8 +1686,6 @@ class DashboardAdvertsPaymentsView(View):
         supplier_products = SupplierModels.Product.objects.filter(
             store__in=SupplierModels.Store.objects.filter(supplier=self.request.user)
         )
-        print("*"*20)
-        print(ManagerModels.Advert.active.all())
         context_data = {
             "adverts" : ManagerModels.Advert.active.filter(product__in = supplier_products)
         }

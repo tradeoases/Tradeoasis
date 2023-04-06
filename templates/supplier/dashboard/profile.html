@@ -25,7 +25,7 @@
                     {% endfor %}
                 {% endif %}
                 <div class="cs-grid cs-content-start" style="--gap: 1rem;padding: 1rem 0;">
-                    <h2 class="cs-text-secondary">Account Details</h2>
+                    <h2 class="cs-text-secondary">{% trans 'Account Details' %}</h2>
                     <div class="group cs-grid" style="--gap: .5rem;">
                         <span class="cs-text-normal" style="color: var(--text-color);">{% trans 'Name' %}:</span>
                         <span class="cs-text-normal cs-text-secondary outlined br-sm" style="padding: .5rem .5rem">{{ request.user.first_name }} {{ request.user.last_name }}</span>
@@ -49,14 +49,16 @@
                         {% endif %}
 
                         {% for membership in memberships %}
-                        <div class="cs-grid" style="--gap: .75rem;grid-template-columns: 1fr .1fr .1fr;">
+                        <div class="cs-grid cs-md-grid-col-1 profile-subscription">
                             <span class="cs-text-normal cs-text-secondary outlined br-sm" style="padding: .5rem .5rem">{{ membership.plan_group }} - {{ membership.membership.feature.name }}</span>
-                            <form action="{% url 'payment:subscription-deactivate' %}" method="POST">
-                                {% csrf_token %}
-                                <input type="hidden" name="plan_id" value="{{ membership.membership.feature.custom_id}}">
-                                <input type="submit" class="btn cs-bg-danger br-sm" style="font-size: 1.1rem;" value="Deactivate">
-                            </form>
-                            <a class="btn cs-bg-secondary br-sm" href="{% url 'payment:memberships' %}">{% trans 'Upgrade' %}</a>
+                            <div class="actions cs-grid cs-grid-flow-col" style="--gap: .75rem">
+                                <form action="{% url 'payment:subscription-deactivate' %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="plan_id" value="{{ membership.membership.feature.custom_id}}">
+                                    <input type="submit" class="btn cs-bg-danger br-sm" style="font-size: 1.1rem;" value="{% trans 'Deactivate' %}">
+                                </form>
+                                <a class="btn cs-bg-secondary br-sm" href="{% url 'payment:memberships' %}">{% trans 'Upgrade' %}</a>
+                            </div>
                         </div>
                         {% endfor %}
                     </div>

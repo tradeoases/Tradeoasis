@@ -135,21 +135,22 @@ body.modal-open::after {
 .cs-content-start {align-content: flex-start;}
 .cs-align-baseline {align-items: baseline;}
 
-@media (max-width: 786px) {
-    .cs-md-hidden {display: none;}
-    .cs-md-flex {
-        display: flex;
-        gap: var(--gap);
-    }
-    .cs-md-grid {
-        display: grid;
-        gap: var(--gap);
-    }
-    .cs-md-grid-col-1 {grid-template-columns: 1fr;}
-    .cs-md-grid-flow-col {grid-auto-flow: column;}
-    .cs-md-grid-flow-row {grid-auto-flow: row;}
-    .cs-flex-md-flow-col {flex-direction: column;}
-    .cs-flex-md-flow-row {flex-direction: row;}
+.app-content {
+    display: grid;
+    grid-template-columns: .5fr 2fr;
+    gap: 1rem;
+    align-items: stretch;
+    block-size: 90vh;
+}
+.lg-hidden {
+    display: none;
+}
+
+.profile-subscription {
+    grid-template-columns: 1fr .7fr;
+    --gap: .5rem;
+    background-color: hsla(43, 89%, 85%, 0.3);
+    padding: .5rem;
 }
 
 /* display */
@@ -709,4 +710,66 @@ body:not(.rtl) .modal {
     padding: 8px 10px;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.267);
     font-size: .8rem;
+}
+
+
+@media (max-width: 786px) {
+    .cs-md-hidden {display: none;}
+    .cs-md-flex {
+        display: flex;
+        gap: var(--gap);
+    }
+    .cs-md-grid {
+        display: grid;
+        gap: var(--gap);
+    }
+    .cs-md-grid-col-1 {grid-template-columns: 1fr;}
+    .cs-md-grid-flow-col {grid-auto-flow: column;}
+    .cs-md-grid-flow-row {grid-auto-flow: row;}
+    .cs-flex-md-flow-col {flex-direction: column;}
+    .cs-flex-md-flow-row {flex-direction: row;}
+
+    .app-container {
+        padding: .5rem;
+    }
+    .app-content {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    .sidebar {
+        position: absolute;
+        inset: 0 0;
+        display: none;
+    }
+    .sidebar.inview {
+        display: grid;
+        z-index: 100000;
+        opacity: 1;
+        background-color: hsl(0, 0%, 95%)
+    }
+    .nav-links li,
+    .app-container .link,
+    .main-content-tabs a {
+        padding: .25rem .5rem;
+        font-size: .9rem;
+    }
+    .md-hidden {
+        display: none;
+    }
+    .md-show {
+        display: grid;
+    }
+    .profile-subscription {
+        grid-template-columns: 1fr;
+    }
+    .main-content.split {
+        grid-template-columns: 1fr;
+    }
+
+    .content-area.w-desciption {
+        /* grid-template-columns: 1fr; */
+        grid-auto-flow: row;
+        flex-direction: column-reverse;
+        display: flex;
+    }
 }

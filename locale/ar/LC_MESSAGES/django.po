@@ -8,16 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-30 11:14+0000\n"
-"PO-Revision-Date: 2023-03-30 11:02+0000\n"
+"POT-Creation-Date: 2023-03-30 12:30+0000\n"
+"PO-Revision-Date: 2023-03-30 12:32+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
 #: admin_api/views.py:86
@@ -192,8 +191,8 @@ msgstr "مرحبًا"
 
 #: app_admin/views.py:691
 msgid ""
-"Your have been added a Foroden Support Team Member, Please edit your account "
-"details and set a desired password after activating your account."
+"Your have been added a Foroden Support Team Member, Please edit your account"
+" details and set a desired password after activating your account."
 msgstr ""
 "تمت إضافة عضو فريق دعم Foroden الخاص بك ، يرجى تعديل تفاصيل حسابك وتعيين "
 "كلمة المرور المطلوبة بعد تنشيط حسابك."
@@ -382,7 +381,8 @@ msgstr "اتبع هذا الرابط لتنشيط حسابك foroden."
 
 #: auth_app/views.py:152
 msgid ""
-"Account Created Successfully. Please check your email for a verfication link."
+"Account Created Successfully. Please check your email for a verfication "
+"link."
 msgstr ""
 "الحساب اقيم بنجاح. يرجى التحقق من بريدك الإلكتروني للحصول على ارتباط التحقق."
 
@@ -990,14 +990,12 @@ msgstr "تم إنشاء عقد المنع"
 #, python-brace-format
 msgid ""
 "Hello, {supplier.username}.\n"
-"A Contract application has been sumbited by {buyer.profile.business_name} on "
-"service {service.name}.\n"
+"A Contract application has been sumbited by {buyer.profile.business_name} on service {service.name}.\n"
 "Please visit the dashboard to respond to the application.\n"
 "Thank you."
 msgstr ""
 "مرحبًا {supplier.username}.\n"
-"تم تقديم تطبيق العقد بواسطة {buyer.profile.business_name} على الخدمة "
-"{service.name}.\n"
+"تم تقديم تطبيق العقد بواسطة {buyer.profile.business_name} على الخدمة {service.name}.\n"
 "يرجى زيارة لوحة القيادة للرد على التطبيق.\n"
 "شكرًا لك."
 
@@ -1072,8 +1070,7 @@ msgstr "تم رفض عقد المحرمة."
 #, python-brace-format
 msgid ""
 "Hello, {contract.buyer.username}.\n"
-"Your contract application on service {contract.service.name} has been "
-"rejected.\n"
+"Your contract application on service {contract.service.name} has been rejected.\n"
 "Please contact the supplier for more information.\n"
 "Thank you."
 msgstr ""
@@ -1197,6 +1194,16 @@ msgstr "المجموعة المستهدفة"
 #: templates/app_admin/promotion_edit.html:49
 msgid "Select Showroom"
 msgstr "حدد صالة العرض"
+
+#: templates/app_admin/email_promotions_create.html:71
+#: templates/app_admin/email_promotions_edit.html:84
+#: templates/app_admin/promotion_create.html:71
+#: templates/app_admin/promotion_edit.html:84
+#: templates/supplier/dashboard/advertise.html:132
+#: templates/supplier/dashboard/create-product.html:253
+#: templates/supplier/dashboard/create-service.html:230
+msgid "Guidelines"
+msgstr "القواعد الارشادية"
 
 #: templates/app_admin/email_promotions_create.html:73
 #: templates/app_admin/email_promotions_edit.html:86
@@ -1659,8 +1666,8 @@ msgstr "حول Foroden"
 #: templates/manager/about.html:160
 msgid ""
 "We represent a wide network of Digital Promoting and local and Traditional "
-"Marketing and Advertising  services  of products (in large scale) of various "
-"companies. Our offices and specialized and indigenous forces are operating "
+"Marketing and Advertising  services  of products (in large scale) of various"
+" companies. Our offices and specialized and indigenous forces are operating "
 "in different countries. We have created a sustainable, learning and "
 "progressive system."
 msgstr ""
@@ -1719,7 +1726,8 @@ msgid "Development of our offices in different countries"
 msgstr "تطوير مكاتبنا في دول مختلفة"
 
 #: templates/manager/about.html:187
-msgid "Creating a network of specialized and indigenous forces in each country"
+msgid ""
+"Creating a network of specialized and indigenous forces in each country"
 msgstr "تكوين شبكة من القوات المتخصصة والمحلية في كل دولة"
 
 #: templates/manager/about.html:188
@@ -1800,30 +1808,30 @@ msgstr "أرسل ردًا"
 msgid "Discussions"
 msgstr "مناقشات"
 
-#: templates/manager/guides/accounts.html:12
+#: templates/manager/guides/accounts.html:13
 msgid "Foroden Account Creation"
 msgstr "إنشاء حساب Foroden"
 
-#: templates/manager/guides/accounts.html:13
+#: templates/manager/guides/accounts.html:14
 msgid "Foroden offers 2 types of client accounts, that is:"
 msgstr "تقدم Foroden نوعين من حسابات العملاء ، وهما:"
 
-#: templates/manager/guides/accounts.html:16
-#: templates/manager/guides/accounts.html:49
-#: templates/manager/guides/accounts.html:82
-#: templates/manager/guides/products.html:22
-#: templates/manager/guides/services.html:22
-#: templates/manager/guides/showrooms.html:30
-#: templates/manager/guides/stores.html:23
-#: templates/manager/guides/stores.html:54
+#: templates/manager/guides/accounts.html:17
+#: templates/manager/guides/accounts.html:50
+#: templates/manager/guides/accounts.html:89
+#: templates/manager/guides/products.html:23
+#: templates/manager/guides/services.html:23
+#: templates/manager/guides/showrooms.html:31
+#: templates/manager/guides/stores.html:24
+#: templates/manager/guides/stores.html:60
 msgid "1"
 msgstr "واحد"
 
-#: templates/manager/guides/accounts.html:17
+#: templates/manager/guides/accounts.html:18
 msgid "Supplier Account"
 msgstr "حساب المورد"
 
-#: templates/manager/guides/accounts.html:20
+#: templates/manager/guides/accounts.html:21
 msgid ""
 "Foroden Suppliers are users who indent to promote their businesses and "
 "products. These have access to the following features:"
@@ -1831,37 +1839,37 @@ msgstr ""
 "موردي Foroden هم مستخدمون يطرحون مسافة بادئة للترويج لأعمالهم ومنتجاتهم. "
 "هؤلاء لديهم حق الوصول إلى الميزات التالية:"
 
-#: templates/manager/guides/accounts.html:22
+#: templates/manager/guides/accounts.html:23
 msgid "Product Advertising"
 msgstr "إعلان المنتج"
 
-#: templates/manager/guides/accounts.html:23
+#: templates/manager/guides/accounts.html:24
 msgid "Business Advertising"
 msgstr "الإعلانات التجارية"
 
-#: templates/manager/guides/accounts.html:24
+#: templates/manager/guides/accounts.html:25
 msgid "Service Trading"
 msgstr "تجارة الخدمة"
 
-#: templates/manager/guides/accounts.html:25
-#: templates/manager/guides/accounts.html:37
+#: templates/manager/guides/accounts.html:26
+#: templates/manager/guides/accounts.html:38
 msgid "Contract Creation"
 msgstr "إنشاء العقد"
 
-#: templates/manager/guides/accounts.html:31
-#: templates/manager/guides/products.html:31
-#: templates/manager/guides/services.html:31
-#: templates/manager/guides/showrooms.html:39
-#: templates/manager/guides/stores.html:33
-#: templates/manager/guides/stores.html:63
+#: templates/manager/guides/accounts.html:32
+#: templates/manager/guides/products.html:35
+#: templates/manager/guides/services.html:35
+#: templates/manager/guides/showrooms.html:43
+#: templates/manager/guides/stores.html:36
+#: templates/manager/guides/stores.html:72
 msgid "2"
 msgstr "إثنان"
 
-#: templates/manager/guides/accounts.html:32
+#: templates/manager/guides/accounts.html:33
 msgid "Buyer Account"
 msgstr "حساب المشتري"
 
-#: templates/manager/guides/accounts.html:35
+#: templates/manager/guides/accounts.html:36
 msgid ""
 "Foroden Buyers are users who seek different services or products from "
 "Foroden Suppliers: These have access to the following features:"
@@ -1869,15 +1877,15 @@ msgstr ""
 "مشترو Foroden هم المستخدمون الذين يبحثون عن خدمات أو منتجات مختلفة من موردي "
 "Foroden: هؤلاء لديهم حق الوصول إلى الميزات التالية:"
 
-#: templates/manager/guides/accounts.html:45
+#: templates/manager/guides/accounts.html:46
 msgid "How to create a client account."
 msgstr "كيفية إنشاء حساب العميل."
 
-#: templates/manager/guides/accounts.html:50
+#: templates/manager/guides/accounts.html:51
 msgid "Choose your desire account creation method"
 msgstr "اختر طريقة إنشاء الحساب التي تريدها"
 
-#: templates/manager/guides/accounts.html:53
+#: templates/manager/guides/accounts.html:54
 msgid ""
 "Foroden offers both custom account creation and social account creation "
 "using Google and LinkedIn "
@@ -1885,27 +1893,27 @@ msgstr ""
 "تقدم Foroden كلاً من إنشاء حساب مخصص وإنشاء حساب اجتماعي باستخدام Google و "
 "LinkedIn"
 
-#: templates/manager/guides/accounts.html:61
+#: templates/manager/guides/accounts.html:65
 msgid "a"
 msgstr "أ"
 
-#: templates/manager/guides/accounts.html:62
+#: templates/manager/guides/accounts.html:66
 msgid "Using custom account creation"
 msgstr "باستخدام إنشاء حساب مخصص"
 
-#: templates/manager/guides/accounts.html:70
+#: templates/manager/guides/accounts.html:77
 msgid "b"
 msgstr "ب"
 
-#: templates/manager/guides/accounts.html:71
+#: templates/manager/guides/accounts.html:78
 msgid "Using social authentication"
 msgstr "استخدام المصادقة الاجتماعية"
 
-#: templates/manager/guides/accounts.html:74
+#: templates/manager/guides/accounts.html:81
 msgid "You are prompted to selected your desired account type."
 msgstr "ستتم مطالبتك بتحديد نوع الحساب المطلوب."
 
-#: templates/manager/guides/accounts.html:83
+#: templates/manager/guides/accounts.html:90
 msgid "Enter your business details"
 msgstr "أدخل تفاصيل عملك"
 
@@ -2000,8 +2008,8 @@ msgstr ""
 #: templates/manager/guides/memberships.html:29
 msgid ""
 "This membership plan allows store owners to sell their products to any "
-"buyers on the platform but does not allow them to have their products listed "
-"under the adverts."
+"buyers on the platform but does not allow them to have their products listed"
+" under the adverts."
 msgstr ""
 "تسمح خطة العضوية هذه لأصحاب المتاجر ببيع منتجاتهم لأي مشترين على المنصة "
 "ولكنها لا تسمح لهم بإدراج منتجاتهم ضمن الإعلانات."
@@ -2027,11 +2035,11 @@ msgstr ""
 "يقتصر المتجر أيضًا على المبيعات من نفس الموقع ولكن ليس بعيدًا عنه أو في "
 "الخارج. العبوة البرونزية مجانية."
 
-#: templates/manager/guides/products.html:12
+#: templates/manager/guides/products.html:13
 msgid "Foroden Supplier Products"
 msgstr "خطة العضوية الذهبية"
 
-#: templates/manager/guides/products.html:13
+#: templates/manager/guides/products.html:14
 msgid ""
 "Foroden Suppliers able able to advertise their product using our different "
 "advertising method based on the supplier's membership plan. Foroden doesnot "
@@ -2041,89 +2049,120 @@ msgstr ""
 "الخاصة بنا بناءً على خطة عضوية المورد. Foroden لا تتعامل مع بيع المنتجات ، "
 "يتم التعامل مع هذا من قبل الموردين."
 
-#: templates/manager/guides/products.html:18
+#: templates/manager/guides/products.html:19
 msgid "How to create a supplier product."
 msgstr "كيفية إنشاء منتج مورد."
 
-#: templates/manager/guides/products.html:23
-#: templates/manager/guides/services.html:23
-#: templates/manager/guides/showrooms.html:31
-#: templates/manager/guides/stores.html:24
+#: templates/manager/guides/products.html:24
+#: templates/manager/guides/services.html:24
+#: templates/manager/guides/showrooms.html:32
+#: templates/manager/guides/stores.html:25
 msgid "Access your supplier dashboard"
 msgstr "الوصول إلى لوحة معلومات المورد الخاص بك"
 
-#: templates/manager/guides/products.html:32
+#: templates/manager/guides/products.html:36
 msgid "Select create product in the Sidebar"
 msgstr "حدد إنشاء منتج في الشريط الجانبي"
 
-#: templates/manager/guides/products.html:35
+#: templates/manager/guides/products.html:39
 msgid "This Redirects you to a form, with which you can create a new product."
 msgstr "هذا يعيد توجيهك إلى نموذج يمكنك من خلاله إنشاء منتج جديد."
 
-#: templates/manager/guides/services.html:12
+#: templates/manager/guides/services.html:13
 msgid "Foroden Supplier Services"
 msgstr "خدمات موردي Foroden"
 
-#: templates/manager/guides/services.html:13
+#: templates/manager/guides/services.html:14
 msgid ""
 "Foroden Supplier Services make it easy for suppliers to sell their business "
 "as a service to different Foroden buyers. A verified Foroden Buyer is able "
 "to create a contract inorder to buy one or more supplier services."
 msgstr ""
 "تسهل Foroden Provider Services على الموردين بيع أعمالهم كخدمة لمشترين "
-"مختلفين من Foroden. يمكن لـ Foroden Buyer الذي تم التحقق منه إنشاء عقد لشراء "
-"واحدة أو أكثر من خدمات الموردين."
+"مختلفين من Foroden. يمكن لـ Foroden Buyer الذي تم التحقق منه إنشاء عقد لشراء"
+" واحدة أو أكثر من خدمات الموردين."
 
-#: templates/manager/guides/services.html:18
+#: templates/manager/guides/services.html:19
 msgid "How to create a supplier service."
 msgstr "كيفية إنشاء خدمة المورد."
 
-#: templates/manager/guides/services.html:32
+#: templates/manager/guides/services.html:36
 msgid "Select create service in the Sidebar"
 msgstr "حدد إنشاء خدمة في الشريط الجانبي"
 
-#: templates/manager/guides/services.html:35
+#: templates/manager/guides/services.html:39
 msgid "This Redirects you to a form, with which you can create a new service."
 msgstr "هذا يعيد توجيهك إلى نموذج يمكنك من خلاله إنشاء خدمة جديدة."
 
-#: templates/manager/guides/showrooms.html:11
+#: templates/manager/guides/showrooms.html:12
 msgid "Foroden Showrooms"
 msgstr "معارض فورودن"
 
-#: templates/manager/guides/showrooms.html:27
+#: templates/manager/guides/showrooms.html:13
+msgid ""
+"Foroden provides a showrooms feature where stores from different locations "
+"are displayed and made accessible to the buyers."
+msgstr ""
+"يوفر Foroden ميزة صالات العرض حيث يتم عرض المتاجر من مواقع مختلفة وإتاحتها "
+"للمشترين."
+
+#: templates/manager/guides/showrooms.html:14
+msgid ""
+"The stores are displayed on the showrooms basing on their membership "
+"packages. Those with Gold membership are made accessible to all buyers all "
+"over the world."
+msgstr ""
+"يتم عرض المتاجر في صالات العرض بناءً على حزم العضوية الخاصة بهم. أولئك الذين"
+" لديهم عضوية ذهبية متاحة لجميع المشترين في جميع أنحاء العالم."
+
+#: templates/manager/guides/showrooms.html:15
+msgid ""
+"The showrooms organize the stores in a way that our algorithms can make the "
+"best suggestions for our buyers hence simplifying the entire process of "
+"buying from our virtual stores."
+msgstr ""
+"تنظم صالات العرض المتاجر بطريقة تمكن خوارزمياتنا من تقديم أفضل الاقتراحات "
+"للمشترين لدينا وبالتالي تبسيط عملية الشراء بأكملها من متاجرنا الافتراضية."
+
+#: templates/manager/guides/showrooms.html:16
+#| msgid "Foroden offers the following three membership plans"
+msgid "Foroden offers the following showrooms:"
+msgstr "تقدم Foroden صالات العرض التالية:"
+
+#: templates/manager/guides/showrooms.html:28
 msgid "How to add a store to a showroom."
 msgstr "كيفية إضافة متجر إلى صالة العرض."
 
-#: templates/manager/guides/showrooms.html:40
-#: templates/manager/guides/stores.html:55
+#: templates/manager/guides/showrooms.html:44
+#: templates/manager/guides/stores.html:61
 msgid "Select Manage Store in the Sidebar"
 msgstr "حدد إدارة المتجر في الشريط الجانبي"
 
-#: templates/manager/guides/showrooms.html:48
+#: templates/manager/guides/showrooms.html:55
 msgid "3"
 msgstr "ثلاثة"
 
-#: templates/manager/guides/showrooms.html:49
-#: templates/manager/guides/stores.html:64
+#: templates/manager/guides/showrooms.html:56
+#: templates/manager/guides/stores.html:73
 msgid "Select Store from the stores list"
 msgstr "حدد المتجر من قائمة المتاجر"
 
-#: templates/manager/guides/showrooms.html:52
+#: templates/manager/guides/showrooms.html:59
 msgid ""
-"This opens up a store modal with 2 forms. Use form 1 to select a showroom to "
-"which you want to add the selected store. Use form 2 to add a specific "
+"This opens up a store modal with 2 forms. Use form 1 to select a showroom to"
+" which you want to add the selected store. Use form 2 to add a specific "
 "product to the selected store."
 msgstr ""
 "هذا يفتح متجر مشروط مع شكلين. استخدم النموذج 1 لتحديد صالة العرض التي تريد "
 "إضافة المتجر المحدد إليها. استخدم النموذج 2 لإضافة منتج معين إلى المتجر "
 "المحدد."
 
-#: templates/manager/guides/stores.html:12
+#: templates/manager/guides/stores.html:13
 #: templates/manager/showroom_list.html:77
 msgid "Foroden Stores"
 msgstr "متاجر Foroden"
 
-#: templates/manager/guides/stores.html:13
+#: templates/manager/guides/stores.html:14
 msgid ""
 "This is an online (virtual) shop that sell different products. Foroden also "
 "has stores that provide services such as online virtual assistance for "
@@ -2133,39 +2172,55 @@ msgstr ""
 "تقدم خدمات مثل المساعدة الافتراضية عبر الإنترنت للأشخاص الذين يبحثون عن فرق "
 "للمساعدة في إدارة أعمالهم عن بُعد."
 
-#: templates/manager/guides/stores.html:14
+#: templates/manager/guides/stores.html:15
 msgid ""
 "Well, think of a store as a shop you visit to purchase some products you "
 "need. However, this store has all products listed on Foroden but not "
 "physically present with them."
 msgstr ""
-"حسنًا ، فكر في المتجر كمتجر تزوره لشراء بعض المنتجات التي تحتاجها. ومع ذلك ، "
-"يحتوي هذا المتجر على جميع المنتجات المدرجة في Foroden ولكنها غير موجودة "
+"حسنًا ، فكر في المتجر كمتجر تزوره لشراء بعض المنتجات التي تحتاجها. ومع ذلك ،"
+" يحتوي هذا المتجر على جميع المنتجات المدرجة في Foroden ولكنها غير موجودة "
 "فعليًا معهم."
 
-#: templates/manager/guides/stores.html:19
+#: templates/manager/guides/stores.html:20
 msgid "How to create a store."
 msgstr "كيفية إنشاء متجر."
 
-#: templates/manager/guides/stores.html:34
+#: templates/manager/guides/stores.html:37
 msgid "Select Create Store in the Sidebar"
 msgstr "حدد إنشاء متجر في الشريط الجانبي"
 
-#: templates/manager/guides/stores.html:37
+#: templates/manager/guides/stores.html:40
 msgid "This Redirects you to a form, with which you can create a new store."
 msgstr "هذا يعيد توجيهك إلى نموذج يمكنك من خلاله إنشاء متجر جديد."
 
-#: templates/manager/guides/stores.html:47
+#: templates/manager/guides/stores.html:53
 msgid "How to manage a store."
 msgstr "كيف تدير متجر."
 
-#: templates/manager/guides/stores.html:49
+#: templates/manager/guides/stores.html:55
 msgid ""
-"The Supplier dashboard gives you the ability to to add a store to a showroom "
-"and also add products to a store."
+"The Supplier dashboard gives you the ability to to add a store to a showroom"
+" and also add products to a store."
 msgstr ""
 "تمنحك لوحة معلومات المورد القدرة على إضافة متجر إلى صالة عرض وكذلك إضافة "
 "منتجات إلى المتجر."
+
+#: templates/manager/guides/stores.html:76
+#| msgid ""
+#| "This opens up a store modal with 2 forms. Use form 1 to select a showroom to"
+#| " which you want to add the selected store. Use form 2 to add a specific "
+#| "product to the selected store."
+msgid ""
+"This opens up a store modal with 2 forms. Use form 1 to select a showroom to"
+" which you want to add the selected store. Use form 2 to add a specific "
+"product to the selected store. Note that you can only add a product to a "
+"showroom if you have a valid subscription."
+msgstr ""
+"هذا يفتح متجر مشروط مع شكلين. استخدم النموذج 1 لتحديد صالة العرض التي تريد "
+"إضافة المتجر المحدد إليها. استخدم النموذج 2 لإضافة منتج معين إلى المتجر "
+"المحدد. لاحظ أنه لا يمكنك إضافة منتج إلى صالة العرض إلا إذا كان لديك اشتراك "
+"صالح."
 
 #: templates/manager/index.html:28 templates/manager/showroom_detail.html:11
 #: templates/supplier/product_detail.html:28
@@ -2413,7 +2468,8 @@ msgstr "فشل تسجيل الدخول إلى الشبكة الاجتماعية"
 #: templates/socialaccount/authentication_error.html:13
 msgid ""
 "An error occurred while attempting to login via your social network account."
-msgstr "حدث خطأ أثناء محاولة تسجيل الدخول عبر حساب الشبكة الاجتماعية الخاص بك."
+msgstr ""
+"حدث خطأ أثناء محاولة تسجيل الدخول عبر حساب الشبكة الاجتماعية الخاص بك."
 
 #: templates/socialaccount/connections.html:5
 #: templates/socialaccount/connections.html:8
@@ -2461,7 +2517,8 @@ msgstr ""
 
 #: templates/socialaccount/login.html:18
 #, python-format
-msgid "You are about to sign in using a third party account from %(provider)s."
+msgid ""
+"You are about to sign in using a third party account from %(provider)s."
 msgstr ""
 "أنت على وشك تسجيل الدخول باستخدام حساب جهة خارجية من\n"
 " %(provider)s"
@@ -2479,11 +2536,11 @@ msgstr "تم إلغاء تسجيل الدخول"
 #, python-format
 msgid ""
 "You decided to cancel logging in to our site using one of your existing "
-"accounts. If this was a mistake, please proceed to <a href=\"%(login_url)s"
-"\">sign in</a>."
+"accounts. If this was a mistake, please proceed to <a "
+"href=\"%(login_url)s\">sign in</a>."
 msgstr ""
-"لقد قررت إلغاء تسجيل الدخول إلى موقعنا باستخدام أحد حساباتك الحالية. إذا كان "
-"هذا خطأ ، فيرجى المتابعة إلى <a href=\"%(login_url)s\"> تسجيل الدخول </a>."
+"لقد قررت إلغاء تسجيل الدخول إلى موقعنا باستخدام أحد حساباتك الحالية. إذا كان"
+" هذا خطأ ، فيرجى المتابعة إلى <a href=\"%(login_url)s\"> تسجيل الدخول </a>."
 
 #: templates/socialaccount/signup.html:9
 msgid "Signup"
@@ -2667,10 +2724,6 @@ msgstr "املأ النموذج لإنشاء الخدمة"
 #: templates/supplier/dashboard/create-service.html:214
 msgid "Service Tags"
 msgstr "علامات الخدمة"
-
-#: templates/supplier/dashboard/create-service.html:230
-msgid "Guidelines"
-msgstr "القواعد الارشادية"
 
 #: templates/supplier/dashboard/create-service.html:234
 msgid "Service tags help buyers to find your service easily."
@@ -3058,8 +3111,7 @@ msgstr "إنشاء ملف تعريف"
 #~ msgid ""
 #~ "Your Foroden Account has been suspended. Contact Foroden Support for more "
 #~ "information"
-#~ msgstr ""
-#~ "تم تعليق حساب Foroden الخاص بك. اتصل بدعم Foroden لمزيد من المعلومات"
+#~ msgstr "تم تعليق حساب Foroden الخاص بك. اتصل بدعم Foroden لمزيد من المعلومات"
 
 #~ msgid "Foroden Account Suspended"
 #~ msgstr "تم تعليق حساب Foroden"
@@ -3165,17 +3217,17 @@ msgstr "إنشاء ملف تعريف"
 #~ msgstr "حدث خطأ. حاول ثانية"
 
 #~ msgid ""
-#~ "Now more than ever, consumers are choosing to support local shops over "
-#~ "big-box chains. There are millions of thriving small businesses in North "
-#~ "America and Europe alone, who collectively represent a $2T market. With "
-#~ "our global community and the power of technology, Faire is helping fuel "
-#~ "the growth of entrepreneurs everywhere."
+#~ "Now more than ever, consumers are choosing to support local shops over big-"
+#~ "box chains. There are millions of thriving small businesses in North America"
+#~ " and Europe alone, who collectively represent a $2T market. With our global "
+#~ "community and the power of technology, Faire is helping fuel the growth of "
+#~ "entrepreneurs everywhere."
 #~ msgstr ""
 #~ "الآن أكثر من أي وقت مضى ، يختار المستهلكون دعم المتاجر المحلية على سلاسل "
 #~ "الصناديق الكبيرة. هناك الملايين من الشركات الصغيرة المزدهرة في أمريكا "
-#~ "الشمالية وأوروبا وحدها ، والتي تمثل مجتمعة سوقًا بقيمة 2 تريليون دولار. "
-#~ "بفضل مجتمعنا العالمي وقوة التكنولوجيا ، تساعد Faire في تعزيز نمو رواد "
-#~ "الأعمال في كل مكان"
+#~ "الشمالية وأوروبا وحدها ، والتي تمثل مجتمعة سوقًا بقيمة 2 تريليون دولار. بفضل"
+#~ " مجتمعنا العالمي وقوة التكنولوجيا ، تساعد Faire في تعزيز نمو رواد الأعمال في"
+#~ " كل مكان"
 
 #~ msgid "Discounted Products"
 #~ msgstr "المنتجات المخفضة"

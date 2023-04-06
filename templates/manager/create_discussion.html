@@ -25,14 +25,14 @@
         <form action="{% url 'manager:create-discussion' %}" method="POST" class="grid gap-4">
             {% csrf_token %}
             <div class="form-group grid gap-2">
-                <label for="subject">Subject</label>
+                <label for="subject">{% trans "Subject" %}</label>
                 <input type="text" name="subject" id="subject" required>
             </div>
             <div class="form-group grid gap-2">
-                <label for="description">Description</label>
+                <label for="description">{% trans "Description" %}</label>
                 <textarea name="description" style="background-color: transparent;" id="description" cols="30" rows="5" required></textarea>
             </div>
-            <input type="submit" value="Send" class="justify-self-start bg-yellowColor text-white text-base px-4 py-2 rounded-full">
+            <input type="submit" value="{% trans 'Send' %}" class="justify-self-start bg-yellowColor text-white text-base px-4 py-2 rounded-full">
         </form>
     </div>
 </section>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-30 11:14+0000\n"
+"POT-Creation-Date: 2023-03-30 12:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1177,6 +1177,16 @@ msgstr ""
 msgid "Select Showroom"
 msgstr ""
 
+#: templates/app_admin/email_promotions_create.html:71
+#: templates/app_admin/email_promotions_edit.html:84
+#: templates/app_admin/promotion_create.html:71
+#: templates/app_admin/promotion_edit.html:84
+#: templates/supplier/dashboard/advertise.html:132
+#: templates/supplier/dashboard/create-product.html:253
+#: templates/supplier/dashboard/create-service.html:230
+msgid "Guidelines"
+msgstr ""
+
 #: templates/app_admin/email_promotions_create.html:73
 #: templates/app_admin/email_promotions_edit.html:86
 #: templates/app_admin/promotion_create.html:73
@@ -1770,106 +1780,106 @@ msgstr ""
 msgid "Discussions"
 msgstr ""
 
-#: templates/manager/guides/accounts.html:12
+#: templates/manager/guides/accounts.html:13
 msgid "Foroden Account Creation"
 msgstr ""
 
-#: templates/manager/guides/accounts.html:13
+#: templates/manager/guides/accounts.html:14
 msgid "Foroden offers 2 types of client accounts, that is:"
 msgstr ""
 
-#: templates/manager/guides/accounts.html:16
-#: templates/manager/guides/accounts.html:49
-#: templates/manager/guides/accounts.html:82
-#: templates/manager/guides/products.html:22
-#: templates/manager/guides/services.html:22
-#: templates/manager/guides/showrooms.html:30
-#: templates/manager/guides/stores.html:23
-#: templates/manager/guides/stores.html:54
+#: templates/manager/guides/accounts.html:17
+#: templates/manager/guides/accounts.html:50
+#: templates/manager/guides/accounts.html:89
+#: templates/manager/guides/products.html:23
+#: templates/manager/guides/services.html:23
+#: templates/manager/guides/showrooms.html:31
+#: templates/manager/guides/stores.html:24
+#: templates/manager/guides/stores.html:60
 msgid "1"
 msgstr ""
 
-#: templates/manager/guides/accounts.html:17
+#: templates/manager/guides/accounts.html:18
 msgid "Supplier Account"
 msgstr ""
 
-#: templates/manager/guides/accounts.html:20
+#: templates/manager/guides/accounts.html:21
 msgid ""
 "Foroden Suppliers are users who indent to promote their businesses and "
 "products. These have access to the following features:"
 msgstr ""
 
-#: templates/manager/guides/accounts.html:22
+#: templates/manager/guides/accounts.html:23
 msgid "Product Advertising"
 msgstr ""
 
-#: templates/manager/guides/accounts.html:23
+#: templates/manager/guides/accounts.html:24
 msgid "Business Advertising"
 msgstr ""
 
-#: templates/manager/guides/accounts.html:24
+#: templates/manager/guides/accounts.html:25
 msgid "Service Trading"
 msgstr ""
 
-#: templates/manager/guides/accounts.html:25
-#: templates/manager/guides/accounts.html:37
+#: templates/manager/guides/accounts.html:26
+#: templates/manager/guides/accounts.html:38
 msgid "Contract Creation"
 msgstr ""
 
-#: templates/manager/guides/accounts.html:31
-#: templates/manager/guides/products.html:31
-#: templates/manager/guides/services.html:31
-#: templates/manager/guides/showrooms.html:39
-#: templates/manager/guides/stores.html:33
-#: templates/manager/guides/stores.html:63
+#: templates/manager/guides/accounts.html:32
+#: templates/manager/guides/products.html:35
+#: templates/manager/guides/services.html:35
+#: templates/manager/guides/showrooms.html:43
+#: templates/manager/guides/stores.html:36
+#: templates/manager/guides/stores.html:72
 msgid "2"
 msgstr ""
 
-#: templates/manager/guides/accounts.html:32
+#: templates/manager/guides/accounts.html:33
 msgid "Buyer Account"
 msgstr ""
 
-#: templates/manager/guides/accounts.html:35
+#: templates/manager/guides/accounts.html:36
 msgid ""
 "Foroden Buyers are users who seek different services or products from "
 "Foroden Suppliers: These have access to the following features:"
 msgstr ""
 
-#: templates/manager/guides/accounts.html:45
+#: templates/manager/guides/accounts.html:46
 msgid "How to create a client account."
 msgstr ""
 
-#: templates/manager/guides/accounts.html:50
+#: templates/manager/guides/accounts.html:51
 msgid "Choose your desire account creation method"
 msgstr ""
 
-#: templates/manager/guides/accounts.html:53
+#: templates/manager/guides/accounts.html:54
 msgid ""
 "Foroden offers both custom account creation and social account creation "
 "using Google and LinkedIn "
 msgstr ""
 
-#: templates/manager/guides/accounts.html:61
+#: templates/manager/guides/accounts.html:65
 msgid "a"
 msgstr ""
 
-#: templates/manager/guides/accounts.html:62
+#: templates/manager/guides/accounts.html:66
 msgid "Using custom account creation"
 msgstr ""
 
-#: templates/manager/guides/accounts.html:70
+#: templates/manager/guides/accounts.html:77
 msgid "b"
 msgstr ""
 
-#: templates/manager/guides/accounts.html:71
+#: templates/manager/guides/accounts.html:78
 msgid "Using social authentication"
 msgstr ""
 
-#: templates/manager/guides/accounts.html:74
+#: templates/manager/guides/accounts.html:81
 msgid "You are prompted to selected your desired account type."
 msgstr ""
 
-#: templates/manager/guides/accounts.html:83
+#: templates/manager/guides/accounts.html:90
 msgid "Enter your business details"
 msgstr ""
 
@@ -1977,127 +1987,159 @@ msgid ""
 "package is free of charge."
 msgstr ""
 
-#: templates/manager/guides/products.html:12
+#: templates/manager/guides/products.html:13
 msgid "Foroden Supplier Products"
 msgstr ""
 
-#: templates/manager/guides/products.html:13
+#: templates/manager/guides/products.html:14
 msgid ""
 "Foroden Suppliers able able to advertise their product using our different "
 "advertising method based on the supplier's membership plan. Foroden doesnot "
 "handle selling of products, this is handled by the suppliers."
 msgstr ""
 
-#: templates/manager/guides/products.html:18
+#: templates/manager/guides/products.html:19
 msgid "How to create a supplier product."
 msgstr ""
 
-#: templates/manager/guides/products.html:23
-#: templates/manager/guides/services.html:23
-#: templates/manager/guides/showrooms.html:31
-#: templates/manager/guides/stores.html:24
+#: templates/manager/guides/products.html:24
+#: templates/manager/guides/services.html:24
+#: templates/manager/guides/showrooms.html:32
+#: templates/manager/guides/stores.html:25
 msgid "Access your supplier dashboard"
 msgstr ""
 
-#: templates/manager/guides/products.html:32
+#: templates/manager/guides/products.html:36
 msgid "Select create product in the Sidebar"
 msgstr ""
 
-#: templates/manager/guides/products.html:35
+#: templates/manager/guides/products.html:39
 msgid "This Redirects you to a form, with which you can create a new product."
 msgstr ""
 
-#: templates/manager/guides/services.html:12
+#: templates/manager/guides/services.html:13
 msgid "Foroden Supplier Services"
 msgstr ""
 
-#: templates/manager/guides/services.html:13
+#: templates/manager/guides/services.html:14
 msgid ""
 "Foroden Supplier Services make it easy for suppliers to sell their business "
 "as a service to different Foroden buyers. A verified Foroden Buyer is able "
 "to create a contract inorder to buy one or more supplier services."
 msgstr ""
 
-#: templates/manager/guides/services.html:18
+#: templates/manager/guides/services.html:19
 msgid "How to create a supplier service."
 msgstr ""
 
-#: templates/manager/guides/services.html:32
+#: templates/manager/guides/services.html:36
 msgid "Select create service in the Sidebar"
 msgstr ""
 
-#: templates/manager/guides/services.html:35
+#: templates/manager/guides/services.html:39
 msgid "This Redirects you to a form, with which you can create a new service."
 msgstr ""
 
-#: templates/manager/guides/showrooms.html:11
+#: templates/manager/guides/showrooms.html:12
 msgid "Foroden Showrooms"
 msgstr ""
 
-#: templates/manager/guides/showrooms.html:27
+#: templates/manager/guides/showrooms.html:13
+msgid ""
+"Foroden provides a showrooms feature where stores from different locations "
+"are displayed and made accessible to the buyers."
+msgstr ""
+
+#: templates/manager/guides/showrooms.html:14
+msgid ""
+"The stores are displayed on the showrooms basing on their membership "
+"packages. Those with Gold membership are made accessible to all buyers all "
+"over the world."
+msgstr ""
+
+#: templates/manager/guides/showrooms.html:15
+msgid ""
+"The showrooms organize the stores in a way that our algorithms can make the "
+"best suggestions for our buyers hence simplifying the entire process of "
+"buying from our virtual stores."
+msgstr ""
+
+#: templates/manager/guides/showrooms.html:16
+msgid "Foroden offers the following showrooms:"
+msgstr ""
+
+#: templates/manager/guides/showrooms.html:28
 msgid "How to add a store to a showroom."
 msgstr ""
 
-#: templates/manager/guides/showrooms.html:40
-#: templates/manager/guides/stores.html:55
+#: templates/manager/guides/showrooms.html:44
+#: templates/manager/guides/stores.html:61
 msgid "Select Manage Store in the Sidebar"
 msgstr ""
 
-#: templates/manager/guides/showrooms.html:48
+#: templates/manager/guides/showrooms.html:55
 msgid "3"
 msgstr ""
 
-#: templates/manager/guides/showrooms.html:49
-#: templates/manager/guides/stores.html:64
+#: templates/manager/guides/showrooms.html:56
+#: templates/manager/guides/stores.html:73
 msgid "Select Store from the stores list"
 msgstr ""
 
-#: templates/manager/guides/showrooms.html:52
+#: templates/manager/guides/showrooms.html:59
 msgid ""
 "This opens up a store modal with 2 forms. Use form 1 to select a showroom to "
 "which you want to add the selected store. Use form 2 to add a specific "
 "product to the selected store."
 msgstr ""
 
-#: templates/manager/guides/stores.html:12
+#: templates/manager/guides/stores.html:13
 #: templates/manager/showroom_list.html:77
 msgid "Foroden Stores"
 msgstr ""
 
-#: templates/manager/guides/stores.html:13
+#: templates/manager/guides/stores.html:14
 msgid ""
 "This is an online (virtual) shop that sell different products. Foroden also "
 "has stores that provide services such as online virtual assistance for "
 "people looking for teams to help manage their businesses remotely."
 msgstr ""
 
-#: templates/manager/guides/stores.html:14
+#: templates/manager/guides/stores.html:15
 msgid ""
 "Well, think of a store as a shop you visit to purchase some products you "
 "need. However, this store has all products listed on Foroden but not "
 "physically present with them."
 msgstr ""
 
-#: templates/manager/guides/stores.html:19
+#: templates/manager/guides/stores.html:20
 msgid "How to create a store."
 msgstr ""
 
-#: templates/manager/guides/stores.html:34
+#: templates/manager/guides/stores.html:37
 msgid "Select Create Store in the Sidebar"
 msgstr ""
 
-#: templates/manager/guides/stores.html:37
+#: templates/manager/guides/stores.html:40
 msgid "This Redirects you to a form, with which you can create a new store."
 msgstr ""
 
-#: templates/manager/guides/stores.html:47
+#: templates/manager/guides/stores.html:53
 msgid "How to manage a store."
 msgstr ""
 
-#: templates/manager/guides/stores.html:49
+#: templates/manager/guides/stores.html:55
 msgid ""
 "The Supplier dashboard gives you the ability to to add a store to a showroom "
 "and also add products to a store."
+msgstr ""
+
+#: templates/manager/guides/stores.html:76
+msgid ""
+"This opens up a store modal with 2 forms. Use form 1 to select a showroom to "
+"which you want to add the selected store. Use form 2 to add a specific "
+"product to the selected store. Note that you can only add a product to a "
+"showroom if you have a valid subscription."
 msgstr ""
 
 #: templates/manager/index.html:28 templates/manager/showroom_detail.html:11
@@ -2586,10 +2628,6 @@ msgstr ""
 
 #: templates/supplier/dashboard/create-service.html:214
 msgid "Service Tags"
-msgstr ""
-
-#: templates/supplier/dashboard/create-service.html:230
-msgid "Guidelines"
 msgstr ""
 
 #: templates/supplier/dashboard/create-service.html:234
