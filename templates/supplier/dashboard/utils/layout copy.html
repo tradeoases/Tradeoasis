@@ -1,0 +1,211 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon/favicon.ico' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'favicon/apple-touch-icon.png' %}">
+    <link rel="stylesheet" href="{% static 'css/_main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboards.css' %}">
+    <link rel="stylesheet" href="{% static 'icons/themify-icons.css' %}">
+    <link href="{% static 'icons/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet"  type='text/css'>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+
+
+    <title>Golden - {% trans 'Supplier Dashboard' %}</title>
+</head>
+
+<body>
+    <div class="app-container container">
+        <div class="app-content">
+            <div class="sidebar card cs-grid" style="--gap: 1rem; align-content: space-between;">
+                <div class="upper cs-grid" style="gap: 1rem;">
+                    <div class="sidebar-header cs-text-accent">
+                        <div class="app-logo">
+                            <i class="ti-layout-grid2"></i>
+                            <span>{%  trans "Supplier's Portal" %}</span>
+                        </div>
+                    </div>
+                    <div class="sidebar-body">
+                        <ul class="main-menu">
+                            <li class="link">
+                                <a href="{% url 'supplier:dashboard' %}">
+                                    <span class="flex">
+                                        <span><i class="icon ti-home"></i><span class="text">{%  trans 'Dashboard' %}</span></span>
+                                    </span>
+                                </a>
+                            </li>
+                            <hr style="border: 1px solid rgba(224, 240, 243, 0.555)">
+                            <li class="link">
+                                <a href="#">
+                                    <span class="flex">
+                                        <span><i class="icon ti-folder"></i><span class="text">{%  trans 'Stores' %}</span></span>
+                                        <!-- <i class="ti-angle-down"></i> -->
+                                    </span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="link"><a href="{% url 'supplier:dashboard-storescreate' %}"> {%  trans 'Create store' %}</a></li>
+                                    <li class="link"><a href="{% url 'supplier:dashboard-stores' %}"> {%  trans 'Manage store' %}</a></li>
+                                </ul>
+                            </li>
+                            <hr style="border: 1px solid rgba(224, 240, 243, 0.555)">
+                            <li class="link">
+                                <a href="#">
+                                    <span class="flex">
+                                        <span><i class="icon ti-folder"></i><span class="text">{%  trans 'Services' %}</span></span>
+                                        <!-- <i class="ti-angle-down"></i> -->
+                                    </span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="link"><a href="{% url 'supplier:dashboard-servicescreate' %}"> {%  trans 'Create service' %}</a></li>
+                                    <li class="link"><a href="{% url 'supplier:dashboard-services' %}"> {%  trans 'Manage service' %}</a></li>
+                                </ul>
+                            </li>
+
+                            <hr style="border: 1px solid rgba(224, 240, 243, 0.555)">
+                            <li class="link">
+                                <a href="#">
+                                    <span class="flex">
+                                        <span><i class="icon ti-receipt"></i><span class="text">{%  trans 'Products' %}</span></span>
+                                        <!-- <i class="ti-angle-down"></i> -->
+                                    </span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="link"><a href="{% url 'supplier:dashboard-productscreate' %}"> {%  trans 'Create products' %}</a></li>
+                                    <li class="link"><a href="{% url 'supplier:dashboard-products' %}"> {%  trans 'Manage products' %}</a></li>
+                                </ul>
+                            </li>
+                            <hr style="border: 1px solid rgba(224, 240, 243, 0.555)">
+                            <li class="link">
+                                <a href="{% url 'supplier:dashboard-contracts' %}">
+                                    <span class="flex">
+                                        <span>
+                                            <i class="icon ti-layout-accordion-list"></i>
+                                            <span
+                                                class="text">{%  trans 'Contracts' %}</span>
+                                            </span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="link">
+                                <a href="{% url 'supplier:dashboard-payments' %}">
+                                    <span class="flex">
+                                        <span>
+                                            <i class="icon ti-money"></i>
+                                            <span
+                                                class="text">{%  trans 'Payments' %}</span>
+                                            </span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="link">
+                                <a href="{% url 'supplier:dashboard-advertise' %}">
+                                    <span class="flex">
+                                        <span>
+                                            <i class="icon ti-layout-accordion-list"></i>
+                                            <span
+                                                class="text">{%  trans 'Advertise' %}</span>
+                                            </span>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="sidebar-footer" style="align-self: flex-end;">
+                    <a href="{% url 'auth_app:logout' %}" class="cs-grid btn outlined cs-text-md cs-font-500 br-sm cs-bg-hover-color cs-text-secondary" style="place-items: center;">{% trans 'Logout' %}</a>
+                </div>
+            </div>
+            <div class="main">
+                <div class="navbar card cs-grid cs-justify-between cs-align-center" style="grid-template-columns: .1fr auto;">
+                    <!-- <div class="logo"> -->
+                        <!-- <form class="search-form" action="">
+                            <div class="form-control">
+                                <input type="search" name="" id="" placeholder="Search for product">
+                                <button type="submit"><i class="ti-search"></i></button>
+                            </div>
+                        </form> -->
+                    <!-- </div> -->
+                    <div class="link customer-display cs-text-accent" style="justify-self: flex-start; align-self: center;padding: .5rem 1rem;font-weight: bold;">
+                        <div class="lg-hidden md-show" id="show_sidebar">
+                            <!-- <i class="fa fa-desktop"></i> -->
+                            <i class="ti-layout-grid2"></i>
+                        </div>
+                    </div>
+                    <nav style="justify-self: flex-end;">
+                        <ul class="nav-links cs-flex cs-align-center" style="--gap: 1rem;justify-self: flex-end;">
+                            <!-- <li class="link bell">
+                                <i class="ti-bell"></i>
+                                </li>
+                            <li class="link settings">
+                                <i class="ti-settings"></i>
+                            </li> -->
+                            <li class="link customer-display cs-text-accent">
+                                <a href="{% url 'manager:home' %}">
+                                    <!-- <i class="fa fa-desktop"></i> -->
+                                    {% trans "Visit Site" %}
+                                </a>
+                            </li>
+                            <li class="link customer-display cs-text-accent">
+                                <a href="{% url 'supplier:business_profile' %}">
+                                    <!-- <i class="fa fa-desktop"></i> -->
+                                    {% trans "Business Profile" %}
+                                </a>
+                            </li>
+
+                            <div class="dropdown cs-text-accent">
+                                <a href="{% url 'supplier:profile' %}" class="flex" style="margin-inline-start: 1rem;">
+                                    <h4 class="md-hidden">{{ request.user.username }}</h4>
+                                    <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="user_image"
+                                        class="avatar" id="toggle-dropdown" >
+                                </a>
+                                <!-- <div class="dropdown-menu" id="dropdown-menu">
+                                    <ul class="dropdown-items">
+                                        <li class="dropdown-item"><i class="ti-help"></i> <a href="#">Help</a></li>
+                                        <li class="dropdown-item"><i class="ti-settings"></i> <a
+                                                href="#">Settings</a></li>
+                                        </li>
+                                        <li class="dropdown-item footer"><a href="#">Sign Out</a></li>
+                                    </ul>
+                                </div> -->
+                            </div>
+                        </ul>
+                    </nav>
+                </div>
+
+                {% block content %}
+                {% endblock %}
+
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.location.href.includes('/ar/')) {
+                document.body.classList.add('rtl');
+            }
+        })
+
+        document.querySelector("#show_sidebar").addEventListener("click", () => {
+            document.querySelector(".sidebar").classList.toggle("inview")
+        })
+    </script>    
+
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/supplierDash.js' %}"></script>
+
+</body>
+
+</html>

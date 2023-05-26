@@ -1528,6 +1528,13 @@ class DashboardContractAcceptDetailsView(SupplierOnlyAccessMixin, View):
         return redirect(reverse("supplier:dashboard-contractsdetails", args=[pk]))
 
 
+class DashboardMessengerView(SupplierOnlyAccessMixin, View):
+    template_name = "supplier/dashboard/messenger.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+
 class DashboardServicesView(SupplierOnlyAccessMixin, View):
     template_name = "supplier/dashboard/services.html"
 

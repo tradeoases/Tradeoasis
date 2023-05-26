@@ -138,3 +138,6 @@ test_files/*
 
 # node npm
 node_modules/
+
+#custom bash script for starting the app
+run.txt

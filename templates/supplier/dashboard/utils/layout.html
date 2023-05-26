@@ -25,25 +25,226 @@
 
 
     <title>Golden - {% trans 'Supplier Dashboard' %}</title>
+
+    <style>
+        body {
+            background-color: rgb(241, 242, 243);
+        }
+
+        .cs-navbar.flex {
+            justify-content: space-between;
+            align-items: center;
+            padding-block: 0;
+        }
+
+        .cs-nav-links {
+            gap: 1.2rem;
+        }
+
+        .cs-nav-links .link {
+            all: unset;
+            background-color: #00a98f;
+            padding: .6rem 1.6rem;
+            border-radius: 9px;
+        }
+
+        .cs-nav-links .icon {
+            background-color: #e7e7e7;
+            inline-size: 40px;
+            block-size: 40px;
+            border-radius: 100%;
+            position: relative;
+        }
+
+        .cs-nav-links .icon::after {
+            content: "2";
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            color: #fff;
+            font-size: 9px;
+            background-color: rgb(242, 114, 17);
+            padding: .1rem .25rem;
+            border-radius: 100%;
+        }
+
+        .cs-nav-links .link a {
+            color: #fff;
+        }
+
+        .cs-avatar {
+            border: 2px solid #00a98f;
+            inline-size: 42px;
+            block-size: 42px;
+        }
+
+        .cs-no-box-shadow {
+            box-shadow: none;
+        }
+
+        .app-container {
+            background-color: #f2f6fa;
+        }
+
+        .app-content {
+            grid-template-columns: .4fr 2fr;
+        }
+
+        .cs-app-logo {
+            justify-content: space-between;
+            background-color: #fff;
+            border-radius: 9px;
+            padding: .8rem 1.4rem;
+        }
+
+        .cs-app-logo span {
+            font-weight: 800;
+            color: #000;
+        }
+
+        .cs-app-logo i {
+            color: #49c0b6 !important;
+            background-color: #e0fcf9;
+            border: none;
+            border-radius: 9px;
+            padding: .4rem;
+        }
+
+        .cs-sidebar-body .main-menu .link {
+            justify-content: space-between;
+            background-color: #fff;
+            background-color: transparent;
+            border-radius: 9px;
+            padding: .8rem 1.4rem;
+            margin-block-start: .1rem;
+        }
+
+        .cs-sidebar-body .main-menu .link:first-child {
+            margin-block-start: unset;
+        }
+
+        .cs-sidebar-body .main-menu .link.active {
+            background-color: #e0fcf9;
+        }
+
+        .cs-sidebar-body .main-menu .link a {
+            color: #999999;
+            font-size: 14px !important;
+        }
+
+        .cs-sidebar-body .main-menu .link.active a {
+            color: #49c0b6;
+            font-size: 14px !important;
+        }
+
+        .cs-sidebar-body .main-menu .link a .flex {
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .cs-sidebar-body .main-menu .link a .flex i {
+            margin-inline-end: .8rem;
+            font-size: 20px;
+            font-weight: 500;
+            color: #999999;
+            border: none;
+            border-radius: 9px;
+            padding: .4rem;
+        }
+
+        .cs-sidebar-body .main-menu .link.active a .flex i {
+            color: #49c0b6;
+            background-color: #fff;
+            border: none;
+            border-radius: 9px;
+            padding: .4rem;
+        }
+
+        .cs-sidebar-body .main-menu .link a .flex i.active {
+            margin-inline-end: .4rem;
+            font-size: 20px;
+            background-color: #49c0b6;
+            color: #00a98f;
+            border: none;
+            border-radius: 9px;
+            padding: .4rem;
+        }
+
+        .cs-top-cards {
+            background-color: #00a98f;
+            border-radius: 20px;
+            padding: 1.8rem 3.2rem;
+        }
+
+        .cs-top-cards h4 {
+            color: #f0f0f0;
+            font-weight: 400;
+            font-size: 14px;
+        }
+
+        .cs-top-cards h6 {
+            color: #fff;
+            font-weight: 800;
+            font-size: 20px;
+        }
+
+        .cs-top-cards .top-card .card-content-right {
+            border-inline-end: 1px solid #fff;
+            padding-inline-end: 24px;
+        }
+
+        .cs-top-cards .top-card:last-child .card-content-right {
+            border-inline-end: none;
+        }
+
+        .cs-card-content {
+            background-color: #49c0b6;
+        }
+
+        .cs-card-content .cs-ti {
+            color: #fff;
+            font-weight: bolder;
+        }
+
+        .cs-content.flex {
+            gap: 24px;
+        }
+
+        .cs-content-inner span i {
+            margin-inline-end: .8rem;
+            font-size: 20px;
+            background-color: #49c0b6;
+            color: #b5b4b4;
+            border: none;
+            border-radius: 9px;
+            padding: .4rem;
+        }
+
+        .cs-content .card.flex {
+            flex-direction: column;
+            align-items: flex-start;
+            border-radius: 13px;
+        }
+    </style>
 </head>
 
 <body>
     <div class="app-container container">
         <div class="app-content">
-            <div class="sidebar card cs-grid" style="--gap: 1rem; align-content: space-between;">
+            <div class="sidebar cs-grid" style="--gap: 1rem; align-content: space-between;">
                 <div class="upper cs-grid" style="gap: 1rem;">
                     <div class="sidebar-header cs-text-accent">
-                        <div class="app-logo">
+                        <div class="cs-app-logo flex">
+                            <span>{%  trans "SUPPLIER" %}</span>
                             <i class="ti-layout-grid2"></i>
-                            <span>{%  trans "Supplier's Portal" %}</span>
                         </div>
                     </div>
-                    <div class="sidebar-body">
+                    <div class="cs-sidebar-body">
                         <ul class="main-menu">
-                            <li class="link">
+                            <li class="link active">
                                 <a href="{% url 'supplier:dashboard' %}">
                                     <span class="flex">
-                                        <span><i class="icon ti-home"></i><span class="text">{%  trans 'Dashboard' %}</span></span>
+                                        <span><i class="icon ti-home"></i></span><span class="text">{%  trans 'Dashboard' %}</span>
                                     </span>
                                 </a>
                             </li>
@@ -51,72 +252,72 @@
                             <li class="link">
                                 <a href="#">
                                     <span class="flex">
-                                        <span><i class="icon ti-folder"></i><span class="text">{%  trans 'Stores' %}</span></span>
-                                        <!-- <i class="ti-angle-down"></i> -->
+                                        <span><i class="icon ti-folder"></i></span><span class="text">{%  trans 'Stores' %}</span>
                                     </span>
                                 </a>
-                                <ul class="sub-menu">
+                                <!-- <ul class="sub-menu">
                                     <li class="link"><a href="{% url 'supplier:dashboard-storescreate' %}"> {%  trans 'Create store' %}</a></li>
                                     <li class="link"><a href="{% url 'supplier:dashboard-stores' %}"> {%  trans 'Manage store' %}</a></li>
-                                </ul>
+                                </ul> -->
                             </li>
                             <hr style="border: 1px solid rgba(224, 240, 243, 0.555)">
                             <li class="link">
                                 <a href="#">
                                     <span class="flex">
-                                        <span><i class="icon ti-folder"></i><span class="text">{%  trans 'Services' %}</span></span>
+                                        <span><i class="icon ti-folder"></i></span><span class="text">{%  trans 'Services' %}</span>
                                         <!-- <i class="ti-angle-down"></i> -->
                                     </span>
                                 </a>
-                                <ul class="sub-menu">
+                                <!-- <ul class="sub-menu">
                                     <li class="link"><a href="{% url 'supplier:dashboard-servicescreate' %}"> {%  trans 'Create service' %}</a></li>
                                     <li class="link"><a href="{% url 'supplier:dashboard-services' %}"> {%  trans 'Manage service' %}</a></li>
-                                </ul>
+                                </ul> -->
                             </li>
 
                             <hr style="border: 1px solid rgba(224, 240, 243, 0.555)">
                             <li class="link">
                                 <a href="#">
                                     <span class="flex">
-                                        <span><i class="icon ti-receipt"></i><span class="text">{%  trans 'Products' %}</span></span>
-                                        <!-- <i class="ti-angle-down"></i> -->
+                                        <span><i class="icon ti-receipt"></i></span><span class="text">{%  trans 'Products' %}</span>
                                     </span>
                                 </a>
-                                <ul class="sub-menu">
+                                <!-- <ul class="sub-menu">
                                     <li class="link"><a href="{% url 'supplier:dashboard-productscreate' %}"> {%  trans 'Create products' %}</a></li>
                                     <li class="link"><a href="{% url 'supplier:dashboard-products' %}"> {%  trans 'Manage products' %}</a></li>
-                                </ul>
+                                </ul> -->
                             </li>
                             <hr style="border: 1px solid rgba(224, 240, 243, 0.555)">
                             <li class="link">
                                 <a href="{% url 'supplier:dashboard-contracts' %}">
                                     <span class="flex">
                                         <span>
-                                            <i class="icon ti-layout-accordion-list"></i>
+                                            <i class="icon ti-layout-accordion-list"></i></span>
                                             <span
-                                                class="text">{%  trans 'Contracts' %}</span>
+                                                class="text">{%  trans 'Contracts' %}
                                             </span>
                                     </span>
                                 </a>
                             </li>
+                            <hr style="border: 1px solid rgba(224, 240, 243, 0.555)">
                             <li class="link">
                                 <a href="{% url 'supplier:dashboard-payments' %}">
                                     <span class="flex">
                                         <span>
-                                            <i class="icon ti-money"></i>
+                                            <i class="icon ti-money"></i></span>
                                             <span
-                                                class="text">{%  trans 'Payments' %}</span>
+                                                class="text">{%  trans 'Payments' %}
                                             </span>
                                     </span>
                                 </a>
                             </li>
+                            <hr style="border: 1px solid rgba(224, 240, 243, 0.555)">
                             <li class="link">
                                 <a href="{% url 'supplier:dashboard-advertise' %}">
                                     <span class="flex">
                                         <span>
-                                            <i class="icon ti-layout-accordion-list"></i>
+                                            <i class="icon ti-layout-accordion-list"></i></span>
                                             <span
-                                                class="text">{%  trans 'Advertise' %}</span>
+                                                class="text">{%  trans 'Advertise' %}
                                             </span>
                                     </span>
                                 </a>
@@ -129,60 +330,50 @@
                 </div>
             </div>
             <div class="main">
-                <div class="navbar card cs-grid cs-justify-between cs-align-center" style="grid-template-columns: .1fr auto;">
-                    <!-- <div class="logo"> -->
-                        <!-- <form class="search-form" action="">
-                            <div class="form-control">
-                                <input type="search" name="" id="" placeholder="Search for product">
-                                <button type="submit"><i class="ti-search"></i></button>
-                            </div>
-                        </form> -->
-                    <!-- </div> -->
-                    <div class="link customer-display cs-text-accent" style="justify-self: flex-start; align-self: center;padding: .5rem 1rem;font-weight: bold;">
-                        <div class="lg-hidden md-show" id="show_sidebar">
-                            <!-- <i class="fa fa-desktop"></i> -->
-                            <i class="ti-layout-grid2"></i>
-                        </div>
+                <div class="cs-navbar card cs-no-box-shadow flex">
+                    <div class="left">
+                        <h4>Good Morning {{ request.user.username }}!</h4>
                     </div>
-                    <nav style="justify-self: flex-end;">
-                        <ul class="nav-links cs-flex cs-align-center" style="--gap: 1rem;justify-self: flex-end;">
-                            <!-- <li class="link bell">
-                                <i class="ti-bell"></i>
-                                </li>
-                            <li class="link settings">
-                                <i class="ti-settings"></i>
-                            </li> -->
-                            <li class="link customer-display cs-text-accent">
-                                <a href="{% url 'manager:home' %}">
-                                    <!-- <i class="fa fa-desktop"></i> -->
-                                    {% trans "Visit Site" %}
-                                </a>
-                            </li>
-                            <li class="link customer-display cs-text-accent">
-                                <a href="{% url 'supplier:business_profile' %}">
-                                    <!-- <i class="fa fa-desktop"></i> -->
-                                    {% trans "Business Profile" %}
-                                </a>
-                            </li>
-
-                            <div class="dropdown cs-text-accent">
-                                <a href="{% url 'supplier:profile' %}" class="flex" style="margin-inline-start: 1rem;">
-                                    <h4 class="md-hidden">{{ request.user.username }}</h4>
-                                    <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="user_image"
-                                        class="avatar" id="toggle-dropdown" >
-                                </a>
-                                <!-- <div class="dropdown-menu" id="dropdown-menu">
-                                    <ul class="dropdown-items">
-                                        <li class="dropdown-item"><i class="ti-help"></i> <a href="#">Help</a></li>
-                                        <li class="dropdown-item"><i class="ti-settings"></i> <a
-                                                href="#">Settings</a></li>
-                                        </li>
-                                        <li class="dropdown-item footer"><a href="#">Sign Out</a></li>
-                                    </ul>
-                                </div> -->
+                    <div class="right">
+                        <!-- <div class="link customer-display cs-text-accent" style="justify-self: flex-start; align-self: center;padding: .5rem 1rem;font-weight: bold;">
+                            <div class="lg-hidden md-show" id="show_sidebar">
+                                <i class="ti-layout-grid2"></i>
                             </div>
-                        </ul>
-                    </nav>
+                        </div> -->
+                        <nav style="justify-self: flex-end;">
+                            <ul class="nav-links cs-nav-links flex">
+                                <!-- <li class="link customer-display cs-text-accent">
+                                    <a href="{% url 'manager:home' %}">
+                                        {% trans "Visit Site" %}
+                                    </a>
+                                </li>
+                                <li class="link customer-display cs-text-accent">
+                                    <a href="{% url 'supplier:business_profile' %}">
+                                        {% trans "Business Profile" %}
+                                    </a>
+                                </li> -->
+                                <li class="icon flex">
+                                    <i class="ti-bell"></i>
+                                </li>
+                                <div class="dropdown cs-text-accent">
+                                    <a href="{% url 'supplier:profile' %}" class="flex" style="margin-inline-start: 1rem;">
+                                        <!-- <h4 class="md-hidden">{{ request.user.username }}</h4> -->
+                                        <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="user_image"
+                                            class="avatar cs-avatar" id="toggle-dropdown" >
+                                    </a>
+                                    <!-- <div class="dropdown-menu" id="dropdown-menu">
+                                        <ul class="dropdown-items">
+                                            <li class="dropdown-item"><i class="ti-help"></i> <a href="#">Help</a></li>
+                                            <li class="dropdown-item"><i class="ti-settings"></i> <a
+                                                    href="#">Settings</a></li>
+                                            </li>
+                                            <li class="dropdown-item footer"><a href="#">Sign Out</a></li>
+                                        </ul>
+                                    </div> -->
+                                </div>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
 
                 {% block content %}

@@ -130,6 +130,11 @@ urlpatterns = [
         name="dashboard-contract-accept",
     ),
     path(
+        "dashboard/messenger",
+        views.DashboardMessengerView.as_view(),
+        name="dashboard-messenger",
+    ),
+    path(
         "dashboard/services",
         views.DashboardServicesView.as_view(),
         name="dashboard-services",
