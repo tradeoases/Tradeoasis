@@ -4,7 +4,7 @@
 {% block content %}
 
 <div class="main-content split cs-split" style="overflow-y: scroll;">
-    <div class="cs-content-area card cs-no-box-shadow" style="block-size: fit-content;">
+    <div class="cs-content-area cs-no-box-shadow" style="block-size: fit-content;">
         <div class="upper-content-area cs-top-cards cs-no-box-shadow" data-context="{{statistics.context_name}}">
             {% for statistic in statistics.results %}
                 <div class="top-card flex">
@@ -18,8 +18,8 @@
                 </div>
             {% endfor %}
         </div>
-        <div class="middle-content-area">
-            <h3 class="title">Important Today</h3>
+        <div class="middle-content-area bordered">
+            <h3 class="title accented">Important Today</h3>
             <h4 class="sub-title">Activities you need to focus on to maintain buyer satisfaction</h4>
             <div class="cs-content flex">
                 <div class="card cs-no-box-shadow flex">
@@ -54,8 +54,8 @@
                 </div>
             </div>
         </div>
-        <div class="lower-content-area md-hidden">
-            <h3 class="title">Revenue & Trending products</h3>
+        <div class="lower-content-area md-hidden bordered">
+            <h3 class="title accented">Revenue & Trending products</h3>
             <h4 class="sub-title">Lst update: 18 May 2023</h4>
             <!-- <div class="stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;padding: .5rem;">
                 <div class="cs-grid cs-justify-between" style="--gap: 1rem;grid-template-columns: 1fr 1fr;">
@@ -94,31 +94,52 @@
             </div>
         </div>
     </div>
-    <div class="right">
-        <div class="right cs-right">
-            <h4>Trending products <i class="ti-arrow-right"></i> </h4>
-            <div class="cs-products flex">
-                <div class="right-card card cs-no-box-shadow cs-right-card cs-product-card flex">
+    <div class="side-content">
+        <div class="right cs-right bordered">
+            <h4 class="accented">Trending products <i class="ti-arrow-right"></i> </h4>
+            <div class="cs-products">
+                <div class="right-card cs-no-box-shadow cs-right-card cs-product-card">
                     <img src="/media/ProductImage/images/case-strap-3064a984-31ab-418c-955b-02cb2984ec6c-ce.jpeg" alt="">
-                    <h6>Uberzer Sleek Watch</h6>
-                    <span><i class="ti-star"></i> 4.5 | 12.3k</span>
-                    <span>Sold 72</span>
+                    <div class="content">
+                        <h6>Uberzer Sleek Watch</h6>
+                        <span><i class="ti-star"></i> 4.5 | 12.3k</span>
+                        <span>Sold 72</span>
+                    </div>
                 </div>
-                <div class="right-card card cs-no-box-shadow cs-right-card cs-product-card flex">
+                <div class="right-card cs-no-box-shadow cs-right-card cs-product-card">
                     <img src="/media/ProductImage/images/case-strap-3064a984-31ab-418c-955b-02cb2984ec6c-ce.jpeg" alt="">
-                    <h6>Uberzer Sleek Watch</h6>
-                    <span><i class="ti-star"></i> 4.5 | 12.3k</span>
-                    <span>Sold 72</span>
+                    <div class="content">
+                        <h6>Uberzer Sleek Watch</h6>
+                        <span><i class="ti-star"></i> 4.5 | 12.3k</span>
+                        <span>Sold 72</span>
+                    </div>
+                </div>
+                <div class="right-card cs-no-box-shadow cs-right-card cs-product-card">
+                    <img src="/media/ProductImage/images/case-strap-3064a984-31ab-418c-955b-02cb2984ec6c-ce.jpeg" alt="">
+                    <div class="content">
+                        <h6>Uberzer Sleek Watch</h6>
+                        <span><i class="ti-star"></i> 4.5 | 12.3k</span>
+                        <span>Sold 72</span>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="right cs-right">
-            <h4>Almost out of stock <i class="ti-arrow-right"></i> </h4>
+        <div class="right cs-right bordered">
+            <h4 class="accented">Almost out of stock <i class="ti-arrow-right"></i> </h4>
             <div class="cs-products flex">
-                <div class="right-card card cs-no-box-shadow cs-right-card cs-product-card flex">
+                <div class="right-card cs-no-box-shadow cs-right-card cs-product-card">
                     <img src="/media/ProductImage/images/case-strap-3064a984-31ab-418c-955b-02cb2984ec6c-ce.jpeg" alt="">
-                    <h6>Uberzer Sleek Watch</h6>
-                    <span>Left 15</span>
+                    <div class="content">
+                        <h6>Uberzer Sleek Watch</h6>
+                        <span>Left 15</span>
+                    </div>
+                </div>
+                <div class="right-card cs-no-box-shadow cs-right-card cs-product-card">
+                    <img src="/media/ProductImage/images/case-strap-3064a984-31ab-418c-955b-02cb2984ec6c-ce.jpeg" alt="">
+                    <div class="content">
+                        <h6>Uberzer Sleek Watch</h6>
+                        <span>Sold 72</span>
+                    </div>
                 </div>
             </div>
         </div>
