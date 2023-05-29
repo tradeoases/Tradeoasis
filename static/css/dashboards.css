@@ -140,8 +140,9 @@ body.modal-open::after {
     grid-template-columns: .5fr 2fr;
     gap: 1rem;
     align-items: stretch;
-    block-size: 90vh;
+    /* block-size: 90vh; */
 }
+
 .lg-hidden {
     display: none;
 }
@@ -775,127 +776,3 @@ body:not(.rtl) .modal {
 }
 
 
-/* SUPPLIER DASHBOARD */
-.cs-app-logo {
-}
-
-
-.flex {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.cs-supplier .chat-window {
-    gap: 20px;
-    align-items: flex-start;
-    block-size: 580px;
-}
-
-.cs-supplier .chat-window .chat-search-form .form-control {
-    background-color: rgb(198, 195, 193);
-    padding: .5em;
-    justify-content: space-between;
-}
-
-.cs-supplier .chat-window .chat-search-form .form-control input {
-    flex: 1;
-}
-
-.cs-supplier .chat-window .chat-search-form .form-control input,
-.cs-supplier .chat-window .chat-search-form .form-control button {
-    padding: .8em;
-}
-
-.cs-supplier .chat-window .all-chats {
-    inline-size: 30%;
-    block-size: 100%;
-    overflow-y: auto;
-}
-
-.cs-supplier .chat-window .chat {
-    justify-content: flex-start;
-    align-items: center;
-    gap: 4px;
-    background-color: rgb(235, 232, 230);
-    margin-top: 4px;
-    padding: 6px;
-    cursor: pointer;
-    block-size: fit-content;
-}
-
-.cs-supplier .chat-window .chat .img img {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    inline-size: 42px;
-    block-size: 42px;
-}
-
-.cs-supplier .chat-window .chat-room {
-    inline-size: 70%;
-    block-size: 100%;
-    background-color: rgb(246, 244, 244);
-}
-
-.cs-supplier .chat-room .room {
-    height: 100%;
-}
-
-.cs-supplier .chat-room .room-messages {
-    inline-size: 100%;
-    block-size: 80.5%;
-}
-
-.cs-supplier .chat-room .room-client {
-    margin-top: 0;
-}
-
-.cs-supplier .chat-room .room-messages.flex {
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-.cs-supplier .chat-room .room-messages .client {
-    inline-size: fit-content;
-    margin-inline-start: 0.5em;
-    margin-block-start: 0.5em;
-    padding: 0.7em;
-    background-color: #dee0de;
-    border-start-end-radius: 25px;
-    border-end-end-radius: 25px;
-    border-end-start-radius: 25px;
-    align-self: flex-start;
-}
-
-.cs-supplier .chat-room .room-messages .agent {
-    inline-size: fit-content;
-    margin-inline-end: 0.5em;
-    margin-block-start: 0.5em;
-    padding: 0.7em;
-    background-color: #dee0de;
-    border-start-end-radius: 25px;
-    border-start-start-radius: 25px;
-    border-end-start-radius: 25px;
-    align-self: flex-end;
-}
-
-.cs-supplier .chat-room .room-actions {
-    inline-size: 100%;
-    height: auto;
-}
-
-.cs-supplier .chat-room .room-actions * {
-    block-size: 40px;
-}
-
-.cs-supplier .chat-room .room-actions textarea {
-    padding: 8px;
-    inline-size: 100%;
-    flex: 1;
-}
-
-.cs-supplier .chat-room .room-actions button {
-    padding-inline: 25px;
-}

@@ -135,6 +135,11 @@ urlpatterns = [
         name="dashboard-messenger",
     ),
     path(
+        "dashboard/notification",
+        views.DashboardNotificationView.as_view(),
+        name="dashboard-notification",
+    ),
+    path(
         "dashboard/services",
         views.DashboardServicesView.as_view(),
         name="dashboard-services",

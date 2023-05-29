@@ -140,4 +140,4 @@ test_files/*
 node_modules/
 
 #custom bash script for starting the app
-run.txt
+start.sh

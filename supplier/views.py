@@ -1534,6 +1534,12 @@ class DashboardMessengerView(SupplierOnlyAccessMixin, View):
     def get(self, request):
         return render(request, self.template_name)
 
+class DashboardNotificationView(SupplierOnlyAccessMixin, View):
+    template_name = "supplier/dashboard/notification.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
+
 
 class DashboardServicesView(SupplierOnlyAccessMixin, View):
     template_name = "supplier/dashboard/services.html"

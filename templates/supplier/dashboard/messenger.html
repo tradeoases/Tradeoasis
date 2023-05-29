@@ -4,8 +4,8 @@
 {% block content %}
 
     <div class="main-content">
-        <div class="content-area">
-            <div class="cs-supplier">
+        <div class="content-area cs-content-area">
+            <div class="cs-supplier cs-chat">
                 <div class="chat-window flex">
                     <div class="all-chats">
                         <form class="chat-search-form">
@@ -15,13 +15,13 @@
                             </div>
                         </form>
                         <div class="chats">
-                            <div class="chat flex">
+                            <div class="chat flex active">
                                 <div class="img">
                                     <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="" class="avatar mobile" id="toggle-dropdown">
                                 </div>
                                 <div class="text">
                                     <h5>Jane Mwebaza</h5>
-                                    <h6>What is your availability for product..</h6>
+                                    <h6>Ok</h6>
                                 </div>
                             </div>
                             <div class="chat flex">
@@ -31,6 +31,24 @@
                                 <div class="text">
                                     <h5>John Muwanguzi Peter</h5>
                                     <h6>I have not received the..</h6>
+                                </div>
+                            </div>
+                            <div class="chat flex">
+                                <div class="img">
+                                    <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="" class="avatar mobile" id="toggle-dropdown">
+                                </div>
+                                <div class="text">
+                                    <h5>Barbra Mwebaza</h5>
+                                    <h6>Hello there!</h6>
+                                </div>
+                            </div>
+                            <div class="chat flex">
+                                <div class="img">
+                                    <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="" class="avatar mobile" id="toggle-dropdown">
+                                </div>
+                                <div class="text">
+                                    <h5>Barbra Mwebaza</h5>
+                                    <h6>Hello there!</h6>
                                 </div>
                             </div>
                             <div class="chat flex">
@@ -124,10 +142,21 @@
                                     <span>I need to know your availability for Building roofs.</span><br>
                                     <span>Please, send me a quotation.</span>
                                 </div>
+                                <div class="agent">
+                                    <span>Alright. Provide some more details about the product</span><br>
+                                    <span>you need.</span>
+                                </div>
+                                <div class="agent">
+                                    <span>Then we can be able to send you the quotation</span><br>
+                                    <span>this afternoon.</span>
+                                </div>
+                                <div class="client">
+                                    <span>Ok</span>
+                                </div>
                             </div>
                             <div class="room-actions flex">
-                                <textarea name="" id="" rows="3"></textarea>
-                                <button>Send</button>
+                                <textarea name="" id="" rows="3" placeholder="Type a message"></textarea>
+                                <button><img src="/static/graphics/paper-plane.png" alt=""></button>
                             </div>
                         </div>
                     </div>

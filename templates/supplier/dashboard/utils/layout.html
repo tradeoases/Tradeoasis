@@ -22,6 +22,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script src="{% static 'js/tinymce/js/tinymce/tinymce.min.js' %}"></script>
 
 
     <title>Golden - {% trans 'Supplier Dashboard' %}</title>
@@ -29,6 +30,89 @@
     <style>
         body {
             background-color: rgb(241, 242, 243);
+        }
+
+        .flex {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* DROPDOWN MENU */
+        .cs-dropdown-menu {
+            inline-size: 250px;
+            block-size: fit-content;
+            font-weight: 400;
+            font-size: 15px;
+            box-shadow: 0 3px 8px rgba(135, 135, 135, 0.2);
+            border-radius: 20px;
+            background-color: #fff;
+            position: absolute;
+            top: 88px;
+            right: 32px;
+            z-index: 1000;
+            overflow: visible;
+        }
+
+        .cs-dropdown-menu::before {
+            content: "";
+            background-color: #fff;
+            box-shadow: -3px -3px 5px 0px rgba(0, 0, 0, .0375);
+            transform: rotate(45deg);
+            position: absolute;
+            top: -6px;
+            left: 80%;
+            width: 20px;
+            height: 20px;
+            overflow: visible;
+        }
+
+        .cs-dropdown-menu.hide {
+            display: none;
+        }
+
+        .cs-dropdown-item {
+            block-size: 100%;
+            padding: 14px 20px;
+            background-color: #fff;
+            border-block-end: 1px solid #f0f0f0;
+            border-radius: 20px;
+
+
+        }
+
+        .cs-dropdown-item a {
+            color: rgb(139, 138, 138);
+        }
+
+        .cs-dropdown-item i {
+            color: rgb(139, 138, 138);
+        }
+
+        .cs-dropdown-item:hover a {
+            color: rgb(65, 64, 64);
+        }
+
+        .cs-dropdown-item:hover i {
+            color: rgb(65, 64, 64);
+        }
+
+        /* DROPDOWN MENU */
+
+        /* START OF DASHBOARD */
+
+        .cs-split {
+            gap: 8px;
+            overflow-x: hidden;
+            overflow-y: scroll;
+            white-space: nowrap;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .cs-split::-webkit-scrollbar {
+            display: none;
         }
 
         .cs-navbar.flex {
@@ -112,10 +196,9 @@
 
         .cs-sidebar-body .main-menu .link {
             justify-content: space-between;
-            background-color: #fff;
             background-color: transparent;
             border-radius: 9px;
-            padding: .8rem 1.4rem;
+            padding: .6rem 1.4rem;
             margin-block-start: .1rem;
         }
 
@@ -125,14 +208,27 @@
 
         .cs-sidebar-body .main-menu .link.active {
             background-color: #e0fcf9;
+            background: rgb(184,246,237);
+            background: linear-gradient(90deg, rgba(184,246,237,.8) 0%, rgba(221,249,246,.8) 10%, rgba(241, 242, 243,.2) 80%);
+        }
+
+        .cs-sidebar-body .main-menu .link:hover {
+            background-color: #e0fcf9;
+            background: rgb(184,246,237);
+            background: linear-gradient(90deg, rgba(184,246,237,.8) 0%, rgba(221,249,246,.8) 10%, rgba(241, 242, 243,.2) 80%);
         }
 
         .cs-sidebar-body .main-menu .link a {
-            color: #999999;
+            color: #535353;
             font-size: 14px !important;
         }
 
         .cs-sidebar-body .main-menu .link.active a {
+            color: #49c0b6;
+            font-size: 14px !important;
+        }
+
+        .cs-sidebar-body .main-menu .link a:hover {
             color: #49c0b6;
             font-size: 14px !important;
         }
@@ -142,38 +238,88 @@
             align-items: center;
         }
 
-        .cs-sidebar-body .main-menu .link a .flex i {
+        .cs-sidebar-body .main-menu .link a .flex img {
             margin-inline-end: .8rem;
-            font-size: 20px;
-            font-weight: 500;
-            color: #999999;
-            border: none;
-            border-radius: 9px;
             padding: .4rem;
+            block-size: 38px;
+            inline-size: 38px;
         }
 
-        .cs-sidebar-body .main-menu .link.active a .flex i {
-            color: #49c0b6;
+        .cs-sidebar-body .main-menu .link.active a .flex img {
             background-color: #fff;
             border: none;
             border-radius: 9px;
             padding: .4rem;
         }
 
-        .cs-sidebar-body .main-menu .link a .flex i.active {
-            margin-inline-end: .4rem;
-            font-size: 20px;
-            background-color: #49c0b6;
-            color: #00a98f;
+        .cs-sidebar-body .main-menu .link:hover a .flex img {
+            background-color: #fff;
             border: none;
             border-radius: 9px;
             padding: .4rem;
         }
 
+        .cs-sidebar-body .main-menu .link a .flex img.active {
+            margin-inline-end: .4rem;
+            background-color: #49c0b6;
+            border: none;
+            border-radius: 9px;
+            padding: .4rem;
+        }
+
+        .middle-content-area .cs-content {
+            margin-block-start: .8rem;
+        }
+
+        .middle-content-area .title {
+            margin-block-start: 1.2rem;
+        }
+
+        .middle-content-area .sub-title {
+            margin-block-start: .6rem;
+            font-weight: 100;
+        }
+
+        .middle-content-area .cs-content .card {
+            margin-block-start: .4rem;
+            background-color: #fff;
+            border: 1px solid hsla(213, 28%, 80%, 70%);
+        }
+
+        .cs-content .card .potential {
+            color: #49c0b6;
+            margin-block-start: .8rem;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .cs-content .card h4 {
+            margin-block-end: .8rem;
+        }
+
+        .cs-content .card i {
+            color: #49c0b6 !important;
+            background-color: #e0fcf9;
+            border: none;
+            border-radius: 9px;
+            padding: .4rem;
+
+            margin-inline-end: .4rem;
+            font-size: 30px;
+            border: none;
+            border-radius: 9px;
+            padding: .4rem;
+        }
+
+        .cs-content .card .count {
+            font-size: larger;
+            font-weight: bolder;
+        }
+
         .cs-top-cards {
             background-color: #00a98f;
             border-radius: 20px;
-            padding: 1.8rem 3.2rem;
+            padding: 2.4rem 3.2rem;
         }
 
         .cs-top-cards h4 {
@@ -201,23 +347,8 @@
             background-color: #49c0b6;
         }
 
-        .cs-card-content .cs-ti {
-            color: #fff;
-            font-weight: bolder;
-        }
-
         .cs-content.flex {
             gap: 24px;
-        }
-
-        .cs-content-inner span i {
-            margin-inline-end: .8rem;
-            font-size: 20px;
-            background-color: #49c0b6;
-            color: #b5b4b4;
-            border: none;
-            border-radius: 9px;
-            padding: .4rem;
         }
 
         .cs-content .card.flex {
@@ -225,17 +356,463 @@
             align-items: flex-start;
             border-radius: 13px;
         }
+
+        .cs-content-area .lower-content-area {
+            display: block;
+            margin-block-start: 2.2rem;
+        }
+
+        .lower-content-area .cs-content {
+            margin-block-start: .8rem;
+        }
+
+        .lower-content-area .sub-title {
+            margin-block-start: .6rem;
+            font-weight: 100;
+        }
+
+        .middle-content-area .cs-content .card {
+            margin-block-start: .4rem;
+        }
+
+        .data-visualization.flex {
+            justify-content: space-between;
+            margin-block-start: .8rem;
+            border-radius: 20px;
+        }
+
+        .data-visualization .cs-stats {
+            flex: 1;
+            block-size: 300px;
+            border-radius: 0;
+        }
+
+        .data-visualization .cs-stats:first-child {
+            border-start-start-radius: 20px;
+            border-end-start-radius: 20px;
+            border-inline-end: 0;
+        }
+
+        .data-visualization .cs-stats:last-child {
+            border-start-end-radius: 20px;
+            border-end-end-radius: 20px;
+        }
+
+        .cs-right {
+            margin-block-start: .8rem;
+            block-size: 400px;
+            background-color: #fff;
+            border: 1px solid hsla(213, 28%, 80%, 70%);
+            border-radius: 20px;
+            padding-block: 1.2rem;
+        }
+
+        .cs-right h4 {
+            margin-inline: 1.2rem;
+            cursor: pointer;
+        }
+
+        .cs-right h4 i {
+            color: #00a98f;
+            font-weight: bolder;
+            margin-inline-start: .8rem;
+            cursor: pointer;
+            position: absolute;
+        }
+
+        .cs-right h4:hover i {
+            font-size: 18px;
+            transform: scale(1.1);
+        }
+
+        .cs-right h4 i:hover {
+            font-size: 18px;
+            transform: scale(1.1);
+        }
+
+        .cs-right .cs-right-card {
+            margin-block-start: .4rem;
+            background-color: #fff;
+            border: 1px solid hsla(213, 28%, 80%, 70%);
+            block-size: 100%;
+        }
+
+        .cs-right .cs-products {
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            gap: 14px;
+            padding-block-end: .8rem;
+            padding: 1.2rem;
+            inline-size: 100%;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            white-space: nowrap;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .cs-right .cs-products::-webkit-scrollbar {
+            display: none;
+        }
+
+        .cs-right .cs-product-card.flex {
+            flex-direction: column;
+            border-radius: 20px;
+            inline-size: 290px;
+            flex: 0 0 auto;
+            inline-size: 180px; 
+        }
+
+        .cs-right .cs-product-card img {
+            block-size: 100px;
+            inline-size: 100px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .cs-right .cs-product-card h6 {
+            font-size: 14px;
+            margin-block-end: 0;
+        }
+
+        .cs-right .cs-product-card span {
+            margin-block: -6px !important;
+        }
+
+        .cs-right .cs-product-card span:last-child {
+            color: #00a98f;
+        }
+
+        .cs-right .cs-product-card span i {
+            color: orange;
+        }
+
+        /* END OF DASHBOARD */
+
+
+        /* START OF MESSENGER */
+
+        .cs-supplier .chat-window {
+            gap: 2px;
+            align-items: flex-start;
+            block-size: 580px;
+        }
+
+        .cs-supplier .chat-window .chat-search-form .form-control {
+            background-color: rgb(198, 195, 193);
+            padding: .5em;
+            justify-content: space-between;
+        }
+
+        .cs-supplier .chat-window .chat-search-form .form-control input {
+            flex: 1;
+        }
+
+        .cs-supplier .chat-window .chat-search-form .form-control input,
+        .cs-supplier .chat-window .chat-search-form .form-control button {
+            padding: .8em;
+        }
+
+        .cs-supplier .chat-window .all-chats {
+            inline-size: 30%;
+            block-size: 100%;
+            overflow-y: auto;
+        }
+
+        .cs-supplier .chat-window .chat {
+            justify-content: flex-start;
+            align-items: center;
+            gap: 4px;
+            background-color: #fff;
+            padding: 10px 6px;
+            cursor: pointer;
+            block-size: fit-content;
+            margin-block: 0;
+            border-block-end: 1px solid #dee4e8;
+        }
+
+        .cs-supplier .chat-window .chat:hover {
+            background-color: #e5ebf0;
+        }
+
+        .cs-supplier .chat-window .chat.active {
+            background-color: #d1d7db;
+        }
+
+        .cs-supplier .chat-window .chat .img img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            inline-size: 42px;
+            block-size: 42px;
+        }
+
+        .cs-supplier .chat-window .chat h5 {
+            color: #1c1b1b;
+            font-size: 14px;
+            font-weight: 400;
+            margin-block-end: .4rem;
+        }
+
+        .cs-supplier .chat-window .chat h6 {
+            color: #868585;
+            font-size: 13px;
+            font-weight: 400;
+            margin-block-end: .4rem;
+        }
+
+        .cs-supplier .chat-window .chat-room {
+            inline-size: 70%;
+            block-size: 100%;
+            background-color: #eae6df;
+        }
+
+        .cs-supplier .chat-room .room {
+            height: 100%;
+        }
+
+        .cs-supplier .chat-room .room-messages {
+            inline-size: 100%;
+            block-size: 80.5%;
+        }
+
+        .cs-supplier .chat-room .room-client {
+            margin-top: 0;
+        }
+
+        .cs-supplier .chat-room .room-messages.flex {
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .cs-supplier .chat-room .room-messages .client {
+            inline-size: fit-content;
+            margin-inline-start: 0.5em;
+            margin-block-start: 0.5em;
+            padding: 0.7em;
+            color: #1c1b1b;
+            background-color: #fff;
+            border-start-end-radius: 25px;
+            border-end-end-radius: 25px;
+            border-end-start-radius: 25px;
+            align-self: flex-start;
+        }
+
+        .cs-supplier .chat-room .room-messages .agent {
+            inline-size: fit-content;
+            margin-inline-end: 0.5em;
+            margin-block-start: 0.5em;
+            padding: 0.7em;
+            color: #1c1b1b;
+            background-color: #c2e8be;
+            background-color: #bcf9b5;
+            border-start-end-radius: 25px;
+            border-start-start-radius: 25px;
+            border-end-start-radius: 25px;
+            align-self: flex-end;
+        }
+
+        .cs-supplier .chat-room .room-actions {
+            inline-size: 100%;
+            height: auto;
+            padding: 8px;
+            background-color: #e5ebf0;
+        }
+
+        .cs-supplier .chat-room .room-actions * {
+            block-size: 40px;
+            border: 0;
+        }
+
+        .cs-supplier .chat-room .room-actions textarea {
+            background-color: #fff;
+            padding: 8px;
+            inline-size: 100%;
+            flex: 1;
+        }
+
+        .cs-supplier .chat-room .room-actions textarea:focus {
+            border: 1px solid rgb(164, 163, 163);
+        }
+
+        .cs-supplier .chat-room .room-actions button {
+            padding-inline: 25px;
+            background-color: #e5ebf0;
+        }
+
+        .cs-supplier .chat-room .room-actions button img {
+            block-size: 30px;
+        }
+
+        .cs-content-area {
+            height: fit-content;
+            overflow-y: hidden;
+        }
+
+        .cs-chat {
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            border-radius: 20px;
+        }
+
+        .chat-window {
+            background-color: rgb(251, 250, 250);
+            border: 1px solid hsla(213, 28%, 80%, 70%);
+            block-size: 100%;
+        }
+
+        .chat-room .room-client .chat {
+            margin: 0;
+            background-color: #d1d7db;
+        }
+
+        .chat-search-form .form-control {
+            border-radius: 0;
+        }
+
+        .chat-room .room {
+            position: relative;
+        }
+
+        .chat-room .room-actions {
+            position: absolute;
+            bottom: 0;
+        }
+
+        .toggle-able {
+            display: none;
+        }
+
+        /* START OF MESSENGER */
+
+        /* START OF NOTIFICATION */
+        .cs-notification {
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            border-radius: 20px;
+        }
+
+        .notification-window {
+            background-color: rgb(251, 250, 250);
+            border: 1px solid hsla(213, 28%, 80%, 70%);
+            block-size: 100vh;
+        }
+
+        .cs-supplier .notification-window .all-notifications {
+            inline-size: 24%;
+            block-size: 100%;
+            overflow-y: auto;
+        }
+
+        .cs-supplier .notification-window .notification-room {
+            inline-size: 100%;
+            block-size: 100%;
+            background-color: #eae6df;
+        }
+
+        .all-notifications h3 {
+            margin-inline: 1.2rem;
+            margin-block-start: 1rem;
+        }
+
+        .all-notifications ul {
+            padding: 1.2rem .8rem;
+        }
+
+        .notification-channels li {
+            border: 1px solid antiquewhite;
+            padding: 1rem 2.4rem;
+            margin-block-end: .8rem;
+            background-color: #fff;
+            border-radius: 18px;
+            cursor: pointer;
+        }
+
+        .notification-channels li.active {
+            border: 1px solid antiquewhite;
+            padding: 1rem 2.4rem;
+            margin-block-end: .8rem;
+            background-color: #c2e8be;
+            border-radius: 18px;
+        }
+
+        .notification-channels li.active span,
+        .notification-channels li.active i {
+            color: #fff;
+        }
+
+        .notification-channels li i {
+            margin-inline-end: .8rem;
+        }
+
+        .notification-section {
+            display: none;
+        }
+
+        .notification-section.inview {
+            display: block;
+            height: 100%;
+        }
+
+        .notification-section .email {
+            padding: 2.4rem;
+            background-color: #e0fcf9;
+            block-size: 100%;
+        }
+
+        .notification-section .email-header {
+            background-color: #e0fcf9;
+        }
+
+        .notification-section .email-header * {
+            margin-block: .2rem;
+        }
+
+        .notification-section .email-header input {
+            padding: .6rem .4rem;
+            inline-size: 100%;
+            border: none;
+            border-block-end: 1px solid #ccc;
+        }
+
+        .notification-section .email-header input:focus {
+            outline: none;
+        }
+
+
+        .notification-section .email-body {
+            background-color: #e0fcf9;
+            margin-block: .8rem;
+            block-size: 250px;
+        }
+
+        .email-body label {
+            font-weight: bold;
+            margin-block-end: .4rem !important;
+        }
+
+        .email-body #email-body-input {
+            border-radius: 0;
+            border: 0;
+            box-shadow: none !important;
+        }
+
+        /* START OF NOTIFICATION */
+
+
     </style>
 </head>
 
 <body>
     <div class="app-container container">
-        <div class="app-content">
+        <div class="app-content" style="display: grid;grid-template-columns: .5fr 8fr;">
             <div class="sidebar cs-grid" style="--gap: 1rem; align-content: space-between;">
                 <div class="upper cs-grid" style="gap: 1rem;">
                     <div class="sidebar-header cs-text-accent">
                         <div class="cs-app-logo flex">
-                            <span>{%  trans "SUPPLIER" %}</span>
+                            <span class="toggle-able" >{%  trans "SUPPLIER" %}</span>
                             <i class="ti-layout-grid2"></i>
                         </div>
                     </div>
@@ -244,7 +821,8 @@
                             <li class="link active">
                                 <a href="{% url 'supplier:dashboard' %}">
                                     <span class="flex">
-                                        <span><i class="icon ti-home"></i></span><span class="text">{%  trans 'Dashboard' %}</span>
+                                        <span><img src="/static/graphics/home.png" alt=""></span>
+                                        <span class="text toggle-able">{%  trans 'Dashboard' %}</span>
                                     </span>
                                 </a>
                             </li>
@@ -252,7 +830,8 @@
                             <li class="link">
                                 <a href="#">
                                     <span class="flex">
-                                        <span><i class="icon ti-folder"></i></span><span class="text">{%  trans 'Stores' %}</span>
+                                        <span><img src="/static/graphics/layer.png" alt=""></span>
+                                        <span class="text toggle-able">{%  trans 'Stores' %}</span>
                                     </span>
                                 </a>
                                 <!-- <ul class="sub-menu">
@@ -264,7 +843,8 @@
                             <li class="link">
                                 <a href="#">
                                     <span class="flex">
-                                        <span><i class="icon ti-folder"></i></span><span class="text">{%  trans 'Services' %}</span>
+                                        <span><img src="/static/graphics/parcel.png" alt=""></span>
+                                        <span class="text toggle-able">{%  trans 'Services' %}</span>
                                         <!-- <i class="ti-angle-down"></i> -->
                                     </span>
                                 </a>
@@ -278,7 +858,8 @@
                             <li class="link">
                                 <a href="#">
                                     <span class="flex">
-                                        <span><i class="icon ti-receipt"></i></span><span class="text">{%  trans 'Products' %}</span>
+                                        <span><img src="/static/graphics/baby-carriage.png" alt=""></span>
+                                        <span class="text toggle-able">{%  trans 'Products' %}</span>
                                     </span>
                                 </a>
                                 <!-- <ul class="sub-menu">
@@ -291,9 +872,9 @@
                                 <a href="{% url 'supplier:dashboard-contracts' %}">
                                     <span class="flex">
                                         <span>
-                                            <i class="icon ti-layout-accordion-list"></i></span>
+                                            <img src="/static/graphics/contract.png" alt=""></span>
                                             <span
-                                                class="text">{%  trans 'Contracts' %}
+                                                class="text toggle-able">{%  trans 'Contracts' %}
                                             </span>
                                     </span>
                                 </a>
@@ -303,9 +884,9 @@
                                 <a href="{% url 'supplier:dashboard-payments' %}">
                                     <span class="flex">
                                         <span>
-                                            <i class="icon ti-money"></i></span>
+                                            <img src="/static/graphics/purse.png" alt=""></span>
                                             <span
-                                                class="text">{%  trans 'Payments' %}
+                                                class="text toggle-able">{%  trans 'Payments' %}
                                             </span>
                                     </span>
                                 </a>
@@ -315,9 +896,33 @@
                                 <a href="{% url 'supplier:dashboard-advertise' %}">
                                     <span class="flex">
                                         <span>
-                                            <i class="icon ti-layout-accordion-list"></i></span>
+                                            <img src="/static/graphics/megaphone.png" alt=""></span>
                                             <span
-                                                class="text">{%  trans 'Advertise' %}
+                                                class="text toggle-able">{%  trans 'Advertise' %}
+                                            </span>
+                                    </span>
+                                </a>
+                            </li>
+                            <hr style="border: 1px solid rgba(224, 240, 243, 0.555)">
+                            <li class="link">
+                                <a href="{% url 'supplier:dashboard-messenger' %}">
+                                    <span class="flex">
+                                        <span>
+                                            <img src="/static/graphics/facebook-messenger.png" alt=""></span>
+                                            <span
+                                                class="text toggle-able">{%  trans 'Chat & Messenger' %}
+                                            </span>
+                                    </span>
+                                </a>
+                            </li>
+                            <hr style="border: 1px solid rgba(224, 240, 243, 0.555)">
+                            <li class="link">
+                                <a href="{% url 'supplier:dashboard-notification' %}">
+                                    <span class="flex">
+                                        <span>
+                                            <img src="/static/graphics/ring.png" alt=""></span>
+                                            <span
+                                                class="text toggle-able">{%  trans 'Push Notifications' %}
                                             </span>
                                     </span>
                                 </a>
@@ -325,9 +930,9 @@
                         </ul>
                     </div>
                 </div>
-                <div class="sidebar-footer" style="align-self: flex-end;">
+                <!-- <div class="sidebar-footer" style="align-self: flex-end;">
                     <a href="{% url 'auth_app:logout' %}" class="cs-grid btn outlined cs-text-md cs-font-500 br-sm cs-bg-hover-color cs-text-secondary" style="place-items: center;">{% trans 'Logout' %}</a>
-                </div>
+                </div> -->
             </div>
             <div class="main">
                 <div class="cs-navbar card cs-no-box-shadow flex">
@@ -355,21 +960,21 @@
                                 <li class="icon flex">
                                     <i class="ti-bell"></i>
                                 </li>
-                                <div class="dropdown cs-text-accent">
-                                    <a href="{% url 'supplier:profile' %}" class="flex" style="margin-inline-start: 1rem;">
-                                        <!-- <h4 class="md-hidden">{{ request.user.username }}</h4> -->
+                                <div class="cs-text-accent">
+                                    <a href="#" class="flex" style="margin-inline-start: 1rem;">
                                         <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="user_image"
-                                            class="avatar cs-avatar" id="toggle-dropdown" >
+                                            class="avatar cs-avatar" id="toggle_cs_dropdown_menu" data-target="cs_dropdown_menu" >
                                     </a>
-                                    <!-- <div class="dropdown-menu" id="dropdown-menu">
-                                        <ul class="dropdown-items">
-                                            <li class="dropdown-item"><i class="ti-help"></i> <a href="#">Help</a></li>
-                                            <li class="dropdown-item"><i class="ti-settings"></i> <a
+                                    <div class="cs-dropdown-menu hide" id="cs_dropdown_menu">
+                                        <ul class="cs-dropdown-items">
+                                            <li class="cs-dropdown-item"><i class="ti-link"></i> <a href="{% url 'manager:home' %}">{% trans "Visit Site" %}</a></li>
+                                            <li class="cs-dropdown-item"><i class="ti-user"></i> <a href="{% url 'supplier:business_profile' %}">{% trans "Business Profile" %}</a></li>
+                                            <li class="cs-dropdown-item"><i class="ti-settings"></i> <a
                                                     href="#">Settings</a></li>
                                             </li>
-                                            <li class="dropdown-item footer"><a href="#">Sign Out</a></li>
+                                            <li class="cs-dropdown-item footer"><a href="{% url 'auth_app:logout' %}">{% trans 'Logout' %}</a></li>
                                         </ul>
-                                    </div> -->
+                                    </div>
                                 </div>
                             </ul>
                         </nav>
@@ -389,9 +994,35 @@
             }
         })
 
-        document.querySelector("#show_sidebar").addEventListener("click", () => {
-            document.querySelector(".sidebar").classList.toggle("inview")
-        })
+        const toggleDropdownMenu = document.querySelector("#toggle_cs_dropdown_menu");
+        toggleDropdownMenu.addEventListener("click", (event) => {
+            document.querySelector(`#${event.target.dataset.target}`).classList.toggle("hide");
+        });
+
+        const toggleSideNav = document.querySelector(".ti-layout-grid2");
+        let isToggled = false;
+        toggleSideNav.addEventListener("click", (event) => {
+            if(isToggled){
+                isToggled = false;
+                document.querySelector(".app-content").style.gridTemplateColumns = ".5fr 2fr";
+                document.querySelectorAll(".toggle-able").forEach(toggleAble => {
+                    toggleAble.classList.toggle("toggle-able");
+                    console.log(toggleAble)
+                });
+                console.log(isToggled)
+            }else{
+                isToggled = true;
+                document.querySelector(".app-content").style.gridTemplateColumns = ".5fr 2fr";
+                document.querySelectorAll(".toggle-able").forEach(toggleAble => {
+                    toggleAble.classList.toggle("toggle-able");
+                });
+                console.log(isToggled)
+            }
+        });
+
+        // document.querySelector("#show_sidebar").addEventListener("click", () => {
+        //     document.querySelector(".sidebar").classList.toggle("inview")
+        // })
     </script>    
 
     <script src="{% static 'js/sidebar.js' %}"></script>
