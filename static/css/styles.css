@@ -1351,3 +1351,10 @@ tr {
 }
 
 /* START OF NOTIFICATION */
+
+/* CALENDAR */
+#calendar {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+/* CALENDAR */

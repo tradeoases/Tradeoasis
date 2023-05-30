@@ -1,0 +1,58 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<div class="main-content">
+    <div class="cs-content-area card cs-no-box-shadow" style="block-size: fit-content;">
+        <!-- <div class="upper-content-area cs-top-cards cs-no-box-shadow" style="background-color: #fff;">
+            <ul class="nav-links cs-flex cs-align-center" style="--gap: 1rem;justify-self: flex-end;">
+                <li class="section-activavtors" data-target="sec_00"><span>Email</span></li>
+                <li class="section-activavtors" data-target="sec_01"><span>Push Notifications</span></li>
+                <li class="section-activavtors" data-target="sec_02"><span>SMS</span></li>
+            </ul>
+        </div> -->
+        <div class="section cs-supplier cs-notification" id="sec_00">
+            <div class="notification-window">
+                <div id='calendar'></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{{ category_group|json_script:"category_group" }}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const sectionActivators = document.querySelectorAll(".section-activators");
+        sectionActivators.forEach(
+            activator => activator.addEventListener("click", (event) => {
+                const sectionToShow = document.querySelector(`#${activator.dataset.section}`);
+
+                sectionActivators.forEach(li => {
+                    li.classList.remove("active");
+                })
+                activator.classList.add("active");
+                
+                const openSections = document.querySelectorAll(".notification-section.inview");
+                openSections.forEach(section => section.classList.remove("inview"));
+
+                sectionToShow.classList.add("inview");
+            })
+        );
+
+        tinymce.init({
+            selector: "#email-body-input",
+            width: 100 + "%",
+            height: 300,
+        });
+    
+    
+    });
+
+
+</script>
+
+{% endblock %}

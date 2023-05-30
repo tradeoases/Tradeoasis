@@ -140,6 +140,11 @@ urlpatterns = [
         name="dashboard-notification",
     ),
     path(
+        "dashboard/calendar",
+        views.DashboardCalendarView.as_view(),
+        name="dashboard-calendar",
+    ),
+    path(
         "dashboard/services",
         views.DashboardServicesView.as_view(),
         name="dashboard-services",
