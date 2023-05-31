@@ -33,7 +33,7 @@
 
 <body>
     <div class="app-container container">
-        <div class="app-content">
+        <div class="app-content expanded">
             <div class="sidebar cs-grid">
                 <div class="upper cs-grid" style="gap: 1rem;">
                     <div class="sidebar-header cs-text-accent">
@@ -46,13 +46,13 @@
                         <ul class="main-menu">
                             <li class="link active">
                                 <a href="{% url 'supplier:dashboard' %}">
-                                    <span><img src="/static/graphics/home.png" alt=""></span>
+                                    <span><i class="fa fa-home"></i></span>
                                     <span class="text toggle-able">{%  trans 'Dashboard' %}</span>
                                 </a>
                             </li>
                             <li class="link">
-                                <a href="#">
-                                    <span><img src="/static/graphics/layer.png" alt=""></span>
+                                <a href="{% url 'supplier:dashboard-stores' %}">
+                                    <span><i class="fa fa-shopping-cart"></i></span>
                                     <span class="text toggle-able">{%  trans 'Stores' %}</span>
                                 </a>
                                 <!-- <ul class="sub-menu">
@@ -62,7 +62,7 @@
                             </li>
                             <li class="link">
                                 <a href="#">
-                                    <span><img src="/static/graphics/parcel.png" alt=""></span>
+                                    <span><i class="fa fa-briefcase"></i></span>
                                     <span class="text toggle-able">{%  trans 'Services' %}</span>
                                     <!-- <i class="ti-angle-down"></i> -->
                                 </a>
@@ -74,7 +74,7 @@
 
                             <li class="link">
                                 <a href="#">
-                                    <span><img src="/static/graphics/baby-carriage.png" alt=""></span>
+                                    <span><i class="fa fa-briefcase"></i></span>
                                     <span class="text toggle-able">{%  trans 'Products' %}</span>
                                 </a>
                                 <!-- <ul class="sub-menu">
@@ -84,7 +84,7 @@
                             </li>
                             <li class="link">
                                 <a href="{% url 'supplier:dashboard-contracts' %}">
-                                    <span><img src="/static/graphics/contract.png" alt=""></span>
+                                    <span><i class="fa fa-gavel"></i></span>
                                     <span
                                         class="text toggle-able">{%  trans 'Contracts' %}
                                     </span>
@@ -92,7 +92,7 @@
                             </li>
                             <li class="link">
                                 <a href="{% url 'supplier:dashboard-payments' %}">
-                                    <span><img src="/static/graphics/purse.png" alt=""></span>
+                                    <span><i class="fa fa-credit-card"></i></span>
                                         <span
                                             class="text toggle-able">{%  trans 'Payments' %}
                                         </span>
@@ -100,7 +100,7 @@
                             </li>
                             <li class="link">
                                 <a href="{% url 'supplier:dashboard-advertise' %}">
-                                    <span><img src="/static/graphics/megaphone.png" alt=""></span>
+                                    <span><i class="fa fa-bullhorn"></i></span>
                                     <span
                                         class="text toggle-able">{%  trans 'Advertise' %}
                                     </span>
@@ -108,7 +108,7 @@
                             </li>
                             <li class="link">
                                 <a href="{% url 'supplier:dashboard-calendar' %}">
-                                    <span><img src="/static/graphics/date.png" alt=""></span>
+                                    <span><i class="fa fa-calendar"></i></span>
                                     <span
                                         class="text toggle-able">{%  trans 'Calendar' %}
                                     </span>
@@ -116,7 +116,7 @@
                             </li>
                             <li class="link">
                                 <a href="{% url 'supplier:dashboard-messenger' %}">
-                                    <span><img src="/static/graphics/facebook-messenger.png" alt=""></span>
+                                    <span><i class="fa fa-comment"></i></span>
                                     <span
                                         class="text toggle-able">{%  trans 'Chat & Messenger' %}
                                     </span>
@@ -124,7 +124,7 @@
                             </li>
                             <li class="link">
                                 <a href="{% url 'supplier:dashboard-notification' %}">
-                                    <span><img src="/static/graphics/ring.png" alt=""></span>
+                                    <span><i class="fa fa-bell"></i></span>
                                     <span
                                         class="text toggle-able">{%  trans 'Push Notifications' %}
                                     </span>
@@ -227,19 +227,19 @@
                 document.querySelector(".app-content").classList.toggle("expanded")
             })
 
-        document.querySelectorAll(".cs-sidebar-body .main-menu .link").forEach(
-            tab => tab.addEventListener("mouseover", () => {
-                document.querySelector(".app-content").classList.add("expanded")
-            })
-        )
+        // document.querySelectorAll(".cs-sidebar-body .main-menu .link").forEach(
+        //     tab => tab.addEventListener("mouseover", () => {
+        //         document.querySelector(".app-content").classList.add("expanded")
+        //     })
+        // )
 
-        document.querySelectorAll(".cs-sidebar-body .main-menu .link").forEach(
-            tab => tab.addEventListener("mouseout", () => {
+        // document.querySelectorAll(".cs-sidebar-body .main-menu .link").forEach(
+        //     tab => tab.addEventListener("mouseout", () => {
                 
-                if (document.querySelector(".app-content").classList.contains("expanded"))
-                    document.querySelector(".app-content").classList.remove("expanded")
-            })
-        )
+        //         if (document.querySelector(".app-content").classList.contains("expanded"))
+        //             document.querySelector(".app-content").classList.remove("expanded")
+        //     })
+        // )
 
         // document.querySelector("#show_sidebar").addEventListener("click", () => {
         //     document.querySelector(".sidebar").classList.toggle("inview")

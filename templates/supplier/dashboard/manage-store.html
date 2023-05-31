@@ -20,8 +20,11 @@
         {% endfor %}
     {% endif %}
     <div class="content-area">
-        <h3 style="margin: .5rem 0;font-weight:600;">{% trans 'My Stores' %}</h3>
-        <div class="alert card card-info" id="orders-help">
+        <div class="view-sub-tabs">
+            <a class="active" href="{% url 'supplier:dashboard-stores' %}">Manage Stores</a>
+            <a href="{% url 'supplier:dashboard-storescreate' %}">Create Store</a>
+        </div>
+        <!-- <div class="alert card card-info" id="orders-help">
             <i class="ti-close exit"></i>
             <div class="title">
                 <small>{% trans 'Please, select a store from the table' %}</small>
@@ -29,8 +32,8 @@
             <div class="text">
                 <small>{% trans 'To add products to it or add store to showroom.' %}.</small>
             </div>
-        </div>
-        <div class="card data-table products-table">
+        </div> -->
+        <div class="bordered data-table products-table">
             <table class="display" id='stores' style="width:100%;margin-top:.5rem;">
                 <thead>
                     <tr class="selected">
@@ -124,17 +127,17 @@
             </div>
         </form>
     </div>
+    {% if not showrooms %}
     <div class="modal-foot cs-grid" style="justify-items: flex-end;">
-        {% if not showrooms %}
-            <a class="btn cs-bg-success br-sm" style="justify-self: flex-end;" href="{% url 'payment:memberships' %}">{% trans 'Subscribe To Access This Feature' %}</a>
-        {% endif %}
+        <a class="btn cs-bg-success br-sm" style="justify-self: flex-end;" href="{% url 'payment:memberships' %}">{% trans 'Subscribe To Access This Feature' %}</a>
     </div>
+    {% endif %}
 </div>
 
 <script>
     // Table
     $(document).ready(function () {
-        $('#table-1').DataTable();
+        
     });
 
 

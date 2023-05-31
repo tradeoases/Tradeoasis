@@ -45,13 +45,17 @@
 .cs-sidebar-body .main-menu {
     display: grid;
     justify-items: stretch;
-    gap: 0;
+    gap: .5rem;
+}
+
+.cs-sidebar-body .main-menu {
+    padding-block: 1rem;
 }
 
 .cs-app-logo {
     block-size: 40px;
     color: hsl(180, 3%, 90%);
-    padding: .5rem;
+    padding: .5rem .15rem;
 }
 
 .app-content.expanded .cs-app-logo {
@@ -84,7 +88,7 @@
 .main-menu .link a {
     display: grid;
     grid-auto-flow: column;
-    gap: .5rem;
+    gap: 1rem;
     justify-content: center;
     align-items: center;
     padding: .15rem;
@@ -95,6 +99,10 @@
     color: hsl(180, 3%, 90%);
 }
 
+.sidebar .link span i {
+    font-size: 1.4rem;
+}
+.sidebar .link span,
 .sidebar .link .toggle-able {
     color: hsl(180, 3%, 80%);
     transition: .2s all ease-in-out;
@@ -104,6 +112,7 @@
     padding-block: .25rem;
     background-color: #1E1F21;
     transition: .2s all ease-in-out;
+    border-radius: 5px;
 }
 .app-content .main-menu .link:hover {
     background-color: hsl(220, 5%, 20%);
@@ -527,6 +536,10 @@
     border-radius: 10px;
     background-color: #fff;
     display: none;
+    min-block-size: 50vh;
+    inline-size: 70vw;
+
+    align-items: flex-start;
 }
 
 .modal.client {
@@ -1358,3 +1371,27 @@ tr {
     margin: 0 auto;
 }
 /* CALENDAR */
+
+
+
+
+
+/* table views */
+.view-sub-tabs {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: flex-start;
+    /* border:1px solid hsl(220, 5%, 90%); */
+    background-color: hsl(220, 5%, 92%);
+}
+.view-sub-tabs a {
+    padding: .75rem 1rem;
+    /* background-color: hsl(43, 93%, 60%); */
+    color: #1E1F21;
+    /* border: 1px solid #1E1F21;; */
+}
+
+.view-sub-tabs a.active {
+    /* background-color: #ECAB08; */
+    border-bottom: 2px solid #1E1F21;;
+}

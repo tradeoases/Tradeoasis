@@ -1348,16 +1348,16 @@ class DashboardStoresView(SupplierOnlyAccessMixin, View):
         if not membership:
             context_data["showrooms"] = None
 
-        elif "One" in membership.feature.name:
-            supplier_stores = SupplierModels.Store.objects.filter(supplier=request.user)
-            for store in supplier_stores:
-                if len(store.store.all()) > 0:
-                    context_data["showrooms"] = store.store.all()
-                else:
-                    context_data["showrooms"] = ManagerModels.Showroom.objects.all()
+        # elif "One" in membership.feature.name:
+        #     supplier_stores = SupplierModels.Store.objects.filter(supplier=request.user)
+        #     for store in supplier_stores:
+        #         if len(store.store.all()) > 0:
+        #             context_data["showrooms"] = store.store.all()
+        #         else:
+        #             context_data["showrooms"] = ManagerModels.Showroom.objects.all()
             
-        elif "Showroom" in membership.feature.name:
-            context_data["showrooms"] = ManagerModels.Showroom.objects.all()
+        # elif "Showroom" in membership.feature.name:
+        #     context_data["showrooms"] = ManagerModels.Showroom.objects.all()
 
         context_data["products"] = {
             "context-name": "products",

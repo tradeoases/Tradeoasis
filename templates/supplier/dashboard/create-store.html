@@ -5,14 +5,9 @@
 
     <div class="main-content">
         <div class="content-area">
-            <div class="alert card card-info" id="orders-help">
-                <i class="ti-close exit"></i>
-                <div class="title">
-                    <small>{% trans 'Choose a good name' %}</small>
-                </div>
-                <div class="text">
-                    <small>{% trans 'To create your store' %}.</small>
-                </div>
+            <div class="view-sub-tabs">
+                <a href="{% url 'supplier:dashboard-stores' %}">Manage Stores</a>
+                <a class="active" href="{% url 'supplier:dashboard-storescreate' %}">Create Store</a>
             </div>
             <form action="{% url 'supplier:dashboard-storescreate' %}" method="POST" id="category-form" class="cs-grid br-sm outlined" enctype="multipart/form-data" style="padding: 2rem;--gap:1rem;">
                 <h2 style="margin: 0;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
