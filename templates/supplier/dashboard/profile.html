@@ -57,7 +57,7 @@
                                     <input type="hidden" name="plan_id" value="{{ membership.membership.feature.custom_id}}">
                                     <input type="submit" class="btn cs-bg-danger br-sm" style="font-size: 1.1rem;" value="{% trans 'Deactivate' %}">
                                 </form>
-                                <a class="btn cs-bg-secondary br-sm" href="{% url 'payment:memberships' %}">{% trans 'Upgrade' %}</a>
+                                <a class="btn cs-bg-secondary br-sm" style="text-align: center" href="{% url 'payment:memberships' %}">{% trans 'Upgrade' %}</a>
                             </div>
                         </div>
                         {% endfor %}

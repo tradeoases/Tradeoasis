@@ -15,7 +15,11 @@
                     <small>{% trans 'To make changes to your product' %}.</small>
                 </div>
             </div> -->
-            <div class="card data-table products-table">
+            <div class="view-sub-tabs">
+                <a class="active" href="{% url 'supplier:dashboard-products' %}">Product List</a>
+                <a href="{% url 'supplier:dashboard-productscreate' %}">Create Product</a>
+            </div>
+            <div class="data-table products-table bordered">
                 <table id="products" class="display" style="width:100%;margin-top:.5rem;">
                     <thead>
                         <tr>

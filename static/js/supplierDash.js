@@ -113,6 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
             document.querySelector('#table-item-count').textContent = response.count;
 
             response.results.forEach((record, i) => {
+                console.log(record)
                 let tableRow = document.createElement('tr')
                 tableRow.setAttribute('data-slug', record.slug);
                 tableRow.setAttribute('data-id', record.id);
@@ -120,6 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${i + 1}</td>
                     <td>${record.name}</td>
                     <td>${record.products}</td>
+                    <td style="text-transform: capitalize;">${record.is_verified}</td>
                     <td>${record.created_on}</td>
                 `;
                 tableBody.appendChild(tableRow);
