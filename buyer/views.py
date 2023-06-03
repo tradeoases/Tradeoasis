@@ -267,6 +267,51 @@ class ContractListView(BuyerOnlyAccessMixin, ListView):
         return context_data
 
 
+class WishListView(BuyerOnlyAccessMixin, ListView):
+    template_name = "buyer/dashboard/wishlist.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+
+class RequestForQuoteView(BuyerOnlyAccessMixin, ListView):
+    template_name = "buyer/dashboard/request-for-quote.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+
+class OrderHistoryView(BuyerOnlyAccessMixin, ListView):
+    template_name = "buyer/dashboard/order-history.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+
+class OrderTrackingView(BuyerOnlyAccessMixin, ListView):
+    template_name = "buyer/dashboard/order-tracking.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+
+
+class MessengerView(BuyerOnlyAccessMixin, ListView):
+    template_name = "buyer/dashboard/messenger.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+
+
+class DashboardView(BuyerOnlyAccessMixin, ListView):
+    template_name = "buyer/dashboard/dashboard.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+
+
 class VisitedProductsListView(BuyerOnlyAccessMixin, ListView):
     template_name = "buyer/products.html"
 

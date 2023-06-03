@@ -1,0 +1,192 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<div class="main-content">
+    <div class="content-area cs-content-area">
+        <div class="content-area-top" style="justify-content: space-between;padding-block-start: .4rem;">
+            <h3 style="font-weight:600;">{% trans 'My Chatroom' %}</h3>
+        </div>
+        <div class="cs-supplier cs-chat" style="block-size: 80vh;">
+            <div class="chat-window flex" style="block-size: 100%;">
+                <div class="all-chats">
+                    <form class="chat-search-form">
+                        <div class="form-control flex">
+                            <input type="search" name="" id="" placeholder="Search">
+                            <button type="submit"><i class="ti-search"></i></button>
+                        </div>
+                    </form>
+                    <div class="chats">
+                        <div class="chat flex active">
+                            <div class="img">
+                                <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="" class="avatar mobile" id="toggle-dropdown">
+                            </div>
+                            <div class="text">
+                                <h5>Jane Mwebaza</h5>
+                                <h6>Ok</h6>
+                            </div>
+                        </div>
+                        <div class="chat flex">
+                            <div class="img">
+                                <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="" class="avatar mobile" id="toggle-dropdown">
+                            </div>
+                            <div class="text">
+                                <h5>John Muwanguzi Peter</h5>
+                                <h6>I have not received the..</h6>
+                            </div>
+                        </div>
+                        <div class="chat flex">
+                            <div class="img">
+                                <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="" class="avatar mobile" id="toggle-dropdown">
+                            </div>
+                            <div class="text">
+                                <h5>Barbra Mwebaza</h5>
+                                <h6>Hello there!</h6>
+                            </div>
+                        </div>
+                        <div class="chat flex">
+                            <div class="img">
+                                <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="" class="avatar mobile" id="toggle-dropdown">
+                            </div>
+                            <div class="text">
+                                <h5>Barbra Mwebaza</h5>
+                                <h6>Hello there!</h6>
+                            </div>
+                        </div>
+                        <div class="chat flex">
+                            <div class="img">
+                                <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="" class="avatar mobile" id="toggle-dropdown">
+                            </div>
+                            <div class="text">
+                                <h5>Barbra Mwebaza</h5>
+                                <h6>Hello there!</h6>
+                            </div>
+                        </div>
+                        <div class="chat flex">
+                            <div class="img">
+                                <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="" class="avatar mobile" id="toggle-dropdown">
+                            </div>
+                            <div class="text">
+                                <h5>Jane Mwebaza</h5>
+                                <h6>Everything is moving well here</h6>
+                            </div>
+                        </div>
+                        <div class="chat flex">
+                            <div class="img">
+                                <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="" class="avatar mobile" id="toggle-dropdown">
+                            </div>
+                            <div class="text">
+                                <h5>Mohamed Ssenteza</h5>
+                                <h6>I would like to find out..</h6>
+                            </div>
+                        </div>
+                        <div class="chat flex">
+                            <div class="img">
+                                <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="" class="avatar mobile" id="toggle-dropdown">
+                            </div>
+                            <div class="text">
+                                <h5>Mugisha Johnson</h5>
+                                <h6>Hello there!</h6>
+                            </div>
+                        </div>
+                        <div class="chat flex">
+                            <div class="img">
+                                <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="" class="avatar mobile" id="toggle-dropdown">
+                            </div>
+                            <div class="text">
+                                <h5>Ian Tukesiga</h5>
+                                <h6>I received the invoice, thanks!</h6>
+                            </div>
+                        </div>
+                        <div class="chat flex">
+                            <div class="img">
+                                <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="" class="avatar mobile" id="toggle-dropdown">
+                            </div>
+                            <div class="text">
+                                <h5>Muhmud Mwebaza</h5>
+                                <h6>Hello there!</h6>
+                            </div>
+                        </div>
+                        <div class="chat flex">
+                            <div class="img">
+                                <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="" class="avatar mobile" id="toggle-dropdown">
+                            </div>
+                            <div class="text">
+                                <h5>Jane Joel Mwebaza</h5>
+                                <h6>Hi! I need some assistance</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-room">
+                    <div class="room">
+                        <div class="room-client">
+                            <div class="chat flex">
+                                <div class="img">
+                                    <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="" class="avatar mobile" id="toggle-dropdown">
+                                </div>
+                                <div class="text">
+                                    <h5>Jane Mwebaza</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="room-messages flex">
+                            <div class="client">
+                                <span>Hello..</span>
+                            </div>
+                            <div class="agent">
+                                <span>Hi</span><br>
+                            </div>
+                            <div class="agent">
+                                <span>How can I help you?</span>
+                            </div>
+                            <div class="client">
+                                <span>I need to know your availability for Building roofs.</span><br>
+                                <span>Please, send me a quotation.</span>
+                            </div>
+                            <div class="agent">
+                                <span>Alright. Provide some more details about the product</span><br>
+                                <span>you need.</span>
+                            </div>
+                            <div class="agent">
+                                <span>Then we can be able to send you the quotation</span><br>
+                                <span>this afternoon.</span>
+                            </div>
+                            <div class="client">
+                                <span>Ok</span>
+                            </div>
+                        </div>
+                        <div class="room-actions flex">
+                            <textarea name="" id="" rows="3" placeholder="Type a message"></textarea>
+                            <button><img src="/static/graphics/paper-plane.png" alt=""></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <!-- <script src="{% static 'js/modal.js' %}"></script> -->
+    <script>
+        // Table
+        $(document).ready(function () {
+            $('#table-1').DataTable();
+        });
+
+        function navigateToContract() {
+            location.href = "_contract-detail.html";
+        }
+
+        const closeCard = document.querySelector('.ti-close.exit');
+        if (closeCard) {
+            closeCard.addEventListener('click', function (e) {
+                e.target.parentElement.remove();
+            });
+        }
+    </script>
+
+{% endblock %}
