@@ -1495,26 +1495,54 @@ tr {
 
 
 /* multiple-part form */
-form.multiple-part {
-    display: grid;
+.multiple-part {
     grid-template-columns: 3fr 1fr;
     gap: 1rem;
+    align-items: flex-start;
 }
-form.multiple-part .form-part {
+.multiple-part .form-part {
     padding: 1rem;
+    align-content: flex-start;
 }
-form.multiple-part .form-part header {
-    display: grid;
-    grid-auto-flow: column;
-    justify-content: space-between;
-    align-items: center;
+.multiple-part .form-part .part-body.in-view {
+    display: grid;    
 }
-form.multiple-part .btn {
+.multiple-part .form-part .part-body {
+    display: none;
+    padding: 1rem .5rem;
+    background-color: hsl(100, 20%, 94%);
+}
+.multiple-part .form-part .part-body.slide-in {
+    /* border-radius: 5px;  animation: slideIn 1s ease-in-out infinite; */
+}
+@keyframes slideIn {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.multiple-part .form-part .part-body.slide-out {
+    border-radius: 5px;  animation: slideOut 1s ease-in-out infinite;
+}
+@keyframes slideOut {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.multiple-part .form-part .part-header {
+}
+.multiple-part .btn {
     background-color: #1c1b1b;
     color: white;
     padding: .5rem 1rem;
 }
-form.multiple-part .description{
+.multiple-part .description{
     padding: 1rem;
     gap: .5rem;
 }

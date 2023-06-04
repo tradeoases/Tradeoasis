@@ -10,40 +10,65 @@
         </div>
         
         <div class="cs-grid content-area cs-align-start">
-            <form action="{% url 'supplier:dashboard-productscreate' %}" method="POST" id="category-form" class="cs-grid br-sm multiple-part" enctype="multipart/form-data" style="--gap:1rem;">
-                <div class="form-part outlined br-sm" id="product-details">
-                    <header>
-                        <h2 style="margin: 0;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
+            <div class="cs-grid br-sm multiple-part" style="--gap:1rem;">
+                <div class="form-part cs-grid cs-grid-flow-row outlined br-sm" style="--gap: .5rem;">
+                    <div class="part-header cs-grid cs-justify-between cs-align-center cs-grid-flow-col">
+                        <h2 id="form-part-title" style="margin: 0;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
                             {% trans 'Enter Product details' %}
                         </h2>
                         <div class="swipe-cta">
-                            <button class="btn"><i class="fa fa-arrow-left"></i></button>
-                            <button class="btn"><i class="fa fa-arrow-right"></i></button>
+                            <button class="btn" id="form-part-previous" onclick="previousFormPart(event)">{% trans "Previous" %}</button>
+                            <button class="btn" id="form-part-next" onclick="nextFormPart(event)">{% trans "Next" %}</button>
                         </div>
-                    </header>
-                    <div class="form-body">
-                        <p class="text-base text-slate-600"><b>*</b> {% trans 'Represents required fields' %}.</p>
-                        {% if messages %}
-                            {% for message in messages %}
-                                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
-                                    <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
-                                        <p>{{ message }}</p>
-                                        <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
-                                    </div>
-                                {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
-                                    <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid rgb(37, 141, 2930);color: rgb(37, 141, 2930); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
-                                        <p>{{ message }}</p>
-                                        <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
+                    </div>
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                                <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                    <p>{{ message }}</p>
+                                    <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                                </div>
+                            {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                                <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid rgb(37, 141, 2930);color: rgb(37, 141, 2930); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                    <p>{{ message }}</p>
+                                    <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    <form enctype="multipart/form-data" class="part-body in-view slide-in" style="--gap: 1rem;"  id="product-details-form-part" data-part-idx="0">
+                        <p class="text-base text-slate-600" style="margin-block-end: .25rem;"><b>*</b> {% trans 'Represents required fields' %}.</p>
                         {% csrf_token %}
                         <div class="form-group cs-grid" style="--gap: .5rem;">
                             <label for="name" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Name' %} *</label>
                             <input type="text" class="cs-text-normal" name="name" id="name" required>
                         </div>
-                    </div>
+                        <div class="form-group cs-grid" style="--gap: .5rem;">
+                            <label for="product-description" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Description' %} *</label>
+                            <input type="textarea" name="description" id="product-description" />
+                        </div>
+                        <div class="form-group cs-grid" style="--gap: .5rem;">
+                            <label for="sub_category" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Sub category' %} *</label>
+                            <input type="text" class="cs-text-normal" name="sub_category" id="sub_category" required list="sub_categories">
+                            <datalist id="sub_categories">
+                                {% for subcategory in subcategories %}
+                                    <option value="{{subcategory.name}}" >
+                                {% endfor %}
+                            </datalist>
+                        </div>
+                    </form>
+                    <form enctype="multipart/form-data" class="part-body" style="--gap: 1rem;"  id="product-media-form-part" data-part-idx="1">
+                        <p class="text-base text-slate-600" style="margin-block-end: .25rem;"><b>*</b> {% trans 'Represents required fields' %}.</p>
+                        {% csrf_token %}
+                        <div class="form-group cs-grid" style="--gap: .5rem;">
+                            <label for="images" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Images' %} *</label>
+                            <input type="file" name="images" id="images" multiple required>
+                        </div>
+                        <div class="form-group cs-grid" style="--gap: .5rem;">
+                            <label for="images" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Videos' %} *</label>
+                            <input type="file" name="images" id="videos" multiple>
+                        </div>
+                    </form>
 
                 </div>
                 <div class="description cs-grid br-sm outlined cs-content-start">
@@ -56,15 +81,15 @@
                         <li>{% trans 'Product tags help buyers to find your service easily.' %}</li>
                     </ul>
                 </div>
-            </form>
+            </div>
         </div>
 
-        <div class="cs-grid content-area w-desciption cs-align-start" style="display: none">
+        <!-- <div class="cs-grid content-area w-desciption cs-align-start" style="display: none">
             <form action="{% url 'supplier:dashboard-productscreate' %}" method="POST" id="category-form" class="cs-grid br-sm outlined" enctype="multipart/form-data" style="padding: 1rem;--gap:1rem;">
                 <h2 style="margin: 0;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
                     {% trans 'Fill in form to create product' %}
                 </h2>
-                <p class="text-base text-slate-600"><b>*</b> {% trans 'Represents required fields' %}.</p>
+                <p class="text-base text-slate-600" style="margin-block-end: .25rem;"><b>*</b> {% trans 'Represents required fields' %}.</p>
                 {% if messages %}
                     {% for message in messages %}
                         {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
@@ -314,9 +339,93 @@
                     <li>{% trans 'Product tags help buyers to find your service easily.' %}</li>
                 </ul>
             </div>
-        </div>
+        </div> -->
     </div>
 
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault()
+        }
+        function submitProductDetails(currentPartId) {
+            // get form data
+            // let formData = {};
+            // let inputs = document.querySelectorAll(`#${currentPartId} input, #${currentPartId} textarea`)
+            // inputs.forEach(elem => {
+            //     formData[elem.name] = elem.value;
+            // })
+            // console.log(formData)
+
+            console.log(document.querySelector("#product-description").value)
+
+            let test = new FormData(document.querySelector(`form#${currentPartId}`))
+            for (var pair of test.entries()) {
+                console.log(pair[0] + ': ' + pair[1]);
+            }
+            
+        }
+        function submitProductMedia(currentPartId) {
+
+        }
+        function SubmitData(currentPartId) {
+            return new Promise(async (resolve, reject) => {
+                let response;
+                switch (currentPartId) {
+                    case 'product-details-form-part':
+                        response = await submitProductDetails(currentPartId)
+                        break;
+                    case 'product-media-form-part':
+                        response = await submitProductMedia(currentPartId)
+                        break;
+                    default:
+                        reject()
+                    break;
+                }
+            })
+        }
+        function previousFormPart(event) {
+            event.preventDefault()
+            let currentPart = document.querySelector(".part-body.in-view")
+            SubmitData(currentPart.id)
+            .then(() => {
+                let currentPartId = parseInt(currentPart.dataset.partIdx)
+                if (currentPartId == 0) return;
+                let prevPart = document.querySelector(`.part-body[data-part-idx="${currentPartId - 1}"]`)
+                currentPart.classList.remove("in-view")
+                prevPart.classList.add("in-view")
+            })
+            .catch(() => {
+
+            })
+        }
+        function nextFormPart(event) {
+            event.preventDefault()
+            let currentPart = document.querySelector(".part-body.in-view")
+            SubmitData(currentPart.id)
+            .then(() => {
+                let currentPartId = parseInt(currentPart.dataset.partIdx)
+                if (currentPartId + 1 == document.querySelectorAll(".part-body").length) return;
+                let nextPart = document.querySelector(`.part-body[data-part-idx="${currentPartId + 1}"]`)
+                currentPart.classList.remove("in-view")
+                nextPart.classList.add("in-view")
+            })
+            .catch(() => {
+
+            })
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+
+            tinymce.init({
+                selector: "#product-description",
+                width: 100 + "%",
+                height: 250,
+            });
+        
+        
+        });
+    
+    
+    </script>
 
     <script src="{% static 'js/dropdown.js' %}"></script>
     <script src="{% static 'js/sidebar.js' %}"></script>
