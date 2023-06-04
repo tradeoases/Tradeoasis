@@ -1434,7 +1434,11 @@ tr {
     color: white;
 }
 
-.content-area .form-group input,
+.content-area .form-group input[type="submit"] {
+    justify-self: flex-end;
+    /* background-color: #1c1b1b; */
+}
+.content-area .form-group input:not([type="submit"]),
 .content-area .form-group textarea {
     outline: transparent;
     background-color: hsl(0, 0%, 98%);
@@ -1487,3 +1491,30 @@ tr {
 }
 /* WISHLIST */
 /* WISHLIST */
+
+
+
+/* multiple-part form */
+form.multiple-part {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 1rem;
+}
+form.multiple-part .form-part {
+    padding: 1rem;
+}
+form.multiple-part .form-part header {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
+    align-items: center;
+}
+form.multiple-part .btn {
+    background-color: #1c1b1b;
+    color: white;
+    padding: .5rem 1rem;
+}
+form.multiple-part .description{
+    padding: 1rem;
+    gap: .5rem;
+}

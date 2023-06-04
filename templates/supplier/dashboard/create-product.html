@@ -8,7 +8,58 @@
             <a href="{% url 'supplier:dashboard-products' %}">Product List</a>
             <a class="active" href="{% url 'supplier:dashboard-productscreate' %}">Create Product</a>
         </div>
-        <div class="cs-grid content-area w-desciption cs-align-start">
+        
+        <div class="cs-grid content-area cs-align-start">
+            <form action="{% url 'supplier:dashboard-productscreate' %}" method="POST" id="category-form" class="cs-grid br-sm multiple-part" enctype="multipart/form-data" style="--gap:1rem;">
+                <div class="form-part outlined br-sm" id="product-details">
+                    <header>
+                        <h2 style="margin: 0;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
+                            {% trans 'Enter Product details' %}
+                        </h2>
+                        <div class="swipe-cta">
+                            <button class="btn"><i class="fa fa-arrow-left"></i></button>
+                            <button class="btn"><i class="fa fa-arrow-right"></i></button>
+                        </div>
+                    </header>
+                    <div class="form-body">
+                        <p class="text-base text-slate-600"><b>*</b> {% trans 'Represents required fields' %}.</p>
+                        {% if messages %}
+                            {% for message in messages %}
+                                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                                    <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                        <p>{{ message }}</p>
+                                        <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                                    </div>
+                                {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                                    <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid rgb(37, 141, 2930);color: rgb(37, 141, 2930); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                                        <p>{{ message }}</p>
+                                        <i style="align-self: center;" onclick="(function(){event.target.parentNode.style.display = 'none';return false;})()" class="fa fa-close"></i>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        {% csrf_token %}
+                        <div class="form-group cs-grid" style="--gap: .5rem;">
+                            <label for="name" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Name' %} *</label>
+                            <input type="text" class="cs-text-normal" name="name" id="name" required>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="description cs-grid br-sm outlined cs-content-start">
+                    <h3 class="cs-font-bold cs-text-secondary cs-text-body">{% trans 'Guidelines' %}</h3>
+                    <ul class="cs-font-normal cs-text-normal cs-grid" style="--gap: .5rem;list-style-type:lower-alpha;list-style-position: inside;">
+                        <li>{% trans 'Provide a name that is easily understood.' %}</li>
+                        <li>{% trans 'Select a store (from the dropdown list) from those you created.' %}</li>
+                        <li>{% trans 'Select a product sub category from the dropdown list. This enables proper grouping of products.' %}</li>
+                        <li>{% trans 'Provide a currency that suites you best e.g EUR, USD.' %}</li>
+                        <li>{% trans 'Product tags help buyers to find your service easily.' %}</li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+
+        <div class="cs-grid content-area w-desciption cs-align-start" style="display: none">
             <form action="{% url 'supplier:dashboard-productscreate' %}" method="POST" id="category-form" class="cs-grid br-sm outlined" enctype="multipart/form-data" style="padding: 1rem;--gap:1rem;">
                 <h2 style="margin: 0;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
                     {% trans 'Fill in form to create product' %}
@@ -248,7 +299,7 @@
                     <label for="images" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Product Images' %} *</label>
                     <input type="file" name="images" id="images" multiple required>
                 </div>
-                <div class="form-group cs-grid" style="--gap: .5rem;justify-content: flex-start;">
+                <div class="form-group cs-grid" style="--gap: .5rem;justify-content: flex-end;">
                     <input class="btn cs-text-white" type="submit" value="{% trans 'Create' %}" style="padding: .7rem 1.5rem;font-size: 1rem;">
                 </div>
             </form>
