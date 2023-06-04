@@ -1512,28 +1512,6 @@ tr {
     padding: 1rem .5rem;
     background-color: hsl(100, 20%, 94%);
 }
-.multiple-part .form-part .part-body.slide-in {
-    /* border-radius: 5px;  animation: slideIn 1s ease-in-out infinite; */
-}
-@keyframes slideIn {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-.multiple-part .form-part .part-body.slide-out {
-    border-radius: 5px;  animation: slideOut 1s ease-in-out infinite;
-}
-@keyframes slideOut {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
 
 .multiple-part .form-part .part-header {
 }
@@ -1545,4 +1523,71 @@ tr {
 .multiple-part .description{
     padding: 1rem;
     gap: .5rem;
+}
+
+.file-input {
+    display: none;
+}
+
+.drop-area {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px dashed #ccc;
+    cursor: pointer;
+    margin: .5rem 0;
+    display: grid;
+    gap: .5rem;
+    place-content: center;
+    align-items: center;
+}
+
+.drop-area.drag-over {
+    border-color: #4CAF50;
+    background-color: #f1f1f1;
+  }
+  
+
+.drop-area .browse-link {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+    background-color: #1c1b1b;
+    color: white;
+    padding: .5rem 1rem;
+    border-radius: 5px;
+}
+
+.multiple-part .selected-images {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: .5rem;
+    justify-content: flex-start;
+}
+
+@media (max-width: 786px) {
+    .multiple-part .selected-images {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+.multiple-part .selected-images img {
+    block-size: 80px;
+    inline-size: 80px;
+    border: 1px solid #ccc;
+}
+.multiple-part input[type="color"] {
+    padding: 0;
+}
+.multiple-part input.with-error {
+    animation: error .5s infinite linear;
+}
+
+@keyframes error {
+    0% {
+        border: 3px solid transparent;
+    }
+    100% {
+        border: 3px solid red;
+    }
 }
