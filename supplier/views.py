@@ -1336,6 +1336,21 @@ class DashboardProductsCreateView(SupplierOnlyAccessMixin, View):
             )
             return redirect(reverse("supplier:dashboard-productscreate"))
 
+class DashboardProductCustomizationView(SupplierOnlyAccessMixin, View):
+    template_name = "supplier/dashboard/custom-product.html"
+
+    def get(self, request, slug):
+        product = SupplierModels.Product.objects.filter(slug=slug)
+        if not product:
+            return redirect(reverse("supplier:dashboard-productscreate"))
+            
+        context_data = {
+            "product" : product.first()
+        }
+        return render(request, self.template_name, context=context_data)
+
+    def post(self, request, *args, **kwargs):
+        pass
 
 class DashboardStoresView(SupplierOnlyAccessMixin, View):
     template_name = "supplier/dashboard/manage-store.html"

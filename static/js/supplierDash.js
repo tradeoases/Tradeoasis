@@ -8,8 +8,17 @@ document.addEventListener("DOMContentLoaded", () => {
         "services_loaded": false,
     }
 
-    const BASE_API_URL = 'https://foroden.com';
-    const BASE_URL = 'https://foroden.com';
+    let BASE_API_URL
+    let BASE_URL
+
+    if (window.location.href.includes("localhost")) {
+        BASE_API_URL = 'http://localhost:8000';
+        BASE_URL = 'http://localhost:8000';
+    }
+    else {
+        BASE_API_URL = 'https://foroden.com';
+        BASE_URL = 'https://foroden.com';
+    }
 
     const fetchData = async (url, has_page_num = true) => {
         let response;
@@ -104,6 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
             document.querySelector('#table-item-count').textContent = response.count;
 
             response.results.forEach((record, i) => {
+                console.log(record)
                 let tableRow = document.createElement('tr')
                 tableRow.setAttribute('data-slug', record.slug);
                 tableRow.setAttribute('data-id', record.id);
@@ -111,6 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${i + 1}</td>
                     <td>${record.name}</td>
                     <td>${record.products}</td>
+                    <td style="text-transform: capitalize;">${record.is_verified}</td>
                     <td>${record.created_on}</td>
                 `;
                 tableBody.appendChild(tableRow);

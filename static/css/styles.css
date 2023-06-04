@@ -45,13 +45,17 @@
 .cs-sidebar-body .main-menu {
     display: grid;
     justify-items: stretch;
-    gap: 0;
+    gap: .5rem;
+}
+
+.cs-sidebar-body .main-menu {
+    padding-block: 1rem;
 }
 
 .cs-app-logo {
     block-size: 40px;
     color: hsl(180, 3%, 90%);
-    padding: .5rem;
+    padding: .5rem .15rem;
 }
 
 .app-content.expanded .cs-app-logo {
@@ -84,7 +88,7 @@
 .main-menu .link a {
     display: grid;
     grid-auto-flow: column;
-    gap: .5rem;
+    gap: 1rem;
     justify-content: center;
     align-items: center;
     padding: .15rem;
@@ -95,6 +99,10 @@
     color: hsl(180, 3%, 90%);
 }
 
+.sidebar .link span i {
+    font-size: 1.4rem;
+}
+.sidebar .link span,
 .sidebar .link .toggle-able {
     color: hsl(180, 3%, 80%);
     transition: .2s all ease-in-out;
@@ -104,6 +112,7 @@
     padding-block: .25rem;
     background-color: #1E1F21;
     transition: .2s all ease-in-out;
+    border-radius: 5px;
 }
 .app-content .main-menu .link:hover {
     background-color: hsl(220, 5%, 20%);
@@ -144,18 +153,18 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
-    block-size: 85vh;
+    block-size: 87vh;
     align-content: flex-start;
     position: relative;
     padding: 0;
 }
 
 .main-content.split {
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 3fr 1.5fr;
 }
 
 .app-content.expanded .main-content.split {
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 2.5fr 1.5fr;
 }
 
 .content-area {
@@ -455,13 +464,12 @@
     padding: 0.5rem;
 }
 
+
+
 .cs-content-area {
     display: grid;
-    gap: 1rem;
-    align-items: flex-start;
     align-content: flex-start;
-    height: fit-content;
-    overflow-y: hidden;
+    gap: 1rem;
 }
 
 .upper-content-area {
@@ -470,12 +478,6 @@
     grid-template-columns: repeat(6, 1fr);
     gap: 1.5rem;
     padding: 1rem 0;
-}
-
-.lower-content-area {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
 }
 
 .product-form .form-control input:focus {
@@ -527,6 +529,10 @@
     border-radius: 10px;
     background-color: #fff;
     display: none;
+    min-block-size: 50vh;
+    inline-size: 70vw;
+
+    align-items: flex-start;
 }
 
 .modal.client {
@@ -890,10 +896,11 @@ tr {
 }
 
 .cs-content-area .lower-content-area {
-    display: block;
-    margin-block-start: 2.2rem;
+    /* display: block; */
+    padding-bottom: 1rem;
+    display: grid;
+    gap: .5rem;
 }
-
 .lower-content-area .cs-content {
     margin-block-start: .8rem;
 }
@@ -984,6 +991,7 @@ tr {
     display: grid;
     gap: .5rem;
     grid-auto-flow: column;
+    justify-content: flex-start;
 }
 
 .cs-right .cs-products::-webkit-scrollbar {
@@ -1353,12 +1361,129 @@ tr {
 /* START OF NOTIFICATION */
 
 /* CALENDAR */
-#calendar {
-    max-width: 1100px;
-    margin: 0 auto;
+#calendar.full {
+    inline-size: 100%;
+    block-size: 85vh;
+}
+#calendar.full button {
+    font-size: .9rem;
+}
+#calendar.full .fc-toolbar-title {
+    font-size: 1.2rem;
+}
+#calendar.perview {
+    block-size: 60vh;
+    inline-size: 100%;
+}
+#calendar.perview .fc-header-toolbar{
+    display: none;
 }
 /* CALENDAR */
 
 
+
+/* table views */
+.view-sub-tabs {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: flex-start;
+    /* border:1px solid hsl(220, 5%, 90%); */
+    background-color: hsl(220, 5%, 92%);
+}
+.view-sub-tabs a {
+    padding: .75rem 1rem;
+    /* background-color: hsl(43, 93%, 60%); */
+    color: #1E1F21;
+    font-size: 1rem;
+    /* border: 1px solid #1E1F21;; */
+}
+
+.view-sub-tabs a.active {
+    /* background-color: #ECAB08; */
+    border-bottom: 2px solid #1E1F21;;
+}
+
+.main-content textarea {
+    outline: none;
+}
+
+
+/* multiple part forms */
+.content-area.multiple-part-forms {
+    display: grid;
+    gap: 1rem;
+    /* background-color: #ffffff; */
+    padding: .5rem;
+}
+
+.content-area.multiple-part-forms form {
+    gap: 1rem;
+}
+
+.multiple-part-header {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+}
+
+.multiple-part-forms .cta {
+    font-size: 1rem;
+    background-color: #1E1F21;
+    color: white;
+}
+
+.content-area .form-group input,
+.content-area .form-group textarea {
+    outline: transparent;
+    background-color: hsl(0, 0%, 98%);
+    border-color: lightgray;
+    border-radius: 5px;
+}
+
+.form-group.customize {
+    padding: .5rem;
+    background-color: hsl(100, 20%, 94%);
+    border-radius: 5px;
+    padding-block: 1rem;
+}
+
+.form-group.customize header {
+    padding-block: .5rem;
+}
+.form-group.customize header h5 {
+    font-size: .9rem;
+    color: var(--secondary-color);;
+    font-weight: 700;
+}
+/* 
+.customize .grouped-colors, */
+.customize .payment-methods {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.customize .payment-method i {
+    font-size: 2rem;
+}
+.customize .payment-method {
+    --hover-color: #1E1F21;
+    display: grid;
+    justify-content: flex-start;
+    align-items: center;
+    border: 1px solid lightgray;
+    gap: 1rem;
+    padding: 1.5rem 1rem;
+    grid-auto-flow: column;
+    color: gray;
+    transition: .3s all ease-in-out;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.customize .payment-method.active,
+.customize .payment-method:hover {
+    border: 1px solid var(--hover-color);
+    color: var(--hover-color);
+}
 /* WISHLIST */
 /* WISHLIST */

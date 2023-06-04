@@ -90,6 +90,11 @@ urlpatterns = [
         name="dashboard-productscreate",
     ),
     path(
+        "dashboard/product/customize/<str:slug>/",
+        views.DashboardProductCustomizationView.as_view(),
+        name="dashboard-productscustomize",
+    ),
+    path(
         "dashboard/stores/",
         views.DashboardStoresView.as_view(),
         name="dashboard-stores",

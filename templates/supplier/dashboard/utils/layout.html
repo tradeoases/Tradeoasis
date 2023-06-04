@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="{% static 'icons/themify-icons.css' %}">
     <link href="{% static 'icons/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet"  type='text/css'>
+    
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
@@ -46,13 +47,13 @@
                         <ul class="main-menu">
                             <li class="link active">
                                 <a href="{% url 'supplier:dashboard' %}">
-                                    <span><img src="/static/graphics/home.png" alt=""></span>
+                                    <span><i class="fa fa-home"></i></span>
                                     <span class="text toggle-able">{%  trans 'Dashboard' %}</span>
                                 </a>
                             </li>
                             <li class="link">
-                                <a href="#">
-                                    <span><img src="/static/graphics/layer.png" alt=""></span>
+                                <a href="{% url 'supplier:dashboard-stores' %}">
+                                    <span><i class="fa fa-shopping-cart"></i></span>
                                     <span class="text toggle-able">{%  trans 'Stores' %}</span>
                                 </a>
                                 <!-- <ul class="sub-menu">
@@ -61,8 +62,18 @@
                                 </ul> -->
                             </li>
                             <li class="link">
+                                <a href="{% url 'supplier:dashboard-products' %}">
+                                    <span><i class="fa fa-briefcase"></i></span>
+                                    <span class="text toggle-able">{%  trans 'Products' %}</span>
+                                </a>
+                                <!-- <ul class="sub-menu">
+                                    <li class="link"><a href="{% url 'supplier:dashboard-productscreate' %}"> {%  trans 'Create products' %}</a></li>
+                                    <li class="link"><a href="{% url 'supplier:dashboard-products' %}"> {%  trans 'Manage products' %}</a></li>
+                                </ul> -->
+                            </li>
+                            <li class="link">
                                 <a href="#">
-                                    <span><img src="/static/graphics/parcel.png" alt=""></span>
+                                    <span><i class="fa fa-briefcase"></i></span>
                                     <span class="text toggle-able">{%  trans 'Services' %}</span>
                                     <!-- <i class="ti-angle-down"></i> -->
                                 </a>
@@ -73,18 +84,8 @@
                             </li>
 
                             <li class="link">
-                                <a href="#">
-                                    <span><img src="/static/graphics/baby-carriage.png" alt=""></span>
-                                    <span class="text toggle-able">{%  trans 'Products' %}</span>
-                                </a>
-                                <!-- <ul class="sub-menu">
-                                    <li class="link"><a href="{% url 'supplier:dashboard-productscreate' %}"> {%  trans 'Create products' %}</a></li>
-                                    <li class="link"><a href="{% url 'supplier:dashboard-products' %}"> {%  trans 'Manage products' %}</a></li>
-                                </ul> -->
-                            </li>
-                            <li class="link">
                                 <a href="{% url 'supplier:dashboard-contracts' %}">
-                                    <span><img src="/static/graphics/contract.png" alt=""></span>
+                                    <span><i class="fa fa-gavel"></i></span>
                                     <span
                                         class="text toggle-able">{%  trans 'Contracts' %}
                                     </span>
@@ -92,7 +93,7 @@
                             </li>
                             <li class="link">
                                 <a href="{% url 'supplier:dashboard-payments' %}">
-                                    <span><img src="/static/graphics/purse.png" alt=""></span>
+                                    <span><i class="fa fa-credit-card"></i></span>
                                         <span
                                             class="text toggle-able">{%  trans 'Payments' %}
                                         </span>
@@ -100,7 +101,7 @@
                             </li>
                             <li class="link">
                                 <a href="{% url 'supplier:dashboard-advertise' %}">
-                                    <span><img src="/static/graphics/megaphone.png" alt=""></span>
+                                    <span><i class="fa fa-bullhorn"></i></span>
                                     <span
                                         class="text toggle-able">{%  trans 'Advertise' %}
                                     </span>
@@ -108,7 +109,7 @@
                             </li>
                             <li class="link">
                                 <a href="{% url 'supplier:dashboard-calendar' %}">
-                                    <span><img src="/static/graphics/date.png" alt=""></span>
+                                    <span><i class="fa fa-calendar"></i></span>
                                     <span
                                         class="text toggle-able">{%  trans 'Calendar' %}
                                     </span>
@@ -116,7 +117,7 @@
                             </li>
                             <li class="link">
                                 <a href="{% url 'supplier:dashboard-messenger' %}">
-                                    <span><img src="/static/graphics/facebook-messenger.png" alt=""></span>
+                                    <span><i class="fa fa-comment"></i></span>
                                     <span
                                         class="text toggle-able">{%  trans 'Chat & Messenger' %}
                                     </span>
@@ -124,7 +125,7 @@
                             </li>
                             <li class="link">
                                 <a href="{% url 'supplier:dashboard-notification' %}">
-                                    <span><img src="/static/graphics/ring.png" alt=""></span>
+                                    <span><i class="fa fa-bell"></i></span>
                                     <span
                                         class="text toggle-able">{%  trans 'Push Notifications' %}
                                     </span>
@@ -171,6 +172,7 @@
                                     <div class="cs-dropdown-menu hide" id="cs_dropdown_menu">
                                         <ul class="cs-dropdown-items">
                                             <li class="cs-dropdown-item"><i class="ti-link"></i> <a href="{% url 'manager:home' %}">{% trans "Visit Site" %}</a></li>
+                                            <li class="cs-dropdown-item"><i class="ti-user"></i> <a href="{% url 'supplier:profile' %}">{% trans "Account Profile" %}</a></li>
                                             <li class="cs-dropdown-item"><i class="ti-user"></i> <a href="{% url 'supplier:business_profile' %}">{% trans "Business Profile" %}</a></li>
                                             <li class="cs-dropdown-item"><i class="ti-settings"></i> <a
                                                     href="#">Settings</a></li>
@@ -223,23 +225,31 @@
         //     }
         // });
 
-        document.querySelector("#menu-expander").addEventListener("click", () => {
-                document.querySelector(".app-content").classList.toggle("expanded")
-            })
-
-        document.querySelectorAll(".cs-sidebar-body .main-menu .link").forEach(
-            tab => tab.addEventListener("mouseover", () => {
+        if (JSON.parse(localStorage.getItem("fsd-expanded")) == true) {
+            if (!document.querySelector(".app-content").classList.contains("expanded"))
                 document.querySelector(".app-content").classList.add("expanded")
-            })
-        )
+        }
+        else {
+            document.querySelector(".app-content").classList.remove("expanded")
+        }
+        document.querySelector("#menu-expander").addEventListener("click", () => {
+            document.querySelector(".app-content").classList.toggle("expanded")
+            localStorage.setItem("fsd-expanded", document.querySelector(".app-content").classList.contains("expanded"))
+        })
 
-        document.querySelectorAll(".cs-sidebar-body .main-menu .link").forEach(
-            tab => tab.addEventListener("mouseout", () => {
+        // document.querySelectorAll(".cs-sidebar-body .main-menu .link").forEach(
+        //     tab => tab.addEventListener("mouseover", () => {
+        //         document.querySelector(".app-content").classList.add("expanded")
+        //     })
+        // )
+
+        // document.querySelectorAll(".cs-sidebar-body .main-menu .link").forEach(
+        //     tab => tab.addEventListener("mouseout", () => {
                 
-                if (document.querySelector(".app-content").classList.contains("expanded"))
-                    document.querySelector(".app-content").classList.remove("expanded")
-            })
-        )
+        //         if (document.querySelector(".app-content").classList.contains("expanded"))
+        //             document.querySelector(".app-content").classList.remove("expanded")
+        //     })
+        // )
 
         // document.querySelector("#show_sidebar").addEventListener("click", () => {
         //     document.querySelector(".sidebar").classList.toggle("inview")

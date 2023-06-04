@@ -4,7 +4,7 @@
 {% block content %}
 
 <div class="main-content split cs-split" style="overflow-y: scroll;">
-    <div class="cs-content-area cs-no-box-shadow" style="block-size: fit-content;">
+    <div class="cs-content-area">
         <div class="upper-content-area cs-top-cards cs-no-box-shadow" data-context="{{statistics.context_name}}">
             {% for statistic in statistics.results %}
                 <div class="top-card flex">
@@ -95,6 +95,9 @@
         </div>
     </div>
     <div class="side-content">
+        <div class="right cs-right bordered">
+            <div id='calendar' class="perview"></div>
+        </div>
         <div class="right cs-right bordered">
             <h4 class="accented">Trending products <i class="ti-arrow-right"></i> </h4>
             <div class="cs-products">
