@@ -25,6 +25,8 @@ urlpatterns = [
     path("order-history/", views.OrderHistoryView.as_view(), name="order-history"),
     path("messenger/", views.MessengerView.as_view(), name="messenger"),
     path("dashboard/", views.DashboardView.as_view(), name="dashboard"),
+    path("calendar/", views.CalendarView.as_view(), name="calendar"),
+    path("notifications/", views.NotificationsView.as_view(), name="notifications"),
     path(
         "dashboard/contractsdetails/<int:pk>",
         views.DashboardContractsDetailsView.as_view(),

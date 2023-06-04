@@ -311,6 +311,18 @@ class DashboardView(BuyerOnlyAccessMixin, ListView):
         return render(request, self.template_name)
 
 
+class CalendarView(BuyerOnlyAccessMixin, ListView):
+    template_name = "buyer/dashboard/calendar.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+
+class NotificationsView(BuyerOnlyAccessMixin, ListView):
+    template_name = "buyer/dashboard/notifications.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
 
 class VisitedProductsListView(BuyerOnlyAccessMixin, ListView):
     template_name = "buyer/products.html"
