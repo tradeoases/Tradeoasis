@@ -35,7 +35,7 @@
                             <input type="textarea" id="email-body-input" />
                         </div>
                         <div class="rfq-form-control flex" style="margin-block-start: .6rem;justify-content: flex-end;">
-                            <button>Send Request</button>
+                            <button type="submit">Send Request</button>
                         </div>
                     </form>
                 </div>
@@ -58,10 +58,6 @@
     <script src="{% static 'js/sidebar.js' %}"></script>
     <!-- <script src="{% static 'js/modal.js' %}"></script> -->
     <script>
-        // Table
-        $(document).ready(function () {
-            $('#table-1').DataTable();
-        });
 
         function navigateToContract() {
             location.href = "_contract-detail.html";
@@ -79,6 +75,13 @@
             width: 100 + "%",
             height: 300,
         });
+
+        // const form = document.querySelector("form");
+        // form.addEventListener("submit", (event) => {
+        //     event.preventDefault();
+        //     const data = document.querySelector("#email-body-input");
+        //     console.log(data.value);
+        // });
     </script>
 
 {% endblock %}

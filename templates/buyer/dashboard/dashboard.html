@@ -5,9 +5,6 @@
 
 <div class="main-content split cs-split" style="overflow-y: scroll;">
     <div class="cs-content-area cs-no-box-shadow" style="block-size: fit-content;">
-        <div class="content-area-top" style="justify-content: space-between;padding-block-start: .4rem;">
-            <h3 style="font-weight:600;">{% trans 'My Dashboard' %}</h3>
-        </div>
         <div class="middle-content-area bordered" style="border-radius: 13px;padding: 1.4rem;">
             <h3 class="title accented">Recent Activities</h3>
             <h4 class="sub-title">Summary of my most activities on the platform</h4>
@@ -70,6 +67,9 @@
         </div>
     </div>
     <div class="side-content">
+        <div class="right cs-right bordered">
+            <div id='calendar' class="perview"></div>
+        </div>
         <div class="right cs-right bordered">
             <h4 class="accented">Recent Purchases <i class="ti-arrow-right"></i> </h4>
             <div class="cs-products">
