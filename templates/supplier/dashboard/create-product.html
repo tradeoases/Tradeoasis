@@ -716,18 +716,18 @@
             inputs.forEach(elem => {
                 formData[elem.name] = elem.value;
             })
-            
 
-            // THIS IS THE FIX
-            // ***************
+
+            // THIS IS THE FIX*********************************
+            // ************************************************
             const editor = tinymce.get("product-description");
             const content = editor.getContent();
 
             formData.description = content;
             console.log("Form Data: ", formData);
 
-            // THIS IS THE FIX
-            // ***************
+            // THIS IS THE FIX*********************************
+            // ************************************************
 
 
 

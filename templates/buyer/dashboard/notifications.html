@@ -3,17 +3,17 @@
 {% load i18n %}
 {% block content %}
 
-<div class="main-content split cs-split" style="overflow-y: scroll;">
-    <div class="cs-content-area cs-no-box-shadow" style="block-size: fit-content;">
+<div class="main-content" style="overflow-y: scroll;">
+    <div class="cs-content-area cs-no-box-shadow outlined" style="block-size: 100vh;padding: .6rem .4rem;">
         <div class="content-area-top flex" style="justify-content: space-between;padding-block-start: .4rem;">
             <h3 style="font-weight:600;">{% trans 'Notifications' %}</h3>
             <h4>Mark all as read</h4>
         </div>
 
-        <div class="notifications-section flex">
-            <h4 class="section-togglers" data-section="sec_00">All Notifications</h4>
-            <h4 class="section-togglers" data-section="sec_01">Contracts</h4>
-            <h4 class="section-togglers" data-section="sec_02">Others</h4>
+        <div class="notifications-section flex" style="background-color: rgb(226, 226, 224);">
+            <h4 class="section-togglers" data-section="sec_00" style="padding-block: 1.2rem;">All Notifications</h4>
+            <h4 class="section-togglers" data-section="sec_01" style="padding-block: 1.2rem;">Contracts</h4>
+            <h4 class="section-togglers" data-section="sec_02" style="padding-block: 1.2rem;">Others</h4>
         </div>
 
         <div class="notification-section inview" id="sec_00">

@@ -3,15 +3,13 @@
 {% load i18n %}
 {% block content %}
 
-<div class="main-content split cs-split" style="overflow-y: scroll;">
+<div class="main-content" style="overflow-y: scroll;">
     <div class="cs-content-area cs-no-box-shadow" style="block-size: fit-content;">
-        <div class="content-area-top" style="justify-content: space-between;padding-block-start: .4rem;">
+        <!-- <div class="content-area-top" style="justify-content: space-between;padding-block-start: .4rem;">
             <h3 style="font-weight:600;">{% trans 'Calendar' %}</h3>
-        </div>
-        <div class="section cs-supplier cs-notification" id="sec_00">
-            <div class="notification-window">
-                <div id='calendar'></div>
-            </div>
+        </div> -->
+        <div class="calendar-wrapper outlined" style="padding: .6rem .4rem;">
+            <div id='calendar'></div>
         </div>
     </div>
 </div>
