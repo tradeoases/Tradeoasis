@@ -25,6 +25,18 @@
     <!-- <link href="{% static 'owl-carousel/owl.carousel.css' %}" rel="stylesheet">
     <link href="{% static 'owl-carousel/owl.theme.css' %}" rel="stylesheet"> -->
     <link rel="stylesheet" href="{% static 'css/coursel.css' %}">
+
+    <!-- CAPTCHA -->
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6LdfK3UmAAAAAJjBzuJDOA9AzqbM7RQeMpE4TPdk"></script>
+    <script>
+    grecaptcha.enterprise.ready(function() {
+        grecaptcha.enterprise.execute('6LdfK3UmAAAAAJjBzuJDOA9AzqbM7RQeMpE4TPdk', {action: 'login'}).then(function(token) {
+        //    ...
+        });
+    });
+    </script>
+
+
 </head>
 
 <body>
