@@ -26,7 +26,9 @@ jobs:
         python -m venv venv
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Run Tests
+    - name: Linux Services
       run: |
         sudo systemctl daemon-reload
-        sudo systemctl restart gunicorn
+        sudo systemctl restart gunicorn_ci
+        sudo systemctl restart daphne_ci
+        sudo systemctl restart nginx
