@@ -26,16 +26,8 @@
     <link href="{% static 'owl-carousel/owl.theme.css' %}" rel="stylesheet"> -->
     <link rel="stylesheet" href="{% static 'css/coursel.css' %}">
 
-    <!-- CAPTCHA -->
-    <script src="https://www.google.com/recaptcha/enterprise.js?render=6LeQ0n4mAAAAADBZXh8ZXLMX4hW6PKUjqvBHwSTz"></script>
-    <script>
-    grecaptcha.enterprise.ready(function() {
-        grecaptcha.enterprise.execute('6LeQ0n4mAAAAADBZXh8ZXLMX4hW6PKUjqvBHwSTz', {action: 'login'}).then(function(token) {
-        //    ...
-        });
-    });
-    </script>
 
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 </head>
 
