@@ -32,24 +32,24 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="form-group grid gap-1">
                             <label for="first_name" class="text-lghterBackgroundColor font-semibold text-base">{% trans 'First Name' %}</label>
-                            <input class="py-4" style="width: 100%;" type="text" id="first_name" required name="first_name">
+                            <input class="py-4" style="width: 100%;" type="text" id="first_name" required autocomplete="given-name" name="first_name">
                         </div>
                         <div class="form-group grid gap-1">
                             <label for="last_name" class="text-lghterBackgroundColor font-semibold text-base">{% trans 'Last Name' %}</label>
-                            <input class="py-4" style="width: 100%;" type="text" id="last_name" required name="last_name">
+                            <input class="py-4" style="width: 100%;" type="text" id="last_name" required autocomplete="family-name" name="last_name">
                         </div>
                     </div>
                     <div class="form-group grid gap-1">
                         <label for="username" class="text-lghterBackgroundColor font-semibold text-base">{% trans 'Username' %}</label>
-                        <input class="py-4" style="width: 100%;" type="text" id="username" required name="username">
+                        <input class="py-4" style="width: 100%;" type="text" id="username" required autocomplete="username" name="username">
                     </div>
                     <div class="form-group grid gap-1">
                         <label for="email" class="text-lghterBackgroundColor font-semibold text-base">{% trans 'Email' %}</label>
-                        <input class="py-4" style="width: 100%;" type="email" id="email" required name="email">
+                        <input class="py-4" style="width: 100%;" type="email" id="email" required autocomplete="email" name="email">
                     </div>
                     <div class="form-group grid gap-1">
                         <label for="password" class="text-lghterBackgroundColor font-semibold text-base">{% trans 'Password' %}</label>
-                        <input class="py-4" style="width: 100%;" type="password" id="password" required name="password">
+                        <input class="py-4" style="width: 100%;" type="password" id="password" required autocomplete="new-password" name="password">
                         <div class="flex gap-2 my-2">
                             <input class="border-none outline-none focus:outline-none focus:border-none hover:outline-none hover:border-none" type="checkbox" id="show-password">
                             <label for="show-password">{% trans 'Show Password' %}</label>
@@ -113,6 +113,7 @@
                 }
             }
         })
+
     </script>
 
 {% endblock %}
