@@ -28,6 +28,7 @@ urlpatterns = [
     path("calendar/", views.CalendarView.as_view(), name="calendar"),
     path("notifications/", views.NotificationsView.as_view(), name="notifications"),
     path("bids/", views.BidsView.as_view(), name="bids"),
+    path("reporting-analytics/", views.ReportingAnalyticsView.as_view(), name="reporting-analytics"),
     path(
         "dashboard/contractsdetails/<int:pk>",
         views.DashboardContractsDetailsView.as_view(),

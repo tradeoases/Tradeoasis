@@ -330,6 +330,12 @@ class BidsView(BuyerOnlyAccessMixin, ListView):
     def get(self, request):
         return render(request, self.template_name)
 
+class ReportingAnalyticsView(BuyerOnlyAccessMixin, ListView):
+    template_name = "buyer/dashboard/reporting-analytics.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
+
 class VisitedProductsListView(BuyerOnlyAccessMixin, ListView):
     template_name = "buyer/products.html"
 
