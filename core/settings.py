@@ -356,3 +356,9 @@ SUPPORT_EMAIL = os.environ.get("SUPPORT_EMAIL")
 #         'level': 'INFO',
 #     }
 # }
+
+# Set the maximum size for in-memory file uploads (2.5 GB in this example)
+DATA_UPLOAD_MAX_MEMORY_SIZE = 2684354560  # 2.5 GB
+
+# Set the maximum size for files stored in memory (2.5 GB in this example)
+FILE_UPLOAD_MAX_MEMORY_SIZE = 2684354560  # 2.5 GB

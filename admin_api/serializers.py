@@ -1,5 +1,5 @@
 from rest_framework import serializers
-
+from datetime import datetime
 from auth_app import models as AuthModels
 from supplier import models as SupplierModels
 from buyer import models as BuyerModels
@@ -89,10 +89,38 @@ class _StoreSerializer(serializers.RelatedField, StoreSerializer):
     def to_representation(self, value):
         return {"name": value.name, "slug": value.slug}
 
+class CustomDateField(serializers.ReadOnlyField):
+    def to_representation(self, value):
+        if isinstance(value, datetime):
+            return value.date()
+        return super().to_representation(value)
+
+class PricingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SupplierModels.ProductPrice
+        fields = "__all__"
+
+class ProductColorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SupplierModels.ProductColor
+        fields = "__all__"
+
+class ProductMaterialSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SupplierModels.ProductMaterial
+        fields = "__all__"
+
+    
+class ProductTagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SupplierModels.ProductTag
+        fields = "__all__"
 
 class ProductsSerializer(serializers.ModelSerializer):
-    store = _StoreSerializer(queryset=SupplierModels.Store.admin_list.all(), many=True)
-    sub_category = ProductSubCategorySerializer()
+    # store = _StoreSerializer(queryset=SupplierModels.Store.admin_list.all(), many=True, required=False)
+    sub_category = serializers.PrimaryKeyRelatedField(queryset=SupplierModels.ProductSubCategory.objects.all())
+    supplier = serializers.PrimaryKeyRelatedField(queryset=AuthModels.Supplier.objects.all(), required=False)
+    created_on = CustomDateField()
 
     class Meta:
         model = SupplierModels.Product
@@ -101,22 +129,46 @@ class ProductsSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         representation = super().to_representation(instance)
 
-        if instance.store:
+        if instance.supplier:
             supplier_data = SuppliersSerializer(
                 instance.store.all().first().supplier.profile
             ).data
             representation["supplier"] = supplier_data.get("business_name")
             representation["supplier_slug"] = supplier_data.get("slug")
 
-        representation["image"] = ProductImagesSerializer(
-            SupplierModels.ProductImage.objects.filter(product=instance).first()
-        ).data.get("image")
+        images = SupplierModels.ProductImage.objects.filter(product=instance)
+        if images:
+            representation["image"] = ProductImagesSerializer(
+                images.first()
+            ).data.get("image")
+
+        representation["store"] = StoreSerializer(instance.stores, many=True).data
+        
+        sub_category = ProductSubCategorySerializer(SupplierModels.ProductSubCategory.objects.filter(pk=instance.sub_category.id).first()).data
+        representation["sub_category"] = sub_category
+
+        # pricings
+        representation["pricings"] = PricingSerializer(SupplierModels.ProductPrice.objects.filter(product = instance), many=True).data
+        representation["tags"] = ProductColorSerializer(SupplierModels.ProductTag.objects.filter(product = instance), many=True).data
+        representation["colors"] = ProductMaterialSerializer(SupplierModels.ProductColor.objects.filter(product = instance), many=True).data
+        representation["materials"] = ProductTagSerializer(SupplierModels.ProductMaterial.objects.filter(product = instance), many=True).data
+
+        # images
+        representation["images"] = ProductImagesSerializer(SupplierModels.ProductImage.objects.filter(product = instance), many=True).data
+        representation["videos"] = ProductVideosSerializer(SupplierModels.ProductVideo.objects.filter(product = instance), many=True).data
+
+        
         return representation
 
 
 class ProductImagesSerializer(serializers.ModelSerializer):
     class Meta:
         model = SupplierModels.ProductImage
+        fields = "__all__"
+
+class ProductVideosSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SupplierModels.ProductVideo
         fields = "__all__"
 
 

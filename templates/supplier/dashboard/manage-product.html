@@ -16,9 +16,25 @@
                 </div>
             </div> -->
             <div class="view-sub-tabs">
-                <a class="active" href="{% url 'supplier:dashboard-products' %}">Product List</a>
+                <a class="active" href="">Product List</a>
                 <a href="{% url 'supplier:dashboard-productscreate' %}">Create Product</a>
+                <a href="{% url 'supplier:dashboard-bulkupload' %}">Bulk Upload</a>
             </div>
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                        <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                            <p>{{ message }}</p>
+                            <i style="align-self: center;" class="fa fa-close"></i>
+                        </div>
+                    {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                        <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid hsl(116, 66%, 50%);color: hsl(116, 66%, 50%); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                            <p>{{ message }}</p>
+                            <i style="align-self: center;" class="fa fa-close"></i>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
             <div class="data-table products-table bordered">
                 <table id="products" class="display" style="width:100%;margin-top:.5rem;">
                     <thead>
@@ -29,6 +45,7 @@
                             <th>{% trans 'Sub Category' %}</th>
                             <th>{% trans 'Unit Price' %}</th>
                             <th>{% trans 'Created At' %}</th>
+                            <th>{% trans 'Verified' %}</th>
                             <!-- <th>{% trans 'Action' %}</th> -->
                         </tr>
                     </thead>
@@ -42,6 +59,7 @@
                             <th>{% trans 'Sub Category' %}</th>
                             <th>{% trans 'Unit Price' %}</th>
                             <th>{% trans 'Created At' %}</th>
+                            <th>{% trans 'Verified' %}</th>
                             <!-- <th>{% trans 'Action' %}</th> -->
                         </tr>
                     </tfoot>
@@ -58,7 +76,94 @@
                 </div>
             </div>
         </div>
+
+        <div class="selected_product_preview">
+            <div class="perview_body">
+                <div class="actions">
+                    <button id="close_selected_product_preview"><i class="ti-arrow-left"></i></button>
+                    <div class="cs-flex" style="--gap: .5rem;align-content: center;">
+                        <!-- <a href="">{% trans "View Product Page" %}</a> -->
+                        <form action="" id="delete_product" method="POST">
+                            {% csrf_token %}
+                            <button class="cta" type="submit">
+                                <i class="ti-trash"></i>
+                                <p>{% trans "Delete" %}</p>
+                            </button>
+                        </form>
+                        <!-- <a href="" class="cta">
+                            <i class="ti-pencil-alt"></i>
+                            <p>{% trans "Edit" %}</p>
+                        </a> -->
+                    </div>
+                </div>
+                <div class="body outlined">
+                    <div class="cs-flex cs-align-center" style="--gap: .5rem;">
+                        <h1 class="product_name"></h1>
+                        <span class="edit_cta" id="title_edit"><i class="ti-pencil"></i></span>
+                    </div>
+                    <div class="cs-flex cs-align-center" style="--gap: .5rem;">
+                        <p class="product_desc"></p>
+                        <span class="edit_cta" id="description_edit"><i class="ti-pencil"></i></span>
+                    </div>
+                    <div class="category-area">
+                    </div>
+                    <div class="product_pricings">
+                        <h3 class="sub_headings">{% trans "Pricings" %}</h3>
+                        <div class="pricings"></div>
+                    </div>
+                    <div class="cs-flex" style="--gap: 2rem">
+                        <div class="labelling">
+                            <h3 class="sub_headings">{% trans "Tags" %}</h3>
+                            <div class="product_labels" id="tags"></div>
+                        </div>
+                        <div class="labelling">
+                            <h3 class="sub_headings">{% trans "Colors" %}</h3>
+                            <div class="product_labels" id="colors"></div>
+                        </div>
+                        <div class="labelling">
+                            <h3 class="sub_headings">{% trans "Material" %}</h3>
+                            <div class="product_labels" id="materials"></div>
+                        </div>
+                    </div>
+                    <div class="product_media">
+                        <div class="media_section" id="images">
+                            <h3 class="sub_headings">{% trans "Images" %}</h3>
+                            <div class="body"></div>
+                        </div>
+                        <div class="media_section" id="videos">
+                            <h3 class="sub_headings">{% trans "Videos" %}</h3>
+                            <div class="body"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="operation-confirm-modal" class="modal sm cs-hidden elevated outlined cs-align-start" style="align-content: flex-start;--gap: .5rem;">
+            <div class="modal-header cs-grid cs-align-start" style="--gap: 1rem;">
+                <div class="cs-flex cs-justify-between cs-align-center">
+                    <h3 style="margin: 0;" class="cs-text-body cs-text-secondary cs-font-600">
+                        {% trans 'Confirm Operation' %}
+                    </h3>
+                </div>
+            </div>
+            <hr class="cs-block" style="border: 1px solid hsl(0, 0%, 95%);">
+            <div class="cs-grid" id="msg">
+                <p class="cs-text-normal cs-text-secondary" id="confirm-msg">{% trans "This operation cannot be reversed." %}</p>
+            </div>
+            <div class="modal-cta cs-flex" style="--gap: 1rem;margin-block-start: .5rem;">
+                <form action="" method="POST" id="confirm_delete">
+                    {% csrf_token %}
+                    <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-danger cs-text-white cs-text-md br-sm">
+                        {% trans "Continue" %}
+                    </button>
+                </form>
+                <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-secondary cs-text-white cs-text-md br-sm" id="cancel-operation">
+                    {% trans "Cancel" %}
+                </button>
+            </div>
+        </div>
     </div>
+
     
     <script src="{% static 'js/dropdown.js' %}"></script>
     <script src="{% static 'js/sidebar.js' %}"></script>
@@ -68,6 +173,7 @@
         $(document).ready(function () {
             
         });
+
 
 
         // Open Modal

@@ -40,6 +40,8 @@ from auth_app import forms as AuthForms
 from supplier import tasks as SupplierTask
 from auth_app import tasks as AuthTask
 
+import pandas as pd
+
 
 class SupplierDetailView(DetailView):
     model = AuthModels.ClientProfile
@@ -1351,6 +1353,326 @@ class DashboardProductCustomizationView(SupplierOnlyAccessMixin, View):
 
     def post(self, request, *args, **kwargs):
         pass
+
+
+class DashboardBulkUploadView(SupplierOnlyAccessMixin, View):
+    template_name = "supplier/dashboard/bulk-upload.html"
+
+    def get(self, request):
+        context_data = {
+        }
+        return render(request, self.template_name, context=context_data)
+
+    def post(self, request, *args, **kwargs):
+        excel_file = request.FILES.get("bulk_upload_file")
+
+        try:
+            products_saved = 0
+            df = pd.read_excel(excel_file)
+            
+            for index, row in df.iterrows():
+                store = SupplierModels.Store.objects.filter(name=row['store'])
+                if not store:
+                    messages.add_message(request, messages.ERROR, _("Product {} Not Created! No Store Found with Name: {}.".format(row["name"], row["store"])))
+                    continue
+                
+                sub_category = SupplierModels.ProductSubCategory.objects.filter(name=row['sub_category'])
+                if not sub_category:
+                    messages.add_message(request, messages.ERROR, _("Product {} Not Created! No Sub Category Found with Name: {}.".format(row["name"], row["sub_category"])))
+                    continue
+
+                # product creation
+                product = SupplierModels.Product(
+                    name = row['name'],
+                    description = row['description'],
+                    discount = row['discount'],
+                    stock = row['stock'],
+                    sub_category=sub_category.first()
+                )
+
+                if not product:
+                    messages.add_message(request, messages.ERROR, _("Product {} Not Created!".format(row["name"])))
+                    continue
+
+                product.save()
+                store.first().store_product.add(product)
+                
+                # save labels
+                tags = str(row["tags"])
+                for tag_name in tags.split(","):
+                    tag = SupplierModels.ProductTag(name=tag_name.strip(), product=product)
+                    if not tag:
+                        messages.add_message(request, messages.ERROR, _("Tag {} not attached to Product {} Not Created!".format(tag_name, row["name"])))
+                        continue
+                    
+                colors = str(row["colors"])
+                for color_name in colors.split(","):
+                    color = SupplierModels.ProductColor(name=color_name.strip(), product=product)
+                    if not color:
+                        messages.add_message(request, messages.ERROR, _("Color {} not attached to Product {} Not Created!".format(tag_name, row["name"])))
+                        continue
+                    
+                materials = str(row["materials"])
+                for material_name in materials.split(","):
+                    material = SupplierModels.ProductMaterial(name=material_name.strip(), product=product)
+                    if not material:
+                        messages.add_message(request, messages.ERROR, _("material {} not attached to Product {} Not Created!".format(tag_name, row["name"])))
+                        continue
+                    
+                price_1 = str(row['price_1']).split(",")
+                if len(price_1) > 1:
+                    pricing_1 = SupplierModels.ProductPrice(product=product, currency=price_1[0], min_price=price_1[1], max_price=price_1[2])
+                    pricing_1.save()
+
+                price_2 = str(row['price_2']).split(",")
+                if len(price_2) > 1:
+                    pricing_2 = SupplierModels.ProductPrice(product=product, currency=price_2[0], min_price=price_2[1], max_price=price_2[2])
+                    pricing_2.save()
+
+                price_3 = str(row['price_3']).split(",")
+                if len(price_3) > 1:
+                    pricing_3 = SupplierModels.ProductPrice(product=product, currency=price_3[0], min_price=price_3[1], max_price=price_3[2])
+                    pricing_3.save()
+
+                products_saved += 1
+            
+            messages.add_message(request, messages.SUCCESS, _("{} Products Created".format(products_saved)))
+            return redirect(reverse("supplier:dashboard-bulkupload"))
+
+        except:
+            product.delete()
+            messages.add_message(request, messages.ERROR, _("Error Occured While Processing Excel File."))
+            return redirect(reverse("supplier:dashboard-bulkupload"))
+
+
+
+class DashboardProductDeleteView(View):
+    def post(self, request, slug):
+        product = SupplierModels.Product.admin_list.filter(slug=slug)
+        if not product:
+            messages.add_message(request, messages.ERROR, _("Product Not Found."))
+            return redirect(reverse("supplier:dashboard-products"))
+        
+        if AuthModels.ClientProfile.objects.filter(user = request.user) and product.first().supplier in AuthModels.ClientProfile.objects.filter(user = request.user):
+            product.first().delete()
+            messages.add_message(request, messages.SUCCESS, _("Product Deleted."))
+            return redirect(reverse("supplier:dashboard-products"))
+        else:
+            messages.add_message(request, messages.ERROR, _("Operation Forbidden."))
+            return redirect(reverse("supplier:dashboard-products"))
+
+class DashboardProductStoreDeleteView(View):
+    model = SupplierModels.Store
+    redirect_url = reverse("supplier:dashboard-products")
+    def post(self, request, product_slug, slug):
+        product = SupplierModels.Product.admin_list.filter(slug = product_slug)
+        if not product:
+            messages.add_message(request, messages.ERROR, _("Product Not Found."))
+            return redirect(self.redirect_url)
+            
+        record = self.model.objects.filter(slug = slug)
+        if not record:
+            messages.add_message(request, messages.ERROR, _("Record Not Found."))
+            return redirect(self.redirect_url)
+        
+        if AuthModels.ClientProfile.objects.filter(user = request.user) and product.first().supplier in AuthModels.ClientProfile.objects.filter(user = request.user):
+
+            if record.first() not in product.first().stores:
+                messages.add_message(request, messages.ERROR, _("Product not in store {}.".format(record.first().name)))
+                return redirect(reverse("supplier:dashboard-products"))
+
+            record.first().delete()
+            messages.add_message(request, messages.SUCCESS, _("Record Deleted Successfully."))
+            return redirect(self.redirect_url)
+        else:
+            messages.add_message(request, messages.ERROR, _("Operation Forbidden."))
+            return redirect(reverse("supplier:dashboard-products"))
+            
+            
+class DashboardProductCategoryDeleteView(View):
+    model = SupplierModels.ProductCategory
+    redirect_url = reverse("supplier:dashboard-products")
+    def post(self, request, product_slug, slug):
+        product = SupplierModels.Product.admin_list.filter(slug = product_slug)
+        if not product:
+            messages.add_message(request, messages.ERROR, _("Product Not Found."))
+            return redirect(self.redirect_url)
+            
+        record = self.model.objects.filter(slug = slug, product=product.first())
+        if not record:
+            messages.add_message(request, messages.ERROR, _("Record Not Found."))
+            return redirect(self.redirect_url)
+        
+        if AuthModels.ClientProfile.objects.filter(user = request.user) and product.first().supplier in AuthModels.ClientProfile.objects.filter(user = request.user):
+            record.first().delete()
+            messages.add_message(request, messages.SUCCESS, _("Record Deleted Successfully."))
+            return redirect(self.redirect_url)
+        else:
+            messages.add_message(request, messages.ERROR, _("Operation Forbidden."))
+            return redirect(reverse("supplier:dashboard-products"))
+            
+            
+class DashboardProductSubCategoryDeleteView(View):
+    model = SupplierModels.ProductSubCategory
+    redirect_url = reverse("supplier:dashboard-products")
+    def post(self, request, product_slug, slug):
+        product = SupplierModels.Product.admin_list.filter(slug = product_slug)
+        if not product:
+            messages.add_message(request, messages.ERROR, _("Product Not Found."))
+            return redirect(self.redirect_url)
+            
+        record = self.model.objects.filter(slug = slug, product=product.first())
+        if not record:
+            messages.add_message(request, messages.ERROR, _("Record Not Found."))
+            return redirect(self.redirect_url)
+        
+        if AuthModels.ClientProfile.objects.filter(user = request.user) and product.first().supplier in AuthModels.ClientProfile.objects.filter(user = request.user):
+            record.first().delete()
+            messages.add_message(request, messages.SUCCESS, _("Record Deleted Successfully."))
+            return redirect(self.redirect_url)
+        else:
+            messages.add_message(request, messages.ERROR, _("Operation Forbidden."))
+            return redirect(reverse("supplier:dashboard-products"))
+            
+            
+class DashboardProductPricingDeleteView(View):
+    model = SupplierModels.ProductPrice
+    redirect_url = reverse("supplier:dashboard-products")
+    def post(self, request, product_slug, pk):
+        product = SupplierModels.Product.admin_list.filter(slug = product_slug)
+        if not product:
+            messages.add_message(request, messages.ERROR, _("Product Not Found."))
+            return redirect(self.redirect_url)
+            
+        record = self.model.objects.filter(pk = pk, product=product.first())
+        if not record:
+            messages.add_message(request, messages.ERROR, _("Record Not Found."))
+            return redirect(self.redirect_url)
+        
+        if AuthModels.ClientProfile.objects.filter(user = request.user) and product.first().supplier in AuthModels.ClientProfile.objects.filter(user = request.user):
+            record.first().delete()
+            messages.add_message(request, messages.SUCCESS, _("Record Deleted Successfully."))
+            return redirect(self.redirect_url)
+        else:
+            messages.add_message(request, messages.ERROR, _("Operation Forbidden."))
+            return redirect(reverse("supplier:dashboard-products"))
+            
+            
+class DashboardProductTagDeleteView(View):
+    model = SupplierModels.ProductTag
+    redirect_url = reverse("supplier:dashboard-products")
+    def post(self, request, product_slug, pk):
+        product = SupplierModels.Product.admin_list.filter(slug = product_slug)
+        if not product:
+            messages.add_message(request, messages.ERROR, _("Product Not Found."))
+            return redirect(self.redirect_url)
+            
+        record = self.model.objects.filter(pk = pk, product=product.first())
+        if not record:
+            messages.add_message(request, messages.ERROR, _("Record Not Found."))
+            return redirect(self.redirect_url)
+        
+        if AuthModels.ClientProfile.objects.filter(user = request.user) and product.first().supplier in AuthModels.ClientProfile.objects.filter(user = request.user):
+            record.first().delete()
+            messages.add_message(request, messages.SUCCESS, _("Record Deleted Successfully."))
+            return redirect(self.redirect_url)
+        else:
+            messages.add_message(request, messages.ERROR, _("Operation Forbidden."))
+            return redirect(reverse("supplier:dashboard-products"))
+            
+            
+class DashboardProductColorDeleteView(View):
+    model = SupplierModels.ProductColor
+    redirect_url = reverse("supplier:dashboard-products")
+    def post(self, request, product_slug, pk):
+        product = SupplierModels.Product.admin_list.filter(slug = product_slug)
+        if not product:
+            messages.add_message(request, messages.ERROR, _("Product Not Found."))
+            return redirect(self.redirect_url)
+            
+        record = self.model.objects.filter(pk = pk, product=product.first())
+        if not record:
+            messages.add_message(request, messages.ERROR, _("Record Not Found."))
+            return redirect(self.redirect_url)
+        
+        if AuthModels.ClientProfile.objects.filter(user = request.user) and product.first().supplier in AuthModels.ClientProfile.objects.filter(user = request.user):
+            record.first().delete()
+            messages.add_message(request, messages.SUCCESS, _("Record Deleted Successfully."))
+            return redirect(self.redirect_url)
+        else:
+            messages.add_message(request, messages.ERROR, _("Operation Forbidden."))
+            return redirect(reverse("supplier:dashboard-products"))
+            
+            
+class DashboardProductMaterialDeleteView(View):
+    model = SupplierModels.ProductMaterial
+    redirect_url = reverse("supplier:dashboard-products")
+    def post(self, request, product_slug, pk):
+        product = SupplierModels.Product.admin_list.filter(slug = product_slug)
+        if not product:
+            messages.add_message(request, messages.ERROR, _("Product Not Found."))
+            return redirect(self.redirect_url)
+            
+        record = self.model.objects.filter(pk = pk, product=product.first())
+        if not record:
+            messages.add_message(request, messages.ERROR, _("Record Not Found."))
+            return redirect(self.redirect_url)
+        
+        if AuthModels.ClientProfile.objects.filter(user = request.user) and product.first().supplier in AuthModels.ClientProfile.objects.filter(user = request.user):
+            record.first().delete()
+            messages.add_message(request, messages.SUCCESS, _("Record Deleted Successfully."))
+            return redirect(self.redirect_url)
+        else:
+            messages.add_message(request, messages.ERROR, _("Operation Forbidden."))
+            return redirect(reverse("supplier:dashboard-products"))
+            
+            
+class DashboardProductImageDeleteView(View):
+    model = SupplierModels.ProductImage
+    redirect_url = reverse("supplier:dashboard-products")
+    def post(self, request, product_slug, slug):
+        product = SupplierModels.Product.admin_list.filter(slug = product_slug)
+        if not product:
+            messages.add_message(request, messages.ERROR, _("Product Not Found."))
+            return redirect(self.redirect_url)
+            
+        record = self.model.objects.filter(slug = slug, product=product.first())
+        if not record:
+            messages.add_message(request, messages.ERROR, _("Record Not Found."))
+            return redirect(self.redirect_url)
+        
+        if AuthModels.ClientProfile.objects.filter(user = request.user) and product.first().supplier in AuthModels.ClientProfile.objects.filter(user = request.user):
+            record.first().delete()
+            messages.add_message(request, messages.SUCCESS, _("Record Deleted Successfully."))
+            return redirect(self.redirect_url)
+        else:
+            messages.add_message(request, messages.ERROR, _("Operation Forbidden."))
+            return redirect(reverse("supplier:dashboard-products"))
+            
+            
+class DashboardProductVideoDeleteView(View):
+    model = SupplierModels.ProductVideo
+    redirect_url = reverse("supplier:dashboard-products")
+    def post(self, request, product_slug, slug):
+        product = SupplierModels.Product.admin_list.filter(slug = product_slug)
+        if not product:
+            messages.add_message(request, messages.ERROR, _("Product Not Found."))
+            return redirect(self.redirect_url)
+            
+        record = self.model.objects.filter(slug = slug, product=product.first())
+        if not record:
+            messages.add_message(request, messages.ERROR, _("Record Not Found."))
+            return redirect(self.redirect_url)
+        
+        if AuthModels.ClientProfile.objects.filter(user = request.user) and product.first().supplier in AuthModels.ClientProfile.objects.filter(user = request.user):
+            record.first().delete()
+            messages.add_message(request, messages.SUCCESS, _("Record Deleted Successfully."))
+            return redirect(self.redirect_url)
+        else:
+            messages.add_message(request, messages.ERROR, _("Operation Forbidden."))
+            return redirect(reverse("supplier:dashboard-products"))
+            
+            
 
 class DashboardStoresView(SupplierOnlyAccessMixin, View):
     template_name = "supplier/dashboard/manage-store.html"

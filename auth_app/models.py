@@ -6,7 +6,7 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils.translation import gettext_lazy as _
 from django.utils.text import slugify
 
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
 # python
@@ -192,3 +192,7 @@ def create_support_profile(sender, instance, *args, **kwargs):
         profile = SupportProfile.objects.create(
             user=instance
         )
+
+@receiver(post_delete, sender=User)
+def delete_business_profile(sender, instance, *args, **kwargs):
+    pass
