@@ -16,202 +16,26 @@
             <h4 class="section-togglers" data-section="sec_03" style="padding-block: 1.2rem;">Custom Reports</h4>
         </div>
 
-        <div class="notification-section inview" id="sec_00">
-            <div class="notifications">
-                <table id="order-analytics" class="display" style="width:100%;margin-top:.5rem;">
-                    <thead>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Supplier</th>
-                            <th>Product</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Amount</th>
-                            <th>Ordered At</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>000123</td>
-                            <td>Modern Electronics</td>
-                            <td>Reizen Smart Watch</td>
-                            <td>$1,500</td>
-                            <td>3</td>
-                            <td>$45,000</td>
-                            <td>21-06-2023</td>
-                        </tr>
-                        <tr>
-                            <td>000123</td>
-                            <td>Modern Electronics</td>
-                            <td>Reizen Smart Watch</td>
-                            <td>$1,500</td>
-                            <td>3</td>
-                            <td>$45,000</td>
-                            <td>21-06-2023</td>
-                        </tr>
-                        <tr>
-                            <td>000123</td>
-                            <td>Modern Electronics</td>
-                            <td>Reizen Smart Watch</td>
-                            <td>$1,500</td>
-                            <td>3</td>
-                            <td>$45,000</td>
-                            <td>21-06-2023</td>
-                        </tr>
-                        <tr>
-                            <td>000123</td>
-                            <td>Modern Electronics</td>
-                            <td>Reizen Smart Watch</td>
-                            <td>$1,500</td>
-                            <td>3</td>
-                            <td>$45,000</td>
-                            <td>21-06-2023</td>
-                        </tr>
-                        <tr>
-                            <td>000123</td>
-                            <td>Modern Electronics</td>
-                            <td>Reizen Smart Watch</td>
-                            <td>$1,500</td>
-                            <td>3</td>
-                            <td>$45,000</td>
-                            <td>21-06-2023</td>
-                        </tr>
-                        <tr>
-                            <td>000123</td>
-                            <td>Modern Electronics</td>
-                            <td>Reizen Smart Watch</td>
-                            <td>$1,500</td>
-                            <td>3</td>
-                            <td>$45,000</td>
-                            <td>21-06-2023</td>
-                        </tr>
-                        <tr>
-                            <td>000123</td>
-                            <td>Modern Electronics</td>
-                            <td>Reizen Smart Watch</td>
-                            <td>$1,500</td>
-                            <td>3</td>
-                            <td>$45,000</td>
-                            <td>21-06-2023</td>
-                        </tr>
-                        <tr>
-                            <td>000123</td>
-                            <td>Modern Electronics</td>
-                            <td>Reizen Smart Watch</td>
-                            <td>$1,500</td>
-                            <td>3</td>
-                            <td>$45,000</td>
-                            <td>21-06-2023</td>
-                        </tr>
-                        <tr>
-                            <td>000123</td>
-                            <td>Modern Electronics</td>
-                            <td>Reizen Smart Watch</td>
-                            <td>$1,500</td>
-                            <td>3</td>
-                            <td>$45,000</td>
-                            <td>21-06-2023</td>
-                        </tr>
-                        <tr>
-                            <td>000123</td>
-                            <td>Modern Electronics</td>
-                            <td>Reizen Smart Watch</td>
-                            <td>$1,500</td>
-                            <td>3</td>
-                            <td>$45,000</td>
-                            <td>21-06-2023</td>
-                        </tr>
-                        <tr>
-                            <td>000123</td>
-                            <td>Modern Electronics</td>
-                            <td>Reizen Smart Watch</td>
-                            <td>$1,500</td>
-                            <td>3</td>
-                            <td>$45,000</td>
-                            <td>21-06-2023</td>
-                        </tr>
-                        <tr>
-                            <td>000123</td>
-                            <td>Modern Electronics</td>
-                            <td>Reizen Smart Watch</td>
-                            <td>$1,500</td>
-                            <td>3</td>
-                            <td>$45,000</td>
-                            <td>21-06-2023</td>
-                        </tr>
-                        <tr>
-                            <td>000123</td>
-                            <td>Modern Electronics</td>
-                            <td>Reizen Smart Watch</td>
-                            <td>$1,500</td>
-                            <td>3</td>
-                            <td>$45,000</td>
-                            <td>21-06-2023</td>
-                        </tr>
-                        <tr>
-                            <td>000123</td>
-                            <td>Modern Electronics</td>
-                            <td>Reizen Smart Watch</td>
-                            <td>$1,500</td>
-                            <td>3</td>
-                            <td>$45,000</td>
-                            <td>21-06-2023</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <th>Order ID</th>
-                        <th>Supplier</th>
-                        <th>Product</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Amount</th>
-                        <th>Ordered At</th>
-                      </tr>
-                    </tfoot>
-                </table>
+        <div class="notification-section inview" id="sec_00" style="block-size: 560px;border-radius: 0;">
+            <div class="data-visualization" style="inline-size: 100%;block-size: 100%;">
+                <div class="cs-stats stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;padding: .5rem;block-size: 100%;border-radius: 0;">
+                    <div style="display: grid;block-size: 100%;">
+                        <canvas id="successful-deliveries" style="max-block-size: 90%;"></canvas>
+                        <span class="cs-text-md cs-font-bold cs-text-secondary" style="color: #4b4a4a;justify-self: center;">{% trans 'Months of 2023' %}</span>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="notification-section" id="sec_01">
-            <div class="notifications">
-                <table id="spend-management" class="display" style="width:100%;margin-top:.5rem;">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Category</th>
-                            <th>Amount</th>
-                            <th>Created At</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>000123</td>
-                            <td>Electonics</td>
-                            <td>$105,000</td>
-                            <td>21-06-2023</td>
-                        </tr>
-                        <tr>
-                            <td>000123</td>
-                            <td>Fashion</td>
-                            <td>$1,000,000</td>
-                            <td>21-06-2023</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <th>Order ID</th>
-                        <th>Category</th>
-                        <th>Amount</th>
-                        <th>Created At</th>
-                      </tr>
-                    </tfoot>
-                </table>
+        <div class="notification-section" id="sec_01" style="block-size: 560px;border-radius: 0;">
+            <div class="data-visualization" style="inline-size: 100%;block-size: 100%;">
+                <div class="cs-stats stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;padding: .5rem;block-size: 100%;border-radius: 0;">
+                    <div style="display: grid;block-size: 100%;">
+                        <canvas id="spend-management" style="max-block-size: 90%;"></canvas>
+                        <span class="cs-text-md cs-font-bold cs-text-secondary" style="color: #4b4a4a;justify-self: center;">{% trans 'Months of 2023' %}</span>
+                    </div>
+                </div>
             </div>
         </div>
-        <!-- <div class="notification-section" id="sec_02">
-            <div class="notifications">
-            </div>
-        </div> -->
         <div class="notification-section" id="sec_03">
             <div class="notifications">
                 <h4>Select Date Range: </h4>
@@ -255,6 +79,36 @@
                             <td>$1,000,000</td>
                             <td>06/23/2023</td>
                         </tr>
+                        <tr>
+                            <td>000123</td>
+                            <td>Fashion</td>
+                            <td>$1,000,000</td>
+                            <td>06/23/2023</td>
+                        </tr>
+                        <tr>
+                            <td>000123</td>
+                            <td>Fashion</td>
+                            <td>$1,000,000</td>
+                            <td>06/23/2023</td>
+                        </tr>
+                        <tr>
+                            <td>000123</td>
+                            <td>Fashion</td>
+                            <td>$1,000,000</td>
+                            <td>06/23/2023</td>
+                        </tr>
+                        <tr>
+                            <td>000123</td>
+                            <td>Fashion</td>
+                            <td>$1,000,000</td>
+                            <td>06/23/2023</td>
+                        </tr>
+                        <tr>
+                            <td>000123</td>
+                            <td>Fashion</td>
+                            <td>$1,000,000</td>
+                            <td>06/23/2023</td>
+                        </tr>
                     </tbody>
                     <tfoot>
                       <tr>
@@ -269,7 +123,7 @@
         </div>
     </div>
 </div>
-
+<script src="{% static 'js/createChart.js' %}"></script>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
     
@@ -292,8 +146,7 @@
             })
         )
 
-        $("#order-analytics").DataTable();
-        $("#spend-management").DataTable();
+
         const customReportsTable = $("#custom-reports").DataTable();
 
 
@@ -344,6 +197,22 @@
         document.querySelector("#print-custom-reports").addEventListener('click', ()=> {
             printDataTable("Custom Report:");
         });
+
+
+
+        let successfulDeliveries = createChart('Successful Deliveries (0-100%)',
+            'bar',
+            ['Jan', 'Feb', 'Mar', 'Apr', 'May','Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            [20, 13, 80, 100, 46, 70, 0, 0, 0, 0, 0, 0],
+            'successful-deliveries'
+        );
+
+        let spendManagement = createChart('Amount Spent ($)',
+            'line',
+            ['Jan', 'Feb', 'Mar', 'Apr', 'May','Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            [2000, 1300, 8500, 1000, 460, 7050, 0, 0, 0, 0, 0, 0],
+            'spend-management'
+        );
     })
 </script>
 

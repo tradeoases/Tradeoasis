@@ -23,7 +23,6 @@
         bottom: 0;
         left: 0;
         right: 0;
-        /* z-index: 9999; */
         display: flex;
         justify-content: center;
         align-items: center;
@@ -32,8 +31,8 @@
 
     #order_product_form {
         background-color: #fff;
-        inline-size: 80%;
-        block-size: 80%;
+        inline-size: fit-content;
+        block-size: fit-content;
     }
 
     .product-form-wrapper {
@@ -216,6 +215,7 @@
          margin-block-start: 15px;
     }
 
+    .select-currency,
     .select-color,
     .select-size {
         float: left;
@@ -224,6 +224,7 @@
         color: #888;
     }
 
+    .select-currency span,
     .select-color span,
     .select-size span {
         display: block;
@@ -239,7 +240,7 @@
         inline-size: 100px;
     }
 
-    select.color, select.size {
+    select.currency, select.color, select.size {
         padding: 8px 10px;
         border: .5px solid #ddd;
         border-radius: 2px;
@@ -247,6 +248,11 @@
         font-weight: 700;
         opacity: .7;
         letter-spacing: .3px;
+    }
+    
+    select.select-currency {
+        margin-block-start: .6em;
+        inline-size: 100%;
     }
 
     .btn {
@@ -298,6 +304,23 @@
         color: #999;
     }
 
+    .set-product-qunatity {
+        display: flex;
+        justify-content: space-between;
+        margin-block-start: .6em;
+    }
+
+    .set-product-qunatity * {
+        flex: 1;
+        border: 1px solid var(--brand-primary);
+        padding: .4em 1.2em;
+        font-size: 20px;
+    }
+
+    .set-product-qunatity button {
+        color: #fff;
+        background-color: var(--brand-primary);
+    }
 
 
 
@@ -497,7 +520,7 @@
         <div id="order_product_form">
             <div class="flex" id="remove_modal" style="padding: .6em;justify-content: flex-end;align-items: center;"><i class="ti-close"></i></div>
             <div class="product-form-wrapper">
-                <div class="pics">
+                <!-- <div class="pics">
                     <span class="main-img-wrapper">
                         <img class="product-main-img" src="/media/ProductImage/images/case-strap-3064a984-31ab-418c-955b-02cb2984ec6c-ce.jpeg">
                     </span>
@@ -507,7 +530,7 @@
                         <img src="/media/ProductImage/images/case-strap-3064a984-31ab-418c-955b-02cb2984ec6c-ce.jpeg">
                         <img src="/media/ProductImage/images/case-strap-3064a984-31ab-418c-955b-02cb2984ec6c-ce.jpeg">
                     </div>
-                </div>
+                </div> -->
                 <div class="product">
                     <span class="category">Wristwear</span>
                     <span class="stock">In Stock</span>
@@ -542,11 +565,11 @@
                         </p>
                     </div> 
                     <div class="block-select clearfix">
-                        <form>
+                        <form id="product_specs_form">
                             <div style="display: flex;flex: 1;">
                                 <div class="select-color">
                                     <span>Select Color</span>
-                                    <select class="color">
+                                    <select class="color" name="color">
                                         <option>White</option>
                                         <option>Black</option>
                                         <option>Brown</option>
@@ -554,21 +577,42 @@
                                 </div>
                                 <div class="select-size">
                                     <span>Size</span>
-                                    <select class="size">
+                                    <select class="size" name="size">
                                         <option>8</option>
                                         <option>9</option>
                                         <option>10</option>
                                     </select>
-                                </div> 
+                                </div>
                             </div>
-                            <button class="btn">Confirm Order</button>
+                            <div class="set-product-qunatity">
+                                <button onclick="decreaseQuantity()">-</button>
+                                <span id="quantity" style="text-align: center;" name="quantity">1</span>
+                                <button onclick="increaseQuantity()">+</button>
+                            </div>
+                            <div class="select-currency" style="inline-size: 100%;">
+                                <span style="margin-block-start: .6em;">Select material</span>
+                                <select class="currency" name="material" style="inline-size: 100%;">
+                                    <option>Cotton</option>
+                                    <option>Silk</option>
+                                    <option>Wool</option>
+                                </select>
+                            </div>
+                            <div class="select-currency" style="inline-size: 100%;">
+                                <span style="margin-block-start: .6em;">Select currency</span>
+                                <select class="currency" name="currency" style="inline-size: 100%;">
+                                    <option>Euro</option>
+                                    <option>Dollar</option>
+                                    <option>Pound</option>
+                                </select>
+                            </div> 
+                            <button class="btn" id="add_product_to_cart">Buy Now</button>
                         </form> 
                     </div>
                     <div class="block-footer">
                         <div class="block-links">
-                            <div class="wishlist">
-                            <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/23243-200.png">
-                            <span>Add to Wishlist</span>
+                            <div id="add_to_wishlist">
+                                <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/23243-200.png">
+                                <span>Click to Add to Wishlist</span>
                             </div>
                         </div>
                     </div>
@@ -581,10 +625,96 @@
     <script>
 
         const productModalOverlay = document.querySelector("#order_product_modal");
+        const removeProductModalOverlay = document.querySelector("#remove_modal");
         const orderProduct = document.querySelector("#order_product");
-        orderProduct.addEventListener("click", event => productModalOverlay.classList.add("inview"));
+        orderProduct.addEventListener("click", () => productModalOverlay.classList.add("inview"));
+        removeProductModalOverlay.addEventListener("click", () => productModalOverlay.classList.remove("inview"));
 
-        document.querySelector("#remove_modal").addEventListener("click", event => productModalOverlay.classList.remove("inview"));
+
+        var productQuantity = 1;
+  
+        function increaseQuantity() {
+            productQuantity++;
+            updateQuantityDisplay();
+        }
+        
+        function decreaseQuantity() {
+            if (productQuantity > 1) {
+                productQuantity--;
+                updateQuantityDisplay();
+            }
+        }
+        
+        function updateQuantityDisplay() {
+            document.getElementById("quantity").innerText = productQuantity;
+        }
+
+
+        // Add product to wishlist
+        // I think here only the product ID is necessary
+        async function addProductToWishlist(event, product) {
+            event.preventDefault();
+
+            // TODO: Provide path to API endpoint
+            const endpoint = "";
+            try {
+                let res = await fetch(endpoint,{
+                method: "POST",
+                credentials: "same-origin",
+                body: JSON.stringify(product)
+                });
+                
+                if (res.status === 201) {
+                    // TODO: Provide URL to wishlist
+                    document.location.href = "";
+                }else{
+                console.log("Product not added to wishlist.");
+                }
+            }
+            catch (err) {
+                console.error(err);
+            }
+        }
+
+        const addToWishlist = document.querySelector("#add_to_wishlist");
+        addToWishlist.addEventListener("click", event => {
+            addProductToWishlist(event, product);
+        });
+
+
+        // Add product to cart
+        async function addProductToCart(event, product) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+
+            // TODO: Provide path to API endpoint
+            const endpoint = "";
+            try {
+                let res = await fetch(endpoint,{
+                method: "POST",
+                credentials: "same-origin",
+                body: JSON.stringify(product)
+                });
+                
+                if (res.status === 201) {
+                    // TODO: Provide URL to orders list
+                    document.location.href = "";
+                }else{
+                console.log("Could not place order.");
+                }
+            }
+            catch (err) {
+                console.error(err);
+            }
+        }
+
+        const addToCart = document.querySelector("#add_product_to_cart");
+        addToCart.addEventListener("click", event => {
+            addProductToCart(event, product);
+        });
+
+
 
     </script>
 

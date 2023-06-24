@@ -31,7 +31,7 @@
     <div class="main-content">
         <div class="content-area outlined" style="padding-block-start: 1.2rem; padding: .6rem .4rem;block-size: 100vh">
             <div class="content-area-top flex" style="justify-content: space-between;padding-block-start: .4rem;">
-                <h3 style="font-weight:600;">{% trans 'Track Orders' %}</h3>
+                <h3 style="font-weight:600;">{% trans 'My Orders' %}</h3>
                 <div class="sort-filters flex" style="gap:.6rem">
                     <div class="sort-by flex">
                         <h4 style="margin-inline-end: .6rem;">Sort time: </h4>
@@ -58,37 +58,100 @@
                     <thead>
                         <tr>
                             <th>{% trans 'Order ID' %}</th>
-                            <th>{% trans 'Created At' %}</th>
-                            <th>{% trans 'Expected At' %}</th>
-                            <th>{% trans 'Days Left' %}</th>
+                            <th>{% trans 'Items' %}</th>
                             <th>{% trans 'View details' %}</th>
                             <th>{% trans 'Status' %}</th>
+                            <th>{% trans 'Created At' %}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>00003624</td>
-                            <td>24-06-2023</td>
-                            <td>26-06-2023</td>
                             <td>02</td>
                             <td>
                                 <div class="item-link">
                                     <a href="{% url 'buyer:order-details' %}" class="order-link-cta">View Detail <i class="ti-arrow-top-right"></i></a>
                                 </div>
                             </td>
-                            <td class="order-status pending"><h4>In Transit</h4></td>
+                            <td class="order-status completed"><h4>Delivered</h4></td>
+                            <td>24-06-2023</td>
                         </tr>
                         <tr>
-                            <td>00003620</td>
-                            <td>18-06-2023</td>
-                            <td>21-06-2023</td>
-                            <td>03</td>
+                            <td>00003624</td>
+                            <td>02</td>
+                            <td>
+                                <div class="item-link">
+                                    <a href="{% url 'buyer:order-details' %}" class="order-link-cta">View Detail <i class="ti-arrow-top-right"></i></a>
+                                </div>
+                            </td>
+                            <td class="order-status completed"><h4>Delivered</h4></td>
+                            <td>24-06-2023</td>
+                        </tr>
+                        <tr>
+                            <td>00003624</td>
+                            <td>02</td>
+                            <td>
+                                <div class="item-link">
+                                    <a href="{% url 'buyer:order-details' %}" class="order-link-cta">View Detail <i class="ti-arrow-top-right"></i></a>
+                                </div>
+                            </td>
+                            <td class="order-status completed"><h4>Delivered</h4></td>
+                            <td>24-06-2023</td>
+                        </tr>
+                        <tr>
+                            <td>00003624</td>
+                            <td>02</td>
+                            <td>
+                                <div class="item-link">
+                                    <a href="{% url 'buyer:order-details' %}" class="order-link-cta">View Detail <i class="ti-arrow-top-right"></i></a>
+                                </div>
+                            </td>
+                            <td class="order-status completed"><h4>Delivered</h4></td>
+                            <td>24-06-2023</td>
+                        </tr>
+                        <tr>
+                            <td>00003624</td>
+                            <td>02</td>
+                            <td>
+                                <div class="item-link">
+                                    <a href="{% url 'buyer:order-details' %}" class="order-link-cta">View Detail <i class="ti-arrow-top-right"></i></a>
+                                </div>
+                            </td>
+                            <td class="order-status completed"><h4>Delivered</h4></td>
+                            <td>24-06-2023</td>
+                        </tr>
+                        <tr>
+                            <td>00003624</td>
+                            <td>02</td>
+                            <td>
+                                <div class="item-link">
+                                    <a href="{% url 'buyer:order-details' %}" class="order-link-cta">View Detail <i class="ti-arrow-top-right"></i></a>
+                                </div>
+                            </td>
+                            <td class="order-status pending"><h4>Pending</h4></td>
+                            <td>24-06-2023</td>
+                        </tr>
+                        <tr>
+                            <td>00003624</td>
+                            <td>02</td>
                             <td>
                                 <div class="item-link">
                                     <a href="{% url 'buyer:order-details' %}" class="order-link-cta">View Detail <i class="ti-arrow-top-right"></i></a>
                                 </div>
                             </td>
                             <td class="order-status canceled"><h4>Canceled</h4></td>
+                            <td>24-06-2023</td>
+                        </tr>
+                        <tr>
+                            <td>00003624</td>
+                            <td>02</td>
+                            <td>
+                                <div class="item-link">
+                                    <a href="{% url 'buyer:order-details' %}" class="order-link-cta">View Detail <i class="ti-arrow-top-right"></i></a>
+                                </div>
+                            </td>
+                            <td class="order-status canceled"><h4>Canceled</h4></td>
+                            <td>24-06-2023</td>
                         </tr>
                     </tbody>
                     <!-- <tfoot>
