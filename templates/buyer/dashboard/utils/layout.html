@@ -12,6 +12,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
     <link rel="apple-touch-icon" sizes="120x120" href="{% static 'favicon/apple-touch-icon.png' %}">
+
+    <link rel="stylesheet" href="{%  static 'css/table.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/_main.css' %}">
     <link rel="stylesheet" href="{% static 'css/dashboards.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
@@ -21,12 +23,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{% static 'js/jquery-3.5.1.js' %}"></script>
+    <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
     <script src="{% static 'js/tinymce/js/tinymce/tinymce.min.js' %}"></script>
     <script src="{% static 'js/tinymce/js/tinymce/tinymce.min.js' %}"></script>
     <script src="{% static 'fullcalendar-6.1.8/dist/index.global.min.js' %}"></script>
     <script src="{% static 'js/fullcalendar-6-custom/fullcalendar.js' %}"></script>
+
+    <script src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
+    <script src="{% static 'js/moment.min.js' %}"></script>
 
 
     <title>Golden - {% trans 'Dashboard' %}</title>
@@ -245,6 +252,31 @@
         /* NOTIFICATIONS */
 
 
+        /* BIDS */
+        .bid-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .bid-table th,
+        .bid-table td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .bid-table th {
+            background-color: #f0f0f0;
+        }
+
+        .bid-table td {
+            border-bottom: 1px solid #ccc;
+        }
+
+        .star-rating {
+            color: gold;
+        }
+
+        /* BIDS */
 
 
 
@@ -324,6 +356,14 @@
                                     <span><img src="/static/graphics/bell.png" alt=""></span>
                                     <span
                                         class="text toggle-able">{%  trans 'Notifications & Alerts' %}
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="link">
+                                <a href="{% url 'buyer:reporting-analytics' %}">
+                                    <span><img src="/static/graphics/bell.png" alt=""></span>
+                                    <span
+                                        class="text toggle-able">{%  trans 'Reporting & Analytics' %}
                                     </span>
                                 </a>
                             </li>

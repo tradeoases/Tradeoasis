@@ -13,7 +13,8 @@
         <div class="notifications-section flex" style="background-color: rgb(226, 226, 224);">
             <h4 class="section-togglers" data-section="sec_00" style="padding-block: 1.2rem;">All Notifications</h4>
             <h4 class="section-togglers" data-section="sec_01" style="padding-block: 1.2rem;">Contracts</h4>
-            <h4 class="section-togglers" data-section="sec_02" style="padding-block: 1.2rem;">Others</h4>
+            <h4 class="section-togglers" data-section="sec_02" style="padding-block: 1.2rem;">Bids</h4>
+            <h4 class="section-togglers" data-section="sec_03" style="padding-block: 1.2rem;">Others</h4>
         </div>
 
         <div class="notification-section inview" id="sec_00">
@@ -84,6 +85,22 @@
         </div>
         <div class="notification-section" id="sec_02">
             <div class="notifications">
+                <a href="{% url 'buyer:bids' %}">
+                    <div class="notification flex">
+                        <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="" class="avatar">
+                        <div class="notification-content">
+                            <h6 class="notification-title"><strong>Rizeen Suppliers</strong> and other suppliers have sent their bids for MTG Commercial Photocopier.</h6>
+                            <span class="notification-time">5 min ago</span>
+                            <div class="notification-actions">
+                                <button>View Bids</button>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="notification-section" id="sec_03">
+            <div class="notifications">
                 <div class="notification flex">
                     <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="" class="avatar">
                     <div class="notification-content">
@@ -106,7 +123,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
