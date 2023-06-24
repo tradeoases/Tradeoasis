@@ -345,11 +345,14 @@ nav.cs-fixed li:hover * {
     }
 }
 
-.product-images-list img {
+.product-images-list img,
+.product-images-list video {
     transform: scale(1);
+    transition: all .2s ease-in-out;
 }
 
-.product-images-list img.active {
+.product-images-list img.active,
+.product-images-list video.active {
     transform: scale(1.1);
 }
 

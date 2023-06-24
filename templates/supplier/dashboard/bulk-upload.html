@@ -17,6 +17,7 @@
                         <h2 id="form-part-title" style="margin: 0;" class="form-heading cs-text-body cs-font-600 cs-text-secondary">
                             {% trans 'Select Excel to Perform Bulk Upload' %}
                         </h2>
+                        <a href="{% static 'assets/files/bulk_product_excel.xlsx' %}" download style="color: hsl(43, 94%, 50%)"><b>{% trans "Download Sample Excel" %}</b></a>
                         {% if messages %}
                             {% for message in messages %}
                                 {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 

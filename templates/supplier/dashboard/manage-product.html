@@ -83,7 +83,7 @@
                     <button id="close_selected_product_preview"><i class="ti-arrow-left"></i></button>
                     <div class="cs-flex" style="--gap: .5rem;align-content: center;">
                         <!-- <a href="">{% trans "View Product Page" %}</a> -->
-                        <form action="" id="delete_product" method="POST">
+                        <form id="delete_product" method="POST">
                             {% csrf_token %}
                             <button class="cta" type="submit">
                                 <i class="ti-trash"></i>
@@ -97,41 +97,182 @@
                     </div>
                 </div>
                 <div class="body outlined">
-                    <div class="cs-flex cs-align-center" style="--gap: .5rem;">
+                    <div class="product_briefs cs-align-center" style="--gap: .5rem;">
                         <h1 class="product_name"></h1>
                         <span class="edit_cta" id="title_edit"><i class="ti-pencil"></i></span>
+                        <form class="floating_form" action="" method="POST" id="title_edit_form">
+                            {% csrf_token %}
+                            <div class="form-group cs-grid" style="--gap: .5rem;">
+                                <label for="name" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Name' %} *</label>
+                                <input type="text" class="cs-text-normal" name="name" id="name" required>
+                            </div>
+                            <div class="form-group cs-grid cs-grid-flow-col" style="justify-items: flex-end; --gap: .5rem;justify-content: flex-end;">
+                                <input class="btn cs-text-white cancel-cta" type="submit" style="background-color: red;" value="{% trans 'Cancel' %}" style="padding: .7rem 1.5rem;font-size: 1rem;">
+                                <input class="btn cs-text-white" type="submit" value="{% trans 'Save' %}" style="padding: .7rem 1.5rem;font-size: 1rem;" name="edit_name">
+                            </div>
+                        </form>
                     </div>
-                    <div class="cs-flex cs-align-center" style="--gap: .5rem;">
+                    <div class="product_briefs cs-align-center" style="--gap: .5rem;">
                         <p class="product_desc"></p>
                         <span class="edit_cta" id="description_edit"><i class="ti-pencil"></i></span>
+                        <form class="floating_form" action="" method="POST" id="description_edit_form">
+                            {% csrf_token %}
+                            <div class="form-group cs-grid" style="--gap: .5rem;">
+                                <label for="product-description" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Description' %} *</label>
+                                <textarea style="padding: .5rem;" name="description" id="product-description" cols="30" rows="10" required></textarea>
+                            </div>
+                            <div class="form-group cs-grid cs-grid-flow-col" style="justify-items: flex-end; --gap: .5rem;justify-content: flex-end;">
+                                <input class="btn cs-text-white cancel-cta" type="submit" style="background-color: red;" value="{% trans 'Cancel' %}" style="padding: .7rem 1.5rem;font-size: 1rem;">
+                                <input class="btn cs-text-white" type="submit" value="{% trans 'Save' %}" style="padding: .7rem 1.5rem;font-size: 1rem;" name="edit_description">
+                            </div>
+                        </form>
                     </div>
                     <div class="category-area">
                     </div>
                     <div class="product_pricings">
-                        <h3 class="sub_headings">{% trans "Pricings" %}</h3>
+                        <div class="sub_heading_area">
+                            <h3 class="sub_headings">{% trans "Pricings" %}</h3>
+                            <span class="edit_cta" id="add_pricings"><i class="ti-plus"></i></span>
+                            <form class="floating_form sm-input" action="" method="POST" id="add_pricing_form">
+                                {% csrf_token %}
+                                <div class="form-group cs-grid cs-grid-flow-col" style="--gap: .5rem;">
+                                    <div class="form-group cs-grid" style="--gap: .5rem;">
+                                        <label for="currency_1" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Currency' %} *</label>
+                                        <input type="text" class="cs-text-normal" name="currency" id="currency_1" required list="currrencies">
+                                    </div>
+                                    <div class="form-group cs-grid" style="--gap: .5rem;">
+                                        <label for="min_price_currency_1" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Min Price' %} *</label>
+                                        <input type="text" class="cs-text-normal" name="min-price" id="min_price_currency_1" required>
+                                    </div>
+                                    <div class="form-group cs-grid" style="--gap: .5rem;">
+                                        <label for="max_price_currency_1" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Max Price' %} *</label>
+                                        <input type="text" class="cs-text-normal" name="max-price" id="max_price_currency_1" required>
+                                    </div>
+                                </div>
+                                <div class="form-group cs-grid cs-grid-flow-col" style="justify-items: flex-end; --gap: .5rem;justify-content: flex-end;">
+                                    <input class="btn cs-text-white cancel-cta" type="submit" style="background-color: red;" value="{% trans 'Cancel' %}" style="padding: .7rem 1.5rem;font-size: 1rem;">
+                                    <input class="btn cs-text-white" type="submit" value="{% trans 'Save' %}" style="padding: .7rem 1.5rem;font-size: 1rem;" name="edit_pricing">
+                                </div>
+                            </form>
+                        </div>
                         <div class="pricings"></div>
                     </div>
                     <div class="cs-flex" style="--gap: 2rem">
                         <div class="labelling">
-                            <h3 class="sub_headings">{% trans "Tags" %}</h3>
+                            <div class="sub_heading_area">
+                                <h3 class="sub_headings">{% trans "Tags" %}</h3>
+                                <span class="edit_cta" id="add_tags"><i class="ti-plus"></i></span>
+                                <form class="floating_form sm-input" action="" method="POST" id="add_tags_form">
+                                    {% csrf_token %}
+                                    <div class="form-group cs-grid cs-grid-flow-col" style="--gap: .5rem;">
+                                        <div class="cs-flex" style="--gap:1rem;">
+                                            <input type="text" name="tag_1" id="tag_1" placeholder="Tag 1" required>
+                                            <input type="text" name="tag_2" id="tag_2" placeholder="Tag 2">
+                                            <input type="text" name="tag_3" id="tag_3" placeholder="Tag 3">
+                                        </div>
+                                    </div>
+                                    <div class="form-group cs-grid cs-grid-flow-col" style="justify-items: flex-end; --gap: .5rem;justify-content: flex-end;">
+                                        <input class="btn cs-text-white cancel-cta" type="submit" style="background-color: red;" value="{% trans 'Cancel' %}" style="padding: .7rem 1.5rem;font-size: 1rem;">
+                                        <input class="btn cs-text-white" type="submit" value="{% trans 'Save' %}" style="padding: .7rem 1.5rem;font-size: 1rem;" name="edit_tags">
+                                    </div>
+                                </form>
+                            </div>
                             <div class="product_labels" id="tags"></div>
                         </div>
                         <div class="labelling">
-                            <h3 class="sub_headings">{% trans "Colors" %}</h3>
+                            <div class="sub_heading_area">
+                                <h3 class="sub_headings">{% trans "Colors" %}</h3>
+                                <span class="edit_cta" id="add_colors"><i class="ti-plus"></i></span>
+                                <form class="floating_form sm-input" action="" method="POST" id="add_colors_form">
+                                    {% csrf_token %}
+                                    <div class="form-group cs-grid cs-grid-flow-col" style="--gap: .5rem;">
+                                        <div class="cs-flex" style="--gap:1rem;">
+                                            <input type="text" name="color_1" id="color_1" placeholder="color 1" required>
+                                            <input type="text" name="color_2" id="color_2" placeholder="color 2">
+                                            <input type="text" name="color_3" id="color_3" placeholder="color 3">
+                                        </div>
+                                    </div>
+                                    <div class="form-group cs-grid cs-grid-flow-col" style="justify-items: flex-end; --gap: .5rem;justify-content: flex-end;">
+                                        <input class="btn cs-text-white cancel-cta" type="submit" style="background-color: red;" value="{% trans 'Cancel' %}" style="padding: .7rem 1.5rem;font-size: 1rem;">
+                                        <input class="btn cs-text-white" type="submit" value="{% trans 'Save' %}" style="padding: .7rem 1.5rem;font-size: 1rem;" name="edit_colors">
+                                    </div>
+                                </form>
+                            </div>
                             <div class="product_labels" id="colors"></div>
                         </div>
                         <div class="labelling">
-                            <h3 class="sub_headings">{% trans "Material" %}</h3>
+                            <div class="sub_heading_area">
+                                <h3 class="sub_headings">{% trans "Material" %}</h3>
+                                <span class="edit_cta" id="add_materials"><i class="ti-plus"></i></span>
+                                <form class="floating_form sm-input" action="" method="POST" id="add_materials_form">
+                                    {% csrf_token %}
+                                    <div class="form-group cs-grid cs-grid-flow-col" style="--gap: .5rem;">
+                                        <div class="cs-flex" style="--gap:1rem;">
+                                            <input type="text" name="material_1" id="material_1" placeholder="material 1" required>
+                                            <input type="text" name="material_2" id="material_2" placeholder="material 2">
+                                            <input type="text" name="material_3" id="material_3" placeholder="material 3">
+                                        </div>
+                                    </div>
+                                    <div class="form-group cs-grid cs-grid-flow-col" style="justify-items: flex-end; --gap: .5rem;justify-content: flex-end;">
+                                        <input class="btn cs-text-white cancel-cta" type="submit" style="background-color: red;" value="{% trans 'Cancel' %}" style="padding: .7rem 1.5rem;font-size: 1rem;">
+                                        <input class="btn cs-text-white" type="submit" value="{% trans 'Save' %}" style="padding: .7rem 1.5rem;font-size: 1rem;" name="edit_materials">
+                                    </div>
+                                </form>
+                            </div>
                             <div class="product_labels" id="materials"></div>
                         </div>
                     </div>
                     <div class="product_media">
                         <div class="media_section" id="images">
-                            <h3 class="sub_headings">{% trans "Images" %}</h3>
+                            <div class="sub_heading_area">
+                                <h3 class="sub_headings">{% trans "Images" %}</h3>
+                                <span class="edit_cta" id="add_images"><i class="ti-plus"></i></span>
+                                <form class="floating_form media" enctype="multipart/form-data" action="" method="POST" id="add_images_form">
+                                    {% csrf_token %}
+                                    {% csrf_token %}
+                                    <div class="form-group cs-grid" style="--gap: .5rem;">
+                                        <label for="images" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Images' %} *</label>
+            
+                                        <div class="selected-images" id="images"></div>
+            
+                                        <input type="file" name="images" multiple id="product-images" class="file-input" required>
+                                        <label for="product-images" class="drop-area" id="product-images-area">
+                                          <span>{% trans "Drag and drop Product Images here" %}</span>
+                                          <span class="browse-link">{% trans "or browse" %}</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-group cs-grid cs-grid-flow-col" style="justify-items: flex-end; --gap: .5rem;justify-content: flex-end;">
+                                        <input class="btn cs-text-white cancel-cta" type="submit" style="background-color: red;" value="{% trans 'Cancel' %}" style="padding: .7rem 1.5rem;font-size: 1rem;">
+                                        <input class="btn cs-text-white" type="submit" value="{% trans 'Save' %}" style="padding: .7rem 1.5rem;font-size: 1rem;" name="edit_images">
+                                    </div>
+                                </form>
+                            </div>
                             <div class="body"></div>
                         </div>
                         <div class="media_section" id="videos">
-                            <h3 class="sub_headings">{% trans "Videos" %}</h3>
+                            <div class="sub_heading_area">
+                                <h3 class="sub_headings">{% trans "Videos" %}</h3>
+                                <span class="edit_cta" id="add_videos"><i class="ti-plus"></i></span>
+                                <form class="floating_form media" enctype="multipart/form-data" action="" method="POST" id="add_videos_form">
+                                    {% csrf_token %}
+                                    {% csrf_token %}
+                                    <div class="form-group cs-grid" style="--gap: .5rem;">
+                                        <label for="images" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Videos' %} </label>
+            
+                                        <div class="selected-images" id="videos" multiple></div>
+            
+                                        <input type="file" name="videos" multiple id="product-videos" class="file-input">
+                                        <label for="product-videos" class="drop-area" id="product-videos-area">
+                                          <span>{% trans "Drag and drop Product Videos here" %}</span>
+                                          <span class="browse-link">{% trans "or browse" %}</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-group cs-grid cs-grid-flow-col" style="justify-items: flex-end; --gap: .5rem;justify-content: flex-end;">
+                                        <input class="btn cs-text-white cancel-cta" type="submit" style="background-color: red;" value="{% trans 'Cancel' %}" style="padding: .7rem 1.5rem;font-size: 1rem;">
+                                        <input class="btn cs-text-white" type="submit" value="{% trans 'Save' %}" style="padding: .7rem 1.5rem;font-size: 1rem;" name="edit_videos">
+                                    </div>
+                                </form>
+                            </div>
                             <div class="body"></div>
                         </div>
                     </div>
@@ -151,7 +292,7 @@
                 <p class="cs-text-normal cs-text-secondary" id="confirm-msg">{% trans "This operation cannot be reversed." %}</p>
             </div>
             <div class="modal-cta cs-flex" style="--gap: 1rem;margin-block-start: .5rem;">
-                <form action="" method="POST" id="confirm_delete">
+                <form method="POST" id="confirm_delete">
                     {% csrf_token %}
                     <button class="btn cs-grid cs-justify-center cs-align-center cs-bg-danger cs-text-white cs-text-md br-sm">
                         {% trans "Continue" %}

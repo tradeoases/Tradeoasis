@@ -1564,7 +1564,7 @@ tr {
     justify-content: flex-start;
 }
 
-@media (max-width: 786px) {
+@media (max-width: 789px) {
     .multiple-part .selected-images {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -1679,17 +1679,17 @@ tr {
     align-content: flex-start;
     gap: 2rem;
 }
-@media (max-width: 786px) {
-    .selected_product_preview {
-        inset-block-start: 0;
-        inset-inline-start: 0;
-    }
-}
 
 .selected_product_preview.in-view {
     display: grid;
     inset-inline-start: 30%;
     transition: width .2s linear;
+}
+@media (max-width: 1000px) {
+    .selected_product_preview.in-view {
+        inset-inline-start: 5%;
+        inline-size: 95%;
+    }
 }
 
 .selected_product_preview .actions {
@@ -1759,7 +1759,7 @@ tr {
 }
 
 .edit_cta:hover {
-    color: hsl(43, 94%, 50%);;
+    color: hsl(43, 94%, 50%);
     background-color: hsl(60, 4%, 92%);
     
 }
@@ -1785,7 +1785,8 @@ tr {
 .selected_product_preview .product_pricings,
 .selected_product_preview .labelling {
     display: grid;
-    gap: .5rem;
+    gap: 1rem;
+    position: relative;
 }
 .selected_product_preview .product_labels {
     display: flex;
@@ -1840,12 +1841,89 @@ tr {
 }
 
 .selected_product_preview .sub_headings {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: bold;
-    color: hsl(220, 5%, 18%);
+    color: hsl(220, 5%, 25%);
     text-transform: capitalize;
 }
+.selected_product_preview .product_briefs,
+.selected_product_preview .sub_heading_area {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: flex-start;
+    gap: 1rem;
+    padding: 1.5rem auto;
+    align-items: center;
+    position: relative;
+    justify-self: flex-start;
+}
+.sub_heading_area .edit_cta {
+    color: grey;
+    font-size: .9rem;
+    padding: .25rem .25rem;
+    display: grid;
+    place-items: center;
+    align-items: center;
+}
 
+.sub_heading_area .edit_cta:hover,
+.sub_heading_area .edit_cta:focus {
+    color: hsl(220, 5%, 18%);
+}
+
+.floating_form {
+    position: absolute;
+    inset-block-start: 105%;
+    inset-inline-start: 105%;
+    background-color: hsl(0, 20%, 99%);
+    padding: 1rem 1.5rem;
+    z-index: 10000;
+    overflow: hidden;
+    border-radius: 10px;
+    gap: .5rem;
+    box-shadow: 1px 1px 2px hsla(0, 1%, 40%, 0.295);
+    display: none;
+    min-inline-size: 300px;
+}
+.product_briefs .floating_form {
+    inset-block-start: 105%;
+    inset-inline-start: 5%;
+}
+.product_briefs .floating_form:has(textarea) {
+    inline-size: 80%;
+}
+.floating_form.media {
+    min-inline-size: 300px;
+    /* inset-block-end: 105%; */
+    inset-inline-start: 105%;
+}
+.floating_form.media .selected-images {
+    display: flex;
+    gap: .5rem;
+    justify-content: flex-start;
+}
+
+.floating_form.media .selected-images img,
+.floating_form.media .selected-images video {
+    block-size: 60px;
+    inline-size: 60px;
+    border: 1px solid #ccc;
+}
+.floating_form.inview {
+    display: grid
+}
+.floating_form.sm-input input {
+    inline-size: 100px;
+}
+
+.floating_form input[type="submit"] {
+    background-color: #1E1F21;
+}
+
+.floating_form.horiz input[type="submit"] {
+    align-self: flex-end;
+
+}
 .selected_product_preview .product_media {
     display: grid;
     gap: 1rem;

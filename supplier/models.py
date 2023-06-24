@@ -13,8 +13,7 @@ import uuid
 import string
 
 # apps
-from auth_app.models import Supplier
-from auth_app.models import Buyer, ClientProfile
+from auth_app.models import Supplier, Buyer, ClientProfile
 
 # utility functions
 def get_file_path(instance, filename):
@@ -140,8 +139,8 @@ class Product(models.Model):
         _("Description"),
     )
     # for easy querying supplier attribute has been added
-    supplier = models.ForeignKey(
-        to=Supplier,
+    business = models.ForeignKey(
+        to=ClientProfile,
         on_delete=models.CASCADE,
         blank=True, null=True
     )
@@ -184,7 +183,7 @@ class Product(models.Model):
     @property
     def supplier(self):
         if not self.store.all():
-            return None
+            return self.business
         return self.store.all().first().supplier.profile
         
     @property

@@ -130,9 +130,12 @@ class ProductsSerializer(serializers.ModelSerializer):
         representation = super().to_representation(instance)
 
         if instance.supplier:
-            supplier_data = SuppliersSerializer(
-                instance.store.all().first().supplier.profile
-            ).data
+            if instance.store.all():
+                supplier_data = SuppliersSerializer(
+                    instance.store.all().first().supplier.profile
+                ).data
+            else:
+                supplier_data = SuppliersSerializer(instance.supplier).data
             representation["supplier"] = supplier_data.get("business_name")
             representation["supplier_slug"] = supplier_data.get("slug")
 

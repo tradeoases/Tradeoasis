@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const closeStoreModal = () => {
         const storeModal = document.querySelector('#store-modal');
-        storeModal.style.display = "none"
+        // storeModal.style.display = "none"
     }
 
     // STORES
@@ -203,27 +203,27 @@ document.addEventListener("DOMContentLoaded", () => {
         cat_elem.textContent = response.sub_category.category.name
         store_area.appendChild(cat_elem)
         
-        let cat_delete_cta = document.createElement("button")
-        cat_delete_cta.className = "delete_cta"
-        cat_delete_cta.innerHTML = '<i class="ti-trash"></i>'
-        cat_delete_cta.addEventListener("click", () => {
-            let deleteUrl = `${BASE_URL}/en/suppliers/dashboard/product/${response.slug}/category/${response.sub_category.category.slug}/delete/`
-            openOperationConfirmModal(deleteUrl)
-        })
-        cat_elem.appendChild(cat_delete_cta)
+        // let cat_delete_cta = document.createElement("button")
+        // cat_delete_cta.className = "delete_cta"
+        // cat_delete_cta.innerHTML = '<i class="ti-trash"></i>'
+        // cat_delete_cta.addEventListener("click", () => {
+        //     let deleteUrl = `${BASE_URL}/en/suppliers/dashboard/product/${response.slug}/category/${response.sub_category.category.slug}/delete/`
+        //     openOperationConfirmModal(deleteUrl)
+        // })
+        // cat_elem.appendChild(cat_delete_cta)
 
         let s_cat_elem = document.createElement("span")
         s_cat_elem.textContent = response.sub_category.name
         store_area.appendChild(s_cat_elem)
         
-        let s_cat_delete_cta = document.createElement("button")
-        s_cat_delete_cta.className = "delete_cta"
-        s_cat_delete_cta.innerHTML = '<i class="ti-trash"></i>'
-        s_cat_delete_cta.addEventListener("click", () => {
-            let deleteUrl = `${BASE_URL}/en/suppliers/dashboard/product/${response.slug}/sub_category/${response.sub_category.slug}/delete/`
-            openOperationConfirmModal(deleteUrl)
-        })
-        s_cat_elem.appendChild(s_cat_delete_cta)
+        // let s_cat_delete_cta = document.createElement("button")
+        // s_cat_delete_cta.className = "delete_cta"
+        // s_cat_delete_cta.innerHTML = '<i class="ti-trash"></i>'
+        // s_cat_delete_cta.addEventListener("click", () => {
+        //     let deleteUrl = `${BASE_URL}/en/suppliers/dashboard/product/${response.slug}/sub_category/${response.sub_category.slug}/delete/`
+        //     openOperationConfirmModal(deleteUrl)
+        // })
+        // s_cat_elem.appendChild(s_cat_delete_cta)
 
         // princing
         let pricings = selected_product_preview.querySelector(".pricings")
@@ -289,7 +289,7 @@ document.addEventListener("DOMContentLoaded", () => {
             })
         }
         else {
-            colors.closest(".labelling").style.display = "none"
+            // colors.closest(".labelling").style.display = "none"
         }
 
         // materials
@@ -312,7 +312,7 @@ document.addEventListener("DOMContentLoaded", () => {
             elem.appendChild(delete_cta)
         })
         if (response.materials.length < 1) {
-            materials.closest(".labelling").style.display = "none"
+            // materials.closest(".labelling").style.display = "none"
         }
 
         // images
@@ -339,7 +339,7 @@ document.addEventListener("DOMContentLoaded", () => {
             wrapper.appendChild(delete_cta)
         })
         if (response.images.length < 1) {
-            images.closest(".media_section").style.display = "none"
+            // images.closest(".media_section").style.display = "none"
         }
 
         // videos
@@ -367,8 +367,28 @@ document.addEventListener("DOMContentLoaded", () => {
             wrapper.appendChild(delete_cta)
         })
         if (response.videos.length < 1) {
-            videos.closest(".media_section").style.display = "none"
+            // videos.closest(".media_section").style.display = "none"
         }
+
+        
+        // set edit form action
+        selected_product_preview.querySelectorAll(".floating_form")
+            .forEach(elem => {
+                elem.action = `${BASE_URL}/en/suppliers/dashboard/product/${response.slug}/edit/`
+            })
+
+        selected_product_preview.querySelectorAll(".floating_form .cancel-cta")
+            .forEach(elem => elem.addEventListener("click", e => {
+                e.preventDefault()
+                elem.closest(".floating_form").classList.remove("inview")
+                elem.closest(".floating_form").reset()
+            }))
+
+        selected_product_preview.querySelectorAll(".edit_cta")
+            .forEach(elem => elem.addEventListener("click", () => {
+                elem.parentNode.querySelector(".floating_form").classList.add("inview")
+            }))
+       
     }
 
     const renderProducts = async () => {

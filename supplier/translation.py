@@ -26,6 +26,13 @@ class ProductTranslationOptions(TranslationOptions):
 class ProductTagTranslationOptions(TranslationOptions):
     fields = ("name",)
 
+@register(models.ProductColor)
+class ProductColorTranslationOptions(TranslationOptions):
+    fields = ("name",)
+
+@register(models.ProductMaterial)
+class ProductMaterialTranslationOptions(TranslationOptions):
+    fields = ("name",)
 
 @register(models.Service)
 class ServiceTranslationOptions(TranslationOptions):

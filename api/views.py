@@ -89,6 +89,10 @@ class ProductCreateApiView(generics.CreateAPIView):
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
 
+        product = SupplierModels.Product.admin_list.filter(pk = serializer.data.pk).first
+        product.first().business = AuthModels.ClientProfile.objects.filter(user=request.user).first()
+        product.first().save()
+
         return Response(
             {
                 "message": _("Product Details Created Successfully."),
