@@ -33,9 +33,17 @@ document.addEventListener('DOMContentLoaded', () => {
         "adverts_was_loaded" : false,
     }
 
-    const BASE_API_URL = 'https://foroden.com/en/admin-api';
-    const BASE_URL = 'https://foroden.com/';
+    let BASE_API_URL
+    let BASE_URL
 
+    if (window.location.href.includes("localhost")) {
+        BASE_API_URL = 'http://localhost:8000/en/admin-api';
+        BASE_URL = 'http://localhost:8000';
+    }
+    else {
+        BASE_API_URL = 'https://foroden.com/en/admin-api';
+        BASE_URL = 'https://foroden.com/';
+    }
 
     function getCookie(name) {
         let cookieValue = null;

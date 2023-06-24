@@ -585,29 +585,18 @@
         // });
 
 
-        // REMOVE LATER
-        document.querySelector(".app-content").classList.add("expanded")
 
-        // document.querySelector("#menu-expander").addEventListener("click", () => {
-        //         document.querySelector(".app-content").classList.toggle("expanded")
-        //     })
-
-        // document.querySelectorAll(".cs-sidebar-body .main-menu .link").forEach(
-        //     tab => tab.addEventListener("mouseover", () => {
-        //         document.querySelector(".app-content").classList.add("expanded")
-        //     })
-        // )
-
-        // document.querySelectorAll(".cs-sidebar-body .main-menu .link").forEach(
-        //     tab => tab.addEventListener("mouseout", () => {
-        //         if (document.querySelector(".app-content").classList.contains("expanded"))
-        //             document.querySelector(".app-content").classList.remove("expanded")
-        //     })
-        // )
-
-        // document.querySelector("#show_sidebar").addEventListener("click", () => {
-        //     document.querySelector(".sidebar").classList.toggle("inview")
-        // })
+        if (JSON.parse(localStorage.getItem("fsd-expanded")) == true) {
+            if (!document.querySelector(".app-content").classList.contains("expanded"))
+                document.querySelector(".app-content").classList.add("expanded")
+        }
+        else {
+            document.querySelector(".app-content").classList.remove("expanded")
+        }
+        document.querySelector("#menu-expander").addEventListener("click", () => {
+            document.querySelector(".app-content").classList.toggle("expanded")
+            localStorage.setItem("fsd-expanded", document.querySelector(".app-content").classList.contains("expanded"))
+        })
     </script>    
 
     <script src="{% static 'js/sidebar.js' %}"></script>

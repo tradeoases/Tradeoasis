@@ -365,11 +365,15 @@
                     <div class="product-images grid gap-2 items-start content-start" data-context="{{product_images.context_name}}">
                         <div class="img-magnifier img-wrapper overflow-hidden" >
                             <img  style="object-fit: cover;" src="" alt="{{object.name}}">
+                            <video style="aspect-ratio: 1;object-fit: cover;cursor: pointer;display: none;" src="/media/{{video.video}}" controls="true">
                         </div>
                         <hr>
                         <div class="product-images-list grid gap-2 grid-cols-4">
                             {% for image in product_images.results %}
-                                <img style="aspect-ratio: 1;object-fit: cover;cursor: pointer;" src="/media/{{image.image}}" alt="">
+                                <img style="aspect-ratio: 1;object-fit: cover;cursor: pointer;" src="/media/{{image.image}}" alt="{{object.name}}">
+                            {% endfor %}
+                            {% for video in product_videos.results %}
+                                <video style="aspect-ratio: 1;object-fit: cover;cursor: pointer;" src="/media/{{video.video}}">
                             {% endfor %}
                         </div>
                     </div>
@@ -405,12 +409,32 @@
                                 <a href="{% url 'supplier:store-detail' store.slug %}" class="grid px-4 py-1 text-base bg-blue-200 rounded-full text-lighterBackgroundColor">{{ store }}</a>
                             {% endfor %}
                         </p>
-                        <p class="text-slate-700 grid grid-flow-col flex-wrap gap-2 justify-start items-center" data-context="{{product_stores.context_name}}">
+                        <p class="text-slate-700 grid grid-flow-col flex-wrap gap-2 justify-start items-center" data-context="{{product_tagss.context_name}}">
                             <span>{% trans 'Tags' %}: </span>
                             {% for tag in tags %}
                                 <a href="{% url 'supplier:products' %}?search={{ tag.name }}" class="grid px-4 py-1 text-base bg-blue-200 rounded-full text-lighterBackgroundColor">{{ tag.name }}</a>
                             {% endfor %}
                         </p>
+                        {% if colors %}
+                        <p class="text-slate-700 grid grid-flow-col flex-wrap gap-2 justify-start items-center" data-context="{{product_colors.context_name}}">
+                            <span>{% trans 'Colors' %}: </span>
+                            {% for color in colors %}
+                                {% if color.name %}
+                                <span class="grid px-4 py-1 text-base bg-blue-200 rounded-full" style="width: 30px;block-size:30px;background-color: {{color.name}};"></span>
+                                {% endif %}
+                            {% endfor %}
+                        </p>
+                        {% endif %}
+                        {% if materials %}
+                        <p class="text-slate-700 grid grid-flow-col flex-wrap gap-2 justify-start items-center" data-context="{{product_colors.context_name}}">
+                            <span>{% trans 'Materials' %}: </span>
+                            {% for material in materials %}
+                                {% if material.name %}
+                                <span class="grid px-4 py-1 text-base bg-blue-200 rounded-full text-lighterBackgroundColor">{{material.name}}</span>
+                                {% endif %}
+                                {% endfor %}
+                        </p>
+                        {% endif %}
                     </div>
                 </div>
             </div>

@@ -40,22 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-
 
     const paginate = (response, invoker) => {
         document.querySelector('.table-pagination #next-page').addEventListener('click', () => {
@@ -91,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const closeStoreModal = () => {
         const storeModal = document.querySelector('#store-modal');
-        storeModal.style.display = "none"
+        // storeModal.style.display = "none"
     }
 
     // STORES
@@ -160,14 +144,260 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     // STORES
 
+    function openOperationConfirmModal (url) {
+        const operationConfirmModal = document.querySelector("#operation-confirm-modal");
+        operationConfirmModal.classList.remove('cs-hidden');
+        operationConfirmModal.classList.add('cs-grid');
+
+        operationConfirmModal.querySelector("form#confirm_delete").action = url
+        
+        operationConfirmModal.querySelector("#cancel-operation")
+            .addEventListener("click", () => {
+                operationConfirmModal.classList.remove('cs-grid');
+                operationConfirmModal.classList.add('cs-hidden');
+            })
+    }
+
     // PRODUCTS
+
+    async function openProductModal(response) {
+        let selected_product_preview = document.querySelector(".selected_product_preview")
+        selected_product_preview.classList.add("in-view")
+        
+        document.querySelector(".selected_product_preview #close_selected_product_preview")
+            .addEventListener('click', () => {
+                selected_product_preview.classList.remove("in-view")
+            })
+
+        selected_product_preview.querySelector("#delete_product")
+            .addEventListener("submit", e => {
+                e.preventDefault()
+                let deleteUrl = `${BASE_URL}/en/suppliers/dashboard/product/${response.slug}/delete/`
+                openOperationConfirmModal(deleteUrl)
+            })
+
+        selected_product_preview.querySelector(".product_name").textContent = response.name
+        selected_product_preview.querySelector(".product_desc").textContent = response.description
+
+        let store_area = selected_product_preview.querySelector(".category-area")
+        store_area.innerHTML = ""
+        response.store.forEach(store => {
+            let elem = document.createElement("span")
+            elem.className = "store"
+            elem.innerHTML = `<p>${store.name}</p>`
+            store_area.appendChild(elem)
+
+            // delete cta
+            let delete_cta = document.createElement("button")
+            delete_cta.className = "delete_cta"
+            delete_cta.innerHTML = '<i class="ti-trash"></i>'
+            delete_cta.addEventListener("click", () => {
+                let deleteUrl = `${BASE_URL}/en/suppliers/dashboard/product/${response.slug}/store/${store.slug}/delete/`
+                openOperationConfirmModal(deleteUrl)
+            })
+            elem.appendChild(delete_cta)
+        })
+
+        // category
+        let cat_elem = document.createElement("span")
+        cat_elem.textContent = response.sub_category.category.name
+        store_area.appendChild(cat_elem)
+        
+        // let cat_delete_cta = document.createElement("button")
+        // cat_delete_cta.className = "delete_cta"
+        // cat_delete_cta.innerHTML = '<i class="ti-trash"></i>'
+        // cat_delete_cta.addEventListener("click", () => {
+        //     let deleteUrl = `${BASE_URL}/en/suppliers/dashboard/product/${response.slug}/category/${response.sub_category.category.slug}/delete/`
+        //     openOperationConfirmModal(deleteUrl)
+        // })
+        // cat_elem.appendChild(cat_delete_cta)
+
+        let s_cat_elem = document.createElement("span")
+        s_cat_elem.textContent = response.sub_category.name
+        store_area.appendChild(s_cat_elem)
+        
+        // let s_cat_delete_cta = document.createElement("button")
+        // s_cat_delete_cta.className = "delete_cta"
+        // s_cat_delete_cta.innerHTML = '<i class="ti-trash"></i>'
+        // s_cat_delete_cta.addEventListener("click", () => {
+        //     let deleteUrl = `${BASE_URL}/en/suppliers/dashboard/product/${response.slug}/sub_category/${response.sub_category.slug}/delete/`
+        //     openOperationConfirmModal(deleteUrl)
+        // })
+        // s_cat_elem.appendChild(s_cat_delete_cta)
+
+        // princing
+        let pricings = selected_product_preview.querySelector(".pricings")
+        pricings.innerHTML = ""
+        response.pricings.forEach(pricing => {
+            let elem = document.createElement("div")
+            elem.className = "pricing"
+            elem.innerHTML = `
+                <span class="currency">${pricing.currency}</span>
+                <span class="min_price">${pricing.min_price}</span>
+                <span class="max_price">${pricing.max_price}</span>
+            `
+            pricings.appendChild(elem)
+            // delete cta
+            let delete_cta = document.createElement("button")
+            delete_cta.className = "delete_cta"
+            delete_cta.innerHTML = '<i class="ti-trash"></i>'
+            delete_cta.addEventListener("click", () => {
+                let deleteUrl = `${BASE_URL}/en/suppliers/dashboard/product/${response.slug}/pricing/${pricing.id}/delete/`
+                openOperationConfirmModal(deleteUrl)
+            })
+            elem.appendChild(delete_cta)
+        })
+
+        // tags
+        let tags = selected_product_preview.querySelector(".product_labels#tags")
+        tags.innerHTML = ""
+        response.tags.forEach(tag => {
+            let elem = document.createElement("span")
+            elem.textContent = tag.name
+            tags.appendChild(elem)
+
+            // delete cta
+            let delete_cta = document.createElement("button")
+            delete_cta.className = "delete_cta"
+            delete_cta.innerHTML = '<i class="ti-trash"></i>'
+            delete_cta.addEventListener("click", () => {
+                let deleteUrl = `${BASE_URL}/en/suppliers/dashboard/product/${response.slug}/tag/${tag.id}/delete/`
+                openOperationConfirmModal(deleteUrl)
+            })
+            elem.appendChild(delete_cta)
+        })
+
+        // colors
+        let colors = selected_product_preview.querySelector(".product_labels#colors")
+        colors.closest(".labelling").style.display = "grid"
+        if (response.colors.length > 0) {
+            colors.innerHTML = ""
+            response.colors.forEach(color => {
+                let elem = document.createElement("span")
+                elem.textContent = color.name
+                colors.appendChild(elem)
+
+                // delete cta
+                let delete_cta = document.createElement("button")
+                delete_cta.className = "delete_cta"
+                delete_cta.innerHTML = '<i class="ti-trash"></i>'
+                delete_cta.addEventListener("click", () => {
+                    let deleteUrl = `${BASE_URL}/en/suppliers/dashboard/product/${response.slug}/color/${color.id}/delete/`
+                    openOperationConfirmModal(deleteUrl)
+                })
+                elem.appendChild(delete_cta)
+            })
+        }
+        else {
+            // colors.closest(".labelling").style.display = "none"
+        }
+
+        // materials
+        let materials = selected_product_preview.querySelector(".product_labels#materials")
+        materials.closest(".labelling").style.display = "grid"
+        materials.innerHTML = ""
+        response.materials.forEach(material => {
+            let elem = document.createElement("span")
+            elem.textContent = material.name
+            materials.appendChild(elem)
+
+            // delete cta
+            let delete_cta = document.createElement("button")
+            delete_cta.className = "delete_cta"
+            delete_cta.innerHTML = '<i class="ti-trash"></i>'
+            delete_cta.addEventListener("click", () => {
+                let deleteUrl = `${BASE_URL}/en/suppliers/dashboard/product/${response.slug}/material/${material.id}/delete/`
+                openOperationConfirmModal(deleteUrl)
+            })
+            elem.appendChild(delete_cta)
+        })
+        if (response.materials.length < 1) {
+            // materials.closest(".labelling").style.display = "none"
+        }
+
+        // images
+        let images = selected_product_preview.querySelector(".product_media #images .body")
+        images.closest(".media_section").style.display = "grid"
+        images.innerHTML = ""
+        response.images.forEach(image => {
+            let elem = document.createElement("img")
+            elem.src = image.image
+            
+            let wrapper = document.createElement("div")
+            wrapper.className = "wrapper"
+            wrapper.appendChild(elem)
+            images.appendChild(wrapper)
+
+            // delete cta
+            let delete_cta = document.createElement("button")
+            delete_cta.className = "delete_cta"
+            delete_cta.innerHTML = '<i class="ti-trash"></i>'
+            delete_cta.addEventListener("click", () => {
+                let deleteUrl = `${BASE_URL}/en/suppliers/dashboard/product/${response.slug}/image/${image.slug}/delete/`
+                openOperationConfirmModal(deleteUrl)
+            })
+            wrapper.appendChild(delete_cta)
+        })
+        if (response.images.length < 1) {
+            // images.closest(".media_section").style.display = "none"
+        }
+
+        // videos
+        let videos = selected_product_preview.querySelector(".product_media #videos .body")
+        videos.closest(".media_section").style.display = "grid"
+        videos.innerHTML = ""
+        response.videos.forEach(video => {
+            let elem = document.createElement("video")
+            elem.src = video.video
+            elem.controls = true
+            
+            let wrapper = document.createElement("div")
+            wrapper.className = "wrapper"
+            wrapper.appendChild(elem)
+            videos.appendChild(wrapper)
+
+            // delete cta
+            let delete_cta = document.createElement("button")
+            delete_cta.className = "delete_cta"
+            delete_cta.innerHTML = '<i class="ti-trash"></i>'
+            delete_cta.addEventListener("click", () => {
+                let deleteUrl = `${BASE_URL}/en/suppliers/dashboard/product/${response.slug}/video/${video.slug}/delete/`
+                openOperationConfirmModal(deleteUrl)
+            })
+            wrapper.appendChild(delete_cta)
+        })
+        if (response.videos.length < 1) {
+            // videos.closest(".media_section").style.display = "none"
+        }
+
+        
+        // set edit form action
+        selected_product_preview.querySelectorAll(".floating_form")
+            .forEach(elem => {
+                elem.action = `${BASE_URL}/en/suppliers/dashboard/product/${response.slug}/edit/`
+            })
+
+        selected_product_preview.querySelectorAll(".floating_form .cancel-cta")
+            .forEach(elem => elem.addEventListener("click", e => {
+                e.preventDefault()
+                elem.closest(".floating_form").classList.remove("inview")
+                elem.closest(".floating_form").reset()
+            }))
+
+        selected_product_preview.querySelectorAll(".edit_cta")
+            .forEach(elem => elem.addEventListener("click", () => {
+                elem.parentNode.querySelector(".floating_form").classList.add("inview")
+            }))
+       
+    }
+
     const renderProducts = async () => {
         if (!fetchState["products_loaded"]) {
             pageNum = 1;
             fetchState["products_loaded"] = true;
         }
 
-        let response = await fetchData(url = 'api/products');
+        let response = await fetchData(url = 'api/supplier/products');
 
         const tableBody = document.querySelector('table#products tbody');
 
@@ -189,17 +419,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${record.sub_category.name}</td>
                     <td>${record.currency} ${record.price}</td>
                     <td>${record.created_on}</td>
+                    <td>${record.is_verified}</td>
                     `;
                     // <td><i class="fa fa-info-circle"></i></td>
+                tableRow.addEventListener('click', () => openProductModal(record))
                 tableBody.appendChild(tableRow);
-                tableRow.addEventListener('click', async () => {
-                    if (!isClientModalOpen) {
-                        // fetch client data
-                        // open modal
-                        fetchData(`product/${record.slug}`, has_page_num = false)
-                            .then(response => openProductModal(response));
-                    }
-                })
             })
         }
 

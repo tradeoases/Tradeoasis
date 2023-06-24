@@ -90,10 +90,36 @@ urlpatterns = [
         name="dashboard-productscreate",
     ),
     path(
+        "dashboard/product/<str:slug>/edit/",
+        views.DashboardProductEditView.as_view(),
+        name="dashboard-productedit",
+    ),
+    path(
         "dashboard/product/customize/<str:slug>/",
         views.DashboardProductCustomizationView.as_view(),
         name="dashboard-productscustomize",
     ),
+    path(
+        "dashboard/bulkupload",
+        views.DashboardBulkUploadView.as_view(),
+        name="dashboard-bulkupload",
+    ),
+    path(
+        "dashboard/product/<str:slug>/delete/",
+        views.DashboardProductDeleteView.as_view(),
+        name="dashboard-productdelete",
+    ),
+    path("dashboard/product/<str:product_slug>/store/<str:slug>/delete/", views.DashboardProductStoreDeleteView.as_view(), name="dashboard-storedelete"),
+    path("dashboard/product/<str:product_slug>/category/<str:slug>/delete/", views.DashboardProductCategoryDeleteView.as_view(), name="dashboard-categorydelete"),
+    path("dashboard/product/<str:product_slug>/sub_category/<str:slug>/delete/", views.DashboardProductSubCategoryDeleteView.as_view(), name="dashboard-sub_categorydelete"),
+    path("dashboard/product/<str:product_slug>/pricing/<int:pk>/delete/", views.DashboardProductPricingDeleteView.as_view(), name="dashboard-pricingdelete"),
+    path("dashboard/product/<str:product_slug>/tag/<int:pk>/delete/", views.DashboardProductTagDeleteView.as_view(), name="dashboard-tagdelete"),
+    path("dashboard/product/<str:product_slug>/color/<int:pk>/delete/", views.DashboardProductColorDeleteView.as_view(), name="dashboard-colordelete"),
+    path("dashboard/product/<str:product_slug>/material/<int:pk>/delete/", views.DashboardProductMaterialDeleteView.as_view(), name="dashboard-materialdelete"),
+    path("dashboard/product/<str:product_slug>/image/<str:slug>/delete/", views.DashboardProductImageDeleteView.as_view(), name="dashboard-imagedelete"),
+    path("dashboard/product/<str:product_slug>/video/<str:slug>/delete/", views.DashboardProductVideoDeleteView.as_view(), name="dashboard-videodelete"),
+
+
     path(
         "dashboard/stores/",
         views.DashboardStoresView.as_view(),

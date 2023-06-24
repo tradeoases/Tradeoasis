@@ -13,18 +13,35 @@ document.addEventListener('DOMContentLoaded', () => {
     if ((imgMagnifier && imgMagnifier != null) && (productImagesContainer && productImagesContainer != null)) {
         
         const productImgs = productImagesContainer.querySelectorAll('img');
-        let activeImg = productImgs[0];
-        activeImg.classList.add('active');
+        const productVideos = productImagesContainer.querySelectorAll('video');
+        let activeMedia = productImgs[0];
+        activeMedia.classList.add('active');
         
         // set initial image
         let mainImg = imgMagnifier.querySelector('img');
-        mainImg.src = activeImg.src;
+        mainImg.src = activeMedia.src;
+        let mainVideo = imgMagnifier.querySelector('video');
 
         productImgs.forEach(img => img.addEventListener('click', () => {
-            activeImg.classList.remove('active');
-            activeImg = img;
-            mainImg.src = activeImg.src;
-            activeImg.classList.add('active');
+            if (mainImg.style.display == "none") {
+                mainVideo.pause()
+                mainImg.style.display = "block"
+                mainVideo.style.display = "none"
+            }
+            activeMedia.classList.remove('active');
+            activeMedia = img;
+            mainImg.src = activeMedia.src;
+            activeMedia.classList.add('active');
+        }));
+        productVideos.forEach(vid => vid.addEventListener('click', () => {
+            if (mainVideo.style.display == "none") {
+                mainVideo.style.display = "block"
+                mainImg.style.display = "none"
+            }
+            activeMedia.classList.remove('active');
+            activeMedia = vid;
+            mainVideo.src = activeMedia.src;
+            activeMedia.classList.add('active');
         }));
 
         // magnify product image
@@ -159,3 +176,4 @@ document.addEventListener('DOMContentLoaded', () => {
 //         window.location.href = `${location.hostname}/blocked`;
 //     }
 // }
+
