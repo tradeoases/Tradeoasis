@@ -1,6 +1,7 @@
 # django
 from django.db import models
 from django.utils import timezone
+import datetime
 from django.utils.translation import gettext_lazy as _
 from django.utils.text import slugify
 from django.db.models.signals import post_save, post_delete
@@ -289,28 +290,158 @@ class ProductReview(models.Model):
 #======================================= Order =======================================
 
 class Order(models.Model):
+    class Meta:
+        ordering = ("-id","-updated_on")
+
     order_statuses = (
-        ("PENDING", "PENDING"),
-        ("VIEWED BY SUPPLER", "VIEWED BY SUPPLER"),
-        ("ACCEPTED BY SUPPLER", "ACCEPTED BY SUPPLER"),
-        ("IN DELIVERY", "IN DELIVERY"),
-        ("DELIVERED", "DELIVERED"),
-        ("REJECTED", "REJECTED"),
-        ("COMPLETED", "COMPLETED"),
+        (_("PENDING"), _("PENDING")),
+        (_("VIEWED BY SUPPLER"), _("VIEWED BY SUPPLER")),
+        (_("ACCEPTED BY SUPPLER"), _("ACCEPTED BY SUPPLER")),
+        (_("IN DELIVERY"), _("IN DELIVERY")),
+        (_("DELIVERED"), _("DELIVERED")),
+        (_("REJECTED"), _("REJECTED")),
+        (_("COMPLETED"), _("COMPLETED")),
     )
-    product = models.ForeignKey(to=Product, on_delete=models.CASCADE)
-    business = models.ForeignKey(to=ClientProfile, on_delete=models.CASCADE)
+    order_id = models.CharField(_("Order Id"), max_length=50, unique=True, blank=True, null=True)
+    products = models.ForeignKey(to=Product, on_delete=models.CASCADE)
+    buyer = models.ForeignKey(to=ClientProfile, on_delete=models.CASCADE, related_name="buyer")
+    supplier = models.ForeignKey(to=ClientProfile, on_delete=models.CASCADE, related_name="supplier")
     status = models.CharField(_("Order Status"), max_length=256, choices=order_statuses, default="PENDING")
     currency = models.CharField(_("Currency"), max_length=6)
-    agreed_price = models.DecimalField(_("Agreed Price"), decimal_places=2, max_digits=12)
-    paid_price = models.DecimalField(_("Agreed Price"), decimal_places=2, max_digits=12)
+    total_price = models.DecimalField(_("Total Price"), decimal_places=2, max_digits=12, blank=True, null=True)
+    agreed_price = models.DecimalField(_("Agreed Price"), decimal_places=2, max_digits=12, blank=True, null=True)
+    paid_price = models.DecimalField(_("Paid Price"), decimal_places=2, max_digits=12, blank=True, null=True)
+    discount = models.DecimalField(_("Discount as a Percentage"), decimal_places=2, max_digits=3, blank=True, null=True)
     is_complete = models.BooleanField(_("Completed"), default=False)
     accepted_on = models.DateField(_("Accepted on"), blank=True, null=True)
-    delivery_data = models.DateField(_("Delivery Date"), blank=True, null=True) 
+    delivery_date = models.DateField(_("Delivery Date"), blank=True, null=True) 
     created_on = models.DateField(_("Created on"), default=timezone.now)
+    updated_on = models.DateTimeField(_("Updated on"), null=True, blank=True)
+
+    def generateOrderId(self):
+        pretext = "FODR"
+
+        today = datetime.datetime.now()
+
+        order_id = f"{pretext}{str(today.year)[2:]}{str(today.month)}{str(today.day)}{str(today.hour)}{str(today.minute)}{str(today.second)}"
+
+        # check if id exists
+        if Order.objects.filter(order_id=order_id):
+            # if exists. regenerate
+            order_id = f"{pretext}{str(today.year)[2:]}{str(today.month)}{str(today.day)}{str(today.hour)}{str(today.minute)}{str(today.second)}"
+
+        return order_id
+
+    def computeTotalPrice(self):
+        # using set discounts
+        total_price = self.agreed_price - ( self.agreed_price * (self.discount / 100))
+
+        # adding shipping taxings
+        shipping_details = OrderShippingDetail.objects.filter(order = self)
+        if shipping_details:
+            shipping_tax = shipping_details.first().get_tax()
+            total_price = total_price + (total_price * shipping_tax)
+
+        return total_price
+
+    def save(self, *args, **kwargs):
+
+        def get_tax(self):
+            pass
+        if not self.order_id:
+            self.order_id = self.generateOrderId()
+
+        self.updated_on = datetime.datetime.now()
+
+        # compute total price basing on taxes and charges
+        self.total_price = self.computeTotalPrice()
+
+        if self.is_complete and self.status != "COMPLETED":
+            self.status = "COMPLETED"
+        if self.status == "COMPLETED" and not self.is_complete:
+            self.is_complete = True
+        
+        super(Order, self).save(*args, **kwargs)
     
     def __str__(self) -> str:
-        return f"{self.product.name} - {self.business}"
+        return f"{self.order_id} - {self.supplier} - {self.buyer}"
+
+class OrderProductVariation(models.Model):
+    order = models.OneToOneField(to=Order, on_delete=models.CASCADE)
+    product = models.OneToOneField(to=Product, on_delete=models.CASCADE)
+    price = models.DecimalField(_("Product Price"), decimal_places=2, max_digits=12)
+    color = models.OneToOneField(to=ProductColor, on_delete=models.CASCADE, null=True, blank=True)
+    material = models.OneToOneField(to=ProductMaterial, on_delete=models.CASCADE, null=True, blank=True)
+    
+    def __str__(self) -> str:
+        return f"{self.order}"
+
+class OrderNote(models.Model):
+    order = models.OneToOneField(to=Order, on_delete=models.CASCADE)
+    notes = models.TextField(
+        _("Notes"),
+    )
+    created_on = models.DateField(_("Created on"), default=timezone.now)
+    updated_on = models.DateTimeField(_("Updated on"), null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        self.updated_on = datetime.datetime.now()
+        
+        super(OrderNote, self).save(*args, **kwargs)
+    
+    def __str__(self) -> str:
+        return f"{self.order}"
+
+
+class DeliveryCarrier(models.Model):
+    name = models.CharField(_("Name"), max_length=256)
+    tax = models.DecimalField(_("Tax as a Percentage"), decimal_places=2, max_digits=3, blank=True, null=True)
+    delivery_period = models.IntegerField(_("Days of Delivery"), blank=True, null=True)
+    
+    def __str__(self) -> str:
+        return f"{self.name}"
+
+class OrderShippingDetail(models.Model):
+    order = models.OneToOneField(to=Order, on_delete=models.CASCADE)
+    carrier = models.OneToOneField(to=DeliveryCarrier, on_delete=models.CASCADE)
+    address_1 = models.CharField(_("Shipping Address 1"), max_length=50)
+    address_2 = models.CharField(_("Shipping Address 1"), max_length=50, blank=True, null=True)
+    # use busines contact information
+
+    def get_tax(self):
+        # returns a percentage ie 0.03 = 3%
+        return int(self.carrier.tax) / 100
+
+
+def get_chat_file_path(instance):
+    ext = ".json"
+    filename = instance.chat_id
+    path = os.path.join(f"{settings.ORDERCHATFILES_DIR}/{filename}{ext}")
+    return path
+
+class OrderChat(models.Model):
+    chat_id = models.CharField(_(" Name"), max_length=256, unique=True, blank=True, null=True)
+    order = models.OneToOneField(to=Order, on_delete=models.CASCADE)
+    chatfilepath = models.CharField(
+        _("Chat filepath"),
+        max_length=256,
+        blank=True,
+        null=True,
+    )
+    is_closed = models.BooleanField(_("Chat Closed"), default=False)
+    is_handled = models.BooleanField(_("Chat handled"), default=False)
+    created_on = models.DateField(_("Created on"), default=timezone.now)
+    updated_on = models.DateTimeField(_("Updated on"), null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.chat_id:
+            self.chat_id = self.order.order_id
+
+        if not self.chatfilepath:
+            self.chatfilepath = get_chat_file_path(self)
+
+        self.updated_on = datetime.datetime.now()
+        super().save(*args, **kwargs)
 
 #======================================= Order =======================================
 

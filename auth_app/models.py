@@ -61,6 +61,10 @@ class User(AbstractUser):
             return f"{self.get_username()}"
         return f"{self.first_name} {self.last_name}"
 
+    @property
+    def business(self):
+        return ClientProfile.objects.filter(user=self).first()
+
 
 class ClientProfile(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)

@@ -339,6 +339,7 @@ SOCIALACCOUNT_PROVIDERS = {
 
 # custom
 CHATROOMFILES_DIR = os.path.join(BASE_DIR, "chatrooms")
+ORDERCHATFILES_DIR = os.path.join(BASE_DIR, "chatrooms", "orderchats")
 SUPPORT_EMAIL = os.environ.get("SUPPORT_EMAIL")
 
 

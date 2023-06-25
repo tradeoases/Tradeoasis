@@ -7,7 +7,9 @@
 
 
 /* supplier and buyer dashboards */
-
+.content-area .alert.card.card-info {
+    display: none;
+}
 
 .app-container {
     background-color: var(--brand-secondary);
@@ -464,6 +466,9 @@
     padding: 0.5rem;
 }
 
+.bordered.data-table {
+    padding: 0;
+}
 
 
 .cs-content-area {
@@ -1949,4 +1954,22 @@ tr {
 .selected_product_preview .wrapper:has(video) {
     inline-size: 150px;
     block-size: 100px;
+}
+
+.table-filter-area {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.table-filter-area .filter-form {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 1rem;
+    align-items: center;
+}
+.filter-form input,
+.filter-form select {
+    border-radius: 2px;
+    background-color: transparent;
 }

@@ -73,7 +73,7 @@
                                 </ul> -->
                             </li>
                             <li class="link">
-                                <a href="#">
+                                <a href="{% url 'supplier:dashboard-services' %}">
                                     <span><i class="fa fa-briefcase"></i></span>
                                     <span class="text toggle-able">{%  trans 'Services' %}</span>
                                     <!-- <i class="ti-angle-down"></i> -->
@@ -89,6 +89,15 @@
                                     <span><i class="fa fa-gavel"></i></span>
                                     <span
                                         class="text toggle-able">{%  trans 'Contracts' %}
+                                    </span>
+                                </a>
+                            </li>
+
+                            <li class="link">
+                                <a href="{% url 'supplier:dashboard-order-list' %}">
+                                    <span><i class="fa fa-gavel"></i></span>
+                                    <span
+                                        class="text toggle-able">{%  trans 'Orders' %}
                                     </span>
                                 </a>
                             </li>

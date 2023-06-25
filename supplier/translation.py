@@ -41,3 +41,17 @@ class ServiceTranslationOptions(TranslationOptions):
 @register(models.ServiceTag)
 class ServiceTagTranslationOptions(TranslationOptions):
     fields = ("name",)
+
+
+# orders
+@register(models.Order)
+class ServiceTagTranslationOptions(TranslationOptions):
+    fields = ("status", "total_price", "agreed_price", "paid_price", "discount")
+
+@register(models.OrderNote)
+class ServiceTagTranslationOptions(TranslationOptions):
+    fields = ("notes",)
+
+@register(models.DeliveryCarrier)
+class ServiceTagTranslationOptions(TranslationOptions):
+    fields = ("tax", "delivery_period")

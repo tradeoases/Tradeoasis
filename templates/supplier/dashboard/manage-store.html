@@ -21,18 +21,9 @@
     {% endif %}
     <div class="content-area">
         <div class="view-sub-tabs">
-            <a class="active" href="{% url 'supplier:dashboard-stores' %}">Manage Stores</a>
-            <a href="{% url 'supplier:dashboard-storescreate' %}">Create Store</a>
+            <a class="active" href="{% url 'supplier:dashboard-stores' %}">{% trans "Manage Stores" %}</a>
+            <a href="{% url 'supplier:dashboard-storescreate' %}">{% trans "Create Store" %}</a>
         </div>
-        <!-- <div class="alert card card-info" id="orders-help">
-            <i class="ti-close exit"></i>
-            <div class="title">
-                <small>{% trans 'Please, select a store from the table' %}</small>
-            </div>
-            <div class="text">
-                <small>{% trans 'To add products to it or add store to showroom.' %}.</small>
-            </div>
-        </div> -->
         <div class="bordered data-table products-table">
             <table class="display" id='stores' style="width:100%;margin-top:.5rem;">
                 <thead>

@@ -1,5 +1,6 @@
 from datetime import datetime
-from django.shortcuts import render, redirect
+from django.utils import timezone
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views import View
 from django.views.generic import ListView, DetailView
@@ -2165,3 +2166,92 @@ class DashboardAdvertsPaymentsView(View):
             "adverts" : ManagerModels.Advert.active.filter(product__in = supplier_products)
         }
         return render(request, self.template_name, context=context_data)
+
+
+# orders
+class DashboardOrderList(SupplierOnlyAccessMixin, View):
+    template_name = "supplier/dashboard/orders/order_list.html"
+    model = SupplierModels.Order
+    PER_PAGE_COUNT = 20
+
+    def get(self, request):
+
+        return render(
+            request, template_name=self.template_name, context=self.get_context_data()
+        )
+
+    def get_queryset(self):
+        # filters => creation date, delivery date, overdue, new, buyer
+        self.queryset = self.model.objects.filter(supplier = self.request.user.business)
+
+        buyer_slug = self.request.GET.get("buyer", 0)
+        country_name = self.request.GET.get("buyer", 0)
+        if buyer_slug:
+            buyer = get_object_or_404(AuthModels.ClientProfile, slug=buyer_slug)
+            self.queryset = self.queryset.filter(buyer = buyer)
+            
+        if self.request.GET.get("overdue", 0):
+            today = timezone.now().date()
+            self.queryset = self.queryset.filter(delivery_date__lt=today)
+
+        if country_name:
+            self.queryset = self.queryset.filter(buyer__country=country_name)
+            
+        if self.request.GET.get("status", 0):
+            if self.request.GET.get("status", 0) != "ALL":
+                self.queryset = self.queryset.filter(status=self.request.GET.get("status", 0))
+
+        return self.queryset
+
+    def get_paginator(self):
+
+        queryset = self.get_queryset()
+
+        self.records = random.sample(
+            list(queryset.order_by("-id")),
+            self.PER_PAGE_COUNT if queryset.count() >= 20 else queryset.count(),
+        )
+
+        paginator = Paginator(self.records, self.PER_PAGE_COUNT)
+
+        page_num = self.request.GET.get("page", 1)
+        return paginator.page(page_num)
+
+    def get_context_data(self, **kwargs):
+        context_data = dict()
+
+        paginator = self.get_paginator()
+
+        context_data["view_name"] = _("Order")
+        context_data["page_obj"] = paginator
+        context_data["item_count"] = len(self.records)
+        context_data["current_page_number"] = self.request.GET.get("page", 1)
+
+        context_data["orders"] = {
+            "context-name": "orders",
+            "results": paginator.object_list,
+        }
+
+        context_data["buyers"] = {
+            "context_name": "buyers",
+            "results": [order.buyer for order in self.model.objects.filter(supplier = self.request.user.business)]
+        }
+        context_data["countries"] = {
+            "context_name": "countries",
+            "results": [order.buyer.country for order in self.model.objects.filter(supplier = self.request.user.business)]
+        }
+        context_data["statuses"] = {
+            "context_name": "statuses",
+            "results": [status[0] for status in SupplierModels.Order.order_statuses]
+        }
+        
+        return context_data
+
+
+
+class DashboardOrderDetail(SupplierOnlyAccessMixin, View):
+    template_name = ""
+
+    def get(self, request, order_id):
+        pass
+

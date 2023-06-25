@@ -5,16 +5,25 @@
 
     <div class="main-content">
         <div class="content-area">
-            <!-- <h3 style="margin: .5rem 0;font-weight:600;">Manage Existing Product</h3> -->
-            <!-- <div class="alert card card-info" id="orders-help">
-                <i class="ti-close exit"></i>
-                <div class="title">
-                    <small>{% trans 'Click the "<i class="fa fa-info-circle"></i>" label' %}.</small>
-                </div>
-                <div class="text">
-                    <small>{% trans 'To make changes to your service' %}.</small>
-                </div>
-            </div> -->
+            <div class="view-sub-tabs">
+                <a class="active" href="{% url 'supplier:dashboard-services' %}">{% trans "Services List" %}</a>
+                <a href="{% url 'supplier:dashboard-servicescreate' %}">{% trans "Create Service" %}</a>
+            </div>
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                        <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid rgb(236, 35, 35);color: rgb(236, 35, 35); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                            <p>{{ message }}</p>
+                            <i style="align-self: center;" class="fa fa-close"></i>
+                        </div>
+                    {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                        <div class="cs-flex cs-justify-between cs-content-center cs-text-normal br-sm cs-font-600" style="border: 1px solid hsl(116, 66%, 50%);color: hsl(116, 66%, 50%); padding: .5rem 1.5rem" onclick="(function(){event.target.style.display = 'none';return false;})()">
+                            <p>{{ message }}</p>
+                            <i style="align-self: center;" class="fa fa-close"></i>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
             <div class="card data-table products-table">
                 <table id="services" class="display" style="width:100%;margin-top:.5rem;">
                     <thead>
@@ -51,55 +60,5 @@
             </div>
         </div>
     </div>
-    
-    <script src="{% static 'js/dropdown.js' %}"></script>
-    <script src="{% static 'js/sidebar.js' %}"></script>
-    <script src="{% static 'js/modal.js' %}"></script>
-    <script>
-        // Table
-        $(document).ready(function () {
-            
-        });
-
-
-        // Open Modal
-        const productEditBtns = document.querySelectorAll('.edit');
-        productEditBtns.forEach(btn => {
-            btn.addEventListener('click', editProduct);
-
-        });
-
-        function editProduct(e) {
-            const name = e.target.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent
-            const category = e.target.previousElementSibling.previousElementSibling.previousElementSibling.textContent
-            const price = e.target.previousElementSibling.previousElementSibling.textContent
-
-            const product = {
-                name,
-                model: "TP-Link Modem 04.4v",
-                serialNumber: "25416",
-                category,
-                price,
-                description: "Some description for this particular product"
-            };
-
-            // Open Modal
-            Modal.show(product);
-
-            // Close Modal
-            document.querySelector('#close-modal').addEventListener('click', (event) => {
-                if (event.target.classList.contains('ti-close'))
-                    Modal.hide(event);
-            });
-        }
-
-        const closeCard = document.querySelector('.ti-close.exit');
-        if (closeCard) {
-            closeCard.addEventListener('click', function (e) {
-                e.target.parentElement.remove();
-            });
-        }
-
-    </script>
 
 {% endblock %}

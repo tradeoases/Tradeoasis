@@ -206,4 +206,17 @@ urlpatterns = [
         views.DashboardAdvertsPaymentsView.as_view(),
         name="dashboard-advert-payments",
     ),
+
+    # orders
+    path(
+        "dashboard/orders/",
+        views.DashboardOrderList.as_view(),
+        name="dashboard-order-list",
+    ),
+    path(
+        "dashboard/orders/<str:order_id>",
+        views.DashboardOrderDetail.as_view(),
+        name="dashboard-order-detail",
+    ),
+
 ]

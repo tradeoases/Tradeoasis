@@ -5,20 +5,10 @@
 
     <div class="main-content">
         <div class="content-area">
-            <!-- <h3 style="margin: .5rem 0;font-weight:600;">Manage Existing Product</h3> -->
-            <!-- <div class="alert card card-info" id="orders-help">
-                <i class="ti-close exit"></i>
-                <div class="title">
-                    <small>{% trans 'Click the "Edit" label' %}</small>
-                </div>
-                <div class="text">
-                    <small>{% trans 'To make changes to your product' %}.</small>
-                </div>
-            </div> -->
             <div class="view-sub-tabs">
-                <a class="active" href="">Product List</a>
-                <a href="{% url 'supplier:dashboard-productscreate' %}">Create Product</a>
-                <a href="{% url 'supplier:dashboard-bulkupload' %}">Bulk Upload</a>
+                <a class="active" href="">{% trans "Product List" %}</a>
+                <a href="{% url 'supplier:dashboard-productscreate' %}">{% trans "Create Product" %}</a>
+                <a href="{% url 'supplier:dashboard-bulkupload' %}">{% trans "Bulk Upload" %}</a>
             </div>
             {% if messages %}
                 {% for message in messages %}
