@@ -3,13 +3,329 @@
 {% load i18n %}
 {% block content %}
 
+<script src="{% static 'js/jquery-3.5.1.js' %}"></script>
+
 <style>
-    @media (max-width: 786px) {
+    @media (max-inline-size: 786px) {
         .horizontal-scroll {
             grid-auto-columns: var(--sm-row-size)
         }
     }
+
+    #order_product_modal {
+        display: none;
+    }
+
+    #order_product_modal.inview {
+        display: block;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    #order_product_form {
+        background-color: #fff;
+        inline-size: fit-content;
+        block-size: fit-content;
+    }
+
+    .product-form-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2.4em;
+    }
+
+    .product-main-img {
+        inline-size: 250px;
+        border: 1px solid #999;
+    }
+
+    .additional-img-wrapper {
+        display: flex;
+        gap: .8em;
+    }
+
+    .additional-img-wrapper img {
+        inline-size: 150px;
+        border: 1px solid #999;
+        margin-block: 1.2em;
+    }
+
+    .category {
+        display: block;
+        font-weight: 700;
+        color: #888;
+        font-size: 12px;
+        line-height: 14px;
+        font-style: italic;
+    }
+
+    .product .category:hover {
+        color: #999;
+        cursor: pointer;
+    }
+
+    .product h1 {
+        inline-size: 300px;
+        font-size: 21px;
+        line-height: 24px;
+        margin-top: 5px;
+        color: #333;
+        text-transform: uppercase;
+        letter-spacing: .3px;
+    }
+
+    .stock {
+        display: block;
+        float: right;
+        position: relative;
+        top: 4px;
+        line-height: 11px;
+        padding: 6px 12px 5px 12px;
+        font-size: 11px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #fff;
+        background: #18d11f;
+        border-radius: 14px;
+        letter-spacing: .3px;
+    }
+
+    .block-price-rating {
+        inline-size: 100%;
+        margin-top: 10px;
+    }
+    
+    .block-price {
+        float: left;
+        inline-size: auto;
+        margin-inline-end: 20px;
+    }
+
+    .price-new {
+        float: left;
+        font-weight: bold;
+        margin-inline-end: 10px;
+    }
+
+    .price-new-dollar {
+        float: left;
+        display: block;
+        font-size: 24px;
+        margin-inline-end: 5px;
+        color: #333;
+    }
+
+    .price-new-cent {
+        font-size: 14px;
+    }
+
+    .price-old {
+        text-decoration: line-through;
+        color: #444;
+        font-size: 14px;
+        position: relative;
+        top: 6px;
+    }
+
+    .item-ratings.star-05 i.ti-star:nth-child(1),
+    .item-ratings.star-05 i.ti-star:nth-child(2),
+    .item-ratings.star-05 i.ti-star:nth-child(3),
+    .item-ratings.star-05 i.ti-star:nth-child(4),
+    .item-ratings.star-05 i.ti-star:nth-child(5) {
+        color: rgb(255, 191, 0);
+    }
+
+    .item-ratings.star-04 i.ti-star:nth-child(1),
+    .item-ratings.star-04 i.ti-star:nth-child(2),
+    .item-ratings.star-04 i.ti-star:nth-child(3),
+    .item-ratings.star-04 i.ti-star:nth-child(4) {
+        color: rgb(255, 191, 0);
+    }
+
+    .item-ratings.star-03 i.ti-star:nth-child(1),
+    .item-ratings.star-03 i.ti-star:nth-child(2),
+    .item-ratings.star-03 i.ti-star:nth-child(3) {
+        color: rgb(255, 191, 0);
+    }
+
+    .item-ratings.star-02 i.ti-star:nth-child(1),
+    .item-ratings.star-02 i.ti-star:nth-child(2) {
+        color: rgb(255, 191, 0);
+    }
+
+    .item-ratings.star-01 i.ti-star:nth-child(1) {
+        color: rgb(255, 191, 0);
+    }
+
+    .block-rating {
+        float: right;
+        position: relative;
+        top: 2px;
+    }
+
+    span.rating img {
+        display: block;
+        float: left;
+        inline-size: 110px;
+        margin-left: 10px;
+    }
+
+    span.rating img:hover {
+        cursor: pointer;
+    }
+
+    span.review {
+        display: block;
+        float: left;
+        position: relative;
+        top: 6px;
+        font-weight: 700;
+        color: #888;
+        font-size: 12px;
+        font-style: italic;
+    }
+
+    span.review:hover {
+        color: #999;
+        cursor: pointer;
+    }
+
+    .descr { 
+        font-size: 14px;
+        line-height: 18px;
+        color: #444;
+        letter-spacing: .3px;
+        margin-block-start: 10px;
+        inline-size: 430px;
+        block-size: 71px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: no-wrap;
+    }
+    
+    .block-select {
+         margin-block-start: 15px;
+    }
+
+    .select-currency,
+    .select-color,
+    .select-size {
+        float: left;
+        font-size: 14px;
+        font-weight: 700;
+        color: #888;
+    }
+
+    .select-currency span,
+    .select-color span,
+    .select-size span {
+        display: block;
+        margin-block-end: 5px;
+    }
+
+    select.color {
+        inline-size: 320px;
+        margin-right: 10px;
+    }
+
+    select.size {
+        inline-size: 100px;
+    }
+
+    select.currency, select.color, select.size {
+        padding: 8px 10px;
+        border: .5px solid #ddd;
+        border-radius: 2px;
+        text-transform: uppercase;
+        font-weight: 700;
+        opacity: .7;
+        letter-spacing: .3px;
+    }
+    
+    select.select-currency {
+        margin-block-start: .6em;
+        inline-size: 100%;
+    }
+
+    .btn {
+        margin: 10px auto;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: .3px;
+        text-transform: uppercase;
+        padding: 15px 0;
+        inline-size: 100%;
+        border-radius: 2px;
+        cursor: pointer;
+        background: var(--brand-primary);
+    }
+
+    .btn:hover {
+        opacity: .8;
+    }
+
+    .block-footer {
+        inline-size: 100%;
+        margin-top: 10px;
+    }
+
+    .block-links {
+        float: left;
+        cursor: pointer;
+    }
+
+    .block-links img {
+        inline-size: 20px;
+        opacity: .3;
+        vertical-align: middle;
+        margin-right: 5px;
+    }
+
+    .block-links span {
+        font-size: 11px;
+        color: #888888;
+        font-weight: 700;
+        letter-spacing: .3px;
+        text-transform: uppercase;
+        font-style: italic;
+    }
+
+    .block-links span:hover {
+        color: #999;
+    }
+
+    .set-product-qunatity {
+        display: flex;
+        justify-content: space-between;
+        margin-block-start: .6em;
+    }
+
+    .set-product-qunatity * {
+        flex: 1;
+        border: 1px solid var(--brand-primary);
+        padding: .4em 1.2em;
+        font-size: 20px;
+    }
+
+    .set-product-qunatity button {
+        color: #fff;
+        background-color: var(--brand-primary);
+    }
+
+
+
 </style>
+
 
     <section class="main w-12/12 gap-2">
         <div class="breadcrumb flex flex-wrap justify-start gap-2 md:w-full mx-auto px-5 ">
@@ -76,6 +392,10 @@
                             <a href="{% url 'supplier:supplier-detail' product_supplier.results.profile.slug %}" class="grid grid-flow-col place-items-center gap-3 px-3 md:px-5 py-2 text-base md:py-2 bg-yellowColor hover:bg-yellowColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
                                 <span class="text-white"><i class="fa fa-address-book"></i></span>
                                 <span>{% trans 'Contact Supplier' %}</span>
+                            </a>
+                            <a id="order_product" href="#" class="grid grid-flow-col place-items-center gap-3 px-3 md:px-5 py-2 text-base md:py-2 bg-yellowColor hover:bg-yellowColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
+                                <span class="text-white"><i class="fa fa-shopping-cart"></i></span>
+                                <span>{% trans 'Order Product' %}</span>
                             </a>
                         </div>
                     </div>
@@ -170,7 +490,7 @@
                         <div class="promotion-card grid"  data-new_arrival-index="{{forloop.counter}}">
                             <a class="grid rounded-md " href="{% url 'supplier:new-arivals' %}" style="background-color: rgba(239, 246, 247, 0.438);padding: .25rem;">
                                 <div class="grid p-2">
-                                    <img loading="lazy" src="/media/{{new_arrival.main_image.image}}" alt="{{new_arrival.product.name}}" class="item-img rounded" style="width: 100%;aspect-ratio:1/.8;object-fit:cover;">
+                                    <img loading="lazy" src="/media/{{new_arrival.main_image.image}}" alt="{{new_arrival.product.name}}" class="item-img rounded" style="inline-size: 100%;aspect-ratio:1/.8;object-fit:cover;">
                                 </div>
                                 <div class="item-details grid gap-0 px-2 items-start content-start">
                                     <h5 class="text-base font-semibold leading-5">
@@ -201,7 +521,7 @@
                         <div class="promotion-card grid"  data-advertised_product-index="{{forloop.counter}}">
                             <a class="grid rounded-md" href="{% url 'supplier:product-detail' advertised_product.product.slug %}" style="background-color: rgba(239, 246, 247, 0.438);padding: .25rem;">
                                 <div class="grid p-2">
-                                    <img loading="lazy" src="/media/{{advertised_product.main_image.image}}" alt="{{advertised_product.product.name}}" class="item-img rounded" style="width: 100%;aspect-ratio:1/.8;object-fit:cover;">
+                                    <img loading="lazy" src="/media/{{advertised_product.main_image.image}}" alt="{{advertised_product.product.name}}" class="item-img rounded" style="inline-size: 100%;aspect-ratio:1/.8;object-fit:cover;">
                                 </div>
                                 <div class="item-details grid gap-0 px-2 items-start content-start">
                                     <h5 class="text-base font-semibold leading-5">
@@ -219,6 +539,208 @@
             </div>
         </div>
     </section>
+
+    <section id="order_product_modal">
+        <div id="order_product_form">
+            <div class="flex" id="remove_modal" style="padding: .6em;justify-content: flex-end;align-items: center;"><i class="ti-close"></i></div>
+            <div class="product-form-wrapper">
+                <!-- <div class="pics">
+                    <span class="main-img-wrapper">
+                        <img class="product-main-img" src="/media/ProductImage/images/case-strap-3064a984-31ab-418c-955b-02cb2984ec6c-ce.jpeg">
+                    </span>
+                    <div class="additional-img-wrapper">
+                        <img src="/media/ProductImage/images/case-strap-3064a984-31ab-418c-955b-02cb2984ec6c-ce.jpeg">
+                        <img src="/media/ProductImage/images/case-strap-3064a984-31ab-418c-955b-02cb2984ec6c-ce.jpeg">
+                        <img src="/media/ProductImage/images/case-strap-3064a984-31ab-418c-955b-02cb2984ec6c-ce.jpeg">
+                        <img src="/media/ProductImage/images/case-strap-3064a984-31ab-418c-955b-02cb2984ec6c-ce.jpeg">
+                    </div>
+                </div> -->
+                <div class="product">
+                    <span class="category">Wristwear</span>
+                    <span class="stock">In Stock</span>
+                    <h1>Reizhen Wrist Watch</h1>
+                    <div class="block-price-rating">
+                        <div class="block-price">
+                        <div class="price-new">
+                            <span class="price-new-dollar">$399</span>
+                            <span class="price-new-cent">90</span>  
+                        </div>
+                        <div class="price-old">
+                            <span class="price-old-dollar">$599</span>
+                            <span class="price-old-cent">&#8228;90</span>
+                        </div>  
+                        </div>
+                        <div class="block-rating">
+                        <span class="review">40 Reviews</span>
+                        <span class="rating"><img src="/media/ProductImage/images/case-strap-3064a984-31ab-418c-955b-02cb2984ec6c-ce.jpeg"></span>
+                        </div>
+                    </div>
+                    <span>Rating</span>
+                    <div class="item-ratings star-03">
+                        <i class="ti-star"></i>
+                        <i class="ti-star"></i>
+                        <i class="ti-star"></i>
+                        <i class="ti-star"></i>
+                        <i class="ti-star"></i>
+                    </div>
+                    <div class="descr">
+                        <p>
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam vitae quas illum error nobis est dolores delectus quae placeat doloribus, voluptates voluptas nisi fugiat aut temporibus. Delectus esse accusantium assumenda.
+                        </p>
+                    </div> 
+                    <div class="block-select clearfix">
+                        <form id="product_specs_form">
+                            <div style="display: flex;flex: 1;">
+                                <div class="select-color">
+                                    <span>Select Color</span>
+                                    <select class="color" name="color">
+                                        <option>White</option>
+                                        <option>Black</option>
+                                        <option>Brown</option>
+                                    </select>
+                                </div>
+                                <div class="select-size">
+                                    <span>Size</span>
+                                    <select class="size" name="size">
+                                        <option>8</option>
+                                        <option>9</option>
+                                        <option>10</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="set-product-qunatity">
+                                <button onclick="decreaseQuantity()">-</button>
+                                <span id="quantity" style="text-align: center;" name="quantity">1</span>
+                                <button onclick="increaseQuantity()">+</button>
+                            </div>
+                            <div class="select-currency" style="inline-size: 100%;">
+                                <span style="margin-block-start: .6em;">Select material</span>
+                                <select class="currency" name="material" style="inline-size: 100%;">
+                                    <option>Cotton</option>
+                                    <option>Silk</option>
+                                    <option>Wool</option>
+                                </select>
+                            </div>
+                            <div class="select-currency" style="inline-size: 100%;">
+                                <span style="margin-block-start: .6em;">Select currency</span>
+                                <select class="currency" name="currency" style="inline-size: 100%;">
+                                    <option>Euro</option>
+                                    <option>Dollar</option>
+                                    <option>Pound</option>
+                                </select>
+                            </div> 
+                            <button class="btn" id="add_product_to_cart">Buy Now</button>
+                        </form> 
+                    </div>
+                    <div class="block-footer">
+                        <div class="block-links">
+                            <div id="add_to_wishlist">
+                                <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/23243-200.png">
+                                <span>Click to Add to Wishlist</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script>
+
+        const productModalOverlay = document.querySelector("#order_product_modal");
+        const removeProductModalOverlay = document.querySelector("#remove_modal");
+        const orderProduct = document.querySelector("#order_product");
+        orderProduct.addEventListener("click", () => productModalOverlay.classList.add("inview"));
+        removeProductModalOverlay.addEventListener("click", () => productModalOverlay.classList.remove("inview"));
+
+
+        var productQuantity = 1;
+  
+        function increaseQuantity() {
+            productQuantity++;
+            updateQuantityDisplay();
+        }
+        
+        function decreaseQuantity() {
+            if (productQuantity > 1) {
+                productQuantity--;
+                updateQuantityDisplay();
+            }
+        }
+        
+        function updateQuantityDisplay() {
+            document.getElementById("quantity").innerText = productQuantity;
+        }
+
+
+        // Add product to wishlist
+        // I think here only the product ID is necessary
+        async function addProductToWishlist(event, product) {
+            event.preventDefault();
+
+            // TODO: Provide path to API endpoint
+            const endpoint = "";
+            try {
+                let res = await fetch(endpoint,{
+                method: "POST",
+                credentials: "same-origin",
+                body: JSON.stringify(product)
+                });
+                
+                if (res.status === 201) {
+                    // TODO: Provide URL to wishlist
+                    document.location.href = "";
+                }else{
+                console.log("Product not added to wishlist.");
+                }
+            }
+            catch (err) {
+                console.error(err);
+            }
+        }
+
+        const addToWishlist = document.querySelector("#add_to_wishlist");
+        addToWishlist.addEventListener("click", event => {
+            addProductToWishlist(event, product);
+        });
+
+
+        // Add product to cart
+        async function addProductToCart(event, product) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+
+            // TODO: Provide path to API endpoint
+            const endpoint = "";
+            try {
+                let res = await fetch(endpoint,{
+                method: "POST",
+                credentials: "same-origin",
+                body: JSON.stringify(product)
+                });
+                
+                if (res.status === 201) {
+                    // TODO: Provide URL to orders list
+                    document.location.href = "";
+                }else{
+                console.log("Could not place order.");
+                }
+            }
+            catch (err) {
+                console.error(err);
+            }
+        }
+
+        const addToCart = document.querySelector("#add_product_to_cart");
+        addToCart.addEventListener("click", event => {
+            addProductToCart(event, product);
+        });
+
+
+
+    </script>
 
     {% include '../utils/product_list.html' %}
 

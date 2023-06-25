@@ -230,6 +230,16 @@
             margin-block-start: .6rem;
         }
 
+
+        .notification-actions a {
+            margin-block-start: 1.2rem;
+            padding: .6rem 1.2rem;
+            border-radius: 13px;
+            cursor: pointer;
+            background-color: beige;
+            border: 0;
+        }
+        
         .notification-actions button {
             margin-block-start: 1.2rem;
             padding: .6rem 1.2rem;
@@ -312,6 +322,18 @@
                                 </a>
                             </li>
                             <li class="link">
+                                <a href="{% url 'buyer:orders' %}">
+                                    <span class="flex"><img src="/static/graphics/cart.svg" alt=""></span>
+                                    <span class="text toggle-able">{%  trans 'Order History' %}</span>
+                                </a>
+                            </li>
+                            <li class="link">
+                                <a href="{% url 'buyer:order-tracking' %}">
+                                    <span class="flex"><img src="/static/graphics/cart.svg" alt=""></span>
+                                    <span class="text toggle-able">{%  trans 'Order Tracking' %}</span>
+                                </a>
+                            </li>
+                            <li class="link">
                                 <a href="{% url 'buyer:wishlist' %}">
                                     <span><img src="/static/graphics/layer.png" alt=""></span>
                                     <span class="text toggle-able">{%  trans 'Whishlist' %}</span>
@@ -352,6 +374,14 @@
                                 </a>
                             </li>
                             <li class="link">
+                                <a href="{% url 'buyer:bids' %}">
+                                    <span class="flex"><img src="/static/graphics/bid.svg" alt=""></span>
+                                    <span
+                                        class="text toggle-able">{%  trans 'Bids' %}
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="link">
                                 <a href="{% url 'buyer:notifications' %}">
                                     <span><img src="/static/graphics/bell.png" alt=""></span>
                                     <span
@@ -361,7 +391,7 @@
                             </li>
                             <li class="link">
                                 <a href="{% url 'buyer:reporting-analytics' %}">
-                                    <span><img src="/static/graphics/bell.png" alt=""></span>
+                                    <span><img src="/static/graphics/reports.svg" alt=""></span>
                                     <span
                                         class="text toggle-able">{%  trans 'Reporting & Analytics' %}
                                     </span>

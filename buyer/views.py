@@ -266,6 +266,19 @@ class ContractListView(BuyerOnlyAccessMixin, ListView):
 
         return context_data
 
+class OrdersView(BuyerOnlyAccessMixin, ListView):
+    template_name = "buyer/dashboard/orders.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+
+class OrderDetailsView(BuyerOnlyAccessMixin, ListView):
+    template_name = "buyer/dashboard/order-details.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
+
 
 class WishListView(BuyerOnlyAccessMixin, ListView):
     template_name = "buyer/dashboard/wishlist.html"
@@ -320,6 +333,19 @@ class CalendarView(BuyerOnlyAccessMixin, ListView):
 
 class NotificationsView(BuyerOnlyAccessMixin, ListView):
     template_name = "buyer/dashboard/notifications.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+class BidsView(BuyerOnlyAccessMixin, ListView):
+    template_name = "buyer/dashboard/bids.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+
+class BidsCompareView(BuyerOnlyAccessMixin, ListView):
+    template_name = "buyer/dashboard/bids-compare.html"
 
     def get(self, request):
         return render(request, self.template_name)
