@@ -22,3 +22,5 @@ pyyaml
 paypalrestsdk
 daphne
 gunicorn
+pandas
+openpyxl
