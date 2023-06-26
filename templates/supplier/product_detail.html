@@ -75,10 +75,12 @@
                                 <span class="text-white"><i class="fa fa-shopping-cart"></i></span>
                                 <span>{% trans 'Add To Cart' %}</span>
                             </a>
-                            <a id="order_product" href="#" class="grid grid-flow-col place-items-center gap-3 px-3 md:px-5 py-2 text-base md:py-2 duration-200 transition-all ease-in rounded-full text-white font-semibold" style="background-color: black;color: #fff">
-                                <span class="text-white"><i class="fa fa-shopping-cart"></i></span>
-                                <span>{% trans 'Add To Wishlist' %}</span>
-                            </a>
+                            <form action="{% url 'buyer:wishlist-add-product' object.slug %}" method="POST">
+                                <button class="grid grid-flow-col place-items-center gap-3 px-3 md:px-5 py-2 text-base md:py-2 duration-200 transition-all ease-in rounded-full text-white font-semibold" style="background-color: black;color: #fff">
+                                    <span class="text-white"><i class="fa fa-shopping-cart"></i></span>
+                                    <span>{% trans 'Add To Wishlist' %}</span>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -223,7 +225,7 @@
     </section>
 
     <section id="order_product_modal">
-        <div id="order_product_form">
+        <div id="order_product_form" data-product-slug="{{object.slug}}">
             <div class="flex" id="remove_modal" style="padding: .6em;justify-content: flex-end;align-items: center;"><i class="ti-close"></i></div>
             <div class="product-form-wrapper">
                 <div class="product">
@@ -260,47 +262,39 @@
                         </p>
                     </div> 
                     <div class="block-select clearfix">
-                        <form id="product_specs_form">
-                            <div style="display: flex;flex: 1;">
+                        <form id="product_variable_form" method="POST" action="" style="display: grid; gap: .7rem;">
+                            <div class="set-product-qunatity">
+                                <button id="decrementQuantity">-</button>
+                                <input type="number" style="text-align: center;" name="quantity" value="1" id="quantity">
+                                <button id="incrementQuantity">+</button>
+                            </div>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: .5rem;justify-content: stretch;">
                                 <div class="select-color">
                                     <span>{% trans "Select Color" %}</span>
-                                    <select class="color" name="color">
+                                    <select class="color" name="color" id="color">
                                         {% for color in colors %}
-                                            <option>{{ color.name }}</option>
+                                            <option value="{{ color.pk }}">{{ color.name }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
-                                <!-- <div class="select-size">
-                                    <span>Size</span>
-                                    <select class="size" name="size">
-                                        <option>8</option>
-                                        <option>9</option>
-                                        <option>10</option>
+                                <div class="select-currency" style="inline-size: 100%;">
+                                    <span>Select material</span>
+                                    <select class="currency" name="material" id="material" style="inline-size: 100%;">
+                                        {% for material in materials %}
+                                            <option value="{{ material.pk }}">{{ material.name }}</option>
+                                        {% endfor %}
                                     </select>
-                                </div> -->
-                            </div>
-                            <div class="set-product-qunatity">
-                                <button onclick="decreaseQuantity()">-</button>
-                                <span id="quantity" style="text-align: center;" name="quantity">1</span>
-                                <button onclick="increaseQuantity()">+</button>
+                                </div>
                             </div>
                             <div class="select-currency" style="inline-size: 100%;">
-                                <span style="margin-block-start: .6em;">Select material</span>
-                                <select class="currency" name="material" style="inline-size: 100%;">
-                                    {% for material in materials %}
-                                        <option>{{ material.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div class="select-currency" style="inline-size: 100%;">
-                                <span style="margin-block-start: .6em;">Select currency</span>
-                                <select class="currency" name="currency" style="inline-size: 100%;">
+                                <span>Select currency</span>
+                                <select class="currency" name="pricing" id="pricing" style="inline-size: 100%;">
                                     {% for pricing in pricings %}
-                                        <option>{{ pricing.currency }} {{ pricing.min_price }} - {{ pricing.currency }} {{ pricing.max_price }}</option>
+                                        <option value="{{ pricing.pk }}">{{ pricing.currency }} {{ pricing.min_price }} - {{ pricing.currency }} {{ pricing.max_price }}</option>
                                     {% endfor %}
                                 </select>
                             </div> 
-                            <button class="btn" id="add_product_to_cart">{% trans "Add To Cart" %}</button>
+                            <button type="submit" style="background-color: rgb(236, 171, 8);" class="btn" id="add_product_to_cart">{% trans "Add To Cart" %}</button>
                         </form> 
                     </div>
                 </div>
@@ -312,97 +306,43 @@
     <script>
 
         const productModalOverlay = document.querySelector("#order_product_modal");
-        const removeProductModalOverlay = document.querySelector("#remove_modal");
         const orderProduct = document.querySelector("#order_product");
-        orderProduct.addEventListener("click", () => productModalOverlay.classList.add("inview"));
-        removeProductModalOverlay.addEventListener("click", () => productModalOverlay.classList.remove("inview"));
-
-
-        var productQuantity = 1;
-  
-        function increaseQuantity() {
-            productQuantity++;
-            updateQuantityDisplay();
-        }
-        
-        function decreaseQuantity() {
-            if (productQuantity > 1) {
-                productQuantity--;
-                updateQuantityDisplay();
-            }
-        }
-        
-        function updateQuantityDisplay() {
-            document.getElementById("quantity").innerText = productQuantity;
-        }
-
-
-        // Add product to wishlist
-        // I think here only the product ID is necessary
-        async function addProductToWishlist(event, product) {
-            event.preventDefault();
-
-            // TODO: Provide path to API endpoint
-            const endpoint = "";
-            try {
-                let res = await fetch(endpoint,{
-                method: "POST",
-                credentials: "same-origin",
-                body: JSON.stringify(product)
-                });
-                
-                if (res.status === 201) {
-                    // TODO: Provide URL to wishlist
-                    document.location.href = "";
-                }else{
-                console.log("Product not added to wishlist.");
+        orderProduct.addEventListener("click", () => {
+            productModalOverlay.classList.add("inview")
+            const removeProductModalOverlay = document.querySelector("#remove_modal");
+            removeProductModalOverlay.addEventListener("click", () => productModalOverlay.classList.remove("inview"));
+            document.getElementById("incrementQuantity").addEventListener("click", e => {
+                e.preventDefault()
+                let currentVal = parseInt(document.getElementById("quantity").value)
+                let newVal = currentVal + 1;
+                document.getElementById("quantity").value = newVal
+            })                
+            document.getElementById("decrementQuantity").addEventListener("click", e => {
+                e.preventDefault()
+                let currentVal = parseInt(document.getElementById("quantity").value)
+                if (currentVal <= 1) return;
+                let newVal = currentVal - 1;
+                document.getElementById("quantity").value = newVal
+            })
+            
+            document.querySelector("#add_product_to_cart").addEventListener("click", async (e) => {
+                e.preventDefault()
+                let product_data = {
+                    color: document.querySelector("#color").value,
+                    material: document.querySelector("#material").value,
+                    pricing: document.querySelector("#pricing").value,
+                    quantity: document.querySelector("#quantity").value
                 }
-            }
-            catch (err) {
-                console.error(err);
-            }
-        }
-
-        const addToWishlist = document.querySelector("#add_to_wishlist");
-        addToWishlist.addEventListener("click", event => {
-            addProductToWishlist(event, product);
-        });
-
-
-        // Add product to cart
-        async function addProductToCart(event, product) {
-            event.preventDefault();
-            const form = event.target;
-            const formData = new FormData(form);
-
-            // TODO: Provide path to API endpoint
-            const endpoint = "";
-            try {
-                let res = await fetch(endpoint,{
-                method: "POST",
-                credentials: "same-origin",
-                body: JSON.stringify(product)
-                });
-                
-                if (res.status === 201) {
-                    // TODO: Provide URL to orders list
-                    document.location.href = "";
-                }else{
-                console.log("Could not place order.");
+                let product_slug = document.querySelector("#order_product_form").dataset.productSlug
+                try {
+                    let response = await makeRequest(`/api/cart/product/${product_slug}/add/`, method="POST", data=product_data)
+                    productModalOverlay.classList.remove("inview")
                 }
-            }
-            catch (err) {
-                console.error(err);
-            }
-        }
+                catch (err) {
 
-        const addToCart = document.querySelector("#add_product_to_cart");
-        addToCart.addEventListener("click", event => {
-            addProductToCart(event, product);
+                }
+            })
         });
-
-
-
     </script>
 
     {% include '../utils/product_list.html' %}

@@ -21,7 +21,6 @@ urlpatterns = [
     path("contracts/", views.ContractListView.as_view(), name="contracts"),
     path("orders/", views.OrdersView.as_view(), name="orders"),
     path("order-details/", views.OrderDetailsView.as_view(), name="order-details"),
-    path("wishlist/", views.WishListView.as_view(), name="wishlist"),
     path("request-for-quote/", views.RequestForQuoteView.as_view(), name="request-for-quote"),
     path("order-tracking/", views.OrderTrackingView.as_view(), name="order-tracking"),
     path("order-history/", views.OrderHistoryView.as_view(), name="order-history"),
@@ -39,4 +38,14 @@ urlpatterns = [
         name="dashboard-contractsdetails",
     ),
     path("product/", views.VisitedProductsListView.as_view(), name="products"),
+
+
+    #---------------------------------------- WishList ----------------------------------------
+    path("wishlist/", views.WishListListView.as_view(), name="wishlist"),
+    path("wishlist/product/<str:product_slug>/add/", views.WishListAppeendAppendView.as_view(), name="wishlist-add-product"),
+    path("wishlist/product/<str:product_slug>/delete/", views.WishListDeleteProductView.as_view(), name="wishlist-delete-product"),
+    #---------------------------------------- WishList ----------------------------------------
+
+    
+    path("cart/", views.CartListView.as_view(), name="cart-list"),
 ]

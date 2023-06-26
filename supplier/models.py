@@ -16,6 +16,7 @@ import string
 
 # apps
 from auth_app.models import Supplier, Buyer, ClientProfile, User
+from buyer import models as BuyerModels
 
 # utility functions
 def get_file_path(instance, filename):
@@ -305,7 +306,6 @@ class Order(models.Model):
         (_("COMPLETED"), _("COMPLETED")),
     )
     order_id = models.CharField(_("Order Id"), max_length=50, unique=True, blank=True, null=True)
-    products = models.ForeignKey(to=Product, on_delete=models.CASCADE)
     buyer = models.ForeignKey(to=ClientProfile, on_delete=models.CASCADE, related_name="buyer")
     supplier = models.ForeignKey(to=ClientProfile, on_delete=models.CASCADE, related_name="supplier")
     status = models.CharField(_("Order Status"), max_length=256, choices=order_statuses, default="PENDING")
@@ -369,23 +369,25 @@ class Order(models.Model):
         return f"{self.order_id} - {self.supplier} - {self.buyer} - {self.status}"
 
 class OrderProductVariation(models.Model):
-    order = models.OneToOneField(to=Order, on_delete=models.CASCADE)
-    product = models.OneToOneField(to=Product, on_delete=models.CASCADE)
-    currency = models.CharField(_("Currency"), max_length=6)
-    price = models.DecimalField(_("Product Price"), decimal_places=2, max_digits=12)
-    color = models.OneToOneField(to=ProductColor, on_delete=models.CASCADE, null=True, blank=True)
-    material = models.OneToOneField(to=ProductMaterial, on_delete=models.CASCADE, null=True, blank=True)
+    order = models.OneToOneField(to=Order, on_delete=models.CASCADE, null=True, blank=True)
+    cart = models.OneToOneField(to=BuyerModels.Cart, on_delete=models.SET_NULL, null=True, blank=True)
+    product = models.ForeignKey(to=Product, on_delete=models.CASCADE)
+    price = models.ForeignKey(to=ProductPrice, on_delete=models.CASCADE, null=True, blank=True)
+    color = models.ForeignKey(to=ProductColor, on_delete=models.CASCADE, null=True, blank=True)
+    material = models.ForeignKey(to=ProductMaterial, on_delete=models.CASCADE, null=True, blank=True)
     quantity = models.IntegerField(_("Quantity"), validators=[MinValueValidator(0)])
-    total_price = models.DecimalField(_("Total Price"), decimal_places=2, max_digits=12, blank=True, null=True)
+    min_total_price = models.DecimalField(_("Min Total Price"), decimal_places=2, max_digits=12, blank=True, null=True)
+    max_total_price = models.DecimalField(_("Max Total Price"), decimal_places=2, max_digits=12, blank=True, null=True)
 
     def save(self, *args, **kwargs):
-        if self.quantity and self.price:
-            self.total_price = self.quantity * self.price
+        if self.quantity > 0 and self.price:
+            self.min_total_price = self.quantity * self.price.min_price
+            self.max_total_price = self.quantity * self.price.max_price
         
         super(OrderProductVariation, self).save(*args, **kwargs)
     
     def __str__(self) -> str:
-        return f"{self.order}"
+        return f"{self.product}"
 
 class OrderNote(models.Model):
     user = models.ForeignKey(
@@ -461,6 +463,13 @@ class OrderChat(models.Model):
 #======================================= Order =======================================
 
 
+#======================================= WishList =======================================
+
+class WishListProduct(models.Model):
+    buyer = models.ForeignKey(to=ClientProfile, on_delete=models.CASCADE)
+    product = models.ForeignKey(to=Product, on_delete=models.CASCADE)
+
+#======================================= WishList =======================================
 class Service(models.Model):
     supplier = models.ForeignKey(
         to=Supplier,

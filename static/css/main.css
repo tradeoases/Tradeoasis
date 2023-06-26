@@ -1292,12 +1292,13 @@ span.review:hover {
 .select-color span,
 .select-size span {
     display: block;
-    margin-block-end: 5px;
+    /* margin-block-end: 5px; */
 }
 
 select.color {
-    inline-size: 320px;
-    margin-right: 10px;
+    /* inline-size: 320px;
+    margin-right: 10px; */
+    inline-size: 100%;
 }
 
 select.size {
@@ -1372,6 +1373,7 @@ select.select-currency {
     display: flex;
     justify-content: space-between;
     margin-block-start: .6em;
+    gap: .5rem
 }
 
 .set-product-qunatity * {

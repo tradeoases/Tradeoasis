@@ -47,11 +47,18 @@
 .cs-sidebar-body .main-menu {
     display: grid;
     justify-items: stretch;
-    gap: .5rem;
+    gap: .5rem;   
 }
 
 .cs-sidebar-body .main-menu {
     padding-block: 1rem;
+    max-block-size: 90vh;
+    overflow-y: auto;
+    overflow-x: none;
+}
+
+.cs-sidebar-body .main-menu::-webkit-scrollbar {
+    display: none;
 }
 
 .cs-app-logo {
@@ -229,18 +236,6 @@
     block-size: 40px;
     border-radius: 100%;
     position: relative;
-}
-
-.cs-nav-links .icon::after {
-    content: "2";
-    position: absolute;
-    top: 6px;
-    right: 6px;
-    color: #fff;
-    font-size: 9px;
-    background-color: rgb(242, 114, 17);
-    padding: .1rem .25rem;
-    border-radius: 100%;
 }
 
 .cs-nav-links .link a {
@@ -783,16 +778,20 @@ tr {
     position: relative;
 }
 
-.cs-nav-links .icon::after {
-    content: "2";
+.cs-nav-links .icon span.count {
+    /* content: "2"; */
     position: absolute;
     top: 6px;
     right: 6px;
     color: #fff;
     font-size: 9px;
     background-color: rgb(242, 114, 17);
-    padding: .1rem .25rem;
+    padding: .15rem .25rem;
     border-radius: 100%;
+    display: none;
+}
+.cs-nav-links .icon span.count.inview {
+    display: grid;
 }
 
 .cs-nav-links .link a {

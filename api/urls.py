@@ -27,9 +27,16 @@ urlpatterns = [
     ),
     #---------------------------------------- Products ----------------------------------------
 
-    # calender events
+    #---------------------------------------- Calender ----------------------------------------
     path("events/", views.CalenderEventListView.as_view(), name="events"),
     path("events/create/", views.CalenderEventCreateView.as_view(), name="event-create"),
     path("events/<int:pk>/details/", views.CalenderEventDetailView.as_view(), name="event-detail"),
     path("events/<int:pk>/delete/", views.CalenderEventDeleteView.as_view(), name="event-detail"),
+    #---------------------------------------- Calender ----------------------------------------
+
+
+    #---------------------------------------- Cart ----------------------------------------
+    path("cart/", views.CartListView.as_view(), name="cart"),
+    path("cart/product/<str:product_slug>/add/", views.CartAppeendAppendView.as_view(), name="cart-add-product"),
+    path("cart/product/<str:product_slug>/delete/", views.CartDeleteProductView.as_view(), name="wishlist-delete-product"),
 ]

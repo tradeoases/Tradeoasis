@@ -277,3 +277,27 @@ class CalenderEventserializer(serializers.ModelSerializer):
     class Meta:
         model = ManagerModels.CalenderEvent
         fields = "__all__"
+
+
+class Orderserializer(serializers.ModelSerializer):
+    buyer = serializers.PrimaryKeyRelatedField(queryset=AuthModels.ClientProfile.objects.all())
+    supplier = serializers.PrimaryKeyRelatedField(queryset=AuthModels.ClientProfile.objects.all())
+    delivery_date = CustomDateField()
+    created_on = CustomDateField()
+    accepted_on = CustomDateField()
+
+    class Meta:
+        model = SupplierModels.Order
+        fields = "__all__"
+
+class ProductVariationserializer(serializers.ModelSerializer):
+    order = serializers.PrimaryKeyRelatedField(queryset=SupplierModels.Order.objects.all())
+    cart = serializers.PrimaryKeyRelatedField(queryset=BuyerModels.Cart.objects.all())
+    product = serializers.PrimaryKeyRelatedField(queryset=SupplierModels.Product.objects.all())
+    price = serializers.PrimaryKeyRelatedField(queryset=SupplierModels.ProductPrice.objects.all())
+    color = serializers.PrimaryKeyRelatedField(queryset=SupplierModels.ProductColor.objects.all())
+    material = serializers.PrimaryKeyRelatedField(queryset=SupplierModels.ProductMaterial.objects.all())
+
+    class Meta:
+        model = SupplierModels.OrderProductVariation
+        fields = "__all__"

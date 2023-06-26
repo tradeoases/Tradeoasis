@@ -1,4 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
 from django.views import View
 from django.utils.translation import gettext as _
@@ -9,6 +11,8 @@ from django.contrib import messages
 
 from auth_app import models as AuthModels
 from payment import models as PaymentModels
+from supplier import models as SupplierModels
+from buyer import models as BuyerModels
 
 from buyer.mixins import BuyerOnlyAccessMixin
 
@@ -280,13 +284,6 @@ class OrderDetailsView(BuyerOnlyAccessMixin, ListView):
         return render(request, self.template_name)
 
 
-class WishListView(BuyerOnlyAccessMixin, ListView):
-    template_name = "buyer/dashboard/wishlist.html"
-
-    def get(self, request):
-        return render(request, self.template_name)
-
-
 class RequestForQuoteView(BuyerOnlyAccessMixin, ListView):
     template_name = "buyer/dashboard/request-for-quote.html"
 
@@ -390,3 +387,58 @@ class DashboardContractsDetailsView(View):
             ).first(),
         }
         return render(request, self.template_name, context=context_data)
+
+
+
+
+
+#---------------------------------------- WishList ----------------------------------------
+class WishListListView(BuyerOnlyAccessMixin, ListView):
+    template_name = "buyer/dashboard/wishlist.html"
+    model = SupplierModels.WishListProduct
+
+    def get_queryset(self):
+        business = AuthModels.ClientProfile.objects.filter(user = self.request.user)
+        return self.model.objects.filter(buyer=business.first())
+
+@method_decorator(csrf_exempt, name='dispatch')
+class WishListAppeendAppendView(BuyerOnlyAccessMixin, View):
+    model = SupplierModels.WishListProduct
+
+    def post(self, request, product_slug):
+        product = get_object_or_404(SupplierModels.Product, slug=product_slug)
+        business = AuthModels.ClientProfile.objects.filter(user = self.request.user)
+        
+        self.model.objects.create(
+            buyer = business.first(),
+            product = product
+        )
+        return redirect(reverse("buyer:wishlist"))
+
+@method_decorator(csrf_exempt, name='dispatch')
+class WishListDeleteProductView(BuyerOnlyAccessMixin, View):
+    model = SupplierModels.WishListProduct
+
+    def post(self, request, product_slug):
+        product = get_object_or_404(SupplierModels.Product, slug=product_slug)
+        business = AuthModels.ClientProfile.objects.filter(user = self.request.user)
+        
+        wishlist_product = self.model.objects.filter(product = product, buyer=business.first())
+        if wishlist_product:
+            wishlist_product.first().delete()
+        return redirect(reverse("buyer:wishlist"))
+
+# cart
+class CartListView(BuyerOnlyAccessMixin, ListView):
+    template_name = "buyer/dashboard/cartlist.html"
+    model = BuyerModels.Cart
+
+    def get_queryset(self):
+        business = AuthModels.ClientProfile.objects.filter(user=self.request.user).first()
+        cart = self.model.objects.filter(buyer=business)
+        if not cart:
+            cart = BuyerModels.Cart.objects.create(buyer=business)
+        else:
+            cart = cart.first()
+
+        return SupplierModels.OrderProductVariation.objects.filter(cart=cart)

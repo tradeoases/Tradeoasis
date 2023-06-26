@@ -8,11 +8,13 @@ from rest_framework import status
 from admin_api import serializers
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
+from django.shortcuts import get_object_or_404
 
 from supplier import models as SupplierModels
 from payment import models as PaymentModels
 from auth_app import models as AuthModels
 from manager import models as ManagerModels
+from buyer import models as BuyerModels
 
 from admin_api import serializers
 import supplier
@@ -287,3 +289,52 @@ class CalenderEventDeleteView(generics.DestroyAPIView):
     def get_queryset(self):       
         business = AuthModels.ClientProfile.objects.filter(user=self.request.user)
         return ManagerModels.CalenderEvent.objects.filter(business=business.first())
+
+
+# carts
+class CartListView(ListAPIView):
+    serializer_class = serializers.ProductVariationserializer
+    
+    def get_queryset(self):
+        business = AuthModels.ClientProfile.objects.filter(user=self.request.user).first()
+        cart = BuyerModels.Cart.objects.filter(buyer=business)
+        if not cart:
+            cart = BuyerModels.Cart.objects.create(buyer=business)
+        else:
+            cart = cart.first()
+        return SupplierModels.OrderProductVariation.objects.filter(cart=cart)
+        
+class CartAppeendAppendView(generics.CreateAPIView):
+    permission_classes = [permissions.AllowAny]
+
+    def post(self, request, product_slug):
+        product = get_object_or_404(SupplierModels.Product, slug=product_slug)
+        business = AuthModels.ClientProfile.objects.filter(user=request.user).first()
+        cart = BuyerModels.Cart.objects.filter(buyer=business)
+        if not cart:
+            cart = BuyerModels.Cart.objects.create(buyer=business)
+        else:
+            cart = cart.first()
+        
+        # create product variation
+        variation = SupplierModels.OrderProductVariation(
+            cart = cart,
+            product = product,
+            price = SupplierModels.ProductPrice.objects.filter(pk=request.data.get("pricing")).first(),
+            color = SupplierModels.ProductColor.objects.filter(pk=request.data.get("color")).first(),
+            material = SupplierModels.ProductMaterial.objects.filter(pk=request.data.get("material")).first(),
+            quantity = int(request.data.get("quantity")),
+        )
+        variation.save()
+
+        return Response(
+            {
+                "message": _("Product Added To Cart Successfully."),
+                "data": ""
+            },
+            status=status.HTTP_201_CREATED,
+        )
+    
+
+class CartDeleteProductView(ListAPIView):
+    pass

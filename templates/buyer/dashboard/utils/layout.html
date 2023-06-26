@@ -314,7 +314,7 @@
                                     <span class="text toggle-able">{%  trans 'Dashboard' %}</span>
                                 </a>
                             </li>
-                            <li class="link active">
+                            <li class="link">
                                 <a href="{% url 'buyer:calendar' %}">
                                     <span><img src="/static/graphics/date.png" alt=""></span>
                                     <span class="text toggle-able">{%  trans 'Calendar' %}</span>
@@ -517,10 +517,14 @@
                                     </a>
                                 </li> -->
                                 <li class="icon flex">
-                                    <i class="ti-shopping-cart-full"></i>
+                                    <a href="{% url 'buyer:cart-list' %}">
+                                        <i class="ti-shopping-cart-full"></i>
+                                        <span class="count" id="buyer_cart_count"></span>
+                                    </a>
                                 </li>
                                 <li class="icon flex">
                                     <i class="ti-bell"></i>
+                                    <span class="count">10</span>
                                 </li>
                                 <div class="cs-text-accent">
                                     <a href="#" class="flex" style="margin-inline-start: 1rem;">
@@ -595,6 +599,20 @@
         document.querySelector("#menu-expander").addEventListener("click", () => {
             document.querySelector(".app-content").classList.toggle("expanded")
             localStorage.setItem("fsd-expanded", document.querySelector(".app-content").classList.contains("expanded"))
+        })
+
+
+        // set cart_count
+        document.addEventListener("DOMContentLoaded", async () => {
+            try {
+                let response = await makeRequest(`/api/cart/`, method="GET")
+                let buyer_cart_count_elem = document.querySelector("#buyer_cart_count")
+                buyer_cart_count_elem.classList.add("inview")
+                buyer_cart_count_elem.textContent = response.length
+            }
+            catch (err) {
+
+            }
         })
     </script>    
 
