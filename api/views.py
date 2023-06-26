@@ -11,9 +11,16 @@ from django.utils.translation import gettext_lazy as _
 
 from supplier import models as SupplierModels
 from payment import models as PaymentModels
+from auth_app import models as AuthModels
+from manager import models as ManagerModels
 
 from admin_api import serializers
 import supplier
+
+
+import pandas as pd
+from datetime import datetime
+from datetime import timezone
 
 
 class CustomListPagination(PageNumberPagination):
@@ -221,10 +228,62 @@ class ProductAppendDetailsApiView(generics.CreateAPIView):
 
 class LoadingProductsListView(ListAPIView):
     serializer_class = serializers.ProductsSerializer
-    pagination_class = LargeCustomListPagination
+    pagination_class = CustomListPagination
 
     def get_queryset(self):
         return SupplierModels.Product.objects.filter(supplier=self.request.user)
 
 
 #---------------------------------------- Products ----------------------------------------
+
+# calender
+class CalenderEventListView(ListAPIView):
+    serializer_class = serializers.CalenderEventserializer
+    pagination_class = CustomListPagination
+    
+    def get_queryset(self):       
+        business = AuthModels.ClientProfile.objects.filter(user=self.request.user)
+        return ManagerModels.CalenderEvent.objects.filter(business=business.first())
+
+class CalenderEventCreateView(generics.CreateAPIView):
+    permission_classes = [permissions.AllowAny]
+    serializer_class = serializers.CalenderEventserializer
+
+    def post(self, request, *args, **kwargs):
+        del request.data["allDay"]
+        business = AuthModels.ClientProfile.objects.filter(user=request.user).first()
+        request.data["business"] = business.id
+
+        request.data["start"] = datetime.fromisoformat(request.data["start"][:-1]).astimezone(timezone.utc)
+        request.data["end"] = datetime.fromisoformat(request.data["end"][:-1]).astimezone(timezone.utc)
+
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+
+        return Response(
+            {
+                "message": _("Event Created Successfully."),
+                "data": serializer.data
+            },
+            status=status.HTTP_201_CREATED,
+            headers=headers
+        )
+    
+
+class CalenderEventDetailView(generics.RetrieveAPIView):
+    serializer_class = serializers.CalenderEventserializer
+    pagination_class = CustomListPagination
+    
+    def get_queryset(self):       
+        business = AuthModels.ClientProfile.objects.filter(user=self.request.user)
+        return ManagerModels.CalenderEvent.objects.filter(business=business.first())
+
+class CalenderEventDeleteView(generics.DestroyAPIView):
+    serializer_class = serializers.CalenderEventserializer
+    pagination_class = CustomListPagination
+    
+    def get_queryset(self):       
+        business = AuthModels.ClientProfile.objects.filter(user=self.request.user)
+        return ManagerModels.CalenderEvent.objects.filter(business=business.first())

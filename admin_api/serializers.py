@@ -6,7 +6,6 @@ from buyer import models as BuyerModels
 from manager import models as ManagerModels
 from payment import models as PaymentModels
 
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = AuthModels.User
@@ -269,3 +268,12 @@ class AdvertsSerializer(serializers.ModelSerializer):
         representation["supplier"] = supplier_data.get("business_name")
         
         return representation
+
+class CalenderEventserializer(serializers.ModelSerializer):
+    # start_date = CustomDateField()
+    # end_date = CustomDateField()
+    business = serializers.PrimaryKeyRelatedField(queryset=AuthModels.ClientProfile.objects.all())
+
+    class Meta:
+        model = ManagerModels.CalenderEvent
+        fields = "__all__"

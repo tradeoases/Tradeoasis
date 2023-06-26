@@ -135,6 +135,7 @@ TEMPLATES = [
                 "django.template.context_processors.i18n",
                 "django.template.context_processors.request",
                 "manager.context_processors.categories_showroows",
+                # "manager.context_processors.calender_events",
             ],
         },
     },

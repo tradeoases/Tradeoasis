@@ -216,7 +216,7 @@ urlpatterns = [
     path(
         "dashboard/orders/<str:order_id>",
         views.DashboardOrderDetail.as_view(),
-        name="dashboard-order-detail",
+        name="dashboard-order-details",
     ),
 
 ]

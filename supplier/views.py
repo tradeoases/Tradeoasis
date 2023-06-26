@@ -418,6 +418,7 @@ class ProductDetailView(DetailView):
         context["tags"] = SupplierModels.ProductTag.objects.filter(product=product)
         context["colors"] = SupplierModels.ProductColor.objects.filter(product=product)
         context["materials"] = SupplierModels.ProductMaterial.objects.filter(product=product)
+        context["pricings"] = SupplierModels.ProductPrice.objects.filter(product=product)
         context["products"] = {
             "context_name": "related-products",
             "results": [
@@ -2250,8 +2251,106 @@ class DashboardOrderList(SupplierOnlyAccessMixin, View):
 
 
 class DashboardOrderDetail(SupplierOnlyAccessMixin, View):
-    template_name = ""
+    template_name = "supplier/dashboard/orders/order_details.html"
+    model = SupplierModels.Order
 
     def get(self, request, order_id):
-        pass
+        order = get_object_or_404(self.model, order_id=order_id)
 
+        if order.supplier.user != request.user:
+            return redirect(reverse("supplier:dashboard-order-list"))
+
+        if order.status == "PENDING":
+            order.status = "VIEWED BY SUPPLER"
+            order.save()
+            SupplierTask.notify_buyer(order.order_id, "VIEWED")
+
+        order_notes = SupplierModels.OrderNote.objects.filter(user=request.user, order=order)
+        if order_notes:
+            order_notes = order_notes.first()
+
+        shipping_details = SupplierModels.OrderShippingDetail.objects.filter(order=order)
+        if shipping_details:
+            shipping_details = shipping_details.first()
+
+        context_data = {
+            "order" : order,
+            "order_products" : SupplierModels.OrderProductVariation.objects.filter(order=order),
+            "order_notes" : order_notes,
+            "shipping_details" : shipping_details,
+            "order_chat": SupplierModels.OrderChat.objects.filter(order=order)
+        }
+        return render(
+            request, template_name=self.template_name, context=context_data
+        )
+
+    def post(self, request, order_id):
+        order = get_object_or_404(self.model, order_id=order_id)
+
+        if order.supplier.user != request.user:
+            return redirect(reverse("supplier:dashboard-order-list"))
+
+        # set delivery date
+        print("\n"*3)
+        print("order_notes:", request.POST.get("order_notes"))
+        print("\n"*3)
+
+        if request.POST.get("order_notes"):
+            order_notes = request.POST.get("order_notes")
+            if SupplierModels.OrderNote.objects.filter(user=request.user, order=order):
+                note = SupplierModels.OrderNote.objects.filter(user=request.user, order=order).first()
+            else:
+                note = SupplierModels.OrderNote.objects.create(user=request.user, order=order)
+            note.notes = order_notes
+            note.save()
+
+        if request.POST.get("delivery_date"):
+            date = request.POST.get("delivery_date")
+            order.delivery_date = date
+            order.save()
+            SupplierTask.notify_buyer(order.order_id, "DELIVERY_DATE_SET")
+
+            # add to calender
+            ManagerModels.CalenderEvent.objects.create(
+                business = order.supplier,
+                title = "Order {} Delivery.".format(order.order_id),
+                start = order.delivery_date
+            )
+            ManagerModels.CalenderEvent.objects.create(
+                business = order.buyer,
+                title = "Order {} Delivery.".format(order.order_id),
+                start = order.delivery_date
+            )
+            
+
+        if request.POST.get("CANCELLED"):
+            order.status = "CANCELLED"
+            order.save()
+            SupplierTask.notify_buyer(order.order_id, "CANCELLED")
+
+        if request.POST.get("ACCEPTED"):
+            order.status = "ACCEPTED BY SUPPLER"
+            order.save()
+            SupplierTask.notify_buyer(order.order_id, "ACCEPTED BY SUPPLIER")
+
+        if request.POST.get("REJECTED"):
+            order.status = "REJECTED"
+            order.save()
+            SupplierTask.notify_buyer(order.order_id, "REJECTED")
+
+        if request.POST.get("IN_DELIVERY"):
+            order.status = "IN DELIVERY"
+            order.save()
+            SupplierTask.notify_buyer(order.order_id, "IN DELIVERY")
+
+        if request.POST.get("DELIVERED"):
+            order.status = "DELIVERY"
+            order.save()
+            SupplierTask.notify_buyer(order.order_id, "DELIVERED")
+
+        if request.POST.get("COMPLETED"):
+            order.status = "COMPLETED"
+            order.save()
+            SupplierTask.notify_buyer(order.order_id, "COMPLETED")
+
+        return redirect(reverse("supplier:dashboard-order-details", kwargs={"order_id": order.order_id}))

@@ -74,6 +74,7 @@
                             <th>{% trans 'Completed' %}</th>
                             <th>{% trans 'Delivery Date' %}</th>
                             <th>{% trans 'Created On' %}</th>
+                            <th>{% trans 'Detials' %}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -81,11 +82,12 @@
                             <tr>
                                 <td>{{order.order_id}}</td>
                                 <td>{{order.buyer}}</td>
-                                <td>{{order.status}}</td>
+                                <td class="{% if order.status == 'IN DELIVERY' %}  IN_DELIVERY {% elif order.status == 'VIEWED BY SUPPLER' %} VIEWED  {% elif order.status == 'ACCEPTED BY SUPPLER' %} ACCEPTED {% else %} {{order.status}} {% endif %}">{{order.status}}</td>
                                 <td>{{order.currency}} {{order.total_price}}</td>
                                 <td>{{order.is_complete}}</td>
                                 <td>{{order.delivery_date}}</td>
                                 <td>{{order.created_on}}</td>
+                                <td><a class="cta" href="{% url 'supplier:dashboard-order-details' order.order_id %}">View Details</a></td>
                             </tr>
                         {% endfor%}
                     </tbody>
@@ -98,6 +100,7 @@
                             <th>{% trans 'Completed' %}</th>
                             <th>{% trans 'Delivery Date' %}</th>
                             <th>{% trans 'Created On' %}</th>
+                            <th>{% trans 'Detials' %}</th>
                         </tr>
                     </tfoot>
                 </table>

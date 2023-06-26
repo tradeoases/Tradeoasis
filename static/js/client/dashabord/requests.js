@@ -40,7 +40,7 @@ async function makeRequest (url, method, data={}, dataType=null, access_token=nu
         // }
     };
 
-    if (method == "POST" || method == "PUT" || method == "PATCH") {
+    if (method == "POST" || method == "PUT" || method == "PATCH" || method == "DELETE") {
         if (dataType == "media") {
             requestData["body"] = data;
             requestData["headers"] = {

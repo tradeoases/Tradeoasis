@@ -1,10 +1,3 @@
-from email.policy import default
-from pyexpat import model
-from random import choices
-from re import T
-from statistics import mode
-import string
-from weakref import proxy
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -380,3 +373,15 @@ class SentEmail(models.Model):
     content = models.TextField(_("content"), blank=True, null=True)
     reply_to = models.CharField(_("reply_to"), max_length=256, blank=True, null=True)
     created_on = models.DateField(_("Created on"), default=timezone.now)
+
+
+class CalenderEvent(models.Model):
+    business = models.ForeignKey(to=Authmodels.ClientProfile, on_delete=models.CASCADE, related_name="business")
+    title = models.CharField(_("Name"), max_length=256, blank=True, null=True)
+    description = models.TextField(_("Description"), blank=True, null=True)
+    start = models.DateTimeField(_("Start Date"))
+    end = models.DateTimeField(_("End Date"), null=True, blank=True)
+    created_on = models.DateTimeField(_("Created on"), default=timezone.now)
+
+    def __str__(self) -> str:
+        return f"{self.title} {self.business}"

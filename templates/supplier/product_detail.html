@@ -5,328 +5,6 @@
 
 <script src="{% static 'js/jquery-3.5.1.js' %}"></script>
 
-<style>
-    @media (max-inline-size: 786px) {
-        .horizontal-scroll {
-            grid-auto-columns: var(--sm-row-size)
-        }
-    }
-
-    #order_product_modal {
-        display: none;
-    }
-
-    #order_product_modal.inview {
-        display: block;
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: rgba(0, 0, 0, 0.5);
-    }
-
-    #order_product_form {
-        background-color: #fff;
-        inline-size: fit-content;
-        block-size: fit-content;
-    }
-
-    .product-form-wrapper {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 2.4em;
-    }
-
-    .product-main-img {
-        inline-size: 250px;
-        border: 1px solid #999;
-    }
-
-    .additional-img-wrapper {
-        display: flex;
-        gap: .8em;
-    }
-
-    .additional-img-wrapper img {
-        inline-size: 150px;
-        border: 1px solid #999;
-        margin-block: 1.2em;
-    }
-
-    .category {
-        display: block;
-        font-weight: 700;
-        color: #888;
-        font-size: 12px;
-        line-height: 14px;
-        font-style: italic;
-    }
-
-    .product .category:hover {
-        color: #999;
-        cursor: pointer;
-    }
-
-    .product h1 {
-        inline-size: 300px;
-        font-size: 21px;
-        line-height: 24px;
-        margin-top: 5px;
-        color: #333;
-        text-transform: uppercase;
-        letter-spacing: .3px;
-    }
-
-    .stock {
-        display: block;
-        float: right;
-        position: relative;
-        top: 4px;
-        line-height: 11px;
-        padding: 6px 12px 5px 12px;
-        font-size: 11px;
-        font-weight: bold;
-        text-transform: uppercase;
-        color: #fff;
-        background: #18d11f;
-        border-radius: 14px;
-        letter-spacing: .3px;
-    }
-
-    .block-price-rating {
-        inline-size: 100%;
-        margin-top: 10px;
-    }
-    
-    .block-price {
-        float: left;
-        inline-size: auto;
-        margin-inline-end: 20px;
-    }
-
-    .price-new {
-        float: left;
-        font-weight: bold;
-        margin-inline-end: 10px;
-    }
-
-    .price-new-dollar {
-        float: left;
-        display: block;
-        font-size: 24px;
-        margin-inline-end: 5px;
-        color: #333;
-    }
-
-    .price-new-cent {
-        font-size: 14px;
-    }
-
-    .price-old {
-        text-decoration: line-through;
-        color: #444;
-        font-size: 14px;
-        position: relative;
-        top: 6px;
-    }
-
-    .item-ratings.star-05 i.ti-star:nth-child(1),
-    .item-ratings.star-05 i.ti-star:nth-child(2),
-    .item-ratings.star-05 i.ti-star:nth-child(3),
-    .item-ratings.star-05 i.ti-star:nth-child(4),
-    .item-ratings.star-05 i.ti-star:nth-child(5) {
-        color: rgb(255, 191, 0);
-    }
-
-    .item-ratings.star-04 i.ti-star:nth-child(1),
-    .item-ratings.star-04 i.ti-star:nth-child(2),
-    .item-ratings.star-04 i.ti-star:nth-child(3),
-    .item-ratings.star-04 i.ti-star:nth-child(4) {
-        color: rgb(255, 191, 0);
-    }
-
-    .item-ratings.star-03 i.ti-star:nth-child(1),
-    .item-ratings.star-03 i.ti-star:nth-child(2),
-    .item-ratings.star-03 i.ti-star:nth-child(3) {
-        color: rgb(255, 191, 0);
-    }
-
-    .item-ratings.star-02 i.ti-star:nth-child(1),
-    .item-ratings.star-02 i.ti-star:nth-child(2) {
-        color: rgb(255, 191, 0);
-    }
-
-    .item-ratings.star-01 i.ti-star:nth-child(1) {
-        color: rgb(255, 191, 0);
-    }
-
-    .block-rating {
-        float: right;
-        position: relative;
-        top: 2px;
-    }
-
-    span.rating img {
-        display: block;
-        float: left;
-        inline-size: 110px;
-        margin-left: 10px;
-    }
-
-    span.rating img:hover {
-        cursor: pointer;
-    }
-
-    span.review {
-        display: block;
-        float: left;
-        position: relative;
-        top: 6px;
-        font-weight: 700;
-        color: #888;
-        font-size: 12px;
-        font-style: italic;
-    }
-
-    span.review:hover {
-        color: #999;
-        cursor: pointer;
-    }
-
-    .descr { 
-        font-size: 14px;
-        line-height: 18px;
-        color: #444;
-        letter-spacing: .3px;
-        margin-block-start: 10px;
-        inline-size: 430px;
-        block-size: 71px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: no-wrap;
-    }
-    
-    .block-select {
-         margin-block-start: 15px;
-    }
-
-    .select-currency,
-    .select-color,
-    .select-size {
-        float: left;
-        font-size: 14px;
-        font-weight: 700;
-        color: #888;
-    }
-
-    .select-currency span,
-    .select-color span,
-    .select-size span {
-        display: block;
-        margin-block-end: 5px;
-    }
-
-    select.color {
-        inline-size: 320px;
-        margin-right: 10px;
-    }
-
-    select.size {
-        inline-size: 100px;
-    }
-
-    select.currency, select.color, select.size {
-        padding: 8px 10px;
-        border: .5px solid #ddd;
-        border-radius: 2px;
-        text-transform: uppercase;
-        font-weight: 700;
-        opacity: .7;
-        letter-spacing: .3px;
-    }
-    
-    select.select-currency {
-        margin-block-start: .6em;
-        inline-size: 100%;
-    }
-
-    .btn {
-        margin: 10px auto;
-        text-align: center;
-        font-size: 14px;
-        font-weight: 700;
-        color: #fff;
-        letter-spacing: .3px;
-        text-transform: uppercase;
-        padding: 15px 0;
-        inline-size: 100%;
-        border-radius: 2px;
-        cursor: pointer;
-        background: var(--brand-primary);
-    }
-
-    .btn:hover {
-        opacity: .8;
-    }
-
-    .block-footer {
-        inline-size: 100%;
-        margin-top: 10px;
-    }
-
-    .block-links {
-        float: left;
-        cursor: pointer;
-    }
-
-    .block-links img {
-        inline-size: 20px;
-        opacity: .3;
-        vertical-align: middle;
-        margin-right: 5px;
-    }
-
-    .block-links span {
-        font-size: 11px;
-        color: #888888;
-        font-weight: 700;
-        letter-spacing: .3px;
-        text-transform: uppercase;
-        font-style: italic;
-    }
-
-    .block-links span:hover {
-        color: #999;
-    }
-
-    .set-product-qunatity {
-        display: flex;
-        justify-content: space-between;
-        margin-block-start: .6em;
-    }
-
-    .set-product-qunatity * {
-        flex: 1;
-        border: 1px solid var(--brand-primary);
-        padding: .4em 1.2em;
-        font-size: 20px;
-    }
-
-    .set-product-qunatity button {
-        color: #fff;
-        background-color: var(--brand-primary);
-    }
-
-
-
-</style>
-
-
     <section class="main w-12/12 gap-2">
         <div class="breadcrumb flex flex-wrap justify-start gap-2 md:w-full mx-auto px-5 ">
             <a class="text-gray-600 hover:text-gray-900" href="{% url 'manager:home' %}">{% trans 'Home' %}</a>
@@ -388,14 +66,18 @@
                         <div class="grid md:gap-1 py-2 justify-items-start" style="border-bottom: 1px solid hsla(213, 28%, 19%, .1);border-top: 1px solid hsla(213, 28%, 19%, .1)">
                             <p class="text-base font-normal text-slate-800">{{object.description}}</p>
                         </div>
-                        <div class="cta grid justify-start md:grid-flow-col gap-3">
+                        <div class="cta grid justify-start gap-3">
                             <a href="{% url 'supplier:supplier-detail' product_supplier.results.profile.slug %}" class="grid grid-flow-col place-items-center gap-3 px-3 md:px-5 py-2 text-base md:py-2 bg-yellowColor hover:bg-yellowColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
                                 <span class="text-white"><i class="fa fa-address-book"></i></span>
                                 <span>{% trans 'Contact Supplier' %}</span>
                             </a>
-                            <a id="order_product" href="#" class="grid grid-flow-col place-items-center gap-3 px-3 md:px-5 py-2 text-base md:py-2 bg-yellowColor hover:bg-yellowColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
+                            <a id="order_product" href="#" class="grid grid-flow-col place-items-center gap-3 px-3 md:px-5 py-2 text-base md:py-2 duration-200 transition-all ease-in rounded-full text-white font-semibold" style="background-color: lightseagreen;">
                                 <span class="text-white"><i class="fa fa-shopping-cart"></i></span>
-                                <span>{% trans 'Order Product' %}</span>
+                                <span>{% trans 'Add To Cart' %}</span>
+                            </a>
+                            <a id="order_product" href="#" class="grid grid-flow-col place-items-center gap-3 px-3 md:px-5 py-2 text-base md:py-2 duration-200 transition-all ease-in rounded-full text-white font-semibold" style="background-color: black;color: #fff">
+                                <span class="text-white"><i class="fa fa-shopping-cart"></i></span>
+                                <span>{% trans 'Add To Wishlist' %}</span>
                             </a>
                         </div>
                     </div>
@@ -544,69 +226,58 @@
         <div id="order_product_form">
             <div class="flex" id="remove_modal" style="padding: .6em;justify-content: flex-end;align-items: center;"><i class="ti-close"></i></div>
             <div class="product-form-wrapper">
-                <!-- <div class="pics">
-                    <span class="main-img-wrapper">
-                        <img class="product-main-img" src="/media/ProductImage/images/case-strap-3064a984-31ab-418c-955b-02cb2984ec6c-ce.jpeg">
-                    </span>
-                    <div class="additional-img-wrapper">
-                        <img src="/media/ProductImage/images/case-strap-3064a984-31ab-418c-955b-02cb2984ec6c-ce.jpeg">
-                        <img src="/media/ProductImage/images/case-strap-3064a984-31ab-418c-955b-02cb2984ec6c-ce.jpeg">
-                        <img src="/media/ProductImage/images/case-strap-3064a984-31ab-418c-955b-02cb2984ec6c-ce.jpeg">
-                        <img src="/media/ProductImage/images/case-strap-3064a984-31ab-418c-955b-02cb2984ec6c-ce.jpeg">
-                    </div>
-                </div> -->
                 <div class="product">
-                    <span class="category">Wristwear</span>
-                    <span class="stock">In Stock</span>
-                    <h1>Reizhen Wrist Watch</h1>
+                    <span class="category">{{ object.sub_category.category }}</span>
+                    <span class="stock">{{ object.stock }} {% trans "left" %}</span>
+                    <h1>{{ object.name }}</h1>
                     <div class="block-price-rating">
                         <div class="block-price">
                         <div class="price-new">
-                            <span class="price-new-dollar">$399</span>
+                            <span class="price-new-dollar"> {{ object.currency }} {{ object.price }}</span>
                             <span class="price-new-cent">90</span>  
                         </div>
-                        <div class="price-old">
+                        <!-- <div class="price-old">
                             <span class="price-old-dollar">$599</span>
                             <span class="price-old-cent">&#8228;90</span>
-                        </div>  
+                        </div>   -->
                         </div>
                         <div class="block-rating">
-                        <span class="review">40 Reviews</span>
-                        <span class="rating"><img src="/media/ProductImage/images/case-strap-3064a984-31ab-418c-955b-02cb2984ec6c-ce.jpeg"></span>
+                        <!-- <span class="review">40 Reviews</span> -->
+                        <span class="rating"><img src="/media/{{product_images.results.first.image}}"></span>
                         </div>
                     </div>
-                    <span>Rating</span>
+                    <!-- <span>Rating</span>
                     <div class="item-ratings star-03">
                         <i class="ti-star"></i>
                         <i class="ti-star"></i>
                         <i class="ti-star"></i>
                         <i class="ti-star"></i>
                         <i class="ti-star"></i>
-                    </div>
+                    </div> -->
                     <div class="descr">
                         <p>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam vitae quas illum error nobis est dolores delectus quae placeat doloribus, voluptates voluptas nisi fugiat aut temporibus. Delectus esse accusantium assumenda.
+                            {{ object.description }}
                         </p>
                     </div> 
                     <div class="block-select clearfix">
                         <form id="product_specs_form">
                             <div style="display: flex;flex: 1;">
                                 <div class="select-color">
-                                    <span>Select Color</span>
+                                    <span>{% trans "Select Color" %}</span>
                                     <select class="color" name="color">
-                                        <option>White</option>
-                                        <option>Black</option>
-                                        <option>Brown</option>
+                                        {% for color in colors %}
+                                            <option>{{ color.name }}</option>
+                                        {% endfor %}
                                     </select>
                                 </div>
-                                <div class="select-size">
+                                <!-- <div class="select-size">
                                     <span>Size</span>
                                     <select class="size" name="size">
                                         <option>8</option>
                                         <option>9</option>
                                         <option>10</option>
                                     </select>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="set-product-qunatity">
                                 <button onclick="decreaseQuantity()">-</button>
@@ -616,29 +287,21 @@
                             <div class="select-currency" style="inline-size: 100%;">
                                 <span style="margin-block-start: .6em;">Select material</span>
                                 <select class="currency" name="material" style="inline-size: 100%;">
-                                    <option>Cotton</option>
-                                    <option>Silk</option>
-                                    <option>Wool</option>
+                                    {% for material in materials %}
+                                        <option>{{ material.name }}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                             <div class="select-currency" style="inline-size: 100%;">
                                 <span style="margin-block-start: .6em;">Select currency</span>
                                 <select class="currency" name="currency" style="inline-size: 100%;">
-                                    <option>Euro</option>
-                                    <option>Dollar</option>
-                                    <option>Pound</option>
+                                    {% for pricing in pricings %}
+                                        <option>{{ pricing.currency }} {{ pricing.min_price }} - {{ pricing.currency }} {{ pricing.max_price }}</option>
+                                    {% endfor %}
                                 </select>
                             </div> 
-                            <button class="btn" id="add_product_to_cart">Buy Now</button>
+                            <button class="btn" id="add_product_to_cart">{% trans "Add To Cart" %}</button>
                         </form> 
-                    </div>
-                    <div class="block-footer">
-                        <div class="block-links">
-                            <div id="add_to_wishlist">
-                                <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/23243-200.png">
-                                <span>Click to Add to Wishlist</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

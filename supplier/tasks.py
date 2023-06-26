@@ -61,3 +61,10 @@ def make_translations(fields, instance, modal):
             except:
                 setattr(instance, f"{field}_{language[0]}", getattr(instance, field))
                 instance.save()
+
+
+@task(name="notify_buyer")
+def notify_buyer(order_id, status):
+    pass
+    # send email
+    # create notification

@@ -7,6 +7,7 @@ from django.utils.text import slugify
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.db.models import Q
+from django.core.validators import MinValueValidator
 
 # python
 import os
@@ -14,7 +15,7 @@ import uuid
 import string
 
 # apps
-from auth_app.models import Supplier, Buyer, ClientProfile
+from auth_app.models import Supplier, Buyer, ClientProfile, User
 
 # utility functions
 def get_file_path(instance, filename):
@@ -300,6 +301,7 @@ class Order(models.Model):
         (_("IN DELIVERY"), _("IN DELIVERY")),
         (_("DELIVERED"), _("DELIVERED")),
         (_("REJECTED"), _("REJECTED")),
+        (_("CANCELLED"), _("CANCELLED")),
         (_("COMPLETED"), _("COMPLETED")),
     )
     order_id = models.CharField(_("Order Id"), max_length=50, unique=True, blank=True, null=True)
@@ -364,19 +366,32 @@ class Order(models.Model):
         super(Order, self).save(*args, **kwargs)
     
     def __str__(self) -> str:
-        return f"{self.order_id} - {self.supplier} - {self.buyer}"
+        return f"{self.order_id} - {self.supplier} - {self.buyer} - {self.status}"
 
 class OrderProductVariation(models.Model):
     order = models.OneToOneField(to=Order, on_delete=models.CASCADE)
     product = models.OneToOneField(to=Product, on_delete=models.CASCADE)
+    currency = models.CharField(_("Currency"), max_length=6)
     price = models.DecimalField(_("Product Price"), decimal_places=2, max_digits=12)
     color = models.OneToOneField(to=ProductColor, on_delete=models.CASCADE, null=True, blank=True)
     material = models.OneToOneField(to=ProductMaterial, on_delete=models.CASCADE, null=True, blank=True)
+    quantity = models.IntegerField(_("Quantity"), validators=[MinValueValidator(0)])
+    total_price = models.DecimalField(_("Total Price"), decimal_places=2, max_digits=12, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if self.quantity and self.price:
+            self.total_price = self.quantity * self.price
+        
+        super(OrderProductVariation, self).save(*args, **kwargs)
     
     def __str__(self) -> str:
         return f"{self.order}"
 
 class OrderNote(models.Model):
+    user = models.ForeignKey(
+        to=User,
+        on_delete=models.CASCADE,
+    )
     order = models.OneToOneField(to=Order, on_delete=models.CASCADE)
     notes = models.TextField(
         _("Notes"),
