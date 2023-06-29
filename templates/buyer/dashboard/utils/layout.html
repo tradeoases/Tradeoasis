@@ -353,18 +353,6 @@
                                     </span>
                                 </a>
                             </li>
-                            <!-- <li class="link">
-                                <a href="{% url 'buyer:order-tracking' %}">
-                                    <span><img src="/static/graphics/parcel.png" alt=""></span>
-                                    <span class="text toggle-able">{%  trans 'Order Tracking' %}</span>
-                                </a>
-                            </li>
-                            <li class="link">
-                                <a href="{% url 'buyer:order-history' %}">
-                                    <span><img src="/static/graphics/parcel.png" alt=""></span>
-                                    <span class="text toggle-able">{%  trans 'Order History' %}</span>
-                                </a>
-                            </li> -->
                             <li class="link">
                                 <a href="{% url 'buyer:messenger' %}">
                                     <span><img src="/static/graphics/facebook-messenger.png" alt=""></span>
@@ -397,52 +385,9 @@
                                     </span>
                                 </a>
                             </li>
-                            <!-- <li class="link">
-                                <a href="{% url 'supplier:dashboard-messenger' %}">
-                                    <span><img src="/static/graphics/facebook-messenger.png" alt=""></span>
-                                    <span
-                                        class="text toggle-able">{%  trans 'Invoices & Payments' %}
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="link">
-                                <a href="{% url 'supplier:dashboard-messenger' %}">
-                                    <span><img src="/static/graphics/facebook-messenger.png" alt=""></span>
-                                    <span
-                                        class="text toggle-able">{%  trans 'Reporting & Analytics' %}
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="link">
-                                <a href="{% url 'supplier:dashboard-contracts' %}">
-                                    <span><img src="/static/graphics/contract.png" alt=""></span>
-                                    <span
-                                        class="text toggle-able">{%  trans 'Contracts' %}
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="link">
-                                <a href="{% url 'supplier:dashboard-payments' %}">
-                                    <span><img src="/static/graphics/purse.png" alt=""></span>
-                                        <span
-                                            class="text toggle-able">{%  trans 'Payments' %}
-                                        </span>
-                                </a>
-                            </li>
-                            <li class="link">
-                                <a href="{% url 'supplier:dashboard-calendar' %}">
-                                    <span><img src="/static/graphics/date.png" alt=""></span>
-                                    <span
-                                        class="text toggle-able">{%  trans 'Calendar' %}
-                                    </span>
-                                </a>
-                            </li>-->
                         </ul>
                     </div>
                 </div>
-                <!-- <div class="sidebar-footer" style="align-self: flex-end;">
-                    <a href="{% url 'auth_app:logout' %}" class="cs-grid btn outlined cs-text-md cs-font-500 br-sm cs-bg-hover-color cs-text-secondary" style="place-items: center;">{% trans 'Logout' %}</a>
-                </div> -->
             </div>
             <div class="main">
                 <div class="cs-navbar card cs-no-box-shadow res-cs-navbar">
@@ -502,27 +447,6 @@
             document.querySelector(`#${event.target.dataset.target}`).classList.toggle("hide");
         });
 
-        // const toggleSideNav = document.querySelector("#menu-expander");
-        // let isToggled = false;
-        // toggleSideNav.addEventListener("click", (event) => {
-        //     if(isToggled){
-        //         isToggled = false;
-        //         document.querySelector(".app-content").style.gridTemplateColumns = ".5fr 2fr";
-        //         document.querySelectorAll(".toggle-able").forEach(toggleAble => {
-        //             toggleAble.classList.toggle("toggle-able");
-        //             console.log(toggleAble)
-        //         });
-        //         console.log(isToggled)
-        //     }else{
-        //         isToggled = true;
-        //         document.querySelector(".app-content").style.gridTemplateColumns = ".5fr 2fr";
-        //         document.querySelectorAll(".toggle-able").forEach(toggleAble => {
-        //             toggleAble.classList.toggle("toggle-able");
-        //         });
-        //         console.log(isToggled)
-        //     }
-        // });
-
 
 
         if (JSON.parse(localStorage.getItem("fsd-expanded")) == true) {
@@ -552,10 +476,7 @@
         })
     </script>    
 
-    <!-- <script src="{% static 'js/sidebar.js' %}"></script> -->
-
     <script src="{% static 'js/supplierDash.js' %}"></script>
-    <!-- <script src="{% static 'js/sidebar.js' %}"></script> -->
 </body>
 
 </html>
