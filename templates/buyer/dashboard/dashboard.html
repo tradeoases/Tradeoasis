@@ -5,7 +5,7 @@
 <script src="{% static 'fullcalendar-6.1.8/dist/index.global.min.js' %}"></script>
 <script src="{% static 'js/fullcalendar-6-custom/fullcalendar.js' %}"></script>
 
-<div class="main-content split cs-split" style="overflow-y: scroll;">
+<!-- <div class="main-content web-app split cs-split" style="overflow-y: scroll;">
     <div class="cs-content-area cs-no-box-shadow" style="block-size: fit-content;">
         <div class="middle-content-area bordered outlined">
             <h3 class="title accented">Recent Activities</h3>
@@ -48,23 +48,133 @@
             <h4 class="sub-title">Lst update: 18 May 2023</h4>
 
             <div class="data-visualization flex">
-                <!-- DATA VISUALIZATION -->
                 <div class="cs-stats stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;padding: .5rem;">
                     <div style="display: grid;">
                         <canvas id="engagement" style="max-block-size: 266px;"></canvas>
                         <span class="cs-text-md cs-font-bold cs-text-secondary" style="color: var(--secondary-color);justify-self: center;">{% trans 'Engagement Analytics' %}</span>
                     </div>
                 </div>
-                <!-- DATA VISUALIZATION -->
-    
-                <!-- DATA VISUALIZATION -->
                 <div class="cs-stats stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="--gap: .8rem;padding: .5rem;">
                     <div style="display: grid;">
                         <canvas id="users" style="max-block-size: 266px;"></canvas>
                         <span class="cs-text-md cs-font-bold cs-text-secondary" style="color: var(--secondary-color);justify-self: center;">{% trans 'Engagement Analytics' %}</span>
                     </div>
                 </div>
-                <!-- DATA VISUALIZATION -->
+            </div>
+        </div>
+    </div>
+    <div class="side-content">
+        <div class="right cs-right bordered outlined" style="border-radius: 0;">
+            <div id='calendar' class="perview"></div>
+        </div>
+        <div class="right cs-right bordered outlined" style="border-radius: 0;">
+            <h4 class="accented">Recent Purchases <i class="ti-arrow-right"></i> </h4>
+            <div class="cs-products">
+                <div class="right-card cs-no-box-shadow cs-right-card cs-product-card">
+                    <img src="/media/ProductImage/images/case-strap-3064a984-31ab-418c-955b-02cb2984ec6c-ce.jpeg" alt="">
+                    <div class="content">
+                        <h6>Uberzer Sleek Watch</h6>
+                        <span><i class="ti-star"></i> 4.5 | 12.3k</span>
+                        <span>Price: $572</span>
+                    </div>
+                </div>
+                <div class="right-card cs-no-box-shadow cs-right-card cs-product-card">
+                    <img src="/media/ProductImage/images/case-strap-3064a984-31ab-418c-955b-02cb2984ec6c-ce.jpeg" alt="">
+                    <div class="content">
+                        <h6>Uberzer Sleek Watch</h6>
+                        <span><i class="ti-star"></i> 4.5 | 12.3k</span>
+                        <span>Price: $672</span>
+                    </div>
+                </div>
+                <div class="right-card cs-no-box-shadow cs-right-card cs-product-card">
+                    <img src="/media/ProductImage/images/case-strap-3064a984-31ab-418c-955b-02cb2984ec6c-ce.jpeg" alt="">
+                    <div class="content">
+                        <h6>Uberzer Sleek Watch</h6>
+                        <span><i class="ti-star"></i> 4.5 | 12.3k</span>
+                        <span>Price: $672</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right cs-right bordered outlined" style="border-radius: 0;">
+            <h4 class="accented">Recommended Products <i class="ti-arrow-right"></i> </h4>
+            <div class="cs-products flex">
+                <div class="right-card cs-no-box-shadow cs-right-card cs-product-card">
+                    <img src="/media/ProductImage/images/case-strap-3064a984-31ab-418c-955b-02cb2984ec6c-ce.jpeg" alt="">
+                    <div class="content">
+                        <h6>Uberzer Sleek Watch</h6>
+                        <span><i class="ti-star"></i> 4.5 | 12.3k</span>
+                        <span>Price: $572</span>
+                    </div>
+                </div>
+                <div class="right-card cs-no-box-shadow cs-right-card cs-product-card">
+                    <img src="/media/ProductImage/images/case-strap-3064a984-31ab-418c-955b-02cb2984ec6c-ce.jpeg" alt="">
+                    <div class="content">
+                        <h6>Uberzer Sleek Watch</h6>
+                        <span><i class="ti-star"></i> 4.5 | 12.3k</span>
+                        <span>Price: $672</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div> -->
+
+<div class="main-content mobile-app" style="overflow-y: scroll;">
+    <div class="cs-content-area cs-no-box-shadow" style="block-size: fit-content;">
+        <div class=" bordered outlined" style="block-size: inherit;">
+            <h3 class="title accented">Recent Activities</h3>
+            <h4 class="sub-title" style="margin-block-end: .4em;">Summary of my most activities on the platform</h4>
+            <div class="cs-content flex" style="flex-direction: column;gap: .4em;">
+                <div class="card cs-no-box-shadow flex outlined" style="border: .5px solid;">
+                    <h4>Orders Placed</h4>
+                    <div class="cs-content-inner flex">
+                        <span><i class="cs-ti ti-filter"></i></span>
+                        <span class="count">204</span>
+                    </div>
+                    <div class="card-content card-content-right">
+                        <h6 class="potential" id="stores">From 41 Stores</h6>
+                    </div>
+                </div>
+                <div class="card cs-no-box-shadow flex outlined" style="border: .5px solid;">
+                    <h4>Successful Deliveries</h4>
+                    <div class="cs-content-inner flex">
+                        <span><i class="cs-ti ti-filter"></i></span>
+                        <span class="count">145</span>
+                    </div>
+                    <div class="card-content card-content-right">
+                        <h6 class="potential" id="stores">From 30 Stores</h6>
+                    </div>
+                </div>
+                <div class="card cs-no-box-shadow flex outlined" style="border: .5px solid;">
+                    <h4>In Transit</h4>
+                    <div class="cs-content-inner flex">
+                        <span><i class="cs-ti ti-filter"></i></span>
+                        <span class="count">11</span>
+                    </div>
+                    <div class="card-content card-content-right">
+                        <h6 class="potential" id="stores">From 11 Stores</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="lower-content-area md-hidden bordered outlined">
+            <h3 class="title accented">Platform Engagement</h3>
+            <h4 class="sub-title">Lst update: 18 May 2023</h4>
+
+            <div class="data-visualization flex" style="flex-direction: column;align-items: flex-start;gap:.8rem">
+                <div class="cs-stats stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="inline-size: 100%;padding: .5rem;border-radius: 6px;">
+                    <div>
+                        <canvas id="engagement" style="max-block-size: 266px;"></canvas>
+                        <span class="cs-text-md cs-font-bold cs-text-secondary" style="color: var(--secondary-color);justify-self: center;">{% trans 'Engagement Analytics' %}</span>
+                    </div>
+                </div>
+                <div class="cs-stats stats-summary-card cs-grid cs-bg-white elevated br-sm cs-overflow-hidden outlined" style="inline-size: 100%;padding: .5rem;border-radius: 6px;">
+                    <div>
+                        <canvas id="users" style="max-block-size: 266px;"></canvas>
+                        <span class="cs-text-md cs-font-bold cs-text-secondary" style="color: var(--secondary-color);justify-self: center;">{% trans 'Engagement Analytics' %}</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
