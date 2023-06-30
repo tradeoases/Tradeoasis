@@ -320,16 +320,16 @@
                                     <span class="text toggle-able">{%  trans 'Calendar' %}</span>
                                 </a>
                             </li>
-                            <li class="link">
+                            <!-- <li class="link">
                                 <a href="{% url 'buyer:orders' %}">
                                     <span class="flex"><img src="/static/graphics/cart.svg" alt=""></span>
                                     <span class="text toggle-able">{%  trans 'Order History' %}</span>
                                 </a>
-                            </li>
+                            </li> -->
                             <li class="link">
                                 <a href="{% url 'buyer:order-tracking' %}">
                                     <span class="flex"><img src="/static/graphics/cart.svg" alt=""></span>
-                                    <span class="text toggle-able">{%  trans 'Order Tracking' %}</span>
+                                    <span class="text toggle-able">{%  trans 'Orders' %}</span>
                                 </a>
                             </li>
                             <li class="link">
@@ -606,9 +606,11 @@
         document.addEventListener("DOMContentLoaded", async () => {
             try {
                 let response = await makeRequest(`/api/cart/`, method="GET")
-                let buyer_cart_count_elem = document.querySelector("#buyer_cart_count")
-                buyer_cart_count_elem.classList.add("inview")
-                buyer_cart_count_elem.textContent = response.length
+                if (parseInt(response.length) > 0) {
+                    let buyer_cart_count_elem = document.querySelector("#buyer_cart_count")
+                    buyer_cart_count_elem.classList.add("inview")
+                    buyer_cart_count_elem.textContent = response.length
+                }
             }
             catch (err) {
 

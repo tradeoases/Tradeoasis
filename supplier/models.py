@@ -309,7 +309,7 @@ class Order(models.Model):
     buyer = models.ForeignKey(to=ClientProfile, on_delete=models.CASCADE, related_name="buyer")
     supplier = models.ForeignKey(to=ClientProfile, on_delete=models.CASCADE, related_name="supplier")
     status = models.CharField(_("Order Status"), max_length=256, choices=order_statuses, default="PENDING")
-    currency = models.CharField(_("Currency"), max_length=6)
+    currency = models.CharField(_("Currency"), max_length=6, blank=True, null=True)
     total_price = models.DecimalField(_("Total Price"), decimal_places=2, max_digits=12, blank=True, null=True)
     agreed_price = models.DecimalField(_("Agreed Price"), decimal_places=2, max_digits=12, blank=True, null=True)
     paid_price = models.DecimalField(_("Paid Price"), decimal_places=2, max_digits=12, blank=True, null=True)
@@ -336,6 +336,9 @@ class Order(models.Model):
 
     def computeTotalPrice(self):
         # using set discounts
+        if not self.agreed_price:
+            return 0
+            
         total_price = self.agreed_price - ( self.agreed_price * (self.discount / 100))
 
         # adding shipping taxings
@@ -369,8 +372,8 @@ class Order(models.Model):
         return f"{self.order_id} - {self.supplier} - {self.buyer} - {self.status}"
 
 class OrderProductVariation(models.Model):
-    order = models.OneToOneField(to=Order, on_delete=models.CASCADE, null=True, blank=True)
-    cart = models.OneToOneField(to=BuyerModels.Cart, on_delete=models.SET_NULL, null=True, blank=True)
+    order = models.ForeignKey(to=Order, on_delete=models.CASCADE, null=True, blank=True)
+    cart = models.ForeignKey(to=BuyerModels.Cart, on_delete=models.SET_NULL, null=True, blank=True)
     product = models.ForeignKey(to=Product, on_delete=models.CASCADE)
     price = models.ForeignKey(to=ProductPrice, on_delete=models.CASCADE, null=True, blank=True)
     color = models.ForeignKey(to=ProductColor, on_delete=models.CASCADE, null=True, blank=True)
@@ -380,9 +383,9 @@ class OrderProductVariation(models.Model):
     max_total_price = models.DecimalField(_("Max Total Price"), decimal_places=2, max_digits=12, blank=True, null=True)
 
     def save(self, *args, **kwargs):
-        if self.quantity > 0 and self.price:
-            self.min_total_price = self.quantity * self.price.min_price
-            self.max_total_price = self.quantity * self.price.max_price
+        if int(self.quantity) > 0 and self.price:
+            self.min_total_price = int(self.quantity) * float(self.price.min_price)
+            self.max_total_price = int(self.quantity) * float(self.price.max_price)
         
         super(OrderProductVariation, self).save(*args, **kwargs)
     

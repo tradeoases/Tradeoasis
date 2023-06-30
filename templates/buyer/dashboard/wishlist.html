@@ -53,6 +53,7 @@
                                 <td>
                                     <div class="item-link">
                                         <form action="{% url 'buyer:wishlist-delete-product' object.product.slug %}" method="POST">
+                                            {% csrf_token %}
                                             <button class="item-link-btn"><i class="ti-shopping-cart-full"></i>{% trans "Remove" %}</button>
                                         </form>
                                     </div>

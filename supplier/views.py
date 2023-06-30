@@ -1417,7 +1417,12 @@ class DashboardProductEditView(SupplierOnlyAccessMixin, View):
                     
                     # Optimize the image by reducing the file size
                     optimized_image = io.BytesIO()
-                    resized_image.save(optimized_image, format='JPEG', optimize=True)
+
+                    if pil_image.format != 'JPEG':
+                        # Convert image to JPEG format
+                        pil_image = pil_image.convert('RGB')
+
+                    pil_image.save(optimized_image, format='JPEG', optimize=True)
                     optimized_image.seek(0)
                     uploaded_image = InMemoryUploadedFile(
                         optimized_image,
@@ -1477,6 +1482,7 @@ class DashboardBulkUploadView(SupplierOnlyAccessMixin, View):
 
     def post(self, request, *args, **kwargs):
         excel_file = request.FILES.get("bulk_upload_file")
+        business = AuthModels.ClientProfile.objects.filter(user=request.user).first()
 
         try:
             products_saved = 0
@@ -1506,6 +1512,8 @@ class DashboardBulkUploadView(SupplierOnlyAccessMixin, View):
                     messages.add_message(request, messages.ERROR, _("Product {} Not Created!".format(row["name"])))
                     continue
 
+                
+                product.business = business
                 product.save()
                 store.first().store_product.add(product)
                 
@@ -2186,7 +2194,7 @@ class DashboardOrderList(SupplierOnlyAccessMixin, View):
         self.queryset = self.model.objects.filter(supplier = self.request.user.business)
 
         buyer_slug = self.request.GET.get("buyer", 0)
-        country_name = self.request.GET.get("buyer", 0)
+        country_name = self.request.GET.get("country", 0)
         if buyer_slug:
             buyer = get_object_or_404(AuthModels.ClientProfile, slug=buyer_slug)
             self.queryset = self.queryset.filter(buyer = buyer)
@@ -2202,6 +2210,10 @@ class DashboardOrderList(SupplierOnlyAccessMixin, View):
             if self.request.GET.get("status", 0) != "ALL":
                 self.queryset = self.queryset.filter(status=self.request.GET.get("status", 0))
 
+        if self.request.GET.get("order_search_value", 0):
+            order_search_value = self.request.GET.get("order_search_value", 0)
+            self.queryset = self.queryset.filter(Q(order_id=order_search_value) | Q(buyer__business_name__icontains=order_search_value))
+
         return self.queryset
 
     def get_paginator(self):
@@ -2209,7 +2221,7 @@ class DashboardOrderList(SupplierOnlyAccessMixin, View):
         queryset = self.get_queryset()
 
         self.records = random.sample(
-            list(queryset.order_by("-id")),
+            list(queryset.order_by("-updated_on")),
             self.PER_PAGE_COUNT if queryset.count() >= 20 else queryset.count(),
         )
 
@@ -2290,10 +2302,10 @@ class DashboardOrderDetail(SupplierOnlyAccessMixin, View):
         if order.supplier.user != request.user:
             return redirect(reverse("supplier:dashboard-order-list"))
 
-        # set delivery date
-        print("\n"*3)
-        print("order_notes:", request.POST.get("order_notes"))
-        print("\n"*3)
+        # # set delivery date
+        # print("\n"*3)
+        # print("order_notes:", request.POST.get("order_notes"))
+        # print("\n"*3)
 
         if request.POST.get("order_notes"):
             order_notes = request.POST.get("order_notes")

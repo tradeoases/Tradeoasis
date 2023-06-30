@@ -56,8 +56,8 @@
                             </div>
                         </div>
                         <div class="sub-grouping">
-                            <span class="title">{% trans "Total Price" %}:</span>
-                            <span class="content">{{ order.total_price }}</span>
+                            <span class="title">{% trans "Agreed Price" %}:</span>
+                            <span class="content">{{ order.agreed_price }}</span>
                         </div>
                         <div class="sub-grouping">
                             <span class="title">{% trans "Status" %}:</span>
@@ -124,22 +124,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {% for object in order_products %}
                                     <tr>
-                                        <td>Reizhen Wrist Watch</td>
-                                        <td>10</td>
-                                        <td>Grey</td>
-                                        <td>Cotton</td>
-                                        <td>$520</td>
-                                        <td>$1520</td>
+                                        <td>{{ object.product.name }}</td>
+                                        <td>{{ object.quantity }}</td>
+                                        <td>{{ object.color.name }}</td>
+                                        <td>{{ object.material.name }}</td>
+                                        <td>{{ object.price.currency }} {{ object.price.min_price }} - {{ object.price.max_price }}</td>
+                                        <td>{{ object.price.currency }} {{ object.price.min_total_price }} - {{ object.price.max_total_price }}</td>
                                     </tr>
-                                    <tr>
-                                        <td>HP Commercial Printer</td>
-                                        <td>20</td>
-                                        <td>Red</td>
-                                        <td>Silk</td>
-                                        <td>$200</td>
-                                        <td>$20,040</td>
-                                    </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>
