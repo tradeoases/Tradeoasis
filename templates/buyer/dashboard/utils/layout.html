@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{% static 'css/_main.css' %}">
     <link rel="stylesheet" href="{% static 'css/dashboards.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
     <link rel="stylesheet" href="{% static 'icons/themify-icons.css' %}">
     <link href="{% static 'icons/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet"  type='text/css'>
 
@@ -288,7 +289,160 @@
         /* BIDS */
 
 
+        /* RESPONSIVENESS */
+        .sidebar {
+            block-size: 100vh;
+        }
 
+        /* Media Query for smaller screens */
+        @media screen and (max-width: 600px) {
+
+            .app-content {
+                display: flex;
+            }
+
+            .sidebar {
+                display: block;
+                inline-size: 60px;
+                z-index: 1000;
+                block-size: 100vh;
+            }
+
+            .app-content.expanded .sidebar {
+                inline-size: 80%;
+            }
+
+            .app-content.expanded .sidebar .link {
+                inline-size: 100%;
+                padding: 0;
+            }
+
+            .main {
+                margin-inline-start: 50px;
+                padding: 0;
+            }
+
+            .main > .cs-navbar {
+                display: flex;
+                border-radius: 0;
+            }
+
+            .main > .cs-navbar .left {display: none;}
+
+            .main > .cs-navbar .right {
+                inline-size: 100%;
+            }
+
+            .main-content.split {
+                display: block;
+                padding-inline: .6rem;
+            }
+
+            .main-content.split .cs-content {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .main-content.split .cs-content .card {
+                inline-size: 320px !important;
+            }
+
+            .cs-content-area .cs-content.flex {
+                inline-size: fit-content;
+            }
+
+            .data-visualization {
+                display: block;
+            }
+
+            .data-visualization .cs-stats {
+                border-radius: 0 !important;
+                margin-block-end: .2rem;
+            }
+
+            table {
+                font-size: 10px;
+            }
+
+            .ti-arrow-top-right {
+                display: none;
+            }
+
+            .order-link-cta {
+                display: block;
+            }
+
+            .rfq.flex {
+                display: block !important;
+                padding: .4rem;
+            }
+
+            .rfq.flex * {
+                font-size: 10px;
+            }
+
+            .rfq.flex .item-specs.flex{
+                flex-direction: column;
+            }
+
+            .rfq-form-control.flex {
+                display: block;
+            }
+
+            .rfq-item {
+                display: none;
+            }
+
+            .chat-window.flex {
+                display: block;
+            }
+
+            .all-chats {
+                display: none;
+            }
+
+            .chat-room {
+                inline-size: 100% !important;
+            }
+
+            .room-messages.flex {
+                inline-size: 100% !important;
+            }
+
+            .notifications * {
+                font-size: 9px !important;
+            }
+
+            .notification.flex {
+                padding: .4rem !important;
+            }
+
+            .notification.flex .notification-actions.cta {
+                padding: .4rem !important;
+                margin-block-end: .6rem !important;
+            }
+
+            .notification.flex .avatar {
+                block-size: 44px;
+                inline-size: 44px;
+            }
+
+            .order-analytics-label {
+                font-size: 8px;
+            }
+
+            .room-messages span {
+                font-size: 10px;
+            }
+
+            .content-area-top h3 {
+                font-size: 12px;
+                margin-inline-start: .4rem;
+            }
+
+
+        }
 
 
 
@@ -297,7 +451,7 @@
 
 <body>
     <div class="app-container container">
-        <div class="app-content">
+        <div class="app-content flex">
             <div class="sidebar cs-grid">
                 <div class="upper cs-grid" style="gap: 1rem;">
                     <div class="sidebar-header cs-text-accent">
@@ -352,18 +506,6 @@
                                     </span>
                                 </a>
                             </li>
-                            <!-- <li class="link">
-                                <a href="{% url 'buyer:order-tracking' %}">
-                                    <span><img src="/static/graphics/parcel.png" alt=""></span>
-                                    <span class="text toggle-able">{%  trans 'Order Tracking' %}</span>
-                                </a>
-                            </li>
-                            <li class="link">
-                                <a href="{% url 'buyer:order-history' %}">
-                                    <span><img src="/static/graphics/parcel.png" alt=""></span>
-                                    <span class="text toggle-able">{%  trans 'Order History' %}</span>
-                                </a>
-                            </li> -->
                             <li class="link">
                                 <a href="{% url 'buyer:messenger' %}">
                                     <span><img src="/static/graphics/facebook-messenger.png" alt=""></span>
@@ -396,126 +538,18 @@
                                     </span>
                                 </a>
                             </li>
-                            <!-- <li class="link">
-                                <a href="{% url 'supplier:dashboard-messenger' %}">
-                                    <span><img src="/static/graphics/facebook-messenger.png" alt=""></span>
-                                    <span
-                                        class="text toggle-able">{%  trans 'Invoices & Payments' %}
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="link">
-                                <a href="{% url 'supplier:dashboard-messenger' %}">
-                                    <span><img src="/static/graphics/facebook-messenger.png" alt=""></span>
-                                    <span
-                                        class="text toggle-able">{%  trans 'Reporting & Analytics' %}
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="link">
-                                <a href="{% url 'supplier:dashboard-contracts' %}">
-                                    <span><img src="/static/graphics/contract.png" alt=""></span>
-                                    <span
-                                        class="text toggle-able">{%  trans 'Contracts' %}
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="link">
-                                <a href="{% url 'supplier:dashboard-payments' %}">
-                                    <span><img src="/static/graphics/purse.png" alt=""></span>
-                                        <span
-                                            class="text toggle-able">{%  trans 'Payments' %}
-                                        </span>
-                                </a>
-                            </li>
-                            <li class="link">
-                                <a href="{% url 'supplier:dashboard-calendar' %}">
-                                    <span><img src="/static/graphics/date.png" alt=""></span>
-                                    <span
-                                        class="text toggle-able">{%  trans 'Calendar' %}
-                                    </span>
-                                </a>
-                            </li>-->
                         </ul>
                     </div>
                 </div>
-                <!-- <div class="sidebar-footer" style="align-self: flex-end;">
-                    <a href="{% url 'auth_app:logout' %}" class="cs-grid btn outlined cs-text-md cs-font-500 br-sm cs-bg-hover-color cs-text-secondary" style="place-items: center;">{% trans 'Logout' %}</a>
-                </div> -->
             </div>
-            <!-- <div class="sidebar card cs-grid" style="--gap: 1rem; align-content: space-between;">
-                <div class="upper cs-grid" style="gap: 1rem;">
-                    <div class="sidebar-header">
-                        <div class="app-logo">
-                            <i class="ti-layout-grid2"></i>
-                            <span>{%  trans "Buyer's Portal" %}</span>
-                        </div>
-                    </div>
-                    <div class="sidebar-body">
-                        <ul class="main-menu">
-                            <li class="link">
-                                <a href="">
-                                    <span class="flex">
-                                        <span><i class="icon ti-home"></i><span class="text">{%  trans 'Profile' %}</span></span>
-                                    </span>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li class="link"><a href="{% url 'buyer:profile' %}"> {%  trans 'Account Details' %}</a></li>
-                                    <li class="link"><a href="{% url 'buyer:business' %}"> {%  trans 'Business Details' %}</a></li>
-                                </ul>
-                            </li>
-                            <li class="link">
-                                <a href="{% url 'buyer:contracts' %}">
-                                    <span class="flex">
-                                        <span>
-                                            <i class="icon ti-layout-accordion-list"></i>
-                                            <span
-                                                class="text">{%  trans 'Contracts' %}</span>
-                                            </span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="link">
-                                <a href="{% url 'manager:support' %}">
-                                    <span class="flex">
-                                        <span>
-                                            <i class="icon ti-headphone-alt"></i>
-                                            <span
-                                                class="text">{%  trans 'Support' %}</span>
-                                            </span>
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="sidebar-footer" style="align-self: flex-end;">
-                    <a href="{% url 'auth_app:logout' %}" class="cs-grid btn outlined cs-text-md cs-font-500 br-sm cs-bg-hover-color cs-text-secondary" style="place-items: center;">{% trans 'Logout' %}</a>
-                </div>
-            </div> -->
             <div class="main">
                 <div class="cs-navbar card cs-no-box-shadow">
                     <div class="left">
                         <h4>Good Morning {{ request.user.username }}!</h4>
                     </div>
                     <div class="right">
-                        <!-- <div class="link customer-display cs-text-accent" style="justify-self: flex-start; align-self: center;padding: .5rem 1rem;font-weight: bold;">
-                            <div class="lg-hidden md-show" id="show_sidebar">
-                                <i class="ti-layout-grid2"></i>
-                            </div>
-                        </div> -->
                         <nav style="justify-self: flex-end;">
                             <ul class="nav-links cs-nav-links flex">
-                                <!-- <li class="link customer-display cs-text-accent">
-                                    <a href="{% url 'manager:home' %}">
-                                        {% trans "Visit Site" %}
-                                    </a>
-                                </li>
-                                <li class="link customer-display cs-text-accent">
-                                    <a href="{% url 'supplier:business_profile' %}">
-                                        {% trans "Business Profile" %}
-                                    </a>
-                                </li> -->
                                 <li class="icon flex">
                                     <a href="{% url 'buyer:cart-list' %}">
                                         <i class="ti-shopping-cart-full"></i>
@@ -566,27 +600,6 @@
             document.querySelector(`#${event.target.dataset.target}`).classList.toggle("hide");
         });
 
-        // const toggleSideNav = document.querySelector("#menu-expander");
-        // let isToggled = false;
-        // toggleSideNav.addEventListener("click", (event) => {
-        //     if(isToggled){
-        //         isToggled = false;
-        //         document.querySelector(".app-content").style.gridTemplateColumns = ".5fr 2fr";
-        //         document.querySelectorAll(".toggle-able").forEach(toggleAble => {
-        //             toggleAble.classList.toggle("toggle-able");
-        //             console.log(toggleAble)
-        //         });
-        //         console.log(isToggled)
-        //     }else{
-        //         isToggled = true;
-        //         document.querySelector(".app-content").style.gridTemplateColumns = ".5fr 2fr";
-        //         document.querySelectorAll(".toggle-able").forEach(toggleAble => {
-        //             toggleAble.classList.toggle("toggle-able");
-        //         });
-        //         console.log(isToggled)
-        //     }
-        // });
-
 
 
         if (JSON.parse(localStorage.getItem("fsd-expanded")) == true) {
@@ -618,10 +631,7 @@
         })
     </script>    
 
-    <script src="{% static 'js/sidebar.js' %}"></script>
-
     <script src="{% static 'js/supplierDash.js' %}"></script>
-    <!-- <script src="{% static 'js/sidebar.js' %}"></script> -->
 </body>
 
 </html>
