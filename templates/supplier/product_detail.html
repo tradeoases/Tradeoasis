@@ -76,6 +76,7 @@
                                 <span>{% trans 'Add To Cart' %}</span>
                             </a>
                             <form action="{% url 'buyer:wishlist-add-product' object.slug %}" method="POST">
+                                {% csrf_token %}
                                 <button class="grid grid-flow-col place-items-center gap-3 px-3 md:px-5 py-2 text-base md:py-2 duration-200 transition-all ease-in rounded-full text-white font-semibold" style="background-color: black;color: #fff">
                                     <span class="text-white"><i class="fa fa-shopping-cart"></i></span>
                                     <span>{% trans 'Add To Wishlist' %}</span>

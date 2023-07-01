@@ -26,3 +26,7 @@ class Cart(models.Model):
 # def on_wishlist_save(sender, instance, **kwargs):
 #     # send supplier email
 #     pass
+
+
+# class Bid(models.Model):
+#     buyer = models.ForeignKey(to=ClientProfile, on_delete=models.CASCADE)

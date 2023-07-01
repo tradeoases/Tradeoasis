@@ -11,6 +11,12 @@
                 <a href="?overdue=true">{% trans "Overdue Orders" %}</a>
             </div>
             <div class="table-filter-area">
+                <form action="" class="filter-form" method="get">
+                    <div class="filter-form-group">
+                        <input type="search" name="order_search_value" placeholder="Search by Order ID or Customer Name" id="">
+                    </div>
+                    <input type="submit" hidden />
+                </form>
                 <form id="status-filter-form" class="filter-form" method="GET" action="" data-context="{{statuses.context_name}}">
                     <p class="title">{% trans 'status' %}: </p>
                     <div class="filter-form-group">
@@ -91,18 +97,6 @@
                             </tr>
                         {% endfor%}
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>{% trans 'Order Id' %}</th>
-                            <th>{% trans 'Buyer' %}</th>
-                            <th>{% trans 'Status' %}</th>
-                            <th>{% trans 'Total Price' %}</th>
-                            <th>{% trans 'Completed' %}</th>
-                            <th>{% trans 'Delivery Date' %}</th>
-                            <th>{% trans 'Created On' %}</th>
-                            <th>{% trans 'Detials' %}</th>
-                        </tr>
-                    </tfoot>
                 </table>
                 <div class="table-pagination cs-flex cs-justify-between cs-align-center" style="--gap: 1rem;padding: 0 1rem;">
                     <div class="cs-grid cs-align-center">

@@ -377,10 +377,31 @@ class SentEmail(models.Model):
 
 class CalenderEvent(models.Model):
     business = models.ForeignKey(to=Authmodels.ClientProfile, on_delete=models.CASCADE, related_name="business")
-    title = models.CharField(_("Name"), max_length=256, blank=True, null=True)
+    title = models.CharField(_("Title"), max_length=256, blank=True, null=True)
     description = models.TextField(_("Description"), blank=True, null=True)
     start = models.DateTimeField(_("Start Date"))
     end = models.DateTimeField(_("End Date"), null=True, blank=True)
+    created_on = models.DateTimeField(_("Created on"), default=timezone.now)
+
+    def __str__(self) -> str:
+        return f"{self.title} {self.business}"
+
+class Notification(models.Model):
+    NOTIFICATION_CHOICES = (
+        ("ORDERS", "ORDERS"),
+        ("EMAILS", "EMAILS"),
+        ("CHATS", "CHATS"),
+        ("SUPPORT", "SUPPORT"),
+        ("INVENTORY", "INVENTORY"),
+        ("CALENDER", "CALENDER"),
+        ("BIDS", "BIDS"),
+        ("CONTRACTS", "CONTRACTS"),
+    )
+    target = models.ForeignKey(to=Authmodels.ClientProfile, on_delete=models.CASCADE, related_name="target")
+    title = models.CharField(_("Title"), max_length=256, blank=True, null=True)
+    category = models.CharField(_("Title"), choices=NOTIFICATION_CHOICES, max_length=256, blank=True, null=True)
+    description = models.TextField(_("Description"), blank=True, null=True)
+    viewed = models.BooleanField(_("Viewed"), default=False)
     created_on = models.DateTimeField(_("Created on"), default=timezone.now)
 
     def __str__(self) -> str:

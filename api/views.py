@@ -1,5 +1,5 @@
 from urllib import request
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, DestroyAPIView
 from rest_framework.views import APIView
 from rest_framework import generics, permissions, status
 from rest_framework.pagination import PageNumberPagination
@@ -338,3 +338,37 @@ class CartAppeendAppendView(generics.CreateAPIView):
 
 class CartDeleteProductView(ListAPIView):
     pass
+
+
+# notifications
+class NotificationListView(ListAPIView):
+    serializer_class = serializers.NotificationSerializer
+    pagination_class = CustomListPagination
+
+    def get_queryset(self):
+        return ManagerModels.Notification.objects.all()
+    
+class NotificationBusinessListView(ListAPIView):
+    serializer_class = serializers.NotificationSerializer
+    pagination_class = CustomListPagination
+
+    def get_queryset(self):
+        business = AuthModels.ClientProfile.objects.filter(user=self.request.user).first()
+        return ManagerModels.Notification.objects.filter(target=business)
+
+class NotificationCategoryListView(ListAPIView):
+    serializer_class = serializers.NotificationSerializer
+    pagination_class = CustomListPagination
+
+    def get_queryset(self):
+        return ManagerModels.Notification.objects.filter(category=self.request.GET.get("category"))
+
+class NotificationDeleteView(DestroyAPIView):
+    serializer_class = serializers.NotificationSerializer
+    pagination_class = CustomListPagination
+    queryset = ManagerModels.Notification.objects.all()
+
+
+class NotificationUpdateView():
+    pass
+

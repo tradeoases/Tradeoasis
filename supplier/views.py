@@ -1417,7 +1417,12 @@ class DashboardProductEditView(SupplierOnlyAccessMixin, View):
                     
                     # Optimize the image by reducing the file size
                     optimized_image = io.BytesIO()
-                    resized_image.save(optimized_image, format='JPEG', optimize=True)
+
+                    if pil_image.format != 'JPEG':
+                        # Convert image to JPEG format
+                        pil_image = pil_image.convert('RGB')
+
+                    pil_image.save(optimized_image, format='JPEG', optimize=True)
                     optimized_image.seek(0)
                     uploaded_image = InMemoryUploadedFile(
                         optimized_image,
@@ -1477,6 +1482,7 @@ class DashboardBulkUploadView(SupplierOnlyAccessMixin, View):
 
     def post(self, request, *args, **kwargs):
         excel_file = request.FILES.get("bulk_upload_file")
+        business = AuthModels.ClientProfile.objects.filter(user=request.user).first()
 
         try:
             products_saved = 0
@@ -1506,6 +1512,8 @@ class DashboardBulkUploadView(SupplierOnlyAccessMixin, View):
                     messages.add_message(request, messages.ERROR, _("Product {} Not Created!".format(row["name"])))
                     continue
 
+                
+                product.business = business
                 product.save()
                 store.first().store_product.add(product)
                 
@@ -2186,7 +2194,7 @@ class DashboardOrderList(SupplierOnlyAccessMixin, View):
         self.queryset = self.model.objects.filter(supplier = self.request.user.business)
 
         buyer_slug = self.request.GET.get("buyer", 0)
-        country_name = self.request.GET.get("buyer", 0)
+        country_name = self.request.GET.get("country", 0)
         if buyer_slug:
             buyer = get_object_or_404(AuthModels.ClientProfile, slug=buyer_slug)
             self.queryset = self.queryset.filter(buyer = buyer)
@@ -2202,17 +2210,16 @@ class DashboardOrderList(SupplierOnlyAccessMixin, View):
             if self.request.GET.get("status", 0) != "ALL":
                 self.queryset = self.queryset.filter(status=self.request.GET.get("status", 0))
 
+        if self.request.GET.get("order_search_value", 0):
+            order_search_value = self.request.GET.get("order_search_value", 0)
+            self.queryset = self.queryset.filter(Q(order_id=order_search_value) | Q(buyer__business_name__icontains=order_search_value))
+
         return self.queryset
 
     def get_paginator(self):
 
         queryset = self.get_queryset()
-
-        self.records = random.sample(
-            list(queryset.order_by("-id")),
-            self.PER_PAGE_COUNT if queryset.count() >= 20 else queryset.count(),
-        )
-
+        self.records = queryset.order_by("-updated_on")
         paginator = Paginator(self.records, self.PER_PAGE_COUNT)
 
         page_num = self.request.GET.get("page", 1)
@@ -2290,10 +2297,10 @@ class DashboardOrderDetail(SupplierOnlyAccessMixin, View):
         if order.supplier.user != request.user:
             return redirect(reverse("supplier:dashboard-order-list"))
 
-        # set delivery date
-        print("\n"*3)
-        print("order_notes:", request.POST.get("order_notes"))
-        print("\n"*3)
+        # # set delivery date
+        # print("\n"*3)
+        # print("order_notes:", request.POST.get("order_notes"))
+        # print("\n"*3)
 
         if request.POST.get("order_notes"):
             order_notes = request.POST.get("order_notes")
@@ -2309,6 +2316,14 @@ class DashboardOrderDetail(SupplierOnlyAccessMixin, View):
             order.delivery_date = date
             order.save()
             SupplierTask.notify_buyer(order.order_id, "DELIVERY_DATE_SET")
+        
+        if request.POST.get("currency") and request.POST.get("agreed_price"):
+            currency = request.POST.get("currency")
+            agreed_price = float(request.POST.get("agreed_price"))
+            order.currency = currency
+            order.agreed_price = agreed_price
+            order.save()
+            BuyerTasks.notify_buyer(order.order_id, "AGREED_PRICE_SET")
 
             # add to calender
             ManagerModels.CalenderEvent.objects.create(
@@ -2352,5 +2367,11 @@ class DashboardOrderDetail(SupplierOnlyAccessMixin, View):
             order.status = "COMPLETED"
             order.save()
             SupplierTask.notify_buyer(order.order_id, "COMPLETED")
+
+        if request.POST.get("REORDER"):
+            order.status = "PENDING"
+            over.delivery_date = None
+            order.save()
+            SupplierTask.notify_buyer(order.order_id, "REORDER")
 
         return redirect(reverse("supplier:dashboard-order-details", kwargs={"order_id": order.order_id}))
