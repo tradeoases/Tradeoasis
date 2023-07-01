@@ -57,7 +57,40 @@
                         </div>
                         <div class="sub-grouping">
                             <span class="title">{% trans "Agreed Price" %}:</span>
-                            <span class="content">{{ order.agreed_price }}</span>
+                            <div class="editable">
+                                {% if order.agreed_price %}
+                                    <span class="content">{{ order.currency }} {{ order.agreed_price }}</span>
+                                {% else %}
+                                    <span class="content">{% trans "Not Set" %}</span>
+                                {% endif %}
+                                <span class="edit_cta floating_form_activator" id="agreed_price"><i class="ti-pencil"></i></span>
+                                <form id="agreed_price_form" class="floating_form" action="{% url 'buyer:order-detail' order.order_id %}" method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-group cs-grid cs-grid-flow-col" style="--gap: .5rem;">
+                                        <div class="form-group cs-grid" style="--gap: .5rem;">
+                                            <label for="currency" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Currency' %} *</label>
+                                            <input type="text" class="cs-text-normal" name="currency" id="currency" required list="currrencies">
+                                        </div>
+                                        <div class="form-group cs-grid" style="--gap: .5rem;">
+                                            <label for="agreed_price" class="cs-text-normal" style="color: var(--text-color);">{% trans 'Price' %} *</label>
+                                            <input type="text" class="cs-text-normal" name="agreed_price" id="agreed_price" required>
+                                        </div>
+                                    </div>
+                                    <input type="submit" hidden />
+                                </form>
+                            </div>
+                        </div>
+                        <div class="sub-grouping">
+                            <span class="title">{% trans "Discount" %}:</span>
+                            <span class="content">{{ order.discount }}</span>
+                        </div>
+                        <div class="sub-grouping">
+                            <span class="title">{% trans "Total Price" %}:</span>
+                            {% if order.total_price %}
+                                <span class="content">{{ order.currency }} {{ order.total_price }}</span>
+                            {% else %}
+                                <span class="content">{% trans "Not Set" %}</span>
+                            {% endif %}
                         </div>
                         <div class="sub-grouping">
                             <span class="title">{% trans "Status" %}:</span>
@@ -111,7 +144,7 @@
                         <h4 class="group-header">{% trans "Order Products" %}</h4>
                     </div>
                     <div class="order-products">
-                        <div class="data-table wishlist-table" style="border-block-end: 0;">
+                        <div class="data-table wishlist-table" style="border-block: 0;">
                             <table class="display" style="width:100%;">
                                 <thead>
                                     <tr>
@@ -200,11 +233,11 @@
                 document.querySelectorAll(".sider-part").forEach(elem => elem.classList.remove("inview"))
                 document.getElementById("chat-area").classList.add("inview")
             })
-            document.getElementById("set_delivery_date")
-                .addEventListener("click", () => {
-                    document.getElementById("delivery_date_form").classList.toggle("inview")
+            document.querySelectorAll(".floating_form_activator").forEach(
+                elem => elem.addEventListener("click", () => {
+                    elem.parentNode.querySelector(".floating_form").classList.toggle("inview")
                 })
-            
+            )
             tinymce.init({
                 selector: "#order_notes",
                 width: 100 + "%",

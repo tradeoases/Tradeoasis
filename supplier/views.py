@@ -2219,12 +2219,7 @@ class DashboardOrderList(SupplierOnlyAccessMixin, View):
     def get_paginator(self):
 
         queryset = self.get_queryset()
-
-        self.records = random.sample(
-            list(queryset.order_by("-updated_on")),
-            self.PER_PAGE_COUNT if queryset.count() >= 20 else queryset.count(),
-        )
-
+        self.records = queryset.order_by("-updated_on")
         paginator = Paginator(self.records, self.PER_PAGE_COUNT)
 
         page_num = self.request.GET.get("page", 1)
@@ -2321,6 +2316,14 @@ class DashboardOrderDetail(SupplierOnlyAccessMixin, View):
             order.delivery_date = date
             order.save()
             SupplierTask.notify_buyer(order.order_id, "DELIVERY_DATE_SET")
+        
+        if request.POST.get("currency") and request.POST.get("agreed_price"):
+            currency = request.POST.get("currency")
+            agreed_price = float(request.POST.get("agreed_price"))
+            order.currency = currency
+            order.agreed_price = agreed_price
+            order.save()
+            BuyerTasks.notify_buyer(order.order_id, "AGREED_PRICE_SET")
 
             # add to calender
             ManagerModels.CalenderEvent.objects.create(
@@ -2364,5 +2367,11 @@ class DashboardOrderDetail(SupplierOnlyAccessMixin, View):
             order.status = "COMPLETED"
             order.save()
             SupplierTask.notify_buyer(order.order_id, "COMPLETED")
+
+        if request.POST.get("REORDER"):
+            order.status = "PENDING"
+            over.delivery_date = None
+            order.save()
+            SupplierTask.notify_buyer(order.order_id, "REORDER")
 
         return redirect(reverse("supplier:dashboard-order-details", kwargs={"order_id": order.order_id}))

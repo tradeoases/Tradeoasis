@@ -313,7 +313,7 @@ class Order(models.Model):
     total_price = models.DecimalField(_("Total Price"), decimal_places=2, max_digits=12, blank=True, null=True)
     agreed_price = models.DecimalField(_("Agreed Price"), decimal_places=2, max_digits=12, blank=True, null=True)
     paid_price = models.DecimalField(_("Paid Price"), decimal_places=2, max_digits=12, blank=True, null=True)
-    discount = models.DecimalField(_("Discount as a Percentage"), decimal_places=2, max_digits=3, blank=True, null=True)
+    discount = models.DecimalField(_("Discount as a Percentage"), decimal_places=2, max_digits=3, blank=True, null=True, default=0.00)
     is_complete = models.BooleanField(_("Completed"), default=False)
     accepted_on = models.DateField(_("Accepted on"), blank=True, null=True)
     delivery_date = models.DateField(_("Delivery Date"), blank=True, null=True) 
@@ -338,8 +338,10 @@ class Order(models.Model):
         # using set discounts
         if not self.agreed_price:
             return 0
+        if not self.discount:
+            self.discount = 0
             
-        total_price = self.agreed_price - ( self.agreed_price * (self.discount / 100))
+        total_price = float(self.agreed_price) - ( float(self.agreed_price) * (self.discount / 100))
 
         # adding shipping taxings
         shipping_details = OrderShippingDetail.objects.filter(order = self)
@@ -415,16 +417,17 @@ class OrderNote(models.Model):
 
 class DeliveryCarrier(models.Model):
     name = models.CharField(_("Name"), max_length=256)
-    tax = models.DecimalField(_("Tax as a Percentage"), decimal_places=2, max_digits=3, blank=True, null=True)
+    tax = models.DecimalField(_("Tax as a Percentage (00.00)"), decimal_places=2, max_digits=3, blank=True, null=True)
     delivery_period = models.IntegerField(_("Days of Delivery"), blank=True, null=True)
+    active = models.BooleanField(_("Is Active"), default=True)
     
     def __str__(self) -> str:
         return f"{self.name}"
 
 class OrderShippingDetail(models.Model):
     order = models.OneToOneField(to=Order, on_delete=models.CASCADE)
-    carrier = models.OneToOneField(to=DeliveryCarrier, on_delete=models.CASCADE)
-    address_1 = models.CharField(_("Shipping Address 1"), max_length=50)
+    carrier = models.OneToOneField(to=DeliveryCarrier, on_delete=models.CASCADE, blank=True, null=True)
+    address_1 = models.CharField(_("Shipping Address 1"), max_length=50, blank=True, null=True)
     address_2 = models.CharField(_("Shipping Address 1"), max_length=50, blank=True, null=True)
     # use busines contact information
 

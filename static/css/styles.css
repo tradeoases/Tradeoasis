@@ -2036,6 +2036,13 @@ td a.cta {
 .group-header-area {
     padding: .5rem;
     border-bottom: 1px solid hsl(210, 12%, 86%);
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
+}
+.group-header-area .edit-cta {
+    color:hsl(39, 100%, 50%);
+    font-size: .9rem;
 }
 .content-group .group-header {
     color:hsl(220, 5%, 40%);;

@@ -17,6 +17,7 @@ from auth_app import models as AuthModels
 from payment import models as PaymentModels
 from supplier import models as SupplierModels
 from buyer import models as BuyerModels
+from manager import models as ManagerModels
 
 from buyer import tasks as BuyerTasks
 
@@ -525,12 +526,7 @@ class OrderTrackingView(BuyerOnlyAccessMixin, ListView):
     def get_paginator(self):
 
         queryset = self.get_queryset()
-
-        self.records = random.sample(
-            list(queryset.order_by("-updated_on")),
-            self.PER_PAGE_COUNT if queryset.count() >= 20 else queryset.count(),
-        )
-
+        self.records = queryset.order_by("-updated_on")
         paginator = Paginator(self.records, self.PER_PAGE_COUNT)
 
         page_num = self.request.GET.get("page", 1)
@@ -616,6 +612,14 @@ class OrderDetaliView(BuyerOnlyAccessMixin, View):
             order.delivery_date = date
             order.save()
             BuyerTasks.notify_suppleir_form_buyer(order.order_id, "DELIVERY_DATE_SET")
+        
+        if request.POST.get("currency") and request.POST.get("agreed_price"):
+            currency = request.POST.get("currency")
+            agreed_price = float(request.POST.get("agreed_price"))
+            order.currency = currency
+            order.agreed_price = agreed_price
+            order.save()
+            BuyerTasks.notify_suppleir_form_buyer(order.order_id, "AGREED_PRICE_SET")
 
             # add to calender
             ManagerModels.CalenderEvent.objects.create(
@@ -685,6 +689,7 @@ class ProductVariationDetails(BuyerOnlyAccessMixin, View):
             variation.quantity = product_quantity
             variation.save()
         
+            BuyerTasks.notify_suppleir_form_buyer(variation.order.order_id, "PRODUCT_DETAILS_UPDATED")
             messages.add_message(request, messages.SUCCESS, _("Product Details Edited successfully."))
             return redirect(reverse("buyer:order-detail", kwargs={"order_id": variation.order.order_id}))
 
@@ -702,57 +707,8 @@ class OrderAddProductView(BuyerOnlyAccessMixin, View):
     def get_queryset(self):
 
         # get query parameters
-        min_price = self.request.GET.get("min-price", 0)
-        max_price = self.request.GET.get("max-price", None)
-        supplier = self.request.GET.get("supplier", "all")
-        country = self.request.GET.get("country", "all")
-        category = self.request.GET.get("category", "all")
         search = self.request.GET.get("search", None)
-
-        if max_price and supplier != "All":
-            return SupplierModels.Product.objects.filter(
-                Q(price__gte=float(min_price) if min_price else float(0)),
-                Q(price__lte=float(max_price)),
-                # Q(
-                #     store__supplier=AuthModels.Supplier.supplier.filter(
-                #         clientprofile__business_name=supplier
-                #     ).first()
-                # ),
-            )
-
-        elif max_price:
-            return SupplierModels.Product.objects.filter(
-                Q(price__gte=float(min_price) if min_price else float(0)),
-                Q(price__lte=float(max_price)),
-            )
-
-        elif supplier != "all":
-            return SupplierModels.Product.objects.filter(
-                Q(price__gte=float(min_price) if min_price else float(0)),
-                Q(
-                    store__supplier=AuthModels.Supplier.supplier.filter(
-                        clientprofile__business_name=supplier
-                    ).first()
-                ),
-            )
-
-        elif country != "all":
-            return SupplierModels.Product.objects.filter(
-                Q(price__gte=float(min_price) if min_price else float(0)),
-                Q(
-                    store__supplier=AuthModels.Supplier.supplier.filter(
-                        clientprofile__country=country
-                    ).first()
-                ),
-            )
-
-        elif category != "all":
-            return SupplierModels.Product.objects.filter(
-                Q(price__gte=float(min_price) if min_price else float(0)),
-                Q(category__name=category),
-            )
-
-        elif search:
+        if search:
             # we are searching for products based on name, sub category, category, tag
             return SupplierModels.Product.objects.filter(
                 Q(name__icontains=search)
@@ -761,9 +717,7 @@ class OrderAddProductView(BuyerOnlyAccessMixin, View):
                 | Q(producttag__name__icontains=search)
             ).distinct("id")
 
-        return SupplierModels.Product.objects.filter(
-            price__gte=float(min_price) if min_price else float(0)
-        )
+        return SupplierModels.Product.objects.all()
 
     def get_products_paginator(self):
 
@@ -808,9 +762,9 @@ class OrderAddProductView(BuyerOnlyAccessMixin, View):
         product = get_object_or_404(SupplierModels.Product, slug=request.POST.get("new_product"))
         business = AuthModels.ClientProfile.objects.filter(user = self.request.user).first()
 
-        if SupplierModels.OrderProductVariation.objects.filter(product=product, order=order):
-            messages.add_message(request, messages.ERROR, _("Product already exits in this order."))
-            return redirect(reverse("buyer:order-detail", kwargs={"order_id": order.order_id}))
+        # if SupplierModels.OrderProductVariation.objects.filter(product=product, order=order):
+        #     messages.add_message(request, messages.ERROR, _("Product already exits in this order."))
+        #     return redirect(reverse("buyer:order-detail", kwargs={"order_id": order.order_id}))
 
 
         variation = SupplierModels.OrderProductVariation(
@@ -820,8 +774,46 @@ class OrderAddProductView(BuyerOnlyAccessMixin, View):
         )
         if variation:
             variation.save()
+            BuyerTasks.notify_suppleir_form_buyer(variation.order.order_id, "PRODUCT_ADDED_TO_ORDER")
             messages.add_message(request, messages.SUCCESS, _("Edit Product Details."))
             return redirect(reverse("buyer:product-variation-detial", kwargs={"pk": variation.pk}))
         else:
             messages.add_message(request, messages.ERROR, _("Please Try again."))
             return redirect(reverse("buyer:order-add-product", kwargs={"order_id": order.order_id}))
+
+class OrderShippingDetailView(BuyerOnlyAccessMixin, View):
+    template_name = "buyer/dashboard/order-shipping-details.html"
+
+    def get(self, request, order_id):
+        order = get_object_or_404(SupplierModels.Order, order_id=order_id)
+        shipping  = SupplierModels.OrderShippingDetail.objects.filter(order=order)
+        
+        if not shipping:
+            shipping = SupplierModels.OrderShippingDetail.objects.create(
+                order = order,
+            )
+        else:
+            shipping = shipping.first()
+
+        context_data = {
+            "object" : shipping,
+            "carriers" : SupplierModels.DeliveryCarrier.objects.filter(active=True)
+        }
+        return render(
+            request, template_name=self.template_name, context=context_data
+        )
+
+    def post(self, request, order_id):
+        order = get_object_or_404(SupplierModels.Order, order_id=order_id)
+        shipping  = SupplierModels.OrderShippingDetail.objects.filter(order=order).first()
+
+        shipping.carrier = get_object_or_404(SupplierModels.DeliveryCarrier, pk=request.POST.get("carrier"))
+        shipping.country = request.POST.get("country")
+        shipping.city = request.POST.get("city")
+        shipping.address_1 = request.POST.get("address_1")
+        shipping.address_2 = request.POST.get("address_2")
+        
+        shipping.save()
+        BuyerTasks.notify_suppleir_form_buyer(order.order_id, "SHIPPING_DETAILS_UPDATED")
+        messages.add_message(request, messages.SUCCESS, _("Shipping Details Updated."))
+        return redirect(reverse("buyer:order-detail", kwargs={"order_id": order.order_id}))

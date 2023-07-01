@@ -43,17 +43,21 @@ urlpatterns = [
     #---------------------------------------- WishList ----------------------------------------
 
     
+    #---------------------------------------- Chart ----------------------------------------
     path("dashboard/cart/", views.CartListView.as_view(), name="cart-list"),
     path("dashboard/cart/product/<int:pk>/delete/", views.CartDeleteProductView.as_view(), name="cart-delete-product"),
+    #---------------------------------------- Chart ----------------------------------------
 
-    # orders
+    #---------------------------------------- Orders ----------------------------------------
     path("dashboard/orders/list/", views.OrderTrackingView.as_view(), name="order-tracking"),
     path("dashboard/orders/<str:order_id>/", views.OrderDetaliView.as_view(), name="order-detail"),
     path("dashboard/orders/create/", views.OrderCreateView.as_view(), name="order-create"),
     path("dashboard/orders/<str:order_id>/add/product/", views.OrderAddProductView.as_view(), name="order-add-product"),
+    path("dashboard/orders/<str:order_id>/shipping/details/", views.OrderShippingDetailView.as_view(), name="order-shipping-details"),
     path("dashboard/orders/product/<int:pk>/", views.ProductVariationDetails.as_view(), name="product-variation-detial"),
 
     # old
     path("dashboard/order-history/", views.OrderHistoryView.as_view(), name="order-history"),
     path("dashboard/orders/", views.OrdersView.as_view(), name="orders"),
+    #---------------------------------------- Orders ----------------------------------------
 ]

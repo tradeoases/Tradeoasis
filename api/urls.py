@@ -38,5 +38,14 @@ urlpatterns = [
     #---------------------------------------- Cart ----------------------------------------
     path("cart/", views.CartListView.as_view(), name="cart"),
     path("cart/product/<str:product_slug>/add/", views.CartAppeendAppendView.as_view(), name="cart-add-product"),
-    path("cart/product/<str:product_slug>/delete/", views.CartDeleteProductView.as_view(), name="wishlist-delete-product"),
+    path("cart/product/<str:product_slug>/delete/", views.CartDeleteProductView.as_view(), name="cart-delete-product"),
+    #---------------------------------------- Cart ----------------------------------------
+
+    #---------------------------------------- Notifications ----------------------------------------
+    path("notifications/", views.NotificationListView.as_view(), name="notification-list"),
+    path("notifications/business/", views.NotificationBusinessListView.as_view(), name="Notification-business-list"),
+    path("notifications/<str:category>/", views.NotificationCategoryListView.as_view(), name="Notification-category-list"),
+    path("notifications/<int:pk>/delete/", views.NotificationDeleteView.as_view(), name="Notification-delete"),
+    # path("notifications/<int:pk>/update/", views.NotificationUpdateView.as_view(), name="Notification-update"),
+    #---------------------------------------- Notifications ----------------------------------------
 ]

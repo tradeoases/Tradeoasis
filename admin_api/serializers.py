@@ -301,3 +301,10 @@ class ProductVariationserializer(serializers.ModelSerializer):
     class Meta:
         model = SupplierModels.OrderProductVariation
         fields = "__all__"
+
+
+class NotificationSerializer(serializers.ModelSerializer):
+    target = serializers.PrimaryKeyRelatedField(queryset=AuthModels.ClientProfile.objects.all())
+    class Meta:
+        model = ManagerModels.Notification
+        fields = "__all__"
