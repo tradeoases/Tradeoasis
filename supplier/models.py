@@ -17,6 +17,7 @@ import string
 # apps
 from auth_app.models import Supplier, Buyer, ClientProfile, User
 from buyer import models as BuyerModels
+from supplier import tasks as SupplierTasks
 
 # utility functions
 def get_file_path(instance, filename):
@@ -177,9 +178,10 @@ class Product(models.Model):
         super().save(*args, **kwargs)
 
     def sell_made(self, items_sold):
-        if self.stock > 0:
-            self.stock -= items_sold
+        if self.stock > 0 and items_sold >= self.stock:
+            self.stock = self.stock - int(items_sold)
             self.save()
+            SupplierTasks.inventory_check.delay(self.pk)
         else:
             raise ValueError(_('Items sold are more than available stock'))
 

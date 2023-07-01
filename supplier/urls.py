@@ -218,5 +218,6 @@ urlpatterns = [
         views.DashboardOrderDetail.as_view(),
         name="dashboard-order-details",
     ),
+    path('dashboard/order-excel/<str:order_id>', views.download_excel, name='order_excel'),
 
 ]

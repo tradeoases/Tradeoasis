@@ -2,6 +2,7 @@ from datetime import datetime
 from django.utils import timezone
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
+from django.http import HttpResponse
 from django.views import View
 from django.views.generic import ListView, DetailView
 from django.db.models import Q
@@ -19,6 +20,9 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.sites.shortcuts import get_current_site
 
 import random
+import openpyxl
+from openpyxl.styles import Font
+
 
 from supplier import models as SupplierModels
 from auth_app import models as AuthModels
@@ -2270,7 +2274,7 @@ class DashboardOrderDetail(SupplierOnlyAccessMixin, View):
         if order.status == "PENDING":
             order.status = "VIEWED BY SUPPLER"
             order.save()
-            SupplierTask.notify_buyer(order.order_id, "VIEWED")
+            SupplierTask.notify_buyer.delay(order.order_id, "VIEWED")
 
         order_notes = SupplierModels.OrderNote.objects.filter(user=request.user, order=order)
         if order_notes:
@@ -2315,7 +2319,7 @@ class DashboardOrderDetail(SupplierOnlyAccessMixin, View):
             date = request.POST.get("delivery_date")
             order.delivery_date = date
             order.save()
-            SupplierTask.notify_buyer(order.order_id, "DELIVERY_DATE_SET")
+            SupplierTask.notify_buyer.delay(order.order_id, "DELIVERY_DATE_SET")
         
         if request.POST.get("currency") and request.POST.get("agreed_price"):
             currency = request.POST.get("currency")
@@ -2323,7 +2327,7 @@ class DashboardOrderDetail(SupplierOnlyAccessMixin, View):
             order.currency = currency
             order.agreed_price = agreed_price
             order.save()
-            BuyerTasks.notify_buyer(order.order_id, "AGREED_PRICE_SET")
+            BuyerTasks.notify_buyer.delay(order.order_id, "AGREED_PRICE_SET")
 
             # add to calender
             ManagerModels.CalenderEvent.objects.create(
@@ -2341,37 +2345,143 @@ class DashboardOrderDetail(SupplierOnlyAccessMixin, View):
         if request.POST.get("CANCELLED"):
             order.status = "CANCELLED"
             order.save()
-            SupplierTask.notify_buyer(order.order_id, "CANCELLED")
+            SupplierTask.notify_buyer.delay(order.order_id, "CANCELLED")
 
         if request.POST.get("ACCEPTED"):
             order.status = "ACCEPTED BY SUPPLER"
             order.save()
-            SupplierTask.notify_buyer(order.order_id, "ACCEPTED BY SUPPLIER")
+            SupplierTask.notify_buyer.delay(order.order_id, "ACCEPTED BY SUPPLIER")
 
         if request.POST.get("REJECTED"):
             order.status = "REJECTED"
             order.save()
-            SupplierTask.notify_buyer(order.order_id, "REJECTED")
+            SupplierTask.notify_buyer.delay(order.order_id, "REJECTED")
 
         if request.POST.get("IN_DELIVERY"):
             order.status = "IN DELIVERY"
             order.save()
-            SupplierTask.notify_buyer(order.order_id, "IN DELIVERY")
+            SupplierTask.notify_buyer.delay(order.order_id, "IN DELIVERY")
+
+            for prod in SupplierModels.OrderProductVariation.objects.filter(order=order):
+                prod.product.sell_made(prod.quantity)
 
         if request.POST.get("DELIVERED"):
             order.status = "DELIVERY"
-            order.save()
-            SupplierTask.notify_buyer(order.order_id, "DELIVERED")
+            order.save()    
+            SupplierTask.notify_buyer.delay(order.order_id, "DELIVERED")
 
         if request.POST.get("COMPLETED"):
             order.status = "COMPLETED"
             order.save()
-            SupplierTask.notify_buyer(order.order_id, "COMPLETED")
+            SupplierTask.notify_buyer.delay(order.order_id, "COMPLETED")
 
         if request.POST.get("REORDER"):
             order.status = "PENDING"
             over.delivery_date = None
             order.save()
-            SupplierTask.notify_buyer(order.order_id, "REORDER")
+            SupplierTask.notify_buyer.delay(order.order_id, "REORDER")
 
         return redirect(reverse("supplier:dashboard-order-details", kwargs={"order_id": order.order_id}))
+
+def download_excel(request, order_id):
+    order = get_object_or_404(SupplierModels.Order, order_id=order_id)
+    shipping = get_object_or_404(SupplierModels.OrderShippingDetail, order=order)
+    # Create a new workbook and get the active sheet
+    workbook = openpyxl.Workbook()
+    sheet = workbook.active
+
+    # order details
+    sheet['A1'] = _('Order Id')
+    sheet['A1'].font = Font(bold=True)
+    sheet['A2'] = order_id
+
+    sheet['B1'] = _('Supplier')
+    sheet['B1'].font = Font(bold=True)
+    sheet['B2'] = order.supplier.business_name
+
+    sheet['C1'] = _('Buyer')
+    sheet['C1'].font = Font(bold=True)
+    sheet['C2'] = order.buyer.business_name
+
+    sheet['D1'] = _('Delivery Date')
+    sheet['D1'].font = Font(bold=True)
+    sheet['D2'] = order.delivery_date
+
+    sheet['E1'] = _('Agreed Price')
+    sheet['E1'].font = Font(bold=True)
+    sheet['E2'] = order.agreed_price
+
+    sheet['F1'] = _('Discount')
+    sheet['F1'].font = Font(bold=True)
+    sheet['F2'] = order.discount
+
+    sheet['G1'] = _('Total Price')
+    sheet['G1'].font = Font(bold=True)
+    sheet['G2'] = order.total_price
+
+    sheet['H1'] = _('Status')
+    sheet['H1'].font = Font(bold=True)
+    sheet['H2'] = order.status
+
+    # shipping
+    sheet['A4'] = _('Carrier')
+    sheet['A4'].font = Font(bold=True)
+    sheet['A5'] = shipping.carrier.name
+    
+    sheet['B4'] = _('Shipping Tax')
+    sheet['B4'].font = Font(bold=True)
+    sheet['B5'] = shipping.carrier.tax
+    
+    sheet['C4'] = _('Address 1')
+    sheet['C4'].font = Font(bold=True)
+    sheet['C5'] = shipping.address_1
+    
+    sheet['D4'] = _('Address 2')
+    sheet['D4'].font = Font(bold=True)
+    sheet['D5'] = shipping.address_2
+    
+    sheet['E4'] = _('Country')
+    sheet['E4'].font = Font(bold=True)
+    sheet['E5'] = order.buyer.country
+    
+    sheet['F4'] = _('City')
+    sheet['F4'].font = Font(bold=True)
+    sheet['F5'] = order.buyer.city
+    
+    sheet['G4'] = _('Telno')
+    sheet['G4'].font = Font(bold=True)
+    sheet['G5'] = f'+ {order.buyer.country_code} {order.buyer.mobile_user}'
+
+    # products
+    sheet['A7'] = _('Product Name')
+    sheet['A7'].font = Font(bold=True)
+    sheet['B7'] = _('Quantity')
+    sheet['B7'].font = Font(bold=True)
+    sheet['C7'] = _('Color')
+    sheet['C7'].font = Font(bold=True)
+    sheet['D7'] = _('Material')
+    sheet['D7'].font = Font(bold=True)
+    sheet['E7'] = _('Unit Price')
+    sheet['E7'].font = Font(bold=True)
+    sheet['F7'] = _('Total')
+    sheet['F7'].font = Font(bold=True)
+
+    line_number = 8
+    for product in SupplierModels.OrderProductVariation.objects.filter(order=order):
+        sheet[f'A{line_number}'] = product.product.name
+        sheet[f'B{line_number}'] = product.quantity
+        sheet[f'C{line_number}'] = product.color.name
+        sheet[f'D{line_number}'] = product.material.name
+        sheet[f'E{line_number}'] = f"{product.price.currency} {product.price.min_price} - {product.price.max_price}"
+        sheet[f'F{line_number}'] = f"{product.price.currency} {product.min_total_price} - {product.max_total_price}"        
+
+        line_number = line_number + 1
+
+    # Generate the file response
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = f'attachment; filename="order_{order_id}.xlsx"'
+
+    # Save the workbook to the response
+    workbook.save(response)
+
+    return response

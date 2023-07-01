@@ -104,13 +104,21 @@
                 <div class="content-group">
                     <div class="group-header-area ">
                         <h4 class="group-header">{% trans "Shipping and Contact Details" %}</h4>
-                        <a href="{% url 'buyer:order-shipping-details' order.order_id %}" class="edit-cta">Edit</a>
+                        <a href="{% url 'buyer:order-shipping-details' order.order_id %}" class="edit-cta">{% trans "Edit" %}</a>
                     </div>
                     <div class="briefs">
                         <div class="sub-grouping">
                             <span class="title">{% trans "Carrier" %}:</span>
                             {% if shipping_details.carrier %}
                                 <span class="content">{{ shipping_details.carrier.name }}</span>
+                            {% else %}
+                                <span class="content">{% trans "Not Set" %}</span>
+                            {% endif %}
+                        </div>
+                        <div class="sub-grouping">
+                            <span class="title">{% trans "Shipping Tax" %}:</span>
+                            {% if shipping_details.carrier %}
+                                <span class="content">{{ shipping_details.carrier.tax }}</span>
                             {% else %}
                                 <span class="content">{% trans "Not Set" %}</span>
                             {% endif %}

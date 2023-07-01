@@ -476,6 +476,8 @@ class OrderCreateView(BuyerOnlyAccessMixin, View):
                 prod.order = order
                 prod.cart = None
                 prod.save()
+
+            SupplierModels.OrderShippingDetail.objects.create(order=order)
             
             # notify suppliers
             BuyerTasks.order_placed_notify_supplier.delay(order.pk, instance.__class__.__name__)
@@ -611,7 +613,7 @@ class OrderDetaliView(BuyerOnlyAccessMixin, View):
             date = request.POST.get("delivery_date")
             order.delivery_date = date
             order.save()
-            BuyerTasks.notify_suppleir_form_buyer(order.order_id, "DELIVERY_DATE_SET")
+            BuyerTasks.notify_suppleir_form_buyer.delay(order.order_id, "DELIVERY_DATE_SET")
         
         if request.POST.get("currency") and request.POST.get("agreed_price"):
             currency = request.POST.get("currency")
@@ -619,7 +621,7 @@ class OrderDetaliView(BuyerOnlyAccessMixin, View):
             order.currency = currency
             order.agreed_price = agreed_price
             order.save()
-            BuyerTasks.notify_suppleir_form_buyer(order.order_id, "AGREED_PRICE_SET")
+            BuyerTasks.notify_suppleir_form_buyer.delay(order.order_id, "AGREED_PRICE_SET")
 
             # add to calender
             ManagerModels.CalenderEvent.objects.create(
@@ -689,7 +691,7 @@ class ProductVariationDetails(BuyerOnlyAccessMixin, View):
             variation.quantity = product_quantity
             variation.save()
         
-            BuyerTasks.notify_suppleir_form_buyer(variation.order.order_id, "PRODUCT_DETAILS_UPDATED")
+            BuyerTasks.notify_suppleir_form_buyer.delay(variation.order.order_id, "PRODUCT_DETAILS_UPDATED")
             messages.add_message(request, messages.SUCCESS, _("Product Details Edited successfully."))
             return redirect(reverse("buyer:order-detail", kwargs={"order_id": variation.order.order_id}))
 
@@ -774,7 +776,7 @@ class OrderAddProductView(BuyerOnlyAccessMixin, View):
         )
         if variation:
             variation.save()
-            BuyerTasks.notify_suppleir_form_buyer(variation.order.order_id, "PRODUCT_ADDED_TO_ORDER")
+            BuyerTasks.notify_suppleir_form_buyer.delay(variation.order.order_id, "PRODUCT_ADDED_TO_ORDER")
             messages.add_message(request, messages.SUCCESS, _("Edit Product Details."))
             return redirect(reverse("buyer:product-variation-detial", kwargs={"pk": variation.pk}))
         else:
@@ -814,6 +816,6 @@ class OrderShippingDetailView(BuyerOnlyAccessMixin, View):
         shipping.address_2 = request.POST.get("address_2")
         
         shipping.save()
-        BuyerTasks.notify_suppleir_form_buyer(order.order_id, "SHIPPING_DETAILS_UPDATED")
+        BuyerTasks.notify_suppleir_form_buyer.delay(order.order_id, "SHIPPING_DETAILS_UPDATED")
         messages.add_message(request, messages.SUCCESS, _("Shipping Details Updated."))
         return redirect(reverse("buyer:order-detail", kwargs={"order_id": order.order_id}))

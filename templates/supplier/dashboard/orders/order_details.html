@@ -25,6 +25,7 @@
                 <div class="content-group">
                     <div class="group-header-area">
                         <h4 class="group-header">{% trans "Order Details" %}</h4>
+                        <a target="_blank" href="{% url 'supplier:order_excel' order.order_id %}" class="edit-cta">{% trans "Export as Excel" %}</a>
                     </div>
                     <div class="briefs">
                         <div class="sub-grouping">
@@ -112,6 +113,14 @@
                             {% endif %}
                         </div>
                         <div class="sub-grouping">
+                            <span class="title">{% trans "Shipping Tax" %}:</span>
+                            {% if shipping_details.carrier %}
+                                <span class="content">{{ shipping_details.carrier.tax }}</span>
+                            {% else %}
+                                <span class="content">{% trans "Not Set" %}</span>
+                            {% endif %}
+                        </div>
+                        <div class="sub-grouping">
                             <span class="title">{% trans "Address 1" %}:</span>
                             {% if shipping_details.address_1 %}
                                 <span class="content">{{ shipping_details.address_1 }}</span>
@@ -164,7 +173,7 @@
                                         <td>{{ object.color.name }}</td>
                                         <td>{{ object.material.name }}</td>
                                         <td>{{ object.price.currency }} {{ object.price.min_price }} - {{ object.price.max_price }}</td>
-                                        <td>{{ object.price.currency }} {{ object.price.min_total_price }} - {{ object.price.max_total_price }}</td>
+                                        <td>{{ object.price.currency }} {{ object.min_total_price }} - {{ object.max_total_price }}</td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
