@@ -26,6 +26,26 @@
                         </div>
                         <input type="submit" hidden />
                     </form>
+                    <form id="price-filter-form" class="filter-group flex gap-2 items-center justify-start" method="GET" action="" data-context="">
+                        <p class="font-medium text-slate-800">{% trans "Price" %}: </p>
+                        <div class="filter-form-group flex gap-3 items-center">
+                            <input type="text" name="price" class="px-2 py-1 rounded text-sm text-slate-500 focus:outline-none" style="width: 100px;" id="price" value="">
+                        </div>
+                        <input type="submit" hidden />
+                    </form>
+                    <form id="rating-filter-form" class="filter-group flex gap-2 items-center justify-start" method="GET" action="" data-context="">
+                        <p class="font-medium text-slate-800">{% trans "Rating" %}: </p>
+                        <div class="filter-form-group flex gap-3 items-center">
+                            <select name="rating" id="rating-filter" class="px-2 py-1 rounded text-sm text-slate-700 focus:outline-none" onchange="(function(){document.querySelector('').submit()})()">
+                                <option value="5">5</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                        <input type="submit" hidden />
+                    </form>
                     <form id="category-filter-form" class="filter-group flex gap-2 items-center justify-start" method="GET" action="" data-context="{{categories.context_name}}">
                         <p class="font-medium text-slate-800">{% trans 'Category' %}: </p>
                         <div class="filter-form-group flex gap-3 items-center">

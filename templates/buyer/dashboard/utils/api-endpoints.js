@@ -16,3 +16,8 @@ const endpoints = {
     "schedule_calendar_event"   : "buyer/:id/calendar/create",              // POST {buyer,title}
     "retrieve_calendar_events"  : "buyer/:id/calendar/events",              // GET
 }
+
+
+
+
+
