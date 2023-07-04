@@ -444,30 +444,6 @@ def get_chat_file_path(instance):
     path = os.path.join(f"{settings.ORDERCHATFILES_DIR}/{filename}{ext}")
     return path
 
-class OrderChat(models.Model):
-    chat_id = models.CharField(_(" Name"), max_length=256, unique=True, blank=True, null=True)
-    order = models.OneToOneField(to=Order, on_delete=models.CASCADE)
-    chatfilepath = models.CharField(
-        _("Chat filepath"),
-        max_length=256,
-        blank=True,
-        null=True,
-    )
-    is_closed = models.BooleanField(_("Chat Closed"), default=False)
-    is_handled = models.BooleanField(_("Chat handled"), default=False)
-    created_on = models.DateField(_("Created on"), default=timezone.now)
-    updated_on = models.DateTimeField(_("Updated on"), null=True, blank=True)
-
-    def save(self, *args, **kwargs):
-        if not self.chat_id:
-            self.chat_id = self.order.order_id
-
-        if not self.chatfilepath:
-            self.chatfilepath = get_chat_file_path(self)
-
-        self.updated_on = datetime.datetime.now()
-        super().save(*args, **kwargs)
-
 #======================================= Order =======================================
 
 

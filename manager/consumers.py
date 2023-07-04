@@ -3,12 +3,136 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from asgiref.sync import sync_to_async
 import json
-from manager import models as ManagerModels
+import datetime
+from coms import models as ComsModels
 from auth_app import models as AuthModels
+from supplier import models as SupplierModels
 from django.db.models import Q
 from django.conf import settings
 import os
 
+from manager import models as ManagerModels
+
+
+class OrderChatRoom(AsyncWebsocketConsumer):
+    async def connect(self):
+        # name of the chatroom
+        self.order_id = self.scope["url_route"]["kwargs"]["order_id"]
+
+        # group users in a specific chatroom
+        self.room_group_name = "chat_%s" % self.order_id
+        await self.channel_layer.group_add(self.room_group_name, self.channel_name)
+
+        await self.accept()
+
+        await self.channel_layer.group_send(
+            self.room_group_name,
+            {
+                "type": "load_messages",
+            },
+        )
+
+    async def load_messages(self, event):
+        file_path = os.path.join(
+            settings.CHATROOMFILES_DIRS.get("orders"),
+            f"{self.order_id}.json",
+        )
+
+        try:
+            with open(file_path, "r") as file:
+                current_data = json.load(file)
+                for i in range(len(current_data)):
+                    await self.send(text_data=json.dumps(current_data[i]))
+        except FileNotFoundError:
+            pass
+
+    async def disconnect(self, code):
+        await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
+        await super().disconnect(code)
+
+    async def receive(self, text_data=None, bytes_data=None):
+        self.order_id = self.scope["url_route"]["kwargs"]["order_id"]
+        text_data_json = json.loads(text_data)
+        business_id = await database_sync_to_async(self.CreateChatRecord)()
+        
+        dataObject = {
+            "message": text_data_json["message"],
+            "sender": business_id,
+            "time": datetime.datetime.now().today().strftime("%Y-%m-%d %H:%M:%S")
+        }
+        await self.write_message_to_file(self.order_id, dataObject)
+
+        dataObject["type"] = "order_message"
+        await self.channel_layer.group_send(
+            self.room_group_name,
+            dataObject
+        )
+
+    async def order_message(self, event):
+        message = event["message"]
+        sender = event["sender"]
+        time = event["time"]
+
+        await self.send(
+            text_data=json.dumps(
+                {"message": message, "sender": sender, "time": time}
+            )
+        )
+
+        await database_sync_to_async(self.createNotification)(sender)
+
+    def createNotification(self, sender):
+        self.order_id = self.scope["url_route"]["kwargs"]["order_id"]
+        order = SupplierModels.Order.objects.filter(order_id=self.order_id).first()
+        business = AuthModels.ClientProfile.objects.filter(pk=sender).first()
+
+        target = order.supplier if business == order.buyer else buyer
+        ManagerModels.Notification.objects.create(
+            target = target,
+            title="New Chat on Order {}".format(self.order_id),
+            category="ORDERS"
+        )
+
+    def CreateChatRecord(self):
+        self.order_id = self.scope["url_route"]["kwargs"]["order_id"]
+        if not ComsModels.OrderChat.objects.filter(roomname=self.order_id).exists():
+            # create database record
+            chatroom = ComsModels.OrderChat.objects.create(
+                roomname=self.order_id,
+                order=SupplierModels.Order.objects.filter(order_id=self.order_id).first(),
+                buyer_representative=self.scope["user"] if self.scope["user"].account_type == "BUYER" else None,
+                supplier_representative=self.scope["user"] if self.scope["user"].account_type == "SUPPLIER" else None
+            )
+        elif (
+            ComsModels.OrderChat.objects.filter(
+                roomname=self.order_id,
+            ).exists()
+        ):
+            chatroom = ComsModels.OrderChat.objects.filter(
+                roomname=self.order_id,
+            ).first()
+            if self.scope["user"].account_type == "BUYER":
+                chatroom.buyer_representative = self.scope["user"]
+
+            if self.scope["user"].account_type == "SUPPLIER":
+                chatroom.supplier_representative = self.scope["user"]
+
+            chatroom.save()
+
+        # return business id
+        return self.scope["user"].business.pk
+
+
+    @sync_to_async
+    def write_message_to_file(self, unique_id, dataObject):
+        file_path = os.path.join(settings.CHATROOMFILES_DIRS.get("orders"), f"{unique_id}.json")
+
+        with open(file_path, "r") as file:
+            current_data = json.load(file)
+            current_data.append(dataObject)
+
+        with open(file_path, "w") as file:
+            json.dump(current_data, file)
 
 class ChatRoomConsumer(AsyncWebsocketConsumer):
     async def connect(self):
@@ -37,7 +161,7 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
         await self.send(text_data=json.dumps({"message": message, "user": user}))
 
         file_path = os.path.join(
-            settings.CHATROOMFILES_DIR,
+            settings.CHATROOMFILES_DIRS.get("support-client"),
             f"{self.scope['url_route']['kwargs']['room_name']}.json",
         )
 
@@ -62,7 +186,11 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
 
         await database_sync_to_async(self.storechatroom)(message, user, username)
 
-        await self.write_message_to_file(roomname, user, username, message)
+        await self.write_message_to_file(roomname, {
+            "user": user,
+            "username": username,
+            "message": message,
+        })
 
         await self.channel_layer.group_send(
             self.room_group_name,
@@ -89,20 +217,20 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
         roomname = self.scope["url_route"]["kwargs"]["room_name"]
         user = AuthModels.User.objects.filter(username=username).first()
         if user:
-            if not ManagerModels.Chatroom.objects.filter(roomname=roomname).exists():
+            if not ComsModels.SupportClientChat.objects.filter(roomname=roomname).exists():
                 # create database record
-                ManagerModels.Chatroom.objects.create(
+                ComsModels.SupportClientChat.objects.create(
                     roomname=roomname,
                     user=user,
                 )
             elif (
-                ManagerModels.Chatroom.objects.filter(
+                ComsModels.SupportClientChat.objects.filter(
                     Q(roomname=roomname), Q(is_handled=False)
                 ).exists()
                 and account_type == "Support"
             ):
                 # set support handling a chat
-                chatroom = ManagerModels.Chatroom.objects.filter(
+                chatroom = ComsModels.SupportClientChat.objects.filter(
                     Q(roomname=roomname), Q(is_handled=False)
                 ).first()
                 user_profile = AuthModels.SupportProfile.objects.filter(
@@ -115,18 +243,14 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
 
                 user_profile.increase_responses_count()
 
+
     @sync_to_async
-    def write_message_to_file(self, roomname, user, username, message):
-        file_path = os.path.join(settings.CHATROOMFILES_DIR, f"{roomname}.json")
+    def write_message_to_file(self, unique_id, dataObject):
+        file_path = os.path.join(settings.CHATROOMFILES_DIRS.get("orders"), f"{unique_id}.json")
+
         with open(file_path, "r") as file:
             current_data = json.load(file)
-            current_data.append(
-                {
-                    "user": user,
-                    "username": username,
-                    "message": message,
-                }
-            )
+            current_data.append(dataObject)
 
         with open(file_path, "w") as file:
             json.dump(current_data, file)

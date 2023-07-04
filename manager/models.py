@@ -13,7 +13,7 @@ import json
 import buyer
 
 # from apps
-from supplier.models import Store, Product
+from supplier.models import Store, Product, Order
 from auth_app import models as Authmodels
 
 class VerifiedManager(models.Manager):
@@ -178,50 +178,6 @@ class UserRequest(models.Model):
     device = models.CharField(_("Device"), max_length=256)
     user_os = models.CharField(_("User Os"), max_length=256)
     created_on = models.DateField(_("Created on"), default=timezone.now)
-
-
-# utility functions
-def get_chat_file_path(instance):
-    ext = ".json"
-    filename = instance.roomname
-    path = os.path.join(f"{settings.CHATROOMFILES_DIR}/{filename}{ext}")
-    return path
-
-
-class Chatroom(models.Model):
-    roomname = models.CharField(_("Chatroom Name"), max_length=256, unique=True)
-    user = models.ForeignKey(
-        Authmodels.User,
-        on_delete=models.CASCADE,
-    )
-    support = models.ForeignKey(
-        Authmodels.SupportProfile,
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True,
-    )
-    chatfilepath = models.CharField(
-        _("Chat filepath"),
-        max_length=256,
-        blank=True,
-        null=True,
-    )
-    is_closed = models.BooleanField(_("Chat Closed"), default=False)
-    is_handled = models.BooleanField(_("Chat handled"), default=False)
-    created_on = models.DateField(_("Created on"), default=timezone.now)
-
-    def save(self, *args, **kwargs):
-        self.chatfilepath = get_chat_file_path(self)
-        super().save(*args, **kwargs)
-
-@receiver(post_save, sender=Chatroom)
-def create_Chat_file(sender, instance, **kwargs):
-    try:
-        with open(f"{instance.chatfilepath}", "w") as file:
-            json.dump([], file)
-    except FileNotFoundError:
-        instance.chatfilepath = None
-        instance.save()
 
 
 class TextPromotionManager(models.Manager):
@@ -405,4 +361,9 @@ class Notification(models.Model):
     created_on = models.DateTimeField(_("Created on"), default=timezone.now)
 
     def __str__(self) -> str:
-        return f"{self.title} {self.business}"
+        return f"{self.title} {self.target}"
+
+
+@receiver(post_save, sender=Notification)
+def create_notification(sender, instance, *args, **kwargs):
+    pass

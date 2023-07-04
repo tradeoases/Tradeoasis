@@ -58,6 +58,7 @@ urlpatterns = i18n_patterns(
     path(_("support/admin/"), include("app_admin.urls", namespace="app_admin")),
     path(_("api/"), include("api.urls", namespace="api")),
     path(_("admin-api/"), include("admin_api.urls", namespace="admin-api")),
+    path(_("communications/"), include("coms.urls", namespace="coms")),
     path(_("admin/"), admin.site.urls),
 )
 urlpatterns += [

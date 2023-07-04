@@ -71,3 +71,4 @@ def notify_buyer(order_id, status):
 
 @task(name="inventory_check")
 def inventory_check(product_id, **kwargs):
+    pass

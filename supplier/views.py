@@ -31,6 +31,7 @@ from payment import models as PaymentModels
 import supplier
 
 from manager import tasks as ManagerTasks
+from coms import models as ComsModels
 
 from supplier.mixins import SupplierOnlyAccessMixin
 
@@ -237,11 +238,7 @@ class ProductListView(View):
             return SupplierModels.Product.objects.filter(
                 Q(price__gte=float(min_price) if min_price else float(0)),
                 Q(price__lte=float(max_price)),
-                # Q(
-                #     store__supplier=AuthModels.Supplier.supplier.filter(
-                #         clientprofile__business_name=supplier
-                #     ).first()
-                # ),
+                Q(business__business_name=supplier)
             )
 
         elif max_price:
@@ -253,21 +250,13 @@ class ProductListView(View):
         elif supplier != "all":
             return SupplierModels.Product.objects.filter(
                 Q(price__gte=float(min_price) if min_price else float(0)),
-                Q(
-                    store__supplier=AuthModels.Supplier.supplier.filter(
-                        clientprofile__business_name=supplier
-                    ).first()
-                ),
+                Q(business__business_name=supplier),
             )
 
         elif country != "all":
             return SupplierModels.Product.objects.filter(
                 Q(price__gte=float(min_price) if min_price else float(0)),
-                Q(
-                    store__supplier=AuthModels.Supplier.supplier.filter(
-                        clientprofile__country=country
-                    ).first()
-                ),
+                Q(business__country=country)
             )
 
         elif category != "all":
@@ -280,9 +269,15 @@ class ProductListView(View):
             # we are searching for products based on name, sub category, category, tag
             return SupplierModels.Product.objects.filter(
                 Q(name__icontains=search)
+                | Q(description__icontains=search)
                 | Q(sub_category__name__icontains=search)
                 | Q(category__name__icontains=search)
+                | Q(productcolor__name__icontains=search)
+                | Q(productmaterial__name__icontains=search)
                 | Q(producttag__name__icontains=search)
+                | Q(business__business_name__icontains=search)
+                | Q(business__country__icontains=search)
+                | Q(business__city__icontains=search)
             ).distinct("id")
 
         return SupplierModels.Product.objects.filter(
@@ -342,15 +337,15 @@ class ProductListView(View):
 
         context_data["suppliers"] = {
             "context_name": "suppliers",
-            "results": AuthModels.Supplier.supplier.all(),
+            "results": AuthModels.Supplier.supplier.all().distinct(),
         }
         context_data["countries"] = {
             "context_name": "countries",
-            "results": AuthModels.ClientProfile.objects.all().only("country")
+            "results": AuthModels.ClientProfile.objects.all().distinct().only("country")
         }
         context_data["categories"] = {
             "context_name": "categories",
-            "results": SupplierModels.ProductCategory.objects.all().only("name")
+            "results": SupplierModels.ProductCategory.objects.all().distinct().only("name")
         }
 
         context_data["price_limits"] = {
@@ -750,6 +745,7 @@ class SubCategoryDetailView(View):
         # get query parameters
         min_price = self.request.GET.get("min-price", 0)
         max_price = self.request.GET.get("max-price", None)
+        price = self.request.GET.get("price", None)
         supplier = self.request.GET.get("supplier", "all")
         country = self.request.GET.get("country", "all")
         showroom = self.request.GET.get("showroom", None)
@@ -759,12 +755,11 @@ class SubCategoryDetailView(View):
                 Q(sub_category=subcategory),
                 Q(price__gte=float(min_price) if min_price else float(0)),
                 Q(price__lte=float(max_price)),
-                # Q(
-                #     store__supplier=AuthModels.Supplier.supplier.filter(
-                #         clientprofile__business_name=supplier
-                #     ).first()
-                # ),
+                Q(business__business_name=supplier),
             )
+
+        elif price:
+            return SupplierModels.Product.objects.filter(price=float(price))
 
         elif max_price:
             return SupplierModels.Product.objects.filter(
@@ -777,33 +772,21 @@ class SubCategoryDetailView(View):
             return SupplierModels.Product.objects.filter(
                 Q(sub_category=subcategory),
                 Q(price__gte=float(min_price) if min_price else float(0)),
-                Q(
-                    store__supplier=AuthModels.Supplier.supplier.filter(
-                        clientprofile__business_name=supplier
-                    ).first()
-                ),
+                Q(business__business_name=supplier),
             )
 
         elif country != "all":
             return SupplierModels.Product.objects.filter(
                 Q(sub_category=subcategory),
                 Q(price__gte=float(min_price) if min_price else float(0)),
-                Q(
-                    store__supplier=AuthModels.Supplier.supplier.filter(
-                        clientprofile__country=country
-                    ).first()
-                ),
+                Q(business__country=country),
             )
 
         elif showroom:
             return SupplierModels.Product.objects.filter(
                 Q(sub_category=subcategory),
                 Q(price__gte=float(min_price) if min_price else float(0)),
-                Q(
-                    store__supplier=AuthModels.Supplier.supplier.filter(
-                        clientprofile__business_name=supplier
-                    ).first()
-                ),
+                Q(business__business_name=supplier),
             )
 
         return SupplierModels.Product.objects.filter(
@@ -915,11 +898,11 @@ class SubCategoryDetailView(View):
 
         context_data["suppliers"] = {
             "context_name": "suppliers",
-            "results": AuthModels.Supplier.supplier.all(),
+            "results": AuthModels.Supplier.supplier.all().distinct(),
         }
         context_data["countries"] = {
             "context_name": "countries",
-            "results": AuthModels.ClientProfile.objects.all().only("country")
+            "results": AuthModels.ClientProfile.objects.all().distinct().only("country")
         }
 
         context_data["price_limits"] = {
@@ -2289,7 +2272,7 @@ class DashboardOrderDetail(SupplierOnlyAccessMixin, View):
             "order_products" : SupplierModels.OrderProductVariation.objects.filter(order=order),
             "order_notes" : order_notes,
             "shipping_details" : shipping_details,
-            "order_chat": SupplierModels.OrderChat.objects.filter(order=order)
+            "order_chat": ComsModels.OrderChat.objects.filter(order=order)
         }
         return render(
             request, template_name=self.template_name, context=context_data

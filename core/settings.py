@@ -61,6 +61,7 @@ CUSTOM_APPS = [
     "app_admin.apps.AppAdminConfig",
     "admin_api.apps.AdminApiConfig",
     "api.apps.ApiConfig",
+    "coms.apps.ComsConfig",
 ]
 
 THIRD_PARTY_APPS = [    
@@ -353,8 +354,13 @@ SOCIALACCOUNT_PROVIDERS = {
 
 
 # custom
-CHATROOMFILES_DIR = os.path.join(BASE_DIR, "chatrooms")
-ORDERCHATFILES_DIR = os.path.join(BASE_DIR, "chatrooms", "orderchats")
+
+CHATROOMFILES_DIRS = {
+    "support-client" : os.path.join(BASE_DIR, "chatrooms", "support-client"),
+    "interclient": os.path.join(BASE_DIR, "chatrooms", "interclient"),
+    "orders": os.path.join(BASE_DIR, "chatrooms", "orderchats"),
+}
+
 SUPPORT_EMAIL = os.environ.get("SUPPORT_EMAIL")
 
 

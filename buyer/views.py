@@ -18,6 +18,7 @@ from payment import models as PaymentModels
 from supplier import models as SupplierModels
 from buyer import models as BuyerModels
 from manager import models as ManagerModels
+from coms import models as ComsModels
 
 from buyer import tasks as BuyerTasks
 
@@ -299,16 +300,6 @@ class OrderHistoryView(BuyerOnlyAccessMixin, ListView):
     def get(self, request):
         return render(request, self.template_name)
 
-
-
-class MessengerView(BuyerOnlyAccessMixin, ListView):
-    template_name = "buyer/dashboard/messenger.html"
-
-    def get(self, request):
-        return render(request, self.template_name)
-
-
-
 class DashboardView(BuyerOnlyAccessMixin, ListView):
     template_name = "buyer/dashboard/dashboard.html"
 
@@ -588,7 +579,7 @@ class OrderDetaliView(BuyerOnlyAccessMixin, View):
             "order_products" : SupplierModels.OrderProductVariation.objects.filter(order=order),
             "order_notes" : order_notes,
             "shipping_details" : shipping_details,
-            "order_chat": SupplierModels.OrderChat.objects.filter(order=order)
+            "order_chat": ComsModels.OrderChat.objects.filter(order=order)
         }
         return render(
             request, template_name=self.template_name, context=context_data
@@ -819,3 +810,10 @@ class OrderShippingDetailView(BuyerOnlyAccessMixin, View):
         BuyerTasks.notify_suppleir_form_buyer.delay(order.order_id, "SHIPPING_DETAILS_UPDATED")
         messages.add_message(request, messages.SUCCESS, _("Shipping Details Updated."))
         return redirect(reverse("buyer:order-detail", kwargs={"order_id": order.order_id}))
+
+
+class MessengerView(BuyerOnlyAccessMixin, ListView):
+    template_name = "buyer/dashboard/messenger.html"
+
+    def get(self, request):
+        return render(request, self.template_name)

@@ -68,10 +68,12 @@
     const chatList = document.querySelector('.chat-list');
     const roomName = JSON.parse(document.getElementById('room_name').textContent);
     const username = JSON.parse(document.getElementById('username').textContent);
-    const chatSocket = new WebSocket(
-        "wss://" + window.location.host + "/ws/chat/" + roomName + "/"
-    );
 
+    let protocol = window.location.host.includes("localhost") ? "ws://" : "wss://"
+    const chatSocket = new WebSocket(
+        protocol + window.location.host + "/ws/chat/" + roomName + "/"
+    );
+    
     chatSocket.onmessage = function (e) {
         const data = JSON.parse(e.data);
         
