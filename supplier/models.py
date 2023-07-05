@@ -544,6 +544,15 @@ def delete_product(sender, instance, *args, **kwargs):
     for video in videos:
         video.delete()
 
+    for record in ProductTag.objects.filter(product=instance):
+        record.delete()
+
+    for record in ProductColor.objects.filter(product=instance):
+        record.delete()
+
+    for record in ProductMaterial.objects.filter(product=instance):
+        record.delete()
+
     product_sub_category = instance.sub_category
     # category product count decreases
     product_sub_category.category.product_count -= 1
