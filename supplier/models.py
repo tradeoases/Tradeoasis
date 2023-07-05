@@ -553,6 +553,9 @@ def delete_product(sender, instance, *args, **kwargs):
     for record in ProductMaterial.objects.filter(product=instance):
         record.delete()
 
+    for record in ProductPrice.objects.filter(product=instance):
+        record.delete()
+
     product_sub_category = instance.sub_category
     # category product count decreases
     product_sub_category.category.product_count -= 1
