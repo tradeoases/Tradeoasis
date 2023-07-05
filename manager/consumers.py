@@ -4,6 +4,7 @@ from channels.db import database_sync_to_async
 from asgiref.sync import sync_to_async
 import json
 import datetime
+import uuid
 from coms import models as ComsModels
 from auth_app import models as AuthModels
 from supplier import models as SupplierModels
@@ -13,6 +14,112 @@ import os
 
 from manager import models as ManagerModels
 
+
+class InterChats(AsyncWebsocketConsumer):
+    async def connect(self):
+        # name of the chatroom
+        self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
+
+        # group users in a specific chatroom
+        self.room_group_name = "inter_chats%s" % self.room_name
+        await self.channel_layer.group_add(self.room_group_name, self.channel_name)
+
+        await self.accept()
+
+    async def disconnect(self, code):
+        await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
+        await super().disconnect(code)
+
+    async def receive(self, text_data=None, bytes_data=None):
+        text_data_json = json.loads(text_data)
+        await database_sync_to_async(self.createInterChatFile)(text_data_json)
+
+        # check for status
+        if text_data_json.get("status") == "load_messages":
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    "type": "load_messages",
+                    "data" : text_data_json
+                },
+            )
+        elif text_data_json.get("status") == "new_message":
+            
+            dataObject = {
+                "message": text_data_json["message"],
+                "sender": text_data_json["sender"],
+                "time": datetime.datetime.now().today().strftime("%Y-%m-%d %H:%M:%S")
+            }
+            await self.write_message_to_file(dataObject, text_data_json)
+
+            dataObject["type"] = "interchat_message"
+            dataObject["data"] = text_data_json
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                dataObject
+            )
+        else:
+            pass
+    
+
+    async def load_messages(self, event):
+        try:
+            with open(event["data"].get("chat").get("chatfilepath"), "r") as file:
+                current_data = json.load(file)
+                for i in range(len(current_data)):
+                    await self.send(text_data=json.dumps(current_data[i]))
+        except FileNotFoundError:
+            pass
+
+    async def interchat_message(self, event):
+        message = event["message"]
+        sender = event["sender"]
+        time = event["time"]
+        data = event["data"]
+
+        await self.send(
+            text_data=json.dumps(
+                {"message": message, "sender": sender, "time": time}
+            )
+        )
+
+        await database_sync_to_async(self.createNotification)(data)
+
+    def createNotification(self, data):
+        if data.get("type") == "business":
+            chat = ComsModels.InterClientChat.objects.filter(pk=data.get("chat").get("id")).first()
+        elif data.get("type") == "personal":
+            chat = ComsModels.InterUserChat.objects.filter(pk=data.get("chat").get("id")).first()
+        # if data.get("type") == "group"
+        #     chat = ComsModels.GroupChat.objects.filter(pk=data.get("chat").get("id")).first()
+
+        user = AuthModels.User.objects.filter(pk=data.get("sender")).first()
+        target = chat.initiator if user.business.pk == data.get("chat").get("participant") else chat.participant
+                
+        ManagerModels.Notification.objects.create(
+            target = target,
+            title="New Chat from {}".format(target.business_name),
+            category="CHATS"
+        )
+
+    def createInterChatFile(self, data):
+        try:
+            with open(data.get("chat").get("chatfilepath"), "r") as file:
+                file.close()
+        except:
+            with open(data.get("chat").get("chatfilepath"), "w") as file:
+                json.dump([], file)
+
+    @sync_to_async
+    def write_message_to_file(self, dataObject, data):
+        file_path = data.get("chat").get("chatfilepath")
+
+        with open(file_path, "r") as file:
+            current_data = json.load(file)
+            current_data.append(dataObject)
+
+        with open(file_path, "w") as file:
+            json.dump(current_data, file)
 
 class OrderChatRoom(AsyncWebsocketConsumer):
     async def connect(self):

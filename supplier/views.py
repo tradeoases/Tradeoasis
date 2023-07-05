@@ -1078,6 +1078,13 @@ class DashboardView(SupplierOnlyAccessMixin, View):
             "context_name": "latest-products",
             "results": SupplierModels.Product.objects.filter(store__supplier=self.request.user).order_by("-id")[:4],
         }
+        context_data["orders"] = [
+            obj
+            for obj in SupplierModels.Order.objects.filter(supplier=self.request.user.business)
+            .values("status")
+            .annotate(dcount=Count("status"))
+            .order_by()
+        ]
         return context_data
 
 
@@ -1986,7 +1993,13 @@ class DashboardMessengerView(SupplierOnlyAccessMixin, View):
     template_name = "supplier/dashboard/messenger.html"
 
     def get(self, request):
-        return render(request, self.template_name)
+        context_data = {
+            "business_chat" : ComsModels.InterClientChat.objects.filter(
+                Q(initiator=self.request.user.business)
+                | Q(participant=self.request.user.business)
+            ).first()
+        }
+        return render(request, self.template_name, context=context_data)
 
 class DashboardNotificationView(SupplierOnlyAccessMixin, View):
     template_name = "supplier/dashboard/notification.html"

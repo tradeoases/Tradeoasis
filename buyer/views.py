@@ -304,7 +304,15 @@ class DashboardView(BuyerOnlyAccessMixin, ListView):
     template_name = "buyer/dashboard/dashboard.html"
 
     def get(self, request):
-        return render(request, self.template_name)
+        context_data = {}
+        context_data["orders"] = [
+            obj
+            for obj in SupplierModels.Order.objects.filter(buyer=request.user.business)
+            .values("status")
+            .annotate(dcount=Count("status"))
+            .order_by()
+        ]
+        return render(request, self.template_name, context=context_data)
 
 
 class CalendarView(BuyerOnlyAccessMixin, ListView):
@@ -816,4 +824,10 @@ class MessengerView(BuyerOnlyAccessMixin, ListView):
     template_name = "buyer/dashboard/messenger.html"
 
     def get(self, request):
-        return render(request, self.template_name)
+        context_data = {
+            "business_chat" : ComsModels.InterClientChat.objects.filter(
+                Q(initiator=self.request.user.business)
+                | Q(participant=self.request.user.business)
+            ).first()
+        }
+        return render(request, self.template_name, context=context_data)

@@ -26,12 +26,16 @@ def get_chat_file_path(instance, chat_filename_key):
 
 # chats and chatrooms
 class Chat(models.Model):
+    class Meta:
+        ordering = ["-updated_on"]
+
     roomname = models.CharField(_("Chatroom Name"), max_length=256, unique=True, null=True, blank=True)
     chatfilepath = models.CharField(
         _("Chat filepath"),
         max_length=256,
         blank=True,
         null=True,
+        unique=True
     )
     is_closed = models.BooleanField(_("Chat Closed"), default=False)
     is_handled = models.BooleanField(_("Chat handled"), default=False)
@@ -70,7 +74,7 @@ class SupportClientChat(Chat):
     )
 
 # order chat in supplier models
-class InterClientChat(models.Model):
+class InterClientChat(Chat):
     '''
         Client Chatroom
         max users: 2
@@ -86,6 +90,30 @@ class InterClientChat(models.Model):
         on_delete=models.CASCADE,
         related_name="participant"
     )
+
+class InterUserChat(Chat):
+    '''
+        Client Chatroom
+        max users: 2
+    '''
+    chat_filename_key = "interuser"
+    participants = models.ManyToManyField(to=Authmodels.User, related_name="chat_participants", blank=True)
+
+class GroupChat(Chat):
+    '''
+        Client Chatroom
+        max users: 2
+    '''
+    chat_filename_key = "groupchat"
+    name = models.CharField(_("Chatroom Name"), max_length=256, null=True, blank=True)
+    image = models.ImageField(
+        verbose_name=_("Image"),
+        upload_to=Authmodels.get_file_path,
+        blank=True,
+        null=True,
+        default="assets/imgs/resources/profiledefault.png",
+    )
+    participants = models.ManyToManyField(to=Authmodels.User, related_name="group_participants", blank=True)
 
 class OrderChat(Chat):
     '''

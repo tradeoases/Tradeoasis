@@ -50,6 +50,7 @@
                         <span class="font-semibold">France</span>
                     </p>
                 </div> -->
+                {% if request.user.business != object %}
                 <div class="cta flex flex-wrap gap-3 my-3">
                     <a href="{% url 'supplier:supplier-contact' object.slug %}" class="flex place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-yellowColor hover:bg-yellowColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
                         <span class="text-white"><i class="fa fa-envelope"></i></span>
@@ -64,6 +65,7 @@
                         <span>{% trans 'Schedule A Call' %}</span>
                     </a>
                 </div>
+                {% endif %}
             </div>
         </div>
     </section>

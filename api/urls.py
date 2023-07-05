@@ -48,4 +48,13 @@ urlpatterns = [
     path("notifications/<int:pk>/delete/", views.NotificationDeleteView.as_view(), name="Notification-delete"),
     # path("notifications/<int:pk>/update/", views.NotificationUpdateView.as_view(), name="Notification-update"),
     #---------------------------------------- Notifications ----------------------------------------
+
+
+    #---------------------------------------- chat ----------------------------------------
+    path("user/<int:pk>/", views.UserInfoView.as_view(), name="user-info-retrieve"),
+    path("business/<int:pk>/", views.BusinessInfoView.as_view(), name="business-info-retrieve"),
+    path("chats/", views.ChatListView.as_view(), name="chat-list"),
+    #---------------------------------------- chat ----------------------------------------
+
+    path("chats/group/create/", views.CreateGroupChat.as_view(), name="create-group"),
 ]

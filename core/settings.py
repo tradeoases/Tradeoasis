@@ -358,7 +358,9 @@ SOCIALACCOUNT_PROVIDERS = {
 CHATROOMFILES_DIRS = {
     "support-client" : os.path.join(BASE_DIR, "chatrooms", "support-client"),
     "interclient": os.path.join(BASE_DIR, "chatrooms", "interclient"),
+    "interuser": os.path.join(BASE_DIR, "chatrooms", "interuser"),
     "orders": os.path.join(BASE_DIR, "chatrooms", "orderchats"),
+    "groupchat": os.path.join(BASE_DIR, "chatrooms", "groupchat"),
 }
 
 SUPPORT_EMAIL = os.environ.get("SUPPORT_EMAIL")
