@@ -16,6 +16,9 @@ import buyer
 from supplier.models import Store, Product, Order
 from auth_app import models as Authmodels
 
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
+
 class VerifiedManager(models.Manager):
     def get_queryset(self):
         # Override the default queryset to exclude inactive items
@@ -366,4 +369,14 @@ class Notification(models.Model):
 
 @receiver(post_save, sender=Notification)
 def create_notification(sender, instance, *args, **kwargs):
-    pass
+    channel_layer = get_channel_layer()
+    async_to_sync(channel_layer.group_send)(
+        "notifications",
+        {
+            "type": "notification_alerts",
+            "notification": instance.pk,
+            "title": instance.title,
+            "target": instance.target,
+            "category": instance.category,
+        },
+    )

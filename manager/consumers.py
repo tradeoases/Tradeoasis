@@ -15,6 +15,34 @@ import os
 from manager import models as ManagerModels
 
 
+class Notifications(AsyncWebsocketConsumer):
+    async def connect(self):
+        await self.channel_layer.group_add("notifications", self.channel_name)
+        await self.accept()
+
+    async def disconnect(self, code):
+        await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
+        await super().disconnect(code)
+
+    async def notification_alerts(self, event):
+        busines_pk = database_sync_to_async(self.get_business_id)()
+        if busines_pk != event['target']:
+            pass
+
+        notification = event["notification"]
+        title = event["title"]
+        category = event["category"]
+
+        await self.send(
+            text_data=json.dumps(
+                {"title": title, "category": category}
+            )
+        )
+
+
+    def get_business_id(self):
+        return self.scope['user'].business.pk
+
 class InterChats(AsyncWebsocketConsumer):
     async def connect(self):
         # name of the chatroom
@@ -92,13 +120,13 @@ class InterChats(AsyncWebsocketConsumer):
             chat = ComsModels.InterUserChat.objects.filter(pk=data.get("chat").get("id")).first()
         # if data.get("type") == "group"
         #     chat = ComsModels.GroupChat.objects.filter(pk=data.get("chat").get("id")).first()
+        sender = AuthModels.User.objects.filter(pk=data.get("sender")).first()
+        target_id = list(filter(lambda x: x != sender.business.pk, [sender.business.pk, data.get("chat").get("initiator") if data.get("chat").get("participant") == sender.business.pk else data.get("chat").get("participant")]))[0]
+        target_business = AuthModels.ClientProfile.objects.filter(pk=target_id).first()
 
-        user = AuthModels.User.objects.filter(pk=data.get("sender")).first()
-        target = chat.initiator if user.business.pk == data.get("chat").get("participant") else chat.participant
-                
         ManagerModels.Notification.objects.create(
-            target = target,
-            title="New Chat from {}".format(target.business_name),
+            target = target_business,
+            title="New Chat from {}".format(sender.business.business_name),
             category="CHATS"
         )
 

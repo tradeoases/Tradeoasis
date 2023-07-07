@@ -40,6 +40,10 @@
 </head>
 
 <body>
+    <div id="notification-alert">
+        <span id="category"></span>
+        <p id="title"></p>
+    </div>
     <div class="app-container container">
         <div class="app-content flex">
             <div class="sidebar cs-grid">
@@ -218,6 +222,22 @@
             }
             catch (err) {
 
+            }
+
+            let protocol = window.location.host.includes("localhost") ? "ws://" : "wss://"
+            url = protocol + window.location.host + `/ws/notifications/` 
+            
+            let notificationAlert = document.querySelector("#notification-alert")
+            const chatSocket = new WebSocket(url);
+            chatSocket.onmessage = async function (e) {
+                const data = JSON.parse(e.data);
+                notificationAlert.querySelector("#title").textContent = data.title
+                notificationAlert.querySelector("#category").textContent = data.category
+                notificationAlert.classList.add("inview")
+
+                setTimeout(() => {
+                    notificationAlert.classList.remove("inview")
+                }, 2000)
             }
         })
     </script>    

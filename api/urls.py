@@ -57,4 +57,5 @@ urlpatterns = [
     #---------------------------------------- chat ----------------------------------------
 
     path("chats/group/create/", views.CreateGroupChat.as_view(), name="create-group"),
+
 ]

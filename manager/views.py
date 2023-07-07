@@ -343,7 +343,7 @@ def dashboard(request):
         return redirect(reverse("supplier:dashboard"))
     elif request.user.account_type == "BUYER":
         # to buyer dashboard
-        return redirect(reverse("buyer:profile"))
+        return redirect(reverse("buyer:dashboard"))
     elif request.user.account_type == "SUPPORT":
         return redirect(reverse("app_admin:home"))
     elif request.user.is_superuser:
