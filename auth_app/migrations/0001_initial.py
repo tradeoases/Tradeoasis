@@ -42,7 +42,7 @@ class Migration(migrations.Migration):
                 ('is_active', models.BooleanField(default=True, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')),
                 ('date_joined', models.DateTimeField(default=django.utils.timezone.now, verbose_name='date joined')),
                 ('account_type', models.CharField(choices=[('ADMIN', 'Admin'), ('SUPPORT', 'Support'), ('SUPPLIER', 'Supplier'), ('BUYER', 'Buyer')], max_length=50, verbose_name='Account Type')),
-                ('image', models.ImageField(blank=True, default='test/profiledefault.png', null=True, upload_to=auth_app.models.get_file_path, verbose_name='Image')),
+                ('image', models.ImageField(blank=True, default='assets/imgs/resources/profiledefault.png', null=True, upload_to=auth_app.models.get_file_path, verbose_name='Image')),
                 ('is_email_activated', models.BooleanField(default=False, verbose_name='Email Activated')),
                 ('groups', models.ManyToManyField(blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', related_name='user_set', related_query_name='user', to='auth.group', verbose_name='groups')),
                 ('user_permissions', models.ManyToManyField(blank=True, help_text='Specific permissions for this user.', related_name='user_set', related_query_name='user', to='auth.permission', verbose_name='user permissions')),

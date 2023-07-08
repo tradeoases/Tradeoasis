@@ -17,6 +17,7 @@ import string
 # apps
 from auth_app.models import Supplier, Buyer, ClientProfile, User
 from buyer import models as BuyerModels
+from supplier import tasks as SupplierTasks
 
 # utility functions
 def get_file_path(instance, filename):
@@ -177,9 +178,10 @@ class Product(models.Model):
         super().save(*args, **kwargs)
 
     def sell_made(self, items_sold):
-        if self.stock > 0:
-            self.stock -= items_sold
+        if self.stock > 0 and items_sold >= self.stock:
+            self.stock = self.stock - int(items_sold)
             self.save()
+            SupplierTasks.inventory_check.delay(self.pk)
         else:
             raise ValueError(_('Items sold are more than available stock'))
 
@@ -442,30 +444,6 @@ def get_chat_file_path(instance):
     path = os.path.join(f"{settings.ORDERCHATFILES_DIR}/{filename}{ext}")
     return path
 
-class OrderChat(models.Model):
-    chat_id = models.CharField(_(" Name"), max_length=256, unique=True, blank=True, null=True)
-    order = models.OneToOneField(to=Order, on_delete=models.CASCADE)
-    chatfilepath = models.CharField(
-        _("Chat filepath"),
-        max_length=256,
-        blank=True,
-        null=True,
-    )
-    is_closed = models.BooleanField(_("Chat Closed"), default=False)
-    is_handled = models.BooleanField(_("Chat handled"), default=False)
-    created_on = models.DateField(_("Created on"), default=timezone.now)
-    updated_on = models.DateTimeField(_("Updated on"), null=True, blank=True)
-
-    def save(self, *args, **kwargs):
-        if not self.chat_id:
-            self.chat_id = self.order.order_id
-
-        if not self.chatfilepath:
-            self.chatfilepath = get_chat_file_path(self)
-
-        self.updated_on = datetime.datetime.now()
-        super().save(*args, **kwargs)
-
 #======================================= Order =======================================
 
 
@@ -565,6 +543,18 @@ def delete_product(sender, instance, *args, **kwargs):
     videos = ProductVideo.objects.filter(product=instance)
     for video in videos:
         video.delete()
+
+    for record in ProductTag.objects.filter(product=instance):
+        record.delete()
+
+    for record in ProductColor.objects.filter(product=instance):
+        record.delete()
+
+    for record in ProductMaterial.objects.filter(product=instance):
+        record.delete()
+
+    for record in ProductPrice.objects.filter(product=instance):
+        record.delete()
 
     product_sub_category = instance.sub_category
     # category product count decreases

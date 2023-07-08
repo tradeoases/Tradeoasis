@@ -20,7 +20,6 @@ urlpatterns = [
     ),
     path("contracts/", views.ContractListView.as_view(), name="contracts"),
     path("request-for-quote/", views.RequestForQuoteView.as_view(), name="request-for-quote"),
-    path("messenger/", views.MessengerView.as_view(), name="messenger"),
     path("dashboard/", views.DashboardView.as_view(), name="dashboard"),
     path("calendar/", views.CalendarView.as_view(), name="calendar"),
     path("bids/", views.BidsView.as_view(), name="bids"),
@@ -60,4 +59,9 @@ urlpatterns = [
     path("dashboard/order-history/", views.OrderHistoryView.as_view(), name="order-history"),
     path("dashboard/orders/", views.OrdersView.as_view(), name="orders"),
     #---------------------------------------- Orders ----------------------------------------
+
+    
+    #---------------------------------------- Chats ----------------------------------------
+    path("messenger/", views.MessengerView.as_view(), name="messenger"),
+    #---------------------------------------- Chats ----------------------------------------
 ]

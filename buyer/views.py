@@ -12,12 +12,14 @@ from django.contrib.auth import authenticate
 from django.contrib import messages
 from datetime import datetime
 from django.utils import timezone
+from django.db.models import Count
 
 from auth_app import models as AuthModels
 from payment import models as PaymentModels
 from supplier import models as SupplierModels
 from buyer import models as BuyerModels
 from manager import models as ManagerModels
+from coms import models as ComsModels
 
 from buyer import tasks as BuyerTasks
 
@@ -299,21 +301,19 @@ class OrderHistoryView(BuyerOnlyAccessMixin, ListView):
     def get(self, request):
         return render(request, self.template_name)
 
-
-
-class MessengerView(BuyerOnlyAccessMixin, ListView):
-    template_name = "buyer/dashboard/messenger.html"
-
-    def get(self, request):
-        return render(request, self.template_name)
-
-
-
 class DashboardView(BuyerOnlyAccessMixin, ListView):
     template_name = "buyer/dashboard/dashboard.html"
 
     def get(self, request):
-        return render(request, self.template_name)
+        context_data = {}
+        context_data["orders"] = [
+            obj
+            for obj in SupplierModels.Order.objects.filter(buyer=request.user.business)
+            .values("status")
+            .annotate(dcount=Count("status"))
+            .order_by()
+        ]
+        return render(request, self.template_name, context=context_data)
 
 
 class CalendarView(BuyerOnlyAccessMixin, ListView):
@@ -476,6 +476,8 @@ class OrderCreateView(BuyerOnlyAccessMixin, View):
                 prod.order = order
                 prod.cart = None
                 prod.save()
+
+            SupplierModels.OrderShippingDetail.objects.create(order=order)
             
             # notify suppliers
             BuyerTasks.order_placed_notify_supplier.delay(order.pk, instance.__class__.__name__)
@@ -586,7 +588,7 @@ class OrderDetaliView(BuyerOnlyAccessMixin, View):
             "order_products" : SupplierModels.OrderProductVariation.objects.filter(order=order),
             "order_notes" : order_notes,
             "shipping_details" : shipping_details,
-            "order_chat": SupplierModels.OrderChat.objects.filter(order=order)
+            "order_chat": ComsModels.OrderChat.objects.filter(order=order)
         }
         return render(
             request, template_name=self.template_name, context=context_data
@@ -611,7 +613,7 @@ class OrderDetaliView(BuyerOnlyAccessMixin, View):
             date = request.POST.get("delivery_date")
             order.delivery_date = date
             order.save()
-            BuyerTasks.notify_suppleir_form_buyer(order.order_id, "DELIVERY_DATE_SET")
+            BuyerTasks.notify_suppleir_form_buyer.delay(order.order_id, "DELIVERY_DATE_SET")
         
         if request.POST.get("currency") and request.POST.get("agreed_price"):
             currency = request.POST.get("currency")
@@ -619,7 +621,7 @@ class OrderDetaliView(BuyerOnlyAccessMixin, View):
             order.currency = currency
             order.agreed_price = agreed_price
             order.save()
-            BuyerTasks.notify_suppleir_form_buyer(order.order_id, "AGREED_PRICE_SET")
+            BuyerTasks.notify_suppleir_form_buyer.delay(order.order_id, "AGREED_PRICE_SET")
 
             # add to calender
             ManagerModels.CalenderEvent.objects.create(
@@ -689,7 +691,7 @@ class ProductVariationDetails(BuyerOnlyAccessMixin, View):
             variation.quantity = product_quantity
             variation.save()
         
-            BuyerTasks.notify_suppleir_form_buyer(variation.order.order_id, "PRODUCT_DETAILS_UPDATED")
+            BuyerTasks.notify_suppleir_form_buyer.delay(variation.order.order_id, "PRODUCT_DETAILS_UPDATED")
             messages.add_message(request, messages.SUCCESS, _("Product Details Edited successfully."))
             return redirect(reverse("buyer:order-detail", kwargs={"order_id": variation.order.order_id}))
 
@@ -774,7 +776,7 @@ class OrderAddProductView(BuyerOnlyAccessMixin, View):
         )
         if variation:
             variation.save()
-            BuyerTasks.notify_suppleir_form_buyer(variation.order.order_id, "PRODUCT_ADDED_TO_ORDER")
+            BuyerTasks.notify_suppleir_form_buyer.delay(variation.order.order_id, "PRODUCT_ADDED_TO_ORDER")
             messages.add_message(request, messages.SUCCESS, _("Edit Product Details."))
             return redirect(reverse("buyer:product-variation-detial", kwargs={"pk": variation.pk}))
         else:
@@ -814,6 +816,19 @@ class OrderShippingDetailView(BuyerOnlyAccessMixin, View):
         shipping.address_2 = request.POST.get("address_2")
         
         shipping.save()
-        BuyerTasks.notify_suppleir_form_buyer(order.order_id, "SHIPPING_DETAILS_UPDATED")
+        BuyerTasks.notify_suppleir_form_buyer.delay(order.order_id, "SHIPPING_DETAILS_UPDATED")
         messages.add_message(request, messages.SUCCESS, _("Shipping Details Updated."))
         return redirect(reverse("buyer:order-detail", kwargs={"order_id": order.order_id}))
+
+
+class MessengerView(BuyerOnlyAccessMixin, ListView):
+    template_name = "buyer/dashboard/messenger.html"
+
+    def get(self, request):
+        context_data = {
+            "business_chat" : ComsModels.InterClientChat.objects.filter(
+                Q(initiator=self.request.user.business)
+                | Q(participant=self.request.user.business)
+            ).first()
+        }
+        return render(request, self.template_name, context=context_data)

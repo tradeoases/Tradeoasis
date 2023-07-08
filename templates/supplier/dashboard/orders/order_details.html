@@ -25,6 +25,7 @@
                 <div class="content-group">
                     <div class="group-header-area">
                         <h4 class="group-header">{% trans "Order Details" %}</h4>
+                        <a target="_blank" href="{% url 'supplier:order_excel' order.order_id %}" class="edit-cta">{% trans "Export as Excel" %}</a>
                     </div>
                     <div class="briefs">
                         <div class="sub-grouping">
@@ -112,6 +113,14 @@
                             {% endif %}
                         </div>
                         <div class="sub-grouping">
+                            <span class="title">{% trans "Shipping Tax" %}:</span>
+                            {% if shipping_details.carrier %}
+                                <span class="content">{{ shipping_details.carrier.tax }}</span>
+                            {% else %}
+                                <span class="content">{% trans "Not Set" %}</span>
+                            {% endif %}
+                        </div>
+                        <div class="sub-grouping">
                             <span class="title">{% trans "Address 1" %}:</span>
                             {% if shipping_details.address_1 %}
                                 <span class="content">{{ shipping_details.address_1 }}</span>
@@ -164,7 +173,7 @@
                                         <td>{{ object.color.name }}</td>
                                         <td>{{ object.material.name }}</td>
                                         <td>{{ object.price.currency }} {{ object.price.min_price }} - {{ object.price.max_price }}</td>
-                                        <td>{{ object.price.currency }} {{ object.price.min_total_price }} - {{ object.price.max_total_price }}</td>
+                                        <td>{{ object.price.currency }} {{ object.min_total_price }} - {{ object.max_total_price }}</td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
@@ -209,11 +218,9 @@
                 </form>
                 <div class="chats inview sider-part" id="chat-area">
                     <ul class="msgs-area">
-                        <li class="msg received">Helloe</li>
-                        <li class="msg sent">Helloe</li>
                     </ul>
-                    <form action="" class="chat-input-area">
-                        <input type="text" placeholder="{% trans 'Type your message...' %}">
+                    <form action="" class="chat-input-area" id="chat-form">
+                        <input type="text" id="message" placeholder="{% trans 'Type your message...' %}">
                         <input type="submit" value="{% trans 'Send' %}">
                     </form>
                 </div>
@@ -223,6 +230,48 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+
+                // chats
+                const chatList = document.querySelector('.msgs-area');
+            const order_id = "{{order.order_id}}"
+            const business_id = "{{request.user.business.pk}}"
+
+            let protocol = window.location.host.includes("localhost") ? "ws://" : "wss://"
+            const chatSocket = new WebSocket(
+                protocol + window.location.host + "/ws/chat/orders/" + order_id + "/"
+            );
+
+            chatSocket.onmessage = function (e) {
+                const data = JSON.parse(e.data);
+                
+                // business_id
+                let elem = document.createElement("li")
+                elem.classList.add("msg")
+                elem.textContent = data.message
+                
+                if (data.sender == business_id) {
+                    elem.classList.add("sent")
+                }
+                else {
+                    elem.classList.add("received")
+                }
+
+                chatList.appendChild(elem);
+            }
+            
+            const chatForm = document.querySelector("#chat-form");
+            chatForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                let messageField = chatForm.querySelector("#message");
+                if (messageField.value != "") {
+                    chatSocket.send(JSON.stringify({
+                        "message": messageField.value,
+                    }))
+                    chatForm.reset();
+                }
+
+            })
+
             let notes_activator = document.getElementById("notes_activator")
             notes_activator.addEventListener("click", () => {
                 document.querySelectorAll(".sider-part").forEach(elem => elem.classList.remove("inview"))

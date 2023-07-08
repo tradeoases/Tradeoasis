@@ -39,7 +39,7 @@ class User(AbstractUser):
         upload_to=get_file_path,
         blank=True,
         null=True,
-        default="test/profiledefault.png",
+        default="assets/imgs/resources/profiledefault.png",
     )
     is_email_activated = models.BooleanField(_("Email Activated"), default=False)
 
@@ -88,6 +88,13 @@ class ClientProfile(models.Model):
     customer_id = models.CharField(
         _("Braintree customer id"), max_length=30, blank=True, null=True
     )
+    image = models.FileField(
+        verbose_name=_("Business Image"),
+        upload_to=get_file_path,
+        default="test/django.png",
+    )
+
+    team = models.ManyToManyField(to=User, related_name="team_members", blank=True)
 
     def save(self, *args, **kwargs):
         if not self.business_name:
@@ -196,6 +203,11 @@ def create_support_profile(sender, instance, *args, **kwargs):
         profile = SupportProfile.objects.create(
             user=instance
         )
+
+@receiver(post_save, sender=ClientProfile)
+def add_to_team(sender, instance, *args, **kwargs):
+    if instance and instance.team != instance.user:
+        instance.team.add(instance.user)
 
 @receiver(post_delete, sender=User)
 def delete_business_profile(sender, instance, *args, **kwargs):

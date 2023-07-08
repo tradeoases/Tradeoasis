@@ -50,12 +50,22 @@
                         <span class="font-semibold">France</span>
                     </p>
                 </div> -->
+                {% if request.user.business != object %}
                 <div class="cta flex flex-wrap gap-3 my-3">
                     <a href="{% url 'supplier:supplier-contact' object.slug %}" class="flex place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-yellowColor hover:bg-yellowColorHover duration-200 transition-all ease-in rounded-full text-white font-semibold">
-                        <span class="text-white"><i class="fa fa-address-book"></i></span>
-                        <span>{% trans 'Contact Supplier' %}</span>
+                        <span class="text-white"><i class="fa fa-envelope"></i></span>
+                        <span>{% trans 'Compose Email' %}</span>
+                    </a>
+                    <a href="{% url 'coms:interclient-chat-init' object.slug %}" class="flex place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-lighterBackgroundColorHover hover:bg-lghterBackgroundColor duration-200 transition-all ease-in rounded-full text-white font-semibold">
+                        <span class="text-white"><i class="fa fa-comment"></i></span>
+                        <span>{% trans 'Live Chat' %}</span>
+                    </a>
+                    <a href="{% url 'supplier:supplier-contact' object.slug %}" class="flex place-items-center gap-3 px-5 md:px-7 py-2 text-base md:py-3 bg-black hover:bg-black duration-200 transition-all ease-in rounded-full text-white font-semibold">
+                        <span class="text-white"><i class="fa fa-phone"></i></span>
+                        <span>{% trans 'Schedule A Call' %}</span>
                     </a>
                 </div>
+                {% endif %}
             </div>
         </div>
     </section>

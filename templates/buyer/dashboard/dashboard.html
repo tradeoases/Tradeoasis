@@ -10,37 +10,31 @@
         <div class="middle-content-area bordered outlined mid-content">
             <h3 class="title accented">Recent Activities</h3>
             <h4 class="sub-title">Summary of my most activities on the platform</h4>
-            <div class="cs-content flex">
+            <div class="cs-content flex" style="justify-items: flex-start;">
+                {% for order in orders %}
                 <div class="card cs-no-box-shadow flex">
-                    <h4>Orders Placed</h4>
+                    <h4>{{order.status}}</h4>
                     <div class="cs-content-inner flex">
                         <span><i class="cs-ti ti-filter"></i></span>
-                        <span class="count">204</span>
+                        <span class="count">{{order.dcount}}</span>
                     </div>
-                    <div class="card-content card-content-right">
-                        <h6 class="potential" id="stores">From 41 Stores</h6>
-                    </div>
+                    <!-- <div class="card-content card-content-right">
+                        <h6 class="potential" id="stores">Potential business +204</h6>
+                    </div> -->
                 </div>
+                {% endfor %}
+                {% if not orders %}
                 <div class="card cs-no-box-shadow flex">
-                    <h4>Successful Deliveries</h4>
+                    <h4>{% trans "Order" %}</h4>
                     <div class="cs-content-inner flex">
                         <span><i class="cs-ti ti-filter"></i></span>
-                        <span class="count">145</span>
+                        <span class="count">{% trans "0" %}</span>
                     </div>
-                    <div class="card-content card-content-right">
-                        <h6 class="potential" id="stores">From 30 Stores</h6>
-                    </div>
+                    <!-- <div class="card-content card-content-right">
+                        <h6 class="potential" id="stores">Potential business +204</h6>
+                    </div> -->
                 </div>
-                <div class="card cs-no-box-shadow flex">
-                    <h4>In Transit</h4>
-                    <div class="cs-content-inner flex">
-                        <span><i class="cs-ti ti-filter"></i></span>
-                        <span class="count">11</span>
-                    </div>
-                    <div class="card-content card-content-right">
-                        <h6 class="potential" id="stores">From 11 Stores</h6>
-                    </div>
-                </div>
+                {% endif %}
             </div>
         </div>
         <div class="lower-content-area md-hidden bordered outlined">

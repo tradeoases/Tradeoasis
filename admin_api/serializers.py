@@ -5,6 +5,7 @@ from supplier import models as SupplierModels
 from buyer import models as BuyerModels
 from manager import models as ManagerModels
 from payment import models as PaymentModels
+from coms import models as ComsModels
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,9 +17,15 @@ class UserSerializer(serializers.ModelSerializer):
             "email",
             "account_type",
             "is_active",
+            "image",
             "date_joined",
         )
 
+class BusinessSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(queryset=AuthModels.User.objects.all())
+    class Meta:
+        model = AuthModels.ClientProfile
+        fields = "__all__"
 
 class MembershipSerializer(serializers.ModelSerializer):
     class Meta:
@@ -308,3 +315,41 @@ class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = ManagerModels.Notification
         fields = "__all__"
+
+
+class InterClientChatSerializer(serializers.ModelSerializer):
+    initiator = serializers.PrimaryKeyRelatedField(queryset=AuthModels.ClientProfile.objects.all())
+    participant = serializers.PrimaryKeyRelatedField(queryset=AuthModels.ClientProfile.objects.all())
+    class Meta:
+        model = ComsModels.InterClientChat
+        fields = "__all__"
+
+    
+class InterUserChatSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ComsModels.InterUserChat
+        fields = "__all__"
+
+        
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        participants = []
+        for participant in instance.participants.all():
+            participants.append(participant.pk)
+        representation["participants"] = participants
+        
+        return representation
+
+class GroupChatSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ComsModels.GroupChat
+        fields = "__all__"
+        
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        participants = []
+        for participant in instance.participants.all():
+            participants.append(participant.pk)
+        representation["participants"] = participants
+        
+        return representation

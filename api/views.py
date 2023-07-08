@@ -15,9 +15,11 @@ from payment import models as PaymentModels
 from auth_app import models as AuthModels
 from manager import models as ManagerModels
 from buyer import models as BuyerModels
+from coms import models as ComsModels
 
 from admin_api import serializers
 import supplier
+import uuid
 
 
 import pandas as pd
@@ -372,3 +374,51 @@ class NotificationDeleteView(DestroyAPIView):
 class NotificationUpdateView():
     pass
 
+class ChatListView(ListAPIView):
+    def get(self, request):
+        interClientChats = ComsModels.InterClientChat.objects.filter(
+            Q(initiator=self.request.user.business)
+            | Q(participant=self.request.user.business)
+        )
+        interUserChats = ComsModels.InterUserChat.objects.filter(participants=self.request.user)
+        groupChat = ComsModels.GroupChat.objects.filter(participants=self.request.user)
+
+        data = {
+            "business" : serializers.InterClientChatSerializer(interClientChats, many=True).data,
+            "users" : serializers.InterUserChatSerializer(interUserChats, many=True).data,
+            "groups" : serializers.GroupChatSerializer(groupChat, many=True).data
+        }
+        
+
+        return Response(
+            {
+                "data": data
+            },
+            status=status.HTTP_200_OK
+        )
+
+
+class UserInfoView(RetrieveAPIView):
+    serializer_class = serializers.UserSerializer
+    queryset = AuthModels.User.objects.all()
+    lookup_field = "pk"
+
+class BusinessInfoView(RetrieveAPIView):
+    serializer_class = serializers.BusinessSerializer
+    queryset = AuthModels.ClientProfile.objects.all()
+    lookup_field = "pk"
+
+
+class CreateGroupChat(generics.CreateAPIView):
+    permission_classes = [permissions.AllowAny]
+    serializer_class = serializers.GroupChatSerializer
+
+    def post(self, request, *args, **kwargs):
+        chat = ComsModels.GroupChat.objects.create(roomname=uuid.uuid4(), name=request.data.get("name"))
+        chat.participants.add(request.user)
+        return Response(
+            {
+                "data": chat.roomname
+            },
+            status=status.HTTP_201_CREATED,
+        )

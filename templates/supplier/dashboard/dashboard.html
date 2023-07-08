@@ -25,36 +25,30 @@
             <h3 class="title accented">Important Today</h3>
             <h4 class="sub-title">Activities you need to focus on to maintain buyer satisfaction</h4>
             <div class="cs-content flex">
+                {% for order in orders %}
                 <div class="card cs-no-box-shadow flex">
-                    <h4>New order</h4>
+                    <h4>{{order.status}}</h4>
                     <div class="cs-content-inner flex">
                         <span><i class="cs-ti ti-filter"></i></span>
-                        <span class="count">204</span>
+                        <span class="count">{{order.dcount}}</span>
                     </div>
-                    <div class="card-content card-content-right">
+                    <!-- <div class="card-content card-content-right">
                         <h6 class="potential" id="stores">Potential business +204</h6>
-                    </div>
+                    </div> -->
                 </div>
+                {% endfor %}
+                {% if not orders %}
                 <div class="card cs-no-box-shadow flex">
-                    <h4>Ready to ship</h4>
+                    <h4>{% trans "Order" %}</h4>
                     <div class="cs-content-inner flex">
                         <span><i class="cs-ti ti-filter"></i></span>
-                        <span class="count">145</span>
+                        <span class="count">{% trans "0" %}</span>
                     </div>
-                    <div class="card-content card-content-right">
-                        <h6 class="potential" id="stores">Potential business +145</h6>
-                    </div>
+                    <!-- <div class="card-content card-content-right">
+                        <h6 class="potential" id="stores">Potential business +204</h6>
+                    </div> -->
                 </div>
-                <div class="card cs-no-box-shadow flex">
-                    <h4>In delivery</h4>
-                    <div class="cs-content-inner flex">
-                        <span><i class="cs-ti ti-filter"></i></span>
-                        <span class="count">98</span>
-                    </div>
-                    <div class="card-content card-content-right">
-                        <h6 class="potential" id="stores">Potential business +98</h6>
-                    </div>
-                </div>
+                {% endif %}
             </div>
         </div>
         <div class="lower-content-area md-hidden bordered">

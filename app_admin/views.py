@@ -36,6 +36,7 @@ from supplier import models as SupplierModels
 from buyer import models as BuyerModels
 from manager import models as ManagerModels
 from payment import models as PaymentModels
+from coms import models as ComsModels
 
 from manager import forms as ManagerForms
 from auth_app import forms as AuthForms
@@ -445,7 +446,7 @@ class AdminDiscussionsView(SupportOnlyAccessMixin, View):
             "context_name": "chatrooms",
             "results": [
                 {"chatroom": chatroom, "last_message": get_last_chatroom_msg(chatroom)}
-                for chatroom in ManagerModels.Chatroom.objects.filter(Q(is_handled=False), ~Q(support__user=self.request.user))
+                for chatroom in ComsModels.SupportClientChat.objects.filter(Q(is_handled=False), ~Q(support__user=self.request.user))
             ],
         }
 
@@ -469,11 +470,11 @@ class AdminChatView(SupportOnlyAccessMixin, View):
             "context_name": "chatrooms",
             "results": [
                 {"chatroom": chatroom, "last_message": get_last_chatroom_msg(chatroom)}
-                for chatroom in ManagerModels.Chatroom.objects.filter(is_handled=False)
+                for chatroom in ComsModels.SupportClientChat.objects.filter(is_handled=False)
             ],
         }
 
-        selected_chatroom = ManagerModels.Chatroom.objects.filter(roomname=roomname)
+        selected_chatroom = ComsModels.SupportClientChat.objects.filter(roomname=roomname)
         if not selected_chatroom:
             return redirect(reverse("app_admin:discussions"))
 
