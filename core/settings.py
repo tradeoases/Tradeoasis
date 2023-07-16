@@ -62,6 +62,7 @@ CUSTOM_APPS = [
     "admin_api.apps.AdminApiConfig",
     "api.apps.ApiConfig",
     "coms.apps.ComsConfig",
+    "customer.apps.CustomerConfig",
 ]
 
 THIRD_PARTY_APPS = [    
