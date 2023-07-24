@@ -1,0 +1,319 @@
+******************************************************************************************************************
+# FORODEN - API DOCUMENTATION
+******************************************************************************************************************
+
+# Buyers' Dashboard
+
+## Introduction
+
+The Foroden Buyers' Dashboard API allows users to perform a lot of user-related activities. For example; placing orders, tracking order status, viewing purchase history, managing account settings, accessing payment information, providing feedback on purchases plus a lot more.
+
+## Authentication
+
+To access the Buyers' Dashboard API, you need to include a valid JSON Web Token in the request headers. Obtain your JWT by registering on our website. Then retrieve the token from LocalStorage. Please, note that this is aimed at streamlining the development process.
+
+Example Header:
+
+```
+Authorization: JWT EXT_ACCESS_TOKEN
+```
+
+## Base URL
+
+The base URL for all API endpoints is `https://foroden.com/en/api`.
+
+## Endpoints
+
+### GET /events
+
+- **Description**: Retrieve calendar events
+- **URL**: `${BASE_URL}/events`
+- **Method**: GET
+- **Mode**: CORS
+- **Authentication**: Required
+- **Response**:
+
+```json
+{
+    "count": 1,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "id": 2,
+            "business": 2,
+            "title": "Title",
+            "description": null,
+            "start": "2023-07-01T21:00:00Z",
+            "end": "2023-07-02T21:00:00Z",
+            "created_on": "2023-07-02T07:27:47.289915Z"
+        }
+    ]
+}
+```
+
+### GET /cart
+
+- **Description**: Retrieve products in cart
+- **URL**: `${BASE_URL}/cart`
+- **Method**: GET
+- **Mode**: CORS
+- **Authentication**: Required
+- **Response**:
+
+```json
+{
+    "count": 1,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "id": 3,
+            "product": "Some name",
+            "quantity": 4,
+            "color": null,
+            "material": null,
+            "unit_price": "1500",
+            "created_on": "2023-07-02T07:27:47.289915Z"
+        }
+    ]
+}
+```
+
+### GET /contracts
+
+- **Description**: Retrieve contracts
+- **URL**: `${BASE_URL}/contracts/?page=1`
+- **Payload**: page:1
+- **Method**: GET
+- **Mode**: CORS
+- **Authentication**: Required
+- **Response**:
+
+```json
+{
+    "count": 1,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "id": 1,
+            "service": "Some service",
+            "supplier_id": 10,
+            "start_date": "2023-07-02T07:27:47.289915Z"
+        }
+    ]
+}
+```
+
+### GET /chats
+
+- **Description**: Retrieve chats
+- **URL**: `${BASE_URL}/chats`
+- **Method**: GET
+- **Mode**: CORS
+- **Authentication**: Required
+- **Response**:
+
+```json
+{
+    "data":{
+        "business":[],
+        "users":[],
+        "groups":[]
+    }
+}
+```
+
+### GET /notifications
+
+- **Description**: Retrieve all notifications
+- **URL**: `${BASE_URL}/notifications`
+- **Method**: GET
+- **Mode**: CORS
+- **Authentication**: Required
+- **Response**:
+
+```json
+{
+    "count":0,
+    "next":null,
+    "previous":null,
+    "results":[
+        {
+            "id": 3,
+            "target": 2,
+            "title": "Chat from somewhere",
+            "category": "CHATS",
+            "description": null,
+            "viewed": false,
+            "created_on": "2023-07-02T07:27:47.289915Z"
+        }
+    ]
+}
+```
+
+### GET /notifications/CHATS
+
+- **Description**: Retrieve chat notifications
+- **URL**: `${BASE_URL}/notifications/CHATS`
+- **Method**: GET
+- **Mode**: CORS
+- **Authentication**: Required
+- **Response**:
+
+```json
+{
+    "count":0,
+    "next":null,
+    "previous":null,
+    "results":[
+        {
+            "id": 3,
+            "target": 2,
+            "title": "Chat from somewhere",
+            "category": "CHATS",
+            "description": null,
+            "viewed": false,
+            "created_on": "2023-07-02T07:27:47.289915Z"
+        }
+    ]
+}
+```
+
+### GET /notifications/CONTRACTS
+
+- **Description**: Retrieve chat notifications specific for contracts
+- **URL**: `${BASE_URL}/notifications/CONTRACTS`
+- **Method**: GET
+- **Mode**: CORS
+- **Authentication**: Required
+- **Response**:
+
+```json
+{
+    "count":0,
+    "next":null,
+    "previous":null,
+    "results":[
+        {
+            "id": 3,
+            "target": 2,
+            "title": "Chat from somewhere",
+            "category": "CONTRACTS",
+            "description": null,
+            "viewed": false,
+            "created_on": "2023-07-02T07:27:47.289915Z"
+        }
+    ]
+}
+```
+
+### GET /notifications/BIDS
+
+- **Description**: Retrieve chat notifications specific for bids
+- **URL**: `${BASE_URL}/notifications/BIDS`
+- **Method**: GET
+- **Mode**: CORS
+- **Authentication**: Required
+- **Response**:
+
+```json
+{
+    "count":0,
+    "next":null,
+    "previous":null,
+    "results":[
+        {
+            "id": 3,
+            "target": 2,
+            "title": "Chat from somewhere",
+            "category": "BIDS",
+            "description": null,
+            "viewed": false,
+            "created_on": "2023-07-02T07:27:47.289915Z"
+        }
+    ]
+}
+```
+
+### POST /orders
+Please, follow this example for all post requests
+
+- **Description**: Create a new order.
+- **URL**: `${BASE_URL}/orders`
+- **Method**: POST
+- **Authentication**: Required
+- **Parameters**:
+
+  - `product_id` (integer, required): The ID of the product to order.
+  - `quantity` (integer, required): The quantity of the product to order.
+
+- **Request Body**:
+
+```json
+{
+  "product_id": 456,
+  "quantity": 2
+}
+```
+
+- **Response**:
+
+```json
+{
+  "order_id": "abc123",
+  "product_id": 456,
+  "quantity": 2,
+  "status": "pending",
+  "created_on": "2023-07-21T10:00:00Z"
+}
+```
+
+### DELETE /orders/{order_id}
+
+- **Description**: Delete an existing order.
+- **URL**: `${BASE_URL}/orders/{order_id}`
+- **Method**: DELETE
+- **Authentication**: Required
+- **Parameters**:
+
+  - `order_id` (string, required): The ID of the order to delete.
+
+- **Response**:
+
+```json
+{
+  "message": "Order abc123 has been deleted successfully."
+}
+```
+
+
+## Error Codes
+
+- **400 Bad Request**: Invalid request data.
+- **401 Unauthorized**: Missing or invalid API key.
+- **404 Not Found**: Resource not found.
+- **500 Internal Server Error**: An unexpected error occurred.
+
+## Status Codes
+
+- **200 OK**: Request successful.
+- **201 Created**: Order successfully created.
+- **204 No Content**: Order successfully deleted.
+- **400 Bad Request**: Invalid request data or missing parameters.
+- **401 Unauthorized**: Missing or invalid API key.
+- **404 Not Found**: Resource not found.
+- **500 Internal Server Error**: An unexpected error occurred.
+
+
+## Changelog
+
+- Version 1.0 (2023-07-21): Initial release of the Foroden Buyers' Dashboard API.
+
+
+## Conclusion
+
+Thank you for using the Foroden Buyers' Dashboard API! If you have any questions or need assistance, please do not hesitate to reach out through the various channels of communication.
+
+---
