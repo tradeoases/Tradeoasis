@@ -1,0 +1,468 @@
+{
+  "Custom_questions": [
+    {
+      "question": "What is the cost of Foroden's services?",
+      "answer": "Foroden offers competitive pricing tailored to the needs of each client. Our team can provide you with a free custom quote after discussing your project needs."
+    },
+    {
+      "question": "Can I get a discount on Foroden's services?",
+      "answer": "We do offer discounts for certain projects and clients. Please contact our team for more information on discounts and special pricing."
+    },
+    {
+      "question": "What are Foroden's pricing plans?",
+      "answer": "Foroden offers multiple pricing plans to fit your budget. We offer a basic plan, a pro plan, and an enterprise plan."
+    },
+    {
+      "question": "Does Foroden offer a free trial?",
+      "answer": "Yes, we do offer a free trial. You can sign up for a free trial and test out our services before committing to a subscription."
+    },
+    {
+      "question": "What is the price of the basic plan?",
+      "answer": "The basic plan starts at $19.99 per month."
+    },
+    {
+      "question": "What is included in the basic plan?",
+      "answer": "The basic plan includes access to our core features, such as our customer support platform, automated chatbot, and analytics dashboard."
+    },
+    {
+      "question": "Do you offer a monthly or yearly subscription?",
+      "answer": "We offer both monthly and yearly subscription options."
+    },
+    {
+      "question": "Are there any setup fees?",
+      "answer": "No, there are no setup fees."
+    },
+    {
+      "question": "How much does the Pro plan cost?",
+      "answer": "The Pro plan is $49.99 per month."
+    },
+    {
+      "question": "What is included in the Pro plan?",
+      "answer": "The Pro plan includes access to our advanced features, such as our advanced analytics dashboard, AI-powered chatbot, and automated customer support."
+    },
+    {
+      "question": "Do you offer a discount for yearly subscriptions?",
+      "answer": "Yes, we do offer a discount for yearly subscriptions. If you subscribe for an entire year, you will receive a 10% discount on the Pro plan."
+    },
+    {
+      "question": "Does Foroden offer any additional services?",
+      "answer": "Yes, we do offer additional services. Our team can provide you with a quote for any custom services you may need."
+    },
+    {
+      "question": "Do you have any free services?",
+      "answer": "Yes, we do offer a few free services. Please contact our team for more information."
+    },
+
+    {
+      "question": "What is Foroden?",
+      "answer": "Foroden is a leading provider of innovative B2B solutions."
+    },
+    {
+      "question": "What services does Foroden offer?",
+      "answer": "Foroden offers a wide range of services, including marketing, analytics, software development, and more."
+    },
+    {
+      "question": "Where is Foroden located?",
+      "answer": "Foroden is headquartered in Dublin, Ireland."
+    },
+    {
+      "question": "What is Foroden's mission?",
+      "answer": "Foroden's mission is to empower businesses to innovate and grow in the digital age."
+    },
+    {
+      "question": "How can I contact Foroden?",
+      "answer": "You can contact Foroden by email at info@foroden.com or by phone at +353 1 888 888."
+    },
+    {
+      "question": "Does Foroden offer consulting services?",
+      "answer": "Yes, Foroden offers a range of consulting services to help businesses achieve their goals."
+    },
+    {
+      "question": "What type of software does Foroden develop?",
+      "answer": "Foroden specializes in developing custom software solutions for businesses of all sizes."
+    },
+    {
+      "question": "What industries does Foroden specialize in?",
+      "answer": "Foroden works with clients from a variety of industries, including finance, healthcare, education, and more."
+    },
+    {
+      "question": "Does Foroden have a presence in other countries?",
+      "answer": "Yes, Foroden has offices in the UK, USA, and India."
+    },
+    {
+      "question": "Does Foroden offer training services?",
+      "answer": "Yes, Foroden offers comprehensive training services to help businesses get the most out of their technology."
+    },
+    {
+      "question": "What support does Foroden provide?",
+      "answer": "Foroden provides 24/7 support to ensure that businesses get the most out of their solutions."
+    },
+    {
+      "question": "Does Foroden have any partners?",
+      "answer": "Yes, Foroden has a number of strategic partnerships with leading technology companies."
+    },
+    {
+      "question": "What technologies does Foroden use?",
+      "answer": "Foroden uses a variety of technologies, including artificial intelligence, machine learning, cloud computing, and more."
+    },
+    {
+      "question": "Does Foroden offer free trials?",
+      "answer": "Yes, Foroden offers free trials of its products and services to help businesses evaluate their fit."
+    },
+    {
+      "question": "Does Foroden have any certifications?",
+      "answer": "Yes, Foroden has a number of certifications, including ISO 9001 and GDPR compliance."
+    },
+    {
+      "question": "Does Foroden offer custom solutions?",
+      "answer": "Yes, Foroden provides custom solutions to meet the unique needs of businesses."
+    },
+    {
+      "question": "Does Foroden have its own products?",
+      "answer": "Yes, Foroden has a range of products, including web and mobile applications, cloud solutions, and more."
+    },
+    {
+      "question": "Does Foroden provide maintenance services?",
+      "answer": "Yes, Foroden offers a range of maintenance services to ensure that businesses get the most out of their solutions."
+    },
+    {
+      "question": "What security measures does Foroden use?",
+      "answer": "Foroden uses a range of security measures, including encryption, firewalls, and access control measures."
+    },
+    {
+      "question": "What payment methods does Foroden accept?",
+      "answer": "Foroden accepts a variety of payment methods, including credit cards, PayPal, and wire transfers."
+    },
+    {
+      "question": "Does Foroden have any awards?",
+      "answer": "Yes, Foroden has been recognized with a number of awards for its innovation and excellence."
+    },
+
+    {
+      "question": "What services does Foroden offer?",
+      "answer": "Foroden provides a range of IT services, including cloud hosting, disaster recovery solutions, and managed services."
+    },
+    {
+      "question": "What is the cost of Foroden's services?",
+      "answer": "The cost of our services depends on the size and complexity of your business. Please contact us for a custom quote."
+    },
+    {
+      "question": "What is the best way to contact Foroden?",
+      "answer": "The best way to contact Foroden is by phone at +1 (555) 555-5555 or by email at info@foroden.com."
+    },
+    {
+      "question": "What makes Foroden's solutions better than the competition?",
+      "answer": "At Foroden, we strive to provide our customers with the highest quality of service and the most reliable IT solutions. We are committed to providing our customers with the best possible solutions and the latest technology to ensure their success."
+    },
+    {
+      "question": "What security measures does Foroden use?",
+      "answer": "Foroden utilizes the latest security measures and technologies, such as encryption, firewalls, and intrusion detection systems, to protect our customers' data and systems."
+    },
+    {
+      "question": "Does Foroden offer on-site support?",
+      "answer": "Yes, Foroden offers on-site support and maintenance services for businesses."
+    },
+    {
+      "question": "Does Foroden offer a service-level agreement?",
+      "answer": "Yes, Foroden offers service-level agreements that provide customers with assurance that their IT needs will be met."
+    },
+    {
+      "question": "Does Foroden offer training services?",
+      "answer": "Yes, Foroden offers a range of training services to help customers get the most out of their IT solutions."
+    },
+    {
+      "question": "Does Foroden offer discounts?",
+      "answer": "Yes, Foroden offers discounts for long-term contracts and bulk orders."
+    },
+    {
+      "question": "Hi, how are you?",
+      "answer": "Hi there! I'm doing great. How can I help you today?"
+    },
+    {
+      "question": "What services does Foroden provide?",
+      "answer": "Foroden provides a range of services, including web design, app development, graphic design, and more!"
+    },
+    {
+      "question": "Can you tell me more about Foroden?",
+      "answer": "Foroden is a full-service digital agency that creates custom digital solutions for businesses. We specialize in web design, app development, and graphic design."
+    },
+    {
+      "question": "How long has Foroden been in business?",
+      "answer": "Foroden has been in business for over 10 years!"
+    },
+    {
+      "question": "What makes Foroden different than other companies?",
+      "answer": "At Foroden, we strive to provide the highest quality of service and work with the latest technologies available. We also have a team of highly skilled professionals who are dedicated to providing the best solutions for our clients."
+    },
+    {
+      "question": "What are Foroden's core values?",
+      "answer": "At Foroden, we believe in creating meaningful relationships with our clients, providing exceptional customer service, and delivering superior results."
+    },
+    {
+      "question": "Do you offer free consultations?",
+      "answer": "Yes, we do offer free consultations. Please feel free to contact us to schedule a consultation."
+    },
+    {
+      "question": "Is Foroden available for international clients?",
+      "answer": "Yes, we are available for international clients. Please feel free to contact us for more information."
+    },
+    {
+      "question": "What payment methods do you accept?",
+      "answer": "We accept all major credit cards, PayPal, and bank transfers."
+    },
+    {
+      "question": "What are your business hours?",
+      "answer": "Our business hours are Monday-Friday, 9am-5pm EST."
+    },
+{
+      "question": "What's up?",
+      "answer": "Hey there, how can I help?"
+    },
+    {
+      "question": "Good morning",
+      "answer": "Good morning! How can I help?"
+    },
+    {
+      "question": "Hey there",
+      "answer": "Hello! I'm here to help. What can I do for you?"
+    },
+    {
+      "question": "Greetings",
+      "answer": "Greetings! How can I help you today?"
+    },
+    {
+      "question": "Hi",
+      "answer": "Hi there! What can I do for you?"
+    },
+    {
+      "question": "Hello",
+      "answer": "Hello! How can I assist you?"
+    },
+    {
+      "question": "Howdy",
+      "answer": "Howdy! What can I do for you?"
+    },
+    {
+      "question": "What's new?",
+      "answer": "Not much, what can I do for you?"
+    },
+    {
+      "question": "Good day",
+      "answer": "Good day to you! What can I do for you?"
+    },
+    {
+      "question": "How are you?",
+      "answer": "I'm doing great, how can I help you?"
+    },
+    {
+      "question": "What's up?",
+      "answer": "Just doing my job, how can I help you?"
+    },
+    {
+      "question": "Hi!",
+      "answer": "Hi there!"
+    },
+    {
+      "question": "Hello!",
+      "answer": "Hello there!"
+    },
+    {
+      "question": "Hey!",
+      "answer": "Hey, how's it going?"
+    },
+    {
+      "question": "Good morning!",
+      "answer": "Good morning, it's nice to see you!"
+    },
+    {
+      "question": "Good afternoon!",
+      "answer": "Good afternoon, how can I help you today?"
+    },
+    {
+      "question": "Good evening!",
+      "answer": "Good evening, how can I help you?"
+    },
+    {
+      "question": "How are you?",
+      "answer": "I'm doing great, thanks for asking!"
+    },
+    {
+      "question": "What's up?",
+      "answer": "Not much, just hanging out!"
+    },
+    {
+      "question": "What's new?",
+      "answer": "A lot is new, what can I help you with?"
+    },
+    {
+      "question": "What are you doing?",
+      "answer": "I'm just here to help, what can I do for you?"
+    },
+    {
+      "question": "What's going on?",
+      "answer": "Nothing much, what can I help you with?"
+    },
+    {
+      "question": "How's it going?",
+      "answer": "Pretty good, how can I help you?"
+    },
+    {
+      "question": "What's happening?",
+      "answer": "A lot of good things, what can I help you with?"
+    },
+    {
+      "question": "What's up today?",
+      "answer": "I'm here to help, what do you need?"
+    },
+    {
+      "question": "Greetings!",
+      "answer": "Greetings, how can I help you today?"
+    },
+    {
+      "question": "Good day!",
+      "answer": "Good day, what can I do for you?"
+    },
+    {
+      "question": "Hi there!",
+      "answer": "Hi there, how can I help you?"
+    },
+    {
+      "question": "Yo!",
+      "answer": "Hey there, what can I do for you?"
+    },
+    {
+      "question": "What's new and exciting?",
+      "answer": "A lot is new and exciting, what can I help you with?"
+    },
+    {
+      "question": "What's going on in your world?",
+      "answer": "I'm just here to help, what can I do for you?"
+    },
+    {
+      "question": "Sup?",
+      "answer": "Not much, what can I help you with?"
+    },
+    {
+      "question": "Hiya!",
+      "answer": "Hiya, how can I help you today?"
+    },
+    {
+      "question": "Good morning!",
+      "answer": "Good morning, it's nice to see you!"
+    },
+    {
+      "question": "Hey there!",
+      "answer": "Hey there, how can I help you?"
+    },
+    {
+      "question": "Howdy!",
+      "answer": "Howdy, what can I do for you?"
+    },
+    {
+      "question": "What's crackin'?",
+      "answer": "Not much, what can I help you with?"
+    },
+    {
+      "question": "Salutations!",
+      "answer": "Salutations, how can I help you?"
+    },
+    {
+      "question": "How's it hanging?",
+      "answer": "It's hanging good, what can I do for you?"
+    },
+    {
+      "question": "What's the good word?",
+      "answer": "The good word is that I'm here to help, what can I do for you?"
+    },
+    {
+      "question": "What's the haps?",
+      "answer": "Not much, what can I help you with?"
+    },
+    {
+      "question": "What's the word?",
+      "answer": "The word is that I'm here to help, what can I do for you?"
+    },
+    {
+      "question": "What's the news?",
+      "answer": "The news is that I'm here to help, what can I do for you?"
+    },
+    {
+      "question": "What's the latest?",
+      "answer": "The latest is that I'm here to help, what can I do for you?"
+    },
+    {
+      "question": "What's the story?",
+      "answer": "The story is that I'm here to help, what can I do for you?"
+    },
+    {
+      "question": "What's the deal?",
+      "answer": "The deal is that I'm here to help, what can I do for you?"
+    },
+    {
+      "question": "What's the score?",
+      "answer": "The score is that I'm here to help, what can I do for you?"
+    },
+    {
+      "question": "What's the poop?",
+      "answer": "The poop is that I'm here to help, what can I do for you?"
+    },
+    {
+      "question": "What's the lowdown?",
+      "answer": "The lowdown is that I'm here to help, what can I do for you?"
+    },
+    {
+      "question": "What's the 411?",
+      "answer": "The 411 is that I'm here to help, what can I do for you?"
+    },
+    {
+      "question": "What's the dealio?",
+      "answer": "The dealio is that I'm here to help, what can I do for you?"
+    },
+    {
+      "question": "What's the dilly?",
+      "answer": "The dilly is that I'm here to help, what can I do for you?"
+    },
+    {
+      "question": "What's the dillio?",
+      "answer": "The dillio is that I'm here to help, what can I do for you?"
+    },
+
+    {
+      "question": "What does B2B mean?",
+      "answer": "B2B stands for Business-to-Business, which refers to online activities and transactions conducted between two businesses."
+    },
+    {
+      "question": "What is your company's mission?",
+      "answer": "Our mission is to provide our customers with innovative solutions that help them to maximize their potential and reach their goals."
+    },
+    {
+      "question": "What services does your company offer?",
+      "answer": "We offer a wide range of services, including marketing, website development, online advertising, content creation, and more."
+    },
+    {
+      "question": "What are the benefits of working with your company?",
+      "answer": "Our company offers a range of benefits, including access to a knowledgeable team of professionals, competitive rates, and a commitment to customer satisfaction."
+    },
+    {
+      "question": "What kind of payment methods do you accept?",
+      "answer": "We accept payments via credit card, PayPal, and bank transfer."
+    },
+    {
+      "question": "How long does it take to get an estimate?",
+      "answer": "We typically provide estimates within 24-48 hours of receiving your request."
+    },
+    {
+      "question": "Are there any setup fees?",
+      "answer": "Yes, there are setup fees associated with some of our services. Please contact us for more information."
+    },
+    {
+      "question": "What is the difference between a B2B and a B2C business?",
+      "answer": "B2B stands for Business-to-Business, which refers to online activities and transactions conducted between two businesses. B2C stands for Business-to-Consumer, which refers to online activities and transactions conducted between a business and a consumer."
+    }
+
+
+  ]
+}
+
+
+
