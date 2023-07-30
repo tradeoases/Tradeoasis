@@ -322,9 +322,14 @@ class CalendarView(BuyerOnlyAccessMixin, ListView):
     def get(self, request):
         return render(request, self.template_name)
 
-
 class NotificationsView(BuyerOnlyAccessMixin, ListView):
     template_name = "buyer/dashboard/notifications.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+class InvoicesView(BuyerOnlyAccessMixin, ListView):
+    template_name = "buyer/dashboard/invoices.html"
 
     def get(self, request):
         return render(request, self.template_name)
