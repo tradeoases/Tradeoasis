@@ -52,6 +52,60 @@
         color: #5a5a5a;
         border: 1px solid #f2f2f2;
     }
+
+    /* body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f1f1;
+    }
+
+    .container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+    } */
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        font-size: 16px;
+    }
+
+    button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
 </style>
 
 <div class="main-content" style="overflow-y: scroll;">
@@ -65,7 +119,7 @@
             <h4 class="section-togglers" data-section="sec_00" style="padding-block: 1.2rem;">Invoice Management</h4>
             <h4 class="section-togglers" data-section="sec_01" style="padding-block: 1.2rem;">Payment Methods</h4>
             <h4 class="section-togglers" data-section="sec_02" style="padding-block: 1.2rem;">Payment History</h4>
-            <h4 class="section-togglers" data-section="sec_03" style="padding-block: 1.2rem;">Accounts Payable</h4>
+            <!-- <h4 class="section-togglers" data-section="sec_03" style="padding-block: 1.2rem;">Accounts Payable</h4> -->
         </div>
 
         <div class="notification-section inview___" id="sec_00">
@@ -85,15 +139,69 @@
         </div>
         <div class="notification-section" id="sec_01">
             <div class="section-wrapper">
-                <h4>Title</h4>
+                <div class="container">
+                    <form>
+                        <div class="form-group">
+                            <label for="payment-method">Payment Method:</label>
+                            <select id="payment-method">
+                                <option value="credit-card">Credit Card</option>
+                                <option value="paypal">PayPal</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="card-number">Card Number:</label>
+                            <input type="text" id="card-number" placeholder="Enter your card number">
+                        </div>
+                        <div class="form-group">
+                            <label for="expiry-date">Expiry Date:</label>
+                            <input type="text" id="expiry-date" placeholder="MM/YY">
+                        </div>
+                        <div class="form-group">
+                            <label for="cvv">CVV:</label>
+                            <input type="text" id="cvv" placeholder="CVV">
+                        </div>
+                        <button type="submit">Save Payment Method</button>
+                    </form>
+                </div>
             </div>
         </div>
         <div class="notification-section" id="sec_02">
-            <div class="section-wrapper"></div>
+            <div class="section-wrapper">
+                <table id="payment-history-table" class="display" style="width:100%;margin-top:.5rem;">
+                    <thead>
+                        <tr>
+                            <th>Receipt #</th>
+                            <th>Item</th>
+                            <th>Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Total</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>123456</td>
+                            <td>Reizhen Smart Wrist Ban</td>
+                            <td>1</td>
+                            <td>$670</td>
+                            <td>$670</td>
+                            <td>03-08-2023</td>
+                        </tr>
+                        <tr>
+                            <td>123000</td>
+                            <td>TP-Link Router CTX-04</td>
+                            <td>2</td>
+                            <td>$800</td>
+                            <td>$1,600</td>
+                            <td>24-07-2023</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="notification-section" id="sec_03">
+        <!-- <div class="notification-section" id="sec_03">
             <div class="section-wrapper"></div>
-        </div>
+        </div> -->
         <div class="notification-section inview" id="sec_04">
             <div class="section-wrapper">
                 <div class="invoice">
@@ -458,6 +566,9 @@
                 console.error('Error fetching data:', error);
             }
         })();
+
+
+        $('#payment-history-table').DataTable();
 
 
         // const invoicesTable = $('#invoices-table').DataTable();
