@@ -33,6 +33,9 @@ class Ticket(models.Model):
     status = models.ForeignKey(TicketStatus, on_delete=models.PROTECT)
     assigned_agent = models.ForeignKey(
         'Agent', on_delete=models.SET_NULL, null=True)
+    response_time = models.DurationField(null=True, blank=True)
+    resolution_time = models.DurationField(null=True, blank=True)
+    customer_satisfaction_score = models.IntegerField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     # agent_assigned = models.ForeignKey(Agent, on_delete=models.SET_NULL, null=True, blank=True)
