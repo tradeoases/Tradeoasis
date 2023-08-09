@@ -303,9 +303,6 @@
 </div>
 
 <script>
-
-    
-
     // Populate form for editing
     function preloadDataForEditing(data, form) {
         const formElement = document.querySelector(`#${form}`).querySelector("form");
@@ -328,135 +325,6 @@
             .replace(/\b\w/g, firstChar => firstChar.toUpperCase()); // Capitalize each word
     }
 
-
-    // // Generate dynamic form
-    // function generateForm(doc) {
-    //     const formContainer = document.querySelector("#sec_01 .section-wrapper");
-    //     formContainer.innerHTML = "";
-    //     const form = document.createElement("form");
-
-    //     const keys = Object.keys(doc);
-    //     const numFields = keys.length;
-
-    //     keys.forEach((key, index) => {
-    //         // Skip the last field (index starts from 0)
-    //         if (index === numFields - 1) {
-    //             return;
-    //         }
-
-    //         const formattedFieldName = formatFieldName(key);
-    //         const value = doc[key];
-
-    //         const formGroup = document.createElement("div");
-    //         formGroup.classList.add("form-group");
-
-    //         // Change the label for the first field to "Reference"
-    //         const label = document.createElement("label");
-    //         label.textContent = index === 0 ? "Reference" : formattedFieldName;
-    //         formGroup.appendChild(label);
-
-    //         // Use <textarea> if characters in the field are more than 200
-    //         const input = document.createElement(value.length > 200 ? "textarea" : "input");
-
-    //         if (key === "completitionStatus") {
-    //             // Create a dropdown for the "Completion Status" field
-    //             const select = document.createElement("select");
-    //             const statusOptions = ["PENDING", "IN PROGRESS", "COMPLETED", "ON HOLD", "CANCELLED"];
-
-    //             statusOptions.forEach(option => {
-    //                 const optionElement = document.createElement("option");
-    //                 optionElement.textContent = option;
-    //                 select.appendChild(optionElement);
-    //             });
-
-    //             // Set the default value as "Pending"
-    //             select.value = doc["completitionStatus"];
-
-    //             // Add event listener to the "select" element
-    //             select.addEventListener("change", async() => {
-    //                 const confirmed = window.confirm("Are you sure you want to change the Completion Status?");
-                    
-    //                 if (confirmed) {
-    //                     doc[key] = select.value;
-    //                     const id = doc["_id"];
-    //                     const status = select.value;
-    //                     doc.status = status;
-    //                     const response = await API.requests.updateRequestStatus(id, {"data": doc});
-
-    //                     if(response){
-    //                         // const requestsTable = $('#requests-table').DataTable();
-    //                         // requestsTable.draw();
-    //                         // console.log(requestsTable)
-    //                     }
-    //                 } else {
-    //                     // Revert the value back to the original value if user cancels
-    //                     select.value = doc[key];
-    //                 }
-    //             });
-
-    //             // Append the dropdown to the form group
-    //             formGroup.appendChild(select);
-    //         } else {
-    //             if (value.length > 200) {
-    //                 if (value.startsWith("uploads/")) {
-    //                     // input.textContent = value;
-    //                 } else {
-    //                     input.textContent = value;
-    //                     input.setAttribute("readonly", true);
-    //                 }
-    //             } else {
-    //                 if (value.startsWith("uploads/")) {
-    //                     // File downloads
-    //                     input.setAttribute("type", "text");
-    //                     input.setAttribute("value", value);
-
-    //                     const downloadLink = document.createElement("a");
-    //                     downloadLink.textContent = "Download File";
-
-    //                     // Set the download link's href to the file URL
-    //                     downloadLink.setAttribute("href", `#`);
-    //                     downloadLink.setAttribute("download", value); // Set the file name with extension
-    //                     downloadLink.addEventListener("click", event => {
-    //                         event.preventDefault();
-
-    //                         // Fetch the file as a Blob
-    //                         fetch(`http://localhost:5000/uploads/file/${value}`)
-    //                         .then(response => response.blob()) // Use response.blob() instead of response.json()
-    //                         .then(blob => {
-    //                             // Create a temporary anchor element to trigger the file download
-    //                             const url = URL.createObjectURL(blob);
-    //                             const a = document.createElement('a');
-    //                             a.href = url;
-    //                             a.download = value; // Set the file name here
-    //                             a.click();
-
-    //                             // Clean up the temporary URL object
-    //                             URL.revokeObjectURL(url);
-    //                         })
-    //                         .catch(error => console.error(error));
-    //                     });
-    //                     formGroup.appendChild(downloadLink);
-    //                 } else {
-    //                     input.setAttribute("type", "text");
-    //                     input.setAttribute("value", value);
-    //                     input.setAttribute("readonly", true);
-    //                 }
-    //             }
-    //             formGroup.appendChild(input);
-    //         }
-
-    //         form.appendChild(formGroup);
-    //     });
-
-    //     formContainer.appendChild(form);
-    // }
-
-
-
-
-
-
-    // Section Togglers
     function sectionToggler(trigger, dataAttrName, parseData = false, dynamicForm = false, dynamicFormData = null){
         const dataSection = trigger.dataset[dataAttrName];
         const sectionToShow = document.querySelector(`#${dataSection}`);
@@ -526,9 +394,6 @@
             try {
                 const data = await fetchAllInvoices();
 
-                console.log(data)
-
-
                 const invoicesTableBody = document.querySelector("#invoices-table").querySelector("tbody");
                 data.forEach((invoice, index) => {
                     const row = document.createElement("tr");
@@ -557,7 +422,6 @@
 
                 });
 
-
                 // Set up invoices table
                 $('#invoices-table').DataTable();
 
@@ -567,129 +431,7 @@
             }
         })();
 
-
         $('#payment-history-table').DataTable();
-
-
-        // const invoicesTable = $('#invoices-table').DataTable();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // // Fetch notifications
-        // async function fetchAllNotifications() {
-        //     try {
-        //         let endpoint;
-
-        //         if (window.location.hostname === 'localhost') {
-        //             endpoint = 'http://localhost:8000/en/api/notifications/';
-        //         } else {
-        //             endpoint = 'https://foroden.com/en/api/notifications/';
-        //         }
-
-        //         const response = await fetch(endpoint);
-        //         if (!response.ok) {
-        //             throw new Error('Failed to fetch notifications');
-        //         }
-
-        //         const notifications = await response.json();
-
-        //         const div = document.querySelector("#sec_00");
-        //         if(notifications.results.length != 0){
-        //             notifications.results.forEach(notification => {
-        //                 div.innerHTML += `
-        //                 <div class="notification flex">
-        //                         <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="" class="avatar">
-        //                         <div class="notification-content">
-        //                             <h6 class="notification-title">${notification.title}</h6>
-        //                             <span class="notification-time">${notification.description}</span>
-        //                             <span class="notification-time">${notification.created_on}</span>
-        //                         </div>
-        //                     </div>
-        //                 `;
-        //             });
-        //         }else{
-        //             div.innerHTML += `
-        //             <div style="background-color: #f2f2f2; padding: 20px; border-radius: 8px; text-align: center;">
-        //                 <h4 style="color: #888888; font-size: 18px;">Nothing to show - yet</h4>
-        //             </div>
-        //             `;
-        //         }
-
-        //     } catch (error) {
-        //         console.error('Error:', error.message);
-        //         // Handle the error gracefully
-        //     }
-        // };
-
-        // // Fetch notifications by category
-        // async function fetchNotifications(category, outputDivID) {
-        //     try {
-        //         let endpoint;
-
-        //         if (window.location.hostname === 'localhost') {
-        //             endpoint = `http://localhost:8000/en/api/notifications/${category}`;
-        //         } else {
-        //             endpoint = `https://foroden.com/en/api/notifications/${category}`;
-        //         }
-
-        //         const response = await fetch(endpoint);
-        //         if (!response.ok) {
-        //             throw new Error('Failed to fetch notifications');
-        //         }
-
-        //         const notifications = await response.json();
-
-        //         const div = document.querySelector(`#${outputDivID}`);
-        //         if(notifications.results.length != 0){
-        //             notifications.results.forEach(notification => {
-        //                 div.innerHTML += `
-        //                 <div class="notification flex">
-        //                         <img src="{% static 'assets/imgs/resources/profiledefault.png' %}" alt="" class="avatar">
-        //                         <div class="notification-content">
-        //                             <h6 class="notification-title">${notification.title}</h6>
-        //                             <span class="notification-time">${notification.description}</span>
-        //                             <span class="notification-time">${notification.created_on}</span>
-        //                         </div>
-        //                     </div>
-        //                 `;
-        //             });
-        //         }else{
-        //             div.innerHTML += `
-        //             <div style="background-color: #f2f2f2; padding: 20px; border-radius: 8px; text-align: center;">
-        //                 <h4 style="color: #888888; font-size: 18px;">Nothing to show - yet</h4>
-        //             </div>
-        //             `;
-        //         }
-
-        //     } catch (error) {
-        //         console.error('Error:', error.message);
-        //         // Handle the error gracefully
-        //     }
-        // };
-
-        // fetchAllNotifications();
-        // fetchNotifications("CONTRACTS", "sec_01");
-        // fetchNotifications("BIDS", "sec_02");
-        // fetchNotifications("CHATS", "sec_03");
     
     });
 </script>
