@@ -1,0 +1,59 @@
+{% extends '../utils/layout.html' %} {% block content %}
+<div class="container mx-auto mt-10 px-4">
+  <div class="container mx-auto mt-10 px-4 flex items-center justify-between">
+    <a
+      href="{% url 'customer:key_metric_summary' %}"
+      class="btn btn-primary mt-10"
+    >
+      Key Metrics Summary</a
+    >
+    <a
+      href="{% url 'customer:line_or_area_charts' %}"
+      class="btn btn-primary mt-10"
+      >View Line and Area Charts</a
+    >
+    <a
+      href="{% url 'customer:performance_comparison' %}"
+      class="btn btn-primary mt-10"
+      >Performance Comparison</a
+    >
+    <a
+      href="{% url 'customer:customer_satisfaction_ratings' %}"
+      class="btn btn-primary mt-10"
+      >Customer Satisfaction</a
+    >
+    <a
+      href="{% url 'customer:response_time_analytics' %}"
+      class="btn btn-primary mt-10"
+      >Response</a
+    >
+    <a
+      href="{% url 'customer:resolution_time_analytics' %}"
+      class="btn btn-primary mt-10"
+      >Resolution</a
+    >
+  </div>
+  <h1 class="text-3xl font-semibold mb-6">Agent Performance Comparison</h1>
+
+  <table class="table-auto w-full">
+    <thead>
+      <tr>
+        <th class="px-4 py-2">Agent Name</th>
+        <th class="px-4 py-2">Average Resolution Time</th>
+        <th class="px-4 py-2">Total Tickets</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for agent_name, avg_resolution_time, total_tickets in agent_data %}
+      <tr>
+        <td class="border px-4 py-2">{{ agent_name }}</td>
+        <td class="border px-4 py-2">
+          {{ avg_resolution_time|default_if_none:"N/A" }}
+        </td>
+        <td class="border px-4 py-2">{{ total_tickets }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
