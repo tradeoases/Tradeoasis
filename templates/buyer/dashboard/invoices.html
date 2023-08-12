@@ -1,0 +1,444 @@
+{% extends '../dashboard/utils/layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<style>
+    .invoice {
+        padding: 1.2rem;
+        border: 1px solid #dddddd;
+        background-color: #fff;
+    }
+    .invoice-header {
+        text-align: center;
+        background-color: rgb(72, 72, 72);
+        margin-block: .4rem;
+        padding-block: .6rem;
+        color: #f2f2f2;
+    }
+    .invoice-content.flex {
+        justify-content: space-between;
+        margin-block: 1.6rem;
+    }
+
+    .invoice-section.right {
+        text-align: right;
+    }
+    .invoice-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    .invoice-table th, .invoice-table td {
+        border: 1px solid #dddddd;
+        padding: 10px;
+        text-align: left;
+    }
+    .invoice-table tr:hover,
+    .invoice-table tr {
+        border: 0;
+        background-color: #fff !important;
+    }
+    .invoice-table th {
+        background-color: #f2f2f2;
+    }
+    .invoice-total {
+        text-align: right;
+    }
+
+    .action-btns .btn {
+        margin-inline: 0;
+        background-color: inherit;
+        color: #5a5a5a;
+        border: 1px solid #f2f2f2;
+    }
+
+    /* body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f1f1;
+    }
+
+    .container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+    } */
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        font-size: 16px;
+    }
+
+    button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+</style>
+
+<div class="main-content" style="overflow-y: scroll;">
+    <div class="cs-content-area cs-no-box-shadow outlined" style="block-size: auto;padding: .6rem .4rem;">
+        <div class="content-area-top flex" style="justify-content: space-between;padding-block-start: .4rem;">
+            <h3 style="font-weight:600;">{% trans 'Invoices & Payment' %}</h3>
+            <!-- <h4>Mark all as read</h4> -->
+        </div>
+
+        <div class="notifications-section flex" style="background-color: rgb(226, 226, 224);">
+            <h4 class="section-togglers" data-section="sec_00" style="padding-block: 1.2rem;">Invoice Management</h4>
+            <h4 class="section-togglers" data-section="sec_01" style="padding-block: 1.2rem;">Payment Methods</h4>
+            <h4 class="section-togglers" data-section="sec_02" style="padding-block: 1.2rem;">Payment History</h4>
+            <!-- <h4 class="section-togglers" data-section="sec_03" style="padding-block: 1.2rem;">Accounts Payable</h4> -->
+        </div>
+
+        <div class="notification-section inview" id="sec_00">
+            <table id="invoices-table" class="display" style="width:100%;margin-top:.5rem;">
+                <thead>
+                    <tr>
+                        <th>Invoice #</th>
+                        <th>Invoice Date</th>
+                        <th>Due Date</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="notification-section" id="sec_01">
+            <div class="section-wrapper">
+                <div class="container">
+                    <form>
+                        <div class="form-group">
+                            <label for="payment-method">Payment Method:</label>
+                            <select id="payment-method">
+                                <option value="credit-card">Credit Card</option>
+                                <option value="paypal">PayPal</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="card-number">Card Number:</label>
+                            <input type="text" id="card-number" placeholder="Enter your card number">
+                        </div>
+                        <div class="form-group">
+                            <label for="expiry-date">Expiry Date:</label>
+                            <input type="text" id="expiry-date" placeholder="MM/YY">
+                        </div>
+                        <div class="form-group">
+                            <label for="cvv">CVV:</label>
+                            <input type="text" id="cvv" placeholder="CVV">
+                        </div>
+                        <button type="submit">Save Payment Method</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="notification-section" id="sec_02">
+            <div class="section-wrapper">
+                <table id="payment-history-table" class="display" style="width:100%;margin-top:.5rem;">
+                    <thead>
+                        <tr>
+                            <th>Receipt #</th>
+                            <th>Item</th>
+                            <th>Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Total</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>123456</td>
+                            <td>Reizhen Smart Wrist Ban</td>
+                            <td>1</td>
+                            <td>$670</td>
+                            <td>$670</td>
+                            <td>03-08-2023</td>
+                        </tr>
+                        <tr>
+                            <td>123000</td>
+                            <td>TP-Link Router CTX-04</td>
+                            <td>2</td>
+                            <td>$800</td>
+                            <td>$1,600</td>
+                            <td>24-07-2023</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- <div class="notification-section" id="sec_03">
+            <div class="section-wrapper"></div>
+        </div> -->
+        <div class="notification-section" id="sec_04">
+            <div class="section-wrapper">
+                <div class="invoice">
+                    <div class="invoice-header">
+                        <h3>Invoice #1253578</h3>
+                        <h5>PAID</h5>
+                    </div>
+
+                    <div class="flex invoice-content">
+                        <div class="invoice-section">
+                            <h3>Pay To</h3>
+                            <p>
+                                Aztecs Inc.<br>
+                                Frique Internet Group UG<br>
+                                108 Rwenzori Street<br>
+                                Kampala 19801
+                            </p>
+                        </div>
+        
+                        <div class="invoice-section right">
+                            <h3>Invoiced To</h3>
+                            <p>
+                                Abdoulanziz Ally<br>
+                                William Street, Bombo Road<br>
+                                Kampala, Central, 00000<br>
+                                Uganda
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex invoice-content">
+                        <div class="invoice-section">
+                            <h3>Payment Method</h3>
+                            <p>Credit or Debit Card (Visa-6764)</p>
+                        </div>
+        
+                        <div class="invoice-section right">
+                            <h3>Invoice Date</h3>
+                            <p>07/27/2023</p>
+                        </div>
+                    </div>
+                
+                    <h3>Invoice Items</h3>
+                    <table class="invoice-table">
+                        <tr>
+                            <th>Description</th>
+                            <th>Amount</th>
+                        </tr>
+                        <tr>
+                            <td>Product Purchase: Gold Riezhen - Smart Watches<br>
+                                Durable Gold sleek watches for both children and adults. Made for high end markets such as East Asia.
+                            </td>
+                            <td>$26.00</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sub Total</strong></td>
+                            <td><strong>$26.00</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Credit</td>
+                            <td>$0.00</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total</strong></td>
+                            <td><strong>$26.00</strong></td>
+                        </tr>
+                    </table>
+                    
+                    <h3>Transaction Details</h3>
+                    <table class="invoice-table">
+                        <tr>
+                            <th>Transaction Date</th>
+                            <th>Gateway</th>
+                            <th>Transaction ID</th>
+                            <th>Amount</th>
+                        </tr>
+                        <tr>
+                            <td>07/27/2023</td>
+                            <td>Credit or Debit Card</td>
+                            <td>txn_3MmdJBK4kABOIfpm15KO5mpX</td>
+                            <td>$26.00</td>
+                        </tr>
+                    </table>
+                    
+                    <div class="invoice-total" style="margin-block-start: .6rem;">
+                        <h3>Balance</h3>
+                        <p>$0.00</p>
+                    </div>
+
+                    <div class="action-btns" style="text-align: right;margin-block-start: 1.2rem;">
+                        <a href="javascript:window.print()" class="btn"><i class="ti-printer"></i> Print</a>
+                        <a href="#" class="btn"><i class="ti-download"></i> Download</a>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Populate form for editing
+    function preloadDataForEditing(data, form) {
+        const formElement = document.querySelector(`#${form}`).querySelector("form");
+        for (const field of formElement.elements) {
+            if (['INPUT', 'SELECT', 'TEXTAREA'].includes(field.tagName)) {
+            const fieldName = field.name;
+            const fieldValue = JSON.parse(data)[fieldName];
+
+            if (fieldValue !== undefined) {
+                field.value = fieldValue;
+            }
+            }
+        }
+    }
+
+    // Capitalize each word and add spaces to field names
+    function formatFieldName(fieldName) {
+        return fieldName
+            .replace(/([a-z])([A-Z])/g, '$1 $2') // Add space between camel case
+            .replace(/\b\w/g, firstChar => firstChar.toUpperCase()); // Capitalize each word
+    }
+
+    function sectionToggler(trigger, dataAttrName, parseData = false, dynamicForm = false, dynamicFormData = null){
+        const dataSection = trigger.dataset[dataAttrName];
+        const sectionToShow = document.querySelector(`#${dataSection}`);
+        
+        const addSection = () => {
+            if (sectionToShow) {
+                sectionToShow.classList.add("inview");
+            }
+        };
+        
+        const removeVisibleSections = () => {
+            const visibleSections = document.querySelectorAll(".notification-section.inview");
+            visibleSections.forEach(section => section.classList.remove("inview"));
+        };
+
+        trigger.addEventListener("click", () => {
+            removeVisibleSections();
+            addSection();
+            console.log(trigger.dataset)
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const section_togglers = document.querySelectorAll(".section-togglers")
+        section_togglers.forEach(
+            activator => activator.addEventListener("click", () => {
+                let sectionToShow = document.querySelector(`#${activator.dataset.section}`)
+
+                section_togglers.forEach(section_toggler => {
+                    section_toggler.style.borderBlockEnd = "unset";
+                    section_toggler.style.color = "#929293";
+                })
+                activator.style.color = "#363637";
+                activator.style.borderBlockEnd = "2px solid #363637";
+                
+                let openSections = document.querySelectorAll(".notification-section.inview");
+                openSections.forEach(section => section.classList.remove("inview"))
+
+                sectionToShow.classList.add("inview")
+            })
+        );
+
+
+
+
+        // Fetch data from the network
+        async function fetchAllInvoices() {
+            // const response = await API.requests.fetchAllRequests();
+            // return response.results;
+            const results = [
+                {
+                    "id": "123456",
+                    "date": "25-12-23",
+                    "dueDate": "25-12-23",
+                    "total": "$900",
+                    "status": "Paid"
+                }
+            ];
+
+            console.log(results);
+            return results;
+        }
+
+
+        // Load data to the DOM
+        (async function loadInvoicesDataToDOM() {
+            try {
+                const data = await fetchAllInvoices();
+
+                const invoicesTableBody = document.querySelector("#invoices-table").querySelector("tbody");
+                data.forEach((invoice, index) => {
+                    const row = document.createElement("tr");
+                    
+                    row.style.cursor = "pointer";
+                    row.dataset.invoice = JSON.stringify(invoice);
+                    
+                    row.classList.add("section-toggler");
+                    row.dataset.section = "sec_04";
+
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${invoice.date}</td>
+                        <td>${invoice.dueDate}</td>
+                        <td>${invoice.total}</td>
+                        <td>${invoice.status}</td>
+                    `;
+
+                    let sectionToShow = document.querySelector(`#${row.dataset.section}`);
+                    sectionToShow.dataset.invoice = row.dataset.invoice;
+                    
+                    invoicesTableBody.appendChild(row);
+
+                    // // Open edit form when row is clicked
+                    sectionToggler(trigger=row, dataAttrName="section", parseData=true, dynamicForm = true, dynamicFormData = invoice);
+
+                });
+
+                // Set up invoices table
+                $('#invoices-table').DataTable();
+
+            } catch (error) {
+                // Handle any errors that occurred during the fetch
+                console.error('Error fetching data:', error);
+            }
+        })();
+
+        $('#payment-history-table').DataTable();
+    
+    });
+</script>
+
+
+
+
+{{ category_group|json_script:"category_group" }}
+
+{% endblock %}
