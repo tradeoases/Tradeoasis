@@ -60,8 +60,6 @@ urlpatterns = i18n_patterns(
     path(_("admin-api/"), include("admin_api.urls", namespace="admin-api")),
     path(_("communications/"), include("coms.urls", namespace="coms")),
     path(_("admin/"), admin.site.urls),
-    # urls for customer care app
-    path(_("customercare/"), include("customer.urls", namespace="customer")),
 )
 urlpatterns += [
     path("accounts/inactive/", InitSubscriptionView.as_view()),

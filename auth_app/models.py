@@ -41,7 +41,7 @@ class User(AbstractUser):
         null=True,
         default="assets/imgs/resources/profiledefault.png",
     )
-    is_email_activated = models.BooleanField(_("Email Activated"), default=False)
+    is_email_activated = models.BooleanField(_("Email Activated"), default=True)
 
     def save(self, *args, **kwargs):
         if self.is_superuser:

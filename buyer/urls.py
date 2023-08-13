@@ -24,6 +24,7 @@ urlpatterns = [
     path("calendar/", views.CalendarView.as_view(), name="calendar"),
     path("bids/", views.BidsView.as_view(), name="bids"),
     path("bids-compare/", views.BidsCompareView.as_view(), name="bids-compare"),
+path("invoices/", views.InvoicesView.as_view(), name="invoices"),
     path("notifications/", views.NotificationsView.as_view(), name="notifications"),
     path("bids/", views.BidsView.as_view(), name="bids"),
     path("reporting-analytics/", views.ReportingAnalyticsView.as_view(), name="reporting-analytics"),

@@ -131,27 +131,27 @@ class SignUpView(View):
         )
 
         fields = ("first_name", "last_name")
-        # AuthTask.make_user_translations.delay(fields, user.pk)
+        AuthTask.make_user_translations.delay(fields, user.pk)
 
         uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
         token = appTokenGenerator.make_token(user)
         domain = get_current_site(request).domain
         link = reverse("auth_app:activate", kwargs={"uidb64": uidb64, "token": token})
 
-        # activate_url = f"{domain}{link}"
+        activate_url = f"{domain}{link}"
 
-        # subject = _("Activate Foroden Activation")
-        # description = "{}\n{}\n{}".format(_("Follow this link to activate you foroden account."), _("Your activation link is"), activate_url)
+        subject = _("Activate Foroden Activation")
+        description = "{}\n{}\n{}".format(_("Follow this link to activate you foroden account."), _("Your activation link is"), activate_url)
 
-        # AuthTask.send_account_activation_email_task.delay(user.username, user.email, subject, description)
+        AuthTask.send_account_activation_email_task.delay(user.username, user.email, subject, description)
 
-        # messages.add_message(
-        #     request,
-        #     messages.SUCCESS,
-        #     _(
-        #         "Account Created Successfully. Please check your email for a verfication link."
-        #     ),
-        # )
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            _(
+                "Account Created Successfully. Please check your email for a verfication link."
+            ),
+        )
         return redirect(reverse("auth_app:login"))
 
 
@@ -224,24 +224,21 @@ class BusinessProfileView(View):
                 "city",
                 "mobile_user",
             )
-            # AuthTask.make_business_translations.delay(fields, profile.pk)
+            AuthTask.make_business_translations.delay(fields, profile.pk)
 
             # create braintree customer
-            # result = braintree_config.get_braintree_gateway().customer.create(
-            #     {
-            #         "first_name": profile.user.first_name,
-            #         "last_name": profile.user.last_name,
-            #         "company": profile.business_name,
-            #         "email": profile.user.email,
-            #         "phone": profile.mobile_user,
-            #     }
-            # )
-            # if result.is_success:
-            #     profile.customer_id = result.customer.id
-            #     profile.save()
-
-            profile.customer_id = "y8i9vaj2y395i435!rymb3t##8snyqz-q7e_fk8&li"
-            profile.save()
+            result = braintree_config.get_braintree_gateway().customer.create(
+                {
+                    "first_name": profile.user.first_name,
+                    "last_name": profile.user.last_name,
+                    "company": profile.business_name,
+                    "email": profile.user.email,
+                    "phone": profile.mobile_user,
+                }
+            )
+            if result.is_success:
+                profile.customer_id = result.customer.id
+                profile.save()
 
             if profile.user.account_type == "SUPPLIER":
                 return redirect(reverse("payment:memberships"))
@@ -253,4 +250,3 @@ class BusinessProfileView(View):
                 request, messages.ERROR, _("An Error Occurred. Try Again.")
             )
             return redirect(reverse("auth_app:business"))
-
