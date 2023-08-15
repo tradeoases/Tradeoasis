@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.1",
+    "mongoose": "^7.4.1",
+    "socket.io": "^4.7.1",
+    "web-push": "^3.6.3"
+  },
+  "name": "microservices",
+  "description": "Microservices",
+  "version": "1.0.0",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "dev": "nodemon ./billing-service/app.js",
+    "start": "node ./billing-service/app.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

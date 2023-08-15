@@ -25,6 +25,7 @@ urlpatterns = [
     path("bids/", views.BidsView.as_view(), name="bids"),
     path("bids-compare/", views.BidsCompareView.as_view(), name="bids-compare"),
     path("notifications/", views.NotificationsView.as_view(), name="notifications"),
+    path("invoices/", views.InvoicesView.as_view(), name="invoices"),
     path("bids/", views.BidsView.as_view(), name="bids"),
     path("reporting-analytics/", views.ReportingAnalyticsView.as_view(), name="reporting-analytics"),
     path(
